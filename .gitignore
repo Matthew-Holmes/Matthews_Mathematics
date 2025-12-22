@@ -1,3 +1,6 @@
+## VSCODE settings for LaTeX Workshop
+.vscode/
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
