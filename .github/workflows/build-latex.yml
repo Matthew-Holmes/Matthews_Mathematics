@@ -21,6 +21,11 @@ jobs:
             | grep '\.tex$' || true
           echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Debug changed files output
+        run: |
+          echo "Raw output value: '${{ steps.changed-tex.outputs.FILES }}'"
+          echo "Output length: ${#{{ steps.changed-tex.outputs.FILES }}}"
+
       - name: Compile changed LaTeX files
         if: steps.changed-tex.outputs.FILES != ''
         uses: xu-cheng/latex-action@v4
