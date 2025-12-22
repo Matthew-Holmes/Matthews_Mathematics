@@ -1,0 +1,45 @@
+% Minimal LaTeX test document
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Test Document}
+\author{Matt}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A short test document for verifying LaTeX builds.
+\end{abstract}
+
+\section{Introduction}
+This is a default LaTeX file created for testing compilation and basic features.
+
+\section{Math}
+Inline math example: $e^{i\pi} + 1 = 0$. Display math example:
+\[
+\int_0^1 x^2 \, dx = \frac{1}{3}.
+\]
+
+\section{Figure}
+A placeholder figure (replace with an actual image file to test graphics):
+\begin{figure}[h]
+	\centering
+	% a gray box placeholder; replace with \includegraphics{myimage.png}
+	\fbox{\rule{0pt}{0.18\textheight}\rule{0.6\textwidth}{0pt}}
+	\caption{Placeholder figure}
+\end{figure}
+
+\section{Bibliography}
+This document uses a simple bibliography setup. Create a `references.bib` file to test BibTeX.
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

@@ -12,6 +12,9 @@
 *.cb2
 .*.lb
 
+## Latex output files, handled by action
+*.pdf 
+
 ## Intermediate documents:
 *.dvi
 *.xdv
