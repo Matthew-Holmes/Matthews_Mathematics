@@ -1,17 +1,37 @@
-name: Build LaTeX document
-on: [push]
+name: Build LaTeX documents
+
+on:
+  push:
+
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v6
-      - name: Compile LaTeX document
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # required for git diff
+
+      - name: Get changed .tex files
+        id: changed-tex
+        run: |
+          echo "FILES<<EOF" >> $GITHUB_OUTPUT
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
+            | grep '\.tex$' || true
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Compile changed LaTeX files
+        if: steps.changed-tex.outputs.FILES != ''
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: main.tex
-      - name: Upload PDF file
+          root_file: |
+            ${{ steps.changed-tex.outputs.FILES }}
+
+      - name: Upload PDFs
+        if: steps.changed-tex.outputs.FILES != ''
         uses: actions/upload-artifact@v5
         with:
-          name: PDF
-          path: main.pdf
+          name: compiled-pdfs
+          path: |
+            **/*.pdf
