@@ -16,15 +16,34 @@ jobs:
       - name: Get changed .tex files
         id: changed-tex
         run: |
-          echo "FILES<<EOF" >> $GITHUB_OUTPUT
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} \
-            | grep '\.tex$' || true
-          echo "EOF" >> $GITHUB_OUTPUT
+          # Get changed files as a single string with newlines
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.tex$' || true)
+          
+          # Debug: show what we found
+          echo "Found these .tex files:"
+          echo "$files"
+          echo "---"
+          
+          # Set outputs CORRECTLY
+          # For multiline values, we need to use delimiter syntax
+          delimiter="$(openssl rand -hex 8)"
+          echo "files<<${delimiter}" >> $GITHUB_OUTPUT
+          echo "$files" >> $GITHUB_OUTPUT
+          echo "${delimiter}" >> $GITHUB_OUTPUT
+          
+          # Also set a simple boolean flag
+          if [[ -n "$files" ]]; then
+            echo "has_files=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_files=false" >> $GITHUB_OUTPUT
+          fi
 
-      - name: Debug changed files output
+      # Debug step to verify
+      - name: Debug outputs
         run: |
-          echo "Raw output value: '${{ steps.changed-tex.outputs.FILES }}'"
-          echo "Output length: ${#{{ steps.changed-tex.outputs.FILES }}}"
+          echo "has_files: ${{ steps.changed-tex.outputs.has_files }}"
+          echo "files output:"
+          echo "${{ steps.changed-tex.outputs.files }}"
 
       - name: Compile changed LaTeX files
         if: steps.changed-tex.outputs.FILES != ''
