@@ -2,6 +2,9 @@ name: Build LaTeX documents
 
 on:
   push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build_latex:
