@@ -14,11 +14,18 @@ jobs:
           fetch-depth: 0  # required for git diff
 
       - name: fetchS3Filenames
-        run: .github/listS3Contents.sh
+        run: DEBUG=1 .github/listS3Contents.sh > s3Objects.ndjson
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Upload S3 object list # debug step to check how the s3 is doing
+        uses: actions/upload-artifact@v4
+        with:
+          name: s3-objects      
+          path: s3Objects.ndjson
+
 
       - name: Get changed .tex files
         id: changed-tex
