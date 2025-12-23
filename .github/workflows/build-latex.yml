@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0  # required for git diff
 
       - name: fetchS3Filenames
-        run: DEBUG=1 .github/listS3Contents.sh > s3Objects.ndjson
+        run: DEBUG=1 .github/workflows/scripts/listS3Contents.sh > s3Objects.ndjson
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
