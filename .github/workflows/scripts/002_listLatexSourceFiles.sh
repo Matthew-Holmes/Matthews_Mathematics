@@ -51,6 +51,7 @@ while IFS= read -r -d '' FILE; do
 
   ((FILE_COUNT++))
 
+  debug "Processing file #$FILE_COUNT"
 
   REL_PATH="$(realpath --relative-to="$ROOT_DIR" "$FILE")"
   debug "Processing file: $REL_PATH"
