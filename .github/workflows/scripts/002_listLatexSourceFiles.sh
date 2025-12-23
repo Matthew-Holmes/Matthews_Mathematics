@@ -47,7 +47,10 @@ FILE_COUNT=0
 debug "Starting file enumeration"
 
 while IFS= read -r -d '' FILE; do
+  debug "Found .tex file: $FILE"
+
   ((FILE_COUNT++))
+
 
   REL_PATH="$(realpath --relative-to="$ROOT_DIR" "$FILE")"
   debug "Processing file: $REL_PATH"
