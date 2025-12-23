@@ -9,6 +9,7 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 # Optional debug flag
 #   Enable with: DEBUG=1 ./script.sh
+#   >&2 indicates standard error, so this doesn't interfere with output piping
 # -----------------------------------------------------------------------------
 DEBUG="${DEBUG:-0}"
 
