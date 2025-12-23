@@ -49,7 +49,8 @@ debug "Starting file enumeration"
 while IFS= read -r -d '' FILE; do
   debug "Found .tex file: $FILE"
 
-  ((FILE_COUNT++))
+  # don't use ((...++)) here since can give exit code 1 in some bash versions
+  let "FILE_COUNT+=1" 
 
   debug "Processing file #$FILE_COUNT"
 
