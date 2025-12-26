@@ -54,7 +54,6 @@ jobs:
           name: latex-files-to-compile
           path: latexFilesToCompile.txt
 
-
       - name: Read list of LaTeX files
         id: read-files
         run: |
@@ -62,13 +61,10 @@ jobs:
           files=$(jq -R -s -c 'split("\n")[:-1]' files.txt)
           echo "files=$files" >> $GITHUB_OUTPUT
 
-
       - name: Compile LaTeX files from list
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: |
-            ${{ join(fromJSON('["' + join('\",\"', (steps.read-files.outputs.files)) + '"]'), '\n') }}
-
+          root_file: ${{ steps.read-files.outputs.files }}
 
       - name: Upload PDFs
         run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh s3Objects.ndjson latexSourceFiles.ndjson
