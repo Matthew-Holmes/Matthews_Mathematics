@@ -58,7 +58,7 @@ jobs:
         id: read-files
         run: |
           # Read each line from files.txt into a JSON array
-          files=$(jq -R -s -c 'split("\n")[:-1]' files.txt)
+          files=$(jq -R -s -c 'split("\n")[:-1]' latexFilesToCompile.txt)
           echo "files=$files" >> $GITHUB_OUTPUT
 
       - name: Compile LaTeX files from list
