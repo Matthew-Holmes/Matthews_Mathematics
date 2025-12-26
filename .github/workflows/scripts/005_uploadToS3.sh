@@ -35,12 +35,13 @@ debug() {
 # Main loop
 # -----------------------------------------------------------------------------
 # Extract .tex files from S3_JSON
-jq -c '.[]' "$S3_JSON" | while IFS= read -r item; do
-    tex_path=$(echo "$item" | jq -r '.path')
+# Read each line of NDJSON
+while IFS= read -r item; do
+    tex_path=$(echo "$item" | jq -r '.Key')
     tex_name=$(basename "$tex_path")
 
     # Lookup the correct pdf_path from REPO_JSON
-    pdf_path=$(jq -r --arg tex "$tex_name" 'select(.path | endswith($tex)) | .pdf_path' "$REPO_JSON")
+    pdf_path=$(jq -r --arg tex "$tex_name" 'map(select(.path | endswith($tex))) | .[0].pdf_path' "$REPO_JSON")
     
     if [[ -z "$pdf_path" || "$pdf_path" == "null" ]]; then
         debug "Skipping $tex_name, no matching PDF found"
@@ -50,6 +51,5 @@ jq -c '.[]' "$S3_JSON" | while IFS= read -r item; do
     pdf_name=$(basename "$pdf_path")
     debug "Uploading $pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
 
-    # Upload to S3
     aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
-done
+done < "$S3_JSON"
