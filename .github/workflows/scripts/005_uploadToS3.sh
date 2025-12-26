@@ -63,6 +63,6 @@ while IFS= read -r tex_path; do
 
   aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
 
-done < "$TEX_LIST"
+done < "$LATEX_SRC"
 
 debug "Finished processing all files"
