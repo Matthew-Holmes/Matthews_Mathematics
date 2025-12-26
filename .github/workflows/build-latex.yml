@@ -54,49 +54,25 @@ jobs:
           name: latex-files-to-compile
           path: latexFilesToCompile.txt
 
-      - name: Get changed .tex files
-        id: changed-tex
-        run: |
-          # Get changed files as a single string with newlines
-          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '\.tex$' || true)
-          
-          # Debug: show what we found
-          echo "Found these .tex files:"
-          echo "$files"
-          echo "---"
-          
-          # Set outputs CORRECTLY
-          # For multiline values, we need to use delimiter syntax
-          delimiter="$(openssl rand -hex 8)"
-          echo "files<<${delimiter}" >> $GITHUB_OUTPUT
-          echo "$files" >> $GITHUB_OUTPUT
-          echo "${delimiter}" >> $GITHUB_OUTPUT
-          
-          # Also set a simple boolean flag
-          if [[ -n "$files" ]]; then
-            echo "has_files=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_files=false" >> $GITHUB_OUTPUT
-          fi
 
-      # Debug step to verify
-      - name: Debug outputs
+      - name: Read list of LaTeX files
+        id: read-files
         run: |
-          echo "has_files: ${{ steps.changed-tex.outputs.has_files }}"
-          echo "files output:"
-          echo "${{ steps.changed-tex.outputs.files }}"
+          # Read each line from files.txt into a JSON array
+          files=$(jq -R -s -c 'split("\n")[:-1]' files.txt)
+          echo "files=$files" >> $GITHUB_OUTPUT
 
-      - name: Compile changed LaTeX files
-        if: steps.changed-tex.outputs.FILES != ''
+
+      - name: Compile LaTeX files from list
         uses: xu-cheng/latex-action@v4
         with:
           root_file: |
-            ${{ steps.changed-tex.outputs.FILES }}
+            ${{ join(fromJSON('["' + join('\",\"', (steps.read-files.outputs.files)) + '"]'), '\n') }}
+
 
       - name: Upload PDFs
-        if: steps.changed-tex.outputs.FILES != ''
-        uses: actions/upload-artifact@v5
-        with:
-          name: compiled-pdfs
-          path: |
-            **/*.pdf
+        run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh s3Objects.ndjson latexSourceFiles.ndjson
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
