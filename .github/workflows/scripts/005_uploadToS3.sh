@@ -32,36 +32,37 @@ debug() {
 # Main loop
 # -----------------------------------------------------------------------------
 line_number=0
+
 while IFS= read -r tex_path; do
-    line_number=$((line_number+1))
-    debug "Processing line $line_number: $tex_path"
+  line_number=$((line_number+1))
 
-    # Skip empty lines
-    if [[ -z "$tex_path" ]]; then
-        debug "Line $line_number: empty line, skipping"
-        continue
-    fi
+  debug "----------------------------------------"
+  debug "Processing TEX line $line_number: $tex_path"
 
-    tex_name=$(basename "$tex_path")
-    debug "Line $line_number: tex_name = $tex_name"
+  [[ -z "$tex_path" ]] && continue
 
-    # Lookup the correct PDF path in REPO_JSON
-    pdf_path=$(jq -r --arg tex "$tex_name" 'map(select(.path | endswith($tex))) | .[0].pdf_path' "$REPO_JSON")
-    debug "Line $line_number: pdf_path = $pdf_path"
+  tex_name="$(basename "$tex_path")"
+  debug "tex_name = $tex_name"
 
-    if [[ -z "$pdf_path" || "$pdf_path" == "null" ]]; then
-        debug "Skipping $tex_name, no matching PDF found"
-        continue
-    fi
+  # NDJSON-safe jq: select, do NOT map
+  pdf_path=$(
+    jq -r --arg tex "$tex_name" '
+      select(.path | endswith($tex)) | .pdf_path
+    ' "$REPO_JSON" | head -n 1
+  )
 
-    pdf_name=$(basename "$pdf_path")
-    debug "Uploading $pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
+  debug "pdf_path = $pdf_path"
 
-    # Upload to S3
-    if [[ "$DEBUG" == "1" ]]; then
-        debug "aws s3 cp latex/$pdf_path s3://$AWS_S3_BUCKET/$pdf_name (simulated)"
-    else
-        aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
-    fi
+  if [[ -z "$pdf_path" || "$pdf_path" == "null" ]]; then
+    debug "No PDF match found for $tex_name"
+    continue
+  fi
 
-done < "$LATEX_SRC"
+  pdf_name="$(basename "$pdf_path")"
+  debug "Uploading latex/$pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
+
+  aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
+
+done < "$TEX_LIST"
+
+debug "Finished processing all files"
