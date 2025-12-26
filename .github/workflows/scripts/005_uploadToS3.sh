@@ -68,10 +68,9 @@ while IFS= read -r tex_path; do
     continue
   fi
 
-  pdf_name="$(basename "$pdf_path")"
-  debug "Uploading latex/$local_pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
+  debug "Uploading latex/$local_pdf_path -> s3://$AWS_S3_BUCKET/$pdf_path"
 
-  aws s3 cp "latex/$local_pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
+  aws s3 cp "latex/$local_pdf_path" "s3://$AWS_S3_BUCKET/$pdf_path"
 
 done < "$LATEX_SRC"
 
