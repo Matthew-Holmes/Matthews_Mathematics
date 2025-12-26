@@ -75,10 +75,12 @@ debug "Missing PDFs count: $(wc -l < "$TMP_MISSING")"
 # ---------------------------------------------------------------------------
 # 4) Map missing PDFs back to their .tex files and echo paths
 # ---------------------------------------------------------------------------
-jq -r --slurpfile missing "$TMP_MISSING" '
+
+MISSING_JSON=$(jq -R -s -c 'split("\n")[:-1]' "$TMP_MISSING")
+
+jq -r --argjson missing "$MISSING_JSON" '
   select(.extension == "tex") |
-  select(.pdf_path as $pdf | ($missing[0] | index($pdf))) |
+  select(.pdf_path as $pdf | ($missing | index($pdf))) |
   .path
-' "$REPO_JSON" | while read -r tex_file; do
-  echo "$tex_file"
-done
+' "$REPO_JSON"
+
