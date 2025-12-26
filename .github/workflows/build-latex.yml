@@ -67,6 +67,7 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.files }}
+          work_in_root_file_dir: true
 
       - name: Upload PDFs
         run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson
