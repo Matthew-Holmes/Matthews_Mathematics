@@ -31,6 +31,8 @@ debug() {
   fi
 }
 
+START_SECONDS=$SECONDS
+
 # -----------------------------------------------------------------------------
 # Create list of active pdf files from LaTeX source files
 # -----------------------------------------------------------------------------
@@ -45,7 +47,12 @@ debug "  TMP_S3_PDFS=$TMP_S3_PDFS"
 debug "  TMP_DELETE=$TMP_DELETE"
 
 # Cleanup temp files on exit
-trap 'rm -f "$TMP_REPO_PDFS" "$TMP_S3_PDFS" "$TMP_DELETE"' EXIT
+trap '
+  ELAPSED=$(( SECONDS - START_SECONDS ))
+  debug "Script completed in ${ELAPSED}s"
+  debug "Cleaning up temp files"
+  rm -f "$TMP_REPO_PDFS" "$TMP_S3_PDFS" "$TMP_DELETE"
+' EXIT
 
 # 1) Repo: .tex → .pdf
 jq -r '
