@@ -69,6 +69,19 @@ while IFS= read -r -d '' FILE; do
   fi
 
   # -----------------------------------------------------------------------------
+  # Short git hash (last 12 characters)
+  # Will be appended to PDF filenames
+  # -----------------------------------------------------------------------------
+
+
+  if [[ -n "$HASH" ]]; then
+  SHORT_HASH="${HASH: -12}"  # last 12 characters of the git commit
+  else
+    SHORT_HASH=""
+  fi
+
+
+  # -----------------------------------------------------------------------------
   # File metadata
   # -----------------------------------------------------------------------------
   MTIME_EPOCH="$(stat -c %Y "$FILE")"
