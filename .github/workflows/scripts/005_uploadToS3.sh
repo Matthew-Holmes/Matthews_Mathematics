@@ -51,5 +51,5 @@ jq -c '.[]' "$S3_JSON" | while IFS= read -r item; do
     debug "Uploading $pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
 
     # Upload to S3
-    aws s3 cp "$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
+    aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
 done

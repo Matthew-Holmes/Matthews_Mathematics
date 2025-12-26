@@ -57,7 +57,8 @@ jobs:
       - name: Read LaTeX files
         id: read-files
         run: |
-          files=$(cat latexFilesToCompile.txt)
+          # Prepend 'latex/' to each line
+          files=$(sed 's|^|latex/|' latexFilesToCompile.txt)
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$files" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -66,7 +67,6 @@ jobs:
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.files }}
-
 
       - name: Upload PDFs
         run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh s3Objects.ndjson latexSourceFiles.ndjson
