@@ -69,7 +69,7 @@ jobs:
           root_file: ${{ steps.read-files.outputs.files }}
 
       - name: Upload PDFs
-        run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh s3Objects.ndjson latexSourceFiles.ndjson
+        run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

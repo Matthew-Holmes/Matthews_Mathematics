@@ -9,19 +9,16 @@ set -euo pipefail
 # -----------------------------------------------------------------------------
 # Input arguments
 # -----------------------------------------------------------------------------
-
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 <s3.ndjson> <repo.ndjson>"
+  echo "Usage: $0 <latexSource.txt> <repo.ndjson>"
   exit 1
 fi
 
-S3_JSON="$1"
+LATEX_SRC="$1"
 REPO_JSON="$2"
 
 # -----------------------------------------------------------------------------
 # Optional debug flag
-#   Enable with: DEBUG=1 ./script.sh
-#   >&2 indicates standard error, so this doesn't interfere with output piping
 # -----------------------------------------------------------------------------
 DEBUG="${DEBUG:-0}"
 
@@ -34,22 +31,19 @@ debug() {
 # -----------------------------------------------------------------------------
 # Main loop
 # -----------------------------------------------------------------------------
-# Extract .tex files from S3_JSON
-# Read each line of NDJSON
 line_number=0
-while IFS= read -r item; do
+while IFS= read -r tex_path; do
     line_number=$((line_number+1))
-    debug "Processing line $line_number: $item"
+    debug "Processing line $line_number: $tex_path"
 
-    # Extract the S3 key
-    tex_path=$(echo "$item" | jq -r '.Key')
-    if [[ -z "$tex_path" || "$tex_path" == "null" ]]; then
-        debug "Line $line_number: No Key found, skipping"
+    # Skip empty lines
+    if [[ -z "$tex_path" ]]; then
+        debug "Line $line_number: empty line, skipping"
         continue
     fi
 
     tex_name=$(basename "$tex_path")
-    debug "Line $line_number: tex_path = $tex_path, tex_name = $tex_name"
+    debug "Line $line_number: tex_name = $tex_name"
 
     # Lookup the correct PDF path in REPO_JSON
     pdf_path=$(jq -r --arg tex "$tex_name" 'map(select(.path | endswith($tex))) | .[0].pdf_path' "$REPO_JSON")
@@ -70,4 +64,4 @@ while IFS= read -r item; do
         aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
     fi
 
-done < "$S3_JSON"
+done < "$LATEX_SRC"
