@@ -72,12 +72,12 @@ comm -23 "$TMP_REPO_PDFS" "$TMP_S3_PDFS" > "$TMP_MISSING"
 
 debug "Missing PDFs count: $(wc -l < "$TMP_MISSING")"
 
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # 4) Map missing PDFs back to their .tex files and echo paths
-# -----------------------------------------------------------------------------
-jq -r --argfile missing "$TMP_MISSING" '
+# ---------------------------------------------------------------------------
+jq -r --slurpfile missing "$TMP_MISSING" '
   select(.extension == "tex") |
-  select(.pdf_path as $pdf | ($missing | index($pdf))) |
+  select(.pdf_path as $pdf | ($missing[0] | index($pdf))) |
   .path
 ' "$REPO_JSON" | while read -r tex_file; do
   echo "$tex_file"
