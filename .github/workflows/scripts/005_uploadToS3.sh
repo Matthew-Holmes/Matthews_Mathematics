@@ -51,15 +51,25 @@ while IFS= read -r tex_path; do
     ' "$REPO_JSON" | head -n 1
   )
 
-  debug "pdf_path = $pdf_path"
+  local_pdf_path=$(
+    jq -r --arg tex "$tex_name" '
+      select(.path | endswith($tex))
+      | .pdf_path
+      | sub("_[^.]{12}\\.pdf$"; ".pdf")
+    ' "$REPO_JSON" | head -n 1
+  )
 
-  if [[ -z "$pdf_path" || "$pdf_path" == "null" ]]; then
+  debug "pdf_path = $pdf_path"
+  debug "local_pdf_path = $local_pdf_path"
+
+
+  if [[ -z "$local_pdf_path" || "$local_pdf_path" == "null" ]]; then
     debug "No PDF match found for $tex_name"
     continue
   fi
 
   pdf_name="$(basename "$pdf_path")"
-  debug "Uploading latex/$pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
+  debug "Uploading latex/$local_pdf_path -> s3://$AWS_S3_BUCKET/$pdf_name"
 
   aws s3 cp "latex/$pdf_path" "s3://$AWS_S3_BUCKET/$pdf_name"
 
