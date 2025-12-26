@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0  # required for git diff
 
-      - name: fetch S3 Object Filenames
+      - name: Fetch S3 Object Filenames
         run: DEBUG=1 .github/workflows/scripts/001_listS3Contents.sh > s3Objects.ndjson
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
@@ -29,7 +29,7 @@ jobs:
           name: s3-objects      
           path: s3Objects.ndjson
 
-      - name: list Latex Source Files
+      - name: List Latex Source Files
         run: DEBUG=1 .github/workflows/scripts/002_listLatexSourceFiles.sh "$GITHUB_WORKSPACE/latex" > latexSourceFiles.ndjson
 
       - name: Upload LaTeX source file list # debug step to check how the latex source listing is doing
@@ -38,7 +38,7 @@ jobs:
           name: latex-source-files
           path: latexSourceFiles.ndjson
 
-      - name: remove stale S3 objects
+      - name: Remove stale S3 objects
         run: DEBUG=1 .github/workflows/scripts/003_removeStaleS3Objects.sh s3Objects.ndjson latexSourceFiles.ndjson
         env:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
