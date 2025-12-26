@@ -45,6 +45,15 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+      - name: Get LaTeX source files to compile
+        run: DEBUG=1 .github/workflows/scripts/004_getSourceToCompile.sh latexSourceFiles.ndjson s3Objects.ndjson > latexFilesToCompile.txt
+
+      - name: Upload LaTeX files to compile # debug step to check which latex files are selected for compilation
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-files-to-compile
+          path: latexFilesToCompile.txt
+
       - name: Get changed .tex files
         id: changed-tex
         run: |
