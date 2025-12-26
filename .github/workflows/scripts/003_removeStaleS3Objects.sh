@@ -35,6 +35,8 @@ START_SECONDS=$SECONDS
 
 # -----------------------------------------------------------------------------
 # Create list of active pdf files from LaTeX source files
+# Since filenames contain git hashes, we will delete any files with
+# recent modifications
 # -----------------------------------------------------------------------------
 
 TMP_REPO_PDFS=$(mktemp)
@@ -54,11 +56,10 @@ trap '
   rm -f "$TMP_REPO_PDFS" "$TMP_S3_PDFS" "$TMP_DELETE"
 ' EXIT
 
-# 1) Repo: .tex → .pdf
+# 1) Repo: PDF filenames from JSON (already include git hash)
 jq -r '
   select(.extension == "tex") |
-  .path |
-  sub("\\.tex$"; ".pdf")
+  .pdf_path
 ' "$REPO_JSON" | sort -u > "$TMP_REPO_PDFS"
 
 debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"

@@ -77,6 +77,19 @@ while IFS= read -r -d '' FILE; do
   FILE_END_NS="$(now_ns)"
   ELAPSED_MS="$(( (FILE_END_NS - FILE_START_NS) / 1000000 ))"
 
+  # ---------------------------------------------------------------------------
+  # Generate PDF filename with git hash
+  # e.g., file.tex -> file_<hash>.pdf
+  # ---------------------------------------------------------------------------
+  BASENAME="$(basename "$REL_PATH" .tex)"
+  DIRNAME="$(dirname "$REL_PATH")"
+  if [[ -n "$SHORT_HASH" ]]; then
+    PDF_FILENAME="${BASENAME}_${SHORT_HASH}.pdf"
+  else
+    PDF_FILENAME="${BASENAME}.pdf"
+  fi
+  PDF_PATH="$DIRNAME/$PDF_FILENAME"
+
   # -----------------------------------------------------------------------------
   # Emit NDJSON (one object per line)
   # -----------------------------------------------------------------------------
@@ -90,6 +103,7 @@ while IFS= read -r -d '' FILE; do
     --argjson processing_ms "$ELAPSED_MS" \
     '{
       path: $path,
+      pdf_path: $pdf_path,
       extension: $ext,
       git_commit: ($git_commit | select(length > 0)),
       mtime_epoch: $mtime,
