@@ -108,6 +108,7 @@ while IFS= read -r -d '' FILE; do
   # -----------------------------------------------------------------------------
   jq -cn \
     --arg path "$REL_PATH" \
+    --arg pdf_path "$PDF_PATH" \
     --arg git_commit "$HASH" \
     --arg root "$ROOT_DIR" \
     --arg ext "tex" \
