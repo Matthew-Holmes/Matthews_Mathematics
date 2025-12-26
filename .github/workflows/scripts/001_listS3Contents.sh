@@ -8,8 +8,6 @@ set -euo pipefail
 
 # -----------------------------------------------------------------------------
 # Optional debug flag
-#   Enable with: DEBUG=1 ./script.sh
-#   >&2 indicates standard error, so this doesn't interfere with output piping
 # -----------------------------------------------------------------------------
 DEBUG="${DEBUG:-0}"
 
@@ -21,7 +19,6 @@ debug() {
 
 # -----------------------------------------------------------------------------
 # Pagination state
-#   Empty token means "start from the beginning"
 # -----------------------------------------------------------------------------
 CONTINUATION_TOKEN=""
 PAGE=1
@@ -42,14 +39,32 @@ while :; do
       --bucket "$AWS_S3_BUCKET")
   fi
 
-  # -----------------------------------------------------------------------------
-  # Emit each object as one NDJSON line
-  #   .Contents[]? handles empty buckets safely
-  # -----------------------------------------------------------------------------
   OBJECT_COUNT=$(echo "$RESPONSE" | jq '.Contents | length // 0')
   debug "Objects in this page: $OBJECT_COUNT"
 
-  echo "$RESPONSE" | jq -c '.Contents[]?'
+  # -----------------------------------------------------------------------------
+  # Process each object
+  # -----------------------------------------------------------------------------
+  echo "$RESPONSE" | jq -c '.Contents[]?' | while read -r obj; do
+    key=$(echo "$obj" | jq -r '.Key')
+    filename=$(basename "$key")
+    
+    # Only process .pdf files
+    if [[ "$filename" == *.pdf ]]; then
+      # Remove extension
+      base="${filename%.pdf}"
+      
+      # Skip if base name is shorter than 12 chars
+      if [[ ${#base} -ge 12 ]]; then
+        git_hash_short="${base: -12}"
+        obj=$(echo "$obj" | jq --arg hash "$git_hash_short" '. + {git_hash_short: $hash}')
+      else
+        debug "Skipping $filename: name shorter than 12 chars"
+      fi
+    fi
+
+    echo "$obj"
+  done
 
   # -----------------------------------------------------------------------------
   # Check if more pages exist
@@ -63,7 +78,6 @@ while :; do
   fi
 
   CONTINUATION_TOKEN=$(echo "$RESPONSE" | jq -r '.NextContinuationToken // empty')
-
   if [[ -z "$CONTINUATION_TOKEN" ]]; then
     debug "WARNING: IsTruncated=true but no continuation token found"
     break
