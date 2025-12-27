@@ -43,28 +43,9 @@ while :; do
   debug "Objects in this page: $OBJECT_COUNT"
 
   # -----------------------------------------------------------------------------
-  # Process each object
+  # Output each object key (one per line)
   # -----------------------------------------------------------------------------
-  echo "$RESPONSE" | jq -c '.Contents[]?' | while read -r obj; do
-    key=$(echo "$obj" | jq -r '.Key')
-    filename=$(basename "$key")
-    
-    # Only process .pdf files
-    if [[ "$filename" == *.pdf ]]; then
-      # Remove extension
-      base="${filename%.pdf}"
-      
-      # Skip if base name is shorter than 12 chars
-      if [[ ${#base} -ge 12 ]]; then
-        git_hash_short="${base: -12}"
-        obj=$(echo "$obj" | jq --arg hash "$git_hash_short" '. + {git_hash_short: $hash}')
-      else
-        debug "Skipping $filename: name shorter than 12 chars"
-      fi
-    fi
-
-    echo "$obj"
-  done
+  echo "$RESPONSE" | jq -r '.Contents[]?.Key'
 
   # -----------------------------------------------------------------------------
   # Check if more pages exist
