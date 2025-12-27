@@ -103,7 +103,7 @@ debug "Updated manifest count: $(wc -l < "$TMP_UPDATED_MANIFEST")"
 # -----------------------------------------------------------------------------
 # Upload updated manifest to S3
 # -----------------------------------------------------------------------------
-debug "Uploading updated manifest to s3://$AWS_S3_BUCKET/latex/manifest.txt"
-aws s3 cp "$TMP_UPDATED_MANIFEST" "s3://$AWS_S3_BUCKET/latex/manifest.txt"
+debug "Uploading updated manifest to s3://$AWS_S3_BUCKET/manifest.txt"
+aws s3 cp "$TMP_UPDATED_MANIFEST" "s3://$AWS_S3_BUCKET/manifest.txt"
 
 debug "Manifest update complete"
