@@ -5,11 +5,11 @@ set -euo pipefail
 # Input arguments
 # -----------------------------------------------------------------------------
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 <s3.ndjson> <repo.ndjson>"
+  echo "Usage: $0 <objects.txt> <repo.ndjson>"
   exit 1
 fi
 
-S3_JSON="$1"
+OBJECTS_TXT="$1"
 REPO_JSON="$2"
 
 # -----------------------------------------------------------------------------
@@ -37,7 +37,6 @@ debug "  TMP_REPO_PDFS=$TMP_REPO_PDFS"
 debug "  TMP_S3_PDFS=$TMP_S3_PDFS"
 debug "  TMP_MISSING=$TMP_MISSING"
 
-# Cleanup temp files on exit
 trap '
   ELAPSED=$(( SECONDS - START_SECONDS ))
   debug "Script completed in ${ELAPSED}s"
@@ -56,12 +55,9 @@ jq -r '
 debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 
 # -----------------------------------------------------------------------------
-# 2) S3: existing PDFs
+# 2) S3: existing PDFs (from objects.txt)
 # -----------------------------------------------------------------------------
-jq -r '
-  select(.Key | endswith(".pdf")) |
-  .Key
-' "$S3_JSON" | sort -u > "$TMP_S3_PDFS"
+grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS"
 
 debug "S3 PDF count: $(wc -l < "$TMP_S3_PDFS")"
 
@@ -72,10 +68,9 @@ comm -23 "$TMP_REPO_PDFS" "$TMP_S3_PDFS" > "$TMP_MISSING"
 
 debug "Missing PDFs count: $(wc -l < "$TMP_MISSING")"
 
-# ---------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # 4) Map missing PDFs back to their .tex files and echo paths
-# ---------------------------------------------------------------------------
-
+# -----------------------------------------------------------------------------
 MISSING_JSON=$(jq -R -s -c 'split("\n")[:-1]' "$TMP_MISSING")
 
 jq -r --argjson missing "$MISSING_JSON" '
@@ -83,4 +78,3 @@ jq -r --argjson missing "$MISSING_JSON" '
   select(.pdf_path as $pdf | ($missing | index($pdf))) |
   .path
 ' "$REPO_JSON"
-
