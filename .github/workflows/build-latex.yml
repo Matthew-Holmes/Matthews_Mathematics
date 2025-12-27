@@ -57,13 +57,17 @@ jobs:
       - name: Read LaTeX files
         id: read-files
         run: |
-          # Prepend 'latex/' to each line
-          files=$(sed 's|^|latex/|' latexFilesToCompile.txt)
-          echo "files<<EOF" >> $GITHUB_OUTPUT
-          echo "$files" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          if [ ! -s latexFilesToCompile.txt ]; then
+            echo "files=" >> $GITHUB_OUTPUT
+          else
+            files=$(sed 's|^|latex/|' latexFilesToCompile.txt)
+            echo "files<<EOF" >> $GITHUB_OUTPUT
+            echo "$files" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
 
       - name: Compile LaTeX files from list
+        if: steps.read-files.outputs.files != ''
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.files }}
