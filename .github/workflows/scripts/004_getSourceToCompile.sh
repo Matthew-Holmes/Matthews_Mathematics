@@ -59,7 +59,7 @@ debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 # -----------------------------------------------------------------------------
 
 if [[ ! -f "$OBJECTS_TXT" ]]; then
-    echo "ERROR: Objects file not found: $OBJECTS_TXT" >&2
+    debug "ERROR: Objects file not found: $OBJECTS_TXT"
     exit 1
 fi
 
