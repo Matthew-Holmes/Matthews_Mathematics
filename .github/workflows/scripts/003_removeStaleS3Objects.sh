@@ -46,7 +46,7 @@ trap '
   ELAPSED=$(( SECONDS - START_SECONDS ))
   debug "Script completed in ${ELAPSED}s"
   debug "Cleaning up temp files"
-  rm -f "$TMP_REPO_PDFS" "$TMP_S3_PDFS" "$TMP_DELETE" "$TMP_UPDATED_MANIFEST"
+  rm -f "$TMP_REPO_PDFS" "$TMP_S3_PDFS" "$TMP_DELETE"
 ' EXIT
 
 # -----------------------------------------------------------------------------
