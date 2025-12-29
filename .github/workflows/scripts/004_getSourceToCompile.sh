@@ -52,7 +52,7 @@ jq -r '
   .pdf_path
 ' "$REPO_JSON" | sort -u > "$TMP_REPO_PDFS"
 
-debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
+# debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 
 debug "next step"
 
