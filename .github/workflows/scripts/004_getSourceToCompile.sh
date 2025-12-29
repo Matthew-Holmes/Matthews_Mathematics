@@ -58,6 +58,11 @@ debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 # 2) S3: existing PDFs (from objects.txt)
 # -----------------------------------------------------------------------------
 
+if [[ ! -f "$OBJECTS_TXT" ]]; then
+    echo "ERROR: Objects file not found: $OBJECTS_TXT" >&2
+    exit 1
+fi
+
 # avoid exit code 1 if no PDFs found
 if grep -qE '\.pdf$' "$OBJECTS_TXT"; then
     grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS"
