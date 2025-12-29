@@ -57,10 +57,16 @@ debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 # -----------------------------------------------------------------------------
 # 2) S3: existing PDFs (from objects.txt)
 # -----------------------------------------------------------------------------
-grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS" || true
-# exit true to handle case where no PDFs exist
+
+# avoid exit code 1 if no PDFs found
+if grep -qE '\.pdf$' "$OBJECTS_TXT"; then
+    grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS"
+else
+    > "$TMP_S3_PDFS"  # create empty file if no PDFs found
+fi
 
 debug "S3 PDF count: $(wc -l < "$TMP_S3_PDFS")"
+
 
 # -----------------------------------------------------------------------------
 # 3) PDFs in repo but NOT in S3 → missing PDFs
