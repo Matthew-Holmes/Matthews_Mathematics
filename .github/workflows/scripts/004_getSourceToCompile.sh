@@ -63,12 +63,9 @@ if [[ ! -f "$OBJECTS_TXT" ]]; then
     exit 1
 fi
 
-# avoid exit code 1 if no PDFs found
-if grep -qE '\.pdf$' "$OBJECTS_TXT"; then
-    grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS"
-else
-    > "$TMP_S3_PDFS"  # create empty file if no PDFs found
-fi
+debug "Reading S3 objects from: $OBJECTS_TXT"
+
+grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS" || true
 
 debug "S3 PDF count: $(wc -l < "$TMP_S3_PDFS")"
 
