@@ -36,13 +36,11 @@ START_SECONDS=$SECONDS
 TMP_REPO_PDFS=$(mktemp)
 TMP_S3_PDFS=$(mktemp)
 TMP_DELETE=$(mktemp)
-TMP_UPDATED_MANIFEST=$(mktemp)
 
 debug "Created temp files:"
 debug "  TMP_REPO_PDFS=$TMP_REPO_PDFS"
 debug "  TMP_S3_PDFS=$TMP_S3_PDFS"
 debug "  TMP_DELETE=$TMP_DELETE"
-debug "  TMP_UPDATED_MANIFEST=$TMP_UPDATED_MANIFEST"
 
 trap '
   ELAPSED=$(( SECONDS - START_SECONDS ))
@@ -76,17 +74,19 @@ comm -23 "$TMP_S3_PDFS" "$TMP_REPO_PDFS" > "$TMP_DELETE"
 debug "PDFs to delete: $(wc -l < "$TMP_DELETE")"
 
 # -----------------------------------------------------------------------------
-# 4) Create UPDATED manifest (remove files that will be deleted)
+# 4) Updae manifest by removing deleted PDFs
 # -----------------------------------------------------------------------------
-comm -23 <(sort -u "$OBJECTS_TXT") "$TMP_DELETE" > "$TMP_UPDATED_MANIFEST"
+tmpfile=$(mktemp)
+comm -23 <(sort -u "$OBJECTS_TXT") "$TMP_DELETE" > "$tmpfile"
+mv "$tmpfile" "$OBJECTS_TXT"
+debug "Updated manifest count: $(wc -l < "$OBJECTS_TXT")"
 
-debug "Updated manifest count: $(wc -l < "$TMP_UPDATED_MANIFEST")"
 
 # -----------------------------------------------------------------------------
 # 5) Upload updated manifest BEFORE deleting objects
 # -----------------------------------------------------------------------------
 debug "Uploading updated manifest to s3://$AWS_S3_BUCKET/manifest.txt"
-aws s3 cp "$TMP_UPDATED_MANIFEST" "s3://$AWS_S3_BUCKET/manifest.txt"
+aws s3 cp "$OBJECTS_TXT" "s3://$AWS_S3_BUCKET/manifest.txt"
 
 # -----------------------------------------------------------------------------
 # 6) Delete obsolete PDFs
