@@ -79,7 +79,7 @@ while IFS= read -r tex_path; do
 
   debug "Uploading latex/$local_pdf_path -> s3://$AWS_S3_BUCKET/$pdf_path"
   aws s3 cp "latex/$local_pdf_path" "s3://$AWS_S3_BUCKET/$pdf_path" \
-    --content-disposition 'attachment; filename="$local_pdf_path"' \
+    --content-disposition "attachment; filename=\"$local_pdf_path\""
 
   # Track newly added object
   echo "$pdf_path" >> "$TMP_NEW_KEYS"
