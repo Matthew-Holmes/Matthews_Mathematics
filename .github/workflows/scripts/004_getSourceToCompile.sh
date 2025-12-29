@@ -57,7 +57,8 @@ debug "Repo PDF count: $(wc -l < "$TMP_REPO_PDFS")"
 # -----------------------------------------------------------------------------
 # 2) S3: existing PDFs (from objects.txt)
 # -----------------------------------------------------------------------------
-grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS"
+grep -E '\.pdf$' "$OBJECTS_TXT" | sort -u > "$TMP_S3_PDFS" || true
+# exit true to handle case where no PDFs exist
 
 debug "S3 PDF count: $(wc -l < "$TMP_S3_PDFS")"
 
