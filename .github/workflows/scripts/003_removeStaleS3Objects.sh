@@ -69,6 +69,9 @@ debug "S3 PDF count: $(wc -l < "$TMP_S3_PDFS")"
 # -----------------------------------------------------------------------------
 # 3) PDFs in S3 but NOT in repo (to be deleted)
 # -----------------------------------------------------------------------------
+
+debug "Determining PDFs to delete"
+
 comm -23 "$TMP_S3_PDFS" "$TMP_REPO_PDFS" > "$TMP_DELETE"
 
 debug "PDFs to delete: $(wc -l < "$TMP_DELETE")"
