@@ -1,0 +1,160 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{amsthm}
+
+\begin{document}
+
+\title{Worked Solutions: Conversions and Basis Points}
+\date{}
+\maketitle
+
+\section*{Question 1}
+Write the following decimals as a fraction in simplest form and as a percentage.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \( 0.125 \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        0.125 &= \frac{125}{1000} \\
+              &= \frac{125 \div 125}{1000 \div 125} \\
+              &= \frac{1}{8}
+    \end{align*}
+    To convert to percentage, multiply by 100:
+    \[
+    0.125 \times 100\% = 12.5\%
+    \]
+    So, \( 0.125 = \frac{1}{8} = 12.5\% \).
+
+    \item \( 0.203125 \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        0.203125 &= \frac{203125}{1000000} \\
+                 &= \frac{203125 \div 15625}{1000000 \div 15625} \\
+                 &= \frac{13}{64}
+    \end{align*}
+    Note: \(15625 = 5^6\), and \(203125 \div 15625 = 13\).
+    
+    To convert to percentage:
+    \[
+    0.203125 \times 100\% = 20.3125\%
+    \]
+    So, \( 0.203125 = \frac{13}{64} = 20.3125\% \).
+\end{enumerate}
+
+\section*{Question 2}
+Convert the following fractions into decimals and percentages.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \( \frac{7}{20} \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        \frac{7}{20} &= 7 \div 20 = 0.35 \\
+        0.35 \times 100\% &= 35\%
+    \end{align*}
+    So, \( \frac{7}{20} = 0.35 = 35\% \).
+
+    \item \( \frac{33}{320} \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        \frac{33}{320} &= 33 \div 320 = 0.103125 \\
+        0.103125 \times 100\% &= 10.3125\%
+    \end{align*}
+    So, \( \frac{33}{320} = 0.103125 = 10.3125\% \).
+\end{enumerate}
+
+\section*{Question 3}
+Express the following percentages as decimals and fractions in simplest form.
+
+\begin{enumerate}[label=(\alph*)]
+    \item \( 17.5\% \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        17.5\% &= \frac{17.5}{100} = 0.175 \\
+        0.175 &= \frac{175}{1000} = \frac{7}{40}
+    \end{align*}
+    So, \( 17.5\% = 0.175 = \frac{7}{40} \).
+
+    \item \( 57.8125\% \)
+    
+    \textbf{Solution:}
+    \begin{align*}
+        57.8125\% &= \frac{57.8125}{100} = 0.578125 \\
+        0.578125 &= \frac{578125}{1000000} = \frac{37}{64}
+    \end{align*}
+    Note: \(578125 \div 15625 = 37\) and \(1000000 \div 15625 = 64\).
+    
+    So, \( 57.8125\% = 0.578125 = \frac{37}{64} \).
+\end{enumerate}
+
+\section*{Question 4}
+\textbf{Basis points} are units used in finance: \(1 \text{ basis point} = 0.01\%\).
+
+\begin{enumerate}[label=(\alph*)]
+    \item Write one basis point as a decimal and a fraction in simplest form.
+    
+    \textbf{Solution:}
+    \begin{align*}
+        1 \text{ basis point} &= 0.01\% \\
+        &= \frac{0.01}{100} = 0.0001 \\
+        &= \frac{1}{10000}
+    \end{align*}
+    So, \(1 \text{ basis point} = 0.0001 = \frac{1}{10000}\).
+
+    \item Write 175 basis points as a decimal and a fraction in simplest form.
+    
+    \textbf{Solution:}
+    \begin{align*}
+        175 \text{ basis points} &= 175 \times 0.01\% = 1.75\% \\
+        &= \frac{1.75}{100} = 0.0175 \\
+        &= \frac{175}{10000} = \frac{7}{400}
+    \end{align*}
+    So, \(175 \text{ basis points} = 0.0175 = \frac{7}{400}\).
+\end{enumerate}
+
+\textbf{Gilts} are UK government bonds with a coupon payment equal to a percentage of the amount borrowed.
+
+\begin{enumerate}[label=(\alph*), resume]
+    \item Find \(5.355\%\) as a decimal and a fraction in its simplest form.
+    
+    \textbf{Solution:}
+    \begin{align*}
+        5.355\% &= \frac{5.355}{100} = 0.05355 \\
+        &= \frac{5355}{100000} = \frac{1071}{20000}
+    \end{align*}
+    So, \(5.355\% = 0.05355 = \frac{1071}{20000}\).
+    
+    \item Calculate the total cost for the government to borrow £1000 over 30 years, including payback of the original amount.
+    
+    \textbf{Solution:}
+    \begin{align*}
+        \text{Annual coupon} &= 5.355\% \text{ of } £1000 \\
+        &= 0.05355 \times 1000 = £53.55 \\
+        \text{Total coupon payments over 30 years} &= 30 \times £53.55 = £1606.50 \\
+        \text{Repayment of principal} &= £1000 \\
+        \text{Total cost} &= £1606.50 + £1000 = £2606.50
+    \end{align*}
+    So, the total cost is £2606.50.
+    
+    \item Suppose the coupon payment of a 30 year gilt rises \(43.5\) basis points. How much more does it cost the government to borrow £1000 over 30 years?
+    
+    \textbf{Solution:}
+    \begin{align*}
+        43.5 \text{ basis points} &= 43.5 \times 0.01\% = 0.435\% \\
+        \text{Increase in annual coupon} &= 0.435\% \text{ of } £1000 \\
+        &= 0.00435 \times 1000 = £4.35 \\
+        \text{Additional cost over 30 years} &= 30 \times £4.35 = £130.50
+    \end{align*}
+    So, it costs an additional £130.50.
+\end{enumerate}
+
+\end{document}
