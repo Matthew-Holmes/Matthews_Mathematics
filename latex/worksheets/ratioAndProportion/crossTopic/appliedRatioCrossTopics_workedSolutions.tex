@@ -1,0 +1,261 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+\title{Worked Solutions: Applied Ratio Extension Problems}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Recipe Questions Past}
+
+\begin{enumerate}
+    \item \textbf{Increasing muffin yield by 50\%:} \\
+    Original yield: 12 muffins. \\
+    Increase by 50\%: \( 12 \times 1.5 = 18 \) muffins. \\
+    Scaling factor: \( \frac{18}{12} = 1.5 \). \\
+    New quantities:
+    \begin{itemize}
+        \item Flour: \( 300 \times 1.5 = 450\) g
+        \item Sugar: \( 200 \times 1.5 = 300\) g
+        \item Eggs: \( 2 \times 1.5 = 3\) eggs (or 150 g)
+        \item Milk: \( 250 \times 1.5 = 375\) ml
+    \end{itemize}
+
+    \item \textbf{Reducing sauce recipe to 75\%:} \\
+    Scaling factor: \( 0.75 \). \\
+    New quantities:
+    \begin{itemize}
+        \item Tomato passata: \( 400 \times 0.75 = 300\) ml
+        \item Garlic: \( 2 \times 0.75 = 1.5\) cloves (or 15 g)
+        \item Olive oil: \( 100 \times 0.75 = 75\) ml
+        \item Basil: \( 50 \times 0.75 = 37.5\) g
+    \end{itemize}
+
+    \item \textbf{Serving 10 people from a 6-person cake recipe:} \\
+    Scaling factor: \( \frac{10}{6} = \frac{5}{3} \approx 1.6667\). \\
+    Percentage increase: \( \left( \frac{5}{3} - 1 \right) \times 100\% = \frac{2}{3} \times 100\% \approx 66.67\% \). \\
+    New quantities:
+    \begin{itemize}
+        \item Flour: \( 240 \times \frac{5}{3} = 400\) g
+        \item Butter: \( 180 \times \frac{5}{3} = 300\) g
+        \item Sugar: \( 150 \times \frac{5}{3} = 250\) g
+        \item Eggs: \( 3 \times \frac{5}{3} = 5\) eggs (or 250 g)
+    \end{itemize}
+
+    \item \textbf{Finding original pasta mass:} \\
+    Let original mass = \( x \) g. \\
+    Increased by 40\%: \( x \times 1.4 = 560 \) \\
+    \( x = \frac{560}{1.4} = 400 \) g. \\
+    Original mass: 400 g.
+
+    \item \textbf{Bread recipe reduction:}
+    \begin{enumerate}
+        \item Original flour: 1000 g, new flour: 850 g. \\
+        Reduction factor: \( \frac{850}{1000} = 0.85 \). \\
+        Percentage reduction: \( (1 - 0.85) \times 100\% = 15\% \).
+        \item New quantities:
+        \begin{itemize}
+            \item Water: \( 600 \times 0.85 = 510\) ml
+            \item Salt: \( 20 \times 0.85 = 17\) g
+            \item Yeast: \( 15 \times 0.85 = 12.75\) g
+        \end{itemize}
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Recipe Questions Future}
+
+\begin{enumerate}[resume]
+    \item \textbf{Square brownie tray enlargement:} \\
+    Original area: \( 20 \times 20 = 400\) cm\(^2\). \\
+    New area: \( 25 \times 25 = 625\) cm\(^2\). \\
+    Scaling factor: \( \frac{625}{400} = 1.5625 \). \\
+    New quantities:
+    \begin{itemize}
+        \item Chocolate: \( 200 \times 1.5625 = 312.5\) g
+        \item Butter: \( 150 \times 1.5625 = 234.375\) g
+        \item Eggs: \( 3 \times 1.5625 = 4.6875 \approx 4.7\) eggs (practically 5 eggs)
+    \end{itemize}
+
+    \item \textbf{Circular cake tin enlargement:} \\
+    Original radius: 10 cm, new radius: 15 cm. \\
+    Area scales with square of linear factor: \\
+    Linear scaling factor: \( \frac{30}{20} = 1.5 \). \\
+    Area scaling factor: \( 1.5^2 = 2.25 \). \\
+    New quantities:
+    \begin{itemize}
+        \item Flour: \( 250 \times 2.25 = 562.5\) g
+        \item Sugar: \( 200 \times 2.25 = 450\) g
+        \item Eggs: \( 4 \times 2.25 = 9\) eggs
+    \end{itemize}
+
+    \item \textbf{Rectangular pizzas:}
+    \begin{enumerate}
+        \item Areas: \\
+        Small pizza: \( 20 \times 15 = 300\) cm\(^2\). \\
+        Large pizza: \( 35 \times 25 = 875\) cm\(^2\).
+        \item Scaling factor: \( \frac{875}{300} = \frac{35}{12} \approx 2.9167\). \\
+        New quantities:
+        \begin{itemize}
+            \item Cheese: \( 200 \times \frac{35}{12} \approx 583.33\) g
+            \item Flour: \( 150 \times \frac{35}{12} = 437.5\) g
+            \item Tomato sauce: \( 100 \times \frac{35}{12} \approx 291.67\) ml
+        \end{itemize}
+    \end{enumerate}
+
+    \item \textbf{Cake perimeter decoration:}
+    \begin{enumerate}
+        \item Perimeter: \( 2 \times (28 + 18) = 92\) cm.
+        \item Sprinkles needed: \( \frac{92}{4} = 23\) g.
+        \item Double perimeter means linear dimensions multiplied by 2 (since perimeter is linear). \\
+        Area scales by \( 2^2 = 4 \), so cake base and icing should be multiplied by 4. \\
+        Perimeter scales by 2, so sprinkles multiplied by 2.
+    \end{enumerate}
+
+    \item \textbf{Triangular dessert scaling:}
+    \begin{enumerate}
+        \item Original perimeter: \( 12 + 12 + 8 = 32\) cm.
+        \item New perimeter: \( 32 \times 1.5 = 48\) cm.
+        \item Sugar (for area): scales with square of linear factor. \\
+        Scaling factor: \( 1.5^2 = 2.25 \). \\
+        Sugar: \( 120 \times 2.25 = 270\) g.
+        \item Cocoa powder (for perimeter): scales linearly. \\
+        Cocoa: \( 80 \times 1.5 = 120\) g.
+        \item Eggs: typically scale with volume (cube of linear factor), but recipe may vary. \\
+        If eggs scale with volume: \( 3 \times 1.5^3 = 3 \times 3.375 = 10.125\) eggs. \\
+        If eggs scale with area: \( 3 \times 2.25 = 6.75\) eggs. \\
+        Usually in baking, eggs scale with area for cakes, but problem doesn't specify. \\
+        Assuming linear scaling for simplicity: \( 3 \times 1.5 = 4.5\) eggs.
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Best Buys Past}
+
+\begin{enumerate}[resume]
+    \item \textbf{Cereal boxes:} \\
+    500g box: \( \frac{4.50}{500} = 0.009\) £/g = 9p per 10g. \\
+    750g box: \( \frac{6.30}{750} = 0.0084\) £/g = 8.4p per 10g. \\
+    750g box is better value.
+
+    \item \textbf{Soda cans:} \\
+    Store A: 6 cans for \$4.80 \(\Rightarrow\) per can: \( \frac{4.80}{6} = 0.80\) dollars. \\
+    Store B: Single can normally \$0.95, 15\% discount: \( 0.95 \times 0.85 = 0.8075\) dollars. \\
+    For 6 cans: Store A: \$4.80, Store B: \( 6 \times 0.8075 = 4.845\) dollars. \\
+    Store A is cheaper.
+
+    \item \textbf{Juice bottles:} \\
+    2L bottle: \( \frac{3.20}{2} = 1.60\) €/L. \\
+    1.5L bottle: Sale price: \( 2.80 \times 0.80 = 2.24\) €. \\
+    Per liter: \( \frac{2.24}{1.5} \approx 1.493\) €/L. \\
+    1.5L bottle on sale is better value.
+
+    \item \textbf{Electronics store:} \\
+    Headphones after discount: \( 120 \times 0.80 = 96\) £. \\
+    Speakers after discount: \( 85 \times 0.70 = 59.50\) £. \\
+    Buy 3 get cheapest free: Buy headphones, speakers, and a third cheap item (e.g., £10 item). \\
+    Total before free: \( 96 + 59.50 + 10 = 165.50\) £. Cheapest free: remove £10. \\
+    Pay: 155.50 £. \\
+    Selling to local shop at 50\% of non-discounted price: \\
+    Headphones: \( 120 \times 0.50 = 60\) £, Speakers: \( 85 \times 0.50 = 42.50\) £. \\
+    Total if bought at discount and sold: \( 60 + 42.50 = 102.50\) £, cost 155.50 £, net loss. \\
+    Cheapest is to buy separately: \( 96 + 59.50 = 155.50\) £.
+
+    \item \textbf{Furniture payment plans:} \\
+    Plan A: Down: \( 0.25 \times 1200 = 300\) £, then \( 12 \times 80 = 960\) £. Total: 1260 £. \\
+    Plan B: \( 18 \times 75 = 1350\) £. \\
+    Plan A is better by \( 1350 - 1260 = 90\) £. \\
+    Percentage of original price: \( \frac{90}{1200} \times 100\% = 7.5\%\).
+\end{enumerate}
+
+\section*{Best Buys Future}
+
+\begin{enumerate}[resume]
+    \item \textbf{Garden fencing:} \\
+    Perimeter: \( 2 \times (10 + 8) = 36\) m. \\
+    Store A: \( 36 \times 12 = 432\) dollars. \\
+    Store B: Each section 2 m, need \( \frac{36}{2} = 18\) sections. \\
+    Cost: \( 18 \times 20 = 360\) dollars. \\
+    Store B is cheaper.
+
+    \item \textbf{Tiling floor:} \\
+    Room area: \( 4 \times 5 = 20\) m\(^2\). \\
+    Type A: \( 20 \times 25 = 500\) £. \\
+    Type B: Needs 15\% more tiles: \( 20 \times 1.15 = 23\) m\(^2\). \\
+    Cost: \( 23 \times 18 = 414\) £. \\
+    Type B is cheaper.
+
+    \item \textbf{Paint coverage:} \\
+    Total wall area: \( (4 \times 3) + (5 \times 3) = 12 + 15 = 27\) m\(^2\). \\
+    Standard paint: Liters needed: \( \frac{27}{12} = 2.25\) L. Cost: \( 2.25 \times 35 = 78.75\) £. \\
+    Brand X: Coverage per liter: \( 12 \times 1.20 = 14.4\) m\(^2\)/L. \\
+    Liters needed: \( \frac{27}{14.4} = 1.875\) L. Cost: \( 1.875 \times 42 = 78.75\) £. \\
+    Same cost. Buying cheapest: 78.75 £.
+
+    \item \textbf{Grass seed:} \\
+    Lawn area: Rectangle: \( 10 \times 6 = 60\) m\(^2\). \\
+    Semicircle: \( \frac{1}{2} \pi r^2 = \frac{1}{2} \pi \times 3^2 = \frac{9\pi}{2} \approx 14.137\) m\(^2\). \\
+    Total area: \( 60 + 14.137 = 74.137\) m\(^2\). \\
+    Seed A: kg needed: \( \frac{74.137}{15} \approx 4.9425\) kg. Cost: \( 4.9425 \times 4.80 \approx 23.724\) dollars. \\
+    Seed B: kg needed: \( \frac{74.137}{25} \approx 2.9655\) kg. Cost: \( 2.9655 \times 7.50 \approx 22.241\) dollars. \\
+    Seed B is more economical.
+
+    \item \textbf{Pool cover:} \\
+    Pool area: Rectangle: \( 8 \times 4 = 32\) m\(^2\). \\
+    Two semicircles = one circle: \( \pi r^2 = \pi \times 2^2 = 4\pi \approx 12.566\) m\(^2\). \\
+    Total area: \( 32 + 12.566 = 44.566\) m\(^2\). \\
+    Material X: Cost: \( 44.566 \times 18 \approx 802.19\) dollars. Per year: \( \frac{802.19}{3} \approx 267.40\) dollars/year. \\
+    Material Y: Cost: \( 44.566 \times 25 \approx 1114.15\) dollars. Per year: \( \frac{1114.15}{5} \approx 222.83\) dollars/year. \\
+    Material Y is more economical per year. Cost per year: 222.83 dollars.
+\end{enumerate}
+
+\section*{Scaling Past}
+
+\begin{enumerate}[resume]
+    \item \textbf{Drawing scaled up 150\%:} \\
+    New length: \( 8 \times 1.5 = 12\) cm.
+
+    \item \textbf{Map scale 1:25,000:} \\
+    1 cm represents 25,000 cm = 250 m = 0.25 km. \\
+    Percentage: \( \frac{1}{25000} \times 100\% = 0.004\% \).
+
+    \item \textbf{Photo reduced to 80\%:} \\
+    Reduced width = 12 cm = 80\% of original. \\
+    Original width: \( \frac{12}{0.8} = 15\) cm.
+
+    \item \textbf{Bedroom scale drawing:} \\
+    Scale 2\% of actual size \(\Rightarrow\) ratio \( 2:100 = 1:50 \). \\
+    Bed length: 2 m = 200 cm. Drawn length: \( 200 \times 0.02 = 4\) cm.
+
+    \item \textbf{Scale models:}
+    \begin{enumerate}
+        \item Window width 1.2 m = 120 cm. \\
+        Model A: \( 120 \times 0.025 = 3\) cm. \\
+        Model B: \( 120 \times 0.04 = 4.8\) cm.
+        \item Model A height 45 cm = 0.025 of actual. \\
+        Actual height: \( \frac{45}{0.025} = 1800\) cm = 18 m.
+        \item Model B scale factor relative to Model A: \( \frac{0.04}{0.025} = 1.6 \). \\
+        Percentage larger: \( (1.6 - 1) \times 100\% = 60\%\).
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Scaling Future}
+
+\begin{enumerate}[resume]
+    \item \textbf{Square enlargement:} \\
+    Original perimeter 12 cm, side length 3 cm. \\
+    Scale factor 3, new side: 9 cm, new perimeter: \( 4 \times 9 = 36\) cm.
+
+    \item \textbf{Rectangular field:} \\
+    Scale 1:200, drawing dimensions 6 cm × 4 cm. \\
+    Actual dimensions: \( 6 \times 200 = 1200\) cm = 12 m, \( 4 \times 200 = 800\) cm = 8 m. \\
+    Actual area: \( 12 \times 8 = 96\) m\(^2\).
+
+    \item \textbf{Equilateral triangle park:} \\
+    Scale 1:50, drawn side 2 cm. \\
+    Actual side: \( 2 \times 50 = 100\) cm = 1 m.
+    \begin{enumerate}
