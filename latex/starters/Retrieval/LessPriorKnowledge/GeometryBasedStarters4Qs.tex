@@ -1,0 +1,98 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{angles,quotes,calc}
+
+\title{Starter}
+\author{}
+\date{}
+
+\setbeamertemplate{navigation symbols}{}
+
+\begin{document}
+
+\begin{frame}
+  \frametitle{Starter}
+
+  \begin{columns}[t,onlytextwidth]
+    % ===== LEFT COLUMN =====
+    \begin{column}{0.52\textwidth}
+      \textbf{1.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Points
+        \coordinate (A) at (0,0);
+        \coordinate (L) at (-3,0);
+        \coordinate (R) at (3,0);
+        % A ray making 52 degrees with the rightward horizontal
+        \path (A) -- ++(52:2.6) coordinate (C);
+
+        % Line and ray
+        \draw (L) -- (R);
+        \draw (A) -- (C);
+
+        % Angle marks
+        % Obtuse angle on the left (128°)
+        \pic[draw,angle radius=9mm,"$128^\circ$" {scale=1}] {angle = C--A--L};
+
+        % Acute angle on the right (x°)
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = R--A--C};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+
+      % ---- Flexible space to push #3 down to align with #4 ----
+      \vfill
+      \vspace{4em}
+
+      \textbf{3.} \quad $372 + 458 = \ \rule{2.5cm}{0.4pt}$
+    \end{column}
+
+    % ===== RIGHT COLUMN =====
+    \begin{column}{0.48\textwidth}
+      \textbf{2.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Intersection point
+        \coordinate (O) at (0,0);
+
+        % Two intersecting lines
+        \coordinate (A1) at (-2.8,-1.6);
+        \coordinate (B1) at (2.8,1.6);
+        \coordinate (C1) at (-2.6,1.6);
+        \coordinate (D1) at (2.6,-1.6);
+        \draw (A1) -- (B1);
+        \draw (C1) -- (D1);
+
+        % Mark the top angle as 62°
+        \pic[draw,angle radius=9mm,"$62^\circ$" {scale=1}] {angle = B1--O--C1};
+
+        % Mark the vertically opposite (bottom) angle as x°
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = A1--O--D1};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+
+      % ---- Flexible space to push #4 down to align with #3 ----
+      \vfill
+        \vspace{1em}
+      \textbf{4.} \quad $(84 \div 6) \times 3 = \ \rule{2.5cm}{0.4pt}$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+% --- Optional: Answers slide ---
+% \begin{frame}
+%   \frametitle{Answers}
+%   \begin{enumerate}
+%     \item $x = 52^\circ$ \hfill (angles on a straight line sum to $180^\circ$)
+%     \item $x = 62^\circ$ \hfill (vertically opposite angles are equal)
+%     \item $372 + 458 = 830$
+%     \item $84 \div 6 \times 3 = 14 \times 3 = 42$
+%   \end{enumerate}
+% \end{frame}
+
+\end{document}
