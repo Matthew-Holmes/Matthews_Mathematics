@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{gensymb}
+\usepackage{amsfonts}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tabularx}
+
+\title{Bearings Challenge}
+
+\date{}
+\begin{document}
+
+\maketitle
+
+
+Bob knows the location of some buried gold, it lies exactly $100$km away, on a line exactly $123.5 \degree$ clockwise from North.
+\\ \\
+Bob has an electronic compass that can direct him on bearings, with no error, unfortunately, it will only accept 3 digit bearings, with no fractions of degrees.
+\\ \\
+To find the gold, Bob must arrive within $1$m of its location.
+
+\section{Introduction}
+
+Assume all travellers can perfectly measure their distance travelled.
+
+\begin{enumerate}
+    \item Using a scale of $1$cm $:$ $20$km, sketch a map for Bob, label the angles and distances
+    \item Determine how Bob can locate the gold by travelling on a bearing of $180\degree$ followed by $090\degree$
+    \item Bob can travel $20$km a day, how long will it take him to travel to the gold?
+    \item Rob has stumbled upon the map to the gold, and intends to plot a course to arrive before Bob, travelling Southeast, then East. Armed with the same model of electronic compass, and travelling at the same speed, how much earlier will he arrive?
+    \item You want to beat both Bob and Rob to the treasure, but can also only follow $3$ digit bearings. And now they both have a $7$ hour head start! Covering $20$km per day can you find a way to arrive at the gold first? is your route the quickest possible?
+\end{enumerate}
+
+\newpage
+
+\section{Challenge I}
+
+Previously we assumed that the travellers could measure their distances with unlimited precision - in reality that is not the case. Luckily, you, Bob and Rob have downloaded an app that will ping every time you travel exactly $1$km in a straight line.
+\\ \\ 
+Therefore - all sections of journeys must be exact multiples of $1$km!
+
+\begin{enumerate}
+    \item Determine how far off the gold's location you, Bob and Rob will be if you round each leg of your planned journeys to the nearest kilometre. Thus show that the gold will remain buried.
+    \item What is the outcome of travelling the following route:
+    \begin{itemize}
+    \item $2$km on a bearing $179\degree$
+    \item $2$km on a bearing of $000\degree$
+    \item $1$km on a bearing of $182\degree$ 
+    \item $1$km on a bearing of $000\degree$
+    \end{itemize}
+    \item What is the outcome of travelling the following route:
+    \begin{itemize}
+        \item $2$km on a bearing $091\degree$
+        \item $2$km on a bearing of $270\degree$
+        \item $1$km on a bearing of $088\degree$
+        \item  $1$km on a bearing of $270\degree$
+    \end{itemize}
+    \item Use the previous two questions to show that a route leading to the gold is possible - how long will this route take?
+    \item Show that it is possible to plot a route to within $1$m of any location $(x,y)$
+    \item Show that it is possible to plot a route with at most $6$ legs to within $1$m of any location $(x,y)$
+\end{enumerate}
+
+\vspace{1em}
+\section{Challenge II}
+
+Now we restrict our attention to routes that have only two legs, thus take the following form:
+
+\begin{itemize}
+    \item Travel $M$km on a bearing of $ABC\degree$
+    \item Travel $N$km on a bearing of $XYZ\degree$
+\end{itemize}
+
+Where $000\degree \leq ABC, XYZ < 360\degree$, and $M,N \in \mathbb{N}$
+
+\begin{enumerate}
+    \item Consider the case that $M>6000$, what restriction does this place on $XYZ\degree$ to return within $100$km of the start location?
+    \item Use the cosine rule to determine the range of $N$ values possible given $M$, to ensure that the end of the journey lies between $0$ and $100$km from the start
+    \item Thus establish an upper bound on the number of possible two leg journeys that we need to consider
+    \item Does the conclusion from the previous section still necessarily hold?
+    \item Use the following table to refine the upper bound of the number of possible two leg journeys to consider:
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{|l|X|X|X|X|X|}
+\hline
+ & $ABC^{\circ}$ Option count &  $M$ in range &  $XYZ^{\circ}$ Option count per $M$ value (upper bound) & $N$ Option count per M value (upper bound) & Total journey option count for this $M$ range \\
+\hline
+$M \le 100$            & & & & & \\
+\hline
+$100 < M \le 500$      & & & & & \\
+\hline
+$500 < M \le 2000$     & & & & & \\
+\hline
+$2000 < M \le 6000$    & & & & & \\
+\hline
+\end{tabularx}
+\end{table}
+
+\item Consider the journey:
+\begin{itemize}
+    \item Travel $N$km on a bearing of $XYZ\degree$
+    \item Travel $M$km on a bearing of $ABC\degree$
+\end{itemize}
+and thus establish and upper bound $U$, on the number of two leg journeys that finish within $100$km of the start point, with $U < 10^{10}$
+
+\item Consider the area in square meters of a circle radius $100$km, thus show that there are some locations that cannot be reached within $1$m, following a two leg journey
+\item Use a computer to determine if the gold can be reached via a two leg journey
+\item If the gold can be reached, use a computer to find the closest point to the gold that cannot be reached; if the gold cannot be reached, find the point closest to the gold that can
+
+\end{enumerate}
+
+\end{document}
