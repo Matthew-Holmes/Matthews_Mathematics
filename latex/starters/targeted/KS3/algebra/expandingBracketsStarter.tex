@@ -1,0 +1,128 @@
+\documentclass{beamer}
+
+% Theme (optional but nice)
+\usetheme{Madrid}
+
+% Maths
+\usepackage{amsmath}
+
+% Graphics
+\usepackage{tikz}
+
+\begin{document}
+
+% ---------- STARTER (PRIOR KNOWLEDGE) ----------
+\begin{frame}{Starter: Prior Knowledge}
+\begin{minipage}[t]{0.48\textwidth}
+
+\begin{block}{1) Arithmetic}
+\Large
+\[
+13 + 9 =
+\]
+\end{block}
+
+\vspace{6.2em}
+
+\begin{block}{3) Collect like terms}
+\Large
+\[
+3b + 4 + 2b =
+\]
+\end{block}
+
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+
+\begin{block}{2) Box Method}
+\centering
+\begin{tikzpicture}[scale=0.8]
+
+\draw (0,0) rectangle (4,2);
+\draw (2,0) -- (2,2);
+
+\node at (1,-0.4) {$3$};
+\node at (3,-0.4) {$5$};
+\node at (-0.4,1) {$4$};
+
+\node at (1,1) {?};
+\node at (3,1) {?};
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+Find the total area.
+
+\end{block}
+
+\vspace{0.6em}
+
+\begin{block}{4) Expand the bracket}
+\Large
+\[
+2(x+6) =
+\]
+\end{block}
+
+\end{minipage}
+\end{frame}
+
+
+% ---------- STARTER ANSWERS ----------
+\begin{frame}{Starter: Answers}
+\begin{minipage}[t]{0.48\textwidth}
+
+\begin{block}{1) Arithmetic}
+\Large
+\[
+13 + 9 = \textcolor{red}{22}
+\]
+\end{block}
+
+\vspace{6.2em}
+
+\begin{block}{3) Collect like terms}
+\Large
+\[
+3b + 4 + 2b = \textcolor{red}{5b + 4}
+\]
+\end{block}
+
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\textwidth}
+
+\begin{block}{2) Box Method}
+\centering
+\begin{tikzpicture}[scale=0.8]
+
+\draw (0,0) rectangle (4,2);
+\draw (2,0) -- (2,2);
+
+\node at (1,-0.4) {$3$};
+\node at (3,-0.4) {$5$};
+\node at (-0.4,1) {$4$};
+
+\node at (1,1) {\textcolor{red}{12}};
+\node at (3,1) {\textcolor{red}{20}};
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+\textcolor{red}{Total area = 32}
+
+\end{block}
+
+\vspace{0.6em}
+
+\begin{block}{4) Expand the bracket}
+\Large
+\[
+2(x+6) = \textcolor{red}{2x + 12}
+\]
+\end{block}
+
+\end{minipage}
+\end{frame}
+
+
+\end{document}
