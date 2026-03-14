@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usetikzlibrary{calc}
 
+
 \title{Starter}
 \date{}
 
@@ -55,15 +56,15 @@
     % outward offset perpendicular to edge (along (1,-1) direction)
     \coordinate (offset) at (0.3,-0.3);
     % shorten factor: move endpoints inward along dir
-    \def\shorten{0.6}
+    \def\shorten{0.1}
     \coordinate (start) at ($(B)+(offset)+\shorten*(dir)$);
     \coordinate (end)   at ($(F)+(offset)-\shorten*(dir)$);
     % dimension line
     \draw (start) -- (end);
     % ticks perpendicular to dimension line (along direction of edge)
-    \coordinate (tickDir) at ($(dir)*0.1$);        % vector for tick length
-    \draw ($(start)-(tickDir)$) -- ($(start)+(tickDir)$);
-    \draw ($(end)-(tickDir)$) -- ($(end)+(tickDir)$);
+    \coordinate (tickDir) at ($(0,0)!0.1!(dir)$);        % vector for tick length
+\coordinate (start) at ($(B)+(offset)+(0,0)!\shorten!(dir)$);
+\coordinate (end)   at ($(F)+(offset)-(0,0)!\shorten!(dir)$);;
     % label
     \node at ($(start)!0.5!(end)$) [fill=white, inner sep=1pt] {\tiny \depthstr};
 \end{scope}
@@ -84,7 +85,7 @@
 
 \textbf{1.}
 
-\begin{tikzpicture}[scale=0.55] % Reduced scale
+\begin{tikzpicture}[scale=0.55]
 \def\R{3}
 \def\r{1.5}
 
@@ -97,9 +98,11 @@
 \draw (0,0) -- (\R,0);
 \draw (0,0) -- (0,\r);
 
-% Repositioned labels at midpoints of radii
-\node at ($(0,0)!0.5!(\R,0)$) [yshift=-0.3cm] {$6$ cm};
-\node at ($(0,0)!0.5!(0,\r)$) [xshift=0.1cm] {$3$ cm};
+% FIXED: Use separate coordinates for midpoint calculation
+\path (0,0) -- (\R,0) coordinate[midway] (midR);
+\path (0,0) -- (0,\r) coordinate[midway] (midr);
+\node at (midR) [yshift=-0.3cm] {$6$ cm};
+\node at (midr) [xshift=+0.1cm] {$3$ cm};
 \end{tikzpicture}
 
 \vspace{0.2cm}
@@ -109,7 +112,7 @@ Find the shaded area.
 
 \textbf{3.}
 
-\begin{tikzpicture}[scale=0.45] % Slightly reduced
+\begin{tikzpicture}[scale=0.45]
 
 \draw (0,0) rectangle (3,2);
 \node at (1.5,-0.4) {\small A};
@@ -181,10 +184,6 @@ Which are similar to $X$?
 % ANSWERS SLIDE
 %------------------------------------------------
 
-%------------------------------------------------
-% ANSWERS SLIDE
-%------------------------------------------------
-
 \begin{frame}
 
 \begin{columns}[T]
@@ -207,8 +206,11 @@ Which are similar to $X$?
 \draw (0,0) -- (\R,0);
 \draw (0,0) -- (0,\r);
 
-\node at ($(0,0)!0.5!(\R,0)$) [yshift=-0.3cm] {$6$ cm};
-\node at ($(0,0)!0.5!(0,\r)$) [xshift=0.1cm] {$3$ cm};
+% FIXED: Use separate coordinates for midpoint calculation
+\path (0,0) -- (\R,0) coordinate[midway] (midR);
+\path (0,0) -- (0,\r) coordinate[midway] (midr);
+\node at (midR) [yshift=-0.3cm] {$6$ cm};
+\node at (midr) [xshift=0.1cm] {$3$ cm};
 \end{tikzpicture}
 
 {\color{red} \(\pi6^2 - \pi3^2 = 27\pi\ \text{cm}^2\)}
@@ -282,11 +284,10 @@ Which are similar to $X$?
   \cuboid{5}{-6}{D}{3×4.5×6}
 \end{tikzpicture}
 
-{\color{red} Similar shapes: A, C, D}
+{\color{red} Similar shapes: B, C, D}  % Corrected based on proportions
 
 \end{columns}
 
 \end{frame}
-
 
 \end{document}
