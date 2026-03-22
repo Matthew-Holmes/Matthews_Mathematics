@@ -2,6 +2,7 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage{xcolor}
+\usepackage{multicol}
 
 \title{Fractions: Starters}
 \author{}
@@ -191,5 +192,162 @@
 \end{columns}
 
 \end{frame}
+
+
+
+\begin{frame}{Starter 5}
+
+\vspace{-3em}
+
+\begin{columns}
+
+% LEFT COLUMN: BARS + A SMALL NUMBER LINE
+\column{0.25\textwidth}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+% --- Bars for 2/3, 4/6, 6/9 ---
+% 2/3 bar
+\draw (0,0) rectangle (3,0.6);
+\fill[green!35] (0,0) rectangle (2,0.6);
+
+\draw (1,0) -- (1,0.6);
+\draw (2,0) -- (2,0.6);
+
+% 4/6 bar
+\draw (0,-1.2) rectangle (3,-0.6);
+\fill[green!35] (0,-1.2) rectangle (2,-0.6);
+
+\foreach \x in {0.5,1,1.5,2,2.5} \draw (\x,-1.2) -- (\x,-0.6);
+
+% 6/9 bar
+\draw (0,-2.4) rectangle (3,-1.8);
+\fill[green!35] (0,-2.4) rectangle (2,-1.8);
+
+\foreach \x in {0.333,0.666,1,1.333,1.666,2,2.333,2.666} \draw (\x,-2.4) -- (\x,-1.8);
+
+% --- Compact number line 0 to 3 ---
+\draw (-0.1,-3.6) -- (3.1,-3.6);
+\foreach \x/\lab in {0/0,1/1,2/2,3/3} {
+  \draw (\x,-3.65) -- (\x,-3.55);
+  \node at (\x,-3.85) {\small \lab};
+}
+\end{tikzpicture}
+\end{center}
+
+% RIGHT COLUMN: TWO-COLUMN QUESTIONS (FLOW)
+\column{0.75\textwidth}
+
+\small 
+
+\begin{multicols}{2}
+\begin{enumerate}
+  \item $\dfrac{1}{2}=\dfrac{?}{6}$
+  \item Write the fraction represented by each bar. (Extension) show that they are equivalent
+  \item $\dfrac{5}{6}=\dfrac{10}{?}$
+
+
+    \item Mark $1\dfrac{2}{3}$ and $2\dfrac{1}{2}$ on the number line. Convert each to an improper fraction.
+
+  \item $\dfrac{2}{3}=\dfrac{?}{12}$
+
+    \columnbreak
+
+  \item Which are equivalent to $\dfrac{3}{7}$: $\dfrac{9}{21}, \dfrac{6}{14}, \dfrac{12}{28}, \dfrac{8}{21}$?
+  \item Write 3 fractions equivalent to $\dfrac{4}{9}$
+  \item Compare ( $<$ $>$ $=$) these fractions: $\dfrac{2}{5}\ \square\ \dfrac{6}{15}$
+
+  \item Fully simplify $\dfrac{48}{18}$
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}{Starter 6}
+
+\vspace{-2.5em}
+
+\begin{columns}
+
+% LEFT COLUMN: VISUAL BARS + NUMBER LINE
+\column{0.25\textwidth}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+
+% --- Bars for 3/4, 6/8, 9/12 ---
+% 3/4
+\draw (0,0) rectangle (3,0.6);
+\fill[blue!35] (0,0) rectangle (2.25,0.6);
+\foreach \x in {0.75,1.5,2.25} \draw (\x,0) -- (\x,0.6);
+
+% 6/8
+\draw (0,-1.2) rectangle (3,-0.6);
+\fill[blue!35] (0,-1.2) rectangle (2.25,-0.6);
+\foreach \x in {0.375,0.75,1.125,1.5,1.875,2.25,2.625} \draw (\x,-1.2) -- (\x,-0.6);
+
+% 9/12
+\draw (0,-2.4) rectangle (3,-1.8);
+\fill[blue!35] (0,-2.4) rectangle (2.25,-1.8);
+\foreach \x in {0.25,0.5,0.75,1,...,2.75} \draw (\x,-2.4) -- (\x,-1.8);
+
+% --- Number Line 0 to 3 ---
+\draw (-0.1,-3.6) -- (3.1,-3.6);
+\foreach \x/\lab in {0/0,1/1,2/2,3/3} {
+  \draw (\x,-3.65) -- (\x,-3.55);
+  \node at (\x,-3.85) {\small \lab};
+}
+
+\end{tikzpicture}
+\end{center}
+
+% RIGHT COLUMN: QUESTIONS
+\column{0.75\textwidth}
+
+\small
+
+\begin{multicols}{2}
+
+\begin{enumerate}
+
+  \item $\dfrac{3}{5}=\dfrac{?}{20}$
+
+  \item Write the fraction shown by each bar. (Extension) Explain why they represent the same amount.
+
+  \item $\dfrac{4}{7}=\dfrac{?}{21}$
+
+  \item Mark $1\dfrac{3}{4}$ and $2\dfrac{2}{3}$ on the number line. Convert both to improper fractions.
+
+  \item Fully simplify: $\dfrac{42}{56}$
+
+  \columnbreak
+
+  \item Which are equivalent to $\dfrac{5}{9}$:  
+    $\dfrac{10}{18},\ \dfrac{15}{27},\ \dfrac{12}{20},\ \dfrac{25}{45}$?
+
+  \item Write 3 fractions equivalent to $\dfrac{7}{12}$.
+
+  \item Order these fractions in ascending order:  
+  \[
+  \frac{2}{8},\quad \frac{4}{6},\quad \frac{5}{12}
+  \]
+
+  \item Compare using $<$, $>$, or $=$:  
+  \[
+  \frac{9}{14}\ \square\ \frac{19}{28}
+  \]
+
+\end{enumerate}
+
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+
 
 \end{document}
