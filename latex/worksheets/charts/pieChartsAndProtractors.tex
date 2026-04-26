@@ -32,17 +32,18 @@
     \pgfmathsetmacro{\startA}{90}%
     \foreach \lbl/\ang/\col in {#2} {%
       \pgfmathsetmacro{\endA}{\startA - \ang}%
-      \fill[\col] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
-      \draw[white, line width=2pt] (0,0) -- (\startA:\r cm);%
+      \fill[\col!20] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
+      \draw[line width=2pt] (0,0) -- (\startA:\r cm);%
       \pgfmathsetmacro{\midA}{(\startA + \endA)/2}%
       \pgfmathsetmacro{\lR}{\r * 0.65}%
-      \node[font=\small\bfseries, text=white, align=center] at (\midA:\lR cm) {\lbl};%
+      \node[font=\small\bfseries, align=center] at (\midA:\lR cm) {\lbl};%
       \xdef\startA{\endA}%
     }%
     \draw[black, line width=1.8pt] (0,0) circle (\r cm);%
+    % Draw all dividing lines again on top, including 12-o'clock
+    \draw[black, line width=2pt] (0,0) -- (90:\r cm);%
     \fill[black] (0,0) circle (3pt);%
     \draw[black, line width=1.2pt] (0,\r cm) -- (0,{\r cm+0.25cm});%
-    \draw[gray!50, dashed, line width=0.7pt] (0,0) -- ({\r cm+0.2cm},0);%
   \end{tikzpicture}%
 }
 
