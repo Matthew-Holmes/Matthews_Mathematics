@@ -1,0 +1,329 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper, margin=1.8cm]{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usetikzlibrary{calc}
+
+% ---- Colours ----
+\definecolor{slice1}{RGB}{70,130,180}
+\definecolor{slice2}{RGB}{240,140,40}
+\definecolor{slice3}{RGB}{70,170,70}
+\definecolor{slice4}{RGB}{210,70,70}
+\definecolor{slice5}{RGB}{150,90,190}
+\definecolor{lightgrey}{RGB}{245,245,245}
+\definecolor{boxblue}{RGB}{220,235,250}
+\definecolor{boxgreen}{RGB}{220,245,220}
+
+% -------------------------------------------------------
+% \piechart{radius_number}{Label/Angle/Colour, ...}
+%   radius_number is a plain number interpreted as cm.
+%   Angles in degrees, clockwise from 12 o'clock; must sum to 360.
+% -------------------------------------------------------
+\newcommand{\piechart}[2]{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\r}{#1}%
+    \pgfmathsetmacro{\startA}{90}%
+    \foreach \lbl/\ang/\col in {#2} {%
+      \pgfmathsetmacro{\endA}{\startA - \ang}%
+      \fill[\col] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
+      \draw[white, line width=2pt] (0,0) -- (\startA:\r cm);%
+      \pgfmathsetmacro{\midA}{(\startA + \endA)/2}%
+      \pgfmathsetmacro{\lR}{\r * 0.65}%
+      \node[font=\small\bfseries, text=white, align=center] at (\midA:\lR cm) {\lbl};%
+      \xdef\startA{\endA}%
+    }%
+    \draw[black, line width=1.8pt] (0,0) circle (\r cm);%
+    \fill[black] (0,0) circle (3pt);%
+    \draw[black, line width=1.2pt] (0,\r cm) -- (0,{\r cm+0.25cm});%
+    \draw[gray!50, dashed, line width=0.7pt] (0,0) -- ({\r cm+0.2cm},0);%
+  \end{tikzpicture}%
+}
+
+% Shortcut for answer boxes
+\newcommand{\ansbox}{\underline{\hspace{1.6cm}}}
+\newcommand{\sqfrac}{\dfrac{\square}{\square}}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ===========================
+%  TITLE
+% ===========================
+\begin{center}
+  {\LARGE\bfseries Reading Pie Charts with a Protractor}\\[4pt]
+  \vspace{2em}
+  {Name:\;\underline{\hspace{6cm}} \quad
+   Date:\;\underline{\hspace{2.8cm}}}
+\end{center}
+\vspace{4pt}
+
+% \begin{mdframed}[backgroundcolor=boxblue, linecolor=slice1,
+%                  linewidth=1.5pt, roundcorner=6pt, innertopmargin=6pt]
+% \textbf{How to use your protractor on a pie chart:}
+% \begin{enumerate}[leftmargin=1.4em, itemsep=1pt, topsep=2pt]
+% \item Put the \textbf{centre cross} in the middle of your protractor exactly over the \textbf{dot} in the centre of the pie chart.
+% \item Turn the protractor so its \textbf{straight bottom edge} lines up with one of the straight lines of the sector you are measuring.
+% \item Look at where the \textbf{other straight line} of that slice crosses the curved part of the protractor --- read the angle from the scale
+% \item Write the angle in the table. \textbf{All the angles must add up to 360\textdegree{}}
+% \end{enumerate}
+% \end{mdframed}
+% \vspace{5pt}
+
+\begin{mdframed}[backgroundcolor=boxgreen, linecolor=slice3,
+                 linewidth=1.5pt, roundcorner=6pt, innertopmargin=6pt]
+\textbf{Key formulae:}\quad
+$\displaystyle\text{sector fraction} = \frac{\text{sector angle}}{360}$
+\qquad\qquad
+$\displaystyle\text{amount} = \text{fraction} \times \text{total}$
+\end{mdframed}
+\vspace{8pt}
+
+% ===========================
+%  PIE CHART 1
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 1 \textendash{} Favourite School Subjects (30 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \piechart{4.4}{Maths/120/slice1,Science/90/slice2,English/72/slice3,Art/48/slice4,PE/30/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.43\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Subject} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Maths    & & & \\
+  \hline
+  Science  & & & \\
+  \hline
+  English  & & & \\
+  \hline
+  Art      & & & \\
+  \hline
+  PE       & & & \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{30} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Questions -- Pie Chart 1:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item Use your protractor to measure each sector and fill in the \textbf{Angle} column above.
+  \item Do your angles add up to 360\textdegree? Write your total here: \ansbox\textdegree
+  \item Write the fraction of students who chose \textbf{Maths} in its simplest form:
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} = \frac{\phantom{ABC}}{\phantom{ABC}}$
+  \item How many students chose \textbf{Science}?
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} \times 30 = {}$\ansbox{} students
+  \item Which subject was chosen by exactly $\dfrac{1}{5}$ of the class? \quad \ansbox
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 2
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 2 \textendash{} How Students Travel to School (60 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \piechart{4.4}{Walk/90/slice3,Bus/120/slice1,Car/60/slice2,Cycle/45/slice4,Other/45/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.43\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Method} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Walk   & & & \\
+  \hline
+  Bus    & & & \\
+  \hline
+  Car    & & & \\
+  \hline
+  Cycle  & & & \\
+  \hline
+  Other  & & & \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{60} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Questions -- Pie Chart 2:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item Measure all sectors with your protractor. Record the angles in the table above.
+  \item How many students travel by \textbf{Bus}?
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} \times 60 = {}$\ansbox{} students
+  \item Write the fraction of students who \textbf{walk} in its simplest form:
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} = \frac{\phantom{ABC}}{\phantom{ABC}}$
+  \item Two sectors have the \textbf{same} angle. Which two travel methods are they? \quad \ansbox
+  \item How many \textbf{more} students travel by Bus than by Car? \quad \ansbox{} students
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 3
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 3 \textendash{} Ice Cream Flavours Sold in One Day (180 sold)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \piechart{4.4}{Vanilla/80/slice2,Choc/100/slice1,Straw/60/slice4,Mint/40/slice3,Other/80/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.43\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Flavour} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Vanilla    & & & \\
+  \hline
+  Chocolate  & & & \\
+  \hline
+  Strawberry & & & \\
+  \hline
+  Mint       & & & \\
+  \hline
+  Other      & & & \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{180} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Questions -- Pie Chart 3:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item Measure all sectors. Check your angles sum to \textbf{360\textdegree} before moving on.
+  \item How many \textbf{Chocolate} ice creams were sold?
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} \times 180 = {}$\ansbox{} ice creams
+  \item How many \textbf{Mint} ice creams were sold? \quad \ansbox{} ice creams
+  \item \textbf{Vanilla} and \textbf{Other} have the same angle. How many does each represent?
+        \quad \ansbox{} ice creams each
+  \item Which flavour is exactly $\tfrac{1}{6}$ of all sales? Show your working below.
+
+        \vspace{1.5cm}
+        Answer: \ansbox
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 4
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 4 \textendash{} One Evening's Activities (4 hours = 240 minutes)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \piechart{4.4}{HW/90/slice4,TV/120/slice2,Gaming/60/slice1,Reading/30/slice3,Other/60/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.43\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.7}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Activity} & \textbf{Angle} & \textbf{Fraction} & \textbf{Mins} \\
+  \hline
+  Homework & & & \\
+  \hline
+  TV       & & & \\
+  \hline
+  Gaming   & & & \\
+  \hline
+  Reading  & & & \\
+  \hline
+  Other    & & & \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{240} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Questions -- Pie Chart 4:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item Measure all angles. Complete the table. \textit{(Hint: 4 hours = 240 minutes.)}
+  \item How many minutes were spent watching \textbf{TV}?
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} \times 240 = {}$\ansbox{} mins
+  \item How many minutes were spent on \textbf{Homework}? \quad \ansbox{} mins
+  \item Write the fraction of the evening spent \textbf{Gaming} in its simplest form:
+        \quad $\dfrac{\framebox{\phantom{120}}}{360} = \frac{\phantom{ABC}}{\phantom{ABC}}$
+  \item \textbf{Challenge:} Another student spends the same fraction of their evening on Homework,
+        but has \textbf{5 hours} (300 minutes) free. How many minutes do they spend on homework?
+
+        \vspace{0.8cm}
+        Answer: \ansbox{} mins
+\end{enumerate}
+
+\newpage{}
+% ===========================
+%  ANSWER KEY
+% ===========================
+\begin{mdframed}[backgroundcolor=lightgrey, linecolor=gray,
+                 linewidth=1pt, roundcorner=4pt, innertopmargin=5pt]
+\textbf{\small Answers (Teacher Copy):}\\[3pt]
+{\small
+\textbf{Chart 1:}
+Maths 120\textdegree\;$=\tfrac{1}{3}=10$;\;
+Science 90\textdegree\;$=\tfrac{1}{4}=9$;\;
+English 72\textdegree\;$=\tfrac{1}{5}=6$;\;
+Art 48\textdegree\;$=\tfrac{2}{15}=4$;\;
+PE 30\textdegree\;$=\tfrac{1}{12}=3$.
+\;Q3: $\tfrac{1}{3}$.\;Q4: 9 students.\;Q5: English.\\[3pt]
+\textbf{Chart 2:}
+Walk 90\textdegree\;$=15$;\;
+Bus 120\textdegree\;$=20$;\;
+Car 60\textdegree\;$=10$;\;
+Cycle 45\textdegree\;$\approx8$;\;
+Other 45\textdegree\;$\approx8$.
+\;Q2: 20.\;Q3: $\tfrac{1}{4}$.\;Q4: Cycle \& Other.\;Q5: 10 more.\\[3pt]
+\textbf{Chart 3:}
+Vanilla 80\textdegree\;$=40$;\;
+Choc 100\textdegree\;$=50$;\;
+Straw 60\textdegree\;$=30$;\;
+Mint 40\textdegree\;$=20$;\;
+Other 80\textdegree\;$=40$.
+\;Q2: 50.\;Q3: 20.\;Q4: 40 each.\;Q5: Strawberry ($60\textdegree=\tfrac{1}{6}$).\\[3pt]
+\textbf{Chart 4:}
+HW 90\textdegree\;$=60$\,min;\;
+TV 120\textdegree\;$=80$\,min;\;
+Gaming 60\textdegree\;$=40$\,min;\;
+Reading 30\textdegree\;$=20$\,min;\;
+Other 60\textdegree\;$=40$\,min.
+\;Q2: 80\,min.\;Q3: 60\,min.\;Q4: $\tfrac{1}{6}$.\;Challenge: $\tfrac{1}{4}\times300=75$\,min.
+}
+\end{mdframed}
+
+\end{document}
