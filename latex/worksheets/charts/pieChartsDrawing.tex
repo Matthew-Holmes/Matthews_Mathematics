@@ -1,0 +1,397 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper, margin=1.8cm]{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usetikzlibrary{calc}
+
+% ---- Colours ----
+\definecolor{slice1}{RGB}{70,130,180}
+\definecolor{slice2}{RGB}{240,140,40}
+\definecolor{slice3}{RGB}{70,170,70}
+\definecolor{slice4}{RGB}{210,70,70}
+\definecolor{slice5}{RGB}{150,90,190}
+\definecolor{lightgrey}{RGB}{245,245,245}
+\definecolor{boxblue}{RGB}{220,235,250}
+\definecolor{boxgreen}{RGB}{220,245,220}
+\definecolor{boxorange}{RGB}{255,240,220}
+
+% -------------------------------------------------------
+% \emptycircle{radius_cm} -- just a blank circle with centre dot and 12-o'clock line
+% -------------------------------------------------------
+\newcommand{\emptycircle}[1]{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\r}{#1}%
+    \draw[black, line width=1.8pt] (0,0) circle (\r cm);
+    \fill[black] (0,0) circle (3pt);
+    \draw[black, line width=1.5pt] (0,0) -- (90:\r cm);
+    \draw[black, line width=1.2pt] (0,\r cm) -- (0,{\r cm+0.25cm});
+  \end{tikzpicture}%
+}
+
+% -------------------------------------------------------
+% \partialchart{radius}{Label/Angle/Colour, ...} -- draws some sectors pre-filled
+%   remaining arc is left blank for the student to complete
+%   sectors listed are drawn; the rest is empty
+% -------------------------------------------------------
+\newcommand{\partialchart}[2]{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\r}{#1}%
+    \pgfmathsetmacro{\startA}{90}%
+    \foreach \lbl/\ang/\col in {#2} {%
+      \pgfmathsetmacro{\endA}{\startA - \ang}%
+      \fill[\col!25] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
+      \draw[black, line width=1.8pt] (0,0) -- (\startA:\r cm);%
+      \draw[black, line width=1.8pt] (0,0) -- (\endA:\r cm);%
+      \pgfmathsetmacro{\midA}{(\startA + \endA)/2}%
+      \pgfmathsetmacro{\lR}{\r * 0.65}%
+      \node[font=\small\bfseries, align=center] at (\midA:\lR cm) {\lbl};%
+      \xdef\startA{\endA}%
+    }%
+    \draw[black, line width=1.8pt] (0,0) circle (\r cm);%
+    \fill[black] (0,0) circle (3pt);%
+    \draw[black, line width=1.2pt] (0,\r cm) -- (0,{\r cm+0.25cm});%
+  \end{tikzpicture}%
+}
+
+\newcommand{\ansbox}{\underline{\hspace{1.6cm}}}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ===========================
+%  TITLE
+% ===========================
+\begin{center}
+  {\LARGE\bfseries Drawing Pie Charts with a Protractor}\\[4pt]
+  \vspace{1em}
+  {Name:\;\underline{\hspace{6cm}} \quad
+   Date:\;\underline{\hspace{2.8cm}}}
+\end{center}
+\vspace{2pt}
+
+
+\begin{mdframed}[backgroundcolor=boxgreen, linecolor=slice3,
+                 linewidth=1.5pt, roundcorner=6pt, innertopmargin=6pt]
+\textbf{Key formula:}\quad
+$\displaystyle\text{sector angle} = \dfrac{\text{amount}}{\text{total}} \times 360°$
+\end{mdframed}
+\vspace{6pt}
+
+%% ===========================
+%%  CHART 1 -- Heavily scaffolded: angles given, 2/5 sectors pre-drawn
+%%  Data: total 36 students; angles all multiples of 10
+%%  Dog 12 → 120°, Cat 9 → 90°, Fish 8 → 80°, Rabbit 5 → 50°, Other 2 → 20°  (sum=360)
+%% ===========================
+\begin{center}
+  {\large\bfseries Chart 1 \textendash{} Favourite Pets (class of 36 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+  \centering
+  % Pre-draw: Dog (120°) and Cat (90°) -- student draws the remaining three
+  \partialchart{4.4}{Dog/120/slice1,Cat/90/slice2}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.45\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Pet} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+  \hline
+  Dog    & 12 & $\tfrac{1}{3}$ & 120\textdegree \\
+  \hline
+  Cat    &  9 & $\tfrac{1}{4}$ & 90\textdegree \\
+  \hline
+  Fish   &  8 & $\tfrac{2}{9}$ & 80\textdegree \\
+  \hline
+  Rabbit &  5 & $\tfrac{5}{36}$ & 50\textdegree \\
+  \hline
+  Other  &  2 & $\tfrac{1}{18}$ & 20\textdegree \\
+  \hline
+  \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\begin{mdframed}[backgroundcolor=boxorange, linecolor=slice2,
+                 linewidth=1pt, roundcorner=5pt, innertopmargin=4pt]
+  \small\textbf{Getting started:} The \textbf{Dog} (120\textdegree) and \textbf{Cat} (90\textdegree) sectors have already been drawn for you.
+  Starting from the Cat radius, use your protractor to add \textbf{Fish} (80\textdegree), \textbf{Rabbit} (50\textdegree) and \textbf{Other} (20\textdegree) in order.
+  Label each sector when you have drawn it.
+\end{mdframed}
+
+\vspace{4pt}
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+  \item Complete the pie chart 
+  \item Which pet was chosen by exactly $\tfrac{1}{3}$ of the class? 
+  \item Which single pet was chosen by exactly 9 students? \quad \ansbox
+\end{enumerate}
+
+\newpage
+
+%% ===========================
+%%  CHART 2 -- Scaffolded: angles given, 1 sector pre-drawn
+%%  Data: total 36 members; all angles multiples of 10
+%%  Football 14→140°, Swimming 9→90°, Tennis 6→60°, Basketball 5→50°, Other 2→20°  (sum=360)
+%% ===========================
+\begin{center}
+  {\large\bfseries Chart 2 \textendash{} Sports Club Memberships (36 members)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.52\textwidth}
+  \centering
+  % Pre-draw: Football (140°) only -- student draws the remaining four
+  \partialchart{4.4}{Football/140/slice1}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.45\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Sport} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+  \hline
+  Football   & 14 & $\tfrac{7}{18}$ & 140\textdegree \\
+  \hline
+  Swimming   &  9 & $\tfrac{1}{4}$ & 90\textdegree \\
+  \hline
+  Tennis     &  6 & $\tfrac{1}{6}$ & 60\textdegree \\
+  \hline
+  Basketball &  5 & $\tfrac{5}{36}$ & 50\textdegree \\
+  \hline
+  Other      &  2 & $\tfrac{1}{18}$ & 20\textdegree \\
+  \hline
+  \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+
+\vspace{4pt}
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+  \item Complete the pie chart.
+  \item Which sport has a sector angle of exactly 90\textdegree? \quad \ansbox
+  \item What fraction of members play \textbf{Tennis}? \quad $\dfrac{\phantom{ABC}}{\phantom{ABC}}$
+  \item How many degrees are taken up by the \textbf{three smallest} sports combined?
+        \vspace{0.6cm}\\
+        \hspace*{1.6em}Answer: \ansbox\textdegree
+\end{enumerate}
+
+\newpage
+
+%% ===========================
+%%  CHART 3 -- Less scaffolded: angles given in table, blank circle
+%% ===========================
+\begin{center}
+  {\large\bfseries Chart 3 \textendash{} How Students Spend Most of Their Pocket Money (36 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.52\textwidth}
+  \centering
+  \emptycircle{4.4}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.45\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Category} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+  \hline
+  Food \& Drink & 12 & $\tfrac{1}{3}$ & 120\textdegree \\
+  \hline
+  Games         &  9 & $\tfrac{1}{4}$ & 90\textdegree \\
+  \hline
+  Clothes       &  6 & $\tfrac{1}{6}$ & 60\textdegree \\
+  \hline
+  Savings       &  6 & $\tfrac{1}{6}$ & 60\textdegree \\
+  \hline
+  Other         &  3 & $\tfrac{1}{12}$ & 30\textdegree \\
+  \hline
+  \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+
+\vspace{4pt}
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+   \item Complete the pie chart.
+  \item Two categories have the same sector angle. Which two are they? \quad \ansbox
+\end{enumerate}
+
+\newpage
+
+%% ===========================
+%%  CHART 4 -- Partially scaffolded table: No. given, students calculate fraction AND angle
+%% ===========================
+\begin{center}
+  {\large\bfseries Chart 4 \textendash{} Colours of Cars in a Car Park (60 cars)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.52\textwidth}
+  \centering
+  \emptycircle{4.4}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.45\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{2.0}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Colour} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+  \hline
+  White  & 20 & & \\
+  \hline
+  Black  & 15 & & \\
+  \hline
+  Silver & 12 & & \\
+  \hline
+  Red    &  9 & & \\
+  \hline
+  Other  &  4 & & \\
+  \hline
+  \textbf{Total} & \textbf{60} & \textbf{1} & \textbf{360\textdegree} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Instructions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Complete the \textbf{Fraction} column. Write each fraction in its simplest form.
+  \item Use $\text{angle} = \tfrac{\text{amount}}{\text{total}} \times 360°$ to complete the \textbf{Angle} column.
+  \item Check your angles sum to 360\textdegree, then draw and label the pie chart.
+\end{enumerate}
+
+\vspace{4pt}
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+\item Complete the table.
+\item Complete the pie chart.
+  \item What angle represents \textbf{White} cars? Show your working.
+        \vspace{0.9cm}\\
+        \hspace*{1.6em}Answer: \ansbox\textdegree
+  \item What fraction of cars are \textbf{Black}? \quad $\dfrac{\phantom{ABC}}{\phantom{ABC}}$
+  \item Check: do your angles add up to 360\textdegree? Write your total. \quad \ansbox\textdegree
+\end{enumerate}
+
+\newpage
+
+%% ===========================
+%%  CHART 5 -- Least scaffolded: only raw data given
+%% ===========================
+\begin{center}
+  {\large\bfseries Chart 5 \textendash{} Languages Spoken at Home (survey of 90 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.52\textwidth}
+  \centering
+  \emptycircle{4.4}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.45\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{2.0}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Language} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+  \hline
+  English  & 45 & & \\
+  \hline
+  Urdu     & 18 & & \\
+  \hline
+  Polish   &  9 & & \\
+  \hline
+  Punjabi  &  9 & & \\
+  \hline
+  Other    &  9 & & \\
+  \hline
+  \textbf{Total} & \textbf{90} & & \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{6pt}
+\noindent\textbf{Questions:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=3pt]
+  \item Complete the table.
+  \item Complete the pie chart.
+  \item Three languages have the \textbf{same} number of speakers. What angle does each of their sectors have?
+        \vspace{0.6cm}\\
+        \hspace*{1.6em}Answer: \ansbox\textdegree
+  \item English speakers make up what fraction of the survey? Write it in its simplest form.\quad $\dfrac{\phantom{ABC}}{\phantom{ABC}}$
+  \item \textbf{Challenge:} If 10 more students joined the survey and they all spoke Polish, what would the new angle for Polish be? Show your full working in the space below.
+
+  \vspace{10em}
+
+  
+  Answer: \ansbox\textdegree
+\end{enumerate}
+
+\newpage
+
+% %% ===========================
+% %%  ANSWER KEY
+% %% ===========================
+% \begin{mdframed}[backgroundcolor=lightgrey, linecolor=gray,
+%                  linewidth=1pt, roundcorner=4pt, innertopmargin=5pt]
+% \textbf{\small Answers (Teacher Copy):}\\[3pt]
+% {\small
+% \textbf{Chart 1 -- Pets (36 students):}
+% Angles: Dog 120\textdegree, Cat 90\textdegree, Fish 80\textdegree, Rabbit 50\textdegree, Other 20\textdegree.
+% Q1: Dog ($\tfrac{1}{3}$).
+% Q2: $360-120-90=150$\textdegree.
+% Q3: Cat (9 students).\\[3pt]
+% \textbf{Chart 2 -- Sports (36 members):}
+% Angles: Football 140\textdegree, Swimming 90\textdegree, Tennis 60\textdegree, Basketball 50\textdegree, Other 20\textdegree.
+% Q1: Swimming (90\textdegree).
+% Q2: $\tfrac{1}{6}$.
+% Q3: Tennis + Basketball + Other = $60+50+20=130$\textdegree.
+% Q4: Yes (or student explains checking sum = 360\textdegree{} and redrawing if not).\\[3pt]
+% \textbf{Chart 3 -- Pocket Money:}
+% Q1: Clothes \& Savings (both 60\textdegree).
+% Q2: Clothes (or Savings) -- both are $\tfrac{1}{6}$.
+% Q3: $\tfrac{1}{3}\times48=16$ students.\\[3pt]
+% \textbf{Chart 4 -- Cars:}
+% White: $\tfrac{20}{60}=\tfrac{1}{3}$, $120$\textdegree.
+% Black: $\tfrac{15}{60}=\tfrac{1}{4}$, $90$\textdegree.
+% Silver: $\tfrac{12}{60}=\tfrac{1}{5}$, $72$\textdegree.
+% Red: $\tfrac{9}{60}=\tfrac{3}{20}$, $54$\textdegree.
+% Other: $\tfrac{4}{60}=\tfrac{1}{15}$, $24$\textdegree.
+% Sum: $120+90+72+54+24=360$\textdegree\checkmark.
+% Q1: 120\textdegree.
+% Q2: $\tfrac{1}{4}$.
+% Q3: 360\textdegree.\\[3pt]
+% \textbf{Chart 5 -- Languages:}
+% English: $\tfrac{1}{2}$, 180\textdegree.\;
+% Urdu: $\tfrac{1}{5}$, 72\textdegree.\;
+% Polish: $\tfrac{1}{10}$, 36\textdegree.\;
+% Punjabi: $\tfrac{1}{10}$, 36\textdegree.\;
+% Other: $\tfrac{1}{10}$, 36\textdegree.
+% Q1: 36\textdegree{} each.
+% Q2: $\tfrac{1}{2}$.
+% Challenge: New total = 100; Polish = 19; angle = $\tfrac{19}{100}\times360=68.4$\textdegree{} (accept 68\textdegree{} or 69\textdegree).
+% }
+% \end{mdframed}
+
+\end{document}
