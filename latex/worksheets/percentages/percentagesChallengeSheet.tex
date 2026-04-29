@@ -1,0 +1,371 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage[T1]{fontenc} % higher quality font encoding
+\usepackage[sfdefault]{courier} % load the font and set it to default
+% \renewcommand*\familydefault{\sfdefault} %sansserify
+
+
+\begin{document}
+\pagenumbering{gobble}
+
+\title{Challenge: Decimals, Percentages, and Fractions}
+\date{}
+\maketitle
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+
+
+\vspace{-3em}
+
+\item Write the following decimals as a fraction in simplest form and as a percentage:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+    \item \( 0.125 \)
+    \item \( 0.203125 \)
+\end{enumerate}
+\end{multicols}
+
+
+\item Convert the following fractions into decimals and percentages:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+    \item \( \frac{7}{20} \)
+    \item \( \frac{33}{320} \)
+\end{enumerate}
+\end{multicols}
+
+\item Express the following percentages as decimals and fractions in simplest form:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+    \item \( 17.5\% \)
+    \item \( 57.8125\% \)
+\end{enumerate}
+\end{multicols}
+
+\end{enumerate}
+
+
+\bigskip
+
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, start=4]
+
+\item
+
+\textbf{Basis points} are units used in finance to describe small changes of percentages. A basis point is a percent of a percent:  
+\[
+1 \text{ basis point} = 0.01\%
+\]
+
+They are often used to describe changes in interest rates or yields.
+
+For example, an increase of \( 25 \) basis points means the interest rate goes up by \( 0.25\% \).
+
+\medskip
+
+
+
+
+
+\begin{enumerate}[label=(\alph*)]
+    \item Write one basis point as a decimal and a fraction in simplest form.
+    \item Write 175 basis points as a decimal and a fraction in simplest form.
+\end{enumerate}
+
+\bigskip
+    \textbf{Gilts} are UK government bonds. When you buy a gilt, you are lending money to the government.  
+
+    The UK government currently issues 30-year gilts offering a simple return (not compounding) of $5.678\%$ per year. 
+
+    They use these to borrow money to fund investment. Each year they pay a \textbf{coupon} equal to $5.678\%$ of the amount borrowed. At the end of the 30 years they pay back the original amount borrowed. 
+    
+    Other durations (1-year, 5-year, 10-year) of Gilts are also sold.
+
+\medskip
+
+\begin{enumerate}[label=(\alph*), resume]
+    \item Find $5.678\%$ as a decimal and a fraction in its simplest form.
+    \item Calculate the total cost for the government to borrow £1000 over 30 years, including payback of the original amount.
+    \item Suppose the coupon payment of a 30 year gilt rises \( 43.5 \) basis points. How much more does it cost the government to borrow £1000 over 30 years?
+    \item Gilts offer only simple interest, how might an investor achieve compounding returns, while still only investing in Gilts?
+\end{enumerate}
+
+\newpage{}
+
+\item Below is a table of the yields for gilts ranging from 1-5 year maturity durations:
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Maturity} & \textbf{Yield (\%)} \\
+\hline
+1 Year  & 4.377 \\
+2 Year  & 4.474 \\
+3 Year  & 4.488 \\
+4 Year  & 4.492 \\
+5 Year  & 4.544 \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=(\alph*)]
+    \item What do you notice about the yield as the maturity duration increases?
+    \item Assume that yields do not change over time. Which gilt would you recommend to someone looking to get the best return over a 5 year period?
+    \item Consider your answer to Q4(f). What strategy would you use to achieve compounding returns over a 5 year period?
+    \item Implement your strategy, assuming you have £10,000 to invest, at the end of 5 years any gilts you have bought must have reached maturity.
+    \\
+    Clearly indicate which gilts you would buy at the start of the first year, the start of the second, etc. You may not need all the entries in the table \\
+    Round all coupon payments down to the nearest pence. \\
+    A spare table has been provided.
+
+\vspace{-10cm}
+{\small
+\begin{flushleft}
+\hspace*{-4cm}
+\begin{tabular}{|p{4cm}|p{14cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Year 0}} \\
+\hline
+Account cash at start of year& £10{,}000 \\
+
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 1}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 2}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 3}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 4}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+
+
+\end{tabular}
+\hspace*{-4cm}
+\begin{tabular}{|p{4cm}|p{14cm}|}
+\hline
+\multicolumn{2}{|c|}{\textbf{Year 0}} \\
+\hline
+Account cash at start of year& £10{,}000 \\
+
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 1}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 2}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 3}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+\multicolumn{2}{|c|}{\textbf{Year 4}} \\
+\hline
+Gilts bought at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £:
+\end{tabular} \\
+\hline
+All gilts held at start of year &
+\begin{tabular}{l}
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\[0.3em]
+Duration: \hspace{1cm} Matures end of year: \hspace{1cm} Yield: \hspace{1cm} Amount £: \\
+\end{tabular} \\
+\hline
+
+Total coupon payments at end of year & £
+\\
+\hline
+
+
+
+\end{tabular}
+\end{flushleft}
+}
+
+\newpage{}
+
+
+    \item What is the total value of the investments at the end of the 5th year?
+    \item What annual simple interest rate of return does this correspond to? 
+    \item Find the annual interest rate that a savings account would need to pay, assuming interest compounds, to achieve the same returns at the end of a 5 year period?
+    \item What about an account that pays interest at the end of each month - What percentage return would be required at the end of each month?
+    % \item Prove that the annual simple interest rate of this strategy is always greater than the 5 Year gilt yield, if the yields increase alongside maturity duration.
+    % \item prove that the annual compounding interest rate is always less than the 5 Year gilt yield, if the yields increase alongside maturity duration.
+    % \item prove that the annual compounding interest rate is always more than the 1 Year gilt yield, if the yields increase alongside maturity duration.
+    
+\end{enumerate}
+
+\end{enumerate}
+
+%TODO - use alpha_1 yields, find result for 1 year, 2 year etc...
+% how does the number of terms in your expansion grow
+% set all equal - link to (1+x)^n
+% link to e!
+
+\end{document}
