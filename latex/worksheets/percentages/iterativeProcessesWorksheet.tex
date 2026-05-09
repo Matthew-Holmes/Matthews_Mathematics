@@ -1,0 +1,714 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ────────────────────────────────────────────────────────────────
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+
+% ── Colours ─────────────────────────────────────────────────────────────────
+\definecolor{headgrey}{gray}{0.15}
+\definecolor{ruleblue}{RGB}{30,80,160}
+\definecolor{scaffoldgold}{RGB}{255,248,220}
+\definecolor{scaffoldborder}{RGB}{200,160,40}
+\definecolor{sectionbg}{RGB}{240,244,252}
+\definecolor{sectionrule}{RGB}{30,80,160}
+\definecolor{challengebg}{RGB}{245,240,255}
+\definecolor{challengerule}{RGB}{100,60,180}
+\definecolor{answerbg}{gray}{0.97}
+\definecolor{lightgrey}{gray}{0.88}
+
+% ── Section header box ───────────────────────────────────────────────────────
+\newcommand{\sectionbox}[2]{%
+  \begin{tcolorbox}[
+    colback=sectionbg, colframe=sectionrule,
+    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    sharp corners, left=6pt, top=4pt, bottom=4pt
+  ]
+  {\large\bfseries\color{sectionrule} #1}\quad{\normalsize #2}
+  \end{tcolorbox}%
+}
+
+% ── Scaffold box ─────────────────────────────────────────────────────────────
+\newcommand{\scaffold}[1]{%
+  \begin{tcolorbox}[
+    colback=scaffoldgold, colframe=scaffoldborder,
+    leftrule=3pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    sharp corners, left=6pt, top=3pt, bottom=3pt, before skip=4pt
+  ]
+  {\small\itshape\color{brown} \textbf{Getting Started:} #1}
+  \end{tcolorbox}%
+}
+
+% ── Answer lines ─────────────────────────────────────────────────────────────
+\newcommand{\answerlines}[1]{%
+  \vspace{2pt}%
+  \foreach \i in {1,...,#1}{%
+    \vspace{0.55cm}\noindent\textcolor{lightgrey}{\rule{\linewidth}{0.4pt}}\par
+  }%
+  \vspace{4pt}%
+}
+
+% ── Answer box (blank area) ───────────────────────────────────────────────────
+\newcommand{\answerbox}[1]{%
+  \begin{tcolorbox}[
+    colback=answerbg, colframe=lightgrey,
+    sharp corners, left=4pt, top=4pt, bottom=4pt,
+    height=#1, valign=top
+  ]
+  \end{tcolorbox}%
+}
+
+% ── Misc ─────────────────────────────────────────────────────────────────────
+\newcolumntype{G}{>{\columncolor{sectionbg}}c}
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=0.4em}
+\setlist[enumerate,2]{label=\roman*., leftmargin=2em}
+\pagestyle{plain}
+
+% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ════════════════════════════════════════════════════════════════════════════
+
+% ── Title block ─────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE\bfseries\color{headgrey} Iterative Processes}\\[4pt]
+  {\large Iterative Processes \textbullet\ Tables of Values \textbullet\ $n$th Terms}\\[8pt]
+  \textcolor{lightgrey}{\rule{\linewidth}{1pt}}
+\end{center}
+
+\vspace{-2pt}
+\noindent
+\begin{tabularx}{\linewidth}{X X X}
+  \textbf{Name:}\enspace\dotfill & \textbf{Class:}\enspace\dotfill & \textbf{Date:}\enspace\dotfill
+\end{tabularx}
+
+\vspace{10pt}
+
+% ── Reference panel ─────────────────────────────────────────────────────────
+\begin{tcolorbox}[
+  colback=white, colframe=headgrey,
+  sharp corners, title={\bfseries Key Ideas},
+  fonttitle=\small\bfseries, coltitle=white, colbacktitle=headgrey,
+  top=6pt, bottom=6pt, left=8pt, right=8pt
+]
+\small
+\begin{multicols}{2}
+\textbf{An iterative process} links each term to the one before it.\\
+Example: $\quad U_{n+1} = U_n + 3, \quad U_1 = 5$\\
+This means: \emph{add 3 to the previous term, starting at 5.}\\
+Terms: $5,\ 8,\ 11,\ 14, \ldots$
+
+\columnbreak
+
+\textbf{An $n$th term formula} gives any term \\ directly.\\
+Example: $\quad U_n = 3n + 2$\\
+This means: \emph{substitute any $n$ to get that term immediately.}\\
+\end{multicols}
+
+% \smallskip
+% \hrule
+% \smallskip
+
+% \begin{multicols}{2}
+% \textbf{When does the sequence start?}\\
+% If $n=1$ is the first term: \\ \enspace$U_1$ is the ``start of the sequence''\\ \\
+% If $n=0$ is the first term: \\ \enspace$U_0$ is the ``start of the sequence''\\ \\
+% \emph{Context decides which makes sense.}
+
+% \columnbreak
+
+% \textbf{The notation can change.}\\ \\
+% $U_n$, $F_j$, $V_k$, $D_n$ all work the same way.\\ \\
+% Always read the iterative process carefully --- don't assume the rules always uses $U_n$.
+% \end{multicols}
+\end{tcolorbox}
+
+\vspace{14pt}
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section A}{Iterative Process $\longrightarrow$ Table of Values}
+% ════════════════════════════════════════════════════════════════════════════
+
+\bigskip
+
+% ── A1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A1.}\quad Consider the iterative process
+\[
+  U_{n+1} = U_n + 7, \qquad U_1 = 4
+\]
+
+\scaffold{To find $U_2$, substitute $n=1$: \enspace $U_2 = U_1 + 7 = 4 + 7 = 11$. Now continue in the same way for each subsequent term.}
+
+\begin{enumerate}
+  \item Complete the table of values below.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1 & 2 & 3 & 4 & 5 & 6 \\
+  \hline
+  $U_n$   & 4 &   &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Describe in words what this sequence is doing.
+
+  \answerlines{2}
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── A2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A2.}\quad Consider the iterative process
+\[
+  V_{k+1} = 3V_k, \qquad V_1 = 2
+\]
+
+\scaffold{The operation here is \emph{multiplication}, not addition. To find $V_2$: \enspace $V_2 = 3 \times V_1 = 3 \times 2 = 6$. Notice the variable is $V_k$, not $U_n$ --- the process works in exactly the same way.}
+
+\begin{enumerate}
+  \item Complete the table of values below.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $k$     & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  $V_k$   & 2 &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Describe in word what the sequence is doing.
+
+  \answerlines{2}
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+% ── A3 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A3.}\quad Consider the iterative process
+\[
+  F_{j+1} = F_j - 9, \qquad F_0 = 72
+\]
+
+\scaffold{This sequence \emph{starts at $j = 0$}, not $j = 1$. The first entry in your table is therefore $F_0 = 72$. Find $F_1 = F_0 - 9 = 72 - 9 = 63$, and continue from there.}
+
+\begin{enumerate}
+  \item Complete the table of values below.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $j$     & 0  & 1 & 2 & 3 & 4 & 5 & 6 \\
+  \hline
+  $F_j$   & 72 &   &   &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item For what value of $j$ does $F_j$ first become negative? Show how you know.
+
+  \answerlines{3}
+
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── A4 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A4.}\quad Consider the iterative process
+\[
+  P_{n+1} = \frac{P_n}{4}, \qquad P_1 = 1024
+\]
+
+\scaffold{Dividing by 4 is the same as multiplying by $\tfrac{1}{4}$. Start: $P_1 = 1024$, so $P_2 = \tfrac{1024}{4} = 256$. Continue until you have 5 terms.}
+
+\begin{enumerate}
+  \item Complete the table of values below.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1    & 2 & 3 & 4 & 5 \\
+  \hline
+  $P_n$   & 1024 &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Write each value of $P_n$ as a power of 4. The first two are done for you.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1     & 2     & 3 & 4 & 5 \\
+  \hline
+  $P_n$   & $4^5$ & $4^4$ &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Use the pattern to write an $n$th term formula for $P_n$ directly.
+
+  \[
+    P_n = \hspace{6cm}
+  \]
+
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section B}{Different representations of sequences}
+% ════════════════════════════════════════════════════════════════════════════
+
+\vspace{6pt}
+\noindent Each row below shows the \textbf{same sequence} in three different forms. One cell in each row is already filled in --- complete the rest.
+
+\scaffold{You already know some methods to find the $n$th term of sequences, however if the sequence uses multiplication then consider you answer to {\bf A4}, and previous work on compounding growth. Use substitution to check your answers. Be careful, some answers will use a different variable to $n$ in the ``$n$th'' term!}
+\vspace{12pt}
+
+% ── B1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B1.}
+\vspace{5pt}
+
+\noindent
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms)} & \textbf{$n$th Term Formula} \\
+\hline
+& \vspace{4pt}$5,\ 8,\ 11,\ 14,\ 17\ldots$\vspace{4pt} & \\[4.5cm]
+\hline
+\end{tabularx}
+
+\vspace{16pt}
+
+% ── B2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B2.}
+\vspace{5pt}
+
+\noindent
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms)} & \textbf{$n$th Term Formula} \\
+\hline
+\vspace{4pt}$F_{j+1} = \dfrac{1}{2}F_j,\quad F_1 = 80$\vspace{4pt} & & \\[4.5cm]
+\hline
+\end{tabularx}
+
+\vspace{16pt}
+
+\newpage{}
+
+% ── B3 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B3.}\quad \textit{A quantity decreases by 15\% each step, starting at $V_0 = 200$.}
+
+% \scaffold{A decrease of 15\% means you keep 85\%, so multiply by $0.85$. The sequence starts at $n=0$, which will affect your $n$th term formula --- think carefully about the index.}
+
+\vspace{5pt}
+
+\noindent
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table ($n=0$ to $4$, 2 d.p.)} & \textbf{$n$th Term Formula} \\
+\hline
+& & \\[4.5cm]
+\hline
+\end{tabularx}
+
+\vspace{16pt}
+
+% ── B4 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B4.}
+\vspace{5pt}
+
+\noindent
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms, 2 d.p.)} & \textbf{$n$th Term Formula} \\
+\hline
+\vspace{4pt}$Q_{n+1} = \dfrac{Q_n}{2} + 6,\quad Q_1 = 100$\vspace{4pt} & & \textit{No neat formula exists --- see question below} \\[4.5cm]
+\hline
+\end{tabularx}
+
+\vspace{8pt}
+\noindent What is different about this question? 
+
+\answerlines{3}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section C}{Context Problems --- When Does the Sequence Start?}
+% ════════════════════════════════════════════════════════════════════════════
+
+\vspace{4pt}
+\noindent In these questions you must decide whether the sequence should start at $n = 0$ or $n = 1$, and justify your choice.
+
+\bigskip
+
+% ── C1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{C1 --- Savings Account}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+Amara opens a savings account with \pounds600. Each year, 5\% interest is added at the end of the year.
+Let $V_k$ be the value of the account \textbf{after $k$ complete years}.
+\end{tcolorbox}
+
+\scaffold{Interest is added \emph{at the end} of each year. Before any interest has been added (at year 0), the account holds the original \pounds600. So what is $V_0$? What does $V_1$ represent?}
+
+\begin{enumerate}
+  \item State the value of $V_0$ and explain why the sequence starts at $k = 0$ rather than $k = 1$.
+
+  \answerlines{2}
+
+  \item Write an iterative process for $V_{k+1}$ in terms of $V_k$.
+  \[
+    V_{k+1} = \hspace{6cm}, \qquad V_0 = \hspace{2cm}
+  \]
+
+  \item Complete the table for $k = 0$ to $4$. Give values to the nearest penny.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $k$        & 0        & 1 & 2 & 3 & 4 \\
+  \hline
+  $V_k$ (\pounds) & \pounds600.00 &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Write a formula for $V_k$ directly. Use it to calculate $V_{10}$ (to the nearest penny).
+
+  \vspace{4pt}
+  $V_k = \hspace{7cm}$
+
+  \vspace{0.5cm}
+  $V_{10} = \hspace{7cm}$
+  \vspace{4pt}
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% % ── C2 ──────────────────────────────────────────────────────────────────────
+% \noindent\textbf{C2 --- Medication Dosage}
+
+% \begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+% A patient takes a 200\,mg dose of medicine on Day 1.
+% Each day, the body removes 30\,mg. Let $D_n$ be the amount of medicine
+% in the body \textbf{at the end of day $n$}.
+% \end{tcolorbox}
+
+% \scaffold{Think about what happens on day 1: the patient takes the medicine, so $D_1$ is the amount present at the \emph{end} of day 1, after the body has already removed 30\,mg. So $D_1 = 200 - 30 = 170\,$mg. Is there a meaningful $D_0$ here?}
+
+% \begin{enumerate}
+%   \item Is $D_0$ or $D_1$ the natural starting point? Justify your answer fully.
+
+%   \answerlines{3}
+
+%   \item Write the iterative process.
+%   \[
+%     D_{n+1} = \hspace{6cm}
+%   \]
+
+%   \item Complete the table below and use it to find on which day the drug level \textbf{first drops below 20\,mg}.
+
+%   \vspace{6pt}
+%   \begin{center}
+%   \renewcommand{\arraystretch}{1.8}
+%   \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}
+%                   |>{\centering\arraybackslash}m{1.6cm}|}
+%   \hline
+%   \rowcolor{sectionbg}
+%   $n$         & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+%   \hline
+%   $D_n$\,(mg) &   &   &   &   &   &   &   \\
+%   \hline
+%   \end{tabular}
+%   \end{center}
+
+%   \vspace{6pt}
+%   The drug level first drops below 20\,mg on Day \underline{\hspace{1.5cm}}.
+
+% \end{enumerate}
+
+% \bigskip\bigskip
+
+% ── C3 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{C2 --- Bouncing Ball}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+A ball is dropped from a height of 4\,m. Each bounce reaches 75\% of the previous height.\\[4pt]
+\textbf{Jess} defines $H_n$ as the height reached after $n$ bounces ignoring the initial drop.\\
+\textbf{Kwame} defines $H_n$ as the height after $n$ bounces, where the \emph{original drop height counts as the height after 0 bounces}.
+\end{tcolorbox}
+
+
+\begin{enumerate}
+  \item Write Jess's iterative process and state her starting value.
+  \[
+    H_{n+1} = \hspace{5cm}, \qquad H_1 = \hspace{2cm}
+  \]
+
+  \item Write Kwame's iterative process and state his starting value.
+  \[
+    H_{n+1} = \hspace{5cm}, \qquad H_0 = \hspace{2cm}
+  \]
+
+  \item What is the same about Jess's and Kwame's iterative processes?
+
+  \answerlines{2}
+
+  \item What is different about Jess's and Kwame's iterative processes?
+
+  \answerlines{2}
+
+
+  \item For \textbf{each} definition, state what height $H_3$ represents, and calculate its value.
+
+  \vspace{6pt}
+  \textit{Jess:}\quad $H_3 = $ \underline{\hspace{2cm}} m. \quad This represents: \underline{\hspace{7cm}}
+
+  \vspace{10pt}
+  \textit{Kwame:}\quad $H_3 = $ \underline{\hspace{2cm}} m. \quad This represents: \underline{\hspace{6.15cm}}
+
+  \vspace{10pt}
+  \item Whose definition do you prefer?
+
+  \answerlines{3}
+
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section D}{Extension and Challenge Problems}
+% ════════════════════════════════════════════════════════════════════════════
+
+
+\bigskip
+
+% ── D1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{D1 --- Working Backwards}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+The 5th term of an iterative sequence is $U_5 = 48$.\\
+The iterative process is \quad $U_{n+1} = 2U_n$.
+\end{tcolorbox}
+
+% \scaffold{If $U_{n+1} = 2U_n$, then rearranging gives $U_n = \dfrac{U_{n+1}}{2}$. Use this inverse operation to work \emph{backwards} step by step from $U_5 = 48$.}
+
+\begin{enumerate}
+  \item Find $U_1$. Show all steps clearly.
+
+  \answerlines{4}
+
+  \item Write an $n$th term formula for $U_n$. Use it to verify that $U_5 = 48$.
+
+  \answerlines{3}
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── D2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{D2 --- Convergence}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+Consider the iterative process \quad $F_{j+1} = \dfrac{F_j}{2} + 6, \qquad F_1 = 100$
+\end{tcolorbox}
+
+% \scaffold{Compute each term by halving the previous one and adding 6. Don't stop early --- the interesting behaviour only becomes visible after several steps. Keep going to at least $j = 8$.}
+
+\begin{enumerate}
+  \item Complete the table to 2 decimal places.
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.9}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $j$   & 1   & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+  \hline
+  $F_j$ & 100 &   &   &   &   &   &   &   \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item What value does $F_j$ appear to be approaching?
+
+  \answerlines{1}
+
+  \item If the sequence eventually settled at a fixed value $L$ (called a \textbf{fixed point}), it would satisfy
+  \[
+    L = \frac{L}{2} + 6
+  \]
+  Solve this equation to find $L$.
+
+  \answerlines{3}
+
+  \item What do you notice about your answers to (b) and (c)? Do you think $F_j$ will ever have a term that has the same value as $L$?
+
+  \answerlines{3}
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+% % ── D3 ──────────────────────────────────────────────────────────────────────
+% \noindent\textbf{D3 --- Create Your Own}
+
+% \begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+% Design an iterative process for a real-life situation of your choice.\\
+% \textit{You may not use savings accounts or bouncing balls.}
+% \end{tcolorbox}
+
+% \vspace{6pt}
+
+% \begin{enumerate}
+%   \item Describe your real-life situation in words.
+
+%   \answerlines{2}
+
+%   \item Write your iterative process, using a variable and subscript letter of your choice.
+
+%   \vspace{10pt}
+%   \hspace{2cm}
+%   $\underbrace{\rule{2.8cm}{0.4pt}}_{\text{variable name}}$%
+%   ${}_{\ \underbrace{\rule{1cm}{0.4pt}}_{\text{subscript}}\ +\ 1}$
+%   $\;=\;$
+%   \underline{\hspace{6cm}},
+%   \qquad
+%   $\underbrace{\rule{2.8cm}{0.4pt}}_{\text{variable name}}$%
+%   ${}_{\ \underbrace{\rule{1cm}{0.4pt}}_{\text{subscript}}}$
+%   $\ =\ $\underline{\hspace{2cm}}
+
+%   \vspace{14pt}
+%   \item Does your sequence start at $n=0$ or $n=1$? Explain why, in the context of your situation.
+
+%   \answerlines{2}
+
+%   \item Does your sequence have a neat $n$th term formula? If yes, write it. If no, explain why not.
+
+%   \answerlines{2}
+
+% \end{enumerate}
+
+% \vfill
+
+% \begin{center}
+% \textcolor{lightgrey}{\rule{0.4\linewidth}{0.4pt}}\\[4pt]
+% {\small\color{gray} Year 10 \textbullet\ Iterative Processes \textbullet\ Sections A--D}
+% \end{center}
+
+\end{document}
