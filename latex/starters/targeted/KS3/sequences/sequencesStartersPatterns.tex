@@ -1,0 +1,387 @@
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{multicol}
+
+% ---- Minimal styling ----
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\usefonttheme{professionalfonts}
+
+% ---- Shared tikz ----
+\tikzset{every picture/.style={baseline=(current bounding box.south)}}
+
+% 1) matchstick squares (n squares)
+\newcommand{\matchsquares}[2][black]{%
+  \begin{tikzpicture}[scale=0.65]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \x in {0,...,\n} {
+      \draw[very thick, cap=round] (\x,0) -- (\x,1);
+    }
+    \foreach \x in {0,...,\the\numexpr\n-1\relax} {
+      \draw[very thick, cap=round] (\x,0) -- (\x+1,0);
+      \draw[very thick, cap=round] (\x,1) -- (\x+1,1);
+    }
+  \end{tikzpicture}%
+}
+
+% 2) dot squares (n x n)
+\newcommand{\dotgrid}[2][black]{%
+  \begin{tikzpicture}[scale=0.65]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \i in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \j in {0,...,\the\numexpr\n-1\relax} {
+        \fill (0.4*\i,0.4*\j) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% 3) matchstick triangles (chain)
+\newcommand{\matchtriangles}[2][black]{%
+  \begin{tikzpicture}[scale=0.65]
+    \pgfmathsetmacro\n{#2}
+    \pgfmathsetmacro\h{0.866}
+    \color{#1}
+    \draw[very thick] (0,0) -- (\n,0);
+    \draw[very thick] (0,0)
+      \foreach \k in {1,...,\n} {
+        -- ({\k - 0.5}, {\h}) -- (\k,0)
+      };
+  \end{tikzpicture}%
+}
+
+% 4) triangular numbers (dots)
+\newcommand{\tridots}[2][black]{%
+  \begin{tikzpicture}[scale=0.7]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \row in {1,...,\n} {
+      \pgfmathsetmacro\k{int(\n - \row + 1)}
+      \pgfmathsetmacro\xstart{ -0.45*(\k-1)/2 }
+      \foreach \col in {0,...,\the\numexpr\k-1\relax} {
+        \pgfmathsetmacro\x{\xstart + 0.45*\col}
+        \pgfmathsetmacro\y{0.4*(\row-1)}
+        \fill (\x,\y) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% 5) rectangle dots (n x (n+1))
+\newcommand{\rectdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.65]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \i in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \j in {0,...,\n} {
+        \fill (0.4*\i, 0.4*\j) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% 6) cross dots
+\newcommand{\crossdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.65]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \fill (0,0) circle (0.07);
+    \ifnum\n>1
+      \foreach \d in {1,...,\the\numexpr\n-1\relax} {
+        \fill (0, 0.4*\d) circle (0.07);
+        \fill (0, -0.4*\d) circle (0.07);
+        \fill (0.4*\d, 0) circle (0.07);
+        \fill (-0.4*\d, 0) circle (0.07);
+      }
+    \fi
+  \end{tikzpicture}%
+}
+
+\begin{document}
+
+% =============================================
+% TITLE
+% =============================================
+\begin{frame}[plain]
+  \centering
+  {\LARGE\bfseries Sequences Starters}\\[0.5em]
+\end{frame}
+
+% =============================================
+% STARTER 1 – Easy
+% =============================================
+\begin{frame}{Starter 1}
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textbf{Matchsticks}\\[0.7em]
+    \matchsquares[red]{1}\;\hspace{0.5cm}
+    \matchsquares[blue]{2}\;\hspace{0.5cm}
+    \matchsquares[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    1. Draw the next shape.\\[0.2em]
+    2. How many matchsticks in the 4th?
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textbf{Dots}\\[0.7em]
+    \dotgrid[red]{1}\;\hspace{0.5cm}
+    \dotgrid[blue]{2}\;\hspace{0.5cm}
+    \dotgrid[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    3. Draw the next pattern.\\[0.2em]
+    4. How many dots in the 4th?
+  \end{minipage}
+
+  \vspace{0.8cm}                     % increased vertical space
+  \centering
+  \textbf{5. Complete The Sequence}\\[0.3em]
+  \small
+  13,\;23,\;33,\;
+  \alt<2>{\textcolor{red}{\underline{43}}}{\underline{\phantom{43}}},\;
+  \alt<2>{\textcolor{red}{\underline{53}}}{\underline{\phantom{53}}},\;
+  \alt<2>{\textcolor{red}{\underline{63}}}{\underline{\phantom{63}}}
+  \uncover<2->{\textcolor{red}{\small\ (add 10)}}
+
+  \vspace{1.2cm}                     % space before pattern answers
+  \pause
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{1. \matchsquares[orange]{4}}\\[0.2em]
+    \textcolor{red}{2. 13 sticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{3. \dotgrid[orange]{4}}\\[0.2em]
+    \textcolor{red}{4. 16 dots}
+  \end{minipage}
+\end{frame}
+
+% =============================================
+% STARTER 2 – Linear patterns
+% =============================================
+\begin{frame}{Starter 2}
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textbf{Matchsticks}\\[0.7em]
+    \matchtriangles[red]{1}\;\hspace{0.5cm}
+    \matchtriangles[blue]{2}\;\hspace{0.5cm}
+    \matchtriangles[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    1. Draw shape 4.\\[0.2em]
+    2. How many matchsticks in shape 4?
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textbf{Dots}\\[0.7em]
+    \tridots[red]{1}\;\hspace{0.5cm}
+    \tridots[blue]{2}\;\hspace{0.5cm}
+    \tridots[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    3. Draw pattern 4.\\[0.2em]
+    4. How many dots in pattern 4?
+  \end{minipage}
+
+  \vspace{0.8cm}
+  \centering
+  \textbf{5. Complete The Sequence}\\[0.3em]
+  \small
+  1,\;3,\;5,\;7,\;
+  \alt<2>{\textcolor{red}{\underline{9}}}{\underline{\phantom{9}}},\;
+  \alt<2>{\textcolor{red}{\underline{11}}}{\underline{\phantom{11}}},\;
+  \alt<2>{\textcolor{red}{\underline{13}}}{\underline{\phantom{13}}}
+  \uncover<2->{\textcolor{red}{\small\ (add 2)}}
+
+  \vspace{1.2cm}
+  \pause
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{1. \matchtriangles[orange]{4}}\\[0.2em]
+    \textcolor{red}{2. 9 sticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{3. \tridots[orange]{4}}\\[0.2em]
+    \textcolor{red}{4. 10 dots}
+  \end{minipage}
+\end{frame}
+
+% =============================================
+% STARTER 3 – Predicting further terms
+% =============================================
+\begin{frame}{Starter 3}
+  \begin{minipage}[t]{0.36\textwidth}
+    \centering
+    \textbf{Dots}\\[0.6em]
+    \rectdots[red]{1}\;\hspace{0.5cm}
+    \rectdots[blue]{2}\;\hspace{0.5cm}
+    \rectdots[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    1. Draw pattern 4.\\[0.2em]
+    2. How many dots in pattern 4?
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textbf{Matchsticks}\\[0.7em]
+    \matchsquares[red]{1}\;\hspace{0.5cm}
+    \matchsquares[blue]{2}\;\hspace{0.5cm}
+    \matchsquares[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    3. How many sticks in the 10th shape?\\[0.2em]
+    4. Find a rule.
+  \end{minipage}
+
+  \vspace{0.8cm}
+  \centering
+  \textbf{5. Complete The Sequence}\\[0.3em]
+  \small
+  3,\;6,\;9,\;12,\;
+  \alt<2>{\textcolor{red}{\underline{15}}}{\underline{\phantom{15}}},\;
+  \alt<2>{\textcolor{red}{\underline{18}}}{\underline{\phantom{18}}},\;
+  \alt<2>{\textcolor{red}{\underline{21}}}{\underline{\phantom{21}}}
+  \uncover<2->{\textcolor{red}{\small\ (add 3)}}
+  \hspace{1em} \footnotesize 6. 20th term? \uncover<2->{\textcolor{red}{$60$}}
+
+  \vspace{0.5cm}
+  \pause
+  \begin{minipage}[t]{0.36\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{1. \rectdots[orange]{4}}\\[0.2em]
+    \textcolor{red}{2. 20 dots \footnotesize (pattern is $n\times(n+1)$ dots)}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{3. 31 }\\[0.2em]
+    \textcolor{red}{4. Rule: $3n+1$}
+  \end{minipage}
+\end{frame}
+
+% =============================================
+% STARTER 4 – Nth term rules
+% =============================================
+\begin{frame}{Starter 4}
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textbf{Matchsticks}\\[0.7em]
+    \matchtriangles[red]{1}\;\hspace{0.5cm}
+    \matchtriangles[blue]{2}\;\hspace{0.5cm}
+    \matchtriangles[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    1. Find a rule for the number of matchsticks.\\[0.2em]
+    2. Use it to find the 20th term.
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textbf{Dots}\\[0.7em]
+    \tridots[red]{1}\;\hspace{0.5cm}
+    \tridots[blue]{2}\;\hspace{0.5cm}
+    \tridots[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    3. Find a rule for the number of dots.\\[0.2em]
+    4. Use it to find the 10th term.
+  \end{minipage}
+
+  \vspace{0.8cm}
+  \centering
+  \textbf{5. Complete The Sequence}\\[0.3em]
+  \small
+  5,\;9,\;13,\;17,\;
+  \alt<2>{\textcolor{red}{\underline{21}}}{\underline{\phantom{21}}},\;
+  \alt<2>{\textcolor{red}{\underline{25}}}{\underline{\phantom{25}}},\;
+  \alt<2>{\textcolor{red}{\underline{29}}}{\underline{\phantom{29}}}
+  \uncover<2->{\textcolor{red}{\small\ (add 4)}}
+  \hspace{1em} \footnotesize 6. $n$th term rule? 100th term? \\ \hspace{12em} \uncover<2->{\textcolor{red}{$4n+1$,    \quad \qquad \quad      $401$}}
+
+  \vspace{1.2cm}
+  \pause
+  \begin{minipage}[t]{0.60\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{1. Rule: $2n+1$}\\[0.2em]
+    \textcolor{red}{2. 20th term: $41$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.34\textwidth}
+    \centering
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{3. Rule: $\frac{n(n+1)}{2}$}\\[0.2em]
+    \textcolor{red}{4. 10th term: $55$}
+  \end{minipage}
+\end{frame}
+
+% =============================================
+% STARTER 5 – Challenge
+% =============================================
+\begin{frame}{Starter 5}
+  \begin{minipage}[t]{0.50\textwidth}
+    \centering
+    \textbf{Dots}\\[0.7em]
+    \crossdots[red]{1}\;\hspace{0.5cm}
+    \crossdots[blue]{2}\;\hspace{0.5cm}
+    \crossdots[green!70!black]{3}\;\hspace{0.5cm}
+    \textbf{?}\\[0.8em]
+    \small
+    1. Draw shape 4.\\[0.2em]
+    2. How many dots in shape 5?\\[0.2em]
+    3. Try to find a rule.
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.50\textwidth}
+    \centering
+    \textbf{Special Sequence}\\[0.7em]
+    1,\;1,\;2,\;3,\;5,\;8,\;
+    \alt<2>{\textcolor{red}{\underline{13}}}{\underline{\phantom{13}}},\;
+    \alt<2>{\textcolor{red}{\underline{21}}}{\underline{\phantom{21}}},\;
+    \alt<2>{\textcolor{red}{\underline{34}}}{\underline{\phantom{34}}}\\[0.8em]
+    \small
+    4. Next three terms?\\[0.2em]
+    5. What is the rule?
+  \end{minipage}
+
+  \vspace{0.8cm}
+  \centering
+  \textbf{6. Complete The Sequence}\\[0.3em]
+  \small
+  1,\;4,\;9,\;16,\;
+  \alt<2>{\textcolor{red}{\underline{25}}}{\underline{\phantom{25}}},\;
+  \alt<2>{\textcolor{red}{\underline{36}}}{\underline{\phantom{36}}},\;
+  \alt<2>{\textcolor{red}{\underline{49}}}{\underline{\phantom{49}}}
+  \uncover<2->{\textcolor{red}{\small\ (square numbers $n^2$)}}
+  \hspace{1em} \footnotesize 7. 20th term? \uncover<2->{\textcolor{red}{$400$}}
+
+  \vspace{0.5cm}
+  \pause
+  \begin{minipage}[t]{0.50\textwidth}
+    \begin{multicols}{2}
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{1. \crossdots[orange]{4}}\\[0.2em]
+    \textcolor{red}{2. Shape 5 has 17 dots}\\[0.2em]
+    \textcolor{red}{3. Rule: $4n-3$}
+    \end{multicols}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.50\textwidth}
+    \centering
+    \vspace{-6.5em}
+    \textcolor{red}{\textbf{Answers}}\\[0.2em]
+    \textcolor{red}{4. 13,\;21,\;34}\\[0.2em]
+    \textcolor{red}{5. Fibonacci: add the two previous terms}
+  \end{minipage}
+\end{frame}
+
+\end{document}
