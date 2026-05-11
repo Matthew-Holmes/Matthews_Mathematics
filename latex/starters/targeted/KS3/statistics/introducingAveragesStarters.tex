@@ -22,6 +22,29 @@
   }%
 }
 
+  \newcommand{\lego}[3]{%
+    \foreach \ii in {1,...,#2}{%
+      \draw[fill=#3!55,draw=#3!80!black,line width=0.3pt]
+        (#1,{(\ii-1)*0.42}) rectangle (#1+0.6,{\ii*0.42});
+      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
+        (#1+0.13,{(\ii-1)*0.42+0.30}) circle (0.07);
+      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
+        (#1+0.40,{(\ii-1)*0.42+0.30}) circle (0.07);
+    }%
+  }
+
+
+  \newcommand{\legob}[3]{%
+    \foreach \ii in {1,...,#2}{%
+      \draw[fill=#3!55,draw=#3!80!black,line width=0.3pt]
+        (#1,{(\ii-1)*0.42}) rectangle (#1+0.6,{\ii*0.42});
+      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
+        (#1+0.13,{(\ii-1)*0.42+0.30}) circle (0.07);
+      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
+        (#1+0.40,{(\ii-1)*0.42+0.30}) circle (0.07);
+    }%
+  }
+
 \begin{document}
 
 \frame{\titlepage}
@@ -102,16 +125,7 @@
 
 % Diagram 1: towers 3,5,4,8 — brick height 0.42 to keep 8-tower in frame
 \begin{tikzpicture}[scale=0.85]
-  \newcommand{\lego}[3]{%
-    \foreach \ii in {1,...,#2}{%
-      \draw[fill=#3!55,draw=#3!80!black,line width=0.3pt]
-        (#1,{(\ii-1)*0.42}) rectangle (#1+0.6,{\ii*0.42});
-      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
-        (#1+0.13,{(\ii-1)*0.42+0.30}) circle (0.07);
-      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
-        (#1+0.40,{(\ii-1)*0.42+0.30}) circle (0.07);
-    }%
-  }
+
   \lego{0.00}{3}{blue}
   \lego{0.70}{5}{blue}
   \lego{1.40}{4}{blue}
@@ -128,16 +142,7 @@
 
 % Diagram 2: towers 1,5,2,8,4
 \begin{tikzpicture}[scale=0.78]
-  \newcommand{\legob}[3]{%
-    \foreach \ii in {1,...,#2}{%
-      \draw[fill=#3!55,draw=#3!80!black,line width=0.3pt]
-        (#1,{(\ii-1)*0.42}) rectangle (#1+0.6,{\ii*0.42});
-      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
-        (#1+0.13,{(\ii-1)*0.42+0.30}) circle (0.07);
-      \draw[fill=#3!80,draw=#3!80!black,line width=0.15pt]
-        (#1+0.40,{(\ii-1)*0.42+0.30}) circle (0.07);
-    }%
-  }
+
   \legob{0.00}{1}{orange}
   \legob{0.75}{5}{orange}
   \legob{1.50}{2}{orange}
@@ -218,50 +223,97 @@
 %------------------------------------------------
 \begin{frame}{Starter 4}
 \vspace{-0.8em}
+
 \begin{columns}[T]
 
+% ---------------- LEFT COLUMN ----------------
 \column{0.33\textwidth}
-\begin{center}
 
+\begin{center}
 
 \vspace{7em}
 
 % Dot plot: house prices with outlier
 \begin{tikzpicture}[scale=0.72]
+
   \draw[thick,->] (-0.2,0) -- (4.6,0);
-  \foreach \xd in {0.3, 0.55, 0.8, 1.05, 1.3}{
+
+  \foreach \xd in {0.3,0.55,0.8,1.05,1.3}{
     \fill[blue] (\xd,0.22) circle (0.1);
   }
+
   \fill[red] (4.2,0.22) circle (0.1);
-  \node[below,font=\tiny,blue] at (0.8,{-0.1})  {£125--140k};
-  \node[below,font=\tiny,red]  at (4.2,{-0.1})  {£980k};
-  \draw[<->,dashed,gray] (1.35,0.52) -- (4.1,0.52)
+
+  \node[below,font=\tiny,blue] at (0.8,-0.1)
+    {\pounds125--140k};
+
+  \node[below,font=\tiny,red] at (4.2,-0.1)
+    {\pounds980k};
+
+  \draw[<->,dashed,gray]
+    (1.35,0.52) -- (4.1,0.52)
     node[midway,above,font=\tiny,gray]{big gap};
-  \node[below,font=\tiny\bfseries] at (2.1,{-0.55})
-    {\textbf{Q10}: house prices on a road}
+
+  \node[below,font=\tiny\bfseries]
+    at (2.1,-0.55)
+    {\textbf{Q10}: house prices on a road};
+
 \end{tikzpicture}
 
 \end{center}
 
+% ---------------- RIGHT COLUMN ----------------
 \column{0.67\textwidth}
+
 \footnotesize
 \vspace{0.2em}
+
+% First four quick questions
+\begin{multicols}{2}
 \begin{enumerate}\itemsep1pt
-  \begin{multicols}{2}
-    \item $4+2+10=\mathord{?}$
-    \item $-4+9 = \mathord{?}$
-    \item $-3-5 = \mathord{?}$
-    \item $6 \times 4 = \mathord{?}$
-  \end{multicols}
-  \item Order smallest to largest: $8,3,11,5,7$. Which is the middle value?
-  \item Order: $21,14,9,35,17,28,6$. Which is the middle value?
-  \item For $3,7,8,9,41$: \textit{estimate} whether the middle value is above or below the mean. Then check.
-  \item What is the middle value of: $-7,\ -2,\ -5,\ 1,\ -1,\ 3,\ -3$
-  \item What is the middle value of: $\tfrac{1}{2},\ \tfrac{1}{4},\ \tfrac{3}{4},\ \tfrac{1}{8},\ \tfrac{5}{8}$.
-  \item House prices on a road are: £130k, £125k, £140k, £128k, £135k, \textcolor{red}{£980k}. Why might the mean not be helpful?
+  \item $4+2+10=\mathord{?}$
+  \item $-4+9=\mathord{?}$
+  \item $-3-5=\mathord{?}$
+  \item $6\times4=\mathord{?}$
+\end{enumerate}
+\end{multicols}
+
+% Remaining questions
+\begin{enumerate}\itemsep1pt
+\setcounter{enumi}{4}
+
+  \item Order smallest to largest:
+  $8,3,11,5,7$.
+  Which is the middle value?
+
+  \item Order:
+  $21,14,9,35,17,28,6$.
+  Which is the middle value?
+
+  \item For $3,7,8,9,41$:
+  \textit{estimate} whether the middle value is above or below the mean.
+  Then check.
+
+  \item What is the middle value of:
+  $-7,\ -2,\ -5,\ 1,\ -1,\ 3,\ -3$
+
+  \item What is the middle value of:
+  $\tfrac{1}{2},\ \tfrac{1}{4},\ \tfrac{3}{4},\ \tfrac{1}{8},\ \tfrac{5}{8}$
+
+  \item House prices on a road are:
+  \pounds130k,
+  \pounds125k,
+  \pounds140k,
+  \pounds128k,
+  \pounds135k,
+  \textcolor{red}{\pounds980k}.
+
+  Why might the mean not be helpful?
+
 \end{enumerate}
 
 \end{columns}
+
 \end{frame}
 
 %------------------------------------------------
