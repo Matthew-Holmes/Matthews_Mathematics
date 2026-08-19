@@ -19,9 +19,11 @@ jobs:
       - name: Fetch S3 Object Filenames
         run: DEBUG=1 .github/workflows/scripts/001_listS3Contents.sh > s3Objects.txt
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_S3_BUCKET: latex-pdfs
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL: https://objects.matthewsmathematics.uk
+          AWS_DEFAULT_REGION: garage
 
       - name: Upload S3 object list # debug step to check how the s3 is doing
         uses: actions/upload-artifact@v4
@@ -41,9 +43,11 @@ jobs:
       - name: Remove stale S3 objects
         run: DEBUG=1 .github/workflows/scripts/003_removeStaleS3Objects.sh s3Objects.txt latexSourceFiles.ndjson
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_S3_BUCKET: latex-pdfs
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL: https://objects.matthewsmathematics.uk
+          AWS_DEFAULT_REGION: garage
 
       - name: Get LaTeX source files to compile
         run: DEBUG=1 .github/workflows/scripts/004_getSourceToCompile.sh s3Objects.txt latexSourceFiles.ndjson > latexFilesToCompile.txt
@@ -76,6 +80,8 @@ jobs:
       - name: Upload PDFs
         run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson s3Objects.txt
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_S3_BUCKET: latex-pdfs
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL: https://objects.matthewsmathematics.uk
+          AWS_DEFAULT_REGION: garage
