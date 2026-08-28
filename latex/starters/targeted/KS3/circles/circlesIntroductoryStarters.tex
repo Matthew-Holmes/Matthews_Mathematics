@@ -5,6 +5,15 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
 \title{Circles: Parts, Perimeter \& Pi}
 \author{}
 \date{}
@@ -38,23 +47,23 @@
 \small
 \begin{enumerate}
     \begin{multicols}{2}
-        \item $13 + 9 = \ ?$
-        \item $5.8 - 1.9 = \ ?$
+        \item $13 + 9 = \ashowq{22}$
+        \item $5.8 - 1.9 = \ashowq{3.9}$
     \end{multicols}
     \begin{multicols}{2}
-        \item $6 \times 8 = \ ?$
-        \item $4 \times 3.5 \ ?$
+        \item $6 \times 8 = \ashowq{48}$
+        \item $4 \times 3.5 \ \ashowq{14}$
   \end{multicols}
-  \item Round $3.14159$ to 2 decimal places.
-  \item A pencil is $12.8$ cm long. How many millimetres is this?
+  \item Round $3.14159$ to 2 decimal places. \ashow{3.14}
+  \item A pencil is $12.8$ cm long. How many millimetres is this? \ablank{128 mm}
 \end{enumerate}
 
 \begin{enumerate}
   \setcounter{enumi}{4}
-  \item Find the perimeter of the rectangle shown.
-  \item The perimeter of a square is $26$ cm. What is the length of one side?
+  \item Find the perimeter of the rectangle shown. \ashow{25.4 cm}
+  \item The perimeter of a square is $26$ cm. What is the length of one side? \ashow{6.5 cm}
   \item  The perimeter of an equilateral triangle is $12.9$ cm. 
-    Find the length of one side, and then the perimeter of a regular hexagon with the same side length.
+    Find the length of one side, and then the perimeter of a regular hexagon with the same side length. \ashow{$4.3$ cm; hexagon: $25.8$ cm}
 \end{enumerate}
 
 \end{columns}
@@ -94,25 +103,25 @@
 \small
 \begin{enumerate}
 \begin{multicols}{2}
-  \item $24 \div 6$ 
-  \item $72 \div 8$
+  \item $24 \div 6$ \ashow{$=4$}
+  \item $72 \div 8$ \ashow{$=9$}
   \end{multicols}
   \begin{multicols}{2}
-  \item Double $15.5$
-  \item Halve $31.4$
+  \item Double $15.5$ \ashow{$=31$}
+  \item Halve $31.4$ \ashow{$=15.7$}
   \end{multicols}
-  \item How many centimetres in $1.2$ metres?
-  \item True or false? $2.5 \times 4 = 10$
+  \item How many centimetres in $1.2$ metres? \ashow{120 cm}
+  \item True or false? $2.5 \times 4 = 10$ \ashow{True}
 \end{enumerate}
 
 \begin{enumerate}
   \setcounter{enumi}{4}
   \item On the diagram, which line is the \textbf{diameter}? 
-    How is it different from a chord?
-  \item If the radius of a circle is $7$ cm, what is its diameter?
-  \item The diameter of a circle is $18$ mm. Find its radius.
+    How is it different from a chord? \ashow{Blue line; a diameter passes through the centre.}
+  \item If the radius of a circle is $7$ cm, what is its diameter? \ashow{14 cm}
+  \item The diameter of a circle is $18$ mm. Find its radius. \ablank{9 mm}
   \item A chord of length $8$ cm is drawn inside a circle of radius $5$ cm.
-    Is the chord a diameter? Explain.
+    Is the chord a diameter? Explain. \ashow{No; a diameter would be $10$ cm.}
 \end{enumerate}
 
 \end{columns}
@@ -173,14 +182,14 @@
 \small
 \begin{enumerate}
 \begin{multicols}{2}
-  \item $3.2 \times 5$
-  \item $1.8 \times 4$
+  \item $3.2 \times 5$ \ashow{$=16$}
+  \item $1.8 \times 4$ \ashow{$=7.2$}
   \end{multicols}
   \begin{multicols}{2}
-    \item  $45 \div 10$
-    \item $90 \div 100$
+    \item  $45 \div 10$ \ashow{$=4.5$}
+    \item $90 \div 100$ \ashow{$=0.9$}
   \end{multicols}
-  \item What is $\frac{1}{4}$ of $360^\circ$?
+  \item What is $\frac{1}{4}$ of $360^\circ$? \ashow{$90^\circ$}
 \end{enumerate}
 
 \begin{enumerate}
@@ -194,8 +203,9 @@
       \item A segment
     \end{itemize}
     \end{multicols}
-  \item If the radius is $6$ cm, what is the whole circumference? (Use $\pi \approx 3.14$)
-  \item For the sector shown, what fraction of the circumference is the arc length? Calculate the arc length if the whole circle has a circumference of 24cm.
+    \ashow{Sector: shaded slice; Arc: curved boundary; Tangent: line touching the circle once; Segment: region between a chord and an arc.}
+  \item If the radius is $6$ cm, what is the whole circumference? (Use $\pi \approx 3.14$) \ashow{$37.68$ cm}
+  \item For the sector shown, what fraction of the circumference is the arc length? Calculate the arc length if the whole circle has a circumference of 24cm. \ashow{$\frac{1}{6}$; $4$ cm}
 
 \end{enumerate}
 
@@ -230,31 +240,31 @@
 \small
 \begin{enumerate}
 \begin{multicols}{2}
-  \item $12 \times 3 $
-  \item $4 \times 3.14$
+  \item $12 \times 3 $ \ashow{$=36$}
+  \item $4 \times 3.14$ \ashow{$=12.56$}
 \end{multicols}
 \begin{multicols}{2}
-  \item $6.28 \div 2 $ 
-  \item $ 9.42 \div 3$
+  \item $6.28 \div 2 $ \ashow{$=3.14$} 
+  \item $ 9.42 \div 3$ \ashow{$=3.14$}
   \end{multicols}
-  \item Round $3.14159265$ to 3 decimal places.
+  \item Round $3.14159265$ to 3 decimal places. \ashow{3.142}
   \begin{multicols}{2}
-  \item Double $3.14$
-  \item halve $12.56$
+  \item Double $3.14$ \ashow{$=6.28$}
+  \item halve $12.56$ \ashow{$=6.28$}
   \end{multicols}
 \end{enumerate}
 \vspace{-0.5em}
 \begin{enumerate}
   \setcounter{enumi}{7}
   \item Copy and label on the diagram: 
-    centre, radius, diameter, circumference.
-    \item Draw a chord on the diagram shorter than the radius
-    \item Draw a chord on the diagram longer than the radius
+    centre, radius, diameter, circumference. \ashow{centre: $O$; radius: red line; diameter: blue line; circumference: the circle itself}
+    \item Draw a chord on the diagram shorter than the radius \ashow{Many possible answers, e.g.\ a chord close to the circumference}
+    \item Draw a chord on the diagram longer than the radius \ashow{Many possible answers, e.g.\ a chord passing near the centre but not through it}
   
   \item If the diameter is $8$ cm, what is:
     \begin{itemize}
-      \item the radius?
-      \item the circumference? ($\pi \approx 3.14$)
+      \item the radius? \ashow{$4$ cm}
+      \item the circumference? ($\pi \approx 3.14$) \ashow{$25.12$ cm}
     \end{itemize}
  
 \end{enumerate}

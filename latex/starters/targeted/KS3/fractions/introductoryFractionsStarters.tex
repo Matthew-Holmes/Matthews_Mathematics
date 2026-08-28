@@ -4,6 +4,15 @@
 \usepackage{xcolor}
 \usepackage{multicol}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
 \title{Fractions: Starters}
 \author{}
 \date{}
@@ -54,13 +63,12 @@
 \column{0.55\textwidth}
 \textbf{Questions}
 \begin{enumerate}
-    \item Which shapes (A, B, C, D) are divided into equal parts?
-    \item In shape B, what fraction is shaded? 
-    \item Draw a rectangle divided into 5 equal parts. Shade $\frac{3}
-    {5}$.
-    \item Which is larger: $\frac{2}{5}$ or $\frac{3}{5}$?
-    \item Which is larger: $\frac{3}{5}$ or $\frac{3}{4}$?
-    \item Order the following fractions from smallest to largest: \newline $\frac{1}{100}, \frac{100}{1}, \frac{1}{10}, \frac{10}{1}, \frac{1}{1}$
+    \item Which shapes (A, B, C, D) are divided into equal parts? \ashow{B and C}
+    \item In shape B, what fraction is shaded? \ashow{$\frac{1}{4}$}
+    \item Draw a rectangle divided into 5 equal parts. Shade $\frac{3}{5}$. \ashow{Shade any 3 of the 5 equal parts.}
+    \item Which is larger: $\frac{2}{5}$ or $\frac{3}{5}$? \ashow{$\frac{3}{5}$}
+    \item Which is larger: $\frac{3}{5}$ or $\frac{3}{4}$? \ashow{$\frac{3}{4}$}
+    \item Order the following fractions from smallest to largest: \newline $\frac{1}{100}, \frac{100}{1}, \frac{1}{10}, \frac{10}{1}, \frac{1}{1}$ \ashow{$\frac{1}{100},\ \frac{1}{10},\ \frac{1}{1},\ \frac{10}{1},\ \frac{100}{1}$}
 \end{enumerate}
 \end{columns}
 
@@ -99,13 +107,13 @@
 \column{0.55\textwidth}
 \textbf{Questions}
 \begin{enumerate}
-    \item Write the fraction shaded for each bar.
-    \item Is the same proportion of each bar shaded?
-    \item Use the bars to fill in the blanks: $\frac{?}{2} = \frac{?}{4} = \frac{?}{6}$
-    \item Shade $\frac{2}{3}$ of a bar divided into 9 parts. 
-    \item Find the missing numerator: $\frac{2}{3} = \frac{?}{9}$
-    \item Find the missing numerator: $\frac{1}{3} = \frac{?}{6}$.
-    \item Which two fractions are equivalent: $\frac{1}{2}, \frac{2}{5}, \frac{4}{8}, \frac{3}{6}$?
+    \item Write the fraction shaded for each bar. \ashow{$\frac{1}{2},\ \frac{2}{4},\ \frac{3}{6}$}
+    \item Is the same proportion of each bar shaded? \ashow{Yes}
+    \item Use the bars to fill in the blanks: $\frac{\ashowq{1}}{2} = \frac{\ashowq{2}}{4} = \frac{\ashowq{3}}{6}$
+    \item Shade $\frac{2}{3}$ of a bar divided into 9 parts. \ashow{Shade 6 parts.}
+    \item Find the missing numerator: $\frac{2}{3} = \frac{\ashowq{6}}{9}$
+    \item Find the missing numerator: $\frac{1}{3} = \frac{\ashowq{2}}{6}$.
+    \item Which two fractions are equivalent: $\frac{1}{2}, \frac{2}{5}, \frac{4}{8}, \frac{3}{6}$? \ashow{$\frac{1}{2} = \frac{4}{8} = \frac{3}{6}$}
 \end{enumerate}
 \end{columns}
 
@@ -141,12 +149,12 @@
 \column{0.55\textwidth}
 \textbf{Questions}
 \begin{enumerate}
-    \item Which is larger: $\frac{1}{2}$ or $\frac{1}{3}$? 
-    \item Compare $\frac{2}{5}$ and $\frac{4}{5}$. Which is bigger?
-    \item Convert $\frac{3}{4}$ and $\frac{5}{8}$ to a common denominator. Which is larger?
-    \item Order from smallest to largest: $\frac{1}{3}, \frac{1}{6}, \frac{1}{2}$.
-    \item Sam ate $\frac{2}{3}$ of a pizza, Lee ate $\frac{5}{6}$ of the same pizza. Who ate more?
-    \item Compare $\frac{4}{6}$ and $\frac{2}{3}$. 
+    \item Which is larger: $\frac{1}{2}$ or $\frac{1}{3}$? \ashow{$\frac{1}{2}$}
+    \item Compare $\frac{2}{5}$ and $\frac{4}{5}$. Which is bigger? \ashow{$\frac{4}{5}$}
+    \item Convert $\frac{3}{4}$ and $\frac{5}{8}$ to a common denominator. Which is larger? \ashow{$\frac{3}{4}=\frac{6}{8}$; larger: $\frac{3}{4}$}
+    \item Order from smallest to largest: $\frac{1}{3}, \frac{1}{6}, \frac{1}{2}$. \ashow{$\frac{1}{6},\ \frac{1}{3},\ \frac{1}{2}$}
+    \item Sam ate $\frac{2}{3}$ of a pizza, Lee ate $\frac{5}{6}$ of the same pizza. Who ate more? \ashow{Lee ate more.}
+    \item Compare $\frac{4}{6}$ and $\frac{2}{3}$. \ashow{Equal: $\frac{4}{6}=\frac{2}{3}$}
 \end{enumerate}
 \end{columns}
 
@@ -182,12 +190,12 @@
 \column{0.55\textwidth}
 \textbf{Questions}
 \begin{enumerate}
-    \item A cake is cut into 10 equal slices. If 3 are eaten, what fraction remains?
-    \item There are 30 students. $\frac{2}{5}$ walk to school. How many walk?
-    \item A ruler is 24 cm long. Mark $\frac{1}{2}$ and $\frac{1}{3}$ on it. How many cm is each?
-    \item Which is longer: $\frac{3}{4}$ of an hour or $\frac{2}{3}$ of an hour? (1 hour = 60 mins)
-    \item You have \$30. You spend $\frac{2}{5}$ on a book. How much do you spend? How much left?
-    \item A recipe needs $\frac{3}{4}$ cup of milk. You only have a $\frac{1}{4}$ cup measure. How many times must you fill it?
+    \item A cake is cut into 10 equal slices. If 3 are eaten, what fraction remains? \ablank{\ensuremath{\frac{7}{10}}}.
+    \item There are 30 students. $\frac{2}{5}$ walk to school. How many walk? \ashow{12 students walk}
+    \item A ruler is 24 cm long. Mark $\frac{1}{2}$ and $\frac{1}{3}$ on it. How many cm is each? \ashow{12 cm and 8 cm}
+    \item Which is longer: $\frac{3}{4}$ of an hour or $\frac{2}{3}$ of an hour? (1 hour = 60 mins) \ashow{$\frac{3}{4}$ hour (45 mins) is longer}
+    \item You have \$30. You spend $\frac{2}{5}$ on a book. How much do you spend? How much left? \ashow{Spend \$12, left \$18}
+    \item A recipe needs $\frac{3}{4}$ cup of milk. You only have a $\frac{1}{4}$ cup measure. How many times must you fill it? \ashow{3 times}
 \end{enumerate}
 \end{columns}
 
@@ -242,22 +250,22 @@
 
 \begin{multicols}{2}
 \begin{enumerate}
-  \item $\dfrac{1}{2}=\dfrac{?}{6}$
-  \item Write the fraction represented by each bar. (Extension) show that they are equivalent
-  \item $\dfrac{5}{6}=\dfrac{10}{?}$
+  \item $\dfrac{1}{2}=\dfrac{\ashowq{3}}{6}$
+  \item Write the fraction represented by each bar. (Extension) show that they are equivalent \ashow{$\frac{2}{3},\ \frac{4}{6},\ \frac{6}{9}$}
+  \item $\dfrac{5}{6}=\dfrac{10}{\ashowq{12}}$
 
 
-    \item Mark $1\dfrac{2}{3}$ and $2\dfrac{1}{2}$ on the number line. Convert each to an improper fraction.
+    \item Mark $1\dfrac{2}{3}$ and $2\dfrac{1}{2}$ on the number line. Convert each to an improper fraction. \ashow{$1\frac{2}{3}=\frac{5}{3}$; $2\frac{1}{2}=\frac{5}{2}$}
 
-  \item $\dfrac{2}{3}=\dfrac{?}{12}$
+  \item $\dfrac{2}{3}=\dfrac{\ashowq{8}}{12}$
 
     \columnbreak
 
-  \item Which are equivalent to $\dfrac{3}{7}$: $\dfrac{9}{21}, \dfrac{6}{14}, \dfrac{12}{28}, \dfrac{8}{21}$?
-  \item Write 3 fractions equivalent to $\dfrac{4}{9}$
-  \item Compare ( $<$ $>$ $=$) these fractions: $\dfrac{2}{5}\ \square\ \dfrac{6}{15}$
+  \item Which are equivalent to $\dfrac{3}{7}$: $\dfrac{9}{21}, \dfrac{6}{14}, \dfrac{12}{28}, \dfrac{8}{21}$? \ashow{$\frac{9}{21},\ \frac{6}{14},\ \frac{12}{28}$}
+  \item Write 3 fractions equivalent to $\dfrac{4}{9}$ \ashow{$\frac{8}{18},\ \frac{12}{27},\ \frac{16}{36}$}
+  \item Compare ( $<$ $>$ $=$) these fractions: $\dfrac{2}{5}\ \square\ \dfrac{6}{15}$ \ashow{$=$}
 
-  \item Fully simplify $\dfrac{48}{18}$
+  \item Fully simplify $\dfrac{48}{18}$ \ashow{$\frac{8}{3}$ (or $2\frac{2}{3}$)}
 \end{enumerate}
 \end{multicols}
 
@@ -313,32 +321,34 @@
 
 \begin{enumerate}
 
-  \item $\dfrac{3}{5}=\dfrac{?}{20}$
+  \item $\dfrac{3}{5}=\dfrac{\ashowq{12}}{20}$
 
-  \item Write the fraction shown by each bar. (Extension) Explain why they represent the same amount.
+  \item Write the fraction shown by each bar. (Extension) Explain why they represent the same amount. \ashow{$\frac{3}{4},\ \frac{6}{8},\ \frac{9}{12}$}
 
-  \item $\dfrac{4}{7}=\dfrac{?}{21}$
+  \item $\dfrac{4}{7}=\dfrac{\ashowq{12}}{21}$
 
-  \item Mark $1\dfrac{3}{4}$ and $2\dfrac{2}{3}$ on the number line. Convert both to improper fractions.
+  \item Mark $1\dfrac{3}{4}$ and $2\dfrac{2}{3}$ on the number line. Convert both to improper fractions. \ashow{$1\frac{3}{4}=\frac{7}{4}$; $2\frac{2}{3}=\frac{8}{3}$}
 
-  \item Fully simplify: $\dfrac{42}{56}$
+  \item Fully simplify: $\dfrac{42}{56}$ \ashow{$\frac{3}{4}$}
 
   \columnbreak
 
   \item Which are equivalent to $\dfrac{5}{9}$:  
-    $\dfrac{10}{18},\ \dfrac{15}{27},\ \dfrac{12}{20},\ \dfrac{25}{45}$?
+    $\dfrac{10}{18},\ \dfrac{15}{27},\ \dfrac{12}{20},\ \dfrac{25}{45}$? \ashow{$\frac{10}{18},\ \frac{15}{27},\ \frac{25}{45}$}
 
-  \item Write 3 fractions equivalent to $\dfrac{7}{12}$.
+  \item Write 3 fractions equivalent to $\dfrac{7}{12}$. \ashow{$\frac{14}{24},\ \frac{21}{36},\ \frac{28}{48}$}
 
   \item Order these fractions in ascending order:  
   \[
   \frac{2}{8},\quad \frac{4}{6},\quad \frac{5}{12}
   \]
+  \ashow{$\frac{2}{8},\ \frac{5}{12},\ \frac{4}{6}$}
 
   \item Compare using $<$, $>$, or $=$:  
   \[
   \frac{9}{14}\ \square\ \frac{19}{28}
   \]
+  \ashow{$<$}
 
 \end{enumerate}
 
@@ -388,46 +398,51 @@
 
 \begin{enumerate}
 
-\item Write the fraction represented by each bar.
+\item Write the fraction represented by each bar. \ashow{$\frac{3}{4},\ \frac{3}{5},\ \frac{3}{8}$}
 
 \item Which is largest:  
 \[
 \frac{3}{4},\quad \frac{3}{5},\quad \frac{3}{8}
 \]
+\ashow{$\frac{3}{4}$}
 
-\item (Extension) explain why fractions with the same numerator change size when the denominator changes.
+\item (Extension) explain why fractions with the same numerator change size when the denominator changes. \ashow{The larger the denominator, the smaller each equal part is.}
 
 \item Compare using $<$, $>$ or $=$:
 
 \[
 \frac{5}{6}\ \square\ \frac{5}{9}
 \]
+\ashow{$>$}
 
-\item Fully simplify: $\frac{18}{24}$
+\item Fully simplify: $\frac{18}{24}$ \ashow{$\frac{3}{4}$}
 
 \columnbreak
 
 \item Fully simplify: $
 \frac{27}{36}
-$
+$ \ashow{$\frac{3}{4}$}
 
 \item Write these as mixed numbers:
 
 \[
 \frac{11}{4},\quad \frac{9}{2}
 \]
+\ashow{$2\frac{3}{4},\ 4\frac{1}{2}$}
 
 \item Convert to improper fractions:
 
 \[
 2\frac{3}{5},\quad 1\frac{7}{8}
 \]
+\ashow{$\frac{13}{5},\ \frac{15}{8}$}
 
 \item Which is bigger:
 
 \[
 \frac{7}{10}\ \square\ \frac{7}{12}
 \]
+\ashow{$\frac{7}{10}$}
 
 \end{enumerate}
 
@@ -480,20 +495,20 @@ $
 
 \begin{enumerate}
 
-\item Write the improper fraction shown by the diagram.
+\item Write the improper fraction shown by the diagram. \ashow{$\frac{5}{4}$}
 
-\item Write the mixed number represented by the green bars in the diagram.
+\item Write the mixed number represented by the green bars in the diagram. \ashow{$1\frac{1}{4}$}
 
-\item Mark $1\frac{1}{4}$ and $2\frac{3}{4}$ on the number line.
+\item Mark $1\frac{1}{4}$ and $2\frac{3}{4}$ on the number line. \ashow{At $1\frac{1}{4}$ and $2\frac{3}{4}$}
 
-\item Convert: $\frac{13}{5}$ to a mixed number.
+\item Convert: $\frac{13}{5}$ to a mixed number. \ashow{$2\frac{3}{5}$}
 
 
 \item Convert:
 \[
 3\frac{2}{3}
 \]
-to an improper fraction.
+to an improper fraction. \ashow{$\frac{11}{3}$}
 
 \columnbreak
 
@@ -502,18 +517,21 @@ to an improper fraction.
 \[
 \frac{16}{40}
 \]
+\ashow{$\frac{2}{5}$}
 
 \item Which is greater:
 
 \[
 \frac{4}{9}\ \square\ \frac{4}{11}
 \]
+\ashow{$\frac{4}{9}$}
 
 \item Order from smallest to largest:
 
 \[
 \frac{6}{5},\quad 1\frac{1}{2},\quad \frac{7}{4}
 \]
+\ashow{$\frac{6}{5},\ 1\frac{1}{2},\ \frac{7}{4}$}
 
 \end{enumerate}
 
@@ -561,42 +579,48 @@ to an improper fraction.
 
 \begin{enumerate}
 
-\item Write the fractions shown by the bars.
+\item Write the fractions shown by the bars. \ashow{$\frac{5}{6}$ and $\frac{5}{8}$}
 
 \item Which is larger:
 
 \[
 \frac{5}{6}\ \square\ \frac{5}{8}
 \]
+\ashow{$>$}
 
 \item Write 3 fractions equivalent to:
 
 \[
 \frac{2}{5}
 \]
+\ashow{$\frac{4}{10},\ \frac{6}{15},\ \frac{8}{20}$}
 
 \item Fully simplify:
 \[
 \frac{54}{72}
 \]
+\ashow{$\frac{3}{4}$}
 
 \item Convert to mixed numbers:
 
 \[
 \frac{17}{6},\quad \frac{22}{9}
 \]
+\ashow{$2\frac{5}{6},\ 2\frac{4}{9}$}
 
 \item Convert to improper fractions:
 
 \[
 4\frac{1}{3},\quad 2\frac{5}{6}
 \]
+\ashow{$\frac{13}{3},\ \frac{17}{6}$}
 
 \item Order from smallest to largest:
 
 \[
 \frac{123}{1234},\quad \frac{321}{1234},\quad \frac{111}{1234}
 \]
+\ashow{$\frac{111}{1234},\ \frac{123}{1234},\ \frac{321}{1234}$}
 
 \item Challenge:
 
@@ -605,6 +629,7 @@ Which is larger?
 \[
 2\frac{1}{4}\ \square\ 2\frac{2}{5}
 \]
+\ashow{$2\frac{2}{5}$}
 
 \end{enumerate}
 
@@ -613,8 +638,5 @@ Which is larger?
 \end{columns}
 
 \end{frame}
-
-
-
 
 \end{document}

@@ -9,6 +9,15 @@
 % Graphics
 \usepackage{tikz}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
 \begin{document}
 
 % ---------- STARTER (PRIOR KNOWLEDGE) ----------
@@ -18,7 +27,7 @@
 \begin{block}{1) Arithmetic}
 \Large
 \[
-13 + 9 =
+13 + 9 = \ablank{22}
 \]
 \end{block}
 
@@ -27,7 +36,7 @@
 \begin{block}{3) Collect like terms}
 \Large
 \[
-3b + 4 + 2b =
+3b + 4 + 2b = \ablank{5b+4}
 \]
 \end{block}
 
@@ -45,13 +54,13 @@
 \node at (3,-0.4) {$5$};
 \node at (-0.4,1) {$4$};
 
-\node at (1,1) {?};
-\node at (3,1) {?};
+\node at (1,1) {\ashowq{12}};
+\node at (3,1) {\ashowq{20}};
 
 \end{tikzpicture}
 
 \vspace{0.4em}
-Find the total area.
+Find the total area. \ashow{Total area = 32}
 
 \end{block}
 
@@ -60,7 +69,7 @@ Find the total area.
 \begin{block}{4) Expand the bracket}
 \Large
 \[
-2(x+6) =
+2(x+6) = \ablank{2x+12}
 \]
 \end{block}
 

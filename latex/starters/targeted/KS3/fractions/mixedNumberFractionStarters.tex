@@ -4,6 +4,16 @@
 \usepackage{xcolor}
 \usepackage{multicol}
 \usepackage{amsmath}
+\usepackage{amssymb}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
 
 \title{Fractions: Adding \& Subtracting}
 \author{}
@@ -49,19 +59,20 @@
 \column{0.8\textwidth}
 \small
 \begin{enumerate}
-  \item Fully simplify: $\dfrac{12}{16}$
-  \item Which is larger: $\dfrac{3}{7}$ or $\dfrac{3}{9}$?
-  \item Convert $\dfrac{11}{4}$ to a mixed number.
-  \item Complete the addition represented by the bars to the left: $$\color{blue}\dfrac{?}{5} \color{orange} + \dfrac{?}{5} \color{green} = \dfrac{3}{?}$$
+  \item Fully simplify: $\dfrac{12}{16}$ \ashow{$=\frac{3}{4}$}
+  \item Which is larger: $\dfrac{3}{7}$ or $\dfrac{3}{9}$? \ashow{$\frac{3}{7}$}
+  \item Convert $\dfrac{11}{4}$ to a mixed number. \ashow{$=2\frac{3}{4}$}
+  \item Complete the addition represented by the bars to the left: $$\color{blue}\dfrac{\text{{\ashowq{2}}}}{5} \color{orange} + \dfrac{\text{{\ashowq{1}}}}{5} \color{green} = \dfrac{3}{\text{{\ashowq{5}}}}$$
   \item Calculate:
   \[
     \frac{1}{7} + \frac{3}{7} \qquad \frac{5}{9} + \frac{2}{9}
   \]
-  \item To add $\dfrac{1}{2} + \dfrac{1}{4}$, what must you do first? Can you draw a picture to demonstrate?
+  \ashow{$=\frac{4}{7},\ \frac{7}{9}$}
+  \item To add $\dfrac{1}{2} + \dfrac{1}{4}$, what must you do first? Can you draw a picture to demonstrate? \ashow{Find a common denominator: $\frac12=\frac24$, so $\frac24+\frac14=\frac34$.}
 
 \begin{multicols}{2}
-  \item Calculate: $\dfrac{1}{2} + \dfrac{1}{4}$
-  \item Calculate: $\dfrac{1}{3} + \dfrac{1}{4}$
+  \item Calculate: $\dfrac{1}{2} + \dfrac{1}{4}$ \ashow{$=\frac{3}{4}$}
+  \item Calculate: $\dfrac{1}{3} + \dfrac{1}{4}$ \ashow{$=\frac{7}{12}$}
 \end{multicols}
 \end{enumerate}
 
@@ -112,21 +123,22 @@
 \column{0.8\textwidth}
 \small
 \begin{enumerate}
-  \item Write 3 fractions equivalent to $\dfrac{2}{3}$.
-  \item Order smallest to largest: $\dfrac{1}{8}, \ \dfrac{1}{2}, \ \dfrac{1}{12}$
-  \item Convert $2\dfrac{3}{7}$ to an improper fraction.
-  \item Complete the subtraction represented by the bars to the left: $$\color{blue}\dfrac{4}{6} \color{red}- \dfrac{?}{6} \color{green} = \dfrac{?}{6} \color{black} = \dfrac{1}{?}$$
+  \item Write 3 fractions equivalent to $\dfrac{2}{3}$. \ashow{$\frac46,\frac69,\frac{8}{12}$}
+  \item Order smallest to largest: $\dfrac{1}{8}, \ \dfrac{1}{2}, \ \dfrac{1}{12}$ \ashow{$\frac{1}{12}<\frac{1}{8}<\frac{1}{2}$}
+  \item Convert $2\dfrac{3}{7}$ to an improper fraction. \ashow{$=\frac{17}{7}$}
+  \item Complete the subtraction represented by the bars to the left: $$\color{blue}\dfrac{4}{6} \color{red}- \dfrac{\text{{\ashowq{1}}}}{6} \color{green} = \dfrac{\text{{\ashowq{3}}}}{6} \color{black} = \dfrac{1}{\text{{\ashowq{2}}}}$$
   \item Calculate:
   \[
     \frac{7}{10} - \frac{3}{10} \qquad \frac{8}{9} - \frac{5}{9}
   \]
-  \item Use the bars to work out $\dfrac{3}{4} - \dfrac{1}{2}$.
+  \ashow{$=\frac{2}{5},\ \frac{1}{3}$}
+  \item Use the bars to work out $\dfrac{3}{4} - \dfrac{1}{2}$. \ashow{$=\frac{1}{4}$}
   \begin{multicols}{2}
-  \item Calculate: $\dfrac{5}{6} - \dfrac{1}{4}$
-  \item Calculate: $\dfrac{7}{8} - \dfrac{2}{3}$
+  \item Calculate: $\dfrac{5}{6} - \dfrac{1}{4}$ \ashow{$=\frac{7}{12}$}
+  \item Calculate: $\dfrac{7}{8} - \dfrac{2}{3}$ \ashow{$=\frac{5}{24}$}
   \end{multicols}
   \vspace{-2em}
-  \item Order smallest to largest: $\dfrac{3}{8},\ \dfrac{1}{2},\ \dfrac{5}{12}$
+  \item Order smallest to largest: $\dfrac{3}{8},\ \dfrac{1}{2},\ \dfrac{5}{12}$ \ashow{$\frac{3}{8}<\frac{5}{12}<\frac{1}{2}$}
 \end{enumerate}
 
 \end{columns}
@@ -181,29 +193,31 @@
 \small
 \begin{enumerate}
 \begin{multicols}{3}
-  \item $\dfrac{2}{5} + \dfrac{1}{5}$
-  \item $\dfrac{3}{4} - \dfrac{1}{2}$
-  \item Simplify: $\dfrac{36}{48}$
+  \item $\dfrac{2}{5} + \dfrac{1}{5}$ \ashow{$=\frac{3}{5}$}
+  \item $\dfrac{3}{4} - \dfrac{1}{2}$ \ashow{$=\frac{1}{4}$}
+  \item Simplify: $\dfrac{36}{48}$ \ashow{$=\frac{3}{4}$}
 \end{multicols}
   
   \item Fill in the blanks using the diagram:
   \[
-    \color{blue}?\frac{?}{4} \color{orange} + 1\frac{?}{?} \color{black} = \frac{?}{4} + \frac{?}{4} = \frac{?}{4} = \ ?  \frac{1}{?}
+    \color{blue}\text{{\ashowq{1}}}\frac{\text{{\ashowq{3}}}}{4} \color{orange} + 1\frac{\text{{\ashowq{1}}}}{\text{{\ashowq{2}}}} \color{black} = \frac{\text{{\ashowq{7}}}}{4} + \frac{\text{{\ashowq{6}}}}{4} = \frac{\text{{\ashowq{13}}}}{4} = \ \text{{\ashowq{3}}}  \frac{1}{\text{{\ashowq{4}}}}
   \]
   \begin{multicols}{2}
   \item 
   \[
     2\frac{1}{3} + 1\frac{1}{3}
   \]
+  \ashow{$=3\frac{2}{3}$}
   \item 
   \[
     3\frac{1}{4} + 1\frac{1}{2}
   \]
+  \ashow{$=4\frac{3}{4}$}
   \end{multicols}
-  \item Mark $1\dfrac{3}{4}$ and $3\dfrac{1}{4}$ on the number line. What is the difference? How else could you work this out? 
+  \item Mark $1\dfrac{3}{4}$ and $3\dfrac{1}{4}$ on the number line. What is the difference? How else could you work this out? \ashow{Difference $=\frac{3}{2}=1\frac12$; work out as $3\frac14-1\frac34=\frac{13}{4}-\frac{7}{4}=\frac{6}{4}=\frac{3}{2}$.}
   \begin{multicols}{2}
-  \item Calculate: $2\dfrac{2}{3} + 1\dfrac{3}{4}$
-  \item Calculate $1\dfrac{3}{4} - 3\dfrac{1}{4} $
+  \item Calculate: $2\dfrac{2}{3} + 1\dfrac{3}{4}$ \ashow{$=4\frac{5}{12}$}
+  \item Calculate $1\dfrac{3}{4} - 3\dfrac{1}{4} $ \ashow{$=-1\frac{1}{2}$}
   \end{multicols}
 \end{enumerate}
 
@@ -248,9 +262,6 @@
   \draw[red, thick] ({0.75*\i+0.75},2.9) -- ({0.75*\i},3.5);
 }
 
-
-
-
 \end{tikzpicture}
 \end{center}
 
@@ -258,36 +269,40 @@
 \small
 \begin{enumerate}
   
-  \item Which is greater: $2\dfrac{1}{3}$ or $2\dfrac{2}{5}$?
-  \item Convert $\dfrac{23}{6}$ to a mixed number.
+  \item Which is greater: $2\dfrac{1}{3}$ or $2\dfrac{2}{5}$? \ashow{$2\frac{2}{5}$}
+  \item Convert $\dfrac{23}{6}$ to a mixed number. \ashow{$=3\frac{5}{6}$}
   \item Consider the diagram on the left, fill in the blanks to demonstrate subtraction using improper fractions:
   \[
-    3\frac{1}{4} - 1\frac{3}{4} = \frac{?}{4} - \frac{?}{4} = \frac{?}{4} = \ ? \frac{?}{?}
+    3\frac{1}{4} - 1\frac{3}{4} = \frac{\text{{\ashowq{13}}}}{4} - \frac{\text{{\ashowq{7}}}}{4} = \frac{\text{{\ashowq{6}}}}{4} = \ \text{{\ashowq{1}}} \frac{\text{{\ashowq{2}}}}{\text{{\ashowq{4}}}}
   \]
   \begin{multicols}{2}
   \item
   \[
     3\frac{3}{5} - 1\frac{1}{5}
   \]
+  \ashow{$=2\frac{2}{5}$}
   \item 
   \[
    4\frac{5}{6} - 2\frac{1}{6}
   \]
+  \ashow{$=2\frac{2}{3}$}
   \end{multicols}
   \begin{multicols}{2}
-  \item \[ 1\dfrac{2}{3} + 2\dfrac{1}{4} \]
+  \item \[ 1\dfrac{2}{3} + 2\dfrac{1}{4} \] \ashow{$=3\frac{11}{12}$}
   \item
   \[
     4\frac{1}{4} - 1\frac{1}{2}  
   \]
+  \ashow{$=2\frac{3}{4}$}
   \end{multicols}
 \begin{multicols}{2}
   \item 
   \[
     3\frac{1}{3} - 1\frac{3}{4}
   \]
+  \ashow{$=1\frac{7}{12}$}
 
-  \item \[ 5\dfrac{1}{3} - 2\dfrac{3}{4} \]
+  \item \[ 5\dfrac{1}{3} - 2\dfrac{3}{4} \] \ashow{$=2\frac{7}{12}$}
 \end{multicols}
   
 \end{enumerate}
@@ -350,21 +365,21 @@
 \small
 \begin{enumerate}
 \begin{multicols}{2}
-\item Fully simplify: $\dfrac{15}{20}$
-\item Fully simplify: $\dfrac{72}{96}$
+\item Fully simplify: $\dfrac{15}{20}$ \ashow{$=\frac{3}{4}$}
+\item Fully simplify: $\dfrac{72}{96}$ \ashow{$=\frac{3}{4}$}
 \end{multicols}
   \item Use the fraction wall to fill in the blanks:
   \[
-    \frac{1}{2} + \frac{?}{6} = 1 \qquad \frac{?}{3} + \frac{?}{6} = 1
+    \frac{1}{2} + \frac{\text{{\ashowq{3}}}}{6} = 1 \qquad \frac{\text{{\ashowq{1}}}}{3} + \frac{\text{{\ashowq{4}}}}{6} = 1
   \] 
 \begin{multicols}{2}
-  \item $2\dfrac{3}{4} + 1\dfrac{2}{3}$
-  \item $4\dfrac{1}{5} - 1\dfrac{3}{4}$
+  \item $2\dfrac{3}{4} + 1\dfrac{2}{3}$ \ashow{$=4\frac{5}{12}$}
+  \item $4\dfrac{1}{5} - 1\dfrac{3}{4}$ \ashow{$=2\frac{9}{20}$}
 \end{multicols}  
-  \item Maya says: \textit{``$\frac{1}{2} + \frac{1}{3} = \frac{2}{5}$''}. Explain the mistake and find the correct answer.
-  \item Amir eats $\dfrac{3}{8}$, Beth eats $\dfrac{1}{4}$, Cal eats $\dfrac{1}{3}$ of a pizza. What fraction is left?
-  \item Fill in the blanks: $\quad 3\dfrac{1}{4} + \square \frac{\square}{\square} = 5\dfrac{1}{6}$
-  \item True or false? $\dfrac{a}{b} + \dfrac{a}{c} = \dfrac{2a}{b+c}$. Can you explain your answer with a proof/counterexample?
+  \item Maya says: \textit{``$\frac{1}{2} + \frac{1}{3} = \frac{2}{5}$''}. Explain the mistake and find the correct answer. \ashow{She added the denominators too; use a common denominator: $\frac36+\frac26=\frac56$.}
+  \item Amir eats $\dfrac{3}{8}$, Beth eats $\dfrac{1}{4}$, Cal eats $\dfrac{1}{3}$ of a pizza. What fraction is left? \ashow{$\frac{1}{24}$}
+  \item Fill in the blanks: $\quad 3\dfrac{1}{4} + \ablank{1}\frac{\ablank{11}}{\ablank{12}} = 5\dfrac{1}{6}$
+  \item True or false? $\dfrac{a}{b} + \dfrac{a}{c} = \dfrac{2a}{b+c}$. Can you explain your answer with a proof/counterexample? \ashow{False; e.g.\ $a=b=c=1$ gives $2=1$. Correct: $\frac ab+\frac ac=\frac{a(c+b)}{bc}$.}
 \end{enumerate}
 
 \end{columns}

@@ -5,6 +5,15 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
 \title{Circles: Area, Squaring \& Pi}
 \author{}
 \date{}
@@ -44,25 +53,25 @@
 \small
 \begin{enumerate}
   \begin{multicols}{2}
-    \item $4 \times 4 = \ ?$
-    \item $7 \times 7 = \ ?$
+    \item $4 \times 4 = \ashowq{16}$
+    \item $7 \times 7 = \ashowq{49}$
   \end{multicols}
   \begin{multicols}{2}
-    \item $10^2 = \ ?$
-    \item $3^2 = \ ?$
+    \item $10^2 = \ashowq{100}$
+    \item $3^2 = \ashowq{9}$
   \end{multicols}
-  \item $2 \times 6$ and $6^2$ — are these the same? 
+  \item $2 \times 6$ and $6^2$ — are these the same? \ashow{No: $12\neq 36$.}
   \begin{multicols}{2}
-  \item $3.14 \times 9 =$
-  \item $3.14 \times 25=$
+  \item $3.14 \times 9=\ablank{28.26}$
+  \item $3.14 \times 25=\ablank{78.5}$
   \end{multicols}
 \end{enumerate}
 \vspace{-1em}
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item A circle has \textbf{diameter} $14$ cm. Find: \newline{} (a) the radius \newline{} (b) the circumference. ($\pi \approx 3.14$)
-  \item A circle has \textbf{radius} $5$ cm. What is the circumference?
-  \item The square has side $3$ cm and area $9$ cm$^2$. A circle has radius $1.5$ cm. Is the circle's area more or less than $9$ cm$^2$?
+  \item A circle has \textbf{diameter} $14$ cm. Find: \newline{} (a) the radius \ablank{7\,\text{cm}} \newline{} (b) the circumference \ablank{43.96\,\text{cm}}. ($\pi \approx 3.14$)
+  \item A circle has \textbf{radius} $5$ cm. What is the circumference? \ablank{31.4\,\text{cm}}
+  \item The square has side $3$ cm and area $9$ cm$^2$. A circle has radius $1.5$ cm. Is the circle's area more or less than $9$ cm$^2$? \ashow{Less: $\pi(1.5)^2 \approx 7.07$ cm$^2$.}
 \end{enumerate}
 
 \end{columns}
@@ -100,22 +109,22 @@
 \small
 \begin{enumerate}
   \begin{multicols}{2}
-    \item Halve $12$ cm
-    \item Halve $9.4$ cm
+    \item Halve $12$ cm \ablank{6\,\text{cm}}
+    \item Halve $9.4$ cm \ablank{4.7\,\text{cm}}
   \end{multicols}
   \begin{multicols}{2}
-    \item $6^2 = \ ?$
-    \item $1.5^2 = \ ?$
-  \item $3 \times 4^2=$
-  \item True or false? $\pi \times (2r) = 2 \times \pi \times r$
+    \item $6^2 = \ashowq{36}$
+    \item $1.5^2 = \ashowq{2.25}$
+  \item $3 \times 4^2=\ablank{48}$
+  \item True or false? $\pi \times (2r) = 2 \times \pi \times r$ \ashow{True}
   \end{multicols}
 \end{enumerate}
 \vspace{-2em}
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item Consider circle A \newline{} (a) What is the circumference? \newline{} (b) What is the area?
-  \item Consider circle B \newline{} (a) What is the circumference? \newline{} (b) What is the area?
-  \item Is the ratio of the cirumferences of circle's A and B the same as the ratio of the areas?
+  \item Consider circle A \newline{} (a) What is the circumference? \ablank{18.84\,\text{cm}} \newline{} (b) What is the area? \ablank{28.26\,\text{cm}^2}
+  \item Consider circle B \newline{} (a) What is the circumference? \ablank{37.68\,\text{cm}} \newline{} (b) What is the area? \ablank{113.04\,\text{cm}^2}
+  \item Is the ratio of the cirumferences of circle's A and B the same as the ratio of the areas? \ashow{No: $1:2$ vs $1:4$.}
 \end{enumerate}
 
 \end{columns}
@@ -158,22 +167,22 @@
 \small
 \begin{enumerate}
   \begin{multicols}{2}
-    \item $5 \times 5 = \ ?$
-    \item $8^2 = \ ?$
+    \item $5 \times 5 = \ashowq{25}$
+    \item $8^2 = \ashowq{64}$
   \end{multicols}
   \begin{multicols}{2}
-    \item $2.5^2 = \ ?$
-    \item $3.14 \times 9 = \ ?$
+    \item $2.5^2 = \ashowq{6.25}$
+    \item $3.14 \times 9 = \ablank{28.26}$
   \end{multicols}
-  \item Area of a $7$ cm $\times$ $4$ cm rectangle $= \ ?$
-  \item What fraction of $360^\circ$ is $90^\circ$?
+  \item Area of a $7$ cm $\times$ $4$ cm rectangle $= \ashowq{28\,\text{cm}^2}$
+  \item What fraction of $360^\circ$ is $90^\circ$? \ashow{$\frac{1}{4}$}
 \end{enumerate}
 
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item Write an expression for the area of the circle in the picture
-  \item Write an expression for the area of the shaded blue region in the picture
-  \item If the square has a perimeter of 48cm, what is the area of the shaded blue region?
+  \item Write an expression for the area of the circle in the picture \ashow{$\pi r^2$}
+  \item Write an expression for the area of the shaded blue region in the picture \ashow{$4r^2-\pi r^2$}
+  \item If the square has a perimeter of 48cm, what is the area of the shaded blue region? \ashow{$30.96$ cm$^2$}
 \end{enumerate}
 
 \end{columns}

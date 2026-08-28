@@ -5,6 +5,15 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
 \title{Fractions: Of Amounts \& Multiplying}
 \author{}
 \date{}
@@ -38,7 +47,7 @@
 \node at (2.25,4.1) {\tiny $10$};
 
 \draw[<->, orange, thick] (0,3.55) -- (1.5,3.55);
-\node[orange] at (0.75,3.3) {\small $\frac{1}{2}$ of $20 = ?$};
+\node[orange] at (0.75,3.3) {\small $\frac{1}{2}$ of $20 = \text{\ashowq{10}}$};
 
 % Bar model for 1/4 of 20 (middle)
 \draw (0,1.8) rectangle (3,2.4);
@@ -48,7 +57,7 @@
 \node at (0.375,2.1) {\tiny $5$};
 
 \draw[<->, green!60!black, thick] (0,1.55) -- (0.75,1.55);
-\node[green!60!black] at (0.375,1.3) {\small $\frac{1}{4}$ of $20 = ?$};
+\node[green!60!black] at (0.375,1.3) {\small $\frac{1}{4}$ of $20 = \text{\ashowq{5}}$};
 
 % Bar model for 3/4 of 20 (bottom)
 \draw (0,-0.1) rectangle (3,0.5);
@@ -61,7 +70,7 @@
 \node at (2.625,0.2) {\tiny $5$};
 
 \draw[<->, blue, thick] (0,-0.35) -- (2.25,-0.35);
-\node[blue] at (1.125,-0.6) {\small $\frac{3}{4}$ of $20 = ?$};
+\node[blue] at (1.125,-0.6) {\small $\frac{3}{4}$ of $20 = \text{\ashowq{15}}$};
 
 \end{tikzpicture}
 \end{center}
@@ -70,23 +79,25 @@
 \small
 \begin{enumerate}
 \begin{multicols}{2}
-  \item Fully simplify: $\dfrac{18}{24}$
-  \item Calculate: $2\dfrac{1}{3} + 1\dfrac{1}{2}$
+  \item Fully simplify: $\dfrac{18}{24}$ \ashow{$\dfrac{3}{4}$}
+  \item Calculate: $2\dfrac{1}{3} + 1\dfrac{1}{2}$ \ashow{$=3\dfrac{5}{6}$}
 \end{multicols}
   \item Using the bar models to the left:
   \[
-    \tfrac{1}{2} \text{ of } 20 = \square \qquad \tfrac{1}{4} \text{ of } 20 = \square \qquad \tfrac{3}{4} \text{ of } 20 = \square
+    \tfrac{1}{2} \text{ of } 20 = \ablank{10} \qquad \tfrac{1}{4} \text{ of } 20 = \ablank{5} \qquad \tfrac{3}{4} \text{ of } 20 = \ablank{15}
   \]
   \item Calculate:
   \[
     \tfrac{1}{3} \text{ of } 24 \qquad \tfrac{2}{3} \text{ of } 24
   \]
-  \item Fill in the blank: $\quad \dfrac{3}{4}$ of $\square = 18$
+  \ashow{$8$ and $16$}
+  \item Fill in the blank: $\quad \dfrac{3}{4}$ of $\ablank{24} = 18$
   \item True or false? ``$\dfrac{1}{2}$ of $30 = 30 \div 2$.'' Explain your reasoning.
+  \ashow{True. $\tfrac12$ of $30 = 15$ and $30 \div 2 = 15$.}
 \begin{multicols}{2}
-  \item Find $\dfrac{2}{5}$ of $35$.
+  \item Find $\dfrac{2}{5}$ of $35$. \ashow{$14$}
   \vspace{2em}
-  \item A $60\,\text{cm}$ ribbon is cut. Amy takes $\dfrac{3}{4}$ of it. How long is her piece?
+  \item A $60\,\text{cm}$ ribbon is cut. Amy takes $\dfrac{3}{4}$ of it. How long is her piece? \ashow{$45$ cm}
 \end{multicols}
 \end{enumerate}
 \end{columns}
@@ -121,7 +132,7 @@
 \node at (2.625,4.6) {\tiny $12$};
 
 \draw[<->, blue, thick] (0,4.05) -- (2.25,4.05);
-\node[blue] at (1.125,3.75) {\small $\frac{3}{4}$ of $48 = ?$};
+\node[blue] at (1.125,3.75) {\small $\frac{3}{4}$ of $48 = \text{\ashowq{36}}$};
 
 
 \draw (0,2.4) rectangle (3,3.0);
@@ -135,7 +146,7 @@
 \node at (1.6875,2.7) {\tiny $6$};
 
 \draw[<->, orange, thick] (0,2.15) -- (1.875,2.15);
-\node[orange] at (0.9375,1.85) {\small $\frac{5}{8}$ of $48 = ?$};
+\node[orange] at (0.9375,1.85) {\small $\frac{5}{8}$ of $48 = \text{\ashowq{30}}$};
 
 
 \end{tikzpicture}
@@ -144,18 +155,18 @@
 \column{0.78\textwidth}
 \small
 \begin{enumerate}
-  \item Order smallest to largest: $\dfrac{3}{8},\ \dfrac{1}{2},\ \dfrac{5}{12}$
-  \item Convert $\dfrac{17}{5}$ to a mixed number.
-  \item Use the bar model to find $\dfrac{3}{4}$ of $48$ and $\dfrac{5}{8}$ of $48$.
-  \item Calculate: $\quad \dfrac{5}{8}$ of $72$
-  \item $\dfrac{2}{3}$ of a class of $30$ are girls. How many boys are there?
-  \item Rania says ``$\dfrac{3}{5}$ of $40 = 24$''. Is she correct? Show your working.
+  \item Order smallest to largest: $\dfrac{3}{8},\ \dfrac{1}{2},\ \dfrac{5}{12}$ \ashow{$\dfrac{3}{8} < \dfrac{5}{12} < \dfrac{1}{2}$}
+  \item Convert $\dfrac{17}{5}$ to a mixed number. \ashow{$3\dfrac{2}{5}$}
+  \item Use the bar model to find $\dfrac{3}{4}$ of $48$ and $\dfrac{5}{8}$ of $48$. \ashow{$36$ and $30$}
+  \item Calculate: $\quad \dfrac{5}{8}$ of $72$ \ashow{$=45$}
+  \item $\dfrac{2}{3}$ of a class of $30$ are girls. How many boys are there? \ashow{$10$ boys}
+  \item Rania says ``$\dfrac{3}{5}$ of $40 = 24$''. Is she correct? Show your working. \ashow{Yes; $\dfrac{3}{5}\times 40 = 24$.}
 
 \begin{multicols}{2}
-  \item Which is greater: \newline $\dfrac{3}{4}$ of $60$ or $\dfrac{4}{5}$ of $55$?
+  \item Which is greater: \newline $\dfrac{3}{4}$ of $60$ or $\dfrac{4}{5}$ of $55$? \ashow{$\dfrac{3}{4}$ of $60$ ($=45$)}
   \item Fill in the blank:
   \[
-    \frac{\square}{8} \text{ of } 64 = 40
+    \frac{\ablank{5}}{8} \text{ of } 64 = 40
   \]
 \end{multicols}
 \end{enumerate}
@@ -232,17 +243,18 @@
 \column{0.75\textwidth}
 \small
 \begin{enumerate}
-  \item What is $\dfrac{1}{2}$ of $\dfrac{1}{2}$? Draw a picture to show your answer.
-  \item Use the area model on the left to calculate $\dfrac{1}{2} \times \dfrac{1}{3} = \dfrac{\square}{\square}$
-  \item Use the second area model to calculate and simplify: $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{\square}{\square} = \dfrac{\square}{\square}$
+  \item What is $\dfrac{1}{2}$ of $\dfrac{1}{2}$? Draw a picture to show your answer. \ashow{$\dfrac{1}{4}$}
+  \item Use the area model on the left to calculate $\dfrac{1}{2} \times \dfrac{1}{3} = \dfrac{\ablank{1}}{\ablank{6}}$
+  \item Use the second area model to calculate and simplify: $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{\ablank{6}}{\ablank{12}} = \dfrac{\ablank{1}}{\ablank{2}}$
   \item Calculate:
   \[
     \frac{3}{5} \times \frac{5}{7}
   \]
-  \item Simplify \textit{then} multiply: $\quad\dfrac{3}{9} \times \dfrac{4}{8}$
-  \item Find $\dfrac{3}{4}$ of $\dfrac{2}{5}$. What do you notice about ``of'' and ``$\times$''?
+  \ashow{$=\dfrac{3}{7}$}
+  \item Simplify \textit{then} multiply: $\quad\dfrac{3}{9} \times \dfrac{4}{8}$ \ashow{$=\dfrac{1}{6}$}
+  \item Find $\dfrac{3}{4}$ of $\dfrac{2}{5}$. What do you notice about ``of'' and ``$\times$''? \ashow{$\dfrac{3}{10}$; ``of'' means multiply.}
   \item Calculate: $1\dfrac{1}{2} \times \dfrac{1}{3}$\\[0.3em]
-  (Hint: convert to improper first.)
+  (Hint: convert to improper first.) \ashow{$=\dfrac{1}{2}$}
 \end{enumerate}
 \end{columns}
 \end{frame}
@@ -294,26 +306,26 @@
 \small
 \begin{enumerate}
 \begin{multicols}{3}
-  \item Simplify: $\dfrac{24}{36}$
-  \item $3\dfrac{1}{4} - 1\dfrac{2}{3}$
-  \item $\dfrac{5}{6}$ of $42$
+  \item Simplify: $\dfrac{24}{36}$ \ashow{$\dfrac{2}{3}$}
+  \item $3\dfrac{1}{4} - 1\dfrac{2}{3}$ \ashow{$=1\dfrac{7}{12}$}
+  \item $\dfrac{5}{6}$ of $42$ \ashow{$=35$}
 \end{multicols}
 
 
-  \item A wall is $4\dfrac{1}{2}$\,m long. A mural covers $\dfrac{2}{3}$ of it. Use the bar model to find the length of the mural.
+  \item A wall is $4\dfrac{1}{2}$\,m long. A mural covers $\dfrac{2}{3}$ of it. Use the bar model to find the length of the mural. \ashow{$3$ m}
 
 
-  \item Use the area model to calculate: $\dfrac{3}{5} \times \dfrac{4}{7} = \dfrac{\square}{\square}$
+  \item Use the area model to calculate: $\dfrac{3}{5} \times \dfrac{4}{7} = \dfrac{\ablank{12}}{\ablank{35}}$
 
-  \item Which is greater: $\dfrac{2}{3} \times \dfrac{3}{4}$, or $\dfrac{3}{4}$ of $\dfrac{2}{3}$? Explain.
+  \item Which is greater: $\dfrac{2}{3} \times \dfrac{3}{4}$, or $\dfrac{3}{4}$ of $\dfrac{2}{3}$? Explain. \ashow{They are equal ($\dfrac{1}{2}$).}
 
 \begin{multicols}{2}
   \item Fill in the blank:
   \[
-    \frac{3}{5} \times \square = \frac{6}{35}
+    \frac{3}{5} \times \ablank{\frac{2}{7}} = \frac{6}{35}
   \]
   \newline
-  \item True or false? ``Multiplying two proper fractions always gives a smaller result than either fraction.'' Explain or give a counterexample.
+  \item True or false? ``Multiplying two proper fractions always gives a smaller result than either fraction.'' Explain or give a counterexample. \ashow{True; e.g.\ $\dfrac{2}{3}\times\dfrac{3}{4}=\dfrac{1}{2}$, which is smaller than both.}
 \end{multicols}
 \end{enumerate}
 \end{columns}
@@ -342,7 +354,7 @@
 \node at (0.375,4.0) {\tiny $9$};
 \node at (1.125,4.0) {\tiny $9$};
 \node at (1.875,4.0) {\tiny $9$};
-\node at (2.625,4.0) {\tiny $?$};
+\node at (2.625,4.0) {\tiny \ashowq{36}};
 
 \draw[<->, blue, thick] (0,3.45) -- (2.25,3.45);
 \node[blue] at (1.125,3.15) {\small $27$};
@@ -355,22 +367,22 @@
 \small
 \begin{enumerate}
 \begin{multicols}{3}
-  \item Simplify: $\dfrac{20}{30}$
-  \item Simplify: $\dfrac{84}{108}$
+  \item Simplify: $\dfrac{20}{30}$ \ashow{$\dfrac{2}{3}$}
+  \item Simplify: $\dfrac{84}{108}$ \ashow{$\dfrac{7}{9}$}
 \end{multicols}
 
-  \item Convert $4\dfrac{3}{5}$ to an improper fraction.
+  \item Convert $4\dfrac{3}{5}$ to an improper fraction. \ashow{$\dfrac{23}{5}$}
 
 
-  \item Calculate: $2\dfrac{3}{4} + 1\dfrac{3}{5}$
+  \item Calculate: $2\dfrac{3}{4} + 1\dfrac{3}{5}$ \ashow{$=4\dfrac{7}{20}$}
 
-  \item $\dfrac{3}{4}$ of a number is $27$. Use the bar model to find the whole number.
+  \item $\dfrac{3}{4}$ of a number is $27$. Use the bar model to find the whole number. \ashow{$36$}
 
-  \item Jack spends $\dfrac{1}{3}$ of his pocket money on Monday and $\dfrac{1}{4}$ on Tuesday. What fraction remains?
+  \item Jack spends $\dfrac{1}{3}$ of his pocket money on Monday and $\dfrac{1}{4}$ on Tuesday. What fraction remains? \ashow{$\dfrac{5}{12}$}
 
-  \item A jug holds $1\dfrac{1}{2}$ litres. You fill $\dfrac{2}{3}$ of it. How many millilitres is that?
+  \item A jug holds $1\dfrac{1}{2}$ litres. You fill $\dfrac{2}{3}$ of it. How many millilitres is that? \ashow{$1000$ mL}
 
-  \item Show that $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{3}{4} \times \dfrac{2}{3}$ using area diagrams.
+  \item Show that $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{3}{4} \times \dfrac{2}{3}$ using area diagrams. \ashow{Both equal $\dfrac{1}{2}$; the area diagrams are congruent.}
 
 
 \end{enumerate}
