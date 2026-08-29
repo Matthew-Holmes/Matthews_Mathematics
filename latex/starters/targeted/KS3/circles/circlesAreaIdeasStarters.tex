@@ -204,65 +204,63 @@
 \end{columns}
 \end{frame}
 
-% WIP
+%------------------------------------------------
+% SLIDE 4: Full Retrieval + Fluency with Area + Spot the Error
+%------------------------------------------------
+\begin{frame}{Starter}
 
-% %------------------------------------------------
-% % SLIDE 4: Full Retrieval + Fluency with Area + Spot the Error
-% %------------------------------------------------
-% \begin{frame}{Starter}
+\vspace{-1em}
 
-% \vspace{-1em}
+\begin{columns}
 
-% \begin{columns}
+\column{0.35\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
 
-% \column{0.35\textwidth}
-% \begin{center}
-% \begin{tikzpicture}[scale=0.85]
+  % Two circles for comparison
+  \draw[thick] (0, 2.2) circle (0.8cm);
+  \fill[red!15] (0,2.2) circle (0.8cm);
+  \fill (0,2.2) circle (0.04);
+  \draw[red, thick] (0,2.2) -- ++(0:0.8);
+  \node[red] at (0.4, 2.45) {\small $4$};
+  \node at (0, 1.2) {\small Circle P};
 
-%   % Two circles for comparison
-%   \draw[thick] (0, 2.2) circle (0.8cm);
-%   \fill[red!15] (0,2.2) circle (0.8cm);
-%   \fill (0,2.2) circle (0.04);
-%   \draw[red, thick] (0,2.2) -- ++(0:0.8);
-%   \node[red] at (0.4, 2.45) {\small $4$};
-%   \node at (0, 1.2) {\small Circle P};
+  \draw[thick] (0,-0.4) circle (1.4cm);
+  \fill[blue!15] (0,-0.4) circle (1.4cm);
+  \fill (0,-0.4) circle (0.04);
+  \draw[blue, thick] (-1.4,-0.4) -- (1.4,-0.4);
+  \node[blue] at (0,-0.15) {\small $d=14$};
+  \node at (0,-2.0) {\small Circle Q};
 
-%   \draw[thick] (0,-0.4) circle (1.4cm);
-%   \fill[blue!15] (0,-0.4) circle (1.4cm);
-%   \fill (0,-0.4) circle (0.04);
-%   \draw[blue, thick] (-1.4,-0.4) -- (1.4,-0.4);
-%   \node[blue] at (0,-0.15) {\small $d=14$};
-%   \node at (0,-2.0) {\small Circle Q};
+  \node[gray] at (0,-2.45) {\small (cm)};
 
-%   \node[gray] at (0,-2.45) {\small (cm)};
+\end{tikzpicture}
+\end{center}
 
-% \end{tikzpicture}
-% \end{center}
+\column{0.65\textwidth}
+\small
+\begin{enumerate}
+  \begin{multicols}{2}
+    \item $9^2 = \ashowq{81}$
+    \item $3.5^2 = \ashowq{12.25}$
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $3.14 \times 16$ \ashow{$=50.24$}
+    \item $3.14 \times 49$ \ashow{$=153.86$}
+  \end{multicols}
+  \item Halve $14$ cm. \quad Then square your answer. \ashow{$7$ cm, so $49\,\text{cm}^2$}
+  \item A square has area $64$ cm$^2$. What is its side length \ashowq{$8$ cm}
+\end{enumerate}
 
-% \column{0.65\textwidth}
-% \small
-% \begin{enumerate}
-%   \begin{multicols}{2}
-%     \item $9^2 = \ ?$
-%     \item $3.5^2 = \ ?$
-%   \end{multicols}
-%   \begin{multicols}{2}
-%     \item $3.14 \times 16$
-%     \item $3.14 \times 49$
-%   \end{multicols}
-%   \item Halve $14$ cm. \quad Then square your answer.
-%   \item A square has area $64$ cm$^2$. What is its side length?
-% \end{enumerate}
+\begin{enumerate}
+  \setcounter{enumi}{6}
+  \item \textbf{Spot the mistake:} \textit{``Circle Q has diameter $14$ cm, so its area is $\pi \times 14^2 \approx 615$ cm$^2$.''} What error was made? Write the correct solution. \ashow{Used diameter not radius: $\pi \times 7^2 \approx 153.86\,\text{cm}^2$.}
+  \item \textbf{Circle P}, radius $4$ cm. Find: (a) the area \ablank{$50.24\,\text{cm}^2$} \quad (b) the circumference \ablank{25.12\,\text{cm}}.
+  \item \textbf{Circle Q}, diameter $14$ cm. Find: (a) the area \ablank{$153.86\,\text{cm}^2$} \quad (b) the circumference \ablank{43.96\,\text{cm}}.
+  \item Which has the greater area, P or Q? By approximately how many cm$^2$? \ashow{Q, by approximately $103.62\,\text{cm}^2$.}
+\end{enumerate}
 
-% \begin{enumerate}
-%   \setcounter{enumi}{6}
-%   \item \textbf{Spot the mistake:} \textit{``Circle Q has diameter $14$ cm, so its area is $\pi \times 14^2 \approx 615$ cm$^2$.''} What error was made? Write the correct solution.
-%   \item \textbf{Circle P}, radius $4$ cm. Find: (a) the area \quad (b) the circumference.
-%   \item \textbf{Circle Q}, diameter $14$ cm. Find: (a) the area \quad (b) the circumference.
-%   \item Which has the greater area, P or Q? By approximately how many cm$^2$?
-% \end{enumerate}
-
-% \end{columns}
-% \end{frame}
+\end{columns}
+\end{frame}
 
 \end{document}
