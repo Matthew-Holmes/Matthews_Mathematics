@@ -12,10 +12,19 @@
 % Answer-overlay helpers
 % ================================================================
 \newcommand{\ablank}[1]{%
-  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
 }
 \newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
 \newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
 
 \title{Worked Solutions --- Circles: Parts, Perimeter \& Pi}
 \author{}
@@ -102,24 +111,26 @@
 
 \column{0.3\textwidth}
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}[scale=0.75]
   % Circle
   \draw[thick] (0,0) circle (2cm);
-  
+
   % Center
   \fill (0,0) circle (0.05);
   \node[below left] at (0,0) {$O$};
-  
+
   % Radius
   \draw[red, thick] (0,0) -- (1.2,1.6);
-  
+
   % Diameter
   \draw[blue, thick] (-2,0) -- (2,0);
-  
+
   % Chord (not through center)
   \draw[thick] (-1.5,-1.323) -- (1.2,-1.6);
 
-  
+  % --- Q5 answer: name the lines on the diagram ---
+  \node[anslab, above] at (-0.85,0.05) {diameter};
+  \node[anslab, above, rotate=-6] at (-0.15,-1.46) {chord};
 \end{tikzpicture}
 \end{center}
 
@@ -141,7 +152,7 @@
 \begin{enumerate}
   \setcounter{enumi}{4}
   \item On the diagram, which line is the \textbf{diameter}? 
-    How is it different from a chord? \ashow{Blue line; a diameter passes through the centre.}
+    How is it different from a chord? \ashow{A diameter passes through the centre.}
   \item If the radius of a circle is $7$ cm, what is its diameter? \ashow{$14$ cm}
   \item The diameter of a circle is $18$ mm. Find its radius. \ablank{$9$ mm}
   \item A chord of length $8$ cm is drawn inside a circle of radius $5$ cm.
@@ -162,12 +173,32 @@
 \column{0.35\textwidth}
 
 \begin{center}
-\begin{tikzpicture}[scale=0.85]
+\begin{tikzpicture}[scale=0.75]
   % Circle
   \draw[thick] (0,0) circle (2cm);
   \fill (0,0) circle (0.05);
   \node[below] at (0,-0.1) {$O$};
 
+  % --- Q6 answers: drawn on the circle ---
+  % Sector
+  \fill[ansfill] (0,0) -- (105:2) arc (105:165:2) -- cycle;
+  \draw[ans] (0,0) -- (105:2);
+  \draw[ans] (0,0) -- (165:2);
+  \node[anslab] at (135:1.2) {sector};
+
+  % Arc
+  \draw[ans, ultra thick] (25:2) arc (25:75:2);
+  \node[anslab] at (50:1.5) {arc};
+
+  % Tangent
+  \draw[ans] (-2,-1.2) -- (-2,1.2);
+  \node[anslab, rotate=90] at (-2.22,0) {tangent};
+
+  % Segment
+  \fill[ansfill] (-75:2) arc (-75:-5:2) -- cycle;
+  \draw[ans] (-75:2) -- (-5:2);
+  \draw[ans, -{Stealth[length=1.5mm]}] (0.95,-2.45) -- (1.42,-1.25);
+  \node[anslab] at (0.95,-2.65) {segment};
 \end{tikzpicture}
 
 \vspace{3em}
@@ -227,7 +258,6 @@
       \item A segment
     \end{itemize}
     \end{multicols}
-    \ashow{Sector: shaded slice; Arc: curved boundary; Tangent: line touching the circle once; Segment: region between a chord and an arc.}
   \item If the radius is $6$ cm, what is the whole circumference? (Use $\pi \approx 3.14$) \ashow{$37.68$ cm}
   \item For the sector shown, what fraction of the circumference is the arc length? Calculate the arc length if the whole circle has a circumference of 24cm. \ashow{$\frac{1}{6}$; $4$ cm}
 
@@ -248,15 +278,29 @@
 
 \column{0.3\textwidth}
 \begin{center}
-\begin{tikzpicture}[scale=0.9]
+\begin{tikzpicture}[scale=0.75]
   % Circle with labels
   \draw[thick] (0,0) circle (2cm);
   \fill (0,0) circle (0.05);
-  
+
   \draw[blue, thick] (-2,0) -- (2,0);
-  
+
   \draw[red, thick] (0,0) -- (40:2);
-  
+
+  % --- Q8 answer: label the parts on the diagram ---
+  \node[anslab, below right, inner sep=2pt] at (0,0) {centre};
+  \node[anslab, above, rotate=40] at (40:1.1) {radius};
+  \node[anslab, above] at (-1,0.02) {diameter};
+  \draw[ans, -{Stealth[length=1.5mm]}] (0,2.5) -- (100:2.05);
+  \node[anslab, above] at (0,2.5) {circumference};
+
+  % --- Q9 answer: a chord shorter than the radius ---
+  \draw[ans] (190:2) -- (240:2);
+  \node[anslab] at (215:1.3) {$<r$};
+
+  % --- Q10 answer: a chord longer than the radius ---
+  \draw[ans] (-80:2) -- (10:2);
+  \node[anslab] at (-33:1.15) {$>r$};
 \end{tikzpicture}
 
 \end{center}
@@ -282,9 +326,9 @@
 \begin{enumerate}
   \setcounter{enumi}{7}
   \item Copy and label on the diagram: 
-    centre, radius, diameter, circumference. \ashow{centre: $O$; radius: red line; diameter: blue line; circumference: the circle itself}
-    \item Draw a chord on the diagram shorter than the radius \ashow{Many possible answers, e.g.\ a chord close to the circumference}
-    \item Draw a chord on the diagram longer than the radius \ashow{Many possible answers, e.g.\ a chord passing near the centre but not through it}
+    centre, radius, diameter, circumference.
+    \item Draw a chord on the diagram shorter than the radius
+    \item Draw a chord on the diagram longer than the radius
   
   \item If the diameter is $8$ cm, what is:
     \begin{itemize}

@@ -9,10 +9,19 @@
 % Answer-overlay helpers
 % ================================================================
 \newcommand{\ablank}[1]{%
-  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
 }
 \newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
 \newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
 
 \title{Fractions: Of Amounts \& Multiplying}
 \author{}
@@ -235,8 +244,12 @@
 \draw[<->, orange, thick] (3.2,0.4) -- (3.2,-1.85);
 \node[orange] at (3.5,-0.8) {\small $\frac{3}{4}$};
 
-
-
+% --- Q1 answer: 1/2 of 1/2 drawn as an area model ---
+\fill[ansfill, red!35] (0,1.2) rectangle (0.55,1.75);
+\draw[ans] (0,0.65) rectangle (1.1,1.75);
+\draw[ans] (0.55,0.65) -- (0.55,1.75);
+\draw[ans] (0,1.2) -- (1.1,1.2);
+\node[anslab, right] at (1.2,1.2) {Q1: $\tfrac{1}{2}$ of $\tfrac{1}{2}=\tfrac{1}{4}$};
 \end{tikzpicture}
 \end{center}
 
@@ -359,7 +372,19 @@
 \draw[<->, blue, thick] (0,3.45) -- (2.25,3.45);
 \node[blue] at (1.125,3.15) {\small $27$};
 
-
+% --- Q7 answer: the two area diagrams, each shading 6 of 12 cells ---
+% 2/3 wide by 3/4 tall
+\fill[ansfill, red!35] (0,1.45) rectangle (1.2,2.8);
+\draw[ans] (0,1.0) rectangle (1.8,2.8);
+\foreach \x in {0.6,1.2} \draw[ans] (\x,1.0) -- (\x,2.8);
+\foreach \y in {1.45,1.9,2.35} \draw[ans] (0,\y) -- (1.8,\y);
+\node[anslab, below right] at (0,0.95) {Q7: $\tfrac{2}{3}\times\tfrac{3}{4}=\tfrac{6}{12}$};
+% 3/4 wide by 2/3 tall
+\fill[ansfill, red!35] (0,-0.8) rectangle (1.35,0.4);
+\draw[ans] (0,-1.4) rectangle (1.8,0.4);
+\foreach \x in {0.45,0.9,1.35} \draw[ans] (\x,-1.4) -- (\x,0.4);
+\foreach \y in {-0.8,-0.2} \draw[ans] (0,\y) -- (1.8,\y);
+\node[anslab, below right] at (0,-1.45) {$\tfrac{3}{4}\times\tfrac{2}{3}=\tfrac{6}{12}$};
 \end{tikzpicture}
 \end{center}
 
@@ -382,7 +407,7 @@
 
   \item A jug holds $1\dfrac{1}{2}$ litres. You fill $\dfrac{2}{3}$ of it. How many millilitres is that? \ashow{$1000$ mL}
 
-  \item Show that $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{3}{4} \times \dfrac{2}{3}$ using area diagrams. \ashow{Both equal $\dfrac{1}{2}$; the area diagrams are congruent.}
+  \item Show that $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{3}{4} \times \dfrac{2}{3}$ using area diagrams.
 
 
 \end{enumerate}

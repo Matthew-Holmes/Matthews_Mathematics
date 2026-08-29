@@ -9,10 +9,19 @@
 % Answer-overlay helpers
 % ================================================================
 \newcommand{\ablank}[1]{%
-  \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
 }
 \newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
 \newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
 
 \title{Circles: Area, Squaring \& Pi}
 \author{}
@@ -48,6 +57,11 @@
   \fill (1.5,-2.5) circle (0.04);
   \draw[red, thick] (1.5,-2.5) -- ++(0:1.5);
   \node[red, below] at (2,-2.6) {\small $1.5cm$};
+
+% --- Q9 answer: the r = 1.5 cm circle drawn inside the 3 cm square ---
+\draw[ans] (1.5,1.5) circle (1.5cm);
+\draw[ans] (1.5,1.5) -- ++(-55:1.5);
+\node[anslab, left] at (2.02,0.76) {$1.5$ cm};
 \end{tikzpicture}
 \end{center}
 
@@ -73,7 +87,7 @@
   \setcounter{enumi}{6}
   \item A circle has \textbf{diameter} $14$ cm. Find: \newline{} (a) the radius \ablank{7\,\text{cm}} \newline{} (b) the circumference \ablank{43.96\,\text{cm}}. ($\pi \approx 3.14$)
   \item A circle has \textbf{radius} $5$ cm. What is the circumference? \ablank{31.4\,\text{cm}}
-  \item The square has side $3$ cm and area $9$ cm$^2$. A circle has radius $1.5$ cm. Is the circle's area more or less than $9$ cm$^2$? \ashow{Less, we can see that the circle could fit inside the square ($\pi(1.5)^2 \approx 7.07$ cm$^2$.)}
+  \item The square has side $3$ cm and area $9$ cm$^2$. A circle has radius $1.5$ cm. Is the circle's area more or less than $9$ cm$^2$? \ashow{Less: $\pi(1.5)^2 \approx 7.07$ cm$^2$.}
 \end{enumerate}
 
 \end{columns}
