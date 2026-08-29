@@ -96,6 +96,7 @@
   \alt<2>{\textcolor{red}{\underline{#1}}}{\underline{\phantom{#1}}}%
 }
 \newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
 
 % ================================================================
 \begin{document}
@@ -118,12 +119,11 @@
     \matchsquares[red]{1}\quad
     \matchsquares[blue]{2}\quad
     \matchsquares[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th shape.\\
     (b)\;How many matchsticks does it use?\\[0.3em]
-    \ashow{(a)\;\matchsquares[orange]{4}
-           \\ (b)\;13 matchsticks}
+    \ashow{(b)\;13 matchsticks}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -157,7 +157,8 @@
     Using the matchstick pattern from Q1:\\
     (a)\;How many matchsticks in the \textbf{10th} shape?\\
     (b)\;Write a rule for the $n$th shape.\\[0.2em]
-    \ashow{(a)\;31 matchsticks.\\ (b)\;position-to-term rule:\;$3n+1$}
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q6.\;Challenge}\\
@@ -165,7 +166,8 @@
     Is $\boldsymbol{100}$ a term in the sequence
     with $n$th term $3n+1$\,?\\
     Show how you know.\\[0.2em]
-    \ashow{Yes, when $n=33$, \\ $3\times n + 1 = 3 \times33 + 1 = 99+1=100$}
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
   \end{minipage}
 
 \end{frame}
@@ -180,12 +182,11 @@
     \fourtabledots[red]{1}\quad
     \fourtabledots[blue]{2}\quad
     \fourtabledots[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th picture.\\
     (b)\;How many dots does it contain?\\[0.3em]
-    \ashow{(a)\;\fourtabledots[orange]{4}
-           \quad (b)\;16 dots}
+    \ashow{(b)\;16 dots}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -241,12 +242,11 @@
     \matchtriangles[red]{1}\quad
     \matchtriangles[blue]{2}\quad
     \matchtriangles[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th shape.\\
     (b)\;How many matchsticks does it use?\\[0.3em]
-    \ashow{(a)\;\matchtriangles[orange]{4}
-           \quad (b)\;12 matchsticks}
+    \ashow{(b)\;12 matchsticks}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -301,12 +301,11 @@
     \rectdots[red]{1}\quad
     \rectdots[blue]{2}\quad
     \rectdots[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th pattern.\\
     (b)\;How many dots does it contain?\\[0.3em]
-    \ashow{(a)\;\rectdots[orange]{4}
-           \quad (b)\;20 dots}
+    \ashow{(b)\;20 dots}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -346,9 +345,9 @@
     The $n$th term of a sequence is $10-2n$.\\
     Which is the \textbf{last positive term}?\\
     What is the \textbf{first negative term}?\\
-    \ashow{$n=4$:\;$+2$ (last positive).\\
-           $n=5$:\;$0$.\\
-           $n=6$:\;$-2$ (first negative).}
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
   \end{minipage}
 
 \end{frame}
@@ -363,12 +362,11 @@
     \crossdots[red]{1}\quad
     \crossdots[blue]{2}\quad
     \crossdots[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th shape.\\
     (b)\;How many dots in shape 5?\\[0.3em]
-    \ashow{(a)\;\crossdots[orange]{4}
-           \\ (b)\;Shape 5 has 17 dots}
+    \ashow{(b)\;Shape 5 has 17 dots}
 
     \vspace{0.4cm}
 
@@ -377,9 +375,9 @@
  \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
   and (c) decide whether $\boldsymbol{59}$ is in his sequence.
   Show your reasoning.\\[0.2em]
-  \ashow{(a) $3,7,11,15,19$. \\
-         (b) $n$th term:\;$4n-1$.\\
-         (c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} \\ (15th term)}
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
 
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
@@ -428,14 +426,13 @@
     \matchtriangles[red]{1}\quad
     \matchtriangles[blue]{2}\quad
     \matchtriangles[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th shape.\\
     (b)\;How many matchsticks does it use?\\
     (c)\;Which times tables does the sequence represent?\\[0.3em]
-    \ashow{(a)\;\matchtriangles[orange]{4} \\
-         (b)\;12 matchsticks \\
-           (c)\;The 3 times table}
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -444,7 +441,7 @@
     \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
 
     \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
-    \ablank{5n}\\[0.3em]
+    \ablank{$5n$}\\[0.3em]
     
     \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
     \footnotesize
@@ -463,11 +460,8 @@
   (b)\;What is the $n$th term rule?\\
   (c)\;Use your rule to find the \textbf{20th} term.\\
   (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
-  \ashow{(a)\;1,\,4,\,7,\,10,\,13.
-         \quad (b)\;$\boldsymbol{3n-2}$.
-         \quad (c)\;$3\!\times\!20\!-\!2 = 58$.\\
-         (d)\;$3n\!-\!2\!=\!100 \Rightarrow 3n\!=\!102 \Rightarrow n\!=\!31$.
-         \textbf{Yes}, 100 is the 31st term.}
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
 
   %
 
@@ -483,14 +477,13 @@
     \fourtabledots[red]{1}\quad
     \fourtabledots[blue]{2}\quad
     \fourtabledots[green!70!black]{3}\quad
-    $\boldsymbol{?}$\\[0.4em]
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
     \footnotesize
     (a)\;Draw the 4th picture.\\
     (b)\;How many dots does it contain?\\
     (c)\;Which times table does the sequence represent?\\[0.3em]
-    \ashow{(a)\;\fourtabledots[orange]{4}
-           \quad (b)\;16 dots \\
-           (c)\;The 4 times table}
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
   \end{minipage}\hfill
   \begin{minipage}[t]{0.48\textwidth}
     \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
@@ -513,16 +506,9 @@
   (b)\;What is the $n$th term rule?\\
   (c)\;Find the 20th term.\\
   (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
-  \ashow{(a)\;6,\,11,\,16,\,21,\,26.
-         \quad (b)\;$\boldsymbol{5n+1}$.
-         \quad (c)\;$5\!\times\!20\!-\!1 = 99$.\\
-         (d)\;$5n\!-\!1\!=\!104 \Rightarrow 5n\!=\!105 \Rightarrow n\!=\!21$.
-         \textbf{Yes}, 101 is the 21st term.}
-
-
-
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
 
 \end{frame}
-
 
 \end{document}
