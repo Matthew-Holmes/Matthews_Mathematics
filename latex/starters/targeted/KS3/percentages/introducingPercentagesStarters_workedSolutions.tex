@@ -404,7 +404,7 @@
 \textbf{Question:} What percentage of the second bar is shaded orange?
 
 \smallskip
-\textbf{Worked Solution:} The second bar is divided into \(3\) equal parts, and \(1\) part is shaded. So the shaded fraction is \(\frac{1}{3}\), which is \ablank{33.\dot{3}\%}.
+\textbf{Worked Solution:} The second bar is divided into \(3\) equal parts, and \(1\) part is shaded. So the shaded fraction is \(\frac{1}{3}\), which is \ablank{$33.\dot{3}\%$}.
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 3, Question 6}
@@ -418,7 +418,7 @@
 \textbf{Question:} What is \(\frac{4}{3}\) as a percentage, rounded to one decimal place?
 
 \smallskip
-\textbf{Worked Solution:} \(\frac{4}{3} = 1.333\ldots\). Multiplying by \(100\) gives \(133.333\ldots\%\). Rounded to one decimal place, this is \ablank{133.3\%}.
+\textbf{Worked Solution:} \(\frac{4}{3} = 1.333\ldots\). Multiplying by \(100\) gives \(133.333\ldots\%\). Rounded to one decimal place, this is \ablank{$133.3\%$}.
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 3, Question 8}
@@ -527,21 +527,21 @@
 \textbf{Question:} \(20\% + \frac{3}{10} =\) ?
 
 \smallskip
-\textbf{Worked Solution:} \(\frac{3}{10} = 30\%\). Therefore \(20\% + 30\% = \ablank{$50\%$}\).
+\textbf{Worked Solution:} \(\frac{3}{10} = 30\%\). Therefore \(20\% + 30\% = \ablank{50\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 4, Question 6}
 \textbf{Question:} \(\frac{1}{2} + 15\% =\) ?
 
 \smallskip
-\textbf{Worked Solution:} \(\frac{1}{2} = 50\%\). Therefore \(50\% + 15\% = \ablank{$65\%$}\).
+\textbf{Worked Solution:} \(\frac{1}{2} = 50\%\). Therefore \(50\% + 15\% = \ablank{65\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 4, Question 7}
 \textbf{Question:} \(45\% + \frac{1}{5} =\) ?
 
 \smallskip
-\textbf{Worked Solution:} \(\frac{1}{5} = 20\%\). Therefore \(45\% + 20\% = \ablank{$65\%$}\).
+\textbf{Worked Solution:} \(\frac{1}{5} = 20\%\). Therefore \(45\% + 20\% = \ablank{65\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 4, Question 8}
@@ -584,13 +584,13 @@
 \def\Y{0}
 \def\W{3.6}
 \draw (0,\Y) -- (\W,\Y);
-\foreach \frac/\dec/\pct in {%
+\foreach \f/\d/\p in {%   <--- FIXED: renamed \frac to \f, \dec to \d, \pct to \p
     0/{0}/{0\%}, 1/{0.25}/{25\%}, 2/{0.5}/{50\%},
     3/{0.75}/{75\%}, 4/{1.0}/{100\%}}{
-  \pgfmathsetmacro\xx{\frac*\W/4}
+  \pgfmathsetmacro\xx{\f*\W/4}
   \draw (\xx,\Y-0.10) -- (\xx,\Y+0.10);
-  \node[below] at (\xx,\Y-0.13) {\dec};
-  \node[above] at (\xx,\Y+0.13) {\pct};
+  \node[below] at (\xx,\Y-0.13) {\d};
+  \node[above] at (\xx,\Y+0.13) {\p};
 }
 % Target: 0.3 (x = 0.3*W) — red arrow, no answer
 
@@ -706,63 +706,63 @@
 \textbf{Question:} \(0.5 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} To convert a decimal to a percentage, multiply by \(100\%\). Thus \(0.5 \times 100\% = \ablank{$50\%$}\).
+\textbf{Worked Solution:} To convert a decimal to a percentage, multiply by \(100\%\). Thus \(0.5 \times 100\% = \ablank{50\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 6}
 \textbf{Question:} \(0.3 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.3 \times 100\% = \ablank{$30\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.3 \times 100\% = \ablank{30\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 7}
 \textbf{Question:} \(0.75 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.75 \times 100\% = \ablank{$75\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.75 \times 100\% = \ablank{75\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 8}
 \textbf{Question:} \(0.08 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.08 \times 100\% = \ablank{$8\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.08 \times 100\% = \ablank{8\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 9}
 \textbf{Question:} \(0.125 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.125 \times 100\% = \ablank{$12.5\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.125 \times 100\% = \ablank{12.5\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 10}
 \textbf{Question:} \(1.4 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(1.4 \times 100\% = \ablank{$140\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(1.4 \times 100\% = \ablank{140\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 11}
 \textbf{Question:} \(0.005 =\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.005 \times 100\% = \ablank{$0.5\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.005 \times 100\% = \ablank{0.5\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 12}
 \textbf{Question:} \(0.92 \to\) ?
 
 \smallskip
-\textbf{Worked Solution:} Multiply by \(100\%\): \(0.92 \times 100\% = \ablank{$92\%$}\).
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.92 \times 100\% = \ablank{92\%}\).
 \end{frame}
 
 \begin{frame}[t]{Worked Solution: Starter 5, Question 13}
 \textbf{Question:} Convert \(0.0625\) to a percentage, then write as a fraction in simplest form.
 
 \smallskip
-\textbf{Worked Solution:} \(0.0625 \times 100\% = \ablank{$6.25\%$}\). As a fraction, \(6.25\% = \frac{6.25}{100} = \frac{625}{10000}\), which simplifies to \ablank{$\frac{1}{16}$}.
+\textbf{Worked Solution:} \(0.0625 \times 100\% = \ablank{6.25\%}\). As a fraction, \(6.25\% = \frac{6.25}{100} = \frac{625}{10000}\), which simplifies to \ablank{$\frac{1}{16}$}.
 \end{frame}
 
 \end{document}
