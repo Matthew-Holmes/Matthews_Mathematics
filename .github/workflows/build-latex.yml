@@ -28,7 +28,7 @@ jobs:
       - name: Upload S3 object list # debug step to check how the s3 is doing
         uses: actions/upload-artifact@v4
         with:
-          name: s3-objects      
+          name: s3-objects
           path: s3Objects.txt
 
       - name: List Latex Source Files
@@ -58,27 +58,66 @@ jobs:
           name: latex-files-to-compile
           path: latexFilesToCompile.txt
 
+      - name: Classify LaTeX files by required engine
+        run: DEBUG=1 .github/workflows/scripts/005_classifyCompileEngine.sh latexFilesToCompile.txt latex > latexCompileEngines.ndjson
+
+      - name: Upload engine classification # debug step to check why each file was routed to its engine
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-compile-engines
+          path: latexCompileEngines.ndjson
+
       - name: Read LaTeX files
         id: read-files
         run: |
-          if [ ! -s latexFilesToCompile.txt ]; then
-            echo "files=" >> $GITHUB_OUTPUT
-          else
-            files=$(sed 's|^|latex/|' latexFilesToCompile.txt)
-            echo "files<<EOF" >> $GITHUB_OUTPUT
-            echo "$files" >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
-          fi
+          # One multi-line output per engine, so each compile step below gets only
+          # the files it can actually build.
+          write_engine_output() {
+            local name="$1" engine="$2" files
+            files=$(jq -r --arg e "$engine" 'select(.engine == $e) | "latex/" + .path' latexCompileEngines.ndjson)
 
-      - name: Compile LaTeX files from list
-        if: steps.read-files.outputs.files != ''
+            if [ -z "$files" ]; then
+              echo "${name}=" >> "$GITHUB_OUTPUT"
+            else
+              {
+                echo "${name}<<LATEX_FILES_EOF"
+                echo "$files"
+                echo "LATEX_FILES_EOF"
+              } >> "$GITHUB_OUTPUT"
+            fi
+
+            echo "[$engine] ${files:-(none)}"
+          }
+
+          write_engine_output pdflatex_files pdflatex
+          write_engine_output xelatex_files  xelatex
+          write_engine_output lualatex_files lualatex
+
+      - name: Compile LaTeX files from list (pdfLaTeX)
+        if: steps.read-files.outputs.pdflatex_files != ''
         uses: xu-cheng/latex-action@v4
         with:
-          root_file: ${{ steps.read-files.outputs.files }}
+          root_file: ${{ steps.read-files.outputs.pdflatex_files }}
           work_in_root_file_dir: true
 
+      - name: Compile LaTeX files from list (XeLaTeX) # Unicode scripts: Chinese, Japanese, Korean, Arabic, Hebrew, Indic, Thai, ...
+        if: steps.read-files.outputs.xelatex_files != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.read-files.outputs.xelatex_files }}
+          work_in_root_file_dir: true
+          latexmk_use_xelatex: true
+
+      - name: Compile LaTeX files from list (LuaLaTeX)
+        if: steps.read-files.outputs.lualatex_files != ''
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: ${{ steps.read-files.outputs.lualatex_files }}
+          work_in_root_file_dir: true
+          latexmk_use_lualatex: true
+
       - name: Upload PDFs
-        run: DEBUG=1 .github/workflows/scripts/005_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson s3Objects.txt
+        run: DEBUG=1 .github/workflows/scripts/006_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson s3Objects.txt
         env:
           AWS_S3_BUCKET: files.matthewsmathematics.uk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
