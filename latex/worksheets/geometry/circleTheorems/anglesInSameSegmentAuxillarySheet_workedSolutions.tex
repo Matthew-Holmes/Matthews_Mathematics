@@ -23,17 +23,22 @@
   labelAB/.style={font=\small}
 }
 
+% Layout of the pairs in section 3: the left diagram sits at \PairLeftX, and the
+% right diagram of the pair sits \PairRightShift further across.
+\def\PairLeftX{-6.8}
+\def\PairRightShift{6.6}
+
 % Draws left pair of equal angles and, on the right, the corresponding shaded segment.
-% #1 x-left, #2 y, #3 R, #4 angA, #5 angB, #6 angC, #7 angD,
-% #8 x-right offset, #9 label, #10 right-start angle, #11 right-delta angle.
-\newcommand{\ShadedTheoremPair}[11]{%
-  \begin{scope}[shift={(#1,#2)}]
-    \node[anchor=west, font=\bfseries] at (-0.2-#3, #3+0.7) {#9};
-    \draw[circleline] (0,0) circle (#3);
-    \coordinate (A) at ({#3*cos(#4)}, {#3*sin(#4)});
-    \coordinate (B) at ({#3*cos(#5)}, {#3*sin(#5)});
-    \coordinate (C) at ({#3*cos(#6)}, {#3*sin(#6)});
-    \coordinate (D) at ({#3*cos(#7)}, {#3*sin(#7)});
+% #1 y, #2 R, #3 angA, #4 angB, #5 angC, #6 angD,
+% #7 label, #8 right-start angle, #9 right-delta angle.
+\def\ShadedTheoremPair#1#2#3#4#5#6#7#8#9{%
+  \begin{scope}[shift={(\PairLeftX,#1)}]
+    \node[anchor=west, font=\bfseries] at (-0.2-#2, #2+0.7) {#7};
+    \draw[circleline] (0,0) circle (#2);
+    \coordinate (A) at ({#2*cos(#3)}, {#2*sin(#3)});
+    \coordinate (B) at ({#2*cos(#4)}, {#2*sin(#4)});
+    \coordinate (C) at ({#2*cos(#5)}, {#2*sin(#5)});
+    \coordinate (D) at ({#2*cos(#6)}, {#2*sin(#6)});
     \draw[chord] (A)--(B);
     \draw (A)--(C)--(B);
     \draw (A)--(D)--(B);
@@ -48,14 +53,14 @@
     \node[labelAB, above right=1pt of C] {\(C\)};
     \node[labelAB, above left=1pt of D] {\(D\)};
   \end{scope}
-  \begin{scope}[shift={({#1 + #8},#2)}]
-    \coordinate (A2) at ({#3*cos(#4)}, {#3*sin(#4)});
-    \coordinate (B2) at ({#3*cos(#5)}, {#3*sin(#5)});
-    \coordinate (S) at ({#3*cos(#10)}, {#3*sin(#10)});
-    \coordinate (E) at ({#3*cos(#10+#11)}, {#3*sin(#10+#11)});
-    \fill[segmentblue] (S) arc[start angle=#10, delta angle=#11, radius=#3] -- (E) -- cycle;
-    \draw[circleline] (0,0) circle (#3);
-    \draw[very thick] (S) arc[start angle=#10, delta angle=#11, radius=#3];
+  \begin{scope}[shift={({\PairLeftX + \PairRightShift},#1)}]
+    \coordinate (A2) at ({#2*cos(#3)}, {#2*sin(#3)});
+    \coordinate (B2) at ({#2*cos(#4)}, {#2*sin(#4)});
+    \coordinate (S) at ({#2*cos(#8)}, {#2*sin(#8)});
+    \coordinate (E) at ({#2*cos(#8+#9)}, {#2*sin(#8+#9)});
+    \fill[segmentblue] (S) arc[start angle=#8, delta angle=#9, radius=#2] -- (E) -- cycle;
+    \draw[circleline] (0,0) circle (#2);
+    \draw[very thick] (S) arc[start angle=#8, delta angle=#9, radius=#2];
     \draw[chord] (A2)--(B2);
     \fill (A2) circle (1pt);
     \fill (B2) circle (1pt);
@@ -214,10 +219,10 @@ The right diagram has the correct \textbf{segment} shaded, and the heavy arc is 
 
 \begin{center}
 \begin{tikzpicture}[scale=1]
-  \ShadedTheoremPair{-6.8}{0}{2.2}{-25}{45}{70}{95}{6.6}{(a)}{45}{290}
-  \ShadedTheoremPair{-6.8}{-5.2}{2.2}{200}{320}{145}{350}{6.6}{(b)}{320}{240}
-  \ShadedTheoremPair{-6.8}{-10.4}{2.2}{150}{20}{120}{60}{6.6}{(c)}{20}{130}
-  \ShadedTheoremPair{-6.8}{-15.6}{2.2}{75}{125}{170}{215}{6.6}{(d)}{125}{310}
+  \ShadedTheoremPair{0}{2.2}{-25}{45}{70}{95}{(a)}{45}{290}
+  \ShadedTheoremPair{-5.2}{2.2}{200}{320}{145}{350}{(b)}{320}{240}
+  \ShadedTheoremPair{-10.4}{2.2}{150}{20}{120}{60}{(c)}{20}{130}
+  \ShadedTheoremPair{-15.6}{2.2}{75}{125}{170}{215}{(d)}{125}{310}
 \end{tikzpicture}
 \end{center}
 
