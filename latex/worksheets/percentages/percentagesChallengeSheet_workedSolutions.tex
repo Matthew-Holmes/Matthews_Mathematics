@@ -1,0 +1,200 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{center}
+{\LARGE\bfseries Worked Solutions}\\[0.3em]
+{\large Challenge: Decimals, Percentages, and Fractions}
+\end{center}
+\vspace{0.5em}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+
+\item Write the following decimals as a fraction in simplest form and as a percentage:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+\item 
+\(0.125=\dfrac{125}{1000}=\dfrac{1}{8}\), and
+\(0.125=12.5\%\).
+
+\item 
+\(0.203125=\dfrac{203125}{1000000}=\dfrac{13}{64}\), and
+\(0.203125=20.3125\%\).
+\end{enumerate}
+\end{multicols}
+
+\item Convert the following fractions into decimals and percentages:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+\item 
+\(\dfrac{7}{20}=\dfrac{35}{100}=0.35=35\%\).
+
+\item 
+\(\dfrac{33}{320}=33(0.003125)=0.103125=10.3125\%\).
+\end{enumerate}
+\end{multicols}
+
+\item Express the following percentages as decimals and fractions in simplest form:
+\begin{multicols}{2}
+\begin{enumerate}[label=(\alph*)]
+\item 
+\(17.5\%=0.175=\dfrac{175}{1000}=\dfrac{7}{40}\).
+
+\item 
+\(57.8125\%=\dfrac{57.8125}{100}=\dfrac{578125}{1000000}=\dfrac{37}{64}\).
+\end{enumerate}
+\end{multicols}
+
+\end{enumerate}
+
+\bigskip
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, start=4]
+
+\item
+\textbf{Basis points.} Recall that \(1\text{ bp}=0.01\%\).
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+\(1\text{ bp}=0.01\%=0.0001=\dfrac{1}{10000}\).
+
+\item 
+\(175\text{ bp}=1.75\%=0.0175=\dfrac{175}{10000}=\dfrac{7}{400}\).
+\end{enumerate}
+
+\medskip
+\textbf{Gilts.} Treat the quoted return as the annual coupon rate on the amount borrowed.
+
+\begin{enumerate}[label=(\alph*), start=3]
+\item 
+\(5.678\%=0.05678=\dfrac{5678}{100000}=\dfrac{2839}{50000}\).
+
+\item 
+Annual coupon \(=5.678\%\times1000=0.05678(1000)=56.78\).
+Over 30 years, coupons total \(30(56.78)=1703.40\). Including repayment of the original \pounds1000:
+\[
+1000+1703.40=2703.40.
+\]
+So the total cost is \pounds 2703.40.
+
+\item 
+\(43.5\text{ bp}=0.435\%=0.00435\).
+The coupon rises by \(0.00435(1000)=4.35\) per year.
+Over 30 years:
+\[
+30(4.35)=130.50.
+\]
+So the extra cost is \pounds 130.50.
+
+\item 
+An investor can achieve compounding by reinvesting every coupon payment in further gilts as soon as it is received, and by reinvesting maturing principal too. The new gilts themselves pay coupons, so interest is then earned on previous interest.
+\end{enumerate}
+
+\newpage
+
+\item Below is the table of gilt yields. Using the table's labels, the 5-year period ends at the end of Year 4.
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+The yields increase with maturity:
+\[
+4.377\%<4.474\%<4.488\%<4.492\%<4.544\%.
+\]
+So the yield curve is upward-sloping.
+
+\item 
+The 5-year gilt has the highest yield, so it gives the best simple return if a single gilt is held to maturity; it is also the best starting point for a reinvestment strategy.
+
+\item 
+Use a coupon-reinvestment ladder. Start with the 5-year gilt. Each year, reinvest all coupon cash received at the previous year-end in the longest-dated gilt that still matures by the end of Year 4.
+
+\item 
+All coupon payments are rounded down to the nearest pence.
+
+\begin{center}
+\small
+\begin{tabular}{c|c|c|c|c|c}
+\textbf{Start} & \textbf{Gilt bought} & \textbf{Matures} & \textbf{Yield} & \textbf{Amount} & \textbf{Annual coupon}\\
+\hline
+0 & 5-year & end of Year 4 & 4.544\% & \pounds 10,000.00 & \pounds 454.40\\
+1 & 4-year & end of Year 4 & 4.492\% & \pounds 454.40 & \pounds 20.41\\
+2 & 3-year & end of Year 4 & 4.488\% & \pounds 474.81 & \pounds 21.30\\
+3 & 2-year & end of Year 4 & 4.474\% & \pounds 496.11 & \pounds 22.19\\
+4 & 1-year & end of Year 4 & 4.377\% & \pounds 518.30 & \pounds 22.68
+\end{tabular}
+\end{center}
+
+The coupon cash reinvested at the start of each year is:
+\[
+454.40,\quad 454.40+20.41=474.81,\quad 454.40+20.41+21.30=496.11,\quad 454.40+20.41+21.30+22.19=518.30.
+\]
+
+At the end of Year 4, every gilt has matured. The maturity payments are:
+\[
+\begin{array}{c|c}
+\text{Gilt} & \text{Maturity payment}\\
+\hline
+5\text{-year} & 10000.00+454.40=10454.40\\
+4\text{-year} & 454.40+20.41=474.81\\
+3\text{-year} & 474.81+21.30=496.11\\
+2\text{-year} & 496.11+22.19=518.30\\
+1\text{-year} & 518.30+22.68=540.98
+\end{array}
+\]
+
+Thus
+\[
+10454.40+474.81+496.11+518.30+540.98=12484.60,
+\]
+so the total value at the end of the fifth year is \pounds 12,484.60.
+
+\item 
+Let \(r_s\) be the annual simple rate. Then
+\[
+10000(1+5r_s)=12484.60
+\]
+so
+\[
+r_s=\frac{12484.60-10000}{10000\times5}
+=\frac{2484.60}{50000}
+=0.049692.
+\]
+Thus the annual simple rate is \(4.9692\%\).
+
+\item 
+Let \(r_c\) be the annual compound rate. Then
+\[
+10000(1+r_c)^5=12484.60
+\]
+so
+\[
+r_c=\left(\frac{12484.60}{10000}\right)^{1/5}-1
+=1.24846^{1/5}-1
+\approx0.045382.
+\]
+Thus the savings account would need to pay about \(4.538\%\) per year compounded annually.
+
+\item 
+Let \(r_m\) be the monthly rate. Over 60 months,
+\[
+10000(1+r_m)^{60}=12484.60
+\]
+so
+\[
+r_m=1.24846^{1/60}-1\approx0.003705.
+\]
+Thus the account would need to pay about \(0.3705\%\) at the end of each month.
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

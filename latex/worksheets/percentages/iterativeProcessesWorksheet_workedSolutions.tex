@@ -1,0 +1,578 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Packages ────────────────────────────────────────────────────────────────
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins, breakable}
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage[T1]{fontenc}
+\usepackage{pgffor}
+
+% ── Colours ─────────────────────────────────────────────────────────────────
+\definecolor{headgrey}{gray}{0.15}
+\definecolor{ruleblue}{RGB}{30,80,160}
+\definecolor{scaffoldgold}{RGB}{255,248,220}
+\definecolor{scaffoldborder}{RGB}{200,160,40}
+\definecolor{sectionbg}{RGB}{240,244,252}
+\definecolor{sectionrule}{RGB}{30,80,160}
+\definecolor{challengebg}{RGB}{245,240,255}
+\definecolor{challengerule}{RGB}{100,60,180}
+\definecolor{answerbg}{gray}{0.97}
+\definecolor{lightgrey}{gray}{0.88}
+
+% ── Section header box ───────────────────────────────────────────────────────
+\newcommand{\sectionbox}[2]{%
+  \begin{tcolorbox}[
+    colback=sectionbg, colframe=sectionrule,
+    leftrule=4pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    sharp corners, left=6pt, top=4pt, bottom=4pt
+  ]
+  {\large\bfseries\color{sectionrule} #1}\quad{\normalsize #2}
+  \end{tcolorbox}%
+}
+
+% ── Scaffold box ─────────────────────────────────────────────────────────────
+\newcommand{\scaffold}[1]{%
+  \begin{tcolorbox}[
+    colback=scaffoldgold, colframe=scaffoldborder,
+    leftrule=3pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    sharp corners, left=6pt, top=3pt, bottom=3pt, before skip=4pt
+  ]
+  {\small\itshape\color{brown} \textbf{Getting Started:} #1}
+  \end{tcolorbox}%
+}
+
+% ── Answer lines ─────────────────────────────────────────────────────────────
+\newcommand{\answerlines}[1]{%
+  \vspace{2pt}%
+  \foreach \i in {1,...,#1}{%
+    \vspace{0.55cm}\noindent\textcolor{lightgrey}{\rule{\linewidth}{0.4pt}}\par
+  }%
+  \vspace{4pt}%
+}
+
+% ── Answer box (blank area) ───────────────────────────────────────────────────
+\newcommand{\answerbox}[1]{%
+  \begin{tcolorbox}[
+    colback=answerbg, colframe=lightgrey,
+    sharp corners, left=4pt, top=4pt, bottom=4pt,
+    height=#1, valign=top
+  ]
+  \end{tcolorbox}%
+}
+
+% ── Misc ─────────────────────────────────────────────────────────────────────
+\newcolumntype{G}{>{\columncolor{sectionbg}}c}
+\setlist[enumerate,1]{label=(\alph*), leftmargin=*, itemsep=0.4em}
+\setlist[enumerate,2]{label=\roman*., leftmargin=2em}
+\pagestyle{plain}
+
+% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+% ════════════════════════════════════════════════════════════════════════════
+
+% ── Title block ─────────────────────────────────────────────────────────────
+\begin{center}
+  {\LARGE\bfseries\color{headgrey} Iterative Processes}\\[4pt]
+  {\large Worked Solutions \textbullet\ Tables of Values \textbullet\ $n$th Terms}\\[8pt]
+  \textcolor{lightgrey}{\rule{\linewidth}{1pt}}
+\end{center}
+
+\vspace{8pt}
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section A}{Iterative Process $\longrightarrow$ Table of Values}
+% ════════════════════════════════════════════════════════════════════════════
+
+\bigskip
+
+% ── A1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A1.}\quad Consider the iterative process
+\[
+  U_{n+1} = U_n + 7, \qquad U_1 = 4
+\]
+
+\begin{enumerate}
+  \item The completed table is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1 & 2 & 3 & 4 & 5 & 6 \\
+  \hline
+  $U_n$   & 4 & 11 & 18 & 25 & 32 & 39 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item \textbf{Solution.} Each term is 7 more than the previous term. The sequence starts at 4 and increases by 7 each time. In symbols, \(U_n = 7n - 3\).
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── A2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A2.}\quad Consider the iterative process
+\[
+  V_{k+1} = 3V_k, \qquad V_1 = 2
+\]
+
+\begin{enumerate}
+  \item The completed table is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $k$     & 1 & 2 & 3 & 4 & 5 \\
+  \hline
+  $V_k$   & 2 & 6 & 18 & 54 & 162 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item \textbf{Solution.} Each term is 3 times the previous term. This is a geometric sequence with starting value 2 and common ratio 3.
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+% ── A3 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A3.}\quad Consider the iterative process
+\[
+  F_{j+1} = F_j - 9, \qquad F_0 = 72
+\]
+
+\begin{enumerate}
+  \item The completed table is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $j$     & 0  & 1 & 2 & 3 & 4 & 5 & 6 \\
+  \hline
+  $F_j$   & 72 & 63 & 54 & 45 & 36 & 27 & 18 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item \textbf{Solution.} Continuing the pattern:
+  \[
+    F_7 = 9, \qquad F_8 = 0, \qquad F_9 = -9.
+  \]
+  Since \(F_8 = 0\) is not negative, the first negative term is \(F_9 = -9\). Therefore the first negative value occurs at \(j = 9\).
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── A4 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{A4.}\quad Consider the iterative process
+\[
+  P_{n+1} = \frac{P_n}{4}, \qquad P_1 = 1024
+\]
+
+\begin{enumerate}
+  \item The completed table is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1    & 2 & 3 & 4 & 5 \\
+  \hline
+  $P_n$   & 1024 & 256 & 64 & 16 & 4 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \vspace{8pt}
+  \item Writing each value as a power of 4:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}
+                  |>{\centering\arraybackslash}m{1.6cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $n$     & 1     & 2     & 3     & 4     & 5 \\
+  \hline
+  $P_n$   & $4^5$ & $4^4$ & $4^3$ & $4^2$ & $4^1$ \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item From the pattern, the exponent decreases by 1 each time:
+  \[
+    P_n = 4^{6-n}.
+  \]
+
+  \item Using the laws of indices:
+  \[
+    P_n = 4^{6-n} = 4^6 \cdot 4^{-n} = 4096 \left(\frac{1}{4}\right)^n.
+  \]
+
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section B}{Different representations of sequences}
+% ════════════════════════════════════════════════════════════════════════════
+
+\vspace{6pt}
+\noindent The completed rows are shown below.
+
+\vspace{10pt}
+
+% ── B1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B1.}
+
+\vspace{5pt}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms)} & \textbf{$n$th Term Formula} \\
+\hline
+\(U_{n+1} = U_n + 3,\quad U_1 = 5\) & \(5,\ 8,\ 11,\ 14,\ 17,\ldots\) & \(U_n = 3n + 2\) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{16pt}
+
+% ── B2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B2.}
+
+\vspace{5pt}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms)} & \textbf{$n$th Term Formula} \\
+\hline
+\(F_{j+1} = \frac{1}{2}F_j,\quad F_1 = 80\) & \(80,\ 40,\ 20,\ 10,\ 5,\ldots\) & \(F_j = 80\left(\frac{1}{2}\right)^{j-1}\) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{16pt}
+
+\newpage{}
+
+% ── B3 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B3.}\quad \textit{A quantity decreases by 15\% each step, starting at \(V_0 = 200\).}
+
+\vspace{5pt}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table ($n=0$ to $4$, 2 d.p.)} & \textbf{$n$th Term Formula} \\
+\hline
+\(V_{n+1} = 0.85V_n,\quad V_0 = 200\) & \(200.00,\ 170.00,\ 144.50,\ 122.83,\ 104.40\) & \(V_n = 200(0.85)^n\) \\
+\hline
+\end{tabularx}
+\end{center}
+
+\medskip
+\noindent\textbf{Solution note.} A decrease of \(15\%\) means the quantity keeps \(85\%\), so it is multiplied by \(0.85\) at each step. Since the starting value is \(V_0\), the formula uses the power \(n\), not \(n-1\).
+
+\vspace{16pt}
+
+% ── B4 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{B4.}
+
+\vspace{5pt}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\linewidth}{|>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X
+                             |>{\centering\arraybackslash}X|}
+\hline
+\rowcolor{sectionbg}
+\textbf{Iterative Process} & \textbf{Table (first 5 terms, 2 d.p.)} & \textbf{$n$th Term Formula} \\
+\hline
+\(Q_{n+1} = \frac{Q_n}{2} + 6,\quad Q_1 = 100\) & \(100.00,\ 56.00,\ 34.00,\ 23.00,\ 17.50\) & \textit{No simple formula from the methods above; see below.} \\
+\hline
+\end{tabularx}
+\end{center}
+
+\vspace{8pt}
+\noindent\textbf{What is different about this question?}
+
+\medskip
+\noindent\textbf{Solution.} This recurrence is neither arithmetic nor geometric. It combines two operations: halve the previous term, then add 6. The differences between terms are not constant, and the ratios are not constant either. From the table, the values are getting closer to 12, but they do not follow the simple arithmetic or geometric patterns used in the other questions.
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section C}{Context Problems --- When Does the Sequence Start?}
+% ════════════════════════════════════════════════════════════════════════════
+
+\vspace{4pt}
+
+\bigskip
+
+% ── C1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{C1 --- Savings Account}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+Amara opens a savings account with \pounds600. Each year, 5\% interest is added at the end of the year.
+Let $V_k$ be the value of the account \textbf{after $k$ complete years}.
+\end{tcolorbox}
+
+\begin{enumerate}
+  \item \textbf{Solution.} \(V_0 = 600\). The sequence starts at \(k=0\) because after 0 complete years no interest has yet been added, so the account still contains the original \pounds600.
+
+  \item The iterative process is
+  \[
+    V_{k+1} = 1.05V_k, \qquad V_0 = 600.
+  \]
+
+  \item The completed table, using exact values and rounding each to the nearest penny, is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.8}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}
+                  |>{\centering\arraybackslash}m{2.0cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $k$        & 0        & 1 & 2 & 3 & 4 \\
+  \hline
+  $V_k$ (\pounds) & \pounds600.00 & \pounds630.00 & \pounds661.50 & \pounds694.58 & \pounds729.30 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \smallskip
+  \noindent\small Note: \(600(1.05)^3 = 694.575\), so \(V_3 \approx \pounds694.58\); \(600(1.05)^4 = 729.30375\), so \(V_4 \approx \pounds729.30\).
+
+  \item The direct formula is
+  \[
+    V_k = 600(1.05)^k.
+  \]
+  Therefore
+  \[
+    V_{10} = 600(1.05)^{10} = 977.33677\ldots \approx \pounds977.34.
+  \]
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── C2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{C2 --- Bouncing Ball}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+A ball is dropped from a height of 4\,m. Each bounce reaches 75\% of the previous height.\\[4pt]
+\textbf{Jess} defines $H_n$ as the height reached after $n$ bounces ignoring the initial drop.\\
+\textbf{Kwame} defines $H_n$ as the height after $n$ bounces, where the \emph{original drop height counts as the height after 0 bounces}.
+\end{tcolorbox}
+
+\begin{enumerate}
+  \item \textbf{Jess's process:}
+  \[
+    H_{n+1} = 0.75H_n, \qquad H_1 = 3.
+  \]
+  The first bounce reaches \(4 \times 0.75 = 3\) m, and Jess ignores the initial drop, so she starts at \(H_1 = 3\).
+
+  \item \textbf{Kwame's process:}
+  \[
+    H_{n+1} = 0.75H_n, \qquad H_0 = 4.
+  \]
+  Kwame counts the original drop height as \(H_0 = 4\) m before any bounces have happened.
+
+  \item \textbf{Same:} Both use the same recurrence and the same multiplier: each new height is \(75\%\) of the previous height, i.e. multiply by \(0.75\).
+
+  \item \textbf{Different:} The starting index and starting value are different.
+  \[
+    \text{Jess: } n=1,\ H_1=3; \qquad \text{Kwame: } n=0,\ H_0=4.
+  \]
+
+  \item \textbf{Jess:}
+  \[
+    H_3 = 3(0.75)^2 = 3 \times 0.5625 = 1.6875 \text{ m}.
+  \]
+  This represents the height reached after 3 bounces.
+
+  \smallskip
+  \textbf{Kwame:}
+  \[
+    H_3 = 4(0.75)^3 = 4 \times 0.421875 = 1.6875 \text{ m}.
+  \]
+  This also represents the height reached after 3 bounces.
+
+  \smallskip
+  \item \textbf{Solution.} Kwame's definition is slightly more natural because it includes the original drop as \(H_0\), so the formula \(H_n = 4(0.75)^n\) works for all \(n \ge 0\). Jess's definition is also perfectly valid; both definitions give the same physical bounce heights.
+
+\end{enumerate}
+
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+\sectionbox{Section D}{Extension and Challenge Problems}
+% ════════════════════════════════════════════════════════════════════════════
+
+\bigskip
+
+% ── D1 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{D1 --- Working Backwards}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+The 5th term of an iterative sequence is $U_5 = 48$.\\
+The iterative process is \quad $U_{n+1} = 2U_n$.
+\end{tcolorbox}
+
+\begin{enumerate}
+  \item \textbf{Solution.} Since \(U_{n+1} = 2U_n\), working backwards gives
+  \[
+    U_n = \frac{U_{n+1}}{2}.
+  \]
+  Therefore:
+  \[
+    U_4 = \frac{48}{2} = 24, \qquad
+    U_3 = \frac{24}{2} = 12, \qquad
+    U_2 = \frac{12}{2} = 6, \qquad
+    U_1 = \frac{6}{2} = 3.
+  \]
+  Hence \(U_1 = 3\).
+
+  \item The $n$th term formula is
+  \[
+    U_n = 3 \cdot 2^{n-1}.
+  \]
+  Check:
+  \[
+    U_5 = 3 \cdot 2^{4} = 3 \times 16 = 48.
+  \]
+
+\end{enumerate}
+
+\bigskip\bigskip
+
+\newpage{}
+
+% ── D2 ──────────────────────────────────────────────────────────────────────
+\noindent\textbf{D2 --- Convergence}
+
+\begin{tcolorbox}[colback=white, colframe=lightgrey, sharp corners, left=8pt, top=6pt, bottom=6pt]
+Consider the iterative process \quad $F_{j+1} = \dfrac{F_j}{2} + 6, \qquad F_1 = 100$
+\end{tcolorbox}
+
+\begin{enumerate}
+  \item The completed table, to 2 decimal places, is:
+
+  \vspace{6pt}
+  \begin{center}
+  \renewcommand{\arraystretch}{1.9}
+  \begin{tabular}{|>{\bfseries\centering\arraybackslash}m{1.2cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}
+                  |>{\centering\arraybackslash}m{1.5cm}|}
+  \hline
+  \rowcolor{sectionbg}
+  $j$   & 1   & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+  \hline
+  $F_j$ & 100.00 & 56.00 & 34.00 & 23.00 & 17.50 & 14.75 & 13.38 & 12.69 \\
+  \hline
+  \end{tabular}
+  \end{center}
+
+  \item It appears that \(F_j\) is approaching \(12\).
+
+  \item \textbf{Solution.} At a fixed point,
+  \[
+    L = \frac{L}{2} + 6.
+  \]
+  Subtract \(\frac{L}{2}\) from both sides:
+  \[
+    \frac{L}{2} = 6.
+  \]
+  Therefore
+  \[
+    L = 12.
+  \]
+
+  \item \textbf{Solution.} The fixed point \(L=12\) is exactly the value that the sequence appears to be approaching. No finite term will be exactly equal to 12, because
+  \[
+    F_j - 12 = (F_1 - 12)\left(\frac12\right)^{j-1}
+    = \frac{88}{2^{j-1}} \neq 0
+  \]
+  for any finite value of \(j\). The terms get closer and closer to 12 but never actually reach it.
+
+\end{enumerate}
+
+\end{document}

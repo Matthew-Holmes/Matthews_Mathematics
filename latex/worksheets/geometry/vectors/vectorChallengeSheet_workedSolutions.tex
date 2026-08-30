@@ -1,0 +1,220 @@
+\documentclass[12pt]{ctexart}
+\usepackage{amsmath, amssymb}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\usetikzlibrary{arrows.meta}
+
+\newcommand{\overarrow}[1]{\overrightarrow{#1}}
+\newcommand{\colvec}[2]{\begin{pmatrix} #1 \\ #2 \end{pmatrix}}
+
+\title{Vectors, Translations, and Meaning\\[2pt] \large Worked Solutions}
+\author{Extension Sheet}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ------------------------------------------------------------------
+\section*{1\quad Vector translation review}
+% ------------------------------------------------------------------
+
+Translating a point by \(\colvec{a}{b}\) means: add \(a\) to the \(x\)-coordinate and \(b\) to the \(y\)-coordinate.
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item For \(A=(2,3)\) translated by \(\mathbf{t}=\colvec{4}{1}\),
+\[
+A'=(2,3)+\colvec{4}{1}
+=(2+4,\;3+1)
+=(6,4).
+\]
+So the destination is \(\boxed{(6,4)}\).
+
+\item For \(B=(-1,5)\) translated by the same vector,
+\[
+B'=(-1,5)+\colvec{4}{1}
+=(-1+4,\;5+1)
+=(3,6).
+\]
+So the destination is \(\boxed{(3,6)}\).
+\end{enumerate}
+
+% ------------------------------------------------------------------
+\section*{2\quad Word embeddings}
+% ------------------------------------------------------------------
+
+Here \(\overarrow{X\ Y}\) means the vector from the first word to the second word, so we compute it as \(Y-X\).
+
+From the grid:
+\[
+\text{man}=(2,5),\quad
+\text{woman}=(3,8),\quad
+\text{king}=(7,6),\quad
+\text{queen}=(8,9),
+\]
+\[
+\text{prince}=(5,6),\quad
+\text{duke}=(4,0),\quad
+\text{duchess}=(5,3).
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \[
+\overarrow{\text{king}\quad\text{queen}}
+=\colvec{8}{9}-\colvec{7}{6}
+=\colvec{1}{3}.
+\]
+
+\item \[
+\overarrow{\text{duke}\quad\text{duchess}}
+=\colvec{5}{3}-\colvec{4}{0}
+=\colvec{1}{3}.
+\]
+
+\item The vector \(\colvec{1}{3}\) is the same in both cases:
+\[
+\text{king}\to\text{queen}=\colvec{1}{3}
+\qquad\text{and}\qquad
+\text{duke}\to\text{duchess}=\colvec{1}{3}.
+\]
+It also maps \text{man} to \text{woman}. Therefore, in this embedding, \(\colvec{1}{3}\) represents the \textbf{male-to-female} direction, i.e.\ a feminine/gender-change vector.
+
+\item Since
+\[
+\overarrow{\text{man}\quad\text{woman}}
+=\colvec{3}{8}-\colvec{2}{5}
+=\colvec{1}{3},
+\]
+yes, it matches the answer to Question 3 exactly.
+
+\item The missing word is at
+\[
+(5,6)+\colvec{1}{3}=(6,9).
+\]
+Since \((5,6)\) is \text{prince}, applying the male-to-female vector gives
+\[
+\text{prince}+\colvec{1}{3}=\text{princess}.
+\]
+So the missing word is \(\boxed{\text{princess}}\).
+\end{enumerate}
+
+% ------------------------------------------------------------------
+\section*{3\quad Translating English to Chinese}
+% ------------------------------------------------------------------
+
+First read the known coordinates from the grid.
+
+English coordinates:
+\[
+\text{man}=(9,8),\quad
+\text{woman}=(10,11),\quad
+\text{boy}=(7,8),\quad
+\text{girl}=(8,11),
+\]
+\[
+\text{king}=(8,6),\quad
+\text{queen}=(9,9),\quad
+\text{prince}=(6,6),\quad
+\text{princess}=(7,9).
+\]
+
+Chinese coordinates:
+\[
+\text{男人}=(-6,-2),\quad
+\text{女人}=(-5,1),\quad
+\text{男孩}=(-8,-2),\quad
+\text{女孩}=(-7,1),
+\]
+\[
+\text{国王}=(-7,-4),\quad
+\text{王妃}=(-6,-1),\quad
+\text{王子}=(-9,-4),\quad
+\text{公主}=(-9,0).
+\]
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item Using the matching pair
+\[
+\text{man}\ \to\ \text{男人},
+\]
+the translation vector from English to Chinese is
+\[
+\mathbf{t}
+=\colvec{-6}{-2}-\colvec{9}{8}
+=\boxed{\colvec{-15}{-10}}.
+\]
+Check with another pair:
+\[
+\text{woman}+\mathbf{t}
+=\colvec{10}{11}+\colvec{-15}{-10}
+=\colvec{-5}{1},
+\]
+which is indeed 女人.
+
+\item The completed table is:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}llll@{}}
+\toprule
+English & English coords & Chinese & Chinese coords \\
+\midrule
+man     & (9,8)    & 男人   & (-6,-2) \\
+woman   & (10,11)  & 女人   & (-5,1) \\
+boy     & (7,8)    & 男孩   & (-8,-2) \\
+girl    & (8,11)   & 女孩   & (-7,1) \\
+king    & (8,6)    & 国王   & (-7,-4) \\
+queen   & (9,9)    & 王妃   & (-6,-1) \\
+prince  & (6,6)    & 王子   & (-9,-4) \\
+princess& (7,9)    & 公主   & (-9,0) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+So the missing labels on the coordinate grid are:
+\[
+(10,11)=\text{woman},\quad
+(9,9)=\text{queen},\quad
+(6,6)=\text{prince},\quad
+(7,9)=\text{princess},
+\]
+and on the Chinese side:
+\[
+(-5,1)=\text{女人},\quad
+(-8,-2)=\text{男孩},\quad
+(-9,0)=\text{公主}.
+\]
+
+\item The vector \(\colvec{-2}{0}\) appears between these English pairs:
+\[
+\text{man}\to\text{boy},\qquad
+\text{woman}\to\text{girl},\qquad
+\text{king}\to\text{prince},\qquad
+\text{queen}\to\text{princess}.
+\]
+In each case, the \(x\)-coordinate decreases by \(2\) and the \(y\)-coordinate stays the same. Thus \(\colvec{-2}{0}\) represents the meaning \textbf{“adult/older” to “younger/child”}, or simply the \textbf{age/youth direction} in this embedding.
+
+\item The bottom row does not fit the pattern because English \text{princess} is the feminine form of \text{prince}, but Chinese 公主 is not a regular feminine form built from 王子.
+
+Applying the translation vector to \text{princess} gives
+\[
+\text{princess}+\mathbf{t}
+=\colvec{7}{9}+\colvec{-15}{-10}
+=\colvec{-8}{-1},
+\]
+but the actual position of 公主 is
+\[
+\colvec{-9}{0}.
+\]
+The difference is
+\[
+\colvec{-9}{0}-\colvec{-8}{-1}
+=\colvec{-1}{1}.
+\]
+
+The Chinese characters explain why: words such as 女人, 女孩, 王妃 all contain the female radical 女, but 公主 does not. Chinese has a separate, lexicalised word for “princess” rather than constructing it as a regular feminine version of 王子. Therefore the regular translation-vector pattern breaks for this row.
+\end{enumerate}
+
+\end{document}

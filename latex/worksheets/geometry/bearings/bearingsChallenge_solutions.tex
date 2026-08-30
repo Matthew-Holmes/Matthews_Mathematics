@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Bearings Challenge --- Answer Key}
+\end{center}
+
+\section*{Introduction}
+\begin{enumerate}
+\item Gold: \(100\) km from the start on bearing \(123.5^\circ\), i.e.\ \(83.38868\) km east and \(55.19370\) km south.
+\item Bob: due south \(55.19370\) km, then due east \(83.38868\) km.
+\item Bob total distance: \(138.58\) km; time \(=6.93\) days.
+\item Rob: \(78.0557\) km on bearing \(135^\circ\), then east. Total \(=106.35\) km; time \(=5.32\) days; Rob arrives about \(1\) day \(15\) hours before Bob.
+\item Best two-leg route: \(50.00190\) km on bearing \(124^\circ\), then \(50.00190\) km on bearing \(123^\circ\); this takes less than a minute more than \(5\) days, so even with a \(7\)-hour delay it beats Rob's time.
+\end{enumerate}
+
+\section*{Challenge I: Integer Distances}
+\begin{enumerate}
+\item
+\begin{enumerate}
+\item Bob, after rounding legs to whole km: \(434\) m from gold.
+\item Rob, after rounding legs to whole km: \(237\) m from gold.
+\end{enumerate}
+
+\item Rounded quickest journey: \(50\) km on \(124^\circ\), then \(50\) km on \(123^\circ\); endpoint is \(99.99619\) km from start and \(3.81\) m from gold, so not within \(1\) m; gold remains buried at this point.
+
+\item Four-leg displacement: \(0.5316\) cm east and \(91.3783\) cm north.
+
+\item Same route rotated \(90^\circ\) anticlockwise: \(0.5316\) cm north and \(91.3783\) cm west, i.e.\ \(-91.3783\) cm east.
+
+\item Use \(A\approx -59868.41\), \(B\approx -91604.77\); equivalently, \(59868\) reversed copies of the first 4-leg route and \(91605\) reversed copies of the rotated route. Total distance \(=908838\) km. This ends about \(11\) cm east and \(37\) cm north of the gold, about \(39\) cm away, so the gold is found.
+
+\item Yes. For any target, real \(A,B\) can solve the two equations; rounding the repetition counts to integers leaves less than \(50\) cm error in each coordinate, hence the endpoint is within \(1\) m.
+\end{enumerate}
+
+\section*{Challenge II: Two Legs Only}
+\begin{enumerate}
+\item For the considered long first leg, the only return bearing that can get within \(100\) km of the start is the exact reverse bearing, e.g.\ \(270^\circ\) after \(090^\circ\); by symmetry, the only candidate return bearing is
+\[
+XYZ^\circ=(ABC^\circ+180^\circ)\bmod 360^\circ.
+\]
+
+\item Necessary condition:
+\[
+|M-N|\le 100,
+\]
+so \(N\) must lie in \([M-100,M+100]\).
+
+\item Upper bound:
+\[
+360\cdot6000\cdot360\cdot203 \approx 1.58\times10^{11}
+\]
+possible destinations within \(101\) km.
+
+\item Not necessarily, but possibly; checking all finite possibilities would be required.
+
+\item Upper bound counts:
+\begin{enumerate}
+\item \(M\le100\): \(2.66\times10^9\).
+\item \(100<M\le500\): \(5.26\times10^9\) (at most \(180\) return bearings).
+\item \(500<M\le2000\): \(3.18\times10^9\) (at most \(29\) return bearings).
+\item \(2000<M\le6000\): \(2.05\times10^9\) (at most \(7\) return bearings).
+\end{enumerate}
+Total \(\le 1.32\times10^{10}\).
+
+\item Reversing the leg order gives the same endpoint, so the bound halves:
+\[
+U\le 6.6\times10^9<10^{10}.
+\]
+
+\item Not every location is reachable within \(1\) m: the reachable area is at most \(6.6\times10^9\pi\ \text{m}^2\), less than the circle area \(10^{10}\pi\ \text{m}^2\); at least \(3\times10^9\pi\ \text{m}^2\) is unreachable.
+
+\item Naive brute force would take over \(42\) hours; the vectorised NumPy version takes about \(40\) minutes and finds \(82\) candidate two-leg journeys ending within \(15\) m of the gold. Plotting them shows none is within \(1\) m, so the gold cannot be found by a two-leg journey.
+
+\item One two-leg journey ends within \(2\) m of the gold: \(4937\) km on bearing \(004^\circ\), then \(4987\) km on bearing \(183^\circ\); final coordinates \((83.38830,\,-55.19177)\).
+\end{enumerate}
+
+\end{document}

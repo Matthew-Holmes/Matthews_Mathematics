@@ -1,0 +1,378 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper, margin=1.8cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+% ---- Colours ----
+\definecolor{slice1}{RGB}{70,130,180}
+\definecolor{slice2}{RGB}{240,140,40}
+\definecolor{slice3}{RGB}{70,170,70}
+\definecolor{slice4}{RGB}{210,70,70}
+\definecolor{slice5}{RGB}{150,90,190}
+\definecolor{lightgrey}{RGB}{245,245,245}
+\definecolor{boxblue}{RGB}{220,235,250}
+\definecolor{boxgreen}{RGB}{220,245,220}
+\definecolor{boxorange}{RGB}{255,240,220}
+
+\newcommand{\piechart}[2]{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\r}{#1}%
+    \pgfmathsetmacro{\startA}{90}%
+    \foreach \lbl/\ang/\col in {#2} {%
+      \pgfmathsetmacro{\endA}{\startA - \ang}%
+      \fill[\col!25] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
+      \draw[black, line width=1.2pt] (0,0) -- (\startA:\r cm);%
+      \draw[black, line width=1.2pt] (0,0) -- (\endA:\r cm);%
+      \pgfmathsetmacro{\midA}{(\startA + \endA)/2}%
+      \pgfmathsetmacro{\lR}{\r * 0.65}%
+      \node[font=\small\bfseries, align=center] at (\midA:\lR cm) {\lbl};%
+      \xdef\startA{\endA}%
+    }%
+    \draw[black, line width=1.2pt] (0,0) circle (\r cm);%
+    \fill[black] (0,0) circle (2.5pt);%
+  \end{tikzpicture}%
+}
+
+\pagestyle{empty}
+\parindent=0pt
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Worked Solutions: Drawing Pie Charts with a Protractor}\\[6pt]
+  {\large Teacher Copy --- Completed tables and angle workings}
+\end{center}
+
+\vspace{4pt}
+
+\begin{mdframed}[backgroundcolor=boxgreen, linecolor=slice3,
+                 linewidth=1.5pt, roundcorner=6pt]
+  \textbf{Key formula:}\quad
+  $\text{sector angle}=\dfrac{\text{amount}}{\text{total}}\times 360^\circ$
+\end{mdframed}
+
+\vspace{6pt}
+
+% ===========================
+%  CHART 1
+% ===========================
+\begin{mdframed}[backgroundcolor=boxblue, linecolor=slice1,
+                 linewidth=1.2pt, roundcorner=6pt]
+\textbf{Chart 1 -- Favourite Pets (class of 36 students)}
+
+\medskip
+\begin{minipage}[c]{0.42\textwidth}
+  \centering
+  \piechart{4.0}{Dog/120/slice1,Cat/90/slice2,Fish/80/slice3,Rabbit/50/slice4,Other/20/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Pet} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+    \hline
+    Dog    & 12 & $\frac{1}{3}$ & $120^\circ$ \\
+    \hline
+    Cat    &  9 & $\frac{1}{4}$ & $90^\circ$ \\
+    \hline
+    Fish   &  8 & $\frac{2}{9}$ & $80^\circ$ \\
+    \hline
+    Rabbit &  5 & $\frac{5}{36}$ & $50^\circ$ \\
+    \hline
+    Other  &  2 & $\frac{1}{18}$ & $20^\circ$ \\
+    \hline
+    \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\medskip
+\textbf{Angle working:}
+\[
+\frac{12}{36}\times360=120^\circ,\quad
+\frac{9}{36}\times360=90^\circ,\quad
+\frac{8}{36}\times360=80^\circ,
+\]
+\[
+\frac{5}{36}\times360=50^\circ,\quad
+\frac{2}{36}\times360=20^\circ.
+\]
+Check: \(120+90+80+50+20=360^\circ\).
+
+\textbf{Answers:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Completed chart shown above. The remaining sectors are Fish \(80^\circ\), Rabbit \(50^\circ\), Other \(20^\circ\).
+  \item Dog, because \(\frac{12}{36}=\frac13\).
+  \item Cat: 9 students corresponds to a \(90^\circ\) sector.
+\end{enumerate}
+\end{mdframed}
+
+\vspace{6pt}
+
+% ===========================
+%  CHART 2
+% ===========================
+\begin{mdframed}[backgroundcolor=boxblue, linecolor=slice2,
+                 linewidth=1.2pt, roundcorner=6pt]
+\textbf{Chart 2 -- Sports Club Memberships (36 members)}
+
+\medskip
+\begin{minipage}[c]{0.42\textwidth}
+  \centering
+  \piechart{4.0}{Football/140/slice1,Swimming/90/slice2,Tennis/60/slice3,Basketball/50/slice4,Other/20/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Sport} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+    \hline
+    Football   & 14 & $\frac{7}{18}$ & $140^\circ$ \\
+    \hline
+    Swimming   &  9 & $\frac{1}{4}$ & $90^\circ$ \\
+    \hline
+    Tennis     &  6 & $\frac{1}{6}$ & $60^\circ$ \\
+    \hline
+    Basketball &  5 & $\frac{5}{36}$ & $50^\circ$ \\
+    \hline
+    Other      &  2 & $\frac{1}{18}$ & $20^\circ$ \\
+    \hline
+    \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\medskip
+\textbf{Angle working:}
+\[
+\frac{14}{36}\times360=\frac{7}{18}\times360=140^\circ,\quad
+\frac{9}{36}\times360=90^\circ,\quad
+\frac{6}{36}\times360=60^\circ,
+\]
+\[
+\frac{5}{36}\times360=50^\circ,\quad
+\frac{2}{36}\times360=20^\circ.
+\]
+Check: \(140+90+60+50+20=360^\circ\).
+
+\textbf{Answers:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Completed chart shown above.
+  \item Swimming has a \(90^\circ\) sector because \(\frac{9}{36}=\frac14\).
+  \item Tennis fraction \(=\frac{6}{36}=\frac16\).
+  \item The three smallest sports are Tennis, Basketball and Other:
+  \[
+  60^\circ+50^\circ+20^\circ=130^\circ.
+  \]
+\end{enumerate}
+\end{mdframed}
+
+\vspace{6pt}
+
+% ===========================
+%  CHART 3
+% ===========================
+\begin{mdframed}[backgroundcolor=boxblue, linecolor=slice3,
+                 linewidth=1.2pt, roundcorner=6pt]
+\textbf{Chart 3 -- How Students Spend Most of Their Pocket Money (36 students)}
+
+\medskip
+\begin{minipage}[c]{0.42\textwidth}
+  \centering
+  \piechart{4.0}{Food \& Drink/120/slice1,Games/90/slice2,Clothes/60/slice3,Savings/60/slice4,Other/30/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Category} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+    \hline
+    Food \& Drink & 12 & $\frac{1}{3}$ & $120^\circ$ \\
+    \hline
+    Games         &  9 & $\frac{1}{4}$ & $90^\circ$ \\
+    \hline
+    Clothes       &  6 & $\frac{1}{6}$ & $60^\circ$ \\
+    \hline
+    Savings       &  6 & $\frac{1}{6}$ & $60^\circ$ \\
+    \hline
+    Other         &  3 & $\frac{1}{12}$ & $30^\circ$ \\
+    \hline
+    \textbf{Total} & \textbf{36} & \textbf{1} & \textbf{360\textdegree} \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\medskip
+\textbf{Angle working:}
+\[
+\frac{12}{36}\times360=120^\circ,\quad
+\frac{9}{36}\times360=90^\circ,\quad
+\frac{6}{36}\times360=60^\circ,
+\]
+\[
+\frac{6}{36}\times360=60^\circ,\quad
+\frac{3}{36}\times360=30^\circ.
+\]
+Check: \(120+90+60+60+30=360^\circ\).
+
+\textbf{Answers:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Completed chart shown above.
+  \item Clothes and Savings both have 6 students, so they both have a sector angle of \(60^\circ\).
+\end{enumerate}
+\end{mdframed}
+
+\vspace{6pt}
+
+% ===========================
+%  CHART 4
+% ===========================
+\begin{mdframed}[backgroundcolor=boxblue, linecolor=slice4,
+                 linewidth=1.2pt, roundcorner=6pt]
+\textbf{Chart 4 -- Colours of Cars in a Car Park (60 cars)}
+
+\medskip
+\begin{minipage}[c]{0.42\textwidth}
+  \centering
+  \piechart{4.0}{White/120/slice1,Black/90/slice2,Silver/72/slice3,Red/54/slice4,Other/24/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Colour} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+    \hline
+    White  & 20 & $\frac{1}{3}$ & $120^\circ$ \\
+    \hline
+    Black  & 15 & $\frac{1}{4}$ & $90^\circ$ \\
+    \hline
+    Silver & 12 & $\frac{1}{5}$ & $72^\circ$ \\
+    \hline
+    Red    &  9 & $\frac{3}{20}$ & $54^\circ$ \\
+    \hline
+    Other  &  4 & $\frac{1}{15}$ & $24^\circ$ \\
+    \hline
+    \textbf{Total} & \textbf{60} & \textbf{1} & \textbf{360\textdegree} \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\medskip
+\textbf{Table working:}
+\begin{align*}
+\text{White: } \frac{20}{60}=\frac13 &\Rightarrow \frac13\times360=120^\circ,\\
+\text{Black: } \frac{15}{60}=\frac14 &\Rightarrow \frac14\times360=90^\circ,\\
+\text{Silver: } \frac{12}{60}=\frac15 &\Rightarrow \frac15\times360=72^\circ,\\
+\text{Red: } \frac{9}{60}=\frac{3}{20} &\Rightarrow \frac{3}{20}\times360=54^\circ,\\
+\text{Other: } \frac{4}{60}=\frac{1}{15} &\Rightarrow \frac{1}{15}\times360=24^\circ.
+\end{align*}
+
+\textbf{Answers:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Completed table shown above.
+  \item Completed pie chart shown above.
+  \item White angle:
+  \[
+  \frac{20}{60}\times360=\frac13\times360=120^\circ.
+  \]
+  \item Black fraction \(=\frac{15}{60}=\frac14\).
+  \item Angle sum check:
+  \[
+  120+90+72+54+24=360^\circ.
+  \]
+\end{enumerate}
+\end{mdframed}
+
+\vspace{6pt}
+
+% ===========================
+%  CHART 5
+% ===========================
+\begin{mdframed}[backgroundcolor=boxblue, linecolor=slice5,
+                 linewidth=1.2pt, roundcorner=6pt]
+\textbf{Chart 5 -- Languages Spoken at Home (survey of 90 students)}
+
+\medskip
+\begin{minipage}[c]{0.42\textwidth}
+  \centering
+  \piechart{4.0}{English/180/slice1,Urdu/72/slice2,Polish/36/slice3,Punjabi/36/slice4,Other/36/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.54\textwidth}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Language} & \textbf{No.} & \textbf{Fraction} & \textbf{Angle} \\
+    \hline
+    English  & 45 & $\frac{1}{2}$ & $180^\circ$ \\
+    \hline
+    Urdu     & 18 & $\frac15$ & $72^\circ$ \\
+    \hline
+    Polish   &  9 & $\frac{1}{10}$ & $36^\circ$ \\
+    \hline
+    Punjabi  &  9 & $\frac{1}{10}$ & $36^\circ$ \\
+    \hline
+    Other    &  9 & $\frac{1}{10}$ & $36^\circ$ \\
+    \hline
+    \textbf{Total} & \textbf{90} & \textbf{1} & \textbf{360\textdegree} \\
+    \hline
+  \end{tabular}
+\end{minipage}
+
+\medskip
+\textbf{Table working:}
+\[
+\frac{45}{90}=\frac12 \Rightarrow \frac12\times360=180^\circ,\qquad
+\frac{18}{90}=\frac15 \Rightarrow \frac15\times360=72^\circ,
+\]
+\[
+\frac{9}{90}=\frac{1}{10} \Rightarrow \frac{1}{10}\times360=36^\circ
+\quad\text{for Polish, Punjabi and Other.}
+\]
+Check: \(180+72+36+36+36=360^\circ\).
+
+\textbf{Answers:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=2pt]
+  \item Completed table shown above.
+  \item Completed pie chart shown above.
+  \item Polish, Punjabi and Other all have 9 speakers, so each sector is
+  \[
+  \frac{9}{90}\times360=\frac{1}{10}\times360=36^\circ.
+  \]
+  \item English fraction \(=\frac{45}{90}=\frac12\).
+  \item \textbf{Challenge:}
+  \[
+  \text{New total}=90+10=100,
+  \qquad
+  \text{New number of Polish speakers}=9+10=19.
+  \]
+  \[
+  \text{New Polish angle}=\frac{19}{100}\times360=68.4^\circ.
+  \]
+  So the new sector angle for Polish is \(68.4^\circ\) (accept \(68^\circ\) or \(69^\circ\) to the nearest degree).
+\end{enumerate}
+\end{mdframed}
+
+\end{document}

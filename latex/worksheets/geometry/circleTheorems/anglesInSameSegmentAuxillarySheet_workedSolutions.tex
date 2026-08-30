@@ -1,0 +1,228 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1.8cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles,quotes,positioning}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\setlength{\parskip}{0.6em}
+\setlength{\parindent}{0pt}
+
+\definecolor{segmentblue}{RGB}{200,220,255}
+\definecolor{sectororange}{RGB}{255,220,180}
+\definecolor{lightgray}{RGB}{230,230,230}
+\definecolor{segmentgreen}{RGB}{210,250,210}
+\definecolor{segmentpurple}{RGB}{235,210,255}
+\definecolor{sectoryellow}{RGB}{255,245,180}
+
+\tikzset{
+  chord/.style={thick},
+  circleline/.style={thick},
+  point/.style={fill=black, circle, inner sep=1.2pt},
+  anglemark/.style={draw, thick},
+  labelAB/.style={font=\small}
+}
+
+% Draws left pair of equal angles and, on the right, the corresponding shaded segment.
+% #1 x-left, #2 y, #3 R, #4 angA, #5 angB, #6 angC, #7 angD,
+% #8 x-right offset, #9 label, #10 right-start angle, #11 right-delta angle.
+\newcommand{\ShadedTheoremPair}[11]{%
+  \begin{scope}[shift={(#1,#2)}]
+    \node[anchor=west, font=\bfseries] at (-0.2-#3, #3+0.7) {#9};
+    \draw[circleline] (0,0) circle (#3);
+    \coordinate (A) at ({#3*cos(#4)}, {#3*sin(#4)});
+    \coordinate (B) at ({#3*cos(#5)}, {#3*sin(#5)});
+    \coordinate (C) at ({#3*cos(#6)}, {#3*sin(#6)});
+    \coordinate (D) at ({#3*cos(#7)}, {#3*sin(#7)});
+    \draw[chord] (A)--(B);
+    \draw (A)--(C)--(B);
+    \draw (A)--(D)--(B);
+    \pic[draw, angle eccentricity=1.2, angle radius=0.5cm] {angle=A--C--B};
+    \pic[draw, angle eccentricity=1.2, angle radius=0.5cm] {angle=A--D--B};
+    \fill (A) circle (1pt);
+    \fill (B) circle (1pt);
+    \fill (C) circle (1pt);
+    \fill (D) circle (1pt);
+    \node[labelAB, below right=1pt of A] {\(A\)};
+    \node[labelAB, below left=1pt of B] {\(B\)};
+    \node[labelAB, above right=1pt of C] {\(C\)};
+    \node[labelAB, above left=1pt of D] {\(D\)};
+  \end{scope}
+  \begin{scope}[shift={({#1 + #8},#2)}]
+    \coordinate (A2) at ({#3*cos(#4)}, {#3*sin(#4)});
+    \coordinate (B2) at ({#3*cos(#5)}, {#3*sin(#5)});
+    \coordinate (S) at ({#3*cos(#10)}, {#3*sin(#10)});
+    \coordinate (E) at ({#3*cos(#10+#11)}, {#3*sin(#10+#11)});
+    \fill[segmentblue] (S) arc[start angle=#10, delta angle=#11, radius=#3] -- (E) -- cycle;
+    \draw[circleline] (0,0) circle (#3);
+    \draw[very thick] (S) arc[start angle=#10, delta angle=#11, radius=#3];
+    \draw[chord] (A2)--(B2);
+    \fill (A2) circle (1pt);
+    \fill (B2) circle (1pt);
+    \node[labelAB, below right=1pt of A2] {\(A\)};
+    \node[labelAB, below left=1pt of B2] {\(B\)};
+  \end{scope}
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \bfseries Angles in the Same Segment --- Worked Solutions}\\[0.25em]
+  \small Angles subtended by the same chord at the circumference, in the same segment, are equal.
+\end{center}
+
+\hrule
+\vspace{1.5em}
+
+\section*{1. Identifying the segments}
+
+A \textbf{segment} is the region bounded by a chord and one of the arcs it cuts off.  
+A \textbf{sector} is the region bounded by two radii and the arc between them.
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+ & Left & Middle & Right \\ \hline
+Row 1 & \(\checkmark\) segment & sector & neither \\
+Row 2 & \(\checkmark\) segment & sector & \(\checkmark\) segment \\
+Row 3 & \(\checkmark\) segment & sector & neither \\
+Row 4 & \(\checkmark\) segment & sector & \(\checkmark\) segment
+\end{tabular}
+\end{center}
+
+The shaded region in Row 2, Right is the \emph{major} segment; it is still a segment.
+
+\section*{2. Angles in a given segment}
+
+The vertex of each angle must lie on the circumference of the shaded segment.  
+One valid set of angles is shown below. In each case the marked angles all stand on chord \(AB\).  
+Any other points on the same shaded arc would also work; by the theorem all these angles are equal.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+
+  % (a) one angle
+  \begin{scope}[shift={(-6.3,0)}]
+    \coordinate (Aa) at ({2.2*cos(-50)},{2.2*sin(-50)});
+    \coordinate (Ba) at ({2.2*cos(60)},{2.2*sin(60)});
+    \coordinate (Ca) at ({2.2*cos(5)},{2.2*sin(5)});
+    \fill[segmentblue] (Aa) arc[start angle=-50,end angle=60,radius=2.2] -- (Ba) -- cycle;
+    \draw[circleline] (0,0) circle (2.2);
+    \draw[chord] (Aa)--(Ba);
+    \draw[thick] (Aa)--(Ca)--(Ba);
+    \fill (Aa) circle (1.2pt);
+    \fill (Ba) circle (1.2pt);
+    \fill (Ca) circle (1.2pt);
+    \node[labelAB, below right=1pt of Aa] {\(A\)};
+    \node[labelAB, above right=1pt of Ba] {\(B\)};
+    \node[labelAB, above right=1pt of Ca] {\(C\)};
+    \pic[draw, angle radius=0.4cm, angle eccentricity=1.25] {angle=Aa--Ca--Ba};
+    \node at (0,-2.9) {(a)};
+  \end{scope}
+
+  % (b) two angles
+  \begin{scope}[shift={(-1.8,0)}]
+    \coordinate (Ab) at ({2.2*cos(20)},{2.2*sin(20)});
+    \coordinate (Bb) at ({2.2*cos(160)},{2.2*sin(160)});
+    \coordinate (Cb) at ({2.2*cos(60)},{2.2*sin(60)});
+    \coordinate (Db) at ({2.2*cos(120)},{2.2*sin(120)});
+    \fill[segmentblue] (Ab) arc[start angle=20,end angle=160,radius=2.2] -- (Bb) -- cycle;
+    \draw[circleline] (0,0) circle (2.2);
+    \draw[chord] (Ab)--(Bb);
+    \draw[thick] (Ab)--(Cb)--(Bb);
+    \draw[thick] (Ab)--(Db)--(Bb);
+    \fill (Ab) circle (1.2pt);
+    \fill (Bb) circle (1.2pt);
+    \fill (Cb) circle (1.2pt);
+    \fill (Db) circle (1.2pt);
+    \node[labelAB, below right=1pt of Ab] {\(A\)};
+    \node[labelAB, below left=1pt of Bb] {\(B\)};
+    \node[labelAB, above right=1pt of Cb] {\(C\)};
+    \node[labelAB, above left=1pt of Db] {\(D\)};
+    \pic[draw, angle radius=0.35cm, angle eccentricity=1.3] {angle=Ab--Cb--Bb};
+    \pic[draw, angle radius=0.35cm, angle eccentricity=1.3] {angle=Ab--Db--Bb};
+    \node at (0,-2.9) {(b)};
+  \end{scope}
+
+  % (c) three angles
+  \begin{scope}[shift={(2.9,0)}]
+    \coordinate (Ac) at ({2.2*cos(10)},{2.2*sin(10)});
+    \coordinate (Bc) at ({2.2*cos(240)},{2.2*sin(240)});
+    \coordinate (Cc) at ({2.2*cos(80)},{2.2*sin(80)});
+    \coordinate (Dc) at ({2.2*cos(140)},{2.2*sin(140)});
+    \coordinate (Ec) at ({2.2*cos(210)},{2.2*sin(210)});
+    \fill[segmentblue] (Ac) arc[start angle=10,end angle=240,radius=2.2] -- (Bc) -- cycle;
+    \draw[circleline] (0,0) circle (2.2);
+    \draw[chord] (Ac)--(Bc);
+    \draw[thick] (Ac)--(Cc)--(Bc);
+    \draw[thick] (Ac)--(Dc)--(Bc);
+    \draw[thick] (Ac)--(Ec)--(Bc);
+    \fill (Ac) circle (1.2pt);
+    \fill (Bc) circle (1.2pt);
+    \fill (Cc) circle (1.2pt);
+    \fill (Dc) circle (1.2pt);
+    \fill (Ec) circle (1.2pt);
+    \node[labelAB, below right=1pt of Ac] {\(A\)};
+    \node[labelAB, below left=1pt of Bc] {\(B\)};
+    \node[labelAB, above right=1pt of Cc] {\(C\)};
+    \node[labelAB, above left=1pt of Dc] {\(D\)};
+    \node[labelAB, below left=1pt of Ec] {\(E\)};
+    \pic[draw, angle radius=0.35cm, angle eccentricity=1.2] {angle=Ac--Cc--Bc};
+    \pic[draw, angle radius=0.35cm, angle eccentricity=1.2] {angle=Ac--Dc--Bc};
+    \pic[draw, angle radius=0.35cm, angle eccentricity=1.2] {angle=Ac--Ec--Bc};
+    \node at (0,-2.9) {(c)};
+  \end{scope}
+
+  % (d) ten angles
+  \begin{scope}[shift={(-1.8,-6.2)}]
+    \coordinate (Od) at (0,0);
+    \coordinate (Ad) at ({3*cos(80)},{3*sin(80)});
+    \coordinate (Bd) at ({3*cos(290)},{3*sin(290)});
+    \fill[segmentblue] (Ad) arc[start angle=80,end angle=290,radius=3] -- (Bd) -- cycle;
+    \draw[circleline] (0,0) circle (3);
+    \draw[chord] (Ad)--(Bd);
+    \fill (Ad) circle (1.5pt);
+    \fill (Bd) circle (1.5pt);
+    \node[labelAB, above right=1pt of Ad] {\(A\)};
+    \node[labelAB, below right=1pt of Bd] {\(B\)};
+
+    \foreach \ang/\lab in {95/$P_1$,115/$P_2$,135/$P_3$,155/$P_4$,175/$P_5$,195/$P_6$,215/$P_7$,235/$P_8$,255/$P_9$,275/$P_{10}$} {
+      \coordinate (P) at ({3*cos(\ang)},{3*sin(\ang)});
+      \draw[gray!60, thin] (Ad)--(P)--(Bd);
+      \fill (P) circle (1.2pt);
+      \node[font=\scriptsize] at ($(P)!1.18!(Od)$) {\lab};
+    }
+
+    % Thicken one representative angle.
+    \coordinate (Rep) at ({3*cos(175)},{3*sin(175)});
+    \draw[very thick] (Ad)--(Rep)--(Bd);
+    \fill (Rep) circle (1.5pt);
+    \pic[draw, angle radius=0.4cm, angle eccentricity=1.2] {angle=Ad--Rep--Bd};
+    \node at (0,-3.6) {(d)};
+  \end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+For (d), the grey lines show the other nine angles; the thicker angle is one of them. All ten angles are equal because they are in the same segment.
+
+\newpage
+
+\section*{3. Interpreting the theorem}
+
+In each pair below, the left diagram shows the two equal angles.  
+The right diagram has the correct \textbf{segment} shaded, and the heavy arc is the arc containing the vertices of the equal angles.
+
+\begin{center}
+\begin{tikzpicture}[scale=1]
+  \ShadedTheoremPair{-6.8}{0}{2.2}{-25}{45}{70}{95}{6.6}{(a)}{45}{290}
+  \ShadedTheoremPair{-6.8}{-5.2}{2.2}{200}{320}{145}{350}{6.6}{(b)}{320}{240}
+  \ShadedTheoremPair{-6.8}{-10.4}{2.2}{150}{20}{120}{60}{6.6}{(c)}{20}{130}
+  \ShadedTheoremPair{-6.8}{-15.6}{2.2}{75}{125}{170}{215}{6.6}{(d)}{125}{310}
+\end{tikzpicture}
+\end{center}
+
+In (a), (b) and (d), the vertices \(C\) and \(D\) lie on the \emph{major} arc, so the major segment is shaded.  
+In (c), \(C\) and \(D\) lie on the \emph{minor} arc, so the minor segment is shaded.  
+In every case, the shaded region is the segment referred to by the theorem.
+
+\end{document}
