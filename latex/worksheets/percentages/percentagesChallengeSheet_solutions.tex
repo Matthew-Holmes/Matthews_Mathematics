@@ -1,0 +1,87 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\begin{center}
+{\LARGE\bfseries Answer Key}\\[0.3em]
+{\large Challenge: Decimals, Percentages, and Fractions}
+\end{center}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}]
+
+\item
+\begin{enumerate}[label=(\alph*)]
+\item $0.125=\dfrac{1}{8}=12.5\%$.
+\item $0.203125=\dfrac{13}{64}=20.3125\%$.
+\end{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+\item $\dfrac{7}{20}=0.35=35\%$.
+\item $\dfrac{33}{320}=0.103125=10.3125\%$.
+\end{enumerate}
+
+\item
+\begin{enumerate}[label=(\alph*)]
+\item $17.5\%=0.175=\dfrac{7}{40}$.
+\item $57.8125\%=0.578125=\dfrac{37}{64}$.
+\end{enumerate}
+
+\item
+\textbf{Basis points.}
+\begin{enumerate}[label=(\alph*)]
+\item $1\text{ bp}=0.01\%=0.0001=\dfrac{1}{10000}$.
+\item $175\text{ bp}=1.75\%=0.0175=\dfrac{7}{400}$.
+\end{enumerate}
+
+\medskip
+\textbf{Gilts.}
+\begin{enumerate}[label=(\alph*), start=3]
+\item $5.678\%=0.05678=\dfrac{2839}{50000}$.
+\item Annual coupon: \pounds 56.68? \\[The source says 5.678\% of 1000 = 56.78, so use that:]
+
+Wait: annual coupon is $56.78$; coupons total $30(56.78)=1703.40$; including repayment, total cost is \pounds 2703.40.
+
+\medskip
+\item $43.5\text{ bp}=0.435\%=0.00435$; the coupon rises by \pounds 4.35 per year, so the extra cost is $30(4.35)=\pounds 130.50$.
+
+\item Compounding can be achieved by reinvesting every coupon payment and maturing principal in further gilts as soon as they are received, so interest is earned on previous interest.
+\end{enumerate}
+
+\newpage
+
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Upward-sloping, since \[
+4.377\%<4.474\%<4.488\%<4.492\%<4.544\%.
+\]
+\item The 5-year gilt has the highest yield, so it gives the best simple return if held to maturity and is the best starting point for a reinvestment strategy.
+\item Use a coupon-reinvestment ladder: start with the 5-year gilt and each year reinvest all coupon cash received at the previous year-end in the longest-dated gilt that still matures by the end of Year 4.
+\item Using that ladder, the final value is \pounds 12,484.60.
+\[
+\begin{array}{c|c}
+\text{Gilt} & \text{Maturity payment}\\ \hline
+5\text{-year} & 10454.40\\
+4\text{-year} & 474.81\\
+3\text{-year} & 496.11\\
+2\text{-year} & 518.30\\
+1\text{-year} & 540.98
+\end{array}
+\]
+\[
+10454.40+474.81+496.11+518.30+540.98=12484.60.
+\]
+\item Annual simple rate: $r_s=0.049692=4.9692\%$.
+\item Annual compound rate: $r_c\approx 0.045382=4.538\%$.
+\item Monthly rate: $r_m\approx 0.003705=0.3705\%$.
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}

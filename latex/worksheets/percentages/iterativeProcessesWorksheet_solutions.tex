@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Answer Key}\\[4pt]
+  {\large Iterative Processes --- Tables of Values and $n$th Terms}
+\end{center}
+
+\section*{Section A}
+
+\textbf{A1.} Table: \(U_1,\dots,U_6 = 4,\ 11,\ 18,\ 25,\ 32,\ 39\).  
+\(U_n = 7n-3\).
+
+\medskip
+\textbf{A2.} Table: \(V_1,\dots,V_5 = 2,\ 6,\ 18,\ 54,\ 162\).  
+\(V_k = 2\cdot 3^{k-1}\).
+
+\medskip
+\textbf{A3.} Table: \(F_0,\dots,F_6 = 72,\ 63,\ 54,\ 45,\ 36,\ 27,\ 18\).  
+The first negative term is \(F_9 = -9\), so the first negative value occurs at \(j=9\).
+
+\medskip
+\textbf{A4.} Table: \(P_1,\dots,P_5 = 1024,\ 256,\ 64,\ 16,\ 4\).  
+\(P_n = 4^{6-n} = 4096\left(\frac{1}{4}\right)^{\!n}\).
+
+\section*{Section B}
+
+\textbf{B1.} Values: \(5,\ 8,\ 11,\ 14,\ 17,\ldots\)  
+\(U_n = 3n+2\).
+
+\medskip
+\textbf{B2.} Values: \(80,\ 40,\ 20,\ 10,\ 5,\ldots\)  
+\(F_j = 80\left(\frac{1}{2}\right)^{\!j-1}\).
+
+\medskip
+\textbf{B3.} Recurrence: \(V_{n+1}=0.85V_n,\ V_0=200\).  
+Values ($n=0$ to $4$, 2 d.p.): \(200.00,\ 170.00,\ 144.50,\ 122.83,\ 104.40\).  
+\(V_n = 200(0.85)^n\).
+
+\medskip
+\textbf{B4.} Recurrence: \(Q_{n+1}=\frac{Q_n}{2}+6,\ Q_1=100\).  
+Values: \(100.00,\ 56.00,\ 34.00,\ 23.00,\ 17.50\).  
+This sequence is neither arithmetic nor geometric; it has no simple formula from the methods above and approaches 12.
+
+\section*{Section C}
+
+\textbf{C1.} \(V_0=600\).  
+\(V_{k+1}=1.05V_k,\ V_0=600\).  
+Table ($k=0$ to $4$): \(\pounds600.00,\ \pounds630.00,\ \pounds661.50,\ \pounds694.58,\ \pounds729.30\).  
+\(V_k = 600(1.05)^k\).  
+\(V_{10} \approx \pounds977.34\).
+
+\medskip
+\textbf{C2.}  
+Jess: \(H_{n+1}=0.75H_n,\ H_1=3\).  
+Kwame: \(H_{n+1}=0.75H_n,\ H_0=4\).  
+They use the same recurrence; they differ in starting index and starting value.  
+Both give \(H_3 = 1.6875\) m.  
+Kwame's definition is slightly more natural because the original drop is \(H_0\) and the formula works for all \(n\ge 0\).
+
+\section*{Section D}
+
+\textbf{D1.} Working backwards: \(U_4=24,\ U_3=12,\ U_2=6,\ U_1=3\).  
+\(U_n = 3\cdot 2^{n-1}\).  
+Check: \(U_5 = 3\cdot 2^4 = 48\).
+
+\medskip
+\textbf{D2.} Table ($j=1$ to $8$, 2 d.p.): \(100.00,\ 56.00,\ 34.00,\ 23.00,\ 17.50,\ 14.75,\ 13.38,\ 12.69\).  
+The sequence approaches 12.  
+Fixed point: \(L=\frac{L}{2}+6\), so \(L=12\).  
+No finite term equals 12 because
+\[
+F_j - 12 = \frac{88}{2^{j-1}} \neq 0
+\]
+for any finite \(j\).
+
+\end{document}
