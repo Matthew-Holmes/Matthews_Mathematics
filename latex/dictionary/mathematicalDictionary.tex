@@ -1,0 +1,175 @@
+% =====================================================================
+% Mathematical dictionary
+%
+% The shared definitions used across every worksheet. This file is both a
+% reference in its own right and the source the generator reads: when a
+% worksheet's vocabulary key uses one of these words, the wording below is the
+% one that appears on it, so that a pupil meets the same explanation every time.
+%
+% TO ADD OR CHANGE AN ENTRY
+%
+%   \dictentry{numerator}{the number above the line in a fraction}
+%
+% Write the definition as you would say it to a pupil who has not met the word:
+% plain words, one sentence, no symbols, and never the word itself inside its
+% own definition. Keep it short enough to sit in a table cell.
+%
+% Other forms of the word are found automatically - "numerators" and
+% "Numerator" both match the entry above, and so do regular verb endings. Where
+% a form is irregular enough that it would not be found, list it first:
+%
+%   \dictentry[vertices]{vertex}{a corner where two or more edges meet}
+%
+% Changing a wording here rebuilds the vocabulary keys that use that word, and
+% only those, the next time the generator runs.
+%
+% Entries are grouped by topic for reading, but the order does not matter to
+% the generator. Keep each group alphabetical.
+% =====================================================================
+\documentclass[10pt,twoside]{article}
+\usepackage[a4paper,margin=16mm,columnsep=8mm]{geometry}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+
+\definecolor{headword}{RGB}{0,128,0}
+
+% One entry. The optional argument lists extra forms of the word, and is shown
+% after the headword so a reader can see what else counts as the same word.
+\newcommand{\dictentry}[3][]{%
+  \par\addvspace{2pt}%
+  \noindent\textbf{\textcolor{headword}{#2}}%
+  \if\relax\detokenize{#1}\relax\else{\small\textit{ (also #1)}}\fi
+  \\ #3\par
+}
+
+\newcommand{\dicttopic}[1]{%
+  \par\addvspace{6pt}%
+  {\normalsize\bfseries #1}\par
+  \vspace{1pt}\hrule\vspace{3pt}%
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Mathematical dictionary}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+{\LARGE\bfseries Mathematical dictionary}\par
+\vspace{2pt}
+{\small The words a mathematics lesson depends on, explained in plain English.}\par
+\vspace{6pt}\hrule\vspace{8pt}
+
+\begin{multicols}{3}
+\small
+
+\dicttopic{Number}
+
+\dictentry{decimal}{a number written with a point, where the digits after the point are parts of a whole}
+\dictentry{denominator}{the number below the line in a fraction, showing how many equal parts the whole is split into}
+\dictentry{difference}{the answer when one number is subtracted from another}
+\dictentry{digit}{a single figure from 0 to 9 that a number is written with}
+\dictentry{equivalent}{having the same value, even though it is written differently}
+\dictentry{estimate}{a sensible answer worked out quickly from rounded numbers}
+\dictentry{factor}{a whole number that divides exactly into another number}
+\dictentry{fraction}{a number written as one whole split into equal parts, with a number of those parts taken}
+\dictentry[HCF]{highest common factor}{the largest whole number that divides exactly into two or more numbers}
+\dictentry{integer}{a whole number, which may be positive, negative or zero}
+\dictentry[LCM]{lowest common multiple}{the smallest number that two or more numbers all divide into exactly}
+\dictentry[multiplies, multiplied, multiplying, multiplication]{multiply}{to add a number to itself a given number of times}
+\dictentry{multiple}{a number you get by multiplying another number by a whole number}
+\dictentry{numerator}{the number above the line in a fraction, showing how many equal parts are taken}
+\dictentry{percentage}{a number of parts out of a hundred}
+\dictentry{place value}{the value a digit has because of where it sits in a number}
+\dictentry[powers]{power}{how many times a number is multiplied by itself}
+\dictentry{prime}{a whole number greater than 1 that divides only by itself and 1}
+\dictentry{product}{the answer when two or more numbers are multiplied}
+\dictentry{quotient}{the answer when one number is divided by another}
+\dictentry[reciprocals]{reciprocal}{the number you multiply by to get 1, found by turning a fraction upside down}
+\dictentry[recurs, recurring]{recur}{to repeat the same digits forever after the decimal point}
+\dictentry[rounds, rounded, rounding]{round}{to replace a number with a nearby simpler one}
+\dictentry[simplifies, simplified, simplifying]{simplify}{to write something in its smallest or plainest form without changing its value}
+\dictentry[square root]{root}{a number that gives another number when multiplied by itself a given number of times}
+\dictentry{sum}{the answer when numbers are added together}
+\dictentry{surd}{a root that cannot be written exactly as a fraction, so it is left in root form}
+
+\dicttopic{Ratio and proportion}
+
+\dictentry{proportion}{a relationship where two amounts change by the same factor}
+\dictentry{ratio}{a way of comparing two or more amounts, showing how much of one there is for each of the other}
+\dictentry{scale factor}{the number every length is multiplied by when a shape is enlarged}
+\dictentry{unitary}{a method that first finds the value of one part or one item}
+
+\dicttopic{Algebra}
+
+\dictentry{coefficient}{the number in front of a letter, showing how many of it there are}
+\dictentry[expands, expanded, expanding]{expand}{to multiply out brackets so the expression has no brackets left}
+\dictentry{expression}{a group of numbers and letters joined by operations, with no equals sign}
+\dictentry[factorisation, factorize]{factorise}{to write an expression as a product, usually by putting brackets back in}
+\dictentry{formula}{a rule written with letters, showing how to work one quantity out from others}
+\dictentry{gradient}{how steep a line is, found by how far it rises for each step across}
+\dictentry{identity}{a statement that is true for every value of the letters in it}
+\dictentry[indices]{index}{the small raised number showing what power something is raised to}
+\dictentry{inequality}{a statement that one quantity is larger or smaller than another}
+\dictentry{intercept}{the point where a graph crosses an axis}
+\dictentry{linear}{making a straight line when drawn as a graph}
+\dictentry{quadratic}{an expression or equation whose highest power is a square}
+\dictentry[rearranges, rearranged, rearranging]{rearrange}{to change the order of a formula so a different letter is on its own}
+\dictentry{sequence}{a list of numbers that follows a rule}
+\dictentry[substitutes, substituted, substituting, substitution]{substitute}{to put a number in place of a letter}
+\dictentry{term}{one part of an expression or one number in a sequence}
+\dictentry{nth term}{a rule that gives any number in a sequence from its position}
+\dictentry{variable}{a letter standing for a quantity that can change}
+
+\dicttopic{Geometry}
+
+\dictentry{adjacent}{next to, and sharing a side or a corner}
+\dictentry{arc}{part of the curved edge of a circle}
+\dictentry{area}{the amount of space inside a flat shape}
+\dictentry{bearing}{a direction given as an angle clockwise from north, written with three figures}
+\dictentry{bisector}{a line that cuts an angle or another line exactly in half}
+\dictentry{chord}{a straight line joining two points on the edge of a circle}
+\dictentry{circumference}{the distance all the way round a circle}
+\dictentry{congruent}{exactly the same shape and size}
+\dictentry{diameter}{a straight line across a circle through its centre}
+\dictentry[edges]{edge}{a straight line where two faces of a solid meet}
+\dictentry[faces]{face}{a flat surface of a solid shape}
+\dictentry{hypotenuse}{the longest side of a right-angled triangle, opposite the right angle}
+\dictentry{parallel}{always the same distance apart and never meeting}
+\dictentry{perimeter}{the total distance around the edge of a shape}
+\dictentry{perpendicular}{meeting at a right angle}
+\dictentry{polygon}{a flat shape with straight sides}
+\dictentry{radius}{the distance from the centre of a circle to its edge}
+\dictentry{sector}{a slice of a circle between two radii}
+\dictentry{segment}{the part of a circle cut off by a chord}
+\dictentry{similar}{the same shape but a different size}
+\dictentry{tangent}{a line that touches a curve at exactly one point}
+\dictentry{transformation}{a change to a shape's position, size or orientation}
+\dictentry{vector}{a quantity with both size and direction}
+\dictentry[vertices]{vertex}{a corner where two or more edges meet}
+\dictentry{volume}{the amount of space inside a solid shape}
+
+\dicttopic{Statistics and probability}
+
+\dictentry{average}{a single value chosen to stand for a whole set of data}
+\dictentry[axes]{axis}{one of the lines a graph is measured against}
+\dictentry{correlation}{how closely two sets of data are related}
+\dictentry{cumulative}{adding up as you go along, so each total includes the ones before}
+\dictentry{data}{the set of values collected}
+\dictentry{frequency}{how many times something happens}
+\dictentry{mean}{the average found by adding all the values and dividing by how many there are}
+\dictentry{median}{the middle value when the data is put in order}
+\dictentry{mode}{the value that appears most often}
+\dictentry{outlier}{a value far away from all the others}
+\dictentry{probability}{how likely something is, given as a number between 0 and 1}
+\dictentry{quartile}{a value marking one quarter of the way through ordered data}
+\dictentry{range}{the difference between the largest and smallest values}
+\dictentry{sample}{a smaller group chosen to stand for a larger one}
+
+\end{multicols}
+
+\end{document}
