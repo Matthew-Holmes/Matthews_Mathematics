@@ -10,7 +10,7 @@ set -euo pipefail
 # Input arguments
 # -----------------------------------------------------------------------------
 if [[ $# -ne 3 ]]; then
-  echo "Usage: $0 <latexSource.txt> <repo.ndjson> <objects.txt>"
+  echo "Usage: $0 <latexFilesCompiled.txt> <repo.ndjson> <objects.txt>"
   exit 1
 fi
 
@@ -74,6 +74,11 @@ while IFS= read -r tex_path; do
 
   if [[ -z "$local_pdf_path" || "$local_pdf_path" == "null" ]]; then
     debug "No PDF match found for $tex_name"
+    continue
+  fi
+
+  if [[ ! -f "latex/$local_pdf_path" ]]; then
+    echo "Warning: expected PDF is missing, skipping: latex/$local_pdf_path" >&2
     continue
   fi
 

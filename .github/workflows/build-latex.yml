@@ -93,19 +93,29 @@ jobs:
           write_engine_output xelatex_files  xelatex
           write_engine_output lualatex_files lualatex
 
+      # The two continue-on-error settings below are what let a single broken
+      # document stop being everybody else's problem: the inner one tells
+      # latex-action to keep building the remaining files, the outer one lets the
+      # workflow carry on to the upload. Nothing is silently ignored -- step 006
+      # works out exactly which documents built, only those are published, and
+      # step 008 fails the run with a report of the ones that did not.
       - name: Compile LaTeX files from list (pdfLaTeX)
         if: steps.read-files.outputs.pdflatex_files != ''
+        continue-on-error: true
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.pdflatex_files }}
           work_in_root_file_dir: true
+          continue_on_error: true
 
       - name: Compile LaTeX files from list (XeLaTeX) # Unicode scripts: Chinese, Japanese, Korean, Arabic, Hebrew, Indic, Thai, ...
         if: steps.read-files.outputs.xelatex_files != ''
+        continue-on-error: true
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.xelatex_files }}
           work_in_root_file_dir: true
+          continue_on_error: true
           latexmk_use_xelatex: true
           extra_system_packages: >-
             font-noto font-noto-arabic font-noto-bengali
@@ -114,21 +124,51 @@ jobs:
 
       - name: Compile LaTeX files from list (LuaLaTeX)
         if: steps.read-files.outputs.lualatex_files != ''
+        continue-on-error: true
         uses: xu-cheng/latex-action@v4
         with:
           root_file: ${{ steps.read-files.outputs.lualatex_files }}
           work_in_root_file_dir: true
+          continue_on_error: true
           latexmk_use_lualatex: true
           extra_system_packages: >-
             font-noto font-noto-arabic font-noto-bengali
             font-noto-gurmukhi font-noto-devanagari
           extra_fonts: ./fonts/*.ttf
 
+      - name: Work out which documents actually compiled
+        run: |
+          DEBUG=1 .github/workflows/scripts/006_verifyCompileResults.sh \
+            latexCompileEngines.ndjson latex compileFailureLogs > latexCompileResults.ndjson
+
+          # Only the documents that built are handed to the upload step.
+          jq -r 'select(.status == "ok") | .path' latexCompileResults.ndjson > latexFilesCompiled.txt
+
+      - name: Upload compile results # debug step to check the per-file verdicts
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-compile-results
+          path: latexCompileResults.ndjson
+
+      - name: Upload logs of failed compiles # the full .log for anything that did not build
+        uses: actions/upload-artifact@v4
+        with:
+          name: compile-failure-logs
+          path: compileFailureLogs
+          if-no-files-found: ignore
+
       - name: Upload PDFs
-        run: DEBUG=1 .github/workflows/scripts/006_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson s3Objects.txt
+        run: DEBUG=1 .github/workflows/scripts/007_uploadToS3.sh latexFilesCompiled.txt latexSourceFiles.ndjson s3Objects.txt
         env:
           AWS_S3_BUCKET: files.matthewsmathematics.uk
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_ENDPOINT_URL: https://objects.matthewsmathematics.uk
           AWS_DEFAULT_REGION: garage
+
+      # Runs even if the upload failed -- that is exactly when knowing what did
+      # and did not build is most useful. The hashFiles guard keeps it quiet if
+      # the run fell over before anything was compiled.
+      - name: Report documents that failed to compile
+        if: always() && hashFiles('latexCompileResults.ndjson') != ''
+        run: DEBUG=1 .github/workflows/scripts/008_reportCompileFailures.sh latexCompileResults.ndjson latex
