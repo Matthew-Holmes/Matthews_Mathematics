@@ -5,6 +5,24 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
 \title{Averages: Mean \& Median}
 \author{}
 \date{}
@@ -69,6 +87,8 @@
   \node[below,font=\tiny] at (1.825,0) {2};
   \node[below,font=\tiny\bfseries] at (1.0,{-0.38})
     {\textbf{Q7}: balance these};
+  \draw[ans, dashed] (-0.15,1.1) -- (2.15,1.1);
+  \node[anslab, right] at (2.15,1.1) {2};
 \end{tikzpicture}
 
 \vspace{0.55em}
@@ -87,6 +107,8 @@
   \node[below,font=\tiny] at (3.325,0) {3};
   \node[below,font=\tiny\bfseries] at (1.7,{-0.38})
     {\textbf{Q8}: balance these};
+  \draw[ans, dashed] (-0.15,1.65) -- (3.75,1.65);
+  \node[anslab, right] at (3.75,1.65) {3};
 \end{tikzpicture}
 
 \end{center}
@@ -96,16 +118,15 @@
 \vspace{0.2em}
 \begin{enumerate}\itemsep1pt
   \begin{multicols}{2}
-    \item $12 \div 4 = \mathord{?}$
-    \item $18 \div 3 = \mathord{?}$
+    \item $12 \div 4 = \ashowq{3}$
+    \item $18 \div 3 = \ashowq{6}$
   \end{multicols}
   \begin{multicols}{2}
-    \item $15 \div 3 = \mathord{?}$
-    \item $28 \div 4 = \mathord{?}$
+    \item $15 \div 3 = \ashowq{5}$
+    \item $28 \div 4 = \ashowq{7}$
   \end{multicols}
-  \item Four friends share 20 sweets equally. How many do they each get?
-  \item Three children have 2, 5 and 8 stickers. They combine them and share them equally. How many does each child get?
-  \item Six children have 3, 5, 3, 7, 5, 7 stickers. \textit{Estimate} the fair share, then calculate. How close were you?
+  \item Four friends share 20 sweets equally. How many do they each get? \ashow{5 sweets}
+  \item Three children have 2, 5 and 8 stickers. They combine them and share them equally. How many does each child get? \ashow{5 stickers}
   \item Draw a picture of the top towers (left), balanced to the same height without changing the total number of bricks.
   \item Draw a picture of the bottom towers (left), balanced to the same height without changing the total number of bricks.
 \end{enumerate}
@@ -136,6 +157,8 @@
   \node[below,font=\tiny] at (2.40,0) {8};
   \node[below,font=\tiny\bfseries] at (1.35,{-0.38})
     {\textbf{Q7}: balance these};
+  \draw[ans, dashed] (-0.15,2.10) -- (2.85,2.10);
+  \node[anslab, right] at (2.85,2.10) {5};
 \end{tikzpicture}
 
 \vspace{0.45em}
@@ -155,6 +178,8 @@
   \node[below,font=\tiny] at (3.30,0) {4};
   \node[below,font=\tiny\bfseries] at (1.7,{-0.38})
     {\textbf{Q8}: balance these?};
+  \draw[ans, dashed] (-0.15,1.68) -- (3.75,1.68);
+  \node[anslab, right] at (3.75,1.68) {4};
 \end{tikzpicture}
 
 \end{center}
@@ -164,24 +189,24 @@
 \vspace{0.2em}
   \begin{multicols}{2}
   \begin{enumerate}
-    \item $7 \times 8 = \mathord{?}$
-    \item $63 \div 7 = \mathord{?}$
+    \item $7 \times 8 = \ashowq{56}$
+    \item $63 \div 7 = \ashowq{9}$
     \end{enumerate}
   \end{multicols}
   \begin{multicols}{2}
   \begin{enumerate}
   \setcounter{enumi}{2}
-    \item $48 \div 8 = \mathord{?}$
-    \item $5 \times 9 = \mathord{?}$
+    \item $48 \div 8 = \ashowq{6}$
+    \item $5 \times 9 = \ashowq{45}$
     \end{enumerate}
   \end{multicols}
   \begin{enumerate}
   \setcounter{enumi}{4}
-  \item Five children have 4, 7, 3, 6, 5 marbles. Shared equally, how many each?
-  \item Six friends earn £8, £14, £10, £6, £12, £10 at a car wash. Split fairly — how much each?
-  \item Eight runners finish in 54, 48, 61, 57, 50, 63, 55, 52 s. Without doing any calculations, estimate the average time.
-  \item What heights would the top towers balance out to?
-  \item What heights would the bottom towers balance out to?
+  \item Five children have 4, 7, 3, 6, 5 marbles. Shared equally, how many each? \ashow{5 marbles}
+  \item Six friends earn £8, £14, £10, £6, £12, £10 at a car wash. Split fairly — how much each? \ashow{\pounds10 each}
+  \item Eight runners finish in 54, 48, 61, 57, 50, 63, 55, 52 s. Without doing any calculations, estimate the average time. \ashow{about 55 s}
+  \item What heights would the top towers balance out to? \ashow{5 bricks high}
+  \item What heights would the bottom towers balance out to? \ashow{4 bricks high}
 \end{enumerate}
 
 \end{columns}
@@ -197,22 +222,22 @@
 \vspace{0.2em}
 \begin{enumerate}\itemsep1pt
   \begin{multicols}{2}
-    \item $3 + 4 + 7 = \mathord{?}$
-    \item $15+27+18=\mathord{?}$
-    \item $60\div 4=\mathord{?}$
-    \item $-15 \div 3=\mathord{?}$
+    \item $3 + 4 + 7 = \ashowq{14}$
+    \item $15+27+18=\ashowq{60}$
+    \item $60\div 4=\ashowq{15}$
+    \item $-15 \div 3=\ashowq{-5}$
   \end{multicols}
   \vspace{-1em}
-  \item What is the mean of: $4,\ 6,\ 2,\ 8$
-  \item What is the mean  of: $3,\ 9,\ 5,\ 7,\ 1$
-  \item What is the mean  of: $-3,\ 5,\ -1,\ 7,\ 2$
-  \item What is the mean  of: $-8,\ -2,\ -5,\ -1,\ -4$
+  \item What is the mean of: $4,\ 6,\ 2,\ 8$ \ashow{5}
+  \item What is the mean  of: $3,\ 9,\ 5,\ 7,\ 1$ \ashow{5}
+  \item What is the mean  of: $-3,\ 5,\ -1,\ 7,\ 2$ \ashow{2}
+  \item What is the mean  of: $-8,\ -2,\ -5,\ -1,\ -4$ \ashow{$-4$}
 \end{enumerate}
 
 \begin{enumerate}\itemsep1pt
   \setcounter{enumi}8
-  \item The mean of four numbers is 9. Three are 6, 11 and 8. Find the fourth.
-  \item The mean of $3,\ 7,\ x,\ 10$ is $8$. What is $x$?
+  \item The mean of four numbers is 9. Three are 6, 11 and 8. Find the fourth. \ashow{11}
+  \item The mean of $3,\ 7,\ x,\ 10$ is $8$. What is $x$? \ashow{12}
 \end{enumerate}
 
 
@@ -271,10 +296,10 @@
 % First four quick questions
 \begin{multicols}{2}
 \begin{enumerate}\itemsep1pt
-  \item $4+2+10=\mathord{?}$
-  \item $-4+9=\mathord{?}$
-  \item $-3-5=\mathord{?}$
-  \item $6\times4=\mathord{?}$
+  \item $4+2+10=\ashowq{16}$
+  \item $-4+9=\ashowq{5}$
+  \item $-3-5=\ashowq{-8}$
+  \item $6\times4=\ashowq{24}$
 \end{enumerate}
 \end{multicols}
 
@@ -284,21 +309,21 @@
 
   \item Order smallest to largest:
   $8,3,11,5,7$.
-  Which is the middle value?
+  Which is the middle value? \ashow{7}
 
   \item Order:
   $21,14,9,35,17,28,6$.
-  Which is the middle value?
+  Which is the middle value? \ashow{17}
 
   \item For $3,7,8,9,41$:
   \textit{estimate} whether the middle value is above or below the mean.
-  Then check.
+  Then check. \ashow{below: median $8$, mean $13.6$}
 
   \item What is the middle value of:
-  $-7,\ -2,\ -5,\ 1,\ -1,\ 3,\ -3$
+  $-7,\ -2,\ -5,\ 1,\ -1,\ 3,\ -3$ \ashow{$-2$}
 
   \item What is the middle value of:
-  $\tfrac{1}{2},\ \tfrac{1}{4},\ \tfrac{3}{4},\ \tfrac{1}{8},\ \tfrac{5}{8}$
+  $\tfrac{1}{2},\ \tfrac{1}{4},\ \tfrac{3}{4},\ \tfrac{1}{8},\ \tfrac{5}{8}$ \ashow{$\frac{1}{2}$}
 
   \item House prices on a road are:
   \pounds130k,
@@ -308,7 +333,7 @@
   \pounds135k,
   \textcolor{red}{\pounds980k}.
 
-  Why might the mean not be helpful?
+  Why might the mean not be helpful? \ashow{the \pounds980k outlier pulls the mean up}
 
 \end{enumerate}
 
@@ -355,20 +380,20 @@
 \vspace{0.3em}
 \begin{enumerate}\itemsep1pt
   \begin{multicols}{2}
-    \item $-6+(-2) = \mathord{?}$
-    \item $\frac{1}{3}+\frac{1}{2} = \mathord{?}$
+    \item $-6+(-2) = \ashowq{-8}$
+    \item $\frac{1}{3}+\frac{1}{2} = \ashowq{\frac{5}{6}}$
   \end{multicols}
   \vspace{-1em}
-  \item Median of: $3,\ 9,\ 4,\ 7,\ 1$
-  \item Mean \textbf{and} median of: $5,\ 8,\ 3,\ 12,\ 7$. Which is larger?
-  \item Five salaries are: £24k, £26k, £25k, £28k, \textcolor{red}{£97k}. Would you prefer to use the mean or the median to find the average?
-  \item For $-10,-1,0,2,3$: \textit{estimate} whether the mean is positive or negative. Then calculate both mean and median.
-  \item Find the mean and median of: $-6,\ -2,\ 4,\ -3,\ 7,\ 0$
-  \item What is the median of: $\frac{1}{3},\ \frac{3}{4},\ \frac{1}{2},\ \frac{1}{6},\ \frac{2}{3},\ \frac{1}{4}$
+  \item Median of: $3,\ 9,\ 4,\ 7,\ 1$ \ashow{4}
+  \item Mean \textbf{and} median of: $5,\ 8,\ 3,\ 12,\ 7$. Which is larger? \ashow{equal (both $7$)}
+  \item Five salaries are: £24k, £26k, £25k, £28k, \textcolor{red}{£97k}. Would you prefer to use the mean or the median to find the average? \ashow{the median}
+  \item For $-10,-1,0,2,3$: \textit{estimate} whether the mean is positive or negative. Then calculate both mean and median. \ashow{negative: mean $-1.2$; median $0$}
+  \item Find the mean and median of: $-6,\ -2,\ 4,\ -3,\ 7,\ 0$ \ashow{mean $0$; median $-1$}
+  \item What is the median of: $\frac{1}{3},\ \frac{3}{4},\ \frac{1}{2},\ \frac{1}{6},\ \frac{2}{3},\ \frac{1}{4}$ \ashow{$\frac{5}{12}$}
   \item True or False?\\
-    (a) The median is always one of the values in the dataset.\\
-    (b) The mean and median are always different.\\
-    (c) A very large outlier affects the median more than the mean.
+    (a) The median is always one of the values in the dataset. \ashow{False}\\
+    (b) The mean and median are always different. \ashow{False}\\
+    (c) A very large outlier affects the median more than the mean. \ashow{False}
 
 \end{enumerate}
 

@@ -1,3 +1,4 @@
+% Root file used ashow macros
 \documentclass{beamer}
 
 \usepackage{tikz}
@@ -89,11 +90,33 @@
 
 \begin{document}
 
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+  \item \hyperlink{q-st1}{\beamergotobutton{Starter 1}}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+  \item \hyperlink{work-st1}{\beamergotobutton{Starter 1}}
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
 %------------------------------------------------
-% QUESTIONS SLIDE
+% STARTER 1
 %------------------------------------------------
 
-\begin{frame}
+\begin{frame}{Starter 1}
+\hypertarget{q-st1}{}
 
 \begin{columns}[T]
 
@@ -207,112 +230,109 @@ Which are similar to $X$?
 \end{frame}
 
 %------------------------------------------------
-% ANSWERS SLIDE
+% WORKED SOLUTIONS: STARTER 1
 %------------------------------------------------
 
-\begin{frame}
+\begin{frame}{Worked Solution: Starter 1, Question 1}
+\hypertarget{work-st1}{}
 
-\begin{columns}[T]
+\textbf{Question:} A ring is formed by two concentric circles. The outer circle has radius \(6\) cm and the inner circle has radius \(3\) cm. Find the shaded area.
 
-% LEFT COLUMN
-\column{0.5\textwidth}
+\textbf{Worked Solution:}
 
-\textbf{1.}
+The shaded area is the area of the large circle minus the area of the small circle:
+\[
+\pi(6)^2-\pi(3)^2
+=36\pi-9\pi
+=27\pi.
+\]
+Therefore the shaded area is
+\[
+\boxed{27\pi\text{ cm}^2}.
+\]
 
-\begin{tikzpicture}[scale=0.55]
-\def\R{3}
-\def\r{1.5}
+\end{frame}
 
-\fill[gray!30] (0,0) circle (\R);
-\fill[white] (0,0) circle (\r);
+\begin{frame}{Worked Solution: Starter 1, Question 2}
 
-\draw (0,0) circle (\R);
-\draw (0,0) circle (\r);
+\textbf{Question:} A shaded annular sector has outer radius \(6\) cm, inner radius \(3\) cm, and angle \(60^\circ\). Find the shaded area.
 
-\draw (0,0) -- (\R,0);
-\draw (0,0) -- (0,\r);
+\textbf{Worked Solution:}
 
-% FIXED: Use separate coordinates for midpoint calculation
-\path (0,0) -- (\R,0) coordinate[midway] (midR);
-\path (0,0) -- (0,\r) coordinate[midway] (midr);
-\node at (midR) [yshift=-0.3cm] {$6$ cm};
-\node at (midr) [xshift=0.1cm] {$3$ cm};
-\end{tikzpicture}
+The full ring has area
+\[
+\pi(6)^2-\pi(3)^2=27\pi.
+\]
 
-{\color{red} \(\pi6^2 - \pi3^2 = 27\pi\ \text{cm}^2\)}
+The shaded region is the sector with angle \(60^\circ\), which is
+\[
+\frac{60}{360}=\frac16
+\]
+of the full ring. Hence
+\[
+\text{shaded area}
+=\frac16(27\pi)
+=\frac{27}{6}\pi
+=\frac{9}{2}\pi
+=4.5\pi\text{ cm}^2.
+\]
+So the shaded area is
+\[
+\boxed{4.5\pi\text{ cm}^2}.
+\]
 
-\vspace{0.4cm}
+\end{frame}
 
-\textbf{3.}
+\begin{frame}{Worked Solution: Starter 1, Question 3}
 
-\begin{tikzpicture}[scale=0.45]
+\textbf{Question:} Rectangle \(A\) has dimensions \(6\) by \(4\). Rectangle \(B\) has dimensions \(9\) by \(6\). Find the scale factor mapping \(A\to B\).
 
-\draw (0,0) rectangle (3,2);
-\node at (1.5,-0.4) {\small A};
-\node at (1.5,2.5) {6};
-\node at (-0.4,1) {4};
+\textbf{Worked Solution:}
 
-\draw (5,0) rectangle (9.5,3);
-\node at (7.25,-0.4) {\small B};
-\node at (7.25,3.5) {9};
-\node at (4.6,1.5) {6};
+The width changes from \(6\) to \(9\), so
+\[
+k=\frac{9}{6}=1.5.
+\]
+The height changes from \(4\) to \(6\), so
+\[
+k=\frac{6}{4}=1.5.
+\]
+Both dimensions are multiplied by the same factor, so the scale factor mapping \(A\) to \(B\) is
+\[
+\boxed{1.5}.
+\]
 
-\end{tikzpicture}
+\end{frame}
 
-{\color{red} Scale factor = \(1.5\)}
+\begin{frame}{Worked Solution: Starter 1, Question 4}
 
-% RIGHT COLUMN
-\column{0.5\textwidth}
+\textbf{Question:} Cuboid \(X\) has dimensions \(4\times6\times8\). Decide which of cuboids \(A\), \(B\), \(C\), \(D\) are similar to \(X\):
+\[
+A=8\times12\times20,\quad B=6\times9\times12,\quad C=5\times7.5\times10,\quad D=3\times4.5\times6.
+\]
 
-\textbf{2.}
+\textbf{Worked Solution:}
 
-\begin{tikzpicture}[scale=0.45]
-\def\R{3}
-\def\r{1.5}
-\def\angle{60}
+Cuboid \(X\) has side ratio
+\[
+4:6:8=2:3:4.
+\]
+A cuboid is similar to \(X\) if its side lengths have the same ratio.
 
-% Shaded annular sector
-\fill[gray!30] (0,0) -- (0:\R) arc (0:\angle:\R) -- cycle;
-\fill[white] (0,0) -- (0:\r) arc (0:\angle:\r) -- cycle;
+\[
+\begin{array}{c|c|c|c}
+\text{cuboid} & \text{dimensions} & \text{ratio} & \text{similar to }X\\ \hline
+A & 8,12,20 & 2:3:5 & \text{No}\\
+B & 6,9,12 & 2:3:4 & \text{Yes}\\
+C & 5,7.5,10 & 2:3:4 & \text{Yes}\\
+D & 3,4.5,6 & 2:3:4 & \text{Yes}
+\end{array}
+\]
 
-% Draw only the arcs that bound the shaded region (no full circles)
-\draw (0:\R) arc (0:\angle:\R);
-\draw (0:\r) arc (0:\angle:\r);
-
-% Draw the two radii
-\draw (0,0) -- (0:\R);
-\draw (0,0) -- (\angle:\R);
-
-% Labels
-\node at ($(0,0)!0.5!(\R,0)$) [yshift=-0.3cm] {$6$ cm};
-\node at ($(0,0)!0.5!(0,\r)$) [xshift=-0.3cm] {$3$ cm};
-\node at (\angle/2:2.2) {$60^\circ$};
-
-% Add answer text to the right of the diagram
-\node[anchor=west] at (3.5,1.5) {\color{red} \(\frac{60}{360} \times 27\pi = \frac{1}{6}\times27\pi\)};
-\node[anchor=west] at (3.5,0.8) {\color{red} \(= 4.5\pi\ \text{cm}^2\)};
-\end{tikzpicture}
-
-\vspace{0.2cm}
-
-\textbf{4.}
-
-\begin{center}
-\begin{tikzpicture}[scale=0.5]
-    \cuboid{0}{0}{X}{4×6×8}
-\end{tikzpicture}
-\end{center}
-
-\begin{tikzpicture}[scale=0.5]
-  \cuboid{0}{-2}{A}{8×12×20}
-  \cuboid{5}{-2}{B}{6×9×12}
-  \cuboid{0}{-6}{C}{5×7.5×10}
-  \cuboid{5}{-6}{D}{3×4.5×6}
-\end{tikzpicture}
-
-{\color{red} Similar shapes: B, C, D}  % Corrected based on proportions
-
-\end{columns}
+So the cuboids similar to \(X\) are
+\[
+\boxed{B,\ C,\ D}.
+\]
 
 \end{frame}
 

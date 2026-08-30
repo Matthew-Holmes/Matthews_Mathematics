@@ -1,0 +1,261 @@
+% Root file used ashow macros
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{multicol}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+\title{Starter}
+\subtitle{Sequences and Iterative Processes}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+\item \hyperlink{q-st1}{\beamergotobutton{Starter 1}}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+\item \hyperlink{work-st1}{\beamergotobutton{Starter 1}}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Starter 1}
+\hypertarget{q-st1}{}
+
+\small
+
+\begin{multicols}{2}
+
+\begin{enumerate}
+
+\item Find the next two terms:
+\[
+5,\ 9,\ 13,\ 17,\ \dots
+\]
+
+\ashow{$21,\ 25$}
+
+\vspace{0.4cm}
+
+\item Find an $n$th term for:
+\[
+8,\ 13,\ 18,\ 23,\ \dots
+\]
+
+\ashow{$5n+3$}
+
+\vspace{0.4cm}
+
+\item A population starts at 200 and grows by $5\%$ each year.
+
+Complete the table.
+
+\[
+\begin{array}{c|c}
+n & P_n \\
+\hline
+0 & 200 \\
+1 & \ablank{210} \\
+2 & \ablank{220.5} \\
+3 & \ablank{231.525}
+\end{array}
+\]
+
+\vspace{0.2cm}
+
+
+\vspace{0.4cm}
+
+\item An iterative process is
+\[
+U_{n+1} = U_n + 4, \qquad U_1 = 3
+\]
+
+Complete the table.
+
+\[
+\begin{array}{c|c}
+n & U_n \\
+\hline
+1 & 3 \\
+2 & \ablank{7} \\
+3 & \ablank{11} \\
+4 & \ablank{15}
+\end{array}
+\]
+
+\end{enumerate}
+
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 1}
+\hypertarget{work-st1}{}
+
+\textbf{Question:} Find the next two terms:
+\[
+5,\ 9,\ 13,\ 17,\ \dots
+\]
+
+\textbf{Worked Solution:} The terms increase by \(4\) each time:
+\[
+9-5=4,\quad 13-9=4,\quad 17-13=4.
+\]
+So the next two terms are
+\[
+17+4=21 \quad \text{and} \quad 21+4=25.
+\]
+Thus the sequence continues
+\[
+5,\ 9,\ 13,\ 17,\ 21,\ 25,\ \dots
+\]
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 2}
+
+\textbf{Question:} Find an \(n\)th term for:
+\[
+8,\ 13,\ 18,\ 23,\ \dots
+\]
+
+\textbf{Worked Solution:} The terms increase by \(5\) each time, so the \(n\)th term has the form
+\[
+5n + c.
+\]
+Using the first term, \(n=1\) gives
+\[
+5(1)+c=8,
+\]
+so
+\[
+c=3.
+\]
+Therefore the \(n\)th term is
+\[
+5n+3.
+\]
+Check: \(n=2\) gives \(10+3=13\), \(n=3\) gives \(15+3=18\), and so on.
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 3}
+
+\textbf{Question:} A population starts at \(200\) and grows by \(5\%\) each year. Complete the table.
+
+\[
+\begin{array}{c|c}
+n & P_n \\
+\hline
+0 & 200 \\
+1 & ? \\
+2 & ? \\
+3 & ?
+\end{array}
+\]
+
+\textbf{Worked Solution:} Each year the population is multiplied by
+\[
+1+\frac{5}{100}=1.05.
+\]
+Therefore
+\[
+P_1=200 \times 1.05 = 210,
+\]
+\[
+P_2=210 \times 1.05 = 220.5,
+\]
+\[
+P_3=220.5 \times 1.05 = 231.525.
+\]
+Equivalently, \(P_n=200(1.05)^n\). The completed table is:
+\[
+\begin{array}{c|c}
+n & P_n \\
+\hline
+0 & 200 \\
+1 & 210 \\
+2 & 220.5 \\
+3 & 231.525
+\end{array}
+\]
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 4}
+
+\textbf{Question:} An iterative process is
+\[
+U_{n+1} = U_n + 4, \qquad U_1 = 3.
+\]
+Complete the table.
+
+\[
+\begin{array}{c|c}
+n & U_n \\
+\hline
+1 & 3 \\
+2 & ? \\
+3 & ? \\
+4 & ?
+\end{array}
+\]
+
+\textbf{Worked Solution:} The recurrence says that each term is the previous term plus \(4\). Hence
+\[
+U_2 = 3 + 4 = 7,
+\]
+\[
+U_3 = 7 + 4 = 11,
+\]
+\[
+U_4 = 11 + 4 = 15.
+\]
+The completed table is:
+\[
+\begin{array}{c|c}
+n & U_n \\
+\hline
+1 & 3 \\
+2 & 7 \\
+3 & 11 \\
+4 & 15
+\end{array}
+\]
+
+\end{frame}
+
+\end{document}

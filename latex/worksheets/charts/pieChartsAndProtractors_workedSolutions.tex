@@ -1,0 +1,385 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[a4paper, margin=1.8cm]{geometry}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usetikzlibrary{calc}
+
+% ---- Colours ----
+\definecolor{slice1}{RGB}{70,130,180}
+\definecolor{slice2}{RGB}{240,140,40}
+\definecolor{slice3}{RGB}{70,170,70}
+\definecolor{slice4}{RGB}{210,70,70}
+\definecolor{slice5}{RGB}{150,90,190}
+\definecolor{lightgrey}{RGB}{245,245,245}
+\definecolor{boxblue}{RGB}{220,235,250}
+\definecolor{boxgreen}{RGB}{220,245,220}
+
+% -------------------------------------------------------
+% \piechart{radius_number}{Label/Angle/Colour, ...}
+%   radius_number is a plain number interpreted as cm.
+%   Angles in degrees, clockwise from 12 o'clock; must sum to 360.
+% -------------------------------------------------------
+\newcommand{\piechart}[2]{%
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\r}{#1}%
+    \pgfmathsetmacro{\startA}{90}%
+    \foreach \lbl/\ang/\col in {#2} {%
+      \pgfmathsetmacro{\endA}{\startA - \ang}%
+      \fill[\col!20] (0,0) -- (\startA:\r cm) arc(\startA:\endA:\r cm) -- cycle;%
+      \draw[line width=2pt] (0,0) -- (\startA:\r cm);%
+      \pgfmathsetmacro{\midA}{(\startA + \endA)/2}%
+      \pgfmathsetmacro{\lR}{\r * 0.65}%
+      \node[font=\small\bfseries, align=center] at (\midA:\lR cm) {\lbl};%
+      \xdef\startA{\endA}%
+    }%
+    \draw[black, line width=1.8pt] (0,0) circle (\r cm);%
+    \draw[black, line width=2pt] (0,0) -- (90:\r cm);%
+    \fill[black] (0,0) circle (3pt);%
+    \draw[black, line width=1.2pt] (0,\r cm) -- (0,{\r cm+0.25cm});%
+  \end{tikzpicture}%
+}
+
+% Shortcut for a boxed written answer
+\newcommand{\ans}[1]{\fbox{\textbf{#1}}}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% ===========================
+%  TITLE
+% ===========================
+\begin{center}
+  {\LARGE\bfseries Reading Pie Charts with a Protractor}\\[3pt]
+  {\large Worked Solutions}
+\end{center}
+\vspace{4pt}
+
+\begin{mdframed}[backgroundcolor=boxgreen, linecolor=slice3,
+                 linewidth=1.5pt, roundcorner=6pt, innertopmargin=6pt]
+\textbf{Method:}\quad
+$\displaystyle\text{sector fraction}=\frac{\text{sector angle}}{360}$
+\qquad
+$\displaystyle\text{amount}=\text{fraction}\times\text{total}$
+
+\smallskip
+For every sector, use the exact angle shown on the chart, then simplify the fraction where possible.
+\end{mdframed}
+
+\newpage
+
+% ===========================
+%  PIE CHART 1
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 1 \textendash{} Favourite School Subjects (30 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+  \centering
+  \piechart{5.8}{Maths/120/slice1,Science/90/slice2,English/72/slice3,Art/48/slice4,PE/30/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.36\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Subject} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Maths    & \(120^\circ\) & \(\frac{120}{360}=\frac13\) & \(10\) \\
+  \hline
+  Science  & \(90^\circ\) & \(\frac14\) & \(7.5^*\) \\
+  \hline
+  English  & \(72^\circ\) & \(\frac15\) & \(6\) \\
+  \hline
+  Art      & \(48^\circ\) & \(\frac{2}{15}\) & \(4\) \\
+  \hline
+  PE       & \(30^\circ\) & \(\frac{1}{12}\) & \(2.5^*\) \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{30} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\textit{Note:} \(^*\)The exact angles shown give fractional numbers of students for Science and PE. This is a reminder that a pie chart must be designed carefully if the data are counts of people.
+
+\vspace{4pt}
+\noindent\textbf{Worked Solutions -- Pie Chart 1:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item Measuring the sectors gives the angles in the table above:
+        \[
+        120^\circ,\;90^\circ,\;72^\circ,\;48^\circ,\;30^\circ.
+        \]
+        Their sum is
+        \[
+        120+90+72+48+30=360^\circ.
+        \]
+
+  \item The angles add up to \(\boxed{360^\circ}\).
+
+  \item Maths fraction:
+        \[
+        \frac{120}{360}=\boxed{\frac13}.
+        \]
+
+  \item Science students:
+        \[
+        \frac{90}{360}\times 30
+        =\frac14\times 30
+        =\boxed{7.5\text{ students}}.
+        \]
+
+  \item A fraction of \(\frac15\) of the circle is
+        \[
+        \frac15\times 360=72^\circ.
+        \]
+        The \(72^\circ\) sector is English, so the subject is \(\ans{English}\).
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 2
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 2 \textendash{} How Students Travel to School (60 students)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+  \centering
+  \piechart{5.8}{Walk/90/slice3,Bus/120/slice1,Car/60/slice2,Cycle/45/slice4,Other/45/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.36\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Method} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Walk   & \(90^\circ\) & \(\frac14\) & \(15\) \\
+  \hline
+  Bus    & \(120^\circ\) & \(\frac13\) & \(20\) \\
+  \hline
+  Car    & \(60^\circ\) & \(\frac16\) & \(10\) \\
+  \hline
+  Cycle  & \(45^\circ\) & \(\frac18\) & \(7.5^*\) \\
+  \hline
+  Other  & \(45^\circ\) & \(\frac18\) & \(7.5^*\) \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{60} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\textit{Note:} \(^*\)Cycle and Other each give exactly \(7.5\) students. If whole students are required, each is approximately \(8\), but the exact calculation using the sector angles is \(7.5\).
+
+\vspace{4pt}
+\noindent\textbf{Worked Solutions -- Pie Chart 2:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item The measured sector angles are:
+        \[
+        90^\circ,\;120^\circ,\;60^\circ,\;45^\circ,\;45^\circ,
+        \]
+        and their sum is
+        \[
+        90+120+60+45+45=360^\circ.
+        \]
+
+  \item Students travelling by Bus:
+        \[
+        \frac{120}{360}\times 60
+        =\frac13\times 60
+        =\boxed{20\text{ students}}.
+        \]
+
+  \item Fraction of students who walk:
+        \[
+        \frac{90}{360}=\boxed{\frac14}.
+        \]
+
+  \item The two sectors with the same angle are:
+        \[
+        45^\circ\text{ and }45^\circ,
+        \]
+        so the two methods are \(\ans{Cycle and Other}\).
+
+  \item Bus minus Car:
+        \[
+        20-10=\boxed{10\text{ more students}}.
+        \]
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 3
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 3 \textendash{} Ice Cream Flavours Sold in One Day (180 sold)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+  \centering
+  \piechart{5.8}{Vanilla/80/slice2,Choc/100/slice1,Straw/60/slice4,Mint/40/slice3,Other/80/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.36\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Flavour} & \textbf{Angle} & \textbf{Fraction} & \textbf{No.} \\
+  \hline
+  Vanilla    & \(80^\circ\) & \(\frac{2}{9}\) & \(40\) \\
+  \hline
+  Chocolate  & \(100^\circ\) & \(\frac{5}{18}\) & \(50\) \\
+  \hline
+  Strawberry & \(60^\circ\) & \(\frac16\) & \(30\) \\
+  \hline
+  Mint       & \(40^\circ\) & \(\frac19\) & \(20\) \\
+  \hline
+  Other      & \(80^\circ\) & \(\frac{2}{9}\) & \(40\) \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{180} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\textbf{Worked Solutions -- Pie Chart 3:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item The sector angles are:
+        \[
+        80^\circ,\;100^\circ,\;60^\circ,\;40^\circ,\;80^\circ,
+        \]
+        and
+        \[
+        80+100+60+40+80=360^\circ.
+        \]
+
+  \item Chocolate ice creams sold:
+        \[
+        \frac{100}{360}\times 180
+        =\frac{5}{18}\times 180
+        =\boxed{50\text{ ice creams}}.
+        \]
+
+  \item Mint ice creams sold:
+        \[
+        \frac{40}{360}\times 180
+        =\frac19\times 180
+        =\boxed{20\text{ ice creams}}.
+        \]
+
+  \item Vanilla and Other both have angle \(80^\circ\). Each represents:
+        \[
+        \frac{80}{360}\times 180
+        =\frac{2}{9}\times 180
+        =\boxed{40\text{ ice creams each}}.
+        \]
+
+  \item A flavour that is exactly \(\frac16\) of all sales has angle
+        \[
+        \frac16\times 360=60^\circ.
+        \]
+        The \(60^\circ\) sector is Strawberry.
+        \[
+        \frac{60}{360}\times 180=30,
+        \qquad
+        \frac16\times 180=30.
+        \]
+        So the flavour is \(\ans{Strawberry}\).
+\end{enumerate}
+
+\newpage
+
+% ===========================
+%  PIE CHART 4
+% ===========================
+\begin{center}
+  {\large\bfseries Pie Chart 4 \textendash{} One Evening's Activities (4 hours = 240 minutes)}
+\end{center}
+
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+  \centering
+  \piechart{5.8}{HW/90/slice4,TV/120/slice2,Gaming/60/slice1,Reading/30/slice3,Other/60/slice5}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.36\textwidth}
+  \setlength{\tabcolsep}{4pt}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{|l|c|c|c|}
+  \hline
+  \textbf{Activity} & \textbf{Angle} & \textbf{Fraction} & \textbf{Mins} \\
+  \hline
+  Homework & \(90^\circ\) & \(\frac14\) & \(60\) \\
+  \hline
+  TV       & \(120^\circ\) & \(\frac13\) & \(80\) \\
+  \hline
+  Gaming   & \(60^\circ\) & \(\frac16\) & \(40\) \\
+  \hline
+  Reading  & \(30^\circ\) & \(\frac{1}{12}\) & \(20\) \\
+  \hline
+  Other    & \(60^\circ\) & \(\frac16\) & \(40\) \\
+  \hline
+  \textbf{Total} & \textbf{360\textdegree} & \textbf{1} & \textbf{240} \\
+  \hline
+  \end{tabular}
+\end{minipage}
+
+\vspace{4pt}
+\noindent\textbf{Worked Solutions -- Pie Chart 4:}
+\begin{enumerate}[leftmargin=1.6em, itemsep=4pt]
+  \item The measured angles are:
+        \[
+        90^\circ,\;120^\circ,\;60^\circ,\;30^\circ,\;60^\circ,
+        \]
+        and
+        \[
+        90+120+60+30+60=360^\circ.
+        \]
+        Since \(4\) hours \(=4\times 60=240\) minutes, each fraction is multiplied by \(240\).
+
+  \item Time spent watching TV:
+        \[
+        \frac{120}{360}\times 240
+        =\frac13\times 240
+        =\boxed{80\text{ mins}}.
+        \]
+
+  \item Time spent on Homework:
+        \[
+        \frac{90}{360}\times 240
+        =\frac14\times 240
+        =\boxed{60\text{ mins}}.
+        \]
+
+  \item Fraction of the evening spent Gaming:
+        \[
+        \frac{60}{360}=\boxed{\frac16}.
+        \]
+
+  \item \textbf{Challenge:} Homework is \(\frac14\) of the evening.
+        For another student with \(5\) hours \(=300\) minutes:
+        \[
+        \frac14\times 300
+        =\boxed{75\text{ mins}}.
+        \]
+\end{enumerate}
+
+\end{document}
