@@ -107,6 +107,10 @@ jobs:
           root_file: ${{ steps.read-files.outputs.xelatex_files }}
           work_in_root_file_dir: true
           latexmk_use_xelatex: true
+          extra_system_packages: >-
+            font-noto font-noto-arabic font-noto-bengali
+            font-noto-gurmukhi font-noto-devanagari
+          extra_fonts: ./fonts/*.ttf
 
       - name: Compile LaTeX files from list (LuaLaTeX)
         if: steps.read-files.outputs.lualatex_files != ''
@@ -115,6 +119,10 @@ jobs:
           root_file: ${{ steps.read-files.outputs.lualatex_files }}
           work_in_root_file_dir: true
           latexmk_use_lualatex: true
+          extra_system_packages: >-
+            font-noto font-noto-arabic font-noto-bengali
+            font-noto-gurmukhi font-noto-devanagari
+          extra_fonts: ./fonts/*.ttf
 
       - name: Upload PDFs
         run: DEBUG=1 .github/workflows/scripts/006_uploadToS3.sh latexFilesToCompile.txt latexSourceFiles.ndjson s3Objects.txt

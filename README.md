@@ -67,3 +67,67 @@ Use it in the following cases, otherwise leave it out:
   the scan to find.
 - **Preferring LuaLaTeX over XeLaTeX.** Unicode-engine packages default to XeLaTeX because it is the
   faster of the two; ask for `lualatex` explicitly if you need its font handling or Lua scripting.
+
+## Fonts
+
+The compile steps run inside a Docker container that `xu-cheng/latex-action` builds for each run, with
+only the repository mounted in. A font installed by a separate step in this workflow lands on the
+*runner host*, outside that container, where the compiler never sees it. Two inputs on the compile step
+reach inside, and they are the only two routes a font can take:
+
+| Input | Use for |
+| --- | --- |
+| `extra_system_packages` | Fonts packaged for Alpine. Installed with `apk` inside the container. |
+| `extra_fonts` | Font files committed to [`fonts/`](fonts/). Copied into the container's font path, then registered with `fc-cache`. |
+
+Both are set on the XeLaTeX and LuaLaTeX steps. pdfLaTeX cannot use system fonts at all, so its step
+does not need them.
+
+**A missing font is not a build failure.** The log fills with `Missing character` lines, the step still
+exits 0, and the PDF is uploaded with blank space where the text should be. So when a sheet in a new
+script builds for the first time, open its compile step in Actions and search the log for
+`Missing character`. That, and not the green tick, is what tells you the font applied.
+
+### Adding a font the build does not have
+
+**First, look for an Alpine package.** Search <https://pkgs.alpinelinux.org/packages?name=font-*>. The
+names are Alpine's, not Debian's — `font-noto-devanagari`, never `fonts-noto-core`, and a Debian name
+will simply fail to resolve. A package is the cheaper option where one exists: nothing is committed to
+the repository, and it tracks the base image. Add it to the `extra_system_packages` list on **both**
+the XeLaTeX and LuaLaTeX steps, since a sheet can route to either.
+
+**Otherwise commit the font file to [`fonts/`](fonts/).** Some fonts are not packaged at all, and some
+are packaged only in the wrong style — Alpine's `font-noto-arabic` will render Urdu, but in *naskh*,
+whereas Urdu is normally set in *nastaliq*. To a reader that difference is closer to typeface versus
+handwriting than to a font preference, which is why `NotoNastaliqUrdu-{Regular,Bold}.ttf` is committed
+here rather than pulled from a package.
+
+`extra_fonts: ./fonts/*.ttf` picks up whatever the directory holds, so a new `.ttf` needs no workflow
+change; add `./fonts/*.otf` alongside it if you commit an OpenType font. After downloading, check you
+have a font and not a redirect or a 404 page saved under the right name:
+
+```bash
+file fonts/*.ttf   # each should say "TrueType Font data"
+ls -l  fonts/      # each should be hundreds of kB, not hundreds of bytes
+```
+
+**Check the licence before committing anything.** The font has to be redistributable inside this
+repository, and its licence text has to travel with it. Noto is under the SIL Open Font License 1.1,
+which permits redistribution provided the licence accompanies the font — hence
+[`fonts/OFL.txt`](fonts/OFL.txt). Take the licence from the repository the font itself came from: the
+`notofonts.github.io` top-level `LICENSE` is Apache 2.0, covering that site's tooling rather than the
+fonts, so it is the wrong file. Anything that is not Noto needs checking on its own terms. Do not
+rename font files either — OFL forbids redistribution under a reserved name, and keeping the original
+names avoids the question.
+
+**Then name the font in the document.** Installing a font does not select it. Ask for it by the family
+name the font declares, which is not always the filename:
+
+```latex
+\usepackage{fontspec}
+\newfontfamily\urdufont{Noto Nastaliq Urdu}[Script=Arabic]
+```
+
+A package existing does not prove `fontconfig` exposes the family name you guessed at. The compile step
+prints the fonts it loaded near the end of its log; a font that is not listed there was never applied,
+whatever else the log says.
