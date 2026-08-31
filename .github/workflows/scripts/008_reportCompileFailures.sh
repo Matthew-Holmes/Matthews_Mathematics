@@ -61,6 +61,53 @@ html_escape() {
   printf '%s' "$text"
 }
 
+# -----------------------------------------------------------------------------
+# Temp files
+# -----------------------------------------------------------------------------
+TMP_ROWS=$(mktemp)
+
+trap 'rm -f "$TMP_ROWS"' EXIT
+
+# -----------------------------------------------------------------------------
+# The other half of the report: what did build, and which engine built it.
+#
+# On a green run this is the whole summary. On a red one it is the answer to
+# "so what did get published?", which is the next thing worth knowing once the
+# failures have been read.
+# -----------------------------------------------------------------------------
+summarise_successes() {
+  local count engine engine_line=""
+
+  jq -r 'select(.status == "ok") | "| <code>" + .path + "</code> | " + .engine + " |"' \
+    "$RESULTS_JSON" | sort > "$TMP_ROWS"
+
+  if [[ ! -s "$TMP_ROWS" ]]; then
+    return 0
+  fi
+
+  # A tally per engine, so a document routed somewhere unexpected stands out
+  # without having to read the whole table.
+  while read -r count engine; do
+    if [[ -n "$engine_line" ]]; then
+      engine_line="$engine_line &nbsp;&middot;&nbsp; $engine **$count**"
+    else
+      engine_line="$engine **$count**"
+    fi
+  done < <(jq -r 'select(.status == "ok") | .engine' "$RESULTS_JSON" | sort | uniq -c)
+
+  summary ""
+  summary "### Compiled and uploaded"
+  summary ""
+  summary "$engine_line"
+  summary ""
+  summary "| Document | Engine |"
+  summary "| --- | --- |"
+
+  if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+    cat "$TMP_ROWS" >> "$GITHUB_STEP_SUMMARY"
+  fi
+}
+
 RULE="========================================================================"
 
 # -----------------------------------------------------------------------------
@@ -92,6 +139,7 @@ if [[ "$FAILED_COUNT" -eq 0 ]]; then
   summary "## LaTeX build report"
   summary ""
   summary ":white_check_mark: All **$TOTAL** document(s) compiled and were uploaded."
+  summarise_successes
   exit 0
 fi
 
@@ -184,6 +232,8 @@ summary "## LaTeX build report"
 summary ""
 summary ":white_check_mark: **$OK_COUNT** compiled and uploaded &nbsp;&nbsp; :x: **$FAILED_COUNT** failed to compile"
 summary ""
+summary "### Failed to compile"
+summary ""
 summary "The documents below were **not** uploaded. Everything else in this run was published as normal."
 summary ""
 summary "| Document | Engine | Error |"
@@ -194,7 +244,7 @@ while IFS=$'\t' read -r REL_PATH ENGINE REASON; do
 done < <(jq -r 'select(.status == "failed") | [.path, .engine, .reason] | @tsv' "$RESULTS_JSON")
 
 summary ""
-summary "Full \`.log\` files are in the **compile-failure-logs** artifact."
+summary "Full <code>.log</code> files are in the **compile-failure-logs** artifact, and each one is expanded in the step log above."
 
 while IFS= read -r REL_PATH; do
   summary ""
@@ -207,5 +257,7 @@ while IFS= read -r REL_PATH; do
   summary ""
   summary "</details>"
 done < <(jq -r 'select(.status == "failed") | select(.errors | length > 0) | .path' "$RESULTS_JSON")
+
+summarise_successes
 
 exit 1
