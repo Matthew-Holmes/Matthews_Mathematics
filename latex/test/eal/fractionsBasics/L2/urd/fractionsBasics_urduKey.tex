@@ -13,6 +13,7 @@
 %   English text        black   RGB 0 0 0
 %   Urdu text           purple  RGB 112 48 160
 %   layout macros       version 1
+%   key layout          version 1
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -20,16 +21,15 @@
 % to make updates to the LaTeX below if you want to edit it.
 % ================================================================
 % ==== VOCABULARY DATA - generated, do not edit ====
-% {"terms":[{"en":"fraction","def":"a number written as one whole split into equal parts, with a number of those parts taken","tr":"\u06A9\u0633\u0631","trdef":"\u0627\u06CC\u06A9 \u067E\u0648\u0631\u06D2 \u06A9\u0648 \u0628\u0631\u0627\u0628\u0631 \u062D\u0635\u0648\u06BA \u0645\u06CC\u06BA \u062A\u0642\u0633\u06CC\u0645 \u06A9\u0631 \u06A9\u06D2 \u0644\u06A9\u06BE\u0627 \u06AF\u06CC\u0627 \u0639\u062F\u062F"},
-% {"en":"numerator","def":"the number above the line in a fraction, showing how many equal parts are taken","tr":"\u0634\u0645\u0627\u0631 \u06A9\u0646\u0646\u062F\u06C1","trdef":"\u06A9\u0633\u0631 \u0645\u06CC\u06BA \u0644\u06A9\u06CC\u0631 \u06A9\u06D2 \u0627\u0648\u067E\u0631 \u0648\u0627\u0644\u0627 \u0639\u062F\u062F"},
-% {"en":"denominator","def":"the number below the line in a fraction, showing how many equal parts the whole is split into","tr":"\u0645\u062E\u0631\u062C","trdef":"\u06A9\u0633\u0631 \u0645\u06CC\u06BA \u0644\u06A9\u06CC\u0631 \u06A9\u06D2 \u0646\u06CC\u0686\u06D2 \u0648\u0627\u0644\u0627 \u0639\u062F\u062F"},
+% {"terms":[{"en":"denominator","def":"the number below the line in a fraction, showing how many equal parts the whole is split into","tr":"\u0645\u062E\u0631\u062C","trdef":"\u06A9\u0633\u0631 \u0645\u06CC\u06BA \u0644\u06A9\u06CC\u0631 \u06A9\u06D2 \u0646\u06CC\u0686\u06D2 \u0648\u0627\u0644\u0627 \u0639\u062F\u062F"},
 % {"en":"equivalent","def":"having the same value, even though it is written differently","tr":"\u0645\u0633\u0627\u0648\u06CC","trdef":"\u0627\u06CC\u06A9 \u06C1\u06CC \u0642\u062F\u0631 \u0631\u06A9\u06BE\u0646\u06D2 \u0648\u0627\u0644\u0627"},
+% {"en":"fraction","def":"a number written as one whole split into equal parts, with a number of those parts taken","tr":"\u06A9\u0633\u0631","trdef":"\u0627\u06CC\u06A9 \u067E\u0648\u0631\u06D2 \u06A9\u0648 \u0628\u0631\u0627\u0628\u0631 \u062D\u0635\u0648\u06BA \u0645\u06CC\u06BA \u062A\u0642\u0633\u06CC\u0645 \u06A9\u0631 \u06A9\u06D2 \u0644\u06A9\u06BE\u0627 \u06AF\u06CC\u0627 \u0639\u062F\u062F"},
+% {"en":"numerator","def":"the number above the line in a fraction, showing how many equal parts are taken","tr":"\u0634\u0645\u0627\u0631 \u06A9\u0646\u0646\u062F\u06C1","trdef":"\u06A9\u0633\u0631 \u0645\u06CC\u06BA \u0644\u06A9\u06CC\u0631 \u06A9\u06D2 \u0627\u0648\u067E\u0631 \u0648\u0627\u0644\u0627 \u0639\u062F\u062F"},
 % {"en":"simplify","def":"to write something in its smallest or plainest form without changing its value","tr":"\u0633\u0627\u062F\u06C1 \u06A9\u0631\u0646\u0627","trdef":"\u0633\u0627\u062F\u06C1 \u062A\u0631\u06CC\u0646 \u0634\u06A9\u0644 \u0645\u06CC\u06BA \u0644\u06A9\u06BE\u0646\u0627"}]}
 % ==== END VOCABULARY DATA ====
 
 \documentclass[11pt]{article}
 \usepackage[a4paper,margin=18mm]{geometry}
-\usepackage{array}
 \usepackage[english,bidi=basic]{babel}
 \babelprovide[import]{urdu}
 \babelfont[urdu]{rm}[Renderer=Harfbuzz, BoldFont={Noto Nastaliq Urdu}, ItalicFont={Noto Nastaliq Urdu}, BoldItalicFont={Noto Nastaliq Urdu}]{Noto Nastaliq Urdu}
@@ -87,34 +87,132 @@
   \addvspace{0.5\baselineskip}%
 }
 
+% ================================================================
+% Vocabulary key layout
+% ================================================================
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\colorlet{ealrulecolour}{ealkeycolour!35!white}
+
+% which way a wrapped meaning is ragged. a right to left language wants
+% its second line flush right, and setting it flush left is the give-away
+% that the meaning has been laid out as though it were English
+\newcommand{\ealmeaningalign}{\raggedleft}
+
+\newlength{\ealwordcol}
+\setlength{\ealwordcol}{40mm}
+
+% One entry: the word, a dotted leader across to the meaning, and the
+% meaning in a box of its own so that a wrapped line lines up under the
+% first rather than under the word.
+\newcommand{\ealentry}[2]{%
+  \par\addvspace{1.6mm}%
+  \noindent
+  \makebox[\ealwordcol][l]{\textbf{\ealkey{#1}}\hspace{2mm}%
+    \textcolor{ealrulecolour}{\dotfill}}%
+  \hspace{3mm}%
+  \parbox[t]{\dimexpr\textwidth-\ealwordcol-3mm\relax}{\ealmeaningalign #2}%
+  \par
+}
+
+% The translated word and then its meaning, all inside one \ealtext
+% rather than two. A right to left language then orders the word, the
+% colon and the meaning itself; set as two runs, the word lands at the
+% far end of the line and is read last.
+\newcommand{\ealtrmeaning}[2]{\ealtext{{\bfseries\color{ealkeycolour}#1}: #2}}
+
+% As many copies of a body as fit go on one page, with a cut line
+% between them, so a key of five terms is printed four to a sheet
+% rather than taking one to itself. A body too tall to fit is typeset
+% directly instead, so it breaks across pages rather than overflowing.
+\newsavebox{\ealcopybox}
+\newlength{\ealcopyht}
+\newlength{\ealcutgap}
+\setlength{\ealcutgap}{10mm}
+\newcount\ealfits
+\newcount\ealdone
+
+\newcommand{\ealcut}{%
+  \par\vspace{0.5\ealcutgap}%
+  \noindent\hbox to \textwidth{%
+    \color{ealrulecolour}%
+    \leaders\hbox to 6pt{\hss\rule[0.55ex]{3pt}{0.4pt}\hss}\hfill}%
+  \par\vspace{0.5\ealcutgap}%
+}
+
+\newcommand{\ealpage}[1]{%
+  \sbox{\ealcopybox}{\parbox{\textwidth}{#1}}%
+  \setlength{\ealcopyht}{\dimexpr\ht\ealcopybox+\dp\ealcopybox\relax}%
+  \ifdim\ealcopyht>\textheight
+    #1%
+  \else
+    \ealfits=\dimexpr\textheight+\ealcutgap\relax
+    \ealdone=\dimexpr\ealcopyht+\ealcutgap\relax
+    \divide\ealfits by \ealdone
+    \ifnum\ealfits<1 \ealfits=1 \fi
+    \ealdone=0
+    \loop\ifnum\ealdone<\ealfits
+      \ifnum\ealdone>0 \ealcut\fi
+      \noindent\usebox{\ealcopybox}\par
+      \advance\ealdone by 1
+    \repeat
+  \fi
+  \newpage
+}
+
+\tikzset{
+  ealmatchgrid/.style={
+    matrix of nodes, ampersand replacement=\ealnextcol,
+    row sep=4mm, column sep=24mm,
+    nodes={anchor=west, align=left, inner sep=1pt},
+    column 1/.style={nodes={text width=38mm}},
+    column 2/.style={nodes={text width=82mm, align=right}},
+  },
+  ealanswerline/.style={ealkeycolour!70!white, line width=0.7pt},
+}
+
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 
 \newcommand{\ealkeybody}{%
-  {\large\textbf{FractionsBasics: key vocabulary}}\par\medskip
-  \begin{tabular}{@{}p{32mm}p{34mm}p{86mm}@{}}
-    \textbf{English} & \textbf{Urdu} & \textbf{Meaning} \\[2pt]
-    \hline\\[-6pt]
-    \ealkey{fraction} & \ealkeytr{کسر} & \ealtext{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد} \\[4pt]
-    \ealkey{numerator} & \ealkeytr{شمار کنندہ} & \ealtext{کسر میں لکیر کے اوپر والا عدد} \\[4pt]
-    \ealkey{denominator} & \ealkeytr{مخرج} & \ealtext{کسر میں لکیر کے نیچے والا عدد} \\[4pt]
-    \ealkey{equivalent} & \ealkeytr{مساوی} & \ealtext{ایک ہی قدر رکھنے والا} \\[4pt]
-    \ealkey{simplify} & \ealkeytr{سادہ کرنا} & \ealtext{سادہ ترین شکل میں لکھنا} \\[4pt]
-  \end{tabular}}
+  {\large\bfseries FractionsBasics: key vocabulary}\par\medskip
+  \ealentry{denominator}{\ealtrmeaning{مخرج}{کسر میں لکیر کے نیچے والا عدد}}
+  \ealentry{equivalent}{\ealtrmeaning{مساوی}{ایک ہی قدر رکھنے والا}}
+  \ealentry{fraction}{\ealtrmeaning{کسر}{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد}}
+  \ealentry{numerator}{\ealtrmeaning{شمار کنندہ}{کسر میں لکیر کے اوپر والا عدد}}
+  \ealentry{simplify}{\ealtrmeaning{سادہ کرنا}{سادہ ترین شکل میں لکھنا}}
+}
 
+
+\newcommand{\ealmatchrows}{%
+  {\textbf{\ealkey{denominator}}} \ealnextcol {\ealtrmeaning{سادہ کرنا}{سادہ ترین شکل میں لکھنا}} \\
+  {\textbf{\ealkey{equivalent}}} \ealnextcol {\ealtrmeaning{کسر}{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد}} \\
+  {\textbf{\ealkey{fraction}}} \ealnextcol {\ealtrmeaning{مخرج}{کسر میں لکیر کے نیچے والا عدد}} \\
+  {\textbf{\ealkey{numerator}}} \ealnextcol {\ealtrmeaning{مساوی}{ایک ہی قدر رکھنے والا}} \\
+  {\textbf{\ealkey{simplify}}} \ealnextcol {\ealtrmeaning{شمار کنندہ}{کسر میں لکیر کے اوپر والا عدد}} \\
+}
 
 \newcommand{\ealmatchbody}{%
-  {\large\textbf{Match the English word to its Urdu meaning}}\par\medskip
-  \begin{tabular}{@{}p{50mm}@{\hspace{16mm}}p{86mm}@{}}
-    \ealkey{fraction} & \ealkeytr{مخرج} \ealtext{کسر میں لکیر کے نیچے والا عدد} \\[10pt]
-    \ealkey{numerator} & \ealkeytr{سادہ کرنا} \ealtext{سادہ ترین شکل میں لکھنا} \\[10pt]
-    \ealkey{denominator} & \ealkeytr{شمار کنندہ} \ealtext{کسر میں لکیر کے اوپر والا عدد} \\[10pt]
-    \ealkey{equivalent} & \ealkeytr{مساوی} \ealtext{ایک ہی قدر رکھنے والا} \\[10pt]
-    \ealkey{simplify} & \ealkeytr{کسر} \ealtext{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد} \\[10pt]
-  \end{tabular}}
+  {\large\bfseries Match the English word to its Urdu meaning}\par\medskip
+  \begin{tikzpicture}
+    \matrix (m) [ealmatchgrid] {\ealmatchrows};
+  \end{tikzpicture}}
+
+\newcommand{\ealanswerbody}{%
+  {\large\bfseries Match the English word to its Urdu meaning: answers}\par\medskip
+  \begin{tikzpicture}
+    \matrix (m) [ealmatchgrid] {\ealmatchrows};
+    \draw[ealanswerline] (m-1-1.east) -- (m-3-2.west);
+    \draw[ealanswerline] (m-2-1.east) -- (m-4-2.west);
+    \draw[ealanswerline] (m-3-1.east) -- (m-2-2.west);
+    \draw[ealanswerline] (m-4-1.east) -- (m-5-2.west);
+    \draw[ealanswerline] (m-5-1.east) -- (m-1-2.west);
+  \end{tikzpicture}}
 
 
 \begin{document}
-\ealkeybody\newpage\ealkeybody\newpage
-\ealmatchbody\newpage\ealmatchbody
+\ealpage{\ealkeybody}
+\ealpage{\ealmatchbody}
+\ealpage{\ealanswerbody}
 \end{document}
