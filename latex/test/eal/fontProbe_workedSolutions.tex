@@ -1,0 +1,13 @@
+% !TeX program = lualatex
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\begin{document}
+{\large\bfseries Worked solutions}\par\medskip
+The supplied source is a \emph{font probe}, not a worksheet of exercises. It contains no problem statements, so there are no exercise-specific worked solutions to typeset.
+
+The source's own task is to check, for every configured language, that the named Noto font is installed. It does this by selecting the font and printing one sample letter of the relevant script. A missing font is recorded and reported at the end as a \texttt{PackageError}; a font that exists but cannot set Latin full stops, digits, or em dashes is also reported so that a Latin fallback can be configured.
+
+Thus the only ``work'' required is to install any missing Noto fonts (for example, the \texttt{font-noto-all} package) and to add a Latin fallback for scripts whose fonts do not carry Latin punctuation or digits.
+\end{document}
