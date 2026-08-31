@@ -131,8 +131,7 @@ jobs:
           continue_on_error: true
           latexmk_use_lualatex: true
           extra_system_packages: >-
-            font-noto font-noto-arabic font-noto-bengali
-            font-noto-gurmukhi font-noto-devanagari
+            font-noto font-noto-all font-noto-cjk
           extra_fonts: ./fonts/*.ttf
 
       - name: Work out which documents actually compiled
