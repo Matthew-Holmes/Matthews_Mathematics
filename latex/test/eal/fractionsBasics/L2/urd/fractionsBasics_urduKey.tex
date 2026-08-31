@@ -13,7 +13,7 @@
 %   English text        black   RGB 0 0 0
 %   Urdu text           purple  RGB 112 48 160
 %   layout macros       version 1
-%   key layout          version 1
+%   key layout          version 3
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -95,32 +95,33 @@
 
 \colorlet{ealrulecolour}{ealkeycolour!35!white}
 
-% which way a wrapped meaning is ragged. a right to left language wants
-% its second line flush right, and setting it flush left is the give-away
-% that the meaning has been laid out as though it were English
-\newcommand{\ealmeaningalign}{\raggedleft}
-
 \newlength{\ealwordcol}
 \setlength{\ealwordcol}{40mm}
+\newlength{\ealmeaningcol}
+\setlength{\ealmeaningcol}{\dimexpr\textwidth-\ealwordcol-3mm\relax}
 
-% One entry: the word, a dotted leader across to the meaning, and the
-% meaning in a box of its own so that a wrapped line lines up under the
-% first rather than under the word.
 \newcommand{\ealentry}[2]{%
   \par\addvspace{1.6mm}%
   \noindent
-  \makebox[\ealwordcol][l]{\textbf{\ealkey{#1}}\hspace{2mm}%
-    \textcolor{ealrulecolour}{\dotfill}}%
+  \parbox[t]{\ealmeaningcol}{\raggedleft\strut #2}%
   \hspace{3mm}%
-  \parbox[t]{\dimexpr\textwidth-\ealwordcol-3mm\relax}{\ealmeaningalign #2}%
+  \makebox[\ealwordcol][l]{\textcolor{ealrulecolour}{\dotfill}%
+    \hspace{2mm}\textbf{\ealkey{#1}}}%
   \par
 }
 
 % The translated word and then its meaning, all inside one \ealtext
 % rather than two. A right to left language then orders the word, the
-% colon and the meaning itself; set as two runs, the word lands at the
+% dash and the meaning itself; set as two runs, the word lands at the
 % far end of the line and is read last.
-\newcommand{\ealtrmeaning}[2]{\ealtext{{\bfseries\color{ealkeycolour}#1}: #2}}
+%
+% The tie keeps the dash with the word, so a meaning that wraps breaks
+% after the dash rather than opening its second line with one.
+\newcommand{\ealtrmeaning}[2]{%
+  \ealtext{{\bfseries\color{ealkeycolour}#1}~\textemdash{} #2}}
+
+% how a heading and the match-up grid sit on the page
+\newcommand{\ealstart}{\hspace*{\fill}}
 
 % As many copies of a body as fit go on one page, with a cut line
 % between them, so a key of five terms is printed four to a sheet
@@ -165,9 +166,9 @@
   ealmatchgrid/.style={
     matrix of nodes, ampersand replacement=\ealnextcol,
     row sep=4mm, column sep=24mm,
-    nodes={anchor=west, align=left, inner sep=1pt},
-    column 1/.style={nodes={text width=38mm}},
-    column 2/.style={nodes={text width=82mm, align=right}},
+    nodes={anchor=west, inner sep=1pt},
+    column 1/.style={nodes={text width=82mm, align=right}},
+    column 2/.style={nodes={text width=38mm, align=left}},
   },
   ealanswerline/.style={ealkeycolour!70!white, line width=0.7pt},
 }
@@ -176,7 +177,7 @@
 \setlength{\parindent}{0pt}
 
 \newcommand{\ealkeybody}{%
-  {\large\bfseries FractionsBasics: key vocabulary}\par\medskip
+  \ealstart{\large\bfseries FractionsBasics: key vocabulary}\par\medskip
   \ealentry{denominator}{\ealtrmeaning{مخرج}{کسر میں لکیر کے نیچے والا عدد}}
   \ealentry{equivalent}{\ealtrmeaning{مساوی}{ایک ہی قدر رکھنے والا}}
   \ealentry{fraction}{\ealtrmeaning{کسر}{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد}}
@@ -186,28 +187,28 @@
 
 
 \newcommand{\ealmatchrows}{%
-  {\textbf{\ealkey{denominator}}} \ealnextcol {\ealtrmeaning{سادہ کرنا}{سادہ ترین شکل میں لکھنا}} \\
-  {\textbf{\ealkey{equivalent}}} \ealnextcol {\ealtrmeaning{کسر}{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد}} \\
-  {\textbf{\ealkey{fraction}}} \ealnextcol {\ealtrmeaning{مخرج}{کسر میں لکیر کے نیچے والا عدد}} \\
-  {\textbf{\ealkey{numerator}}} \ealnextcol {\ealtrmeaning{مساوی}{ایک ہی قدر رکھنے والا}} \\
-  {\textbf{\ealkey{simplify}}} \ealnextcol {\ealtrmeaning{شمار کنندہ}{کسر میں لکیر کے اوپر والا عدد}} \\
+  {\ealtrmeaning{سادہ کرنا}{سادہ ترین شکل میں لکھنا}} \ealnextcol {\textbf{\ealkey{denominator}}} \\
+  {\ealtrmeaning{کسر}{ایک پورے کو برابر حصوں میں تقسیم کر کے لکھا گیا عدد}} \ealnextcol {\textbf{\ealkey{equivalent}}} \\
+  {\ealtrmeaning{مخرج}{کسر میں لکیر کے نیچے والا عدد}} \ealnextcol {\textbf{\ealkey{fraction}}} \\
+  {\ealtrmeaning{مساوی}{ایک ہی قدر رکھنے والا}} \ealnextcol {\textbf{\ealkey{numerator}}} \\
+  {\ealtrmeaning{شمار کنندہ}{کسر میں لکیر کے اوپر والا عدد}} \ealnextcol {\textbf{\ealkey{simplify}}} \\
 }
 
 \newcommand{\ealmatchbody}{%
-  {\large\bfseries Match the English word to its Urdu meaning}\par\medskip
-  \begin{tikzpicture}
+  \ealstart{\large\bfseries Match the English word to its Urdu meaning}\par\medskip
+  \ealstart\begin{tikzpicture}
     \matrix (m) [ealmatchgrid] {\ealmatchrows};
   \end{tikzpicture}}
 
 \newcommand{\ealanswerbody}{%
-  {\large\bfseries Match the English word to its Urdu meaning: answers}\par\medskip
-  \begin{tikzpicture}
+  \ealstart{\large\bfseries Match the English word to its Urdu meaning: answers}\par\medskip
+  \ealstart\begin{tikzpicture}
     \matrix (m) [ealmatchgrid] {\ealmatchrows};
-    \draw[ealanswerline] (m-1-1.east) -- (m-3-2.west);
-    \draw[ealanswerline] (m-2-1.east) -- (m-4-2.west);
-    \draw[ealanswerline] (m-3-1.east) -- (m-2-2.west);
-    \draw[ealanswerline] (m-4-1.east) -- (m-5-2.west);
-    \draw[ealanswerline] (m-5-1.east) -- (m-1-2.west);
+    \draw[ealanswerline] (m-1-2.west) -- (m-3-1.east);
+    \draw[ealanswerline] (m-2-2.west) -- (m-4-1.east);
+    \draw[ealanswerline] (m-3-2.west) -- (m-2-1.east);
+    \draw[ealanswerline] (m-4-2.west) -- (m-5-1.east);
+    \draw[ealanswerline] (m-5-2.west) -- (m-1-1.east);
   \end{tikzpicture}}
 
 
