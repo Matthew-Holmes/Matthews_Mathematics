@@ -1,0 +1,783 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/targeted/KS3/percentages/introducingPercentagesStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/targeted/KS3/percentages/introducingPercentagesStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+\title{Percentages: Retrieve and Connects}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------------------------------------
+% Contents
+%------------------------------------------------------------------
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+  \item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+  \item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+  \item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+  \item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+  \item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+  \item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+  \item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+  \item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+  \item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+  \item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% Starter 1
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect}
+\hypertarget{q-st1}{}
+\begin{columns}
+\column{0.4\textwidth}
+\begin{center}
+\vspace{-1.5em}
+\begin{tikzpicture}[scale=0.78]
+% 10×10 grid; first 3 columns shaded = 30 squares
+\foreach \col in {0,...,9}{
+  \foreach \row in {0,...,9}{
+    \ifnum\col<3
+      \fill[blue!30] (\col*0.52,\row*0.52) rectangle ++(0.52,0.52);
+    \fi
+    \draw (\col*0.52,\row*0.52) rectangle ++(0.52,0.52);
+  }
+}
+% Column numbers 1--10 along the top
+\foreach \col in {0,...,9}{
+  \node[font=\tiny, above] at (\col*0.52+0.26, 5.2+0.15) {\number\numexpr\col+1};
+}
+% Row numbers 1--10 along the left side (bottom = 1, top = 10)
+\foreach \row in {0,...,9}{
+  \node[font=\tiny, left] at (-0.25, \row*0.52+0.26) {\number\numexpr10-\row};
+}
+\node at (2.34,-0.45) {\small \ablank{30} squares out of \ablank{100} are shaded };
+\end{tikzpicture}
+\end{center}
+
+\column{0.6\textwidth}
+\vspace{-1.5em}
+\begin{enumerate}
+  \item In the diagram how many squares are shaded?
+        \ablank{30}
+  \item How many total squares are there?
+        \ablank{100}
+  \item $70 + 30 = \ablank{100}$
+  \item $25 \times 4 = \ablank{100}$
+  \item What fraction of the square is shaded:
+        \ashow{$\tfrac{30}{100}$}
+  \item ``Per cent'' means ``out of \ablank{100}''.
+  \item The shaded fraction $= \ablank{30\%}$
+  \item Write $\dfrac{1}{2}$ as a percentage. \ablank{$50\%$}
+  \item Write $\dfrac{1}{4}$ as a percentage. \ablank{$25\%$}
+  \item Write $\dfrac{5}{4}$ as a percentage. \ablank{$125\%$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} In the diagram how many squares are shaded?
+
+\smallskip
+\textbf{Worked Solution:} The shaded region is three full columns of the grid. Each column has \(10\) squares, so the number shaded is \(3 \times 10\), which is \ablank{$30$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 2}
+\textbf{Question:} How many total squares are there?
+
+\smallskip
+\textbf{Worked Solution:} The grid is \(10\) squares by \(10\) squares, so the total number of squares is \(10 \times 10\), which is \ablank{$100$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 3}
+\textbf{Question:} \(70 + 30 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Add \(70\) and \(30\). The sum is \ablank{$100$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 4}
+\textbf{Question:} \(25 \times 4 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiplying \(25\) by \(4\) means four quarters of \(25\). The product is \ablank{$100$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 5}
+\textbf{Question:} What fraction of the square is shaded?
+
+\smallskip
+\textbf{Worked Solution:} There are \(30\) shaded squares out of \(100\) total squares, so the shaded fraction is \ablank{$\tfrac{30}{100}$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 6}
+\textbf{Question:} What does ``per cent'' mean?
+
+\smallskip
+\textbf{Worked Solution:} The word ``cent'' refers to one hundred, so ``per cent'' means \ablank{out of 100}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 7}
+\textbf{Question:} The shaded fraction equals what percentage?
+
+\smallskip
+\textbf{Worked Solution:} The shaded part is \(30\) out of \(100\), so as a percentage it is \ablank{$30\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 8}
+\textbf{Question:} Write \(\frac{1}{2}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 2 = 50\), we have \(\frac{1}{2} = \frac{50}{100}\). Therefore the percentage is \ablank{$50\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 9}
+\textbf{Question:} Write \(\frac{1}{4}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 4 = 25\), we have \(\frac{1}{4} = \frac{25}{100}\). Therefore the percentage is \ablank{$25\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 10}
+\textbf{Question:} Write \(\frac{5}{4}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 4 = 25\), we have \(\frac{5}{4} = \frac{125}{100}\). Therefore the percentage is \ablank{$125\%$}.
+\end{frame}
+
+%------------------------------------------------------------------
+% Starter 2
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect}
+\hypertarget{q-st2}{}
+\begin{columns}
+\column{0.48\textwidth}
+\vspace{-4em}
+\begin{center}
+% \vspace{-1.5em}
+\begin{tikzpicture}[scale=0.85]
+% bar 1/5
+\draw (0,0) rectangle (5.0,0.65);
+\fill[red!35] (0,0) rectangle (1.0,0.65);
+\foreach \x in {1,2,3,4} \draw (\x,0) -- (\x,0.65);
+\foreach \i in {0,1,2,3,4}
+  \node[font=\tiny] at (\i +0.50,0.325) {20\%};
+\node[above,font=\small] at (2.5,0.65) {$\tfrac{1}{5}$};
+\node[right,font=\small] at (5.0,0.325) {$=\ablank{20\%}$};
+
+% bar 2/5
+\draw (0,-1.65) rectangle (5.0,-1.0);
+\fill[red!35] (0,-1.65) rectangle (2.0,-1.0);
+\foreach \x in {1,2,3,4} \draw (\x,-1.65) -- (\x,-1.0);
+\foreach \i in {0,1,2,3,4}
+  \node[font=\tiny] at (\i+0.50,-1.325) {20\%};
+\node[above,font=\small] at (2.5,-1.0) {$\tfrac{2}{5}$};
+\node[right,font=\small] at (5.0,-1.325) {$=\ablank{40\%}$};
+
+% bar 3/10 (lowered further for extra separation)
+\draw (0,-3.15) rectangle (5.0,-2.5);
+\fill[green!35] (0,-3.15) rectangle (1.50,-2.5);
+\foreach \x in {0.50,1.0,...,5.00} \draw (\x,-3.15) -- (\x,-2.5);
+\foreach \i in {0,...,9}
+  \node[font=\tiny] at (\i*0.50+0.25,-2.825) {10\%};
+\node[above,font=\small] at (2.5,-2.5) {$\tfrac{3}{10}$};
+\node[right,font=\small] at (5.0,-2.825) {$=\ablank{30\%}$};
+\end{tikzpicture}
+\end{center}
+
+\column{0.52\textwidth}
+
+\vspace{-2em}
+\begin{multicols}{2}
+\begin{enumerate}
+   \setlength{\itemsep}{12pt}
+  \item $3 \times 20 = \ablank{60}$
+  \item $7 \times 10 = \ablank{70}$
+  \item $\dfrac{1}{5} = \ablank{20\%}$
+  \item $\dfrac{2}{5} = \ablank{40\%}$
+  \item $\dfrac{3}{10} = \ablank{30\%}$
+  \item $\dfrac{\text{\ashowq{7}}}{10} = 70\%$
+  \item $\dfrac{1}{\text{\ashowq{4}}} = 25\%$
+  \item $\dfrac{2}{25} = \ablank{8\%}$
+  \item $\dfrac{7}{8} = \ablank{87.5\%}$
+  \end{enumerate}
+\end{multicols}
+\begin{center}
+  \begin{enumerate}
+  \setcounter{enumi}{9}
+  \item $\dfrac{5}{3}={}$\ablank{$166.\dot{6}\%$}
+  \vspace{0.6em}
+  \item Complete the conversion: \\[2pt]
+        $\dfrac{\text{\ashowq{3}}}{4} = \dfrac{75}{\text{\ashowq{100}}} = 75\%$
+\end{enumerate}
+\end{center}
+
+
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} \(3 \times 20 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply \(3\) by \(20\). The product is \ablank{$60$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 2}
+\textbf{Question:} \(7 \times 10 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply \(7\) by \(10\). The product is \ablank{$70$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 3}
+\textbf{Question:} Write \(\frac{1}{5}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 5 = 20\), we have \(\frac{1}{5} = \frac{20}{100}\). Therefore the percentage is \ablank{$20\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 4}
+\textbf{Question:} Write \(\frac{2}{5}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(\frac{1}{5} = \frac{20}{100}\), we have \(\frac{2}{5} = \frac{40}{100}\). Therefore the percentage is \ablank{$40\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 5}
+\textbf{Question:} Write \(\frac{3}{10}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 10 = 10\), we have \(\frac{3}{10} = \frac{30}{100}\). Therefore the percentage is \ablank{$30\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 6}
+\textbf{Question:} \(\frac{?}{10} = 70\%\). Find the missing numerator.
+
+\smallskip
+\textbf{Worked Solution:} Write \(70\%\) as \(\frac{70}{100}\). Simplify by dividing numerator and denominator by \(10\): \(\frac{70}{100} = \frac{7}{10}\). The missing numerator is \ablank{$7$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 7}
+\textbf{Question:} \(\frac{1}{?} = 25\%\). Find the missing denominator.
+
+\smallskip
+\textbf{Worked Solution:} Write \(25\%\) as \(\frac{25}{100}\). Simplify by dividing numerator and denominator by \(25\): \(\frac{25}{100} = \frac{1}{4}\). The missing denominator is \ablank{$4$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 8}
+\textbf{Question:} Write \(\frac{2}{25}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 25 = 4\), multiply numerator and denominator by \(4\): \(\frac{2}{25} = \frac{8}{100}\). Therefore the percentage is \ablank{$8\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 9}
+\textbf{Question:} Write \(\frac{7}{8}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} Since \(100 \div 8 = 12.5\), multiply numerator and denominator by \(12.5\): \(\frac{7}{8} = \frac{87.5}{100}\). Therefore the percentage is \ablank{$87.5\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 10}
+\textbf{Question:} Write \(\frac{5}{3}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{5}{3} = 1.666\ldots\). To convert to a percentage, multiply by \(100\): \(1.666\ldots \times 100 = 166.666\ldots\). Therefore the percentage is \ablank{$166.\dot{6}\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 11}
+\textbf{Question:} Complete the conversion: \(\frac{?}{4} = \frac{75}{?} = 75\%\).
+
+\smallskip
+\textbf{Worked Solution:} Write \(75\%\) as \(\frac{75}{100}\). Simplify by dividing numerator and denominator by \(25\): \(\frac{75}{100} = \frac{3}{4}\). The missing numerator is \ablank{$3$} and the missing denominator is \ablank{$100$}.
+\end{frame}
+
+%------------------------------------------------------------------
+% Starter 3
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect}
+\hypertarget{q-st3}{}
+\begin{columns}
+\column{0.35\textwidth}
+\begin{tikzpicture}[scale=0.9]
+% visual bar for 3/8
+\draw (0,0) rectangle (4,0.6);
+\fill[blue!30] (0,0) rectangle (1.5,0.6);   % 3 of 8 segments
+\foreach \x in {0.5,1.0,1.5,2.0,2.5,3.0,3.5}
+  \draw (\x,0) -- (\x,0.6);
+\foreach \i in {0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0}
+  \node[font=\tiny] at (\i-0.25,0.325) {$\frac{1}{8}$};
+  
+\node[above,font=\small] at (2,0.65) {$\frac{1}{8} = 12.5\%$};
+% second bar for 1/3
+\draw (0,-2.2) rectangle (4,-1.6);
+\fill[orange!30] (0,-2.2) rectangle (1.333,-1.6);
+\draw (1.333,-2.2) -- (1.333,-1.6);
+\draw (2.667,-2.2) -- (2.667,-1.6);
+\end{tikzpicture}
+
+\column{0.65\textwidth}
+\textbf{Questions}
+\begin{enumerate}
+  \item Write $\frac{1}{2}$ as a percentage. \ablank{$50\%$}
+  \item Write $\frac{3}{10}$ as a percentage. \ablank{$30\%$}
+  \item What does “per cent” mean? \ablank{out of 100}
+  \item Convert $\frac{3}{8}$ to a percentage. \ablank{$37.5\%$}
+  \item What percentage of the second bar is shaded orange? \ablank{$33.\dot{3}\%$}
+  \item Convert $\frac{2}{3}$ to a percentage. \ablank{$66.\dot{6}\%$}
+  \item What is $\frac{4}{3}$ as a percentage, round your percentage to one decimal place. \ablank{$133.3\%$}
+  \item What fraction does $0.1\%$ equal? \ashow{$\frac{1}{1000}$}
+  \item What fraction does $0.003\%$ equal? \ashow{$\frac{3}{100,000}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} Write \(\frac{1}{2}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{2} = \frac{50}{100}\), so as a percentage it is \ablank{$50\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 2}
+\textbf{Question:} Write \(\frac{3}{10}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{3}{10} = \frac{30}{100}\), so as a percentage it is \ablank{$30\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 3}
+\textbf{Question:} What does ``per cent'' mean?
+
+\smallskip
+\textbf{Worked Solution:} ``Cent'' means one hundred, so ``per cent'' means \ablank{out of 100}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 4}
+\textbf{Question:} Convert \(\frac{3}{8}\) to a percentage.
+
+\smallskip
+\textbf{Worked Solution:} The diagram shows that \(\frac{1}{8} = 12.5\%\). Therefore \(\frac{3}{8} = 3 \times 12.5\% = \ablank{37.5\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 5}
+\textbf{Question:} What percentage of the second bar is shaded orange?
+
+\smallskip
+\textbf{Worked Solution:} The second bar is divided into \(3\) equal parts, and \(1\) part is shaded. So the shaded fraction is \(\frac{1}{3}\), which is \ablank{$33.\dot{3}\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 6}
+\textbf{Question:} Convert \(\frac{2}{3}\) to a percentage.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{3} = 33.\dot{3}\%\), so \(\frac{2}{3} = 2 \times 33.\dot{3}\% = \ablank{66.\dot{6}\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 7}
+\textbf{Question:} What is \(\frac{4}{3}\) as a percentage, rounded to one decimal place?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{4}{3} = 1.333\ldots\). Multiplying by \(100\) gives \(133.333\ldots\%\). Rounded to one decimal place, this is \ablank{$133.3\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 8}
+\textbf{Question:} What fraction does \(0.1\%\) equal?
+
+\smallskip
+\textbf{Worked Solution:} \(0.1\% = \frac{0.1}{100}\). Multiply numerator and denominator by \(10\) to clear the decimal. This gives \ashow{$\frac{1}{1000}$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 9}
+\textbf{Question:} What fraction does \(0.003\%\) equal?
+
+\smallskip
+\textbf{Worked Solution:} \(0.003\% = \frac{0.003}{100}\). Multiply numerator and denominator by \(1000\). This gives \ashow{$\frac{3}{100000}$}.
+\end{frame}
+
+%------------------------------------------------------------------
+% Starter 4
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect}
+\hypertarget{q-st4}{}
+\begin{columns}
+\column{0.35\textwidth}
+\begin{center}
+\vspace{-5em}
+\begin{tikzpicture}[scale=0.85]
+% 30% bar
+\draw (0,0) rectangle (5.0,0.7);
+\fill[green!35] (0,0) rectangle (1.50,0.7);
+\foreach \x in {0.50,1.0,...,5.00} \draw (\x,0) -- (\x,0.7);
+\foreach \i in {0,...,9}
+  \node[font=\tiny] at (\i*0.50+0.25,0.35) {10\%};
+
+% 1/4 = 25% bar
+\draw (0,-1.1) rectangle (5,-0.4);
+\fill[red!30] (0,-1.1) rectangle (1.25,-0.4);
+\foreach \x in {1.25,2.5,3.75} \draw (\x,-1.1) -- (\x,-0.4);
+\foreach \i in {0,...,3}
+    \node[font=\tiny] at (\i*1.25+0.675,-0.75) {$\frac{1}{4}$};
+    
+% Combined bar
+\draw (0,-2.2) rectangle (5,-1.5);
+\fill[green!30] (0,-2.2) rectangle (1.5,-1.5);
+\fill[red!30] (1.5,-2.2) rectangle (2.75,-1.5);
+\draw[thick] (1.5,-2.2) -- (1.5,-1.5);
+\end{tikzpicture}
+
+
+\end{center}
+
+\column{0.7\textwidth}
+\vspace{-2em}
+\begin{enumerate}
+\begin{multicols}{2}
+  \item $50\% + 50\% = \ablank{100\%}$
+  \item $25\% + 25\% = \ablank{50\%}$
+\end{multicols}
+  \item Write $\frac{1}{5}$ as a percentage: \ablank{$20\%$}
+  \item Complete the sum represented by the diagram: \\[0.2em]
+  $ 3 \times \text{\ashowq{10}}\% + \frac{1}{\text{\ashowq{4}}} = 30\% + 25\% = 55\% $
+\begin{multicols}{2}
+  \item $20\%+\dfrac{3}{10}=\ablank{50\%}$
+  \item $\dfrac{1}{2}+15\%=\ablank{65\%}$
+  \item $45\%+\dfrac{1}{5}=\ablank{65\%}$
+  \item Which is larger: $\dfrac{3}{8}$ or $40\%$?
+        \ablank{$40\%$ ($\tfrac{3}{8}=37.5\%$)}
+  \item $\dfrac{2}{5}+\dfrac{3}{10}+20\%=\ablank{90\%}$
+\end{multicols}
+  
+  \item A class finishes $\tfrac{1}{3}$ of a project, then $20\%$ more. What percentage have they completed in total?
+        \ashow{$33.\dot{3}\%+20\%=53.\dot{3}\%$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} \(50\% + 50\% =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Two lots of \(50\%\) make one whole, so the sum is \ablank{$100\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 2}
+\textbf{Question:} \(25\% + 25\% =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Two lots of \(25\%\) make \(50\%\), so the sum is \ablank{$50\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 3}
+\textbf{Question:} Write \(\frac{1}{5}\) as a percentage.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{5} = \frac{20}{100}\), so as a percentage it is \ablank{$20\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 4}
+\textbf{Question:} Complete the sum represented by the diagram: \(3 \times ?\% + \frac{1}{?} = 30\% + 25\% = 55\%\).
+
+\smallskip
+\textbf{Worked Solution:} The first bar is divided into \(10\) equal slabs, so each slab is \(10\%\). Thus \(3 \times 10\% = 30\%\). The second bar is divided into \(4\) equal quarters, so the fraction is \(\frac{1}{4}\). The missing numbers are \ablank{$10$} and \ablank{$4$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 5}
+\textbf{Question:} \(20\% + \frac{3}{10} =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{3}{10} = 30\%\). Therefore \(20\% + 30\% = \ablank{50\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 6}
+\textbf{Question:} \(\frac{1}{2} + 15\% =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{2} = 50\%\). Therefore \(50\% + 15\% = \ablank{65\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 7}
+\textbf{Question:} \(45\% + \frac{1}{5} =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{5} = 20\%\). Therefore \(45\% + 20\% = \ablank{65\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 8}
+\textbf{Question:} Which is larger: \(\frac{3}{8}\) or \(40\%\)?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{3}{8} = 37.5\%\). Since \(37.5\% < 40\%\), the larger value is \ablank{$40\%$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 9}
+\textbf{Question:} \(\frac{2}{5} + \frac{3}{10} + 20\% =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{2}{5} = 40\%\), \(\frac{3}{10} = 30\%\), and \(20\%\) remains \(20\%\). Adding gives \(40\% + 30\% + 20\% = \ablank{90\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 10}
+\textbf{Question:} A class finishes \(\frac{1}{3}\) of a project, then \(20\%\) more. What percentage have they completed in total?
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{1}{3} = 33.\dot{3}\%\). After completing \(20\%\) more, the total is \(33.\dot{3}\% + 20\% = \ablank{53.\dot{3}\%}\).
+\end{frame}
+
+%------------------------------------------------------------------
+% Starter 5
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect}
+\hypertarget{q-st5}{}
+\begin{columns}
+\column{0.4\textwidth}
+\begin{center}
+\vspace{-1em}
+\begin{tikzpicture}[scale=0.9, every node/.style={font=\scriptsize}]
+
+% ── Shared style ──────────────────────────────────────────────
+% Each number line: width W, drawn at height Y
+% Anchors labelled both sides; target marked with red ? above
+
+% ── LINE 1: 0 to 1 in quarters (scaffolds Q5, Q7, Q3, Q4) ───
+\def\Y{0}
+\def\W{3.6}
+\draw (0,\Y) -- (\W,\Y);
+\foreach \f/\d/\p in {%   <--- FIXED: renamed \frac to \f, \dec to \d, \pct to \p
+    0/{0}/{0\%}, 1/{0.25}/{25\%}, 2/{0.5}/{50\%},
+    3/{0.75}/{75\%}, 4/{1.0}/{100\%}}{
+  \pgfmathsetmacro\xx{\f*\W/4}
+  \draw (\xx,\Y-0.10) -- (\xx,\Y+0.10);
+  \node[below] at (\xx,\Y-0.13) {\d};
+  \node[above] at (\xx,\Y+0.13) {\p};
+}
+% Target: 0.3 (x = 0.3*W) — red arrow, no answer
+
+% ── LINE 2: 0 to 1 in tenths (scaffolds Q6=0.3, Q12=0.92) ───
+\def\Y{-2.0}
+\draw (0,\Y) -- (\W,\Y);
+\foreach \k in {0,1,...,10}{
+  \pgfmathsetmacro\xx{\k*\W/10}
+  \pgfmathsetmacro\dec{\k/10}
+  \ifodd\k
+    \draw (\xx,\Y-0.07) -- (\xx,\Y+0.07); % minor tick
+  \else
+    \draw (\xx,\Y-0.10) -- (\xx,\Y+0.10);
+    \node[below] at (\xx,\Y-0.13) {\pgfmathprintnumber[fixed,precision=1]{\dec}};
+    \pgfmathsetmacro\pct{int(\k*10)}
+    \node[above] at (\xx,\Y+0.13) {\pct\%};
+  \fi
+}
+% Target: 0.92 — red marker, no answer label
+\pgfmathsetmacro\ta{0.92*\W}
+
+% ── LINE 3: 0 to 0.1 zoom (scaffolds Q8=0.08, Q11=0.005) ────
+\def\Y{-4.0}
+\draw (0,\Y) -- (\W,\Y);
+% Anchor ticks at 0, 0.05, 0.1
+\foreach \k/\dec/\pct in {0/{0}/{0\%}, 1/{0.05}/{5\%}, 2/{0.1}/{10\%}}{
+  \pgfmathsetmacro\xx{\k*\W/2}
+  \draw (\xx,\Y-0.10) -- (\xx,\Y+0.10);
+  \node[below] at (\xx,\Y-0.13) {\dec};
+  \node[above] at (\xx,\Y+0.13) {\pct};
+}
+% Minor ticks every 0.01
+\foreach \k in {1,2,...,9}{
+  \pgfmathsetmacro\xx{\k*\W/10}
+  \draw (\xx,\Y-0.06) -- (\xx,\Y+0.06);
+}
+% Target: 0.08
+% Zoom label
+\node[right,gray] at (\W+0.05,\Y) {\tiny zoomed in};
+
+% ── LINE 4: 0 to 2 (scaffolds Q10=1.4, shows >100%) ─────────
+\def\Y{-6.0}
+\draw (0,\Y) -- (\W,\Y);
+\foreach \k in {0,1,2,3,4}{
+  \pgfmathsetmacro\xx{\k*\W/4}
+  \pgfmathsetmacro\dec{\k/2}
+  \pgfmathsetmacro\pct{int(\k*50)}
+  \draw (\xx,\Y-0.10) -- (\xx,\Y+0.10);
+  \node[below] at (\xx,\Y-0.13) {\pgfmathprintnumber[fixed,precision=1]{\dec}};
+  \node[above] at (\xx,\Y+0.13) {\pct\%};
+}
+
+\node[right,gray] at (\W+0.05,\Y) {\tiny zoomed out};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.60\textwidth}
+\begin{enumerate}
+\begin{multicols}{2}
+  \item $0.6 + 0.4 = \ablank{1}$
+  \item $0.25 \times 4 = \ablank{1}$
+\end{multicols}
+  \item Write $\frac{3}{10}$ as a decimal: \ablank{$0.3$}
+  \item Write $\frac{7}{100}$ as a decimal: \ablank{$0.07$}
+\begin{multicols}{2}
+  \item $0.5   = \ablank{50\%}$
+  \item $0.3   = \ablank{30\%}$
+  \item $0.75  = \ablank{75\%}$
+  \item $0.08  = \ablank{8\%}$
+  \item $0.125 = \ablank{12.5\%}$
+  \item $1.4   = \ablank{140\%}$
+  \item $0.005 = \ablank{0.5\%}$
+  \item $0.92  \to \ablank{92\%}$
+\end{multicols}
+  \item \textit{Challenge:} Convert $0.0625$ to a \%,\\
+        then write as a fraction in simplest form.
+        \ashow{$6.25\%=\tfrac{1}{16}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} \(0.6 + 0.4 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(0.6\) is \(6\) tenths and \(0.4\) is \(4\) tenths, so together they make \(10\) tenths. This is \ablank{$1$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 2}
+\textbf{Question:} \(0.25 \times 4 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} \(0.25 = \frac{1}{4}\), and four quarters make one whole. Therefore the product is \ablank{$1$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 3}
+\textbf{Question:} Write \(\frac{3}{10}\) as a decimal.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{3}{10}\) means \(3\) tenths, which is \ablank{$0.3$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 4}
+\textbf{Question:} Write \(\frac{7}{100}\) as a decimal.
+
+\smallskip
+\textbf{Worked Solution:} \(\frac{7}{100}\) means \(7\) hundredths, which is \ablank{$0.07$}.
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 5}
+\textbf{Question:} \(0.5 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} To convert a decimal to a percentage, multiply by \(100\%\). Thus \(0.5 \times 100\% = \ablank{50\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 6}
+\textbf{Question:} \(0.3 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.3 \times 100\% = \ablank{30\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 7}
+\textbf{Question:} \(0.75 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.75 \times 100\% = \ablank{75\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 8}
+\textbf{Question:} \(0.08 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.08 \times 100\% = \ablank{8\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 9}
+\textbf{Question:} \(0.125 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.125 \times 100\% = \ablank{12.5\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 10}
+\textbf{Question:} \(1.4 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(1.4 \times 100\% = \ablank{140\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 11}
+\textbf{Question:} \(0.005 =\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.005 \times 100\% = \ablank{0.5\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 12}
+\textbf{Question:} \(0.92 \to\) ?
+
+\smallskip
+\textbf{Worked Solution:} Multiply by \(100\%\): \(0.92 \times 100\% = \ablank{92\%}\).
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 13}
+\textbf{Question:} Convert \(0.0625\) to a percentage, then write as a fraction in simplest form.
+
+\smallskip
+\textbf{Worked Solution:} \(0.0625 \times 100\% = \ablank{6.25\%}\). As a fraction, \(6.25\% = \frac{6.25}{100} = \frac{625}{10000}\), which simplifies to \ablank{$\frac{1}{16}$}.
+\end{frame}
+
+\end{document}

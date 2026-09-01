@@ -1,0 +1,1287 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/targeted/KS3/sequences/sequencesNthTermIdeasStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/targeted/KS3/sequences/sequencesNthTermIdeasStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+% ---- Minimal styling ----
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\usefonttheme{professionalfonts}
+
+% ---- Global tikz baseline ----
+\tikzset{every picture/.style={baseline=(current bounding box.south)}}
+
+% ================================================================
+% TikZ pattern commands
+% ================================================================
+
+% Matchstick squares: n squares in a row
+\newcommand{\matchsquares}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \x in {0,...,\n} {
+      \draw[very thick, cap=round] (\x,0) -- (\x,1);
+    }
+    \foreach \x in {0,...,\the\numexpr\n-1\relax} {
+      \draw[very thick, cap=round] (\x,0)   -- (\x+1,0);
+      \draw[very thick, cap=round] (\x,1)   -- (\x+1,1);
+    }
+  \end{tikzpicture}%
+}
+
+% Matchstick triangles: chain of n triangles
+\newcommand{\matchtriangles}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \pgfmathsetmacro\h{0.866}
+    \color{#1}
+    \draw[very thick] (0,0) -- (\n,0);
+    \draw[very thick] (0,0)
+      \foreach \k in {1,...,\n} {
+        -- ({\k - 0.5}, {\h}) -- (\k,0)
+      };
+  \end{tikzpicture}%
+}
+
+% Rectangular dots: n columns x (n+1) rows
+\newcommand{\rectdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \i in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \j in {0,...,\n} {
+        \fill (0.4*\i, 0.4*\j) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% Cross / plus dots
+\newcommand{\crossdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \fill (0,0) circle (0.07);
+    \ifnum\n>1
+      \foreach \d in {1,...,\the\numexpr\n-1\relax} {
+        \fill (0,   0.4*\d) circle (0.07);
+        \fill (0,  -0.4*\d) circle (0.07);
+        \fill ( 0.4*\d, 0)  circle (0.07);
+        \fill (-0.4*\d, 0)  circle (0.07);
+      }
+    \fi
+  \end{tikzpicture}%
+}
+
+% 4-times-table dots: n rows of 4 dots
+\newcommand{\fourtabledots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \row in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \col in {0,1,2,3} {
+        \fill (0.4*\col, 0.4*\row) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% ================================================================
+\title{Sequences Retrieve and Connects}
+\date{}
+\begin{document}
+% ================================================================
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+\item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\item \hyperlink{q-st6}{\beamergotobutton{Retrieve and Connect 6}}
+\item \hyperlink{q-st7}{\beamergotobutton{Retrieve and Connect 7}}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+\item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\item \hyperlink{work-st6}{\beamergotobutton{Retrieve and Connect 6}}
+\item \hyperlink{work-st7}{\beamergotobutton{Retrieve and Connect 7}}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ================================================================
+% STARTER 1
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st1}{}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Pattern}\\[0.5em]
+    \matchsquares[red]{1}\quad
+    \matchsquares[blue]{2}\quad
+    \matchsquares[green!70!black]{3}\quad
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;13 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of the sequence with position-to-term rule: $\boldsymbol{2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{2},\;\ablank{4},\;\ablank{6},\;\ablank{8},\;\ablank{10}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q4.\enspace}\;
+  Sam writes the 3 times table: $3, 6, 9, 12, 15\ldots$ \\
+  He then \textbf{adds 2} to every term.
+  Write the first 5 terms of Sam's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  % ---- Bottom row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using the matchstick pattern from Q1:\\
+    (a)\;How many matchsticks in the \textbf{10th} shape?\\
+    (b)\;Write a rule for the $n$th shape.\\[0.2em]
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Is $\boldsymbol{100}$ a term in the sequence
+    with $n$th term $3n+1$\,?\\
+    Show how you know.\\[0.2em]
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} The matchstick pattern shows 1 square, then 2 squares, then 3 squares. (a) Draw the 4th shape. (b) How many matchsticks does it use?
+
+\textbf{Worked Solution:} The 4th shape is four squares in a row.
+
+\matchsquares[orange]{4}
+
+Count the matchsticks: there are 4 on the top, 4 on the bottom, and 5 vertical matchsticks. Hence
+\[
+4+4+5=13.
+\]
+Equivalently, shape $n$ uses $3n+1$ matchsticks: 4 for the first square and 3 extra for each added square. So the 4th shape uses
+\[
+3\times4+1=12+1=13.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+5,\;10,\;15,\;20,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 5 each time.
+\[
+20+5=25,\qquad 25+5=30,\qquad 30+5=35.
+\]
+So the completed sequence is
+\[
+5,\;10,\;15,\;20,\;25,\;30,\;35.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with position-to-term rule $2n$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$ into $2n$:
+\[
+2(1)=2,\quad 2(2)=4,\quad 2(3)=6,\quad 2(4)=8,\quad 2(5)=10.
+\]
+So the first five terms are
+\[
+2,\;4,\;6,\;8,\;10.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 4}
+\textbf{Question:} Sam writes the 3 times table and then adds 2 to every term. Write the first 5 terms and find the $n$th term rule.
+
+\textbf{Worked Solution:} The 3 times table has $n$th term $3n$. Adding 2 to every term gives
+\[
+3n+2.
+\]
+Now substitute $n=1,2,3,4,5$:
+\[
+3(1)+2=5,\quad 3(2)+2=8,\quad 3(3)+2=11,\quad 3(4)+2=14,\quad 3(5)+2=17.
+\]
+So Sam's sequence is
+\[
+5,\;8,\;11,\;14,\;17
+\]
+and the $n$th term rule is
+\[
+3n+2.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 5}
+\textbf{Question:} Using the matchstick pattern from Q1: (a) How many matchsticks are in the 10th shape? (b) Write a rule for the $n$th shape.
+
+\textbf{Worked Solution:} From Q1, the $n$th shape uses $3n+1$ matchsticks.
+
+(a) For the 10th shape,
+\[
+3(10)+1=30+1=31.
+\]
+
+(b) The position-to-term rule is
+\[
+3n+1.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 6}
+\textbf{Question:} Is $100$ a term in the sequence with $n$th term $3n+1$? Show how you know.
+
+\textbf{Worked Solution:} We need an integer $n$ such that
+\[
+3n+1=100.
+\]
+Subtract 1 from both sides:
+\[
+3n=99.
+\]
+Divide by 3:
+\[
+n=33.
+\]
+Since $n=33$ is a whole number, $100$ is indeed the 33rd term of the sequence.
+\end{frame}
+
+% ================================================================
+% STARTER 2
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st2}{}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dot Pattern}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;16 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{3n+1}$}\\[0.3em]
+    \footnotesize
+    \ablank{4},\;\ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Alex writes the 5 times table: $5, 10, 15, 20, 25\ldots$
+  He then \textbf{subtracts 1} from every term.
+  Write the first 5 terms of Alex's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$4,\ 9,\ 14,\ 19,\ 24$.\quad
+         $n$th term:\;$\boldsymbol{5n-1}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extend Q1}\\
+    \footnotesize
+    Using your dot pattern from Q1:\\
+    (a)\;How many dots in the \textbf{10th} picture?\\
+    (b)\;Write a rule for the $n$th picture.\\[0.2em]
+    \ashow{(a)\;40 dots.\quad (b)\;Rule:\;$4n$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Sequence A has $n$th term $4n-2$.\\
+    Sequence B has $n$th term $2n+6$.\\
+    Do they share a term \\ \emph{at the same position}? \\
+    \ashow{$4n-2=2n+6\;\Rightarrow\;n=4.$\;
+           Both equal\;\textbf{14} at position $n=4$.}
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} The dot pattern shows rows of 4 dots. (a) Draw the 4th picture. (b) How many dots does it contain?
+
+\textbf{Worked Solution:} The 4th picture has 4 rows with 4 dots in each row.
+
+\fourtabledots[orange]{4}
+
+So the number of dots is
+\[
+4\times4=16.
+\]
+The pattern has $4n$ dots in the $n$th picture, so the 4th picture has $4(4)=16$ dots.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+4,\;8,\;12,\;16,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 4 each time.
+\[
+16+4=20,\qquad 20+4=24,\qquad 24+4=28.
+\]
+So the completed sequence is
+\[
+4,\;8,\;12,\;16,\;20,\;24,\;28.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $3n+1$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+3(1)+1=4,\quad 3(2)+1=7,\quad 3(3)+1=10,\quad 3(4)+1=13,\quad 3(5)+1=16.
+\]
+So the first five terms are
+\[
+4,\;7,\;10,\;13,\;16.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 4}
+\textbf{Question:} Alex writes the 5 times table and subtracts 1 from every term. Write the first 5 terms and find the $n$th term rule.
+
+\textbf{Worked Solution:} The 5 times table has $n$th term $5n$. Subtracting 1 gives
+\[
+5n-1.
+\]
+Now substitute $n=1,2,3,4,5$:
+\[
+5(1)-1=4,\quad 5(2)-1=9,\quad 5(3)-1=14,\quad 5(4)-1=19,\quad 5(5)-1=24.
+\]
+So Alex's sequence is
+\[
+4,\;9,\;14,\;19,\;24
+\]
+and the $n$th term rule is
+\[
+5n-1.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 5}
+\textbf{Question:} Using the dot pattern from Q1: (a) How many dots are in the 10th picture? (b) Write a rule for the $n$th picture.
+
+\textbf{Worked Solution:} The $n$th picture has $4n$ dots.
+
+(a) For the 10th picture,
+\[
+4(10)=40.
+\]
+
+(b) The rule for the $n$th picture is
+\[
+4n.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 6}
+\textbf{Question:} Sequence A has $n$th term $4n-2$. Sequence B has $n$th term $2n+6$. Do they share a term at the same position?
+
+\textbf{Worked Solution:} Set the two expressions equal:
+\[
+4n-2=2n+6.
+\]
+Subtract $2n$ from both sides:
+\[
+2n-2=6.
+\]
+Add 2:
+\[
+2n=8.
+\]
+Divide by 2:
+\[
+n=4.
+\]
+At position $n=4$,
+\[
+4(4)-2=14 \quad\text{and}\quad 2(4)+6=14.
+\]
+Yes, they both equal $14$ at position $n=4$.
+\end{frame}
+
+% ================================================================
+% STARTER 3
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st3}{}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    7,\;14,\;21,\;28,\;
+    \ablank{35},\;\ablank{42},\;\ablank{49}\\
+    \ashow{(add 7 each time --- the 7$\times$ table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{5n-2}$}\\[0.3em]
+    \footnotesize
+    \ablank{3},\;\ablank{8},\;\ablank{13},\;\ablank{18},\;\ablank{23}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  A sequence \textbf{starts at 5} and \textbf{increases by 3} each time.
+  Write the first 5 terms.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using your triangle pattern from Q1:\\
+    (a)\;Write a rule for the $n$th shape.\\
+    (b)\;How many matchsticks in the \textbf{20th} shape?\\[0.2em]
+    \ashow{(a)\;Rule:\;$3n$.\quad (b)\;60 matchsticks.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $4n+3$.\\
+    Which term is the \textbf{first to exceed 75}?\\
+    Show your working clearly.\\[0.2em]
+    \ashow{$4n+3>75\;\Rightarrow\;n>18.$\;
+           19th term:\;$4(19)+3=\boldsymbol{79}.$}
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} The matchstick triangle pattern is shown. (a) Draw the 4th shape. (b) How many matchsticks does it use?
+
+\textbf{Worked Solution:} The 4th shape is four triangles side by side.
+
+\matchtriangles[orange]{4}
+
+Each triangle uses 3 matchsticks: one base matchstick and two sloping matchsticks. So 4 triangles use
+\[
+4\times3=12.
+\]
+The 4th shape uses 12 matchsticks.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+7,\;14,\;21,\;28,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 7 each time.
+\[
+28+7=35,\qquad 35+7=42,\qquad 42+7=49.
+\]
+So the completed sequence is
+\[
+7,\;14,\;21,\;28,\;35,\;42,\;49.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $5n-2$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+5(1)-2=3,\quad 5(2)-2=8,\quad 5(3)-2=13,\quad 5(4)-2=18,\quad 5(5)-2=23.
+\]
+So the first five terms are
+\[
+3,\;8,\;13,\;18,\;23.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 4}
+\textbf{Question:} A sequence starts at 5 and increases by 3 each time. Write the first 5 terms. What is the $n$th term rule?
+
+\textbf{Worked Solution:} Start at 5 and add 3 each time:
+\[
+5,\quad 5+3=8,\quad 8+3=11,\quad 11+3=14,\quad 14+3=17.
+\]
+So the first five terms are
+\[
+5,\;8,\;11,\;14,\;17.
+\]
+The $n$th term rule is
+\[
+3n+2,
+\]
+since when $n=1$, $3(1)+2=5$, and each later term adds 3.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 5}
+\textbf{Question:} Using the triangle pattern from Q1: (a) Write a rule for the $n$th shape. (b) How many matchsticks are in the 20th shape?
+
+\textbf{Worked Solution:} Each triangle uses 3 matchsticks, so the $n$th shape uses
+\[
+3n
+\]
+matchsticks.
+
+(a) The rule is $3n$.
+
+(b) For the 20th shape,
+\[
+3(20)=60.
+\]
+The 20th shape uses 60 matchsticks.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 6}
+\textbf{Question:} The $n$th term of a sequence is $4n+3$. Which term is the first to exceed 75? Show your working clearly.
+
+\textbf{Worked Solution:} We need
+\[
+4n+3>75.
+\]
+Subtract 3:
+\[
+4n>72.
+\]
+Divide by 4:
+\[
+n>18.
+\]
+The first integer value of $n$ is $19$. The 19th term is
+\[
+4(19)+3=76+3=79.
+\]
+So the 19th term is the first term to exceed 75.
+\end{frame}
+
+% ================================================================
+% STARTER 4
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st4}{}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \rectdots[red]{1}\quad
+    \rectdots[blue]{2}\quad
+    \rectdots[green!70!black]{3}\quad
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th pattern.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;20 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;5,\;9,\;13,\;
+    \ablank{17},\;\ablank{21},\;\ablank{25}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{10-2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{8},\;\ablank{6},\;\ablank{4},\;\ablank{2},\;\ablank{0}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Mia writes the 6 times table: $6, 12, 18, 24, 30\ldots$
+  She then \textbf{subtracts 4} from every term.
+  Write the first 5 terms, find the $n$th term, and find the 50th term.\\[0.2em]
+  \ashow{Terms:\;$2,\ 8,\ 14,\ 20,\ 26$.\quad
+         $n$th term:\;$6n-4$.\quad
+         50th term:\;$\boldsymbol{296}$.}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Find the $n$th Term}\\
+    \footnotesize
+    $1,\;5,\;9,\;13,\;17,\;\ldots$\\[0.2em]
+    What is the $n$th term rule?\\[0.2em]
+    \ashow{Differences: $+4$. \;First term: 1.
+           \quad Rule:\;$\boldsymbol{4n-3}$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $10-2n$.\\
+    Which is the \textbf{last positive term}?\\
+    What is the \textbf{first negative term}?\\
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} The dot pattern shows a rectangle of dots. (a) Draw the 4th pattern. (b) How many dots does it contain?
+
+\textbf{Worked Solution:} The 4th pattern has 4 columns and 5 rows.
+
+\rectdots[orange]{4}
+
+So it contains
+\[
+4\times5=20
+\]
+dots.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+1,\;5,\;9,\;13,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 4 each time.
+\[
+13+4=17,\qquad 17+4=21,\qquad 21+4=25.
+\]
+So the completed sequence is
+\[
+1,\;5,\;9,\;13,\;17,\;21,\;25.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $10-2n$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+10-2(1)=8,\quad 10-2(2)=6,\quad 10-2(3)=4,\quad 10-2(4)=2,\quad 10-2(5)=0.
+\]
+So the first five terms are
+\[
+8,\;6,\;4,\;2,\;0.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 4}
+\textbf{Question:} Mia writes the 6 times table and subtracts 4 from every term. Write the first 5 terms, find the $n$th term, and find the 50th term.
+
+\textbf{Worked Solution:} The 6 times table has $n$th term $6n$. Subtracting 4 gives
+\[
+6n-4.
+\]
+First five terms:
+\[
+6(1)-4=2,\quad 6(2)-4=8,\quad 6(3)-4=14,\quad 6(4)-4=20,\quad 6(5)-4=26.
+\]
+So the sequence starts
+\[
+2,\;8,\;14,\;20,\;26.
+\]
+The 50th term is
+\[
+6(50)-4=300-4=296.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 5}
+\textbf{Question:} Find the $n$th term rule for the sequence
+\[
+1,\;5,\;9,\;13,\;17,\;\ldots
+\]
+
+\textbf{Worked Solution:} The differences are
+\[
+5-1=4,\qquad 9-5=4,\qquad 13-9=4.
+\]
+So the sequence goes up by 4 each time. Starting from 1, the $n$th term is
+\[
+1+4(n-1)=1+4n-4=4n-3.
+\]
+Thus the rule is
+\[
+4n-3.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 6}
+\textbf{Question:} The $n$th term of a sequence is $10-2n$. Which is the last positive term? What is the first negative term?
+
+\textbf{Worked Solution:} Work out the terms around where the sequence changes sign:
+\[
+10-2(4)=10-8=2,\qquad 10-2(5)=10-10=0,\qquad 10-2(6)=10-12=-2.
+\]
+Zero is neither positive nor negative, so the last positive term is
+\[
+2
+\]
+at position $n=4$, and the first negative term is
+\[
+-2
+\]
+at position $n=6$.
+\end{frame}
+
+% ================================================================
+% STARTER 5
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st5}{}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \crossdots[red]{1}\quad
+    \crossdots[blue]{2}\quad
+    \crossdots[green!70!black]{3}\quad
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many dots in shape 5?\\[0.3em]
+    \ashow{(b)\;Shape 5 has 17 dots}
+
+    \vspace{0.4cm}
+
+  \textbf{Q5.\enspace}\;
+  Jake says: \\ \textit{``I start at 3 and add 4 each time.''}
+ \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
+  and (c) decide whether $\boldsymbol{59}$ is in his sequence.
+  Show your reasoning.\\[0.2em]
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
+
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;4,\;9,\;16,\;
+    \ablank{25},\;\ablank{36},\;\ablank{49}\\
+    \ashow{(square numbers,\;$n^2$)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{2n+5}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{9},\;\ablank{11},\;\ablank{13},\;\ablank{15}
+
+\vspace{0.45cm}
+
+    \small\textbf{Q4.\enspace Find the $n$th Term}\\
+    \footnotesize
+    (a)\;$3,\;5,\;7,\;9,\;11,\;\ldots$\quad
+    \ashow{$2n+1$}\\[0.3em]
+    (b)\;$6,\;10,\;14,\;18,\;22,\;\ldots$\quad
+    \ashow{$4n+2$}
+
+    \vspace{0.45cm}
+
+        \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Mia's sequence has $n$th term $3n+1$.\\
+    Jake's sequence has $n$th term $2n+6$.\\
+    Find the \textbf{first three values} that appear
+    in \emph{both} sequences.
+    What do you notice about them?\\[0.2em]
+    \ashow{Shared values:\;$10,\;16,\;22,\;\ldots$
+           \;(they increase by 6 each time).}
+    
+  \end{minipage}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} The cross/plus dot pattern is shown. (a) Draw the 4th shape. (b) How many dots are in shape 5?
+
+\textbf{Worked Solution:} Shape 1 has 1 dot. Each new shape adds one dot on each of the four arms:
+\[
+1,\quad 1+4=5,\quad 5+4=9,\quad 9+4=13.
+\]
+So the 4th shape is
+
+\crossdots[orange]{4}
+
+Shape 4 has 13 dots, and shape 5 has
+\[
+13+4=17.
+\]
+Shape 5 has 17 dots.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+1,\;4,\;9,\;16,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} These are the square numbers:
+\[
+1^2=1,\quad 2^2=4,\quad 3^2=9,\quad 4^2=16,\quad 5^2=25,\quad 6^2=36,\quad 7^2=49.
+\]
+So the completed sequence is
+\[
+1,\;4,\;9,\;16,\;25,\;36,\;49.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $2n+5$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+2(1)+5=7,\quad 2(2)+5=9,\quad 2(3)+5=11,\quad 2(4)+5=13,\quad 2(5)+5=15.
+\]
+So the first five terms are
+\[
+7,\;9,\;11,\;13,\;15.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 4}
+\textbf{Question:} Find the $n$th term rule for each sequence.  
+(a) $3,\;5,\;7,\;9,\;11,\;\ldots$  
+(b) $6,\;10,\;14,\;18,\;22,\;\ldots$
+
+\textbf{Worked Solution:}  
+(a) The differences are $+2$ and the first term is 3, so
+\[
+3+2(n-1)=2n+1.
+\]
+Thus the rule is $2n+1$.
+
+(b) The differences are $+4$ and the first term is 6, so
+\[
+6+4(n-1)=4n+2.
+\]
+Thus the rule is $4n+2$.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 5}
+\textbf{Question:} Jake says, ``I start at 3 and add 4 each time.'' (a) Write his first 5 terms. (b) Find the $n$th term rule. (c) Decide whether 59 is in his sequence. Show your reasoning.
+
+\textbf{Worked Solution:}  
+(a) Starting at 3 and adding 4:
+\[
+3,\;7,\;11,\;15,\;19.
+\]
+
+(b) The $n$th term is
+\[
+3+4(n-1)=3+4n-4=4n-1.
+\]
+
+(c) Check whether $59$ is a term:
+\[
+4n-1=59.
+\]
+Add 1:
+\[
+4n=60.
+\]
+Divide by 4:
+\[
+n=15.
+\]
+Since $n=15$ is an integer, 59 is the 15th term of Jake's sequence.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 6}
+\textbf{Question:} Mia's sequence has $n$th term $3n+1$. Jake's sequence has $n$th term $2n+6$. Find the first three values that appear in both sequences. What do you notice about them?
+
+\textbf{Worked Solution:} List the first few terms of each sequence.
+
+Mia:
+\[
+4,\;7,\;10,\;13,\;16,\;19,\;22,\;25,\;28,\;\ldots
+\]
+
+Jake:
+\[
+8,\;10,\;12,\;14,\;16,\;18,\;20,\;22,\;24,\;26,\;28,\;\ldots
+\]
+
+The first three values in both sequences are
+\[
+10,\;16,\;22.
+\]
+They increase by 6 each time.
+\end{frame}
+
+% ================================================================
+% STARTER 6
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st6}{}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\
+    (c)\;Which times tables does the sequence represent?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
+
+    \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
+    \ablank{$5n$}\\[0.3em]
+    
+    \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16},\;\ablank{19}
+  \end{minipage}
+
+  \vspace{0.65cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q5.\enspace}\;
+  A sequence is made by taking the \textbf{3 times table}
+  and \textbf{subtracting 2 from every term.}\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Use your rule to find the \textbf{20th} term.\\
+  (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
+
+  %
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 6, Question 1}
+\hypertarget{work-st6}{}
+\textbf{Question:} The matchstick triangle pattern is shown. (a) Draw the 4th shape. (b) How many matchsticks does it use? (c) Which times table does the sequence represent?
+
+\textbf{Worked Solution:} The 4th shape is:
+
+\matchtriangles[orange]{4}
+
+Each triangle uses 3 matchsticks, so the 4th shape uses
+\[
+4\times3=12
+\]
+matchsticks.
+
+The sequence is
+\[
+3,\;6,\;9,\;12,\;\ldots
+\]
+which is the 3 times table.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 6, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+4,\;8,\;12,\;16,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 4 each time.
+\[
+16+4=20,\qquad 20+4=24,\qquad 24+4=28.
+\]
+So the completed sequence is
+\[
+4,\;8,\;12,\;16,\;20,\;24,\;28.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 6, Question 3}
+\textbf{Question:} The 3 times table has $n$th term rule $3n$. What is the $n$th term rule for the 5 times table?
+
+\textbf{Worked Solution:} The 5 times table is
+\[
+5,\;10,\;15,\;20,\;25,\;\ldots
+\]
+Each term is 5 times its position. Therefore the $n$th term rule is
+\[
+5n.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 6, Question 4}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $3n+4$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+3(1)+4=7,\quad 3(2)+4=10,\quad 3(3)+4=13,\quad 3(4)+4=16,\quad 3(5)+4=19.
+\]
+So the first five terms are
+\[
+7,\;10,\;13,\;16,\;19.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 6, Question 5}
+\textbf{Question:} A sequence is made by taking the 3 times table and subtracting 2 from every term. (a) Write the first 5 terms. (b) What is the $n$th term rule? (c) Use the rule to find the 20th term. (d) Is 100 in the sequence?
+
+\textbf{Worked Solution:}  
+(a) The 3 times table is $3,6,9,12,15$. Subtracting 2 from each term:
+\[
+1,\;4,\;7,\;10,\;13.
+\]
+
+(b) The $n$th term rule is
+\[
+3n-2.
+\]
+
+(c) The 20th term is
+\[
+3(20)-2=60-2=58.
+\]
+
+(d) Check whether $100$ is a term:
+\[
+3n-2=100.
+\]
+Add 2:
+\[
+3n=102.
+\]
+Divide by 3:
+\[
+n=34.
+\]
+Since $n=34$ is an integer, $100$ is the 34th term.
+\end{frame}
+
+% ================================================================
+% STARTER 7
+% ================================================================
+\begin{frame}[shrink=5]{Retrieve and Connect}
+\hypertarget{q-st7}{}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\
+    (c)\;Which times table does the sequence represent?\\[0.3em]
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time --- the 5 times table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{4n-3}$}\\[0.3em]
+    \footnotesize
+    \ablank{1},\;\ablank{5},\;\ablank{9},\;\ablank{13},\;\ablank{17}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Start with the \textbf{5 times table} and \textbf{add 1} to every term.\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Find the 20th term.\\
+  (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 7, Question 1}
+\hypertarget{work-st7}{}
+\textbf{Question:} The dot pattern shows rows of 4 dots. (a) Draw the 4th picture. (b) How many dots does it contain? (c) Which times table does the sequence represent?
+
+\textbf{Worked Solution:} The 4th picture has 4 rows of 4 dots.
+
+\fourtabledots[orange]{4}
+
+It contains
+\[
+4\times4=16
+\]
+dots.
+
+The sequence is
+\[
+4,\;8,\;12,\;16,\;\ldots
+\]
+which is the 4 times table.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 7, Question 2}
+\textbf{Question:} Complete the sequence:
+\[
+5,\;10,\;15,\;20,\;\_\,,\;\_\,,\;\_
+\]
+
+\textbf{Worked Solution:} The sequence increases by 5 each time.
+\[
+20+5=25,\qquad 25+5=30,\qquad 30+5=35.
+\]
+So the completed sequence is
+\[
+5,\;10,\;15,\;20,\;25,\;30,\;35.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 7, Question 3}
+\textbf{Question:} Write the first 5 terms of the sequence with $n$th term $4n-3$.
+
+\textbf{Worked Solution:} Substitute $n=1,2,3,4,5$:
+\[
+4(1)-3=1,\quad 4(2)-3=5,\quad 4(3)-3=9,\quad 4(4)-3=13,\quad 4(5)-3=17.
+\]
+So the first five terms are
+\[
+1,\;5,\;9,\;13,\;17.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 7, Question 4}
+\textbf{Question:} Start with the 5 times table and add 1 to every term. (a) Write the first 5 terms. (b) What is the $n$th term rule? (c) Find the 20th term. (d) Is 104 in the sequence? Explain how you know.
+
+\textbf{Worked Solution:}  
+(a) The 5 times table is $5,10,15,20,25$. Adding 1 to each term:
+\[
+6,\;11,\;16,\;21,\;26.
+\]
+
+(b) The $n$th term rule is
+\[
+5n+1.
+\]
+
+(c) The 20th term is
+\[
+5(20)+1=100+1=101.
+\]
+
+(d) Check whether $104$ is a term:
+\[
+5n+1=104.
+\]
+Subtract 1:
+\[
+5n=103.
+\]
+Divide by 5:
+\[
+n=20.6.
+\]
+Since $n$ is not a whole number, $104$ is not a term of the sequence.
+\end{frame}
+
+\end{document}

@@ -1,0 +1,897 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/targeted/KS3/statistics/developingAveragesStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/targeted/KS3/statistics/developingAveragesStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc,arrows.meta,patterns}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+\title{Averages: Mean \& Median}
+\author{}
+\date{}
+
+% Lego tower: \legotower{x-offset}{height}{colour}
+% Each brick is 0.65 wide x 0.55 tall, with two studs
+\newcommand{\legotower}[3]{%
+  \foreach \i in {1,...,#2}{%
+    \draw[fill=#3!55, draw=#3!80!black, line width=0.35pt]
+      (#1, {(\i-1)*0.55}) rectangle (#1+0.65, {\i*0.55});
+    \draw[fill=#3!80, draw=#3!80!black, line width=0.2pt]
+      (#1+0.15,{(\i-1)*0.55+0.38}) circle (0.08);
+    \draw[fill=#3!80, draw=#3!80!black, line width=0.2pt]
+      (#1+0.44,{(\i-1)*0.55+0.38}) circle (0.08);
+  }%
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+  \begin{column}{0.48\textwidth}
+    \textbf{Questions and short answers}
+    \begin{itemize}
+      \item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+      \item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+      \item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+      \item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+      \item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+    \end{itemize}
+  \end{column}
+  \begin{column}{0.48\textwidth}
+    \textbf{Worked solutions}
+    \begin{itemize}
+      \item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+      \item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+      \item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+      \item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+      \item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+    \end{itemize}
+  \end{column}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 1 — Mean and Median
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st1}{}
+\vspace{-0.8em}
+
+\footnotesize
+\begin{enumerate}\itemsep2pt
+\begin{multicols}{2}
+  \item $6 + 9 = \ashowq{15}$
+  \item $24 \div 4 = \ashowq{6}$
+  \item $7 + 13 + 5 = \ashowq{25}$
+  \item $30 \div 5 = \ashowq{6}$
+  \end{multicols}
+  \item How do we work out the mean? \ashow{Add the values and divide by how many there are.}
+  \item How do we work out the median? \ashow{Order the data and find the middle value.}
+  \item Find the mean of: $3,\ 7,\ 5,\ 9$ \ashow{$=6$}
+  \item Find the median of: $4,\ 9,\ 2,\ 7,\ 8$ \ashow{$=7$}
+  \item Find the mean of: $\frac{1}{2},\ \frac{3}{2},\ 2,\ 3$ \ashow{$=\frac{7}{4}$}
+  \item Find the median of: $-4,\ 2,\ -1,\ -7,\ 1$ \ashow{$=-1$}
+  \item The mean of $x,\ x+4,\ x+8,\ x+12$ is $15$, what is the total of all the values? \ashow{$60$}
+  \item Find the value of $x$ in the previous question \ashow{$x=9$}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\small
+\textbf{Question:} \(6+9=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(6+9=6+10-1=16-1=15\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 2}
+\small
+\textbf{Question:} \(24 \div 4=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(24 \div 4 = 6\), because \(4 \times 6 = 24\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 3}
+\small
+\textbf{Question:} \(7+13+5=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(7+13=20\), and \(20+5=25\). So \(7+13+5=25\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 4}
+\small
+\textbf{Question:} \(30 \div 5=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(30 \div 5 = 6\), because \(5 \times 6 = 30\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 5}
+\small
+\textbf{Question:} How do we work out the mean?
+
+\smallskip
+\textbf{Worked Solution:} Add all the data values, then divide by how many values there are. For values \(x_1,x_2,\dots,x_n\), the mean is
+\[
+\frac{x_1+x_2+\cdots+x_n}{n}.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 6}
+\small
+\textbf{Question:} How do we work out the median?
+
+\smallskip
+\textbf{Worked Solution:} Order the data from smallest to largest. If there is an odd number of values, take the middle value. If there is an even number of values, take the average of the two middle values.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 7}
+\small
+\textbf{Question:} Find the mean of \(3,\ 7,\ 5,\ 9\).
+
+\smallskip
+\textbf{Worked Solution:} Sum \(=3+7+5+9=24\). There are \(4\) values, so the mean is
+\[
+24 \div 4 = 6.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 8}
+\small
+\textbf{Question:} Find the median of \(4,\ 9,\ 2,\ 7,\ 8\).
+
+\smallskip
+\textbf{Worked Solution:} Put the values in order:
+\[
+2,\ 4,\ 7,\ 8,\ 9.
+\]
+There are \(5\) values, so the median is the middle value, \(7\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 9}
+\small
+\textbf{Question:} Find the mean of \(\frac{1}{2},\ \frac{3}{2},\ 2,\ 3\).
+
+\smallskip
+\textbf{Worked Solution:} Write \(2=\frac42\) and \(3=\frac62\). Then the sum is
+\[
+\frac12+\frac32+\frac42+\frac62=\frac{1+3+4+6}{2}=\frac{14}{2}=7.
+\]
+There are \(4\) values, so the mean is
+\[
+7 \div 4 = \frac74.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 10}
+\small
+\textbf{Question:} Find the median of \(-4,\ 2,\ -1,\ -7,\ 1\).
+
+\smallskip
+\textbf{Worked Solution:} Put the values in order:
+\[
+-7,\ -4,\ -1,\ 1,\ 2.
+\]
+There are \(5\) values, so the median is the middle value, \(-1\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 11}
+\small
+\textbf{Question:} The mean of \(x,\ x+4,\ x+8,\ x+12\) is \(15\). What is the total of all the values?
+
+\smallskip
+\textbf{Worked Solution:} Mean \(=\) total \(\div\) number of values, so
+\[
+\text{total}=\text{mean}\times\text{number of values}=15\times4=60.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 12}
+\small
+\textbf{Question:} Find the value of \(x\) in the previous question.
+
+\smallskip
+\textbf{Worked Solution:} The total is
+\[
+x+(x+4)+(x+8)+(x+12)=4x+24.
+\]
+Since the total is \(60\),
+\[
+4x+24=60 \implies 4x=36 \implies x=9.
+\]
+\end{frame}
+
+%------------------------------------------------
+% STARTER 2 — Mean and Median
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st2}{}
+\vspace{-0.8em}
+
+\footnotesize
+\begin{enumerate}\itemsep2pt
+\begin{multicols}{2}
+  \item $3 + 7 + 10 = \ashowq{20}$
+  \item $48 \div 6 = \ashowq{8}$
+  \item $\frac{1}{2} + \frac{1}{4} = \ashowq{\frac{3}{4}}$
+  \item $28 \div 4 = \ashowq{7}$
+  \end{multicols}
+  \item Which average requires you to order the data first? \ashow{Median}
+  \item Find the median of: $7,\ 2,\ 9,\ 4,\ 5$ \ashow{$=5$}
+  \item Find the median of: $3,\ 8,\ 1,\ 6,\ 4,\ 10$ \ashow{$=5$}
+  \item Find the mean and median of: $2,\ 5,\ 3,\ 8,\ 7$.  
+        Which is larger? \ashow{Mean $=5$, median $=5$ (equal).}
+  \item Find the mean and median of: $-5,\ 1,\ -2,\ 4,\ 7$ \ashow{Mean $=1$, median $=1$.}
+  \item The mean of $a,\ a+3,\ a+6$ is $6$.
+        \begin{itemize}\footnotesize
+        \item What is the median in terms of $a$? \ashow{$a+3$}
+          \item What is the total of the data (use the mean) \ashow{$18$}
+          \item Find $a$ \ashow{$a=3$}
+        \end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\small
+\textbf{Question:} \(3+7+10=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(3+7=10\), so \(3+7+10=10+10=20\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 2}
+\small
+\textbf{Question:} \(48 \div 6=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(48 \div 6 = 8\), because \(6 \times 8 = 48\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 3}
+\small
+\textbf{Question:} \(\frac12+\frac14=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} Using a common denominator of \(4\),
+\[
+\frac12+\frac14=\frac24+\frac14=\frac34.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 4}
+\small
+\textbf{Question:} \(28 \div 4=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(28 \div 4 = 7\), because \(4 \times 7 = 28\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 5}
+\small
+\textbf{Question:} Which average requires you to order the data first?
+
+\smallskip
+\textbf{Worked Solution:} The median. To find it, order the data from smallest to largest and then take the middle value, or the average of the two middle values if there is an even number of values.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 6}
+\small
+\textbf{Question:} Find the median of \(7,\ 2,\ 9,\ 4,\ 5\).
+
+\smallskip
+\textbf{Worked Solution:} In order:
+\[
+2,\ 4,\ 5,\ 7,\ 9.
+\]
+There are \(5\) values, so the median is the middle value, \(5\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 7}
+\small
+\textbf{Question:} Find the median of \(3,\ 8,\ 1,\ 6,\ 4,\ 10\).
+
+\smallskip
+\textbf{Worked Solution:} In order:
+\[
+1,\ 3,\ 4,\ 6,\ 8,\ 10.
+\]
+There are \(6\) values, so the median is the average of the two middle values:
+\[
+\frac{4+6}{2}=\frac{10}{2}=5.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 8}
+\small
+\textbf{Question:} Find the mean and median of \(2,\ 5,\ 3,\ 8,\ 7\). Which is larger?
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{2+5+3+8+7}{5}=\frac{25}{5}=5.
+\]
+Median: in order \(2,\ 3,\ 5,\ 7,\ 8\), the middle value is \(5\).
+
+So mean \(=5\) and median \(=5\); neither is larger, they are equal.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 9}
+\small
+\textbf{Question:} Find the mean and median of \(-5,\ 1,\ -2,\ 4,\ 7\).
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{-5+1-2+4+7}{5}=\frac{5}{5}=1.
+\]
+Median: in order \(-5,\ -2,\ 1,\ 4,\ 7\), the middle value is \(1\).
+
+So mean \(=1\) and median \(=1\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 10}
+\small
+\textbf{Question:} The mean of \(a,\ a+3,\ a+6\) is \(6\).
+\begin{itemize}
+  \item What is the median in terms of \(a\)?
+  \item What is the total of the data?
+  \item Find \(a\).
+\end{itemize}
+
+\smallskip
+\textbf{Worked Solution:}
+\begin{itemize}
+  \item The ordered data are \(a,\ a+3,\ a+6\), so the median is the middle value, \(a+3\).
+  \item Total \(= \text{mean} \times \text{number of values} = 6 \times 3 = 18\).
+  \item The sum is \(a+(a+3)+(a+6)=3a+9\). Since the total is \(18\),
+  \[
+  3a+9=18 \implies 3a=9 \implies a=3.
+  \]
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 3 — Mean, Median, Mode
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st3}{}
+\vspace{-0.8em}
+
+\footnotesize
+\begin{enumerate}\itemsep2pt
+\begin{multicols}{2}
+  \item $4 + 11 = \ashowq{15}$
+  \item $40 \div 8 = \ashowq{5}$
+  \item $\frac{3}{4} - \frac{1}{4} = \ashowq{\frac{1}{2}}$
+  \item $72 \div 9 = \ashowq{8}$
+  \end{multicols}
+  \item A shoe shop owner says,  
+        ``The most popular size last week was size 6.''  
+    Which average is she using? \ashow{Mode}
+  \item Find the mode of: $3,\ 7,\ 3,\ 9,\ 5,\ 3,\ 7$ \ashow{$3$}
+  \item Find the mode of: $2,\ 5,\ 8,\ 5,\ 3,\ 8,\ 1$ \ashow{$5$ and $8$}
+  \item Find the mean and median of: $4,\ 7,\ 2,\ 9,\ 3$ \ashow{Mean $=5$, median $=4$.}
+  \item Find the mean, median and mode of: $5,\ 3,\ 7,\ 3,\ 5,\ 5,\ 9$ \ashow{Mean $=\frac{37}{7}$, median $=5$, mode $=5$.}
+  \item The data set is $\{4,\ 7,\ 4,\ x,\ 7,\ 3\}$  
+        The \textbf{only} mode is $4$.  
+        Find $x$ and explain your reasoning. \ashow{$x=4$; then $4$ occurs three times.}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\small
+\textbf{Question:} \(4+11=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(4+11=15\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 2}
+\small
+\textbf{Question:} \(40 \div 8=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(40 \div 8 = 5\), because \(8 \times 5 = 40\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 3}
+\small
+\textbf{Question:} \(\frac34-\frac14=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:}
+\[
+\frac34-\frac14=\frac{3-1}{4}=\frac24=\frac12.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 4}
+\small
+\textbf{Question:} \(72 \div 9=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(72 \div 9 = 8\), because \(9 \times 8 = 72\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 5}
+\small
+\textbf{Question:} A shoe shop owner says, ``The most popular size last week was size 6.'' Which average is she using?
+
+\smallskip
+\textbf{Worked Solution:} She is using the mode, because the mode is the value that appears most often.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 6}
+\small
+\textbf{Question:} Find the mode of \(3,\ 7,\ 3,\ 9,\ 5,\ 3,\ 7\).
+
+\smallskip
+\textbf{Worked Solution:} Count the frequencies:
+\[
+3\text{ appears }3\text{ times},\quad 7\text{ appears }2\text{ times},\quad 5,\ 9\text{ appear once}.
+\]
+So the mode is \(3\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 7}
+\small
+\textbf{Question:} Find the mode of \(2,\ 5,\ 8,\ 5,\ 3,\ 8,\ 1\).
+
+\smallskip
+\textbf{Worked Solution:} Count the frequencies:
+\[
+5\text{ appears twice},\quad 8\text{ appears twice},\quad 1,\ 2,\ 3\text{ appear once}.
+\]
+So the data are bimodal: the modes are \(5\) and \(8\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 8}
+\small
+\textbf{Question:} Find the mean and median of \(4,\ 7,\ 2,\ 9,\ 3\).
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{4+7+2+9+3}{5}=\frac{25}{5}=5.
+\]
+Median: in order \(2,\ 3,\ 4,\ 7,\ 9\), the middle value is \(4\).
+
+So mean \(=5\) and median \(=4\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 9}
+\small
+\textbf{Question:} Find the mean, median and mode of \(5,\ 3,\ 7,\ 3,\ 5,\ 5,\ 9\).
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{5+3+7+3+5+5+9}{7}=\frac{37}{7}.
+\]
+Median: in order \(3,\ 3,\ 5,\ 5,\ 5,\ 7,\ 9\), the middle value is \(5\).
+
+Mode: \(5\) appears three times, more than any other value.
+
+So mean \(=\frac{37}{7}\), median \(=5\), mode \(=5\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 10}
+\small
+\textbf{Question:} The data set is \(\{4,\ 7,\ 4,\ x,\ 7,\ 3\}\). The \textbf{only} mode is \(4\). Find \(x\) and explain your reasoning.
+
+\smallskip
+\textbf{Worked Solution:} Initially, \(4\) appears twice and \(7\) appears twice. For \(4\) to be the only mode, it must appear strictly more often than every other value.
+
+If \(x=4\), then \(4\) appears three times while \(7\) still appears twice, so the only mode is \(4\).
+
+If \(x\) were any other value, \(4\) and \(7\) would be tied at two appearances each, or \(7\) would become the mode if \(x=7\). Hence \(x=4\).
+\end{frame}
+
+%------------------------------------------------
+% STARTER 4 — Consolidation
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st4}{}
+\vspace{-0.8em}
+
+\footnotesize
+\begin{enumerate}\itemsep2pt
+\begin{multicols}{2}
+  \item $3+4 = \ashowq{7}$
+  \item $4 \times 8 = \ashowq{32}$
+  \item $-3 + 8 + (-5) = \ashowq{0}$
+  \item $\frac{2}{3} + \frac{1}{6} = \ashowq{\frac{5}{6}}$
+  \item $-12 \div 4 = \ashowq{-3}$
+  \item $\frac{3}{4} \times 8 = \ashowq{6}$
+  \end{multicols}
+  \item A class votes for their favourite colour.  
+        Can you find the mean?  
+        Which average should you use instead, and why?  
+        \ashow{No; use the mode, because the data are categories.}
+  \item Find the mean, median and mode of:  
+        $-3,\ 1,\ -3,\ 4,\ -1,\ 2,\ -3$ \ashow{Mean $=-\frac{3}{7}$, median $=-1$, mode $=-3$.}
+  \item Find the median of:  
+        $\frac{1}{4},\ \frac{3}{4},\ \frac{1}{2},\ \frac{1}{8},\ \frac{5}{8}$ \ashow{$\frac{1}{2}$}
+  \item The ages in a youth club are:  
+        $11,\ 12,\ 12,\ 13,\ 13,\ 13,\ 14,\ 42$
+        Which average would you not use for this example, and why? \ashow{Mean, because $42$ is an outlier.}
+  \item The mean of $\{x,\ 3,\ x,\ 7,\ 5\}$ is $6$.  
+        Find $x$ and state the mode. \ashow{$x=6$, mode $=6$}
+  \item Five numbers have mean $8$, median $7$ and unique mode of $5$.  
+        Two numbers are $5$ and $5$.  
+        Find a possible set. \ashow{$\{5,5,6,7,17\}$}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\small
+\textbf{Question:} \(3+4=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(3+4=7\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 2}
+\small
+\textbf{Question:} \(4 \times 8=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(4 \times 8 = 32\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 3}
+\small
+\textbf{Question:} \(-3+8+(-5)=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(-3+8=5\), and \(5+(-5)=0\). So
+\[
+-3+8+(-5)=0.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 4}
+\small
+\textbf{Question:} \(\frac23+\frac16=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} Using a common denominator of \(6\),
+\[
+\frac23+\frac16=\frac46+\frac16=\frac56.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 5}
+\small
+\textbf{Question:} \(-12 \div 4=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(-12 \div 4 = -3\), because \(4 \times (-3)=-12\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 6}
+\small
+\textbf{Question:} \(\frac34 \times 8=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:}
+\[
+\frac34 \times 8 = \frac{3\times8}{4}=\frac{24}{4}=6.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 7}
+\small
+\textbf{Question:} A class votes for their favourite colour. Can you find the mean? Which average should you use instead, and why?
+
+\smallskip
+\textbf{Worked Solution:} You cannot find the mean because favourite colour is a category, not a number; adding colours is meaningless. Use the mode instead, since the mode is the most popular category.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 8}
+\small
+\textbf{Question:} Find the mean, median and mode of \(-3,\ 1,\ -3,\ 4,\ -1,\ 2,\ -3\).
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{-3+1-3+4-1+2-3}{7}=\frac{-3}{7}=-\frac37.
+\]
+Median: in order \(-3,\ -3,\ -3,\ -1,\ 1,\ 2,\ 4\), the middle value is \(-1\).
+
+Mode: \(-3\) appears three times, more than any other value.
+
+So mean \(=-\frac37\), median \(=-1\), mode \(=-3\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 9}
+\small
+\textbf{Question:} Find the median of \(\frac14,\ \frac34,\ \frac12,\ \frac18,\ \frac58\).
+
+\smallskip
+\textbf{Worked Solution:} Write each fraction in eighths:
+\[
+\frac18,\ \frac28,\ \frac48,\ \frac58,\ \frac68.
+\]
+There are \(5\) values, so the median is the middle value:
+\[
+\frac48=\frac12.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 10}
+\small
+\textbf{Question:} The ages in a youth club are \(11,\ 12,\ 12,\ 13,\ 13,\ 13,\ 14,\ 42\). Which average would you not use for this example, and why?
+
+\smallskip
+\textbf{Worked Solution:} Do not use the mean, because \(42\) is an outlier. It pulls the mean upwards so it is not typical of the club. The median or mode would be more representative here.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 11}
+\small
+\textbf{Question:} The mean of \(\{x,\ 3,\ x,\ 7,\ 5\}\) is \(6\). Find \(x\) and state the mode.
+
+\smallskip
+\textbf{Worked Solution:} Since the mean is \(6\) and there are \(5\) values, the total must be
+\[
+6\times5=30.
+\]
+The sum of the data is
+\[
+x+3+x+7+5=2x+15.
+\]
+So
+\[
+2x+15=30 \implies 2x=15 \implies x=7.5.
+\]
+The data are \(\{7.5,\ 3,\ 7.5,\ 7,\ 5\}\), so \(7.5\) occurs twice and the mode is \(7.5\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 12}
+\small
+\textbf{Question:} Five numbers have mean \(8\), median \(7\) and unique mode of \(5\). Two numbers are \(5\) and \(5\). Find a possible set.
+
+\smallskip
+\textbf{Worked Solution:} The total must be
+\[
+8\times5=40.
+\]
+Since the median is \(7\), the middle value in the ordered list must be \(7\). The two \(5\)'s must be below it, so the list begins
+\[
+5,\ 5,\ 7,\ \dots
+\]
+The two remaining numbers must add to
+\[
+40-(5+5+7)=23.
+\]
+They must be distinct from each other so that \(5\) remains the unique mode. Choosing \(8\) and \(15\) works, since \(8+15=23\).
+
+Therefore one possible set is
+\[
+\{5,\ 5,\ 7,\ 8,\ 15\}.
+\]
+\end{frame}
+
+%------------------------------------------------
+% STARTER 5 — Challenge
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st5}{}
+\vspace{-0.8em}
+
+\footnotesize
+\begin{enumerate}\itemsep2pt
+\begin{multicols}{2}
+\item $3+8 = \ashowq{11}$
+\item $120 \div 10 = \ashowq{12}$
+  \item $-6 + (-2) + 5 = \ashowq{-3}$
+  \item Order from smallest to largest:  
+        $\frac{1}{3},\ \frac{5}{6},\ \frac{1}{2},\ \frac{2}{3}$ \ashow{$\frac{1}{3},\ \frac{1}{2},\ \frac{2}{3},\ \frac{5}{6}$}
+  \item $3\frac{1}{2} + 2\frac{3}{4} = \ashowq{6\frac{1}{4}}$
+  \item $-20 \div 4 = \ashowq{-5}$
+  \end{multicols}
+
+  \item Find the mean, median and mode of:  
+        $-6,\ -2,\ 4,\ -3,\ 7,\ 0,\ -2$ \ashow{Mean $=-\frac{2}{7}$, median $=-2$, mode $=-2$.}
+
+  \item True or False?  
+        ``Adding 10 to every value increases the mean by 10 but leaves the median unchanged.''  
+        \ashow{True}
+
+  \item The seven values  
+        $n-9,\ n-6,\ n-3,\ n,\ n+3,\ n+6,\ n+9$  
+        have a mean of $4$.  
+        State the median \textbf{without calculation}. \ashow{Median $=4$}
+  \item A set of five positive integers has  
+        mean = median = mode = $6$.
+        \begin{itemize}\footnotesize
+          \item What is the smallest possible range? \ashow{$1$}
+          \item What is the largest possible range? \ashow{$12$}
+        \end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\small
+\textbf{Question:} \(3+8=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(3+8=11\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 2}
+\small
+\textbf{Question:} \(120 \div 10=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(120 \div 10 = 12\), because \(10 \times 12 = 120\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 3}
+\small
+\textbf{Question:} \(-6+(-2)+5=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(-6+(-2)=-8\), and \(-8+5=-3\). So
+\[
+-6+(-2)+5=-3.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 4}
+\small
+\textbf{Question:} Order \(\frac13,\ \frac56,\ \frac12,\ \frac23\) from smallest to largest.
+
+\smallskip
+\textbf{Worked Solution:} Use a common denominator of \(6\):
+\[
+\frac13=\frac26,\qquad \frac56=\frac56,\qquad \frac12=\frac36,\qquad \frac23=\frac46.
+\]
+Ordering the numerators gives
+\[
+\frac26,\ \frac36,\ \frac46,\ \frac56,
+\]
+so the required order is
+\[
+\frac13,\ \frac12,\ \frac23,\ \frac56.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 5}
+\small
+\textbf{Question:} \(3\frac12+2\frac34=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} Write as improper fractions:
+\[
+3\frac12=\frac72,\qquad 2\frac34=\frac{11}{4}.
+\]
+Then
+\[
+\frac72+\frac{11}{4}=\frac{14}{4}+\frac{11}{4}=\frac{25}{4}=6\frac14.
+\]
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 6}
+\small
+\textbf{Question:} \(-20 \div 4=\mathord{?}\)
+
+\smallskip
+\textbf{Worked Solution:} \(-20 \div 4 = -5\), because \(4 \times (-5)=-20\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 7}
+\small
+\textbf{Question:} Find the mean, median and mode of \(-6,\ -2,\ 4,\ -3,\ 7,\ 0,\ -2\).
+
+\smallskip
+\textbf{Worked Solution:} Mean:
+\[
+\frac{-6-2+4-3+7+0-2}{7}=\frac{-2}{7}=-\frac27.
+\]
+Median: in order \(-6,\ -3,\ -2,\ -2,\ 0,\ 4,\ 7\), the middle value is \(-2\).
+
+Mode: \(-2\) appears twice, more than any other value.
+
+So mean \(=-\frac27\), median \(=-2\), mode \(=-2\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 8}
+\small
+\textbf{Question:} True or False? ``Adding 10 to every value increases the mean by 10 but leaves the median unchanged.''
+
+\smallskip
+\textbf{Worked Solution:} False.
+
+If every value is increased by \(10\), the new mean is the old mean plus \(10\). The ordered list is also shifted up by \(10\), so the median increases by \(10\) too. Therefore the median is not left unchanged.
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 9}
+\small
+\textbf{Question:} The seven values \(n-9,\ n-6,\ n-3,\ n,\ n+3,\ n+6,\ n+9\) have a mean of \(4\). State the median without calculation.
+
+\smallskip
+\textbf{Worked Solution:} The values are symmetric about \(n\), so their mean is \(n\). Since the mean is \(4\), we have \(n=4\).
+
+The median is the middle value of the ordered list, which is \(n\). Therefore the median is \(4\).
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 10}
+\small
+\textbf{Question:} A set of five positive integers has mean \(= \text{median} = \text{mode} = 6\). What is the smallest possible range? What is the largest possible range?
+
+\smallskip
+\textbf{Worked Solution:} Let the sorted values be \(a\le b\le c\le d\le e\). Since the mean is \(6\), the total is \(30\). Since the median is \(6\), the middle value \(c=6\).
+
+\textbf{Smallest range:} Take all five values equal to \(6\):
+\[
+\{6,6,6,6,6\}.
+\]
+Then mean, median and mode are all \(6\), and the range is \(0\).
+
+\textbf{Largest range:} Since \(6\) is the mode, \(6\) must appear at least twice. The largest range is obtained using exactly two \(6\)'s at positions \(c\) and \(d\), and choosing the smallest possible distinct positive values for \(a\) and \(b\):
+\[
+a=1,\quad b=2.
+\]
+Then
+\[
+1+2+6+6+e=30 \implies e=15.
+\]
+The set
+\[
+\{1,2,6,6,15\}
+\]
+has mean \(6\), median \(6\), mode \(6\), and range \(15-1=14\).
+
+So the smallest possible range is \(0\), and the largest possible range is \(14\).
+\end{frame}
+
+\end{document}
