@@ -1,0 +1,236 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=11mm,bottom=10mm,left=13mm,right=13mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+
+\pagestyle{empty}
+\setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=4pt, topsep=2pt, parsep=1pt}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=1pt, topsep=1pt, parsep=0pt}
+
+\setlength{\multicolsep}{4pt}
+
+\newcommand{\ansline}[1][2.2cm]{\underline{\hspace{#1}}}
+
+% \barmodel{<cells>}{<cells under the lower brace>}{<lower label>}{<upper label>}{<width in cm>}
+% The same bar model as the Quick Questions slides: the whole bar
+% carries the upper label, the lower brace picks out the part named
+% underneath.
+\newcommand{\barmodel}[5]{%
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \pgfmathsetmacro{\cw}{#5/#1}
+    \foreach \i in {1,...,#1}
+      {\draw[gray!70] ({(\i-1)*\cw},0) rectangle ({\i*\cw},0.42);}
+    \draw[thick] (0,0) rectangle (#5,0.42);
+    \draw[decorate,decoration={brace,amplitude=3pt}] (0,0.54) -- (#5,0.54)
+      node[midway,above=2pt,font=\small]{#4};
+    \draw[decorate,decoration={brace,mirror,amplitude=3pt}] (0,-0.1) -- ({#2*\cw},-0.1)
+      node[midway,below=2pt,font=\small]{#3};
+  \end{tikzpicture}%
+}
+
+% The whole sheet lives in one macro so that it can be typeset twice,
+% giving two identical pages: printing those two-up puts two copies of
+% the worksheet on a single sheet of paper.
+\newcommand{\sheet}{%
+\begin{center}
+  {\Large\bfseries Percentages: Non calculator questions}\\[1pt]
+\end{center}
+\vspace{-0.6em}
+
+\begin{enumerate}
+
+%----------------------------------------------------------------
+\item
+\begin{minipage}[t]{0.66\linewidth}
+A badge for the coding club is drawn as pixel art on a grid of $100$
+squares. $51$ squares are coloured in.
+\begin{enumerate}
+  \item What percentage of the badge is coloured in? \ansline
+  \item Write that as a decimal. \ansline
+  \item Write that as a fraction of the badge. \ansline
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.30\linewidth}
+\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), scale=0.24]
+  % Pac-Man, facing right: a circle of squares with a wedge left out
+  % for the mouth and one square left out for the eye. The filled
+  % cells are listed as column/row pairs, row 0 at the top.
+  \foreach \c/\r in {3/0,4/0,5/0,6/0,
+                     2/1,3/1,4/1,5/1,6/1,7/1,
+                     1/2,2/2,3/2,5/2,6/2,
+                     1/3,2/3,3/3,4/3,5/3,
+                     0/4,1/4,2/4,3/4,4/4,
+                     0/5,1/5,2/5,3/5,4/5,
+                     1/6,2/6,3/6,4/6,5/6,
+                     1/7,2/7,3/7,4/7,5/7,6/7,
+                     2/8,3/8,4/8,5/8,6/8,7/8,
+                     3/9,4/9,5/9,6/9}
+    {\fill[yellow!85!orange] (\c,-\r) rectangle ++(1,-1);}
+  \foreach \r in {0,...,9}{
+    \foreach \c in {0,...,9}{\draw[gray!70] (\c,-\r) rectangle ++(1,-1);}
+  }
+\end{tikzpicture}
+\end{minipage}
+
+%----------------------------------------------------------------
+\item Fill in the gaps.
+\begin{multicols}{3}
+\begin{enumerate}
+  \item $0.4=\ansline[1.1cm]\%$
+  \item $0.06=\ansline[1.1cm]\%$
+  \item $1.25=\ansline[1.1cm]\%$
+  \item $45\%=\ansline[1.1cm]$
+  \item $7\%=\ansline[1.1cm]$
+  \item $130\%=\ansline[1.1cm]$
+\end{enumerate}
+\end{multicols}
+
+%----------------------------------------------------------------
+\item
+\begin{minipage}[t]{0.63\linewidth}
+$50$ pupils voted for the theme of the summer disco.
+\begin{enumerate}
+  \item What percentage voted for Neon? \ansline
+  \item What percentage voted for Jungle? \ansline
+  \item Ravi says ``more than half voted for Space or Retro''.
+        Is Ravi right? Explain why or why not, including a calculation to back up your answer.
+        \vspace{2em}
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.33\linewidth}
+\centering
+\begin{tikzpicture}[baseline=(current bounding box.north), x=0.46cm, y=0.095cm]
+  \draw[->] (0,0) -- (0,24);
+  \draw (0,0) -- (9,0);
+  \foreach \i/\h/\lab in {0/18/Neon,1/12/Retro,2/15/Space,3/5/Jungle}{
+    \fill[blue!25] ({\i*2+0.4},0) rectangle ({\i*2+1.6},\h);
+    \draw ({\i*2+0.4},0) rectangle ({\i*2+1.6},\h);
+    \node[font=\tiny, below] at ({\i*2+1},0) {\lab};
+    \node[font=\tiny] at ({\i*2+1},{\h+3}) {\h};
+  }
+\end{tikzpicture}
+\end{minipage}
+
+%----------------------------------------------------------------
+\item Work these out \textbf{without} a calculator.
+\begin{multicols}{3}
+\begin{enumerate}
+  \item $10\%$ of $250$ \ansline[1.3cm]
+  \item $5\%$ of $60$ \ansline[1.3cm]
+  \item $35\%$ of $80$ \ansline[1.3cm]
+\end{enumerate}
+\end{multicols}
+
+%----------------------------------------------------------------
+\item Work out the new price of each item.
+\begin{multicols}{2}
+\begin{enumerate}
+  \item Trainers cost $\pounds 45$ and are reduced by $20\%$ in a
+        sale. \ansline[2.2cm]
+  \item A hoodie costs $\pounds 32$ and its price is increased by
+        $25\%$. \ansline[2.2cm]
+\end{enumerate}
+\end{multicols}
+
+
+%----------------------------------------------------------------
+\item Use the bar models to find the original prices.
+
+\vspace{2pt}
+\noindent
+\begin{minipage}[t]{0.48\linewidth}
+(a) A coat is reduced by $20\%$ in a sale. It now costs $\pounds 48$.
+\begin{center}
+\barmodel{10}{8}{$80\%$ is $\pounds 48$}{$100\%$ is $\;?$}{6.2}
+\end{center}
+\vspace{-0.4em}
+\hspace*{1.2em}$80\%$ is $\pounds 48$\\
+\hspace*{1.2em}$10\%$ is \ansline[1.5cm]\\
+\hspace*{1.2em}$100\%$ is \ansline[1.5cm]
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}
+(b) A gym membership rises by $30\%$ to $\pounds 91$ a month.
+\begin{center}
+\barmodel{13}{10}{$100\%$ is $\;?$}{$130\%$ is $\pounds 91$}{6.2}
+\end{center}
+\vspace{-0.4em}
+\hspace*{1.2em}What was the membership before the rise?
+
+\vspace{4pt}
+\hspace*{1.2em}
+\end{minipage}
+
+
+%----------------------------------------------------------------
+\item
+\begin{minipage}[t]{0.50\linewidth}
+Until 2011, VAT in the UK was charged at $17.5\%$. A bicycle repair
+cost $\pounds 64$ before VAT. Complete the steps to find the VAT
+without a calculator.
+\begin{itemize}[label={}, leftmargin=1.5em, itemsep=-2pt, topsep=1pt]
+  \item $10\%$ is \ansline[1.8cm]
+  \item $5\%$ is \ansline[1.8cm]
+  \item $2.5\%$ is \ansline[1.8cm]
+  \item $17.5\%$ is \ansline[1.8cm]
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}
+% Q8 sits beside Q7 to save space, so its label is stepped by hand.
+\stepcounter{enumi}\textbf{Q\arabic{enumi}.}~A caf\'e sells $240$ drinks
+on Saturday. $35\%$ are coffees, $20\%$ are teas and the rest are cold
+drinks.
+
+\vspace{4pt}
+How many cold drinks are sold?
+
+\vspace{3em}
+\ansline[3.5cm]
+\end{minipage}
+
+%----------------------------------------------------------------
+\item A shop raises all of its prices by $20\%$. A month later it takes
+$20\%$ off every price in a sale. A customer says:
+\vspace{3pt}\par\noindent\begin{minipage}{\linewidth}\centering
+\fbox{\begin{minipage}{0.72\linewidth}\small\itshape
+``The sale takes off exactly what was added on, so the prices are back
+to what they were before.''
+\end{minipage}}
+\end{minipage}\vspace{3pt}
+\vspace{-2pt}
+Is the customer right? Use an example price to explain your answer.
+\vspace{2em}
+
+%----------------------------------------------------------------
+\item Two shops sell the same headphones, normally $\pounds 80$.
+\vspace{3pt}\par\noindent\begin{minipage}{\linewidth}\centering
+\fbox{\begin{minipage}[t]{0.40\linewidth}\small\centering
+\textbf{Shop A}\par ``$30\%$ off everything!''
+\end{minipage}}\hspace{6mm}
+\fbox{\begin{minipage}[t]{0.40\linewidth}\small\centering
+\textbf{Shop B}\par ``A quarter off, then $\pounds 8$ off!''
+\end{minipage}}
+\end{minipage}\vspace{3pt}
+\vspace{-2pt}
+\begin{enumerate}
+  \item Which shop is cheaper, and by how much?
+  \item Design a third offer that beats both shops but still charges
+        more than half of the normal price. Explain why it works.
+\end{enumerate}
+
+\end{enumerate}
+}
+
+\begin{document}
+
+\sheet
+\newpage
+\sheet
+
+\end{document}
