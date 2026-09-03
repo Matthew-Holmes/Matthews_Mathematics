@@ -5,9 +5,15 @@
 \usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage{multicol}
+\usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing}
 
+% ================================================================
+% Solutions to percentagesNonCalculatorMethods.tex. The sheet is
+% reproduced exactly, with the answers written into the spaces in
+% red. It is typeset once and is allowed to run past a single page.
+% ================================================================
 
 \pagestyle{empty}
 \setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=4pt, topsep=2pt, parsep=1pt}
@@ -15,7 +21,10 @@
 
 \setlength{\multicolsep}{4pt}
 
-\newcommand{\ansline}[1][2.2cm]{\underline{\hspace{#1}}}
+% An answer written into the space a pupil would write in.
+\newcommand{\ans}[1]{\textcolor{red}{\underline{#1}}}
+% A line of working underneath a question.
+\newcommand{\work}[1]{\par\vspace{1pt}{\color{red}\small #1}}
 
 % \barmodel{<cells>}{<cells under the lower brace>}{<lower label>}{<upper label>}{<width in cm>}
 % The same bar model as the Quick Questions slides: the whole bar
@@ -34,14 +43,13 @@
   \end{tikzpicture}%
 }
 
-% The whole sheet lives in one macro so that it can be typeset twice,
-% giving two identical pages: printing those two-up puts two copies of
-% the worksheet on a single sheet of paper.
-\newcommand{\sheet}{%
+\begin{document}
+
 \begin{center}
   {\Large\bfseries Percentages: Non calculator questions}\\[1pt]
+  {\large\bfseries\color{red}Solutions}
 \end{center}
-\vspace{-0.6em}
+\vspace{-0.4em}
 
 \begin{enumerate}
 
@@ -51,9 +59,9 @@
 A badge for the coding club is drawn as pixel art on a grid of $100$
 squares. $51$ squares are coloured in.
 \begin{enumerate}
-  \item What percentage of the badge is coloured in? \ansline
-  \item Write that as a decimal. \ansline
-  \item Write that as a fraction of the badge. \ansline
+  \item What percentage of the badge is coloured in? \ans{$51\%$}
+  \item Write that as a decimal. \ans{$0.51$}
+  \item Write that as a fraction of the badge. \ans{$\frac{51}{100}$}
 \end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.30\linewidth}
@@ -83,12 +91,12 @@ squares. $51$ squares are coloured in.
 \item Fill in the gaps.
 \begin{multicols}{3}
 \begin{enumerate}
-  \item $0.4=\ansline[1.1cm]\%$
-  \item $0.06=\ansline[1.1cm]\%$
-  \item $1.25=\ansline[1.1cm]\%$
-  \item $45\%=\ansline[1.1cm]$
-  \item $7\%=\ansline[1.1cm]$
-  \item $130\%=\ansline[1.1cm]$
+  \item $0.4=\ans{40}\%$
+  \item $0.06=\ans{6}\%$
+  \item $1.25=\ans{125}\%$
+  \item $45\%=\ans{0.45}$
+  \item $7\%=\ans{0.07}$
+  \item $130\%=\ans{1.3}$
 \end{enumerate}
 \end{multicols}
 
@@ -97,11 +105,15 @@ squares. $51$ squares are coloured in.
 \begin{minipage}[t]{0.63\linewidth}
 $50$ pupils voted for the theme of the summer disco.
 \begin{enumerate}
-  \item What percentage voted for Neon? \ansline
-  \item What percentage voted for Jungle? \ansline
+  \item What percentage voted for Neon? \ans{$36\%$}
+        \work{$\frac{18}{50}=\frac{36}{100}=36\%$}
+  \item What percentage voted for Jungle? \ans{$10\%$}
+        \work{$\frac{5}{50}=\frac{10}{100}=10\%$}
   \item Ravi says ``more than half voted for Space or Retro''.
         Is Ravi right? Explain why or why not, including a calculation to back up your answer.
-        \vspace{2em}
+        \work{Yes. Space and Retro together are $15+12=27$ votes,
+              and $\frac{27}{50}=\frac{54}{100}=54\%$, which is more
+              than half.}
 \end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.33\linewidth}
@@ -122,9 +134,9 @@ $50$ pupils voted for the theme of the summer disco.
 \item Work these out \textbf{without} a calculator.
 \begin{multicols}{3}
 \begin{enumerate}
-  \item $10\%$ of $250$ \ansline[1.3cm]
-  \item $5\%$ of $60$ \ansline[1.3cm]
-  \item $35\%$ of $80$ \ansline[1.3cm]
+  \item $10\%$ of $250$ \ans{$25$}
+  \item $5\%$ of $60$ \ans{$3$}
+  \item $35\%$ of $80$ \ans{$28$}
 \end{enumerate}
 \end{multicols}
 
@@ -133,9 +145,13 @@ $50$ pupils voted for the theme of the summer disco.
 \begin{multicols}{2}
 \begin{enumerate}
   \item Trainers cost $\pounds 45$ and are reduced by $20\%$ in a
-        sale. \ansline[2.2cm]
+        sale. \ans{$\pounds 36$}
+        \work{$10\%$ is $\pounds 4.50$, so $20\%$ is $\pounds 9$.\\
+              $\pounds 45 - \pounds 9 = \pounds 36$}
   \item A hoodie costs $\pounds 32$ and its price is increased by
-        $25\%$. \ansline[2.2cm]
+        $25\%$. \ans{$\pounds 40$}
+        \work{$25\%$ is $\pounds 8$.\\
+              $\pounds 32 + \pounds 8 = \pounds 40$}
 \end{enumerate}
 \end{multicols}
 
@@ -152,8 +168,8 @@ $50$ pupils voted for the theme of the summer disco.
 \end{center}
 \vspace{-0.4em}
 \hspace*{1.2em}$80\%$ is $\pounds 48$\\
-\hspace*{1.2em}$10\%$ is \ansline[1.5cm]\\
-\hspace*{1.2em}$100\%$ is \ansline[1.5cm]
+\hspace*{1.2em}$10\%$ is \ans{$\pounds 6$}\\
+\hspace*{1.2em}$100\%$ is \ans{$\pounds 60$}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\linewidth}
 (b) A gym membership rises by $30\%$ to $\pounds 91$ a month.
@@ -164,7 +180,9 @@ $50$ pupils voted for the theme of the summer disco.
 \hspace*{1.2em}What was the membership before the rise?
 
 \vspace{4pt}
-\hspace*{1.2em}
+\hspace*{1.2em}\ans{$\pounds 70$}
+\work{\hspace*{1.2em}$130\%$ is $\pounds 91$, so $10\%$ is $\pounds 7$
+      and $100\%$ is $\pounds 70$}
 \end{minipage}
 
 
@@ -175,10 +193,10 @@ Until 2011, VAT in the UK was charged at $17.5\%$. A bicycle repair
 cost $\pounds 64$ before VAT. Complete the steps to find the VAT
 without a calculator.
 \begin{itemize}[label={}, leftmargin=1.5em, itemsep=-2pt, topsep=1pt]
-  \item $10\%$ is \ansline[1.8cm]
-  \item $5\%$ is \ansline[1.8cm]
-  \item $2.5\%$ is \ansline[1.8cm]
-  \item $17.5\%$ is \ansline[1.8cm]
+  \item $10\%$ is \ans{$\pounds 6.40$}
+  \item $5\%$ is \ans{$\pounds 3.20$}
+  \item $2.5\%$ is \ans{$\pounds 1.60$}
+  \item $17.5\%$ is \ans{$\pounds 11.20$}
 \end{itemize}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.46\linewidth}
@@ -188,10 +206,10 @@ on Saturday. $35\%$ are coffees, $20\%$ are teas and the rest are cold
 drinks.
 
 \vspace{4pt}
-How many cold drinks are sold?
-
-\vspace{3em}
-\ansline[3.5cm]
+How many cold drinks are sold? \ans{$108$}
+\work{$35\%+20\%=55\%$, so $45\%$ are cold drinks.\\
+      $10\%$ is $24$, so $40\%$ is $96$; $5\%$ is $12$.\\
+      $96+12=108$}
 \end{minipage}
 
 %----------------------------------------------------------------
@@ -205,7 +223,13 @@ to what they were before.''
 \end{minipage}\vspace{3pt}
 \vspace{-2pt}
 Is the customer right? Use an example price to explain your answer.
-\vspace{2em}
+\work{No. Take a price of $\pounds 100$.\\
+      After the rise: $10\%$ is $\pounds 10$, so $20\%$ is $\pounds 20$,
+      giving $\pounds 120$.\\
+      In the sale: $10\%$ of $\pounds 120$ is $\pounds 12$, so $20\%$ is
+      $\pounds 24$, giving $\pounds 96$.\\
+      The price ends up $\pounds 4$ lower, because the $20\%$ taken off
+      is $20\%$ of the \emph{larger} price.}
 
 %----------------------------------------------------------------
 \item Two shops sell the same headphones, normally $\pounds 80$.
@@ -220,18 +244,32 @@ Is the customer right? Use an example price to explain your answer.
 \vspace{-2pt}
 \begin{enumerate}
   \item Which shop is cheaper, and by how much?
+        \work{Shop A: $10\%$ is $\pounds 8$, so $30\%$ is $\pounds 24$,
+              giving $\pounds 80-\pounds 24=\pounds 56$.\\
+              Shop B: a quarter off is $\pounds 20$ off, giving
+              $\pounds 60$, then $\pounds 60-\pounds 8=\pounds 52$.\\
+              Shop B is cheaper, by $\pounds 4$.}
   \item Design a third offer that beats both shops but still charges
         more than half of the normal price. Explain why it works.
-  \item How much would the headphones have to cost for the two shops to charge the same price? 
+        \work{Many answers. For example ``$40\%$ off'': $10\%$ is
+              $\pounds 8$, so $40\%$ is $\pounds 32$, giving
+              $\pounds 48$.\\
+              That is cheaper than Shop B's $\pounds 52$, and half of
+              $\pounds 80$ is $\pounds 40$, so $\pounds 48$ is still
+              more than half price.\\
+              Any final price between $\pounds 40$ and $\pounds 52$
+              works.}
+  \item How much would the headphones have to cost for the two shops to charge the same price?
+        \work{Shop A takes off $30\%$. Shop B takes off $25\%$ and then
+              $\pounds 8$, so Shop A takes off an extra $5\%$ and Shop B
+              takes off an extra $\pounds 8$.\\
+              The two are the same when $5\%$ is $\pounds 8$, so $10\%$ is
+              $\pounds 16$ and $100\%$ is $\pounds 160$.\\
+              Check: Shop A gives $\pounds 160-\pounds 48=\pounds 112$;
+              Shop B gives $\pounds 160-\pounds 40=\pounds 120$, then
+              $\pounds 120-\pounds 8=\pounds 112$.}
 \end{enumerate}
 
 \end{enumerate}
-}
-
-\begin{document}
-
-\sheet
-\newpage
-\sheet
 
 \end{document}
