@@ -23,6 +23,16 @@
   anslab/.style  = {red, font=\tiny, visible on=<2->},
 }
 
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
 \title{Fractions: Of Amounts \& Multiplying}
 \author{}
 \date{}

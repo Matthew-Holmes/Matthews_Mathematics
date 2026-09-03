@@ -1,0 +1,1066 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/targeted/KS3/fractions/fractionsOfAmountsStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/targeted/KS3/fractions/fractionsOfAmountsStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
+\title{Fractions: Of Amounts \& Multiplying}
+\author{}
+\date{}
+
+\setbeamersize{text margin left=0.5cm, text margin right=0.5cm}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------------------
+% Contents
+%------------------------------------------------
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+  \item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+  \item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+  \item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+  \item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+  \item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+  \item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+  \item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+  \item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+  \item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+  \item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 15: Fractions of Amounts (Introduction)
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st1}{}
+
+\vspace{-2em}
+
+\begin{columns}
+
+\column{0.25\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+% Label for whole (20) above the top bar
+\node[anchor=west] at (1.2,5.0) {\small $20$};
+% Bar model for 1/2 of 20 (top)
+\fill[orange!35] (0,3.8) rectangle (1.5,4.4);
+\fill[gray!15] (1.5,3.8) rectangle (3,4.4);
+\draw (0,3.8) rectangle (3,4.4);
+\draw (1.5,3.8) -- (1.5,4.4);
+\node at (0.75,4.1) {\tiny $10$};
+\node at (2.25,4.1) {\tiny $10$};
+\draw[<->, orange, thick] (0,3.55) -- (1.5,3.55);
+\node[orange] at (0.75,3.15) {\small $\frac{1}{2}$ of $20 = \text{\ashowq{10}}$};
+% Bar model for 1/4 of 20 (middle)
+\fill[green!30] (0,1.8) rectangle (0.75,2.4);
+\fill[gray!15] (0.75,1.8) rectangle (3,2.4);
+\draw (0,1.8) rectangle (3,2.4);
+\foreach \x in {0.75,1.5,2.25} \draw (\x,1.8) -- (\x,2.4);
+\node at (0.375,2.1) {\tiny $5$};
+\draw[<->, green!60!black, thick] (0,1.55) -- (0.75,1.55);
+\node[green!60!black] at (0.375,1.15) {\small $\frac{1}{4}$ of $20 = \text{\ashowq{5}}$};
+% Bar model for 3/4 of 20 (bottom)
+\fill[blue!30] (0,-0.1) rectangle (2.25,0.5);
+\fill[gray!15] (2.25,-0.1) rectangle (3,0.5);
+\draw (0,-0.1) rectangle (3,0.5);
+\foreach \x in {0.75,1.5,2.25} \draw (\x,-0.1) -- (\x,0.5);
+\node at (0.375,0.2) {\tiny $5$};
+\node at (1.125,0.2) {\tiny $5$};
+\node at (1.875,0.2) {\tiny $5$};
+\node at (2.625,0.2) {\tiny $5$};
+\draw[<->, blue, thick] (0,-0.35) -- (2.25,-0.35);
+\node[blue] at (1.125,-0.75) {\small $\frac{3}{4}$ of $20 = \text{\ashowq{15}}$};
+\end{tikzpicture}
+\end{center}
+
+\column{0.75\textwidth}
+\small
+\begin{enumerate}
+\begin{multicols}{2}
+  \item Fully simplify: $\dfrac{18}{24}$ \ashow{$\dfrac{3}{4}$}
+  \item Calculate: $2\dfrac{1}{3} + 1\dfrac{1}{2}$ \ashow{$=3\dfrac{5}{6}$}
+\end{multicols}
+  \item Using the bar models to the left:
+  \[
+    \tfrac{1}{2} \text{ of } 20 = \ablank{10} \qquad \tfrac{1}{4} \text{ of } 20 = \ablank{5} \qquad \tfrac{3}{4} \text{ of } 20 = \ablank{15}
+  \]
+  \item Calculate:
+  \[
+    \tfrac{1}{3} \text{ of } 24 \qquad \tfrac{2}{3} \text{ of } 24
+  \]
+  \ashow{$8$ and $16$}
+  \item Fill in the blank: $\quad \dfrac{3}{4}$ of $\ablank{24} = 18$
+
+\begin{multicols}{2}
+  \item Find $\dfrac{2}{5}$ of $35$. \ashow{$14$}
+  \vspace{2em}
+  \item Amy cuts a  $60\,\text{cm}$ ribbon and takes $\dfrac{3}{4}$ of it. How long is her piece? \ashow{$45$ cm}
+\end{multicols}
+  \item True or false? ``$\dfrac{1}{2}$ of $30 = 30 \div 2$.'' Explain your reasoning.
+  \ashow{True. $\tfrac12$ of $30 = 15$ and $30 \div 2 = 15$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} Fully simplify \(\dfrac{18}{24}\).
+
+\awork{Solution: The highest common factor of \(18\) and \(24\) is \(6\), so divide numerator and denominator by \(6\):
+\[
+\frac{18}{24}=\frac{18\div 6}{24\div 6}=\frac{3}{4}.
+\]
+So \(\dfrac{18}{24}\) simplifies to \(\dfrac{3}{4}\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 2}
+\textbf{Question:} Calculate \(2\dfrac{1}{3}+1\dfrac{1}{2}\).
+
+\awork{Solution: Use a common denominator of \(6\):
+\[
+2\frac13=2\frac26,\qquad 1\frac12=1\frac36.
+\]
+\[
+2\frac26+1\frac36=3\frac56.
+\]
+So the sum is \(3\dfrac{5}{6}\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 3}
+\textbf{Question:} Using the bar models, find \(\dfrac12\) of \(20\), \(\dfrac14\) of \(20\), and \(\dfrac34\) of \(20\).
+
+\awork{Solution: The bar models split the whole \(20\) into equal parts.
+
+\(\dfrac12\) of \(20\): split into \(2\) parts of \(10\), so \(10\).
+
+\(\dfrac14\) of \(20\): split into \(4\) parts of \(5\), so \(5\).
+
+\(\dfrac34\) of \(20\): take \(3\) of the \(4\) equal parts, so \(3\times 5=15\).
+
+Therefore:
+\[
+\frac12\text{ of }20=10,\qquad
+\frac14\text{ of }20=5,\qquad
+\frac34\text{ of }20=15.
+\]}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 4}
+\textbf{Question:} Calculate \(\dfrac13\) of \(24\) and \(\dfrac23\) of \(24\).
+
+\awork{Solution: First find one third:
+\[
+24\div 3=8.
+\]
+So \(\dfrac13\) of \(24=8\).
+
+Two thirds are two lots of one third:
+\[
+\dfrac23\text{ of }24=2\times 8=16.
+\]
+Hence the answers are \(8\) and \(16\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 5}
+\textbf{Question:} Fill in the blank: \(\dfrac34\) of \(\_\_\_ = 18\).
+
+\awork{Solution: Let the missing number be \(x\). We need
+\[
+\frac34 x=18.
+\]
+Divide both sides by \(3\): one quarter of \(x\) is \(6\). Then multiply by \(4\): the whole of \(x\) is \(4\times 6=24\).
+
+So the blank is \(24\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 6}
+\textbf{Question:} Find \(\dfrac25\) of \(35\).
+
+\awork{Solution: Divide \(35\) into \(5\) equal parts:
+\[
+35\div 5=7.
+\]
+Each fifth is \(7\), so two fifths are
+\[
+2\times 7=14.
+\]
+Therefore \(\dfrac25\) of \(35=14\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 7}
+\textbf{Question:} Amy cuts a \(60\,\text{cm}\) ribbon and takes \(\dfrac34\) of it. How long is her piece?
+
+\awork{Solution: Divide the ribbon into \(4\) equal parts:
+\[
+60\div 4=15.
+\]
+Each quarter is \(15\,\text{cm}\). Amy takes \(3\) quarters, so her piece is
+\[
+3\times 15=45\,\text{cm}.
+\]
+So Amy's piece is \(45\,\text{cm}\) long.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 1, Question 8}
+\textbf{Question:} True or false? ``\(\dfrac12\) of \(30=30\div 2\).'' Explain your reasoning.
+
+\awork{Solution: True. The word ``of'' means multiply, so
+\[
+\frac12\text{ of }30=\frac12\times 30=\frac{30}{2}=15.
+\]
+Also,
+\[
+30\div 2=15.
+\]
+Since both give \(15\), the statement is true.}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 16: Fractions of Amounts (Mixed difficulty)
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st2}{}
+
+\vspace{-2em}
+
+\begin{columns}
+
+\column{0.22\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+
+% Bar model for 3/4 of 48
+\node[anchor=west] at (1, 5.5) {\small $48$};
+
+\draw (0,4.3) rectangle (3,4.9);
+\foreach \x in {0.75,1.5,2.25} \draw (\x,4.3) -- (\x,4.9);
+\fill[blue!30] (0,4.3) rectangle (0.75,4.9);
+\fill[blue!30] (0.75,4.3) rectangle (1.5,4.9);
+\fill[blue!30] (1.5,4.3) rectangle (2.25,4.9);
+\fill[gray!15] (2.25,4.3) rectangle (3,4.9);
+\node at (0.375,4.6) {\tiny $12$};
+\node at (1.125,4.6) {\tiny $12$};
+\node at (1.875,4.6) {\tiny $12$};
+\node at (2.625,4.6) {\tiny $12$};
+
+\draw[<->, blue, thick] (0,4.05) -- (2.25,4.05);
+\node[blue] at (1.125,3.75) {\small $\frac{3}{4}$ of $48 = \text{\ashowq{36}}$};
+
+
+\draw (0,2.4) rectangle (3,3.0);
+\foreach \x in {0.375,0.75,1.125,1.5,1.875,2.25,2.625} \draw (\x,2.4) -- (\x,3.0);
+\fill[orange!30] (0,2.4) rectangle (1.875,3.0);
+\fill[gray!15] (1.875,2.4) rectangle (3,3.0);
+\node at (0.1875,2.7) {\tiny $6$};
+\node at (0.5625,2.7) {\tiny $6$};
+\node at (0.9375,2.7) {\tiny $6$};
+\node at (1.3125,2.7) {\tiny $6$};
+\node at (1.6875,2.7) {\tiny $6$};
+
+\draw[<->, orange, thick] (0,2.15) -- (1.875,2.15);
+\node[orange] at (0.9375,1.85) {\small $\frac{5}{8}$ of $48 = \text{\ashowq{30}}$};
+
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.78\textwidth}
+\small
+\begin{enumerate}
+  \item Order smallest to largest: $\dfrac{3}{8},\ \dfrac{1}{2},\ \dfrac{5}{12}$ \ashow{$\dfrac{3}{8} < \dfrac{5}{12} < \dfrac{1}{2}$}
+  \item Convert $\dfrac{17}{5}$ to a mixed number. \ashow{$3\dfrac{2}{5}$}
+  \item Use the bar model to find $\dfrac{3}{4}$ of $48$ and $\dfrac{5}{8}$ of $48$. \ashow{$36$ and $30$}
+  \item Calculate: $\quad \dfrac{5}{8}$ of $72$ \ashow{$=45$}
+  \item $\dfrac{2}{3}$ of a class of $30$ are girls. How many boys are there? \ashow{$10$ boys}
+  \item Rania says ``$\dfrac{3}{5}$ of $40 = 24$''. Is she correct? Show your working. \ashow{Yes; $\dfrac{3}{5}\times 40 = 24$.}
+
+\begin{multicols}{2}
+  \item Which is greater: \newline $\dfrac{3}{4}$ of $60$ or $\dfrac{4}{5}$ of $55$? \ashow{$\dfrac{3}{4}$ of $60$ ($=45$)}
+  \item Fill in the blank:
+  \[
+    \frac{\ablank{5}}{8} \text{ of } 64 = 40
+  \]
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} Order smallest to largest: \(\dfrac38,\ \dfrac12,\ \dfrac{5}{12}\).
+
+\awork{Solution: Use a common denominator of \(24\):
+\[
+\frac38=\frac{9}{24},\qquad
+\frac12=\frac{12}{24},\qquad
+\frac{5}{12}=\frac{10}{24}.
+\]
+The numerators are \(9<10<12\), so
+\[
+\frac38<\frac{5}{12}<\frac12.
+\]}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 2}
+\textbf{Question:} Convert \(\dfrac{17}{5}\) to a mixed number.
+
+\awork{Solution: Divide \(17\) by \(5\). Since \(5\times 3=15\), there are \(3\) whole fives with remainder \(2\):
+\[
+\frac{17}{5}=3\frac{2}{5}.
+\]
+So the mixed number is \(3\dfrac25\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 3}
+\textbf{Question:} Use the bar model to find \(\dfrac34\) of \(48\) and \(\dfrac58\) of \(48\).
+
+\awork{Solution: For \(\dfrac34\) of \(48\): split \(48\) into \(4\) equal parts.
+\[
+48\div 4=12,\qquad 3\times 12=36.
+\]
+For \(\dfrac58\) of \(48\): split \(48\) into \(8\) equal parts.
+\[
+48\div 8=6,\qquad 5\times 6=30.
+\]
+So the answers are \(36\) and \(30\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 4}
+\textbf{Question:} Calculate \(\dfrac58\) of \(72\).
+
+\awork{Solution: Divide \(72\) into \(8\) equal parts:
+\[
+72\div 8=9.
+\]
+Each eighth is \(9\), so five eighths are
+\[
+5\times 9=45.
+\]
+Therefore \(\dfrac58\) of \(72=45\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 5}
+\textbf{Question:} \(\dfrac23\) of a class of \(30\) are girls. How many boys are there?
+
+\awork{Solution: If \(\dfrac23\) are girls, then \(\dfrac13\) are boys.
+\[
+30\div 3=10.
+\]
+So there are \(10\) boys.
+
+Alternatively, girls \(=\dfrac23\times 30=20\), so boys \(=30-20=10\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 6}
+\textbf{Question:} Rania says ``\(\dfrac35\) of \(40=24\)''. Is she correct? Show your working.
+
+\awork{Solution: Split \(40\) into \(5\) equal parts:
+\[
+40\div 5=8.
+\]
+Three fifths are
+\[
+3\times 8=24.
+\]
+So Rania is correct: \(\dfrac35\) of \(40=24\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 7}
+\textbf{Question:} Which is greater: \(\dfrac34\) of \(60\), or \(\dfrac45\) of \(55\)?
+
+\awork{Solution: Compute each amount.
+\[
+\frac34\times 60=45.
+\]
+\[
+\frac45\times 55=\frac{4\times 55}{5}=\frac{220}{5}=44.
+\]
+Since \(45>44\), \(\dfrac34\) of \(60\) is greater.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 2, Question 8}
+\textbf{Question:} Fill in the blank:
+\[
+\frac{\_\_\_}{8}\text{ of }64=40.
+\]
+
+\awork{Solution: Let the missing numerator be \(x\). Then
+\[
+\frac{x}{8}\times 64=40.
+\]
+Since \(64\div 8=8\),
+\[
+8x=40.
+\]
+\[
+x=40\div 8=5.
+\]
+So the missing number is \(5\).}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 17: Multiplying Fractions (Introduction)
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st3}{}
+
+\vspace{-2em}
+
+\begin{columns}
+
+\column{0.25\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+
+% Area model for 1/2 x 1/3
+
+% Grid: 2 columns x 3 rows = 6 cells
+\draw (0,2.5) rectangle (3,4.9);
+% vertical line (halves)
+\draw (1.5,2.5) -- (1.5,4.9);
+% horizontal lines (thirds)
+\draw (0,3.3) -- (3,3.3);
+\draw (0,4.1) -- (3,4.1);
+
+% shade 1 cell (top-left = 1/2 wide, 1/3 tall)
+\fill[blue!40] (0,4.1) rectangle (1.5,4.9);
+
+\node at (0.75,4.5) {\small $\frac{1}{6}$};
+\node[gray] at (2.25,4.5) {\small $\frac{1}{6}$};
+\node[gray] at (0.75,3.7) {\small $\frac{1}{6}$};
+\node[gray] at (2.25,3.7) {\small $\frac{1}{6}$};
+\node[gray] at (0.75,2.9) {\small $\frac{1}{6}$};
+\node[gray] at (2.25,2.9) {\small $\frac{1}{6}$};
+
+% labels on axes
+\draw[<->, blue, thick] (0,2.25) -- (1.5,2.25);
+\node[blue] at (0.75,2.0) {\small $\frac{1}{2}$};
+\draw[<->, orange, thick] (3.2,4.1) -- (3.2,4.9);
+\node[orange] at (3.6,4.5) {\small $\frac{1}{3}$};
+
+% Area model for 2/3 x 3/4
+
+\draw (0,-2.5) rectangle (3,0.4);
+% shade 2/3 wide x 3/4 tall = 6 of 12 cells
+\fill[orange!40] (0,-1.85) rectangle (2,0.4);
+
+% vertical lines (thirds)
+\draw (1,  -2.5) -- (1,  0.4);
+\draw (2,  -2.5) -- (2,  0.4);
+% horizontal lines (quarters)
+\draw (0,-0.35) -- (3,-0.35);
+\draw (0,-1.1) -- (3,-1.1);
+\draw (0,-1.85) -- (3,-1.85);
+
+% labels on axes
+\draw[<->, blue, thick] (0,-3.0) -- (2,-3.0);
+\node[blue] at (1,-3.3) {\small $\frac{2}{3}$};
+\draw[<->, orange, thick] (3.2,0.4) -- (3.2,-1.85);
+\node[orange] at (3.5,-0.8) {\small $\frac{3}{4}$};
+
+% --- Q1 answer: 1/2 of 1/2 drawn as an area model ---
+\fill[ansfill, red!35] (0,1.2) rectangle (0.55,1.75);
+\draw[ans] (0,0.65) rectangle (1.1,1.75);
+\draw[ans] (0.55,0.65) -- (0.55,1.75);
+\draw[ans] (0,1.2) -- (1.1,1.2);
+\node[anslab, right] at (1.2,1.2) {Q1: $\tfrac{1}{2}$ of $\tfrac{1}{2}=\tfrac{1}{4}$};
+\end{tikzpicture}
+\end{center}
+
+\column{0.75\textwidth}
+\small
+\begin{enumerate}
+  \item What is $\dfrac{1}{2}$ of $\dfrac{1}{2}$? Draw a picture to show your answer. \ashow{$\dfrac{1}{4}$}
+  \item Use the area model on the left to calculate $\dfrac{1}{2} \times \dfrac{1}{3} = \dfrac{\ablank{1}}{\ablank{6}}$
+  \item Use the second area model to calculate and simplify: $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{\ablank{6}}{\ablank{12}} = \dfrac{\ablank{1}}{\ablank{2}}$
+  \item Calculate:
+  \[
+    \frac{3}{5} \times \frac{5}{7}
+  \]
+  \ashow{$=\dfrac{3}{7}$}
+  \item Simplify \textit{then} multiply: $\quad\dfrac{3}{9} \times \dfrac{4}{8}$ \ashow{$=\dfrac{1}{6}$}
+  \item Find $\dfrac{3}{4}$ of $\dfrac{2}{5}$. What do you notice about ``of'' and ``$\times$''? \ashow{$\dfrac{3}{10}$; ``of'' means multiply.}
+  \item Calculate: $1\dfrac{1}{2} \times \dfrac{1}{3}$\\[0.3em]
+  (Hint: convert to improper first.) \ashow{$=\dfrac{1}{2}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} What is \(\dfrac12\) of \(\dfrac12\)? Draw a picture to show your answer.
+
+\awork{Solution: ``\(\dfrac12\) of \(\dfrac12\)'' means
+\[
+\frac12\times\frac12=\frac{1\times 1}{2\times 2}=\frac14.
+\]
+A diagram showing this is a square split into \(2\) equal rows and \(2\) equal columns. Shading one of the four equal parts shows one quarter.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\fill[blue!20] (0,1) rectangle (1,2);
+\draw (0,0) rectangle (2,2);
+\draw (1,0) -- (1,2);
+\draw (0,1) -- (2,1);
+\end{tikzpicture}
+\end{center}
+
+So the answer is \(\dfrac14\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 2}
+\textbf{Question:} Use the area model to calculate
+\[
+\frac12\times\frac13=\frac{\_\_\_}{\_\_\_}.
+\]
+
+\awork{Solution: The area model is divided into \(2\) equal columns and \(3\) equal rows, so it has
+\[
+2\times 3=6
+\]
+equal parts. The overlap of \(\dfrac12\) and \(\dfrac13\) is exactly \(1\) of those \(6\) parts.
+
+Therefore
+\[
+\frac12\times\frac13=\frac16.
+\]
+The missing numbers are \(1\) and \(6\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 3}
+\textbf{Question:} Use the second area model to calculate and simplify:
+\[
+\frac23\times\frac34=\frac{\_\_\_}{\_\_\_}=\frac{\_\_\_}{\_\_\_}.
+\]
+
+\awork{Solution: The second area model is divided into \(3\) equal columns and \(4\) equal rows, giving
+\[
+3\times 4=12
+\]
+equal parts. The overlap is \(2\times 3=6\) parts, so
+\[
+\frac23\times\frac34=\frac{6}{12}.
+\]
+Now simplify by dividing numerator and denominator by \(6\):
+\[
+\frac{6}{12}=\frac12.
+\]
+So the completed fraction is
+\[
+\frac23\times\frac34=\frac{6}{12}=\frac12.
+\]}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 4}
+\textbf{Question:} Calculate
+\[
+\frac35\times\frac57.
+\]
+
+\awork{Solution: Multiply numerators and denominators:
+\[
+\frac35\times\frac57=\frac{3\times 5}{5\times 7}=\frac{15}{35}.
+\]
+Simplify by dividing numerator and denominator by \(5\):
+\[
+\frac{15}{35}=\frac37.
+\]
+So \(\dfrac35\times\dfrac57=\dfrac37\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 5}
+\textbf{Question:} Simplify \textit{then} multiply:
+\[
+\frac39\times\frac48.
+\]
+
+\awork{Solution: First simplify each fraction:
+\[
+\frac39=\frac13,\qquad \frac48=\frac12.
+\]
+Then multiply:
+\[
+\frac13\times\frac12=\frac{1\times 1}{3\times 2}=\frac16.
+\]
+So \(\dfrac39\times\dfrac48=\dfrac16\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 6}
+\textbf{Question:} Find \(\dfrac34\) of \(\dfrac25\). What do you notice about ``of'' and ``\(\times\)''?
+
+\awork{Solution: ``\(\dfrac34\) of \(\dfrac25\)'' means
+\[
+\frac34\times\frac25=\frac{3\times 2}{4\times 5}=\frac{6}{20}=\frac{3}{10}.
+\]
+So the answer is \(\dfrac{3}{10}\).
+
+Notice that ``of'' means the same as multiplication by a fraction.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 3, Question 7}
+\textbf{Question:} Calculate
+\[
+1\frac12\times\frac13.
+\]
+
+\awork{Solution: First convert \(1\frac12\) to an improper fraction:
+\[
+1\frac12=\frac{3}{2}.
+\]
+Then multiply:
+\[
+\frac32\times\frac13=\frac{3\times 1}{2\times 3}=\frac{3}{6}=\frac12.
+\]
+So \(1\dfrac12\times\dfrac13=\dfrac12\).}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 18: Multiplying Fractions & Amounts (Mixed)
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st4}{}
+
+\vspace{-2em}
+
+\begin{columns}
+
+\column{0.22\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+
+% Illustration: 2/3 of 4.5m wall
+\node at (1.5, 5.3) {\small $4\tfrac{1}{2}$\,m wall};
+
+\draw (0,4.2) rectangle (3,4.8);
+\foreach \x in {1,2} \draw (\x,4.2) -- (\x,4.8);
+\fill[gray!20] (0,4.2) rectangle (3,4.8);
+\fill[blue!35] (0,4.2) rectangle (2,4.8);
+\node at (0.5,4.5) {\tiny $1.5$};
+\node at (1.5,4.5) {\tiny $1.5$};
+\node at (2.5,4.5) {\tiny $1.5$};
+
+\draw[<->, blue, thick] (0,3.95) -- (2,3.95);
+
+% Area model reminder: 3/5 x 4/7
+\node at (1.5,3.1) {\small $\dfrac{3}{5} \times \dfrac{4}{7}$};
+
+\draw (0,0.5) rectangle (3,2.5);
+\fill[orange!35] (0,1.3) rectangle (1.7143,2.5);
+
+% 5 rows, 7 cols
+\foreach \y in {0.9,1.3,1.7,2.1} \draw (0,\y) -- (3,\y);
+\foreach \x in {0.4286,0.8571,1.2857,1.7143,2.1429,2.5714} \draw (\x,0.5) -- (\x,2.5);
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.78\textwidth}
+\small
+\begin{enumerate}
+\begin{multicols}{3}
+  \item Simplify: $\dfrac{24}{36}$ \ashow{$\dfrac{2}{3}$}
+  \item $3\dfrac{1}{4} - 1\dfrac{2}{3}$ \ashow{$=1\dfrac{7}{12}$}
+  \item $\dfrac{5}{6}$ of $42$ \ashow{$=35$}
+\end{multicols}
+
+  \item A wall is $4\dfrac{1}{2}$\,m long. A mural covers $\dfrac{2}{3}$ of it. Use the bar model to find the length of the mural. \ashow{$3$ m}
+
+  \item Use the area model to calculate: $\dfrac{3}{5} \times \dfrac{4}{7} = \dfrac{\ablank{12}}{\ablank{35}}$
+
+  \item Which is greater: $\dfrac{2}{3} \times \dfrac{3}{4}$, or $\dfrac{3}{4}$ of $\dfrac{2}{3}$? Explain. \ashow{They are equal ($\dfrac{1}{2}$).}
+
+\begin{multicols}{2}
+  \item Fill in the blank:
+  \[
+    \frac{3}{5} \times \ablank{\frac{2}{7}} = \frac{6}{35}
+  \]
+  \newline
+  \item True or false? ``Multiplying two proper fractions always gives a smaller result than either fraction.'' Explain or give a counterexample. \ashow{True; e.g.\ $\dfrac{2}{3}\times\dfrac{3}{4}=\dfrac{1}{2}$, which is smaller than both.}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} Simplify \(\dfrac{24}{36}\).
+
+\awork{Solution: The highest common factor of \(24\) and \(36\) is \(12\). Divide numerator and denominator by \(12\):
+\[
+\frac{24}{36}=\frac{24\div 12}{36\div 12}=\frac23.
+\]
+So \(\dfrac{24}{36}\) simplifies to \(\dfrac23\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 2}
+\textbf{Question:} Calculate \(3\dfrac14-1\dfrac23\).
+
+\awork{Solution: Convert both mixed numbers to improper fractions:
+\[
+3\frac14=\frac{13}{4},\qquad 1\frac23=\frac53.
+\]
+Use a common denominator of \(12\):
+\[
+\frac{13}{4}=\frac{39}{12},\qquad \frac53=\frac{20}{12}.
+\]
+Subtract:
+\[
+\frac{39}{12}-\frac{20}{12}=\frac{19}{12}=1\frac{7}{12}.
+\]
+So the answer is \(1\dfrac{7}{12}\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 3}
+\textbf{Question:} Calculate \(\dfrac56\) of \(42\).
+
+\awork{Solution: Divide \(42\) into \(6\) equal parts:
+\[
+42\div 6=7.
+\]
+Each sixth is \(7\), so five sixths are
+\[
+5\times 7=35.
+\]
+Therefore \(\dfrac56\) of \(42=35\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 4}
+\textbf{Question:} A wall is \(4\dfrac12\)\,m long. A mural covers \(\dfrac23\) of it. Use the bar model to find the length of the mural.
+
+\awork{Solution: Split the wall into \(3\) equal thirds:
+\[
+4\frac12\div 3=\frac92\div 3=\frac92\times\frac13=\frac32=1.5\text{ m}.
+\]
+Each third is \(1.5\) m. The mural covers \(2\) thirds, so its length is
+\[
+2\times 1.5=3\text{ m}.
+\]
+Equivalently,
+\[
+\frac23\times 4\frac12=\frac23\times\frac92=\frac{18}{6}=3.
+\]
+So the mural is \(3\) m long.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 5}
+\textbf{Question:} Use the area model to calculate
+\[
+\frac35\times\frac47=\frac{\_\_\_}{\_\_\_}.
+\]
+
+\awork{Solution: The area model is divided into \(5\) equal rows and \(7\) equal columns, so it has
+\[
+5\times 7=35
+\]
+equal parts. The shaded overlap is \(3\times 4=12\) parts.
+
+Therefore
+\[
+\frac35\times\frac47=\frac{12}{35}.
+\]
+The missing numbers are \(12\) and \(35\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 6}
+\textbf{Question:} Which is greater: \(\dfrac23\times\dfrac34\), or \(\dfrac34\) of \(\dfrac23\)? Explain.
+
+\awork{Solution: Since ``of'' means multiply, both are products of the same two fractions:
+\[
+\frac23\times\frac34=\frac{2\times 3}{3\times 4}=\frac{6}{12}=\frac12,
+\]
+and
+\[
+\frac34\text{ of }\frac23=\frac34\times\frac23=\frac{3\times 2}{4\times 3}=\frac{6}{12}=\frac12.
+\]
+They are equal. Multiplication of fractions is commutative, so neither is greater.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 7}
+\textbf{Question:} Fill in the blank:
+\[
+\frac35\times \_\_\_ = \frac{6}{35}.
+\]
+
+\awork{Solution: Let the missing fraction be \(x\). To find \(x\), divide \(\dfrac{6}{35}\) by \(\dfrac35\):
+\[
+x=\frac{6}{35}\div\frac35=\frac{6}{35}\times\frac53
+=\frac{6\times 5}{35\times 3}
+=\frac{30}{105}
+=\frac{2}{7}.
+\]
+So the missing fraction is \(\dfrac27\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 4, Question 8}
+\textbf{Question:} True or false? ``Multiplying two proper fractions always gives a smaller result than either fraction.'' Explain or give a counterexample.
+
+\awork{Solution: True for positive proper fractions. A proper fraction lies between \(0\) and \(1\), and multiplying a positive number by a number less than \(1\) makes it smaller.
+
+For example,
+\[
+\frac23\times\frac34=\frac{6}{12}=\frac12.
+\]
+Here \(\dfrac12<\dfrac23\) and \(\dfrac12<\dfrac34\), so the result is smaller than both fractions. Therefore the statement is true.}
+\end{frame}
+
+%------------------------------------------------
+% SLIDE 19: Problem Solving & Mastery
+%------------------------------------------------
+\begin{frame}{Retrieve and Connect}
+\hypertarget{q-st5}{}
+
+\vspace{-2em}
+
+\begin{columns}
+
+\column{0.22\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+
+% Bar model: 3/4 of a number is 27
+
+\draw (0,3.7) rectangle (3,4.3);
+\foreach \x in {0.75,1.5,2.25} \draw (\x,3.7) -- (\x,4.3);
+\fill[blue!30] (0,3.7) rectangle (2.25,4.3);
+\fill[gray!15] (2.25,3.7) rectangle (3,4.3);
+\node at (0.375,4.0) {\tiny $9$};
+\node at (1.125,4.0) {\tiny $9$};
+\node at (1.875,4.0) {\tiny $9$};
+\node at (2.625,4.0) {\tiny \ashowq{36}};
+
+\draw[<->, blue, thick] (0,3.45) -- (2.25,3.45);
+\node[blue] at (1.125,3.15) {\small $27$};
+
+% --- Q7 answer: the two area diagrams, each shading 6 of 12 cells ---
+% 2/3 wide by 3/4 tall
+\fill[ansfill, red!35] (0,1.45) rectangle (1.2,2.8);
+\draw[ans] (0,1.0) rectangle (1.8,2.8);
+\foreach \x in {0.6,1.2} \draw[ans] (\x,1.0) -- (\x,2.8);
+\foreach \y in {1.45,1.9,2.35} \draw[ans] (0,\y) -- (1.8,\y);
+\node[anslab, below right] at (0,0.95) {Q7: $\tfrac{2}{3}\times\tfrac{3}{4}=\tfrac{6}{12}$};
+% 3/4 wide by 2/3 tall
+\fill[ansfill, red!35] (0,-0.8) rectangle (1.35,0.4);
+\draw[ans] (0,-1.4) rectangle (1.8,0.4);
+\foreach \x in {0.45,0.9,1.35} \draw[ans] (\x,-1.4) -- (\x,0.4);
+\foreach \y in {-0.8,-0.2} \draw[ans] (0,\y) -- (1.8,\y);
+\node[anslab, below right] at (0,-1.45) {$\tfrac{3}{4}\times\tfrac{2}{3}=\tfrac{6}{12}$};
+\end{tikzpicture}
+\end{center}
+
+\column{0.78\textwidth}
+\small
+\begin{enumerate}
+\begin{multicols}{3}
+  \item Simplify: $\dfrac{20}{30}$ \ashow{$\dfrac{2}{3}$}
+  \item Simplify: $\dfrac{84}{108}$ \ashow{$\dfrac{7}{9}$}
+\end{multicols}
+
+  \item Convert $4\dfrac{3}{5}$ to an improper fraction. \ashow{$\dfrac{23}{5}$}
+
+  \item Calculate: $2\dfrac{3}{4} + 1\dfrac{3}{5}$ \ashow{$=4\dfrac{7}{20}$}
+
+  \item $\dfrac{3}{4}$ of a number is $27$. Use the bar model to find the whole number. \ashow{$36$}
+
+  \item Jack spends $\dfrac{1}{3}$ of his pocket money on Monday and $\dfrac{1}{4}$ on Tuesday. What fraction remains? \ashow{$\dfrac{5}{12}$}
+
+  \item A jug holds $1\dfrac{1}{2}$ litres. You fill $\dfrac{2}{3}$ of it. How many millilitres is that? \ashow{$1000$ mL}
+
+  \item Show that $\dfrac{2}{3} \times \dfrac{3}{4} = \dfrac{3}{4} \times \dfrac{2}{3}$ using area diagrams.
+
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} Simplify \(\dfrac{20}{30}\).
+
+\awork{Solution: The highest common factor of \(20\) and \(30\) is \(10\). Divide numerator and denominator by \(10\):
+\[
+\frac{20}{30}=\frac{20\div 10}{30\div 10}=\frac23.
+\]
+So \(\dfrac{20}{30}\) simplifies to \(\dfrac23\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 2}
+\textbf{Question:} Simplify \(\dfrac{84}{108}\).
+
+\awork{Solution: Divide numerator and denominator by their highest common factor, \(12\):
+\[
+\frac{84}{108}=\frac{84\div 12}{108\div 12}=\frac{7}{9}.
+\]
+So \(\dfrac{84}{108}\) simplifies to \(\dfrac79\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 3}
+\textbf{Question:} Convert \(4\dfrac35\) to an improper fraction.
+
+\awork{Solution: The whole number \(4\) is \(4\times 5=20\) fifths. Add the extra \(3\) fifths:
+\[
+4\frac35=\frac{4\times 5+3}{5}=\frac{20+3}{5}=\frac{23}{5}.
+\]
+So the improper fraction is \(\dfrac{23}{5}\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 4}
+\textbf{Question:} Calculate \(2\dfrac34+1\dfrac35\).
+
+\awork{Solution: Add the whole numbers and the fractions separately.
+\[
+2+1=3.
+\]
+\[
+\frac34+\frac35=\frac{15}{20}+\frac{12}{20}=\frac{27}{20}=1\frac{7}{20}.
+\]
+So the total is
+\[
+3+1\frac{7}{20}=4\frac{7}{20}.
+\]
+Thus \(2\dfrac34+1\dfrac35=4\dfrac{7}{20}\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 5}
+\textbf{Question:} \(\dfrac34\) of a number is \(27\). Use the bar model to find the whole number.
+
+\awork{Solution: The bar model shows the whole split into \(4\) equal quarters. Three quarters are worth \(27\), so one quarter is
+\[
+27\div 3=9.
+\]
+The whole number is four quarters:
+\[
+4\times 9=36.
+\]
+So the whole number is \(36\).}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 6}
+\textbf{Question:} Jack spends \(\dfrac13\) of his pocket money on Monday and \(\dfrac14\) on Tuesday. What fraction remains?
+
+\awork{Solution: First find the total fraction spent.
+\[
+\frac13+\frac14=\frac{4}{12}+\frac{3}{12}=\frac{7}{12}.
+\]
+The whole amount is \(1=\dfrac{12}{12}\), so the fraction remaining is
+\[
+\frac{12}{12}-\frac{7}{12}=\frac{5}{12}.
+\]
+So \(\dfrac{5}{12}\) of the pocket money remains.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 7}
+\textbf{Question:} A jug holds \(1\dfrac12\) litres. You fill \(\dfrac23\) of it. How many millilitres is that?
+
+\awork{Solution: First convert \(1\frac12\) litres to millilitres:
+\[
+1\frac12\text{ L}=1500\text{ mL}.
+\]
+Now find \(\dfrac23\) of \(1500\) mL. Divide by \(3\):
+\[
+1500\div 3=500.
+\]
+Two thirds are
+\[
+2\times 500=1000\text{ mL}.
+\]
+So the jug contains \(1000\) mL.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Retrieve and Connect 5, Question 8}
+\textbf{Question:} Show that
+\[
+\frac23\times\frac34=\frac34\times\frac23
+\]
+using area diagrams.
+
+\awork{Solution: In the left diagram, take a \(3\times 4\) grid. Shade \(2\) columns and \(3\) rows, giving \(2\times 3=6\) shaded cells out of \(3\times 4=12\).
+
+In the right diagram, take a \(4\times 3\) grid. Shade \(3\) columns and \(2\) rows, giving \(3\times 2=6\) shaded cells out of \(4\times 3=12\).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% 2/3 x 3/4
+\fill[orange!30] (0,0) rectangle (2,3);
+\draw (0,0) rectangle (3,4);
+\foreach \x in {1,2} \draw (\x,0) -- (\x,4);
+\foreach \y in {1,2,3} \draw (0,\y) -- (3,\y);
+\end{tikzpicture}
+\qquad
+\begin{tikzpicture}[scale=0.7]
+% 3/4 x 2/3
+\fill[blue!30] (0,0) rectangle (3,2);
+\draw (0,0) rectangle (4,3);
+\foreach \x in {1,2,3} \draw (\x,0) -- (\x,3);
+\foreach \y in {1,2} \draw (0,\y) -- (4,\y);
+\end{tikzpicture}
+\end{center}
+
+Both diagrams give
+\[
+\frac{6}{12}=\frac12.
+\]
+So \(\dfrac23\times\dfrac34=\dfrac34\times\dfrac23\).}
+\end{frame}
+
+\end{document}
