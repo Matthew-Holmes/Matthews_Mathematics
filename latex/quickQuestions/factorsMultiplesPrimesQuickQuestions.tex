@@ -1,0 +1,591 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+% ================================================================
+% Quick Questions deck: factors, multiples and primes.
+%
+% Each topic opens with five true/false statements and then runs ten
+% quick questions that get gradually harder. Every question gets two
+% slides: the question on its own for the mini whiteboards, then the
+% same question again with the solution underneath in red.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+
+% Topic divider.
+\newcommand{\qtopic}[1]{%
+  \section{#1}%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \tf[<statement size>][<answer size>]{<statement>}{<answer>}
+% As \qq, but with a standing "True or false?" heading above the
+% statement. The statements hunt for the usual misconceptions, so the
+% answer always says why, not just which.
+\NewDocumentCommand{\tf}{O{\LARGE}O{\Large}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% Contents-slide bullets, colour-coded by difficulty band:
+% green for the first three topics, orange for the last four.
+\setbeamertemplate{section in toc}{%
+  \ifnum\inserttocsectionnumber<4
+    \textcolor{green!55!black}{$\bullet$}%
+  \else
+    \textcolor{orange}{$\bullet$}%
+  \fi
+  ~\inserttocsection%
+}
+
+\title{Factors, Multiples and Primes: Quick Questions}
+\subtitle{Mini whiteboard questions, with solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+  \small
+  \tableofcontents
+\end{frame}
+
+%================================================================
+\qtopic{Factors}
+%================================================================
+
+\tf{$7$ is a factor of $21$}
+  {\textbf{True.} $21=7\times 3$, so $21$ divides exactly by $7$.}
+
+\tf{$1$ is a factor of every whole number}
+  {\textbf{True.} Every number $n$ can be written as $1\times n$.}
+
+\tf{$6$ is a factor of $16$}
+  {\textbf{False.} The factors of $16$ are $1,2,4,8,16$;\\[0.3em]
+   $16\div 6$ is not a whole number.}
+
+\tf{Every number has an even number of factors}
+  {\textbf{False.} Factors usually pair up, but $9$ has just $1,3,9$
+   --- three factors --- because $3\times 3$ uses the same factor twice.}
+
+\tf{If $4$ is a factor of a number,\\[0.3em]then $8$ must be a factor of it too}
+  {\textbf{False.} $4$ is a factor of $12$, but $8$ is not.}
+
+\qq[\LARGE]{List all the factors of $12$}{$1,\ 2,\ 3,\ 4,\ 6,\ 12$}
+
+\qq[\LARGE]{List all the factors of $20$}{$1,\ 2,\ 4,\ 5,\ 10,\ 20$}
+
+\qq[\LARGE]{List all the factors of $36$}
+  {$1,\ 2,\ 3,\ 4,\ 6,\ 9,\ 12,\ 18,\ 36$}
+
+\qq[\LARGE]{How many factors does $16$ have?}
+  {$1,\ 2,\ 4,\ 8,\ 16$\\[0.3em]Five factors.}
+
+\qq[\LARGE]{Find the highest common factor of $12$ and $18$}
+  {Factors of $12$: $1,\ 2,\ 3,\ 4,\ \mathbf{6},\ 12$\\[0.3em]
+   Factors of $18$: $1,\ 2,\ 3,\ \mathbf{6},\ 9,\ 18$\\[0.3em]
+   $\mathrm{HCF}=6$}
+
+\qq[\LARGE]{Find the highest common factor of $24$ and $36$}
+  {Factors of $24$: $1,\ 2,\ 3,\ 4,\ 6,\ 8,\ \mathbf{12},\ 24$\\[0.3em]
+   Factors of $36$: $1,\ 2,\ 3,\ 4,\ 6,\ 9,\ \mathbf{12},\ 18,\ 36$\\[0.3em]
+   $\mathrm{HCF}=12$}
+
+\qq[\LARGE]{List all the factor pairs of $48$}
+  {$1\times 48\qquad 2\times 24\qquad 3\times 16$\\[0.4em]
+   $4\times 12\qquad 6\times 8$}
+
+\qq[\LARGE]{Which whole number below $30$ has the most factors?}
+  {$24$, with eight factors:\\[0.3em]
+   $1,\ 2,\ 3,\ 4,\ 6,\ 8,\ 12,\ 24$}
+
+\qq[\LARGE]{$n$ has exactly three factors.\\[0.4em]
+Give a possible value of $n$.}
+  {$4$ ($1,2,4$), $9$ ($1,3,9$) or $25$ ($1,5,25$).\\[0.3em]
+   Any prime squared works.}
+
+\qq[\Large][\Large]{Explain why square numbers have an odd number of factors}
+  {Factors come in pairs, one either side of the square root.\\[0.3em]
+   In a square number the square root pairs with itself,
+   so one factor is left unpaired.}
+
+%================================================================
+\qtopic{Multiples}
+%================================================================
+
+\tf{$24$ is a multiple of $6$}
+  {\textbf{True.} $6\times 4=24$.}
+
+\tf{Every multiple of $10$ is also a multiple of $5$}
+  {\textbf{True.} $10=5\times 2$, so every multiple of $10$
+   already contains a factor of $5$.}
+
+\tf{$35$ is a multiple of $4$}
+  {\textbf{False.} $4\times 8=32$ and $4\times 9=36$, so $35$ is stepped over.}
+
+\tf{Every multiple of $3$ is also a multiple of $9$}
+  {\textbf{False.} $6$ is a multiple of $3$ but not of $9$.\\[0.3em]
+   The other way round \emph{is} true.}
+
+\tf[\Large]{The lowest common multiple of two numbers is always found by
+multiplying them together}
+  {\textbf{False.} $4\times 6=24$, but the LCM of $4$ and $6$ is $12$.\\[0.3em]
+   Multiplying only works when the numbers share no factors.}
+
+\qq[\LARGE]{Write down the first five multiples of $4$}
+  {$4,\ 8,\ 12,\ 16,\ 20$}
+
+\qq[\LARGE]{Write down the first five multiples of $7$}
+  {$7,\ 14,\ 21,\ 28,\ 35$}
+
+\qq[\LARGE]{Write down the multiples of $6$ between $20$ and $50$}
+  {$24,\ 30,\ 36,\ 42,\ 48$}
+
+\qq[\LARGE]{Is $126$ a multiple of $9$?}
+  {Yes. $1+2+6=9$, and $9\times 14=126$.}
+
+\qq[\LARGE]{Find the lowest common multiple of $4$ and $6$}
+  {$4,\ 8,\ \mathbf{12},\ 16,\ \ldots$\\[0.3em]
+   $6,\ \mathbf{12},\ 18,\ \ldots$\\[0.3em]
+   $\mathrm{LCM}=12$}
+
+\qq[\LARGE]{Find the lowest common multiple of $8$ and $12$}
+  {$8,\ 16,\ \mathbf{24},\ 32,\ \ldots$\\[0.3em]
+   $12,\ \mathbf{24},\ 36,\ \ldots$\\[0.3em]
+   $\mathrm{LCM}=24$}
+
+\qq[\LARGE]{Find the lowest common multiple of $5$, $6$ and $9$}
+  {LCM of $5$ and $6$ is $30$.\\[0.3em]
+   LCM of $30$ and $9$ is $90$.\\[0.3em]
+   $\mathrm{LCM}=90$}
+
+\qq[\LARGE]{A number is a multiple of both $4$ and $10$.\\[0.4em]
+What is the smallest it could be?}
+  {$20$, the lowest common multiple of $4$ and $10$.}
+
+\qq[\Large][\Large]{Two lighthouses flash together now.\\[0.4em]
+One flashes every $12$ seconds, the other every $18$ seconds.\\[0.4em]
+When do they next flash together?}
+  {$\mathrm{LCM}(12,18)=36$\\[0.3em]
+   In $36$ seconds.}
+
+\qq[\Large][\Large]{Find the smallest number above $1$ that leaves a remainder
+of $1$ when divided by $4$, by $5$ and by $6$}
+  {The number must be one more than a common multiple of $4$, $5$ and $6$.\\[0.3em]
+   $\mathrm{LCM}(4,5,6)=60$, so the number is $61$.}
+
+%================================================================
+\qtopic{Primes}
+%================================================================
+
+\tf{$1$ is a prime number}
+  {\textbf{False.} A prime has exactly two factors, but $1$ has only one.}
+
+\tf{$2$ is the only even prime number}
+  {\textbf{True.} Every other even number has $2$ as an extra factor,
+   so it has more than two factors.}
+
+\tf{$51$ is a prime number}
+  {\textbf{False.} $51=3\times 17$.\\[0.3em]
+   Its digits add to $6$, so it divides by $3$.}
+
+\tf{There are infinitely many prime numbers}
+  {\textbf{True.} The primes never run out,
+   although they do thin out as the numbers get larger.}
+
+\tf{If a number ends in $3$, it must be prime}
+  {\textbf{False.} $33=3\times 11$ and $63=7\times 9$.}
+
+\qq[\LARGE]{Write down all the prime numbers between $1$ and $10$}
+  {$2,\ 3,\ 5,\ 7$}
+
+\qq[\LARGE]{Write down all the prime numbers between $10$ and $20$}
+  {$11,\ 13,\ 17,\ 19$}
+
+\qq[\LARGE]{Is $27$ a prime number?\\[0.4em]Explain your answer.}
+  {No. $27=3\times 9$, so it has more than two factors.}
+
+\qq[\LARGE]{Write down the first prime number greater than $30$}
+  {$31$}
+
+\qq[\LARGE]{Is $91$ a prime number?}
+  {No. $91=7\times 13$.}
+
+\qq[\LARGE]{How many prime numbers are there between $20$ and $40$?}
+  {$23,\ 29,\ 31,\ 37$\\[0.3em]Four of them.}
+
+\qq[\LARGE]{Is $143$ a prime number?}
+  {No. $143=11\times 13$.}
+
+\qq[\LARGE]{Find two prime numbers that add up to $24$}
+  {$5+19$ \quad $7+17$ \quad $11+13$}
+
+\qq[\Large][\Large]{To test whether $211$ is prime,\\[0.3em]
+which numbers do you need to divide by?\\[0.4em]Is it prime?}
+  {Only the primes up to $\sqrt{211}\approx 14.5$:\\[0.3em]
+   $2,\ 3,\ 5,\ 7,\ 11,\ 13$\\[0.3em]
+   None of them divides $211$, so $211$ is prime.}
+
+\qq[\Large][\Large]{Explain why $n^2-1$ can never be prime when $n>2$}
+  {$n^2-1=(n-1)(n+1)$\\[0.3em]
+   When $n>2$ both brackets are bigger than $1$,
+   so the number always has more than two factors.}
+
+%================================================================
+\qtopic{Prime factor decomposition}
+%================================================================
+
+\tf[\Large]{$12=2^2\times 3$ is the prime factor decomposition of $12$}
+  {\textbf{True.} $2$ and $3$ are both prime,
+   and $4\times 3=12$.}
+
+\tf[\Large]{$2\times 3\times 4$ is the prime factor decomposition of $24$}
+  {\textbf{False.} $4$ is not prime.\\[0.3em]
+   $24=2^3\times 3$}
+
+\tf[\Large]{Every whole number greater than $1$ can be written as a product
+of primes}
+  {\textbf{True.} A prime is its own decomposition, and any other number
+   keeps splitting until only primes are left.}
+
+\tf[\Large]{A number can have two different prime factor decompositions}
+  {\textbf{False.} Apart from the order you write them in,
+   every number has exactly one decomposition.}
+
+\tf[\Large]{$2^3\times 5=30$}
+  {\textbf{False.} $2^3\times 5=8\times 5=40$.\\[0.3em]
+   $30=2\times 3\times 5$}
+
+\qq[\LARGE]{Write $12$ as a product of its prime factors}
+  {$12=2\times 2\times 3=2^2\times 3$}
+
+\qq[\LARGE]{Write $18$ as a product of its prime factors}
+  {$18=2\times 3\times 3=2\times 3^2$}
+
+\qq[\LARGE]{Write $60$ as a product of its prime factors}
+  {$60=2\times 2\times 3\times 5=2^2\times 3\times 5$}
+
+\qq[\LARGE]{Write $84$ as a product of its prime factors}
+  {$84=2\times 2\times 3\times 7=2^2\times 3\times 7$}
+
+\qq[\LARGE]{Write $200$ as a product of its prime factors}
+  {$200=2\times 2\times 2\times 5\times 5=2^3\times 5^2$}
+
+\qq[\LARGE]{Write $360$ as a product of its prime factors}
+  {$360=2^3\times 3^2\times 5$}
+
+\qq[\LARGE]{Write $1001$ as a product of its prime factors}
+  {$1001=7\times 143=7\times 11\times 13$}
+
+\qq[\LARGE]{Work out $2^3\times 3\times 5^2$ as an ordinary number}
+  {$8\times 3\times 25=600$}
+
+\qq[\Large][\Large]{$n=2^3\times 3\times 5$.\\[0.4em]
+Write $2n$ as a product of prime factors.}
+  {Doubling adds one more factor of $2$:\\[0.3em]
+   $2n=2^4\times 3\times 5$}
+
+\qq[\Large][\Large]{$720=2^4\times 3^2\times 5$.\\[0.4em]
+How many factors does $720$ have?}
+  {Each factor uses $0$ to $4$ twos, $0$ to $2$ threes and $0$ or $1$ five:\\[0.3em]
+   $5\times 3\times 2=30$ factors}
+
+%================================================================
+\qtopic{HCF and LCM by prime factor decomposition}
+%================================================================
+
+\tf[\Large]{The HCF of two numbers is always smaller than both of them}
+  {\textbf{False.} The HCF of $6$ and $12$ is $6$,
+   which is one of the numbers itself.}
+
+\tf[\Large]{The LCM of two numbers is always a multiple of both of them}
+  {\textbf{True.} That is exactly what a common multiple is;
+   the LCM is the smallest one.}
+
+\tf[\Large]{If $a=2^2\times 3$ and $b=2\times 3^2$,\\[0.3em]then the HCF of
+$a$ and $b$ is $2\times 3$}
+  {\textbf{True.} Take the \emph{lowest} power of each prime that appears
+   in both: $2^1\times 3^1=6$.}
+
+\tf[\Large]{$\mathrm{HCF}\times\mathrm{LCM}$ gives the product of the two numbers}
+  {\textbf{True.} Every prime is counted once at its lowest power and once
+   at its highest, which is the same as counting both numbers.}
+
+\tf[\Large]{The lowest common multiple of $6$ and $8$ is $48$}
+  {\textbf{False.} $6=2\times 3$ and $8=2^3$,
+   so the LCM is $2^3\times 3=24$.}
+
+\qq[\Large][\Large]{$12=2^2\times 3$ \quad and \quad $18=2\times 3^2$\\[0.4em]
+Find the HCF of $12$ and $18$.}
+  {Lowest power of each shared prime:\\[0.3em]
+   $\mathrm{HCF}=2\times 3=6$}
+
+\qq[\Large][\Large]{$12=2^2\times 3$ \quad and \quad $18=2\times 3^2$\\[0.4em]
+Find the LCM of $12$ and $18$.}
+  {Highest power of each prime:\\[0.3em]
+   $\mathrm{LCM}=2^2\times 3^2=36$}
+
+\qq[\Large][\Large]{$24=2^3\times 3$ \quad and \quad $60=2^2\times 3\times 5$\\[0.4em]
+Find the HCF of $24$ and $60$.}
+  {$\mathrm{HCF}=2^2\times 3=12$}
+
+\qq[\Large][\Large]{$24=2^3\times 3$ \quad and \quad $60=2^2\times 3\times 5$\\[0.4em]
+Find the LCM of $24$ and $60$.}
+  {$\mathrm{LCM}=2^3\times 3\times 5=120$}
+
+\qq[\Large][\large]{Find the HCF and the LCM of $84$ and $120$}
+  {$84=2^2\times 3\times 7$ \qquad $120=2^3\times 3\times 5$\\[0.4em]
+   $\mathrm{HCF}=2^2\times 3=12$\\[0.3em]
+   $\mathrm{LCM}=2^3\times 3\times 5\times 7=840$}
+
+\qq[\Large][\large]{Find the HCF and the LCM of $126$ and $180$}
+  {$126=2\times 3^2\times 7$ \qquad $180=2^2\times 3^2\times 5$\\[0.4em]
+   $\mathrm{HCF}=2\times 3^2=18$\\[0.3em]
+   $\mathrm{LCM}=2^2\times 3^2\times 5\times 7=1260$}
+
+\qq[\Large][\large]{$a=2^3\times 3^2\times 5$ \quad and \quad
+$b=2^2\times 3\times 5^2$\\[0.4em]
+Find the HCF and the LCM, in index form.}
+  {$\mathrm{HCF}=2^2\times 3\times 5$\\[0.3em]
+   $\mathrm{LCM}=2^3\times 3^2\times 5^2$}
+
+\qq[\Large][\large]{Two numbers have HCF $6$ and LCM $72$.\\[0.4em]
+One of the numbers is $24$. Find the other.}
+  {$\mathrm{HCF}\times\mathrm{LCM}=6\times 72=432$, which is the
+   product of the two numbers.\\[0.4em]
+   $432\div 24=18$}
+
+\qq[\Large][\large]{Find the HCF and the LCM of\\[0.4em]
+$2^5\times 3^2\times 11$ \quad and \quad $2^3\times 3^4\times 7$\\[0.4em]
+Leave your answers in index form.}
+  {$\mathrm{HCF}=2^3\times 3^2$\\[0.3em]
+   $\mathrm{LCM}=2^5\times 3^4\times 7\times 11$}
+
+\qq[\Large][\large]{Two numbers have HCF $12$ and LCM $180$.\\[0.4em]
+Find the numbers. Is there more than one answer?}
+  {Their product is $12\times 180=2160$, and both are multiples of $12$.\\[0.4em]
+   $12$ and $180$ \quad or \quad $36$ and $60$\\[0.3em]
+   Both pairs work, so there is more than one answer.}
+
+%================================================================
+\qtopic{Square numbers from prime factors}
+%================================================================
+
+\tf[\Large]{A number is square exactly when every power in its prime
+factor decomposition is even}
+  {\textbf{True.} Halving every even power gives the square root.}
+
+\tf[\Large]{$2^3\times 3^2$ is a square number}
+  {\textbf{False.} The power of $2$ is odd,
+   so the number cannot be split into two equal halves.}
+
+\tf[\Large]{$2^4\times 5^6$ is a square number}
+  {\textbf{True.} $2^4\times 5^6=\left(2^2\times 5^3\right)^2$}
+
+\tf[\Large]{Every square number has an even number of factors}
+  {\textbf{False.} Square numbers have an \emph{odd} number of factors:\\[0.3em]
+   $16$ has $1,\ 2,\ 4,\ 8,\ 16$.}
+
+\tf[\Large]{If $n$ is a square number, then $4n$ is a square number too}
+  {\textbf{True.} Multiplying by $4=2^2$ keeps every power even.}
+
+\qq[\Large][\Large]{Use prime factors to show that $36$ is a square number}
+  {$36=2^2\times 3^2$\\[0.3em]
+   Both powers are even, and $36=(2\times 3)^2=6^2$.}
+
+\qq[\Large][\Large]{Is $2^2\times 3^2\times 5^2$ a square number?\\[0.4em]
+If so, what is its square root?}
+  {Yes --- every power is even.\\[0.3em]
+   $\sqrt{2^2\times 3^2\times 5^2}=2\times 3\times 5=30$}
+
+\qq[\Large][\Large]{Is $2^3\times 3^2$ a square number?}
+  {No. Halving the powers would need $2^{1.5}$,\\[0.3em]
+   so the power of $2$ must be even and it is not.}
+
+\qq[\Large][\Large]{Work out $\sqrt{2^6\times 3^4}$}
+  {Halve each power:\\[0.3em]
+   $2^3\times 3^2=8\times 9=72$}
+
+\qq[\Large][\Large]{Use prime factors to decide whether $400$ is a square number}
+  {$400=2^4\times 5^2$\\[0.3em]
+   Both powers are even, so $400=\left(2^2\times 5\right)^2=20^2$.}
+
+\qq[\Large][\Large]{Use prime factors to decide whether $150$ is a square number}
+  {$150=2\times 3\times 5^2$\\[0.3em]
+   The powers of $2$ and $3$ are odd, so $150$ is not square.}
+
+\qq[\Large][\Large]{Work out $\sqrt{2^8\times 3^2\times 5^4}$}
+  {Halve each power:\\[0.3em]
+   $2^4\times 3\times 5^2=16\times 3\times 25=1200$}
+
+\qq[\Large][\large]{$n=2^3\times 3\times 5^2$\\[0.4em]
+Find the smallest whole number $k$ so that $nk$ is a square number.}
+  {The powers of $2$ and $3$ are odd, so each needs one more:\\[0.3em]
+   $k=2\times 3=6$, giving $nk=2^4\times 3^2\times 5^2$.}
+
+\qq[\Large][\large]{$504=2^3\times 3^2\times 7$\\[0.4em]
+Find the smallest number $504$ can be multiplied by to give a square number.}
+  {The powers of $2$ and $7$ are odd:\\[0.3em]
+   multiply by $2\times 7=14$.\\[0.3em]
+   $504\times 14=7056=84^2$}
+
+\qq[\Large][\large]{$1080=2^3\times 3^3\times 5$\\[0.4em]
+Find the smallest number $1080$ can be divided by to give a square number.}
+  {Remove one $2$, one $3$ and the $5$:\\[0.3em]
+   divide by $2\times 3\times 5=30$.\\[0.3em]
+   $1080\div 30=36=6^2$}
+
+%================================================================
+\qtopic{Problem solving with HCF and LCM}
+%================================================================
+
+\tf[\Large]{To find when two repeating events next happen together,
+you use the LCM}
+  {\textbf{True.} You are looking for the first time that is a multiple
+   of both gaps.}
+
+\tf[\Large]{To split two collections into the largest identical bags,
+you use the LCM}
+  {\textbf{False.} Use the HCF --- the bag size has to be a factor
+   of both amounts.}
+
+\tf[\Large]{Cutting two ropes into equal pieces, as long as possible with
+none left over, uses the HCF}
+  {\textbf{True.} The piece length must be a factor of both rope lengths.}
+
+\tf[\Large]{The LCM of two numbers is never smaller than either of them}
+  {\textbf{True.} It is a multiple of each number,
+   so it is at least as big as both.}
+
+\tf[\Large]{Two events repeat every $4$ minutes and every $6$ minutes,\\[0.3em]
+so they coincide every $24$ minutes}
+  {\textbf{False.} They coincide every $\mathrm{LCM}(4,6)=12$ minutes.}
+
+\qq[\Large][\Large]{Two bells ring together now.\\[0.4em]
+One rings every $4$ minutes, the other every $6$ minutes.\\[0.4em]
+When do they next ring together?}
+  {Common multiple, so use the LCM:\\[0.3em]
+   $\mathrm{LCM}(4,6)=12$ --- in $12$ minutes.}
+
+\qq[\Large][\Large]{Two ribbons, $18$\,cm and $24$\,cm long, are cut into
+equal pieces, as long as possible with none left over.\\[0.4em]
+How long is each piece?}
+  {The length must be a factor of both, so use the HCF:\\[0.3em]
+   $\mathrm{HCF}(18,24)=6$ --- each piece is $6$\,cm.}
+
+\qq[\Large][\large]{$36$ pens and $48$ pencils are shared into identical packs
+with nothing left over.\\[0.4em]
+What is the greatest number of packs?}
+  {$36=2^2\times 3^2$ \qquad $48=2^4\times 3$\\[0.4em]
+   $\mathrm{HCF}=2^2\times 3=12$ packs,\\[0.3em]
+   each with $3$ pens and $4$ pencils.}
+
+\qq[\Large][\Large]{Two lighthouses flash together at $8$pm.\\[0.4em]
+One flashes every $15$ seconds, the other every $18$ seconds.\\[0.4em]
+When do they next flash together?}
+  {$\mathrm{LCM}(15,18)=90$ seconds\\[0.3em]
+   At $8${:}$01${:}$30$pm.}
+
+\qq[\Large][\Large]{Rectangular tiles measure $12$\,cm by $18$\,cm.\\[0.4em]
+What is the smallest square they can tile exactly?}
+  {The side must be a multiple of both, so use the LCM:\\[0.3em]
+   $\mathrm{LCM}(12,18)=36$\\[0.3em]
+   A $36$\,cm by $36$\,cm square.}
+
+\qq[\Large][\Large]{A bus leaves every $24$ minutes and a tram every
+$36$ minutes.\\[0.4em]
+Both leave at $9${:}$00$. When do they next leave together?}
+  {$\mathrm{LCM}(24,36)=72$ minutes\\[0.3em]
+   At $10${:}$12$.}
+
+\qq[\Large][\large]{Two cogs, with $18$ and $24$ teeth, start meshed at a
+marked tooth.\\[0.4em]
+How many turns does each make before the marks meet again?}
+  {$\mathrm{LCM}(18,24)=72$ teeth must pass.\\[0.4em]
+   $72\div 18=4$ turns of the small cog,\\[0.3em]
+   $72\div 24=3$ turns of the large cog.}
+
+\qq[\Large][\large]{A floor measures $360$\,cm by $504$\,cm.\\[0.4em]
+It is tiled with identical square tiles, as large as possible.\\[0.4em]
+Find the tile size and the number of tiles.}
+  {$360=2^3\times 3^2\times 5$ \qquad $504=2^3\times 3^2\times 7$\\[0.4em]
+   $\mathrm{HCF}=2^3\times 3^2=72$, so the tiles are $72$\,cm square.\\[0.3em]
+   $5\times 7=35$ tiles.}
+
+\qq[\Large][\large]{Three runners take $60$\,s, $72$\,s and $90$\,s per lap.\\[0.4em]
+They start together. When are they next all at the start line?}
+  {$60=2^2\times 3\times 5$ \quad $72=2^3\times 3^2$ \quad
+   $90=2\times 3^2\times 5$\\[0.4em]
+   $\mathrm{LCM}=2^3\times 3^2\times 5=360$\,s\\[0.3em]
+   After $6$ minutes.}
+
+\qq[\Large][\large]{Hot dogs come in packs of $10$, buns in packs of $8$ and
+sauce sachets in packs of $12$.\\[0.4em]
+What is the smallest number of complete hot dogs Sam can make with nothing
+left over, and how many packs of each is that?}
+  {$\mathrm{LCM}(10,8,12)=2^3\times 3\times 5=120$\\[0.4em]
+   $120$ hot dogs: $12$ packs of hot dogs,\\[0.3em]
+   $15$ packs of buns and $10$ packs of sachets.}
+
+\end{document}

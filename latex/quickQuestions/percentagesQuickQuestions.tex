@@ -1,0 +1,325 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
+
+% ================================================================
+% Quick Questions deck: percentages.
+%
+% Every question gets two slides: the question on its own for the
+% mini whiteboards, then the same question again with the solution
+% underneath in red. Within each topic the ten questions get
+% gradually harder.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+
+% Topic divider.
+\newcommand{\qtopic}[1]{%
+  \section{#1}%
+  \begin{frame}[plain]
+    \vfill
+    \begin{center}
+      {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% Stepped working, written in the form
+%   80% is 64 / 10% is 8 / 100% is 80
+% Rows are separated with \ and the two columns with &.
+\newcommand{\steps}[1]{%
+  \begin{tabular}{@{}r@{\ is\ }l@{}}#1\end{tabular}%
+}
+
+% \barmodel{<cells>}{<cells spanned by the lower brace>}{<lower label>}{<upper label>}
+% The whole bar is 9cm wide and represents the upper label; the lower
+% brace picks out the part of it named by the lower label.
+\newcommand{\barmodel}[4]{%
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \pgfmathsetmacro{\cw}{9/#1}
+    \fill[red!12] (0,0) rectangle ({#2*\cw},0.7);
+    \foreach \i in {1,...,#1}
+      {\draw[red!60!black] ({(\i-1)*\cw},0) rectangle ({\i*\cw},0.7);}
+    \draw[red!60!black,thick] (0,0) rectangle (9,0.7);
+    \draw[red,decorate,decoration={brace,amplitude=4pt}] (0,0.9) -- (9,0.9)
+      node[midway,above=4pt,red,font=\normalsize]{#4};
+    \draw[red,decorate,decoration={brace,mirror,amplitude=4pt}] (0,-0.2) -- ({#2*\cw},-0.2)
+      node[midway,below=4pt,red,font=\normalsize]{#3};
+  \end{tikzpicture}%
+}
+
+% Contents-slide bullets, colour-coded by difficulty band:
+% green for the first two topics, orange for the next two,
+% red for the last three.
+\setbeamertemplate{section in toc}{%
+  \ifnum\inserttocsectionnumber<3
+    \textcolor{green!55!black}{$\bullet$}%
+  \else\ifnum\inserttocsectionnumber<5
+    \textcolor{orange}{$\bullet$}%
+  \else
+    \textcolor{red}{$\bullet$}%
+  \fi\fi
+  ~\inserttocsection%
+}
+
+\title{Percentages: Quick Questions}
+\subtitle{Mini whiteboard questions, with solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+  \small
+  \tableofcontents
+\end{frame}
+
+%================================================================
+\qtopic{Converting between decimals and percentages}
+%================================================================
+
+\qq[\LARGE]{Write $0.5$ as a percentage}{$0.5\times 100=50\%$}
+\qq[\LARGE]{Write $0.25$ as a percentage}{$0.25\times 100=25\%$}
+\qq[\LARGE]{Write $30\%$ as a decimal}{$30\div 100=0.3$}
+\qq[\LARGE]{Write $0.07$ as a percentage}{$0.07\times 100=7\%$}
+\qq[\LARGE]{Write $6\%$ as a decimal}{$6\div 100=0.06$}
+\qq[\LARGE]{Write $0.125$ as a percentage}{$0.125\times 100=12.5\%$}
+\qq[\LARGE]{Write $4.5\%$ as a decimal}{$4.5\div 100=0.045$}
+\qq[\LARGE]{Write $1.3$ as a percentage}{$1.3\times 100=130\%$}
+\qq[\LARGE]{Write $250\%$ as a decimal}{$250\div 100=2.5$}
+\qq[\LARGE]{Write $0.0025$ as a percentage}{$0.0025\times 100=0.25\%$}
+
+%================================================================
+\qtopic{Writing one number as a percentage of another}
+%================================================================
+
+\qq[\LARGE][\Large]{Write $25$ as a percentage of $100$}
+  {$\dfrac{25}{100}=25\%$}
+\qq[\LARGE][\Large]{Write $7$ as a percentage of $10$}
+  {$\dfrac{7}{10}=\dfrac{70}{100}=70\%$}
+\qq[\LARGE][\Large]{Write $13$ as a percentage of $20$}
+  {$\dfrac{13}{20}=\dfrac{65}{100}=65\%$}
+\qq[\LARGE][\Large]{Write $12$ as a percentage of $25$}
+  {$\dfrac{12}{25}=\dfrac{48}{100}=48\%$}
+\qq[\LARGE][\Large]{Write $18$ as a percentage of $40$}
+  {$\dfrac{18}{40}=\dfrac{45}{100}=45\%$}
+\qq[\LARGE][\Large]{Write $21$ as a percentage of $50$}
+  {$\dfrac{21}{50}=\dfrac{42}{100}=42\%$}
+\qq[\LARGE][\Large]{Write $9$ as a percentage of $12$}
+  {$\dfrac{9}{12}=\dfrac{3}{4}=\dfrac{75}{100}=75\%$}
+\qq[\LARGE][\Large]{Write $27$ as a percentage of $60$}
+  {$\dfrac{27}{60}=\dfrac{9}{20}=\dfrac{45}{100}=45\%$}
+\qq[\LARGE][\Large]{Write $34$ as a percentage of $80$}
+  {$\dfrac{34}{80}=\dfrac{17}{40}=\dfrac{42.5}{100}=42.5\%$}
+\qq[\LARGE][\Large]{In a test Ali scored $57$ out of $75$.\\[0.4em]
+What percentage did Ali score?}
+  {$\dfrac{57}{75}=\dfrac{19}{25}=\dfrac{76}{100}=76\%$}
+
+%================================================================
+\qtopic{Basic percentages without a calculator}
+%================================================================
+
+\qq{$50\%$ of $80$}{$80\div 2=40$}
+\qq{$10\%$ of $70$}{$70\div 10=7$}
+\qq{$10\%$ of $45$}{$45\div 10=4.5$}
+\qq{$1\%$ of $300$}{$300\div 100=3$}
+\qq{$20\%$ of $45$}{\steps{$10\%$ & $4.5$ \\ $20\%$ & $9$}}
+\qq{$5\%$ of $80$}{\steps{$10\%$ & $8$ \\ $5\%$ & $4$}}
+\qq{$30\%$ of $250$}{\steps{$10\%$ & $25$ \\ $30\%$ & $75$}}
+\qq{$1\%$ of $42$}{$42\div 100=0.42$}
+\qq{$15\%$ of $60$}{\steps{$10\%$ & $6$ \\ $5\%$ & $3$ \\ $15\%$ & $9$}}
+\qq{$35\%$ of $240$}{\steps{$10\%$ & $24$ \\ $30\%$ & $72$ \\ $5\%$ & $12$ \\ $35\%$ & $84$}}
+
+%================================================================
+\qtopic{Increasing and decreasing without a calculator}
+%================================================================
+
+\qq[\LARGE]{Increase $80$ by $10\%$}
+  {\steps{$10\%$ & $8$}\par\vspace{0.4em}$80+8=88$}
+\qq[\LARGE]{Decrease $60$ by $50\%$}
+  {\steps{$50\%$ & $30$}\par\vspace{0.4em}$60-30=30$}
+\qq[\LARGE]{Increase $40$ by $25\%$}
+  {\steps{$25\%$ & $10$}\par\vspace{0.4em}$40+10=50$}
+\qq[\LARGE]{Decrease $90$ by $10\%$}
+  {\steps{$10\%$ & $9$}\par\vspace{0.4em}$90-9=81$}
+\qq[\LARGE]{Increase \pounds $250$ by $20\%$}
+  {\steps{$10\%$ & \pounds $25$ \\ $20\%$ & \pounds $50$}\par\vspace{0.4em}
+   \pounds $250+$ \pounds $50=$ \pounds $300$}
+\qq[\LARGE]{Decrease $45$ by $20\%$}
+  {\steps{$10\%$ & $4.5$ \\ $20\%$ & $9$}\par\vspace{0.4em}$45-9=36$}
+\qq[\LARGE]{Increase $120$ by $5\%$}
+  {\steps{$10\%$ & $12$ \\ $5\%$ & $6$}\par\vspace{0.4em}$120+6=126$}
+\qq[\LARGE]{Decrease \pounds $64$ by $25\%$}
+  {\steps{$25\%$ & \pounds $16$}\par\vspace{0.4em}
+   \pounds $64-$ \pounds $16=$ \pounds $48$}
+\qq[\LARGE]{Increase $350$ by $30\%$}
+  {\steps{$10\%$ & $35$ \\ $30\%$ & $105$}\par\vspace{0.4em}$350+105=455$}
+\qq[\LARGE]{Decrease $480$ by $35\%$}
+  {\steps{$10\%$ & $48$ \\ $30\%$ & $144$ \\ $5\%$ & $24$ \\ $35\%$ & $168$}%
+   \par\vspace{0.4em}$480-168=312$}
+
+%================================================================
+\qtopic{Finding the original value without a calculator}
+%================================================================
+
+\qq[\Large][\large]{$10\%$ of a number is $7$.\\[0.3em]What is the number?}
+  {\barmodel{10}{1}{$10\%$ is $7$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$10\%$ & $7$ \\ $100\%$ & $70$}}
+
+\qq[\Large][\large]{$50\%$ of a number is $24$.\\[0.3em]What is the number?}
+  {\barmodel{2}{1}{$50\%$ is $24$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$50\%$ & $24$ \\ $100\%$ & $48$}}
+
+\qq[\Large][\large]{$20\%$ of a number is $12$.\\[0.3em]What is the number?}
+  {\barmodel{10}{2}{$20\%$ is $12$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$20\%$ & $12$ \\ $10\%$ & $6$ \\ $100\%$ & $60$}}
+
+\qq[\Large][\large]{$80\%$ of a number is $64$.\\[0.3em]What is the number?}
+  {\barmodel{10}{8}{$80\%$ is $64$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$80\%$ & $64$ \\ $10\%$ & $8$ \\ $100\%$ & $80$}}
+
+\qq[\Large][\large]{$30\%$ of a number is $18$.\\[0.3em]What is the number?}
+  {\barmodel{10}{3}{$30\%$ is $18$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$30\%$ & $18$ \\ $10\%$ & $6$ \\ $100\%$ & $60$}}
+
+\qq[\Large][\large]{$25\%$ of a number is $15$.\\[0.3em]What is the number?}
+  {\barmodel{4}{1}{$25\%$ is $15$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$25\%$ & $15$ \\ $100\%$ & $60$}}
+
+\qq[\Large][\large]{$15\%$ of a number is $12$.\\[0.3em]What is the number?}
+  {\barmodel{20}{3}{$15\%$ is $12$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$15\%$ & $12$ \\ $5\%$ & $4$ \\ $100\%$ & $80$}}
+
+\qq[\Large][\large]{A coat is reduced by $20\%$ in a sale.\\[0.3em]
+It now costs \pounds $48$. What was the original price?}
+  {\barmodel{10}{8}{$80\%$ is \pounds $48$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$80\%$ & \pounds $48$ \\ $10\%$ & \pounds $6$ \\ $100\%$ & \pounds $60$}}
+
+\qq[\Large][\large]{A price rises by $10\%$ to \pounds $88$.\\[0.3em]
+What was the price before the rise?}
+  {\barmodel{11}{10}{$100\%$ is $?$}{$110\%$ is \pounds $88$}\par\vspace{0.9em}
+   \steps{$110\%$ & \pounds $88$ \\ $10\%$ & \pounds $8$ \\ $100\%$ & \pounds $80$}}
+
+\qq[\Large][\large]{A house rises in value by $30\%$ to \pounds $169\,000$.\\[0.3em]
+What was it worth before the rise?}
+  {\barmodel{13}{10}{$100\%$ is $?$}{$130\%$ is \pounds $169\,000$}\par\vspace{0.9em}
+   \steps{$130\%$ & \pounds $169\,000$ \\ $10\%$ & \pounds $13\,000$ \\ $100\%$ & \pounds $130\,000$}}
+
+%================================================================
+\qtopic{Percentage word problems}
+%================================================================
+
+\qq[\Large][\Large]{A coat costs \pounds $40$.\\[0.3em]
+In a sale it is reduced by $10\%$.\\[0.3em]What is the sale price?}
+  {\steps{$10\%$ & \pounds $4$}\par\vspace{0.4em}
+   \pounds $40-$ \pounds $4=$ \pounds $36$}
+
+\qq[\Large][\Large]{$30\%$ of a class of $30$ students walk to school.\\[0.3em]
+How many students walk to school?}
+  {\steps{$10\%$ & $3$ \\ $30\%$ & $9$}\par\vspace{0.4em}
+   $9$ students}
+
+\qq[\Large][\Large]{A phone costs \pounds $250$ plus $20\%$ VAT.\\[0.3em]
+What is the total price?}
+  {\steps{$10\%$ & \pounds $25$ \\ $20\%$ & \pounds $50$}\par\vspace{0.4em}
+   \pounds $250+$ \pounds $50=$ \pounds $300$}
+
+\qq[\Large][\Large]{Sam earns \pounds $800$ a month and is given a $5\%$ pay rise.\\[0.3em]
+What is Sam's new monthly pay?}
+  {\steps{$10\%$ & \pounds $80$ \\ $5\%$ & \pounds $40$}\par\vspace{0.4em}
+   \pounds $800+$ \pounds $40=$ \pounds $840$}
+
+\qq[\Large][\Large]{A jacket cost \pounds $60$ and now costs \pounds $45$.\\[0.3em]
+What is the percentage reduction?}
+  {Reduction $=$ \pounds $15$\par\vspace{0.4em}
+   $\dfrac{15}{60}=\dfrac{25}{100}=25\%$}
+
+\qq[\Large][\Large]{A town's population grows from $8000$ to $8600$.\\[0.3em]
+What is the percentage increase?}
+  {Increase $=600$\par\vspace{0.4em}
+   $\dfrac{600}{8000}=\dfrac{7.5}{100}=7.5\%$}
+
+\qq[\Large][\large]{A laptop costs \pounds $480$ in a sale, after a $20\%$ discount.\\[0.3em]
+What was the price before the sale?}
+  {\barmodel{10}{8}{$80\%$ is \pounds $480$}{$100\%$ is $?$}\par\vspace{0.9em}
+   \steps{$80\%$ & \pounds $480$ \\ $10\%$ & \pounds $60$ \\ $100\%$ & \pounds $600$}}
+
+\qq[\Large][\Large]{Maya scored $34$ out of $40$ in a test.\\[0.3em]
+Ben scored $82\%$. Who did better?}
+  {$\dfrac{34}{40}=\dfrac{85}{100}=85\%$\par\vspace{0.4em}
+   $85\%>82\%$, so Maya did better}
+
+\qq[\Large][\Large]{A television costs \pounds $1200$.\\[0.3em]
+It is reduced by $15\%$, then by a further $10\%$ of the new price.\\[0.3em]
+What is the final price?}
+  {\steps{$15\%$ of \pounds $1200$ & \pounds $180$ \\
+          new price & \pounds $1020$ \\
+          $10\%$ of \pounds $1020$ & \pounds $102$}\par\vspace{0.4em}
+   Final price $=$ \pounds $918$}
+
+\qq[\Large][\Large]{A car costs \pounds $12\,000$.\\[0.3em]
+It loses $20\%$ of its value in the first year and $15\%$ of its value in the second year.\\[0.3em]
+What is it worth after two years?}
+  {\steps{after year $1$ & \pounds $12\,000\times 0.8=$ \pounds $9600$ \\
+          after year $2$ & \pounds $9600\times 0.85=$ \pounds $8160$}}
+
+%================================================================
+\qtopic{Harder percentages of a number}
+%================================================================
+
+\qq{$11\%$ of $200$}
+  {\steps{$10\%$ & $20$ \\ $1\%$ & $2$ \\ $11\%$ & $22$}}
+\qq{$21\%$ of $400$}
+  {\steps{$10\%$ & $40$ \\ $20\%$ & $80$ \\ $1\%$ & $4$ \\ $21\%$ & $84$}}
+\qq{$17.5\%$ of $40$}
+  {\steps{$10\%$ & $4$ \\ $5\%$ & $2$ \\ $2.5\%$ & $1$ \\ $17.5\%$ & $7$}}
+\qq{$12.5\%$ of $80$}
+  {\steps{$10\%$ & $8$ \\ $2.5\%$ & $2$ \\ $12.5\%$ & $10$}}
+\qq{$17.5\%$ of $240$}
+  {\steps{$10\%$ & $24$ \\ $5\%$ & $12$ \\ $2.5\%$ & $6$ \\ $17.5\%$ & $42$}}
+\qq{$32\%$ of $150$}
+  {\steps{$10\%$ & $15$ \\ $30\%$ & $45$ \\ $1\%$ & $1.5$ \\ $2\%$ & $3$ \\ $32\%$ & $48$}}
+\qq{$17.5\%$ of $68$}
+  {\steps{$10\%$ & $6.8$ \\ $5\%$ & $3.4$ \\ $2.5\%$ & $1.7$ \\ $17.5\%$ & $11.9$}}
+\qq{$87.5\%$ of $96$}
+  {\steps{$100\%$ & $96$ \\ $10\%$ & $9.6$ \\ $2.5\%$ & $2.4$ \\ $12.5\%$ & $12$ \\ $87.5\%$ & $96-12=84$}}
+\qq{$6.5\%$ of $400$}
+  {\steps{$1\%$ & $4$ \\ $6\%$ & $24$ \\ $0.5\%$ & $2$ \\ $6.5\%$ & $26$}}
+\qq[\Huge][\LARGE]{$17.5\%$ of \pounds $312$}
+  {\steps{$10\%$ & \pounds $31.20$ \\ $5\%$ & \pounds $15.60$ \\
+          $2.5\%$ & \pounds $7.80$ \\ $17.5\%$ & \pounds $54.60$}}
+
+\end{document}
