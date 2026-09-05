@@ -2,13 +2,19 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing}
 
 % ================================================================
-% Quick Questions deck.
+% Quick Questions deck: fractions.
 %
-% One question per slide, no answers: the teacher jumps to a topic
-% from the contents slide and picks questions for mini whiteboards.
-% Within each topic the ten questions get gradually harder.
+% Every question gets two slides: the question on its own for the
+% mini whiteboards, then the same question again with the solution
+% underneath in red. Within each topic the ten questions get
+% gradually harder.
+%
+% Where a picture helps, the solution carries a bar model, a number
+% line or a hundred square drawn in the same red as the working.
 % ================================================================
 
 \setbeamertemplate{navigation symbols}{}
@@ -26,19 +32,130 @@
   \end{frame}%
 }
 
-% A question slide: the question on its own, centred, nothing else on
-% the slide. The optional argument drops the type size for the wordier
-% questions, so nothing runs off the slide.
-\newcommand{\qq}[2][\Huge]{%
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
   \begin{frame}
     \vfill
     \begin{center}
       \begin{minipage}{0.92\textwidth}
-        \centering #1 #2
+        \centering #1 #3
       \end{minipage}
     \end{center}
     \vfill
   \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \wholes[<width of one whole, cm>]{<wholes drawn>}{<parts per whole>}{<parts shaded>}
+% A row of unit bars, each cut into the same number of parts, with the
+% first few parts shaded. Used for mixed numbers and improper fractions.
+\NewDocumentCommand{\wholes}{O{1.8}mmm}{%
+  \begin{tikzpicture}[x=1cm,y=1cm,baseline=(current bounding box.center)]
+    \pgfmathsetmacro{\bw}{#1}
+    \pgfmathsetmacro{\cw}{\bw/#3}
+    \foreach \w in {1,...,#2}{%
+      \pgfmathsetmacro{\bx}{(\w-1)*(\bw+0.22)}%
+      \foreach \i in {1,...,#3}{%
+        \pgfmathtruncatemacro{\idx}{(\w-1)*#3+\i}%
+        \ifnum\idx>#4\relax
+          \draw[red!55!black,thin] ({\bx+(\i-1)*\cw},0) rectangle ({\bx+\i*\cw},0.5);
+        \else
+          \filldraw[fill=red!25,draw=red!55!black,thin]
+            ({\bx+(\i-1)*\cw},0) rectangle ({\bx+\i*\cw},0.5);
+        \fi}%
+      \draw[red!55!black,thick] (\bx,0) rectangle ({\bx+\bw},0.5);}
+  \end{tikzpicture}%
+}
+
+% A single bar: \fbar[<width, cm>]{<parts>}{<parts shaded>}
+\NewDocumentCommand{\fbar}{O{6}mm}{\wholes[#1]{1}{#2}{#3}}
+
+% Bars stacked one above another with a label down the left, written as
+%   \barstack{$\frac12$ & \fbar{2}{1} \\[0.95em] $\frac14$ & \fbar{4}{1}}
+% Rows carry an explicit skip because \arraystretch only scales the strut,
+% which is not enough to keep stacked \dfrac labels apart.
+\newcommand{\barstack}[1]{%
+  {\renewcommand{\arraystretch}{1.2}%
+   \begin{tabular}{@{}r@{\;\;}l@{}}#1\end{tabular}}%
+}
+
+% Stepped working, written in the form
+%   3/4 of 40 is 30
+% Rows are separated with \\ and the two columns with &.
+\newcommand{\steps}[1]{%
+  {\renewcommand{\arraystretch}{1.5}%
+   \begin{tabular}{@{}r@{\ is\ }l@{}}#1\end{tabular}}%
+}
+
+% Chained working, one equation per row, for the algebraic methods.
+\newcommand{\work}[1]{%
+  \begin{tabular}{@{}r@{\;=\;}l@{}}#1\end{tabular}%
+}
+
+% \barmodel{<cells>}{<cells spanned by the lower brace>}{<lower label>}{<upper label>}
+% The whole bar is 9cm wide and represents the upper label; the lower
+% brace picks out the part of it named by the lower label. Kept
+% identical to the percentages deck so the two decks match.
+\newcommand{\barmodel}[4]{%
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \pgfmathsetmacro{\cw}{9/#1}
+    \fill[red!12] (0,0) rectangle ({#2*\cw},0.7);
+    \foreach \i in {1,...,#1}
+      {\draw[red!60!black] ({(\i-1)*\cw},0) rectangle ({\i*\cw},0.7);}
+    \draw[red!60!black,thick] (0,0) rectangle (9,0.7);
+    \draw[red,decorate,decoration={brace,amplitude=4pt}] (0,0.9) -- (9,0.9)
+      node[midway,above=4pt,red,font=\normalsize]{#4};
+    \draw[red,decorate,decoration={brace,mirror,amplitude=4pt}] (0,-0.2) -- ({#2*\cw},-0.2)
+      node[midway,below=4pt,red,font=\normalsize]{#3};
+  \end{tikzpicture}%
+}
+
+% \nline{<divisions>}{<label at 0>}{<label at the far end>}{<marks>}
+% draws a number line 10cm long. Marks are placed with \mk (label above)
+% and \mkb (label below), each taking how far along the line to go as a
+% fraction, so that two close values can sit on opposite sides.
+\newcommand{\nline}[4]{%
+  \begin{tikzpicture}[x=1cm,y=1cm]
+    \draw[red!55!black,thick] (0,0) -- (10,0);
+    \foreach \i in {0,...,#1}{%
+      \pgfmathsetmacro{\xx}{10*\i/#1}%
+      \draw[red!55!black] (\xx,-0.12) -- (\xx,0.12);}
+    \node[red!55!black,below=10pt,font=\small] at (0,0) {#2};
+    \node[red!55!black,below=10pt,font=\small] at (10,0) {#3};
+    #4
+  \end{tikzpicture}%
+}
+\newcommand{\mk}[2]{%
+  \fill[red] ({10*(#1)},0) circle (2.4pt);
+  \node[red,above=5pt,font=\small] at ({10*(#1)},0) {#2};}
+\newcommand{\mkb}[2]{%
+  \fill[red] ({10*(#1)},0) circle (2.4pt);
+  \node[red,below=5pt,font=\small] at ({10*(#1)},0) {#2};}
+
+% \hgrid{<hundredths shaded>} draws a hundred square, for the
+% fraction / decimal / percentage conversions. The grid lines are kept
+% much lighter than the shading so the shaded part reads at a glance.
+\newcommand{\hgrid}[1]{%
+  \begin{tikzpicture}[x=0.33cm,y=0.33cm,baseline=(current bounding box.center)]
+    \foreach \i in {1,...,#1}{%
+      \pgfmathtruncatemacro{\rr}{floor((\i-1)/10)}%
+      \pgfmathtruncatemacro{\cc}{mod(\i-1,10)}%
+      \fill[red!35] (\cc,-\rr) rectangle ({\cc+1},{-\rr-1});}
+    \draw[red!30,very thin,step=1] (0,0) grid (10,-10);
+    \draw[red!60!black,thick] (0,0) rectangle (10,-10);
+  \end{tikzpicture}%
 }
 
 % Contents-slide bullets, colour-coded by difficulty band:
@@ -56,7 +173,7 @@
 }
 
 \title{Fractions: Quick Questions}
-\subtitle{Mini whiteboard questions}
+\subtitle{Mini whiteboard questions, with solutions}
 \author{}
 \date{}
 
@@ -73,255 +190,640 @@
 \qtopic{Simplifying fractions}
 %================================================================
 
-\qq{Simplify $\dfrac{4}{8}$}
-\qq{Simplify $\dfrac{6}{9}$}
-\qq{Simplify $\dfrac{12}{20}$}
+\qq[\Huge][\large]{Simplify $\dfrac{4}{8}$}
+  {\barstack{$\dfrac{4}{8}$ & \fbar{8}{4} \\[0.95em]
+             $\dfrac{1}{2}$ & \fbar{2}{1}}
+   \par\vspace{0.6em}
+   $\dfrac{4}{8}=\dfrac{4\div 4}{8\div 4}=\dfrac{1}{2}$}
+
+\qq[\Huge][\large]{Simplify $\dfrac{6}{9}$}
+  {\barstack{$\dfrac{6}{9}$ & \fbar{9}{6} \\[0.95em]
+             $\dfrac{2}{3}$ & \fbar{3}{2}}
+   \par\vspace{0.6em}
+   $\dfrac{6}{9}=\dfrac{6\div 3}{9\div 3}=\dfrac{2}{3}$}
+
+\qq[\Huge][\large]{Simplify $\dfrac{12}{20}$}
+  {\barstack{$\dfrac{12}{20}$ & \fbar{20}{12} \\[0.95em]
+             $\dfrac{3}{5}$ & \fbar{5}{3}}
+   \par\vspace{0.6em}
+   $\dfrac{12}{20}=\dfrac{12\div 4}{20\div 4}=\dfrac{3}{5}$}
+
 \qq{Simplify $\dfrac{24}{36}$}
+  {$\dfrac{24}{36}=\dfrac{24\div 12}{36\div 12}=\dfrac{2}{3}$}
+
 \qq{Simplify $\dfrac{45}{60}$}
+  {$\dfrac{45}{60}=\dfrac{45\div 15}{60\div 15}=\dfrac{3}{4}$}
+
 \qq{Simplify $\dfrac{42}{70}$}
-\qq{Simplify $\dfrac{84}{144}$}
-\qq{Simplify $\dfrac{91}{117}$}
-\qq{Simplify $\dfrac{315}{420}$}
-\qq[\LARGE]{Simplify $\dfrac{1001}{1309}$\\[0.4em]
+  {$\dfrac{42}{70}=\dfrac{42\div 14}{70\div 14}=\dfrac{3}{5}$}
+
+\qq[\Huge][\Large]{Simplify $\dfrac{84}{144}$}
+  {$\dfrac{84}{144}=\dfrac{84\div 12}{144\div 12}=\dfrac{7}{12}$}
+
+\qq[\Huge][\Large]{Simplify $\dfrac{91}{117}$}
+  {$91=7\times 13$ \qquad $117=9\times 13$\\[0.4em]
+   $\dfrac{91}{117}=\dfrac{91\div 13}{117\div 13}=\dfrac{7}{9}$}
+
+\qq[\Huge][\Large]{Simplify $\dfrac{315}{420}$}
+  {Both divide by $105$:\\[0.4em]
+   $\dfrac{315}{420}=\dfrac{315\div 105}{420\div 105}=\dfrac{3}{4}$}
+
+\qq[\LARGE][\Large]{Simplify $\dfrac{1001}{1309}$\\[0.4em]
 \normalsize (Hint: both numbers are multiples of $7$ and of $11$.)}
+  {$1001=7\times 11\times 13$ \qquad $1309=7\times 11\times 17$\\[0.4em]
+   Divide both by $77$:\\[0.3em]
+   $\dfrac{1001}{1309}=\dfrac{13}{17}$}
 
 %================================================================
 \qtopic{Ordering fractions}
 %================================================================
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{1}{4}\qquad \dfrac{1}{2}\qquad \dfrac{1}{8}$}
+  {\barstack{$\dfrac18$ & \fbar{8}{1} \\[0.95em]
+             $\dfrac14$ & \fbar{4}{1} \\[0.95em]
+             $\dfrac12$ & \fbar{2}{1}}
+   \par\vspace{0.5em}
+   The bigger the denominator, the smaller the piece.}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{3}{7}\qquad \dfrac{6}{7}\qquad \dfrac{2}{7}$}
+  {\barstack{$\dfrac27$ & \fbar{7}{2} \\[0.95em]
+             $\dfrac37$ & \fbar{7}{3} \\[0.95em]
+             $\dfrac67$ & \fbar{7}{6}}
+   \par\vspace{0.5em}
+   Same denominator, so just order the numerators.}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{1}{2}\qquad \dfrac{3}{4}\qquad \dfrac{5}{8}$}
+  {\barstack{$\dfrac12=\dfrac48$ & \fbar{8}{4} \\[0.95em]
+             $\dfrac58$ & \fbar{8}{5} \\[0.95em]
+             $\dfrac34=\dfrac68$ & \fbar{8}{6}}
+   \par\vspace{0.5em}
+   $\dfrac12\quad \dfrac58\quad \dfrac34$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{2}{3}\qquad \dfrac{5}{6}\qquad \dfrac{3}{4}$}
+  {\barstack{$\dfrac23=\dfrac{8}{12}$ & \fbar{12}{8} \\[0.95em]
+             $\dfrac34=\dfrac{9}{12}$ & \fbar{12}{9} \\[0.95em]
+             $\dfrac56=\dfrac{10}{12}$ & \fbar{12}{10}}
+   \par\vspace{0.5em}
+   $\dfrac23\quad \dfrac34\quad \dfrac56$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{3}{5}\qquad \dfrac{7}{10}\qquad \dfrac{13}{20}$}
+  {Common denominator $20$:\\[0.4em]
+   $\dfrac{12}{20}\qquad \dfrac{14}{20}\qquad \dfrac{13}{20}$\\[0.4em]
+   $\dfrac{3}{5}\quad \dfrac{13}{20}\quad \dfrac{7}{10}$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{5}{9}\qquad \dfrac{2}{3}\qquad \dfrac{7}{12}$}
+  {Common denominator $36$:\\[0.4em]
+   $\dfrac{20}{36}\qquad \dfrac{24}{36}\qquad \dfrac{21}{36}$\\[0.4em]
+   $\dfrac{5}{9}\quad \dfrac{7}{12}\quad \dfrac{2}{3}$}
 
-\qq[\LARGE]{Put these in order, \textbf{largest} first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, \textbf{largest} first:\\[0.6em]
 $\dfrac{4}{5}\qquad \dfrac{7}{9}\qquad \dfrac{11}{15}$}
+  {Common denominator $45$:\\[0.4em]
+   $\dfrac{36}{45}\qquad \dfrac{35}{45}\qquad \dfrac{33}{45}$\\[0.4em]
+   $\dfrac{4}{5}\quad \dfrac{7}{9}\quad \dfrac{11}{15}$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{5}{8}\qquad \dfrac{7}{11}\qquad \dfrac{9}{14}$}
+  {The denominators share no factors, so divide instead:\\[0.4em]
+   \work{$\dfrac58$ & $0.625$ \\[0.2em]
+         $\dfrac{7}{11}$ & $0.636\ldots$ \\[0.2em]
+         $\dfrac{9}{14}$ & $0.642\ldots$}\\[0.4em]
+   $\dfrac58\quad \dfrac{7}{11}\quad \dfrac{9}{14}$}
 
-\qq[\LARGE]{Which is closer to $1$: $\dfrac{8}{9}$ or $\dfrac{11}{12}$?\\[0.4em]
+\qq[\LARGE][\large]{Which is closer to $1$: $\dfrac{8}{9}$ or $\dfrac{11}{12}$?\\[0.4em]
 \normalsize How do you know?}
+  {\barstack{$\dfrac89$ & \fbar{9}{8} \\[0.95em]
+             $\dfrac{11}{12}$ & \fbar{12}{11}}
+   \par\vspace{0.5em}
+   The gaps left are $\dfrac19$ and $\dfrac{1}{12}$.\\[0.3em]
+   $\dfrac{1}{12}$ is smaller, so $\dfrac{11}{12}$ is closer to $1$.}
 
-\qq[\LARGE]{Write a fraction that lies between\\[0.6em]
+\qq[\LARGE][\Large]{Write a fraction that lies between\\[0.6em]
 $\dfrac{5}{8}$ \quad and \quad $\dfrac{2}{3}$}
+  {In $24$ths they are next-door neighbours:
+   $\dfrac{15}{24}$ and $\dfrac{16}{24}$.\\[0.4em]
+   Double both denominators to make room:\\[0.3em]
+   $\dfrac{30}{48}\ <\ \dfrac{31}{48}\ <\ \dfrac{32}{48}$\\[0.4em]
+   So $\dfrac{31}{48}$ works.}
 
 %================================================================
 \qtopic{Mixed numbers and improper fractions}
 %================================================================
 
-\qq{Write $1\dfrac{1}{2}$ as an improper fraction}
-\qq{Write $2\dfrac{3}{4}$ as an improper fraction}
-\qq{Write $\dfrac{7}{2}$ as a mixed number}
-\qq{Write $4\dfrac{2}{5}$ as an improper fraction}
-\qq{Write $\dfrac{23}{4}$ as a mixed number}
-\qq{Write $5\dfrac{7}{8}$ as an improper fraction}
-\qq{Write $\dfrac{100}{7}$ as a mixed number}
-\qq{Write $12\dfrac{5}{9}$ as an improper fraction}
-\qq{Write $-3\dfrac{2}{5}$ as an improper fraction}
-\qq[\LARGE]{The mixed number $6\dfrac{a}{7}$ is the same as $\dfrac{45}{7}$.\\[0.6em]
+\qq[\Huge][\large]{Write $1\dfrac{1}{2}$ as an improper fraction}
+  {\wholes[2]{2}{2}{3}
+   \par\vspace{0.6em}
+   Three halves are shaded:\\[0.3em]
+   $1\dfrac12=\dfrac{2}{2}+\dfrac{1}{2}=\dfrac{3}{2}$}
+
+\qq[\Huge][\large]{Write $2\dfrac{3}{4}$ as an improper fraction}
+  {\wholes[2]{3}{4}{11}
+   \par\vspace{0.6em}
+   $2\dfrac34=\dfrac{8}{4}+\dfrac{3}{4}=\dfrac{11}{4}$}
+
+\qq[\Huge][\large]{Write $\dfrac{7}{2}$ as a mixed number}
+  {\wholes[2]{4}{2}{7}
+   \par\vspace{0.6em}
+   $7\div 2=3$ remainder $1$, so $\dfrac72=3\dfrac12$}
+
+\qq[\Huge][\Large]{Write $4\dfrac{2}{5}$ as an improper fraction}
+  {$4\times 5=20$, then add the $2$:\\[0.4em]
+   $4\dfrac25=\dfrac{22}{5}$}
+
+\qq[\Huge][\large]{Write $\dfrac{23}{4}$ as a mixed number}
+  {\wholes[1.7]{6}{4}{23}
+   \par\vspace{0.6em}
+   $23\div 4=5$ remainder $3$, so $\dfrac{23}{4}=5\dfrac34$}
+
+\qq[\Huge][\Large]{Write $5\dfrac{7}{8}$ as an improper fraction}
+  {$5\times 8=40$, then add the $7$:\\[0.4em]
+   $5\dfrac78=\dfrac{47}{8}$}
+
+\qq[\Huge][\Large]{Write $\dfrac{100}{7}$ as a mixed number}
+  {$7\times 14=98$, leaving $2$:\\[0.4em]
+   $\dfrac{100}{7}=14\dfrac27$}
+
+\qq[\Huge][\Large]{Write $12\dfrac{5}{9}$ as an improper fraction}
+  {$12\times 9=108$, then add the $5$:\\[0.4em]
+   $12\dfrac59=\dfrac{113}{9}$}
+
+\qq[\Huge][\Large]{Write $-3\dfrac{2}{5}$ as an improper fraction}
+  {Convert $3\dfrac25$ first, then put the sign back:\\[0.4em]
+   $3\times 5+2=17$, so $-3\dfrac25=-\dfrac{17}{5}$}
+
+\qq[\LARGE][\Large]{The mixed number $6\dfrac{a}{7}$ is the same as $\dfrac{45}{7}$.\\[0.6em]
 Find $a$.}
+  {$6\dfrac{a}{7}=\dfrac{42+a}{7}$\\[0.4em]
+   $42+a=45$, so $a=3$}
 
 %================================================================
 \qtopic{Adding and subtracting fractions}
 %================================================================
 
-\qq{$\dfrac{1}{2}+\dfrac{1}{4}$}
-\qq{$\dfrac{2}{3}+\dfrac{1}{6}$}
-\qq{$\dfrac{3}{4}-\dfrac{1}{8}$}
-\qq{$\dfrac{1}{3}+\dfrac{1}{4}$}
-\qq{$\dfrac{3}{5}-\dfrac{1}{4}$}
-\qq{$\dfrac{5}{6}+\dfrac{3}{8}$}
-\qq{$\dfrac{7}{10}-\dfrac{2}{15}$}
-\qq{$\dfrac{2}{3}+\dfrac{3}{4}+\dfrac{1}{6}$}
-\qq{$\dfrac{5}{12}-\dfrac{7}{18}$}
-\qq[\LARGE]{What must be added to $\dfrac{5}{9}$\\[0.4em]
+\qq[\Huge][\large]{$\dfrac{1}{2}+\dfrac{1}{4}$}
+  {\barstack{$\dfrac12=\dfrac24$ & \fbar{4}{2} \\[0.95em]
+             $\dfrac14$ & \fbar{4}{1} \\[0.95em]
+             total & \fbar{4}{3}}
+   \par\vspace{0.5em}
+   $\dfrac24+\dfrac14=\dfrac34$}
+
+\qq[\Huge][\large]{$\dfrac{2}{3}+\dfrac{1}{6}$}
+  {\barstack{$\dfrac23=\dfrac46$ & \fbar{6}{4} \\[0.95em]
+             $\dfrac16$ & \fbar{6}{1} \\[0.95em]
+             total & \fbar{6}{5}}
+   \par\vspace{0.5em}
+   $\dfrac46+\dfrac16=\dfrac56$}
+
+\qq[\Huge][\large]{$\dfrac{3}{4}-\dfrac{1}{8}$}
+  {\barstack{$\dfrac34=\dfrac68$ & \fbar{8}{6} \\[0.95em]
+             take off $\dfrac18$ & \fbar{8}{1} \\[0.95em]
+             leaves & \fbar{8}{5}}
+   \par\vspace{0.5em}
+   $\dfrac68-\dfrac18=\dfrac58$}
+
+\qq[\Huge][\large]{$\dfrac{1}{3}+\dfrac{1}{4}$}
+  {\barstack{$\dfrac13=\dfrac{4}{12}$ & \fbar{12}{4} \\[0.95em]
+             $\dfrac14=\dfrac{3}{12}$ & \fbar{12}{3} \\[0.95em]
+             total & \fbar{12}{7}}
+   \par\vspace{0.5em}
+   $\dfrac{4}{12}+\dfrac{3}{12}=\dfrac{7}{12}$}
+
+\qq[\Huge][\Large]{$\dfrac{3}{5}-\dfrac{1}{4}$}
+  {Common denominator $20$:\\[0.4em]
+   $\dfrac{12}{20}-\dfrac{5}{20}=\dfrac{7}{20}$}
+
+\qq[\Huge][\Large]{$\dfrac{5}{6}+\dfrac{3}{8}$}
+  {Common denominator $24$:\\[0.4em]
+   $\dfrac{20}{24}+\dfrac{9}{24}=\dfrac{29}{24}=1\dfrac{5}{24}$}
+
+\qq[\Huge][\Large]{$\dfrac{7}{10}-\dfrac{2}{15}$}
+  {Common denominator $30$:\\[0.4em]
+   $\dfrac{21}{30}-\dfrac{4}{30}=\dfrac{17}{30}$}
+
+\qq[\Huge][\Large]{$\dfrac{2}{3}+\dfrac{3}{4}+\dfrac{1}{6}$}
+  {Common denominator $12$:\\[0.4em]
+   $\dfrac{8}{12}+\dfrac{9}{12}+\dfrac{2}{12}=\dfrac{19}{12}=1\dfrac{7}{12}$}
+
+\qq[\Huge][\Large]{$\dfrac{5}{12}-\dfrac{7}{18}$}
+  {Common denominator $36$:\\[0.4em]
+   $\dfrac{15}{36}-\dfrac{14}{36}=\dfrac{1}{36}$}
+
+\qq[\LARGE][\Large]{What must be added to $\dfrac{5}{9}$\\[0.4em]
 to make $\dfrac{7}{8}$?}
+  {The missing amount is $\dfrac78-\dfrac59$.\\[0.4em]
+   Common denominator $72$:\\[0.3em]
+   $\dfrac{63}{72}-\dfrac{40}{72}=\dfrac{23}{72}$}
 
 %================================================================
 \qtopic{Converting fractions, decimals and percentages}
 %================================================================
 
-\qq[\LARGE]{Write $\dfrac{1}{2}$ as a decimal and as a percentage}
-\qq[\LARGE]{Write $0.25$ as a fraction and as a percentage}
-\qq[\LARGE]{Write $30\%$ as a decimal and as a fraction in its simplest form}
-\qq[\LARGE]{Write $\dfrac{3}{4}$ as a percentage, and $0.6$ as a percentage}
-\qq[\LARGE]{Write $\dfrac{7}{20}$ as a decimal and as a percentage}
-\qq[\LARGE]{Write $0.08$ as a percentage and as a fraction in its simplest form}
-\qq[\LARGE]{Write $\dfrac{3}{8}$ as a decimal and as a percentage}
-\qq[\LARGE]{Write $12.5\%$ as a fraction in its simplest form}
-\qq[\LARGE]{Write $\dfrac{5}{6}$ as a decimal, and as a percentage to $1$ decimal place}
-\qq[\LARGE]{Write $137.5\%$ as a mixed number in its simplest form}
+\qq[\LARGE][\large]{Write $\dfrac{1}{2}$ as a decimal and as a percentage}
+  {\hgrid{50}
+   \par\vspace{0.5em}
+   Half the square is $50$ out of $100$:\\[0.3em]
+   $\dfrac12=\dfrac{50}{100}=0.5=50\%$}
+
+\qq[\LARGE][\large]{Write $0.25$ as a fraction and as a percentage}
+  {\hgrid{25}
+   \par\vspace{0.5em}
+   $0.25=\dfrac{25}{100}=\dfrac14=25\%$}
+
+\qq[\LARGE][\large]{Write $30\%$ as a decimal and as a fraction in its simplest form}
+  {\hgrid{30}
+   \par\vspace{0.5em}
+   $30\%=\dfrac{30}{100}=0.3=\dfrac{3}{10}$}
+
+\qq[\LARGE][\Large]{Write $\dfrac{3}{4}$ as a percentage, and $0.6$ as a percentage}
+  {$\dfrac34=\dfrac{75}{100}=75\%$\\[0.4em]
+   $0.6=\dfrac{60}{100}=60\%$}
+
+\qq[\LARGE][\large]{Write $\dfrac{7}{20}$ as a decimal and as a percentage}
+  {\hgrid{35}
+   \par\vspace{0.5em}
+   Multiply top and bottom by $5$:\\[0.3em]
+   $\dfrac{7}{20}=\dfrac{35}{100}=0.35=35\%$}
+
+\qq[\LARGE][\large]{Write $0.08$ as a percentage and as a fraction in its simplest form}
+  {\hgrid{8}
+   \par\vspace{0.5em}
+   $0.08=\dfrac{8}{100}=8\%=\dfrac{2}{25}$}
+
+\qq[\LARGE][\Large]{Write $\dfrac{3}{8}$ as a decimal and as a percentage}
+  {$3\div 8=0.375$\\[0.4em]
+   $0.375\times 100=37.5\%$}
+
+\qq[\LARGE][\Large]{Write $12.5\%$ as a fraction in its simplest form}
+  {$12.5\%=\dfrac{12.5}{100}=\dfrac{125}{1000}$\\[0.4em]
+   Divide both by $125$: \ $\dfrac{1}{8}$}
+
+\qq[\LARGE][\Large]{Write $\dfrac{5}{6}$ as a decimal, and as a percentage to $1$ decimal place}
+  {$5\div 6=0.8333\ldots$\\[0.4em]
+   $0.8333\ldots\times 100=83.3\%$ (1 d.p.)}
+
+\qq[\LARGE][\Large]{Write $137.5\%$ as a mixed number in its simplest form}
+  {$137.5\%=1.375=1\dfrac{375}{1000}$\\[0.4em]
+   Divide both by $125$: \ $1\dfrac{3}{8}$}
 
 %================================================================
 \qtopic{Ordering fractions, decimals and percentages}
 %================================================================
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $0.5\qquad \dfrac{1}{4}\qquad 60\%$}
+  {\nline{10}{$0$}{$1$}{\mk{0.25}{$\frac14$}\mkb{0.5}{$0.5$}\mk{0.6}{$60\%$}}
+   \par\vspace{0.6em}
+   $\dfrac14=0.25$ \qquad $60\%=0.6$\\[0.3em]
+   $\dfrac14\quad 0.5\quad 60\%$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\large]{Put these in order, smallest first:\\[0.6em]
 $0.7\qquad \dfrac{3}{4}\qquad 70\%$}
+  {\nline{10}{$0$}{$1$}{\mkb{0.7}{$0.7=70\%$}\mk{0.75}{$\frac34$}}
+   \par\vspace{0.6em}
+   $0.7$ and $70\%$ are equal, and $\dfrac34=0.75$.\\[0.3em]
+   $0.7=70\%$, \ then \ $\dfrac34$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{2}{5}\qquad 45\%\qquad 0.35$}
+  {As decimals: \ $0.4$ \quad $0.45$ \quad $0.35$\\[0.4em]
+   $0.35\quad \dfrac25\quad 45\%$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $0.62\qquad \dfrac{5}{8}\qquad 63\%$}
+  {As decimals: \ $0.62$ \quad $0.625$ \quad $0.63$\\[0.4em]
+   $0.62\quad \dfrac58\quad 63\%$}
 
-\qq[\LARGE]{Put these in order, \textbf{largest} first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, \textbf{largest} first:\\[0.6em]
 $\dfrac{7}{8}\qquad 0.87\qquad 88\%$}
+  {As decimals: \ $0.875$ \quad $0.87$ \quad $0.88$\\[0.4em]
+   $88\%\quad \dfrac78\quad 0.87$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{1}{3}\qquad 0.3\qquad 33\%$}
+  {As decimals: \ $0.333\ldots$ \quad $0.3$ \quad $0.33$\\[0.4em]
+   $0.3\quad 33\%\quad \dfrac13$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $0.045\qquad 4.5\%\qquad \dfrac{1}{20}$}
+  {As decimals: \ $0.045$ \quad $0.045$ \quad $0.05$\\[0.4em]
+   $0.045=4.5\%$, \ then \ $\dfrac{1}{20}$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{5}{6}\qquad 83\%\qquad 0.835$}
+  {As decimals: \ $0.8333\ldots$ \quad $0.83$ \quad $0.835$\\[0.4em]
+   $83\%\quad \dfrac56\quad 0.835$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{2}{7}\qquad 0.28\qquad 29\%$}
+  {As decimals: \ $0.2857\ldots$ \quad $0.28$ \quad $0.29$\\[0.4em]
+   $0.28\quad \dfrac27\quad 29\%$}
 
-\qq[\LARGE]{Put these in order, smallest first:\\[0.6em]
+\qq[\LARGE][\Large]{Put these in order, smallest first:\\[0.6em]
 $\dfrac{3}{8}\qquad 0.38\qquad 37.5\%\qquad \dfrac{3}{7}$\\[0.5em]
 \normalsize What do you notice?}
+  {As decimals: \ $0.375$ \quad $0.38$ \quad $0.375$ \quad $0.4285\ldots$\\[0.4em]
+   $\dfrac38=37.5\%$, \ then \ $0.38$, \ then \ $\dfrac37$\\[0.4em]
+   $\dfrac38$ and $37.5\%$ are the same number written two ways.}
 
 %================================================================
 \qtopic{Fractions of amounts (no calculator)}
 %================================================================
 
-\qq{$\dfrac{1}{2}$ of $40$}
-\qq{$\dfrac{1}{4}$ of $60$}
-\qq{$\dfrac{1}{5}$ of $45$}
-\qq{$\dfrac{3}{4}$ of $40$}
-\qq{$\dfrac{2}{3}$ of $36$}
-\qq{$\dfrac{3}{5}$ of $45$}
-\qq{$\dfrac{5}{8}$ of $72$}
-\qq{$\dfrac{2}{7}$ of $350$}
-\qq[\LARGE]{$\dfrac{5}{6}$ of a number is $45$.\\[0.4em]
+\qq[\Huge][\Large]{$\dfrac{1}{2}$ of $40$}
+  {\barmodel{2}{1}{$\frac12$ of $40$ is $20$}{$40$}
+   \par\vspace{0.7em}
+   $40\div 2=20$}
+
+\qq[\Huge][\Large]{$\dfrac{1}{4}$ of $60$}
+  {\barmodel{4}{1}{$\frac14$ of $60$ is $15$}{$60$}
+   \par\vspace{0.7em}
+   $60\div 4=15$}
+
+\qq[\Huge][\Large]{$\dfrac{1}{5}$ of $45$}
+  {\barmodel{5}{1}{$\frac15$ of $45$ is $9$}{$45$}
+   \par\vspace{0.7em}
+   $45\div 5=9$}
+
+\qq[\Huge][\Large]{$\dfrac{3}{4}$ of $40$}
+  {\barmodel{4}{3}{$\frac34$ of $40$ is $30$}{$40$}
+   \par\vspace{0.7em}
+   \steps{$\frac14$ of $40$ & $10$ \\ $\frac34$ of $40$ & $30$}}
+
+\qq[\Huge][\Large]{$\dfrac{2}{3}$ of $36$}
+  {\barmodel{3}{2}{$\frac23$ of $36$ is $24$}{$36$}
+   \par\vspace{0.7em}
+   \steps{$\frac13$ of $36$ & $12$ \\ $\frac23$ of $36$ & $24$}}
+
+\qq[\Huge][\Large]{$\dfrac{3}{5}$ of $45$}
+  {\barmodel{5}{3}{$\frac35$ of $45$ is $27$}{$45$}
+   \par\vspace{0.7em}
+   \steps{$\frac15$ of $45$ & $9$ \\ $\frac35$ of $45$ & $27$}}
+
+\qq[\Huge][\Large]{$\dfrac{5}{8}$ of $72$}
+  {\barmodel{8}{5}{$\frac58$ of $72$ is $45$}{$72$}
+   \par\vspace{0.7em}
+   \steps{$\frac18$ of $72$ & $9$ \\ $\frac58$ of $72$ & $45$}}
+
+\qq[\Huge][\Large]{$\dfrac{2}{7}$ of $350$}
+  {\barmodel{7}{2}{$\frac27$ of $350$ is $100$}{$350$}
+   \par\vspace{0.7em}
+   \steps{$\frac17$ of $350$ & $50$ \\ $\frac27$ of $350$ & $100$}}
+
+\qq[\LARGE][\large]{$\dfrac{5}{6}$ of a number is $45$.\\[0.4em]
 What is the number?}
-\qq[\LARGE]{$\dfrac{3}{8}$ of $\dfrac{2}{5}$ of $200$}
+  {\barmodel{6}{5}{$\frac56$ of it is $45$}{the number}
+   \par\vspace{0.7em}
+   \steps{$\frac56$ of it & $45$ \\ $\frac16$ of it & $9$ \\ the number & $54$}}
+
+\qq[\LARGE][\Large]{$\dfrac{3}{8}$ of $\dfrac{2}{5}$ of $200$}
+  {Work from the inside out:\\[0.4em]
+   \steps{$\frac25$ of $200$ & $80$ \\ $\frac18$ of $80$ & $10$ \\ $\frac38$ of $80$ & $30$}}
 
 %================================================================
 \qtopic{Fractions of amounts (calculator)}
 %================================================================
 
-\qq{$\dfrac{1}{4}$ of $386$}
-\qq{$\dfrac{3}{5}$ of $245$}
-\qq{$\dfrac{2}{7}$ of $483$}
-\qq{$\dfrac{3}{16}$ of $1024$}
-\qq{$\dfrac{5}{9}$ of $738$}
-\qq[\LARGE]{$\dfrac{7}{8}$ of $\pounds 312.40$}
-\qq{$\dfrac{11}{13}$ of $2405$}
-\qq[\LARGE]{$\dfrac{4}{7}$ of $3.5$ kg.\\[0.4em]
+\qq[\Huge][\Large]{$\dfrac{1}{4}$ of $386$}
+  {$386\div 4=96.5$}
+
+\qq[\Huge][\Large]{$\dfrac{3}{5}$ of $245$}
+  {\steps{$\frac15$ of $245$ & $49$ \\ $\frac35$ of $245$ & $147$}}
+
+\qq[\Huge][\Large]{$\dfrac{2}{7}$ of $483$}
+  {\steps{$\frac17$ of $483$ & $69$ \\ $\frac27$ of $483$ & $138$}}
+
+\qq[\Huge][\Large]{$\dfrac{3}{16}$ of $1024$}
+  {\steps{$\frac{1}{16}$ of $1024$ & $64$ \\ $\frac{3}{16}$ of $1024$ & $192$}}
+
+\qq[\Huge][\Large]{$\dfrac{5}{9}$ of $738$}
+  {\steps{$\frac19$ of $738$ & $82$ \\ $\frac59$ of $738$ & $410$}}
+
+\qq[\LARGE][\Large]{$\dfrac{7}{8}$ of $\pounds 312.40$}
+  {\steps{$\frac18$ of it & \pounds $39.05$ \\ $\frac78$ of it & \pounds $273.35$}}
+
+\qq[\Huge][\Large]{$\dfrac{11}{13}$ of $2405$}
+  {\steps{$\frac{1}{13}$ of $2405$ & $185$ \\ $\frac{11}{13}$ of $2405$ & $2035$}}
+
+\qq[\LARGE][\Large]{$\dfrac{4}{7}$ of $3.5$ kg.\\[0.4em]
 Give your answer in grams.}
-\qq[\LARGE]{$\dfrac{5}{8}$ of a number is $215$.\\[0.4em]
+  {\steps{$\frac17$ of $3.5$ kg & $0.5$ kg \\ $\frac47$ of $3.5$ kg & $2$ kg}
+   \par\vspace{0.4em}
+   $2$ kg $=2000$ g}
+
+\qq[\LARGE][\large]{$\dfrac{5}{8}$ of a number is $215$.\\[0.4em]
 What is the number?}
-\qq[\LARGE]{$\dfrac{7}{12}$ of $4$ hours $48$ minutes.\\[0.4em]
+  {\barmodel{8}{5}{$\frac58$ of it is $215$}{the number}
+   \par\vspace{0.7em}
+   \steps{$\frac58$ of it & $215$ \\ $\frac18$ of it & $43$ \\ the number & $344$}}
+
+\qq[\LARGE][\Large]{$\dfrac{7}{12}$ of $4$ hours $48$ minutes.\\[0.4em]
 Give your answer in hours and minutes.}
+  {$4$ h $48$ min $=288$ minutes\\[0.4em]
+   \steps{$\frac{1}{12}$ of $288$ & $24$ \\ $\frac{7}{12}$ of $288$ & $168$}
+   \par\vspace{0.4em}
+   $168$ min $=2$ hours $48$ minutes}
 
 %================================================================
 \qtopic{Four operations with mixed numbers and negatives}
 %================================================================
 
-\qq{$1\dfrac{1}{2}+2\dfrac{1}{4}$}
-\qq{$3\dfrac{4}{5}-1\dfrac{2}{5}$}
-\qq{$2\dfrac{1}{2}+\left(-1\dfrac{1}{4}\right)$}
-\qq{$4\dfrac{1}{6}-2\dfrac{3}{4}$}
-\qq{$2\dfrac{1}{2}\times 4$}
-\qq{$-3\dfrac{1}{3}+1\dfrac{5}{6}$}
-\qq{$1\dfrac{1}{2}\times 2\dfrac{2}{3}$}
-\qq{$3\dfrac{3}{4}\div 1\dfrac{1}{2}$}
-\qq{$-5\dfrac{1}{3}\div \dfrac{2}{3}$}
-\qq[\LARGE]{$-2\dfrac{1}{4}\times\left(-1\dfrac{1}{3}\right)+1\dfrac{1}{2}$}
+\qq[\Huge][\Large]{$1\dfrac{1}{2}+2\dfrac{1}{4}$}
+  {Add the wholes, then the fractions:\\[0.4em]
+   $1+2=3$ \qquad $\dfrac12+\dfrac14=\dfrac34$\\[0.4em]
+   $=3\dfrac34$}
+
+\qq[\Huge][\Large]{$3\dfrac{4}{5}-1\dfrac{2}{5}$}
+  {$3-1=2$ \qquad $\dfrac45-\dfrac25=\dfrac25$\\[0.4em]
+   $=2\dfrac25$}
+
+\qq[\LARGE][\Large]{$2\dfrac{1}{2}+\left(-1\dfrac{1}{4}\right)$}
+  {Adding a negative is subtracting:\\[0.4em]
+   $2\dfrac12-1\dfrac14=1\dfrac14$}
+
+\qq[\Huge][\Large]{$4\dfrac{1}{6}-2\dfrac{3}{4}$}
+  {Improper fractions, common denominator $12$:\\[0.4em]
+   $\dfrac{25}{6}-\dfrac{11}{4}=\dfrac{50}{12}-\dfrac{33}{12}=\dfrac{17}{12}=1\dfrac{5}{12}$}
+
+\qq[\Huge][\Large]{$2\dfrac{1}{2}\times 4$}
+  {Four lots of $2\dfrac12$:\\[0.4em]
+   $2\dfrac12+2\dfrac12+2\dfrac12+2\dfrac12=10$\\[0.4em]
+   or $\dfrac52\times 4=\dfrac{20}{2}=10$}
+
+\qq[\Huge][\Large]{$-3\dfrac{1}{3}+1\dfrac{5}{6}$}
+  {$-\dfrac{10}{3}+\dfrac{11}{6}=-\dfrac{20}{6}+\dfrac{11}{6}$\\[0.4em]
+   $=-\dfrac{9}{6}=-\dfrac32=-1\dfrac12$}
+
+\qq[\Huge][\Large]{$1\dfrac{1}{2}\times 2\dfrac{2}{3}$}
+  {Improper fractions first:\\[0.4em]
+   $\dfrac32\times\dfrac83=\dfrac{24}{6}=4$}
+
+\qq[\Huge][\Large]{$3\dfrac{3}{4}\div 1\dfrac{1}{2}$}
+  {Improper fractions, then multiply by the reciprocal:\\[0.4em]
+   $\dfrac{15}{4}\div\dfrac32=\dfrac{15}{4}\times\dfrac23=\dfrac{30}{12}=\dfrac52=2\dfrac12$}
+
+\qq[\Huge][\Large]{$-5\dfrac{1}{3}\div \dfrac{2}{3}$}
+  {$-\dfrac{16}{3}\div\dfrac23=-\dfrac{16}{3}\times\dfrac32=-\dfrac{48}{6}=-8$}
+
+\qq[\LARGE][\Large]{$-2\dfrac{1}{4}\times\left(-1\dfrac{1}{3}\right)+1\dfrac{1}{2}$}
+  {Multiply first; two negatives give a positive:\\[0.4em]
+   $-\dfrac94\times-\dfrac43=\dfrac{36}{12}=3$\\[0.4em]
+   $3+1\dfrac12=4\dfrac12$}
 
 %================================================================
 \qtopic{Word problems with mixed numbers}
 %================================================================
 
-\qq[\LARGE]{A recipe needs $1\dfrac{1}{2}$ cups of flour.\\[0.4em]
+\qq[\LARGE][\large]{A recipe needs $1\dfrac{1}{2}$ cups of flour.\\[0.4em]
 Alex makes a double batch.\\[0.4em]
 How much flour is needed?}
+  {\wholes[2]{3}{2}{6}
+   \par\vspace{0.6em}
+   $1\dfrac12\times 2=\dfrac32\times 2=\dfrac62=3$ cups}
 
-\qq[\LARGE]{A plank is $3\dfrac{1}{4}$\,m long.\\[0.4em]
+\qq[\LARGE][\large]{A plank is $3\dfrac{1}{4}$\,m long.\\[0.4em]
 A piece $1\dfrac{1}{2}$\,m long is cut off.\\[0.4em]
 How much plank is left?}
+  {\barstack{$3\frac14$\,m & \wholes[1.5]{4}{4}{13} \\[0.4em]
+             cut off $1\frac12$\,m & \wholes[1.5]{2}{4}{6}}
+   \par\vspace{0.5em}
+   $\dfrac{13}{4}-\dfrac{6}{4}=\dfrac{7}{4}=1\dfrac34$\,m left}
 
-\qq[\LARGE]{Priya has two ribbons, $2\dfrac{1}{3}$\,m and $1\dfrac{5}{6}$\,m long.\\[0.4em]
+\qq[\LARGE][\Large]{Priya has two ribbons, $2\dfrac{1}{3}$\,m and $1\dfrac{5}{6}$\,m long.\\[0.4em]
 What is their total length?}
+  {Common denominator $6$:\\[0.4em]
+   $\dfrac{14}{6}+\dfrac{11}{6}=\dfrac{25}{6}=4\dfrac16$\,m}
 
-\qq[\LARGE]{Sam runs $2\dfrac{3}{4}$ miles on Monday and $3\dfrac{1}{2}$ miles on Tuesday.\\[0.4em]
+\qq[\LARGE][\Large]{Sam runs $2\dfrac{3}{4}$ miles on Monday and $3\dfrac{1}{2}$ miles on Tuesday.\\[0.4em]
 How much further did he run on Tuesday?}
+  {$3\dfrac12-2\dfrac34=\dfrac{14}{4}-\dfrac{11}{4}=\dfrac34$\\[0.4em]
+   $\dfrac34$ of a mile further}
 
-\qq[\LARGE]{A tin holds $4\dfrac{1}{2}$ litres of paint.\\[0.4em]
+\qq[\LARGE][\large]{A tin holds $4\dfrac{1}{2}$ litres of paint.\\[0.4em]
 Five jugs of $\dfrac{3}{4}$ of a litre are poured out.\\[0.4em]
 How much paint is left?}
+  {\barstack{tin, $4\frac12$\,l & \wholes[1.3]{5}{4}{18} \\[0.4em]
+             poured, $3\frac34$\,l & \wholes[1.3]{4}{4}{15}}
+   \par\vspace{0.5em}
+   $5\times\dfrac34=\dfrac{15}{4}$, \ and \
+   $\dfrac{18}{4}-\dfrac{15}{4}=\dfrac34$ of a litre left}
 
-\qq[\LARGE]{A wall is $7\dfrac{1}{2}$\,m wide.\\[0.4em]
+\qq[\LARGE][\Large]{A wall is $7\dfrac{1}{2}$\,m wide.\\[0.4em]
 Panels are $1\dfrac{1}{4}$\,m wide.\\[0.4em]
 How many panels fit across the wall?}
+  {$7\dfrac12\div 1\dfrac14=\dfrac{15}{2}\div\dfrac54$\\[0.4em]
+   $=\dfrac{15}{2}\times\dfrac45=\dfrac{60}{10}=6$ panels}
 
-\qq[\LARGE]{A bottle holds $1\dfrac{1}{3}$ litres of water.\\[0.4em]
+\qq[\LARGE][\large]{A bottle holds $1\dfrac{1}{3}$ litres of water.\\[0.4em]
 Jo drinks $\dfrac{3}{8}$ of it.\\[0.4em]
 How much water does Jo drink?}
+  {\barmodel{8}{3}{Jo drinks $\frac12$ litre}{$1\frac13$ litres}
+   \par\vspace{0.7em}
+   $\dfrac38\times\dfrac43=\dfrac{12}{24}=\dfrac12$ of a litre}
 
-\qq[\LARGE]{A journey takes $2\dfrac{1}{4}$ hours.\\[0.4em]
+\qq[\LARGE][\large]{A journey takes $2\dfrac{1}{4}$ hours.\\[0.4em]
 Maria has driven $\dfrac{2}{3}$ of the way.\\[0.4em]
 How long is left, in minutes?}
+  {\barmodel{3}{2}{driven $\frac23$, so $\frac13$ is left}{$2\frac14$ hours $=135$ min}
+   \par\vspace{0.7em}
+   \steps{$\frac13$ of $135$ min & $45$ min}}
 
-\qq[\LARGE]{A rope $12\dfrac{1}{2}$\,m long is cut into pieces $1\dfrac{3}{4}$\,m long.\\[0.4em]
+\qq[\LARGE][\Large]{A rope $12\dfrac{1}{2}$\,m long is cut into pieces $1\dfrac{3}{4}$\,m long.\\[0.4em]
 How many whole pieces are there, and how much rope is left over?}
+  {$\dfrac{25}{2}\div\dfrac74=\dfrac{25}{2}\times\dfrac47=\dfrac{50}{7}=7\dfrac17$\\[0.4em]
+   $7$ whole pieces use $7\times 1\dfrac34=12\dfrac14$\,m,\\[0.3em]
+   leaving $12\dfrac12-12\dfrac14=\dfrac14$\,m of rope.}
 
-\qq[\large]{A recipe for $4$ people uses $2\dfrac{1}{2}$ cups of rice and $1\dfrac{3}{4}$ litres of stock.\\[0.5em]
+\qq[\large][\Large]{A recipe for $4$ people uses $2\dfrac{1}{2}$ cups of rice and $1\dfrac{3}{4}$ litres of stock.\\[0.5em]
 How much rice and stock are needed for $10$ people?}
+  {$10$ people is $2\dfrac12$ times as many, so multiply by $\dfrac52$:\\[0.4em]
+   Rice: $\dfrac52\times\dfrac52=\dfrac{25}{4}=6\dfrac14$ cups\\[0.3em]
+   Stock: $\dfrac74\times\dfrac52=\dfrac{35}{8}=4\dfrac38$ litres}
 
 %================================================================
 \qtopic{Recurring decimals to fractions}
 %================================================================
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{3}$ \quad as a fraction}
+  {\work{$x$ & $0.333\ldots$ \\[0.2em]
+         $10x$ & $3.333\ldots$ \\[0.2em]
+         $9x$ & $3$ \\[0.2em]
+         $x$ & $\dfrac39=\dfrac13$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{7}$ \quad as a fraction}
+  {\work{$x$ & $0.777\ldots$ \\[0.2em]
+         $10x$ & $7.777\ldots$ \\[0.2em]
+         $9x$ & $7$ \\[0.2em]
+         $x$ & $\dfrac79$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{4}\dot{5}$ \quad as a fraction}
+  {Two digits repeat, so multiply by $100$:\\[0.4em]
+   \work{$x$ & $0.4545\ldots$ \\[0.2em]
+         $100x$ & $45.4545\ldots$ \\[0.2em]
+         $99x$ & $45$ \\[0.2em]
+         $x$ & $\dfrac{45}{99}=\dfrac{5}{11}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{1}\dot{2}$ \quad as a fraction in its simplest form}
+  {\work{$x$ & $0.1212\ldots$ \\[0.2em]
+         $100x$ & $12.1212\ldots$ \\[0.2em]
+         $99x$ & $12$ \\[0.2em]
+         $x$ & $\dfrac{12}{99}=\dfrac{4}{33}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{2}\dot{7}$ \quad as a fraction in its simplest form}
+  {\work{$x$ & $0.2727\ldots$ \\[0.2em]
+         $100x$ & $27.2727\ldots$ \\[0.2em]
+         $99x$ & $27$ \\[0.2em]
+         $x$ & $\dfrac{27}{99}=\dfrac{3}{11}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.\dot{1}2\dot{3}$ \quad as a fraction in its simplest form}
+  {Three digits repeat, so multiply by $1000$:\\[0.4em]
+   \work{$x$ & $0.123123\ldots$ \\[0.2em]
+         $1000x$ & $123.123123\ldots$ \\[0.2em]
+         $999x$ & $123$ \\[0.2em]
+         $x$ & $\dfrac{123}{999}=\dfrac{41}{333}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.1\dot{6}$ \quad as a fraction in its simplest form}
+  {Only the $6$ repeats, so line up $10x$ and $100x$:\\[0.4em]
+   \work{$10x$ & $1.666\ldots$ \\[0.2em]
+         $100x$ & $16.666\ldots$ \\[0.2em]
+         $90x$ & $15$ \\[0.2em]
+         $x$ & $\dfrac{15}{90}=\dfrac{1}{6}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $0.8\dot{3}$ \quad as a fraction in its simplest form}
+  {\work{$10x$ & $8.333\ldots$ \\[0.2em]
+         $100x$ & $83.333\ldots$ \\[0.2em]
+         $90x$ & $75$ \\[0.2em]
+         $x$ & $\dfrac{75}{90}=\dfrac{5}{6}$}}
 
-\qq[\LARGE]{Use an algebraic method to write\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to write\\[0.5em]
 $1.\dot{2}\dot{7}$ \quad as a mixed number in its simplest form}
+  {Deal with the decimal part, then put the $1$ back:\\[0.4em]
+   \work{$x$ & $0.2727\ldots$ \\[0.2em]
+         $99x$ & $27$ \\[0.2em]
+         $x$ & $\dfrac{27}{99}=\dfrac{3}{11}$}
+   \par\vspace{0.4em}
+   $1.\dot{2}\dot{7}=1\dfrac{3}{11}$}
 
-\qq[\LARGE]{Use an algebraic method to show that\\[0.5em]
+\qq[\LARGE][\Large]{Use an algebraic method to show that\\[0.5em]
 $0.\dot{9}=1$}
+  {\work{$x$ & $0.999\ldots$ \\[0.2em]
+         $10x$ & $9.999\ldots$ \\[0.2em]
+         $9x$ & $9$ \\[0.2em]
+         $x$ & $1$}
+   \par\vspace{0.4em}
+   So $0.\dot{9}$ and $1$ are the same number.}
 
 \end{document}
