@@ -1,0 +1,687 @@
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
+% Tighter list spacing, so eight questions fit on one frame.
+\newcommand{\qtight}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}%
+  \setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}%
+}
+\setlength{\columnsep}{8pt}
+
+\title{Number Sense: Starters}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------------------
+% CONTENTS
+%------------------------------------------------
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+  \item \hyperlink{q-st1}{\beamergotobutton{Starter 1}}
+  \item \hyperlink{q-st2}{\beamergotobutton{Starter 2}}
+  \item \hyperlink{q-st3}{\beamergotobutton{Starter 3}}
+  \item \hyperlink{q-st4}{\beamergotobutton{Starter 4}}
+  \item \hyperlink{q-st5}{\beamergotobutton{Starter 5}}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+  \item \hyperlink{work-st1}{\beamergotobutton{Starter 1}}
+  \item \hyperlink{work-st2}{\beamergotobutton{Starter 2}}
+  \item \hyperlink{work-st3}{\beamergotobutton{Starter 3}}
+  \item \hyperlink{work-st4}{\beamergotobutton{Starter 4}}
+  \item \hyperlink{work-st5}{\beamergotobutton{Starter 5}}
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 1: Number Lines and Place Value
+%------------------------------------------------
+\begin{frame}{Starter 1}
+\hypertarget{q-st1}{}
+
+\vspace{-2.5em}
+
+\begin{columns}[T]
+
+\column{0.30\textwidth}
+\begin{center}
+\vspace{3em}
+\begin{tikzpicture}[scale=0.95]
+
+% --- Line A: 0 to 10, ticks every 1 ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,4.6) {Numberline A};
+\draw[thick] (-0.1,3.8) -- (3.1,3.8);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,3.7) -- (\x,3.9);
+\foreach \x/\lab in {0/0,1.5/5,3/10} \node[font=\tiny] at (\x,3.5) {\lab};
+% Given points: P at 3, Q at 8. Kept low, so they stay clear of the Line A heading.
+\draw[blue, thick] (0.9,3.9) -- (0.9,4.1);
+\node[blue, font=\tiny] at (0.9,4.28) {P};
+\draw[blue, thick] (2.4,3.9) -- (2.4,4.1);
+\node[blue, font=\tiny] at (2.4,4.28) {Q};
+% --- Q3 answer: 6 marked on Line A ---
+\draw[ans] (1.8,3.9) -- (1.8,4.1);
+\node[anslab] at (1.8,4.28) {$6$};
+
+% --- Numberline B: 0 to 1 in tenths ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,3.05) {Numberline B};
+\draw[thick] (-0.1,2.1) -- (3.1,2.1);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,2.0) -- (\x,2.2);
+\foreach \x/\lab in {0/0,1.5/0.5,3/1} \node[font=\tiny] at (\x,1.8) {\lab};
+% Given points: S at 0.3, T at 0.9
+\draw[blue, thick] (0.9,2.2) -- (0.9,2.5);
+\node[blue, font=\tiny] at (0.9,2.7) {S};
+\draw[blue, thick] (2.7,2.2) -- (2.7,2.5);
+\node[blue, font=\tiny] at (2.7,2.7) {T};
+% --- Q3 answer: 0.45 marked on Line B, raised clear of the blue S label ---
+\draw[ans] (1.35,2.2) -- (1.35,2.75);
+\node[anslab] at (1.35,2.95) {$0.45$};
+
+% --- Place value chart for 407.52 ---
+
+\foreach \i/\head/\digit in {0/100/4,1/10/0,2/1/7,3/{$\cdot$}/{$\cdot$},4/0.1/5,5/0.01/2} {
+  \draw ({0.5*\i},0.2) rectangle ({0.5*\i+0.5},0.7);
+  \node[font=\tiny] at ({0.5*\i+0.25},0.95) {\head};
+  \node[font=\small] at ({0.5*\i+0.25},0.45) {\digit};
+}
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.70\textwidth}
+
+\small
+\begin{multicols}{2}
+\begin{enumerate}\qtight
+
+  \item On numberline A what numbers are marked by  $P$ and $Q$? \ashow{$3$ and $8$}
+
+  \item On numberline B what numbers are marked by  $S$ and $T$? \ashow{$0.3$ and $0.9$}
+
+  \item Mark $6$ on Line~A and $0.45$ on Line~B.
+
+  \item Sam says $P=4$, as it is the $4$th mark. What has he done wrong? \ashow{Counted marks, not steps: $P=3$}
+  \columnbreak
+
+  \item The chart shows $407.52$. What is the $4$ worth? And the $5$? \ashow{$400$ and $0.5$}
+
+
+  \item Work out $407.52\times 10$ and $407.52\div 10$. \ashow{$4075.2$ and $40.752$}
+
+  \item A numberline goes $3.6$ to $3.7$ in $10$ equal steps. What is $3$ steps along from $3.6$? \ashow{$3.63$}
+
+  \item Use $7$, $5$, $4$, $2$ and a decimal point to make the largest number less than $100$. \ashow{$75.42$}
+
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} On numberline A, what numbers are marked by $P$ and $Q$?
+\awork{\textbf{Solution:} Line A is divided into ten equal intervals from $0$ to $10$, so each interval is one unit. $P$ is three intervals to the right of $0$, so $P=3$; $Q$ is eight intervals to the right of $0$, so $Q=8$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 2}
+\textbf{Question:} On numberline B, what numbers are marked by $S$ and $T$?
+\awork{\textbf{Solution:} Line B goes from $0$ to $1$ in ten equal intervals, so each interval is $0.1$. $S$ is three intervals from $0$, hence $S=0.3$; $T$ is nine intervals from $0$, hence $T=0.9$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 3}
+\textbf{Question:} Mark $6$ on Line~A and $0.45$ on Line~B.
+\awork{\textbf{Solution:} On Line A the small intervals are units, so place the mark $6$ at the sixth unit to the right of $0$. On Line B the small intervals are tenths, so $0.45$ is halfway between the tick for $0.4$ and the tick for $0.5$; place it exactly halfway between those two ticks.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 4}
+\textbf{Question:} Sam says $P=4$, as it is the $4$th mark. What has he done wrong?
+\awork{\textbf{Solution:} Sam has counted the marks, including the mark at $0$. A number on a number line is found by counting intervals from $0$, not by counting the ordinal number of the tick. The zero tick stands for $0$, so $P$, which is three intervals from $0$, is on the mark for $3$, not $4$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 5}
+\textbf{Question:} In the place-value chart for $407.52$, what is the $4$ worth and what is the $5$ worth?
+\awork{\textbf{Solution:} The digit $4$ is in the hundreds column, so it is worth $4\times100=400$. The digit $5$ is in the tenths column, so it is worth $5\times0.1=0.5$, or five tenths.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 6}
+\textbf{Question:} Work out $407.52\times 10$ and $407.52\div 10$.
+\awork{\textbf{Solution:} Multiplying by $10$ moves each digit one place to the left, so $407.52\times10=4075.2$. Dividing by $10$ moves each digit one place to the right, so $407.52\div10=40.752$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 7}
+\textbf{Question:} A numberline goes $3.6$ to $3.7$ in $10$ equal steps. What is $3$ steps along from $3.6$?
+\awork{\textbf{Solution:} The total distance is $3.7-3.6=0.1$. One step is $0.1\div10=0.01$. Three steps are $3\times0.01=0.03$, so the value is $3.6+0.03=3.63$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 1, Question 8}
+\textbf{Question:} Use $7$, $5$, $4$, $2$ and a decimal point to make the largest number less than $100$.
+\awork{\textbf{Solution:} To make the number as large as possible while still less than $100$, start with $7$ in the tens place and $5$ in the ones place, giving $75.\ldots$. Use the two remaining digits, $4$ and $2$, to make the largest possible fraction, $.42$. Therefore the number is $75.42$.}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 2: Inequality Symbols and Ordering Decimals
+%------------------------------------------------
+\begin{frame}{Starter 2: Inequality Symbols \& Ordering Decimals}
+\hypertarget{q-st2}{}
+
+\vspace{-2.5em}
+
+\begin{columns}[T]
+
+\column{0.28\textwidth}
+\vspace{5em}
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+
+% --- Line A: 0.3 to 0.4 in hundredths ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,3.5) {Line A};
+\draw[thick] (-0.1,2.6) -- (3.1,2.6);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,2.5) -- (\x,2.7);
+\foreach \x/\lab in {0/0.3,1.5/0.35,3/0.4} \node[font=\tiny] at (\x,2.3) {\lab};
+% --- Q5 answer: 0.38 marked ---
+\draw[ans] (2.4,2.7) -- (2.4,3.0);
+\node[anslab] at (2.4,3.2) {$0.38$};
+
+% --- Place value chart: 0.4, 0.35, 0.405 ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,1.75) {Place value chart};
+\foreach \i/\head in {0/1,1/{$\cdot$},2/0.1,3/0.01,4/0.001}
+  \node[font=\tiny] at ({0.6*\i+0.3},1.4) {\head};
+\foreach \j in {0,1,2} {
+  \foreach \i in {0,1,2,3,4}
+    \draw ({0.6*\i},{-0.5*\j+1.15}) rectangle ({0.6*\i+0.6},{-0.5*\j+0.65});
+}
+% row 1: 0.4
+\foreach \i/\d in {0/0,1/{$\cdot$},2/4} \node[font=\small] at ({0.6*\i+0.3},0.9) {\d};
+% row 2: 0.35
+\foreach \i/\d in {0/0,1/{$\cdot$},2/3,3/5} \node[font=\small] at ({0.6*\i+0.3},0.4) {\d};
+% row 3: 0.405
+\foreach \i/\d in {0/0,1/{$\cdot$},2/4,3/0,4/5} \node[font=\small] at ({0.6*\i+0.3},-0.1) {\d};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.72\textwidth}
+
+\small
+\begin{multicols}{2}
+\begin{enumerate}\qtight
+
+  \item Fill in $<$ or $>$: $7 \mathrel{\text{\ashow{$<$}}} 12$\newline $30 \mathrel{\text{\ashow{$>$}}} 3$
+  \vspace{1em}
+
+  \item In $0.405$, what is the $4$ worth? \ashow{$4$ tenths, $0.4$}
+
+  \item On the place value chart, which is bigger, $0.4$ or $0.35$? Why? \ashow{$0.4$: $4$ tenths is greater than $3$ tenths}
+
+  \item Fill in $<$, $>$ or $=$ $0.4 \mathrel{\text{\ashow{$=$}}} 0.40$, $0.6 \mathrel{\text{\ashow{$>$}}} 0.06$
+
+\vspace{0.5em}
+
+  \item Mark $0.38$ on Line A. Is it nearer $0.3$ or $0.4$? \ashow{nearer $0.4$}
+
+  \columnbreak
+
+  \item Order, smallest first: $0.5$, $0.45$, $0.405$, $0.54$ \ashow{$0.405$, $0.45$, $0.5$, $0.54$}
+
+  \vspace{0.2em}
+
+  \item True or false: more digits \emph{after} the decimal point means a bigger number? Give an example/counter-example. \ashow{False: $0.9>0.1234$}
+
+  \vspace{0.2em}
+
+  \item Alfie says $0.45>0.5$ as $45>5$. Explain his mistake, then write a decimal between $0.4$ and $0.405$. \ashow{$0.5$ has $5$ tenths; e.g.\ $0.402$}
+
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} Insert $<$ or $>$ between $7$ and $12$, and between $30$ and $3$.
+\awork{\textbf{Solution:} On a number line, $7$ is to the left of $12$, so $7<12$. Also $30$ is to the right of $3$, so $30>3$. The symbol always points towards the smaller number.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 2}
+\textbf{Question:} In $0.405$, what is the $4$ worth?
+\awork{\textbf{Solution:} The $4$ is the first digit after the decimal point, so it is in the tenths column. Its value is $4$ tenths, which is $0.4$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 3}
+\textbf{Question:} On the place value chart, which is bigger, $0.4$ or $0.35$? Why?
+\awork{\textbf{Solution:} Compare the tenths digits first. $0.4$ has $4$ tenths, while $0.35$ has only $3$ tenths. Since $4$ tenths $>3$ tenths, $0.4>0.35$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 4}
+\textbf{Question:} Fill in $<$, $>$ or $=$: $0.4 \mathrel{?} 0.40$ and $0.6 \mathrel{?} 0.06$.
+\awork{\textbf{Solution:} $0.40$ is just $0.4$ written with an extra zero, so $0.4=0.40$. For the second pair, compare tenths: $0.6$ has $6$ tenths, but $0.06$ has $0$ tenths and $6$ hundredths. Therefore $0.6>0.06$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 5}
+\textbf{Question:} Mark $0.38$ on Line A. Is it nearer $0.3$ or $0.4$?
+\awork{\textbf{Solution:} Line A goes from $0.3$ to $0.4$ in hundredths. $0.38$ is $0.08$ to the right of $0.3$, but only $0.02$ to the left of $0.4$. Since $0.02<0.08$, $0.38$ is nearer $0.4$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 6}
+\textbf{Question:} Order, smallest first: $0.5$, $0.45$, $0.405$, $0.54$.
+\awork{\textbf{Solution:} Write equivalent values with the same number of decimal places: $0.500$, $0.450$, $0.405$, $0.540$. Comparing these gives $0.405$, then $0.450$, then $0.500$, then $0.540$. So the order is $0.405$, $0.45$, $0.5$, $0.54$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 7}
+\textbf{Question:} True or false: more digits \emph{after} the decimal point means a bigger number? Give an example/counter-example.
+\awork{\textbf{Solution:} False. The size of a decimal is decided by its place values, not by how many digits it has. For example, $0.9$ has only one decimal digit but is greater than $0.1234$, which has four decimal digits.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 2, Question 8}
+\textbf{Question:} Alfie says $0.45>0.5$ as $45>5$. Explain his mistake, then write a decimal between $0.4$ and $0.405$.
+\awork{\textbf{Solution:} Alfie is comparing $45$ and $5$ as whole numbers, but the digits have different place values. $0.45$ is $45$ hundredths, while $0.5$ is $50$ hundredths, so $0.5>0.45$. One decimal between $0.4$ and $0.405$ is $0.402$, since $0.400<0.402<0.405$.}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 3: Negative Numbers
+%------------------------------------------------
+\begin{frame}{Starter 3: Ordering Negative Numbers}
+\hypertarget{q-st3}{}
+
+\vspace{-2.5em}
+
+\begin{columns}[T]
+
+\column{0.30\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+
+% --- Thermometer: -10 to 10, one tick every 2 degrees, only -10/0/10 labelled ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,3.45) {Thermometer ($^\circ$C)};
+\draw[thick] (0.6,0) -- (0.6,3);
+\foreach \y in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (0.5,\y) -- (0.7,\y);
+\foreach \y/\lab in {0/{$-10$},1.5/{$0$},3/{$10$}}
+  \node[font=\tiny, anchor=east] at (0.4,\y) {\lab};
+\fill[gray!40] (0.6,-0.3) circle (0.22);
+\draw[gray!60, thick] (0.6,-0.3) circle (0.22);
+% Given readings: A at -6, B at 4 (both sit exactly on a tick)
+\draw[blue, thick] (0.7,0.6) -- (1.0,0.6);
+\node[blue, font=\tiny, anchor=west] at (1.05,0.6) {A};
+\draw[blue, thick] (0.7,2.1) -- (1.0,2.1);
+\node[blue, font=\tiny, anchor=west] at (1.05,2.1) {B};
+
+% --- Line C: -1 to 0 in tenths ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,-0.85) {Line C};
+\draw[thick] (-0.1,-1.8) -- (3.1,-1.8);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,-1.9) -- (\x,-1.7);
+\foreach \x/\lab in {0/{$-1$},1.5/{$-0.5$},3/{$0$}} \node[font=\tiny] at (\x,-2.1) {\lab};
+% Reminder for the challenge question, which is the deck's only use of a weak inequality
+\node[font=\tiny, anchor=west] at (-0.1,-2.7) {$\leq$: less than or equal to};
+% --- Q5 answers: -0.5 and -0.05 marked on Line C, at different heights ---
+\draw[ans] (1.5,-1.7) -- (1.5,-1.4);
+\node[anslab] at (1.5,-1.2) {$-0.5$};
+\draw[ans] (2.85,-1.7) -- (2.85,-1.05);
+\node[anslab] at (2.85,-0.85) {$-0.05$};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.70\textwidth}
+
+\small
+\begin{multicols}{2}
+\begin{enumerate}\qtight
+
+  \item Which is colder, $4\,^\circ$C or $-4\,^\circ$C? \ashow{$-4\,^\circ$C}
+
+  \item What is each mark on the thermometer worth? Write the temperatures at A and B. \ashow{$2\,^\circ$C per mark; A $=-6$, B $=4$}
+
+  \item Which is colder, $-3$ or $-8$? Fill in: $-3 \mathrel{\text{\ashowq{$>$}}} -8$ \ashow{($-8$ is colder)}
+
+  \item Order, smallest first: $-2$, $5$, $-7$, $0$, $-1$ \ashow{($-7,-2,-1,0,5$)}
+
+  \columnbreak
+
+  \item Mark $-0.5$ and $-0.05$ on Line C. Which is larger? \ashow{$-0.05$}
+
+  \item Fill in $<$ or $>$: $-4.5 \mathrel{\text{\ashowq{$<$}}} -4.05$, $-0.3 \mathrel{\text{\ashowq{$<$}}} 0.03$
+
+  \item (Extension) Order, smallest first: $-0.08$, $0.7$, $-0.8$, $-0.75$ \ashow{($-0.8$, $-0.75$, $-0.08$, $0.7$)}
+
+  \item (Challenge) List the integers $n$: $-3\leq n<2$. Write a number between $-0.5$ and $-0.4$. \ashow{$-3,-2,-1,0,1$; e.g.\ $-0.45$}
+
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} Which is colder, $4\,^\circ$C or $-4\,^\circ$C?
+\awork{\textbf{Solution:} Colder means the lower temperature. Since $-4$ is below zero and $4$ is above zero, $-4\,^\circ$C is the colder temperature.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 2}
+\textbf{Question:} What is each mark on the thermometer worth? Write the temperatures at A and B.
+\awork{\textbf{Solution:} The marked scale runs from $-10$ to $10$, a range of $20^\circ$C, in ten equal gaps. Each small gap is therefore $2^\circ$C. A is two gaps above $-10$, so $A=-10+4=-6$. B is seven gaps above $-10$, so $B=-10+14=4$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 3}
+\textbf{Question:} Which is colder, $-3$ or $-8$? Fill in: $-3 \mathrel{?} -8$.
+\awork{\textbf{Solution:} On a number line, $-8$ is further to the left than $-3$, so $-8$ is smaller and colder. Hence $-3>-8$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 4}
+\textbf{Question:} Order, smallest first: $-2$, $5$, $-7$, $0$, $-1$.
+\awork{\textbf{Solution:} All the negative numbers are less than $0$, and $5$ is positive. Among $-7$, $-2$ and $-1$, the order on a number line is $-7$, then $-2$, then $-1$. So the full order is $-7$, $-2$, $-1$, $0$, $5$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 5}
+\textbf{Question:} Mark $-0.5$ and $-0.05$ on Line C. Which is larger?
+\awork{\textbf{Solution:} On the number line from $-1$ to $0$, $-0.5$ is halfway and $-0.05$ is close to $0$. The number further to the right is larger, so $-0.05>-0.5$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 6}
+\textbf{Question:} Fill in $<$ or $>$: $-4.5 \mathrel{?} -4.05$ and $-0.3 \mathrel{?} 0.03$.
+\awork{\textbf{Solution:} $-4.5$ is to the left of $-4.05$, so $-4.5<-4.05$. Every negative number is less than every positive number, so $-0.3<0.03$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 7}
+\textbf{Question:} Order, smallest first: $-0.08$, $0.7$, $-0.8$, $-0.75$.
+\awork{\textbf{Solution:} Both negative numbers are less than $0.7$. Compare $-0.8$ and $-0.75$: $-0.8$ is further left, so $-0.8<-0.75$. Then $-0.08$ is the closest to zero, so the order is $-0.8$, $-0.75$, $-0.08$, $0.7$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 3, Question 8}
+\textbf{Question:} List the integers $n$: $-3\leq n<2$. Write a number between $-0.5$ and $-0.4$.
+\awork{\textbf{Solution:} The integers satisfying $-3\leq n<2$ are $-3,-2,-1,0,1$. A number between $-0.5$ and $-0.4$ is $-0.45$, since $-0.5<-0.45<-0.4$.}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 4: Rounding Integers
+%------------------------------------------------
+\begin{frame}{Starter 4: Rounding Integers}
+\hypertarget{q-st4}{}
+
+\vspace{-2.5em}
+
+\begin{columns}[T]
+
+\column{0.30\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+
+% --- Line A: 40 to 50, ticks every 1 ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,3.5) {Line A};
+\draw[thick] (-0.1,2.6) -- (3.1,2.6);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,2.5) -- (\x,2.7);
+\foreach \x/\lab in {0/40,1.5/45,3/50} \node[font=\tiny] at (\x,2.3) {\lab};
+% Given point: 47
+\draw[blue, thick] (2.1,2.7) -- (2.1,3.0);
+\node[blue, font=\tiny] at (2.1,3.2) {$47$};
+
+% --- Line B: 3400 to 3500, ticks every 10 ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,1.4) {Line B};
+\draw[thick] (-0.1,0.5) -- (3.1,0.5);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,0.4) -- (\x,0.6);
+\foreach \x/\lab in {0/3400,1.5/3450,3/3500} \node[font=\tiny] at (\x,0.2) {\lab};
+% --- Q4 answers: 3472 marked, with an arrow to the nearer end ---
+\draw[ans] (2.16,0.6) -- (2.16,0.9);
+\node[anslab] at (2.16,1.1) {$3472$};
+\draw[ans, ->] (2.16,0.75) -- (2.98,0.75);
+\node[anslab] at (1.5,-0.25) {$3472 \to 3500$};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.70\textwidth}
+
+\small
+\begin{multicols}{2}
+\begin{enumerate}\qtight
+
+  \item Fill in $<$ or $>$: $-6 \mathrel{\text{\ashowq{$<$}}} -2$
+
+  \item Line A: is $47$ nearer $40$ or $50$? Round it to the nearest $10$. \ashow{nearer $50$, so $50$}
+
+  \item Round to the nearest $10$: $32$, $85$ \ashow{($30$ and $90$)}
+
+  \item Mark $3472$ on Line B, then round it to the nearest $100$.
+
+  \item Round $3472$ to the nearest $10$; to the nearest $1000$. \ashow{$3470$ and $3000$}
+
+  \columnbreak
+
+  \item Round $4950$ to the nearest $100$. \ashow{$5000$}
+
+  \item (Extension) Zoe rounds $8449$ to the nearest $100$: $8449\to 8450\to 8500$. What is her mistake? \ashow{Rounded twice: only the tens digit $4$ counts, so $8400$}
+
+  \item (Challenge) A number rounds to $250$ to the nearest $10$. Smallest it could be? Largest? \ashow{$245$ and $254$}
+
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} Fill in $<$ or $>$: $-6 \mathrel{?} -2$.
+\awork{\textbf{Solution:} On a number line, $-6$ is to the left of $-2$, so $-6$ is smaller. Hence $-6<-2$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 2}
+\textbf{Question:} On Line A, is $47$ nearer $40$ or $50$? Round it to the nearest $10$.
+\awork{\textbf{Solution:} On a number line from $40$ to $50$, $47$ is $7$ above $40$ and only $3$ below $50$. It is therefore nearer to $50$, so $47$ rounds to $50$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 3}
+\textbf{Question:} Round to the nearest $10$: $32$, $85$.
+\awork{\textbf{Solution:} $32$ is between $30$ and $40$ and is closer to $30$, so it rounds to $30$. $85$ is exactly halfway between $80$ and $90$; using the standard convention that halves round up, $85$ rounds to $90$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 4}
+\textbf{Question:} Mark $3472$ on Line B, then round it to the nearest $100$.
+\awork{\textbf{Solution:} On Line B, $3472$ lies between $3400$ and $3500$. It is $72$ above $3400$ and $28$ below $3500$, so it is closer to $3500$. Therefore $3472$ rounds to $3500$ to the nearest $100$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 5}
+\textbf{Question:} Round $3472$ to the nearest $10$; to the nearest $1000$.
+\awork{\textbf{Solution:} To the nearest $10$, look at the ones digit $2<5$, so $3472$ rounds down to $3470$. To the nearest $1000$, look at the hundreds digit $4<5$, so $3472$ rounds down to $3000$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 6}
+\textbf{Question:} Round $4950$ to the nearest $100$.
+\awork{\textbf{Solution:} $4950$ is exactly halfway between $4900$ and $5000$. By the usual round-half-up convention, the tens digit is $5$, so round up: $4950\to5000$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 7}
+\textbf{Question:} Zoe rounds $8449$ to the nearest $100$: $8449\to8450\to8500$. What is her mistake?
+\awork{\textbf{Solution:} Zoe has rounded twice. To round $8449$ to the nearest $100$, look only at the tens digit, $4$. Since $4<5$, the hundreds digit stays $4$ and the tens and ones become zero: $8449\to8400$. Rounding first to the nearest $10$ and then to the nearest $100$ gives the wrong result.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 4, Question 8}
+\textbf{Question:} A number rounds to $250$ to the nearest $10$. Smallest it could be? Largest?
+\awork{\textbf{Solution:} For whole numbers, the values that round to $250$ are $245,246,\dots,254$. The smallest is $245$, because $245$ rounds up to $250$ by the usual convention. The largest is $254$, because $255$ would round up to $260$.}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 5: Rounding Decimals, Recurring and Irrational
+%------------------------------------------------
+\begin{frame}{Starter 5: Rounding Decimals \& Never-Ending Decimals}
+\hypertarget{q-st5}{}
+
+\vspace{-2.5em}
+
+\begin{columns}[T]
+
+\column{0.30\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.85]
+
+% --- Line A: 2.7 to 2.8 in hundredths ---
+% Heading sits at 3.3 rather than 3.5: this frame's title is two lines' worth of
+% width and the diagram column otherwise crowds it.
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,3.3) {Line A};
+\draw[thick] (-0.1,2.6) -- (3.1,2.6);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,2.5) -- (\x,2.7);
+\foreach \x/\lab in {0/2.7,1.5/2.75,3/2.8} \node[font=\tiny] at (\x,2.3) {\lab};
+% (the Line A heading sits low here, to keep clear of the frame title)
+% --- Q3 answers: 2.763 marked, with an arrow to the nearer end ---
+\draw[ans] (1.89,2.7) -- (1.89,3.0);
+\node[anslab] at (1.89,3.2) {$2.763$};
+\draw[ans, ->] (1.89,2.85) -- (2.98,2.85);
+\node[anslab] at (1.5,2.0) {$2.763 \to 2.8$};
+
+% --- Line B: 0.6 to 0.7 in hundredths, with 2/3 shown ---
+\node[font=\tiny\bfseries, anchor=west] at (-0.1,1.4) {Line B};
+\draw[thick] (-0.1,0.5) -- (3.1,0.5);
+\foreach \x in {0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4,2.7,3}
+  \draw (\x,0.4) -- (\x,0.6);
+\foreach \x/\lab in {0/0.6,1.5/0.65,3/0.7} \node[font=\tiny] at (\x,0.2) {\lab};
+% Given point: 2/3 = 0.6666...
+\draw[blue, thick] (2.0,0.6) -- (2.0,0.9);
+\node[blue, font=\scriptsize] at (2.0,1.15) {$\tfrac{2}{3}$};
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+{\scriptsize
+\begin{tabular}{@{}l@{}}
+\textbf{Never-ending decimals} \\[0.15em]
+$\frac{2}{3} = 0.6666\ldots = 0.\dot{6}$ \\
+$\frac{1}{7} = 0.142857142857\ldots$ \\
+$\pi = 3.14159265\ldots$ \\
+$\sqrt{2} = 1.41421356\ldots$ \\
+$0.1010010001\ldots$
+\end{tabular}}
+\end{center}
+
+\column{0.70\textwidth}
+
+\small
+\begin{multicols}{2}
+\begin{enumerate}\qtight
+
+  \item Round $4738$ to the nearest $100$. \ashow{$4700$}
+
+  \item Round to the nearest whole number: $4.6$, $12.348$ \ashow{($5$ and $12$)}
+
+  \item Mark $2.763$ on Line A. Round it to $1$ decimal place (d.p.).
+
+  \item Round to $1$ d.p.: $4.62$, $0.95$. Why is $0.95$ not $1$? \ashow{$4.6$, $1.0$ --- $1$ d.p.\ needs one decimal digit}
+
+  \item Round $12.348$ to $2$ d.p., then to $1$ d.p. Why not $12.4$? \ashow{$12.35$, $12.3$ --- never round twice}
+
+  \columnbreak
+
+  \item Line B shows $\frac{2}{3}=0.\dot{6}$. Round it to $1$ d.p.\ and $2$ d.p. \ashow{$0.7$ and $0.67$}
+
+  \item (Extension) Write $\frac{1}{3}$ in dot notation, then round $\frac{1}{7}$ to $3$ d.p. \ashow{$0.\dot{3}$ and $0.143$}
+
+  \item (Challenge) Which listed decimals never settle into a repeating block? Can one still be a fraction? \ashow{$\pi$, $\sqrt{2}$, $0.101001\ldots$; yes: $0.\dot{3}=\frac13$}
+
+\end{enumerate}
+\end{multicols}
+
+\end{columns}
+
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} Round $4738$ to the nearest $100$.
+\awork{\textbf{Solution:} $4738$ is between $4700$ and $4800$. It is $38$ above $4700$ and $62$ below $4800$, so it is closer to $4700$. Therefore $4738\to4700$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 2}
+\textbf{Question:} Round to the nearest whole number: $4.6$, $12.348$.
+\awork{\textbf{Solution:} $4.6$ is $0.4$ from $5$ but $0.6$ from $4$, so it rounds to $5$. $12.348$ is $0.348$ from $12$ and $0.652$ from $13$, so it rounds to $12$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 3}
+\textbf{Question:} Mark $2.763$ on Line A. Round it to $1$ decimal place.
+\awork{\textbf{Solution:} On Line A, $2.763$ lies between $2.7$ and $2.8$, only $0.037$ from $2.8$. To round to $1$ d.p., look at the hundredths digit: $6\ge5$, so the tenths digit rounds up: $2.763\to2.8$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 4}
+\textbf{Question:} Round to $1$ d.p.: $4.62$, $0.95$. Why is $0.95$ not $1$?
+\awork{\textbf{Solution:} $4.62$ rounds to $4.6$ because the hundredths digit $2<5$. $0.95$ rounds to $1.0$ because the hundredths digit $5$ rounds the tenths digit up from $9$ to $10$ tenths. It is written as $1.0$, not $1$, because the answer must show one decimal place.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 5}
+\textbf{Question:} Round $12.348$ to $2$ d.p., then to $1$ d.p. Why not $12.4$?
+\awork{\textbf{Solution:} To $2$ d.p., look at the third decimal digit $8\ge5$, so $12.348\to12.35$. To $1$ d.p., look at the second decimal digit of the original number, $4<5$, so $12.348\to12.3$. It is not $12.4$, because you should not round the already-rounded $12.35$ to $1$ d.p.; that would be rounding twice.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 6}
+\textbf{Question:} Line B shows $\frac{2}{3}=0.\dot{6}$. Round it to $1$ d.p.\ and $2$ d.p.
+\awork{\textbf{Solution:} $\frac23=0.6666\ldots$. To $1$ d.p., the second decimal digit is $6\ge5$, so $0.666\ldots\to0.7$. To $2$ d.p., the third decimal digit is $6\ge5$, so $0.666\ldots\to0.67$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 7}
+\textbf{Question:} Write $\frac{1}{3}$ in dot notation, then round $\frac{1}{7}$ to $3$ d.p.
+\awork{\textbf{Solution:} $\frac13=0.333\ldots$, so in dot notation it is $0.\dot{3}$. Also $\frac17=0.1428571\ldots$; to $3$ d.p., look at the fourth decimal digit $8\ge5$, so the third decimal digit $2$ rounds up: $\frac17\approx0.143$.}
+\end{frame}
+
+\begin{frame}{Worked Solution: Starter 5, Question 8}
+\textbf{Question:} Which listed decimals never settle into a repeating block? Can one still be a fraction?
+\awork{\textbf{Solution:} The decimals that never settle into a repeating block are $\pi$, $\sqrt{2}$, and $0.1010010001\ldots$. An infinite decimal can still be a fraction exactly when its digits eventually repeat; for example $0.\dot3=\frac13$. The non-repeating ones listed here cannot be written as fractions.}
+\end{frame}
+
+\end{document}
