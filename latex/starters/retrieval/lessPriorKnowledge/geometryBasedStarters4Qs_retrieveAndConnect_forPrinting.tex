@@ -1,0 +1,400 @@
+% ================================================================
+% The printable version of latex/starters/retrieval/lessPriorKnowledge/geometryBasedStarters4Qs_retrieveAndConnect.tex
+%
+% This is the same deck, laid out to be handed out rather than put on
+% the board. Every slide is shown as it stands before any answer is
+% revealed, and 4 copies of it go on one page of A4, two by two, so
+% that a printed page cuts into four question sheets.
+%
+%   made from           latex/starters/retrieval/lessPriorKnowledge/geometryBasedStarters4Qs_retrieveAndConnect.tex
+%   slides on the sheet 1
+%   copies of each      4, two by two on A4 landscape
+%   printing rules      version 1
+%
+% Nothing was reworded and nothing was rewritten. Each slide is the slide
+% from the deck, asked for at its first step, which is how the answers
+% stay hidden.
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/lessPriorKnowledge/geometryBasedStarters4Qs.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/lessPriorKnowledge/geometryBasedStarters4Qs.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{angles,quotes,calc}
+\usepackage{xcolor}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+\title{Retrieve and Connect}
+\author{}
+\date{}
+
+\setbeamertemplate{navigation symbols}{}
+
+% ---------------------------------------------------------------
+% Added so this deck prints four slides to a page. Nothing above
+% this line was changed.
+% ---------------------------------------------------------------
+\usepackage{pgfpages}
+
+% 4 slides to a sheet of A4, two by two, with a thin line round each
+% so that the page can be cut up. The margin is wide enough that the lines
+% fall inside what a printer can actually put ink on.
+\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=10mm]
+\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
+% There is nothing on paper to click, and a slide announcing a new section
+% would sit between two copies of the same question and put every page after
+% it out of step with the grid.
+\setbeamertemplate{navigation symbols}{}
+\AtBeginPart{}
+\AtBeginSection{}
+\AtBeginSubsection{}
+\AtBeginSubsubsection{}
+\begin{document}
+
+\begin{frame}<1>
+  \frametitle{Retrieve and Connect}
+
+  \begin{columns}[t,onlytextwidth]
+    % ===== LEFT COLUMN =====
+    \begin{column}{0.52\textwidth}
+      \textbf{1.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Points
+        \coordinate (A) at (0,0);
+        \coordinate (L) at (-3,0);
+        \coordinate (R) at (3,0);
+        % A ray making 52 degrees with the rightward horizontal
+        \path (A) -- ++(52:2.6) coordinate (C);
+
+        % Line and ray
+        \draw (L) -- (R);
+        \draw (A) -- (C);
+
+        % Angle marks
+        % Obtuse angle on the left (128°)
+        \pic[draw,angle radius=9mm,"$128^\circ$" {scale=1}] {angle = C--A--L};
+
+        % Acute angle on the right (x°)
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = R--A--C};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 52^\circ$}
+
+      % ---- Flexible space to push #3 down to align with #4 ----
+      \vfill
+      \vspace{4em}
+
+      \textbf{3.} \quad $372 + 458 = \ablank{830}$
+    \end{column}
+
+    % ===== RIGHT COLUMN =====
+    \begin{column}{0.48\textwidth}
+      \textbf{2.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Intersection point
+        \coordinate (O) at (0,0);
+
+        % Two intersecting lines
+        \coordinate (A1) at (-2.8,-1.6);
+        \coordinate (B1) at (2.8,1.6);
+        \coordinate (C1) at (-2.6,1.6);
+        \coordinate (D1) at (2.6,-1.6);
+        \draw (A1) -- (B1);
+        \draw (C1) -- (D1);
+
+        % Mark the top angle as 62°
+        \pic[draw,angle radius=9mm,"$62^\circ$" {scale=1}] {angle = B1--O--C1};
+
+        % Mark the vertically opposite (bottom) angle as x°
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = A1--O--D1};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 62^\circ$}
+
+      % ---- Flexible space to push #4 down to align with #3 ----
+      \vfill
+        \vspace{1em}
+      \textbf{4.} \quad $(84 \div 6) \times 3 = \ablank{42}$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+\begin{frame}<1>
+  \frametitle{Retrieve and Connect}
+
+  \begin{columns}[t,onlytextwidth]
+    % ===== LEFT COLUMN =====
+    \begin{column}{0.52\textwidth}
+      \textbf{1.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Points
+        \coordinate (A) at (0,0);
+        \coordinate (L) at (-3,0);
+        \coordinate (R) at (3,0);
+        % A ray making 52 degrees with the rightward horizontal
+        \path (A) -- ++(52:2.6) coordinate (C);
+
+        % Line and ray
+        \draw (L) -- (R);
+        \draw (A) -- (C);
+
+        % Angle marks
+        % Obtuse angle on the left (128°)
+        \pic[draw,angle radius=9mm,"$128^\circ$" {scale=1}] {angle = C--A--L};
+
+        % Acute angle on the right (x°)
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = R--A--C};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 52^\circ$}
+
+      % ---- Flexible space to push #3 down to align with #4 ----
+      \vfill
+      \vspace{4em}
+
+      \textbf{3.} \quad $372 + 458 = \ablank{830}$
+    \end{column}
+
+    % ===== RIGHT COLUMN =====
+    \begin{column}{0.48\textwidth}
+      \textbf{2.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Intersection point
+        \coordinate (O) at (0,0);
+
+        % Two intersecting lines
+        \coordinate (A1) at (-2.8,-1.6);
+        \coordinate (B1) at (2.8,1.6);
+        \coordinate (C1) at (-2.6,1.6);
+        \coordinate (D1) at (2.6,-1.6);
+        \draw (A1) -- (B1);
+        \draw (C1) -- (D1);
+
+        % Mark the top angle as 62°
+        \pic[draw,angle radius=9mm,"$62^\circ$" {scale=1}] {angle = B1--O--C1};
+
+        % Mark the vertically opposite (bottom) angle as x°
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = A1--O--D1};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 62^\circ$}
+
+      % ---- Flexible space to push #4 down to align with #3 ----
+      \vfill
+        \vspace{1em}
+      \textbf{4.} \quad $(84 \div 6) \times 3 = \ablank{42}$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+\begin{frame}<1>
+  \frametitle{Retrieve and Connect}
+
+  \begin{columns}[t,onlytextwidth]
+    % ===== LEFT COLUMN =====
+    \begin{column}{0.52\textwidth}
+      \textbf{1.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Points
+        \coordinate (A) at (0,0);
+        \coordinate (L) at (-3,0);
+        \coordinate (R) at (3,0);
+        % A ray making 52 degrees with the rightward horizontal
+        \path (A) -- ++(52:2.6) coordinate (C);
+
+        % Line and ray
+        \draw (L) -- (R);
+        \draw (A) -- (C);
+
+        % Angle marks
+        % Obtuse angle on the left (128°)
+        \pic[draw,angle radius=9mm,"$128^\circ$" {scale=1}] {angle = C--A--L};
+
+        % Acute angle on the right (x°)
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = R--A--C};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 52^\circ$}
+
+      % ---- Flexible space to push #3 down to align with #4 ----
+      \vfill
+      \vspace{4em}
+
+      \textbf{3.} \quad $372 + 458 = \ablank{830}$
+    \end{column}
+
+    % ===== RIGHT COLUMN =====
+    \begin{column}{0.48\textwidth}
+      \textbf{2.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Intersection point
+        \coordinate (O) at (0,0);
+
+        % Two intersecting lines
+        \coordinate (A1) at (-2.8,-1.6);
+        \coordinate (B1) at (2.8,1.6);
+        \coordinate (C1) at (-2.6,1.6);
+        \coordinate (D1) at (2.6,-1.6);
+        \draw (A1) -- (B1);
+        \draw (C1) -- (D1);
+
+        % Mark the top angle as 62°
+        \pic[draw,angle radius=9mm,"$62^\circ$" {scale=1}] {angle = B1--O--C1};
+
+        % Mark the vertically opposite (bottom) angle as x°
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = A1--O--D1};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 62^\circ$}
+
+      % ---- Flexible space to push #4 down to align with #3 ----
+      \vfill
+        \vspace{1em}
+      \textbf{4.} \quad $(84 \div 6) \times 3 = \ablank{42}$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+\begin{frame}<1>
+  \frametitle{Retrieve and Connect}
+
+  \begin{columns}[t,onlytextwidth]
+    % ===== LEFT COLUMN =====
+    \begin{column}{0.52\textwidth}
+      \textbf{1.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Points
+        \coordinate (A) at (0,0);
+        \coordinate (L) at (-3,0);
+        \coordinate (R) at (3,0);
+        % A ray making 52 degrees with the rightward horizontal
+        \path (A) -- ++(52:2.6) coordinate (C);
+
+        % Line and ray
+        \draw (L) -- (R);
+        \draw (A) -- (C);
+
+        % Angle marks
+        % Obtuse angle on the left (128°)
+        \pic[draw,angle radius=9mm,"$128^\circ$" {scale=1}] {angle = C--A--L};
+
+        % Acute angle on the right (x°)
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = R--A--C};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 52^\circ$}
+
+      % ---- Flexible space to push #3 down to align with #4 ----
+      \vfill
+      \vspace{4em}
+
+      \textbf{3.} \quad $372 + 458 = \ablank{830}$
+    \end{column}
+
+    % ===== RIGHT COLUMN =====
+    \begin{column}{0.48\textwidth}
+      \textbf{2.}
+
+      \begin{tikzpicture}[scale=1.0, thick]
+        % Intersection point
+        \coordinate (O) at (0,0);
+
+        % Two intersecting lines
+        \coordinate (A1) at (-2.8,-1.6);
+        \coordinate (B1) at (2.8,1.6);
+        \coordinate (C1) at (-2.6,1.6);
+        \coordinate (D1) at (2.6,-1.6);
+        \draw (A1) -- (B1);
+        \draw (C1) -- (D1);
+
+        % Mark the top angle as 62°
+        \pic[draw,angle radius=9mm,"$62^\circ$" {scale=1}] {angle = B1--O--C1};
+
+        % Mark the vertically opposite (bottom) angle as x°
+        \pic[draw,angle radius=9mm,"$x^\circ$" {scale=1}] {angle = A1--O--D1};
+      \end{tikzpicture}
+
+      \vspace{0.7em}
+      Find the value of $x$.
+      \ashow{\quad $x = 62^\circ$}
+
+      % ---- Flexible space to push #4 down to align with #3 ----
+      \vfill
+        \vspace{1em}
+      \textbf{4.} \quad $(84 \div 6) \times 3 = \ablank{42}$
+    \end{column}
+  \end{columns}
+
+\end{frame}
+
+% --- Optional: Answers slide ---
+% \begin{frame}
+%   \frametitle{Answers}
+%   \begin{enumerate}
+%     \item $x = 52^\circ$ \hfill (angles on a straight line sum to $180^\circ$)
+%     \item $x = 62^\circ$ \hfill (vertically opposite angles are equal)
+%     \item $372 + 458 = 830$
+%     \item $84 \div 6 \times 3 = 14 \times 3 = 42$
+%   \end{enumerate}
+% \end{frame}
+
+\end{document}
