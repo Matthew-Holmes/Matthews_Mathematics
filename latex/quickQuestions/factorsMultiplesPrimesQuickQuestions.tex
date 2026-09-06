@@ -2,6 +2,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 
 % ================================================================
 % Quick Questions deck: factors, multiples and primes.
@@ -10,15 +12,32 @@
 % quick questions that get gradually harder. Every question gets two
 % slides: the question on its own for the mini whiteboards, then the
 % same question again with the solution underneath in red.
+%
+% Two topics are built differently. "Is it prime?" runs every whole
+% number from 1 to 100 on its own slide, then lists that number's
+% factors and says why it is or is not prime. "HCF and LCM from lists"
+% builds each answer over five slides, adding the factor lists, the
+% multiples and then the rings round the HCF and the LCM one slide at
+% a time.
 % ================================================================
 
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}{}
+
+% A link in the bottom left of every slide back to the contents, so a
+% deck this long can be jumped around in during a lesson.
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{%
+    \hspace{1em}%
+    \hyperlink{contents}{%
+      \color{gray}\scriptsize$\leftarrow$~Back to contents}%
+    \hfil}%
+  \vskip4pt%
+}
 
 % Topic divider.
 \newcommand{\qtopic}[1]{%
   \section{#1}%
-  \begin{frame}[plain]
+  \begin{frame}
     \vfill
     \begin{center}
       {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
@@ -86,13 +105,106 @@
   \end{frame}%
 }
 
-% Contents-slide bullets, colour-coded by difficulty band:
-% green for the first three topics, orange for the last four.
+% \prq{<number>}{<factors>}{<why it is or is not prime>}
+% The "Is it prime?" drill: the number alone in a large centred font,
+% then the same number with all of its factors and the reason in red.
+% The number is scaled rather than set with \fontsize, because the
+% sans font stops at 51.59pt and larger sizes are silently substituted.
+\NewDocumentCommand{\prq}{m m +m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \scalebox{3.6}{\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \scalebox{1.9}{\Huge\bfseries #1}
+      \par\vspace{0.8em}
+      \begin{minipage}{0.9\textwidth}
+        \centering\color{red}
+        {\large Factors of $#1$: #2}
+        \par\vspace{0.7em}
+        {\large #3}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% Rings drawn round a number in a list. The ring is set in a box the
+% width of the number itself, so the list is spaced as though it were
+% ordinary text and nothing moves on the slide where the ring appears;
+% the ring itself spills over the gaps either side, as a ring drawn by
+% hand would.
+\tikzset{
+  ringed/.style={ellipse, inner sep=1pt, draw=red, line width=0.9pt},
+  unringed/.style={ellipse, inner sep=1pt, draw=none},
+}
+\newlength{\ringwd}
+\newcommand{\ringnode}[2]{%
+  \settowidth{\ringwd}{$#2$}%
+  \addtolength{\ringwd}{3pt}% a little clearance for the ring to sit in
+  \makebox[\ringwd][c]{%
+    \tikz[baseline=(n.base)]{\node[#1] (n) {$#2$};}%
+  }%
+}
+\newcommand{\hcfmark}[1]{\alt<4->{\ringnode{ringed}{#1}}{\ringnode{unringed}{#1}}}
+\newcommand{\lcmmark}[1]{\alt<5->{\ringnode{ringed}{#1}}{\ringnode{unringed}{#1}}}
+
+% \hcflcm{<a>}{<b>}{<factors of a>}{<factors of b>}
+%        {<multiples of a>}{<multiples of b>}
+% Five slides: the question, the two factor lists, the two lists of
+% multiples, the ring round the HCF, then the ring round the LCM.
+% Everything added after the question slide is in red.
+% The frame is top aligned so that the question stays put as the lists
+% are added underneath it.
+\NewDocumentCommand{\hcflcm}{m m +m +m +m +m}{%
+  \begin{frame}<1-5>[t]
+    \vspace{0.8em}
+    \begin{center}
+      {\LARGE Find the HCF and LCM of $#1$ and $#2$.}
+    \end{center}
+    \vspace{1.6em}
+    \begin{columns}[T]
+      \begin{column}{0.40\textwidth}
+        \only<2->{\color{red}\large
+          Factors of $#1$:\\[0.35em]
+          #3
+          \par\vspace{1em}
+          Factors of $#2$:\\[0.35em]
+          #4}
+      \end{column}
+      \begin{column}{0.58\textwidth}
+        \only<3->{\color{red}\large
+          Multiples of $#1$:\\[0.35em]
+          #5
+          \par\vspace{1em}
+          Multiples of $#2$:\\[0.35em]
+          #6}
+      \end{column}
+    \end{columns}
+    \vfill
+  \end{frame}%
+}
+
+% Contents-slide bullets. Green then orange sets the difficulty band;
+% blue marks the two topics that work through a method a slide at a
+% time rather than asking for a quick answer.
+\newcommand{\tocbullet}[1]{\textcolor{#1}{$\bullet$}}
 \setbeamertemplate{section in toc}{%
-  \ifnum\inserttocsectionnumber<4
-    \textcolor{green!55!black}{$\bullet$}%
-  \else
-    \textcolor{orange}{$\bullet$}%
+  \ifcase\inserttocsectionnumber
+    \or\tocbullet{green!55!black}% 1 Factors
+    \or\tocbullet{green!55!black}% 2 Multiples
+    \or\tocbullet{green!55!black}% 3 Primes
+    \or\tocbullet{blue}%          4 Is it prime?
+    \or\tocbullet{orange}%        5 Prime factor decomposition
+    \or\tocbullet{blue}%          6 HCF and LCM from lists
+    \or\tocbullet{orange}%        7 HCF and LCM by prime factor decomposition
+    \or\tocbullet{orange}%        8 Square numbers from prime factors
+    \or\tocbullet{orange}%        9 Problem solving with HCF and LCM
   \fi
   ~\inserttocsection%
 }
@@ -106,7 +218,7 @@
 
 \frame{\titlepage}
 
-\begin{frame}{Contents}
+\begin{frame}[label=contents]{Contents}
   \small
   \tableofcontents
 \end{frame}
@@ -293,6 +405,313 @@ which numbers do you need to divide by?\\[0.4em]Is it prime?}
    so the number always has more than two factors.}
 
 %================================================================
+\qtopic{Is it prime?}
+%================================================================
+
+% Every whole number from 1 to 100, one to a slide, followed by all
+% of its factors and the reason it is or is not a prime number.
+
+\prq{1}{$1$}
+  {$1$ has only one factor. A prime number has exactly two different factors, $1$ and itself, and for $1$ those would be the same factor, so $1$ is not a prime number.}
+
+\prq{2}{$1$, $2$}
+  {$2$ has exactly two factors, $1$ and itself, so $2$ is a prime number. It is the only even prime number, because every other even number has $2$ as a third factor.}
+
+\prq{3}{$1$, $3$}
+  {$3$ has exactly two factors, $1$ and itself, so $3$ is a prime number.}
+
+\prq{4}{$1$, $2$, $4$}
+  {$4$ has three factors, not two, so $4$ is not a prime number.}
+
+\prq{5}{$1$, $5$}
+  {$5$ has exactly two factors, $1$ and itself, so $5$ is a prime number.\\[0.45em]We only need to test $2$ as a factor, because $3\times 3=9$ is bigger than $5$.}
+
+\prq{6}{$1$, $2$, $3$, $6$}
+  {$6$ has four factors, not two, so $6$ is not a prime number.}
+
+\prq{7}{$1$, $7$}
+  {$7$ has exactly two factors, $1$ and itself, so $7$ is a prime number.\\[0.45em]We only need to test $2$ as a factor, because $3\times 3=9$ is bigger than $7$.}
+
+\prq{8}{$1$, $2$, $4$, $8$}
+  {$8$ has four factors, not two, so $8$ is not a prime number.}
+
+\prq{9}{$1$, $3$, $9$}
+  {$9$ has three factors, not two, so $9$ is not a prime number.}
+
+\prq{10}{$1$, $2$, $5$, $10$}
+  {$10$ has four factors, not two, so $10$ is not a prime number.}
+
+\prq{11}{$1$, $11$}
+  {$11$ has exactly two factors, $1$ and itself, so $11$ is a prime number.\\[0.45em]We only need to test $2$ and $3$ as factors, because $5\times 5=25$ is bigger than $11$.}
+
+\prq{12}{$1$, $2$, $3$, $4$, $6$, $12$}
+  {$12$ has six factors, not two, so $12$ is not a prime number.}
+
+\prq{13}{$1$, $13$}
+  {$13$ has exactly two factors, $1$ and itself, so $13$ is a prime number.\\[0.45em]We only need to test $2$ and $3$ as factors, because $5\times 5=25$ is bigger than $13$.}
+
+\prq{14}{$1$, $2$, $7$, $14$}
+  {$14$ has four factors, not two, so $14$ is not a prime number.}
+
+\prq{15}{$1$, $3$, $5$, $15$}
+  {$15$ has four factors, not two, so $15$ is not a prime number.}
+
+\prq{16}{$1$, $2$, $4$, $8$, $16$}
+  {$16$ has five factors, not two, so $16$ is not a prime number.}
+
+\prq{17}{$1$, $17$}
+  {$17$ has exactly two factors, $1$ and itself, so $17$ is a prime number.\\[0.45em]We only need to test $2$ and $3$ as factors, because $5\times 5=25$ is bigger than $17$.}
+
+\prq{18}{$1$, $2$, $3$, $6$, $9$, $18$}
+  {$18$ has six factors, not two, so $18$ is not a prime number.}
+
+\prq{19}{$1$, $19$}
+  {$19$ has exactly two factors, $1$ and itself, so $19$ is a prime number.\\[0.45em]We only need to test $2$ and $3$ as factors, because $5\times 5=25$ is bigger than $19$.}
+
+\prq{20}{$1$, $2$, $4$, $5$, $10$, $20$}
+  {$20$ has six factors, not two, so $20$ is not a prime number.}
+
+\prq{21}{$1$, $3$, $7$, $21$}
+  {$21$ has four factors, not two, so $21$ is not a prime number.}
+
+\prq{22}{$1$, $2$, $11$, $22$}
+  {$22$ has four factors, not two, so $22$ is not a prime number.}
+
+\prq{23}{$1$, $23$}
+  {$23$ has exactly two factors, $1$ and itself, so $23$ is a prime number.\\[0.45em]We only need to test $2$ and $3$ as factors, because $5\times 5=25$ is bigger than $23$.}
+
+\prq{24}{$1$, $2$, $3$, $4$, $6$, $8$, $12$, $24$}
+  {$24$ has eight factors, not two, so $24$ is not a prime number.}
+
+\prq{25}{$1$, $5$, $25$}
+  {$25$ has three factors, not two, so $25$ is not a prime number.}
+
+\prq{26}{$1$, $2$, $13$, $26$}
+  {$26$ has four factors, not two, so $26$ is not a prime number.}
+
+\prq{27}{$1$, $3$, $9$, $27$}
+  {$27$ has four factors, not two, so $27$ is not a prime number.}
+
+\prq{28}{$1$, $2$, $4$, $7$, $14$, $28$}
+  {$28$ has six factors, not two, so $28$ is not a prime number.}
+
+\prq{29}{$1$, $29$}
+  {$29$ has exactly two factors, $1$ and itself, so $29$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $29$.}
+
+\prq{30}{$1$, $2$, $3$, $5$, $6$, $10$, $15$, $30$}
+  {$30$ has eight factors, not two, so $30$ is not a prime number.}
+
+\prq{31}{$1$, $31$}
+  {$31$ has exactly two factors, $1$ and itself, so $31$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $31$.}
+
+\prq{32}{$1$, $2$, $4$, $8$, $16$, $32$}
+  {$32$ has six factors, not two, so $32$ is not a prime number.}
+
+\prq{33}{$1$, $3$, $11$, $33$}
+  {$33$ has four factors, not two, so $33$ is not a prime number.}
+
+\prq{34}{$1$, $2$, $17$, $34$}
+  {$34$ has four factors, not two, so $34$ is not a prime number.}
+
+\prq{35}{$1$, $5$, $7$, $35$}
+  {$35$ has four factors, not two, so $35$ is not a prime number.}
+
+\prq{36}{$1$, $2$, $3$, $4$, $6$, $9$, $12$, $18$, $36$}
+  {$36$ has nine factors, not two, so $36$ is not a prime number.}
+
+\prq{37}{$1$, $37$}
+  {$37$ has exactly two factors, $1$ and itself, so $37$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $37$.}
+
+\prq{38}{$1$, $2$, $19$, $38$}
+  {$38$ has four factors, not two, so $38$ is not a prime number.}
+
+\prq{39}{$1$, $3$, $13$, $39$}
+  {$39$ has four factors, not two, so $39$ is not a prime number.}
+
+\prq{40}{$1$, $2$, $4$, $5$, $8$, $10$, $20$, $40$}
+  {$40$ has eight factors, not two, so $40$ is not a prime number.}
+
+\prq{41}{$1$, $41$}
+  {$41$ has exactly two factors, $1$ and itself, so $41$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $41$.}
+
+\prq{42}{$1$, $2$, $3$, $6$, $7$, $14$, $21$, $42$}
+  {$42$ has eight factors, not two, so $42$ is not a prime number.}
+
+\prq{43}{$1$, $43$}
+  {$43$ has exactly two factors, $1$ and itself, so $43$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $43$.}
+
+\prq{44}{$1$, $2$, $4$, $11$, $22$, $44$}
+  {$44$ has six factors, not two, so $44$ is not a prime number.}
+
+\prq{45}{$1$, $3$, $5$, $9$, $15$, $45$}
+  {$45$ has six factors, not two, so $45$ is not a prime number.}
+
+\prq{46}{$1$, $2$, $23$, $46$}
+  {$46$ has four factors, not two, so $46$ is not a prime number.}
+
+\prq{47}{$1$, $47$}
+  {$47$ has exactly two factors, $1$ and itself, so $47$ is a prime number.\\[0.45em]We only need to test $2$, $3$ and $5$ as factors, because $7\times 7=49$ is bigger than $47$.}
+
+\prq{48}{$1$, $2$, $3$, $4$, $6$, $8$, $12$, $16$, $24$, $48$}
+  {$48$ has ten factors, not two, so $48$ is not a prime number.}
+
+\prq{49}{$1$, $7$, $49$}
+  {$49$ has three factors, not two, so $49$ is not a prime number.}
+
+\prq{50}{$1$, $2$, $5$, $10$, $25$, $50$}
+  {$50$ has six factors, not two, so $50$ is not a prime number.}
+
+\prq{51}{$1$, $3$, $17$, $51$}
+  {$51$ has four factors, not two, so $51$ is not a prime number.}
+
+\prq{52}{$1$, $2$, $4$, $13$, $26$, $52$}
+  {$52$ has six factors, not two, so $52$ is not a prime number.}
+
+\prq{53}{$1$, $53$}
+  {$53$ has exactly two factors, $1$ and itself, so $53$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $53$.}
+
+\prq{54}{$1$, $2$, $3$, $6$, $9$, $18$, $27$, $54$}
+  {$54$ has eight factors, not two, so $54$ is not a prime number.}
+
+\prq{55}{$1$, $5$, $11$, $55$}
+  {$55$ has four factors, not two, so $55$ is not a prime number.}
+
+\prq{56}{$1$, $2$, $4$, $7$, $8$, $14$, $28$, $56$}
+  {$56$ has eight factors, not two, so $56$ is not a prime number.}
+
+\prq{57}{$1$, $3$, $19$, $57$}
+  {$57$ has four factors, not two, so $57$ is not a prime number.}
+
+\prq{58}{$1$, $2$, $29$, $58$}
+  {$58$ has four factors, not two, so $58$ is not a prime number.}
+
+\prq{59}{$1$, $59$}
+  {$59$ has exactly two factors, $1$ and itself, so $59$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $59$.}
+
+\prq{60}{$1$, $2$, $3$, $4$, $5$, $6$, $10$, $12$, $15$, $20$, $30$, $60$}
+  {$60$ has twelve factors, not two, so $60$ is not a prime number.}
+
+\prq{61}{$1$, $61$}
+  {$61$ has exactly two factors, $1$ and itself, so $61$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $61$.}
+
+\prq{62}{$1$, $2$, $31$, $62$}
+  {$62$ has four factors, not two, so $62$ is not a prime number.}
+
+\prq{63}{$1$, $3$, $7$, $9$, $21$, $63$}
+  {$63$ has six factors, not two, so $63$ is not a prime number.}
+
+\prq{64}{$1$, $2$, $4$, $8$, $16$, $32$, $64$}
+  {$64$ has seven factors, not two, so $64$ is not a prime number.}
+
+\prq{65}{$1$, $5$, $13$, $65$}
+  {$65$ has four factors, not two, so $65$ is not a prime number.}
+
+\prq{66}{$1$, $2$, $3$, $6$, $11$, $22$, $33$, $66$}
+  {$66$ has eight factors, not two, so $66$ is not a prime number.}
+
+\prq{67}{$1$, $67$}
+  {$67$ has exactly two factors, $1$ and itself, so $67$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $67$.}
+
+\prq{68}{$1$, $2$, $4$, $17$, $34$, $68$}
+  {$68$ has six factors, not two, so $68$ is not a prime number.}
+
+\prq{69}{$1$, $3$, $23$, $69$}
+  {$69$ has four factors, not two, so $69$ is not a prime number.}
+
+\prq{70}{$1$, $2$, $5$, $7$, $10$, $14$, $35$, $70$}
+  {$70$ has eight factors, not two, so $70$ is not a prime number.}
+
+\prq{71}{$1$, $71$}
+  {$71$ has exactly two factors, $1$ and itself, so $71$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $71$.}
+
+\prq{72}{$1$, $2$, $3$, $4$, $6$, $8$, $9$, $12$, $18$, $24$, $36$, $72$}
+  {$72$ has twelve factors, not two, so $72$ is not a prime number.}
+
+\prq{73}{$1$, $73$}
+  {$73$ has exactly two factors, $1$ and itself, so $73$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $73$.}
+
+\prq{74}{$1$, $2$, $37$, $74$}
+  {$74$ has four factors, not two, so $74$ is not a prime number.}
+
+\prq{75}{$1$, $3$, $5$, $15$, $25$, $75$}
+  {$75$ has six factors, not two, so $75$ is not a prime number.}
+
+\prq{76}{$1$, $2$, $4$, $19$, $38$, $76$}
+  {$76$ has six factors, not two, so $76$ is not a prime number.}
+
+\prq{77}{$1$, $7$, $11$, $77$}
+  {$77$ has four factors, not two, so $77$ is not a prime number.}
+
+\prq{78}{$1$, $2$, $3$, $6$, $13$, $26$, $39$, $78$}
+  {$78$ has eight factors, not two, so $78$ is not a prime number.}
+
+\prq{79}{$1$, $79$}
+  {$79$ has exactly two factors, $1$ and itself, so $79$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $79$.}
+
+\prq{80}{$1$, $2$, $4$, $5$, $8$, $10$, $16$, $20$, $40$, $80$}
+  {$80$ has ten factors, not two, so $80$ is not a prime number.}
+
+\prq{81}{$1$, $3$, $9$, $27$, $81$}
+  {$81$ has five factors, not two, so $81$ is not a prime number.}
+
+\prq{82}{$1$, $2$, $41$, $82$}
+  {$82$ has four factors, not two, so $82$ is not a prime number.}
+
+\prq{83}{$1$, $83$}
+  {$83$ has exactly two factors, $1$ and itself, so $83$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $83$.}
+
+\prq{84}{$1$, $2$, $3$, $4$, $6$, $7$, $12$, $14$, $21$, $28$, $42$, $84$}
+  {$84$ has twelve factors, not two, so $84$ is not a prime number.}
+
+\prq{85}{$1$, $5$, $17$, $85$}
+  {$85$ has four factors, not two, so $85$ is not a prime number.}
+
+\prq{86}{$1$, $2$, $43$, $86$}
+  {$86$ has four factors, not two, so $86$ is not a prime number.}
+
+\prq{87}{$1$, $3$, $29$, $87$}
+  {$87$ has four factors, not two, so $87$ is not a prime number.}
+
+\prq{88}{$1$, $2$, $4$, $8$, $11$, $22$, $44$, $88$}
+  {$88$ has eight factors, not two, so $88$ is not a prime number.}
+
+\prq{89}{$1$, $89$}
+  {$89$ has exactly two factors, $1$ and itself, so $89$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $89$.}
+
+\prq{90}{$1$, $2$, $3$, $5$, $6$, $9$, $10$, $15$, $18$, $30$, $45$, $90$}
+  {$90$ has twelve factors, not two, so $90$ is not a prime number.}
+
+\prq{91}{$1$, $7$, $13$, $91$}
+  {$91$ has four factors, not two, so $91$ is not a prime number.}
+
+\prq{92}{$1$, $2$, $4$, $23$, $46$, $92$}
+  {$92$ has six factors, not two, so $92$ is not a prime number.}
+
+\prq{93}{$1$, $3$, $31$, $93$}
+  {$93$ has four factors, not two, so $93$ is not a prime number.}
+
+\prq{94}{$1$, $2$, $47$, $94$}
+  {$94$ has four factors, not two, so $94$ is not a prime number.}
+
+\prq{95}{$1$, $5$, $19$, $95$}
+  {$95$ has four factors, not two, so $95$ is not a prime number.}
+
+\prq{96}{$1$, $2$, $3$, $4$, $6$, $8$, $12$, $16$, $24$, $32$, $48$, $96$}
+  {$96$ has twelve factors, not two, so $96$ is not a prime number.}
+
+\prq{97}{$1$, $97$}
+  {$97$ has exactly two factors, $1$ and itself, so $97$ is a prime number.\\[0.45em]We only need to test $2$, $3$, $5$ and $7$ as factors, because $11\times 11=121$ is bigger than $97$.}
+
+\prq{98}{$1$, $2$, $7$, $14$, $49$, $98$}
+  {$98$ has six factors, not two, so $98$ is not a prime number.}
+
+\prq{99}{$1$, $3$, $9$, $11$, $33$, $99$}
+  {$99$ has six factors, not two, so $99$ is not a prime number.}
+
+\prq{100}{$1$, $2$, $4$, $5$, $10$, $20$, $25$, $50$, $100$}
+  {$100$ has nine factors, not two, so $100$ is not a prime number.}
+
+%================================================================
 \qtopic{Prime factor decomposition}
 %================================================================
 
@@ -350,6 +769,94 @@ Write $2n$ as a product of prime factors.}
 How many factors does $720$ have?}
   {Each factor uses $0$ to $4$ twos, $0$ to $2$ threes and $0$ or $1$ five:\\[0.3em]
    $5\times 3\times 2=30$ factors}
+
+%================================================================
+\qtopic{HCF and LCM from lists}
+%================================================================
+
+% Five slides to a question: the question on its own, then the two
+% factor lists, then the two lists of multiples, then a ring round
+% the HCF, then a ring round the LCM.
+
+\hcflcm{4}{6}
+  {$1$, \hcfmark{2}, $4$}
+  {$1$, \hcfmark{2}, $3$, $6$}
+  {$4$, $8$, \lcmmark{12}, $16$, $20$,\\[0.45em]
+   $24$, $28$, $32$, $36$, $40$}
+  {$6$, \lcmmark{12}, $18$, $24$, $30$,\\[0.45em]
+   $36$, $42$, $48$, $54$, $60$}
+
+\hcflcm{6}{8}
+  {$1$, \hcfmark{2}, $3$, $6$}
+  {$1$, \hcfmark{2}, $4$, $8$}
+  {$6$, $12$, $18$, \lcmmark{24}, $30$,\\[0.45em]
+   $36$, $42$, $48$, $54$, $60$}
+  {$8$, $16$, \lcmmark{24}, $32$, $40$,\\[0.45em]
+   $48$, $56$, $64$, $72$, $80$}
+
+\hcflcm{6}{9}
+  {$1$, $2$, \hcfmark{3}, $6$}
+  {$1$, \hcfmark{3}, $9$}
+  {$6$, $12$, \lcmmark{18}, $24$, $30$,\\[0.45em]
+   $36$, $42$, $48$, $54$, $60$}
+  {$9$, \lcmmark{18}, $27$, $36$, $45$,\\[0.45em]
+   $54$, $63$, $72$, $81$, $90$}
+
+\hcflcm{8}{12}
+  {$1$, $2$, \hcfmark{4}, $8$}
+  {$1$, $2$, $3$, \hcfmark{4}, $6$, $12$}
+  {$8$, $16$, \lcmmark{24}, $32$, $40$,\\[0.45em]
+   $48$, $56$, $64$, $72$, $80$}
+  {$12$, \lcmmark{24}, $36$, $48$, $60$,\\[0.45em]
+   $72$, $84$, $96$, $108$, $120$}
+
+\hcflcm{10}{15}
+  {$1$, $2$, \hcfmark{5}, $10$}
+  {$1$, $3$, \hcfmark{5}, $15$}
+  {$10$, $20$, \lcmmark{30}, $40$, $50$,\\[0.45em]
+   $60$, $70$, $80$, $90$, $100$}
+  {$15$, \lcmmark{30}, $45$, $60$, $75$,\\[0.45em]
+   $90$, $105$, $120$, $135$, $150$}
+
+\hcflcm{9}{12}
+  {$1$, \hcfmark{3}, $9$}
+  {$1$, $2$, \hcfmark{3}, $4$, $6$, $12$}
+  {$9$, $18$, $27$, \lcmmark{36}, $45$,\\[0.45em]
+   $54$, $63$, $72$, $81$, $90$}
+  {$12$, $24$, \lcmmark{36}, $48$, $60$,\\[0.45em]
+   $72$, $84$, $96$, $108$, $120$}
+
+\hcflcm{12}{18}
+  {$1$, $2$, $3$, $4$, \hcfmark{6}, $12$}
+  {$1$, $2$, $3$, \hcfmark{6}, $9$, $18$}
+  {$12$, $24$, \lcmmark{36}, $48$, $60$,\\[0.45em]
+   $72$, $84$, $96$, $108$, $120$}
+  {$18$, \lcmmark{36}, $54$, $72$, $90$,\\[0.45em]
+   $108$, $126$, $144$, $162$, $180$}
+
+\hcflcm{14}{21}
+  {$1$, $2$, \hcfmark{7}, $14$}
+  {$1$, $3$, \hcfmark{7}, $21$}
+  {$14$, $28$, \lcmmark{42}, $56$, $70$,\\[0.45em]
+   $84$, $98$, $112$, $126$, $140$}
+  {$21$, \lcmmark{42}, $63$, $84$, $105$,\\[0.45em]
+   $126$, $147$, $168$, $189$, $210$}
+
+\hcflcm{15}{20}
+  {$1$, $3$, \hcfmark{5}, $15$}
+  {$1$, $2$, $4$, \hcfmark{5}, $10$, $20$}
+  {$15$, $30$, $45$, \lcmmark{60}, $75$,\\[0.45em]
+   $90$, $105$, $120$, $135$, $150$}
+  {$20$, $40$, \lcmmark{60}, $80$, $100$,\\[0.45em]
+   $120$, $140$, $160$, $180$, $200$}
+
+\hcflcm{8}{9}
+  {\hcfmark{1}, $2$, $4$, $8$}
+  {\hcfmark{1}, $3$, $9$}
+  {$8$, $16$, $24$, $32$, $40$,\\[0.45em]
+   $48$, $56$, $64$, \lcmmark{72}, $80$}
+  {$9$, $18$, $27$, $36$, $45$,\\[0.45em]
+   $54$, $63$, \lcmmark{72}, $81$, $90$}
 
 %================================================================
 \qtopic{HCF and LCM by prime factor decomposition}
