@@ -1,0 +1,561 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=16mm,right=16mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks
+
+\newcommand{\ptitle}[1]{%
+  \par\addvspace{12pt}
+  \noindent{\color{blue!50!black}\rule{\linewidth}{0.8pt}}\par\nobreak\vspace{2pt}
+  \noindent{\large\bfseries\color{blue!50!black}#1}\par\nobreak\vspace{2pt}
+  \noindent{\color{blue!50!black}\rule{\linewidth}{0.4pt}}\par\vspace{8pt}}
+
+\newcommand{\wsol}{%
+  \par\smallskip
+  \noindent\textbf{\color{blue!50!black}Worked solution.}\space}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Recurring Decimals into Fractions}\\[3pt]
+{\large Worked Solutions}
+\end{center}
+
+\ptitle{Part 1: Reading and Writing Recurring Decimals}
+
+\noindent\textbf{Q1.} Write out the first eight decimal places.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.\dot{5}=0.55555555$
+\item $0.\dot{1}\dot{8}=0.18181818$
+\item $0.3\dot{7}=0.37777777$
+\item $0.\dot{2}0\dot{6}=0.20620620$
+\item $0.4\dot{5}\dot{1}=0.45151515$
+\item $0.\dot{9}=0.99999999$
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q2.} Write each using dot notation.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.8888\ldots=0.\dot{8}$
+\item $0.636363\ldots=0.\dot{6}\dot{3}$
+\item $0.24444\ldots=0.2\dot{4}$
+\item $0.157157\ldots=0.\dot{1}5\dot{7}$
+\item $0.91666\ldots=0.91\dot{6}$
+\item $0.40505\ldots=0.4\dot{0}\dot{5}$
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q3.}
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item We have
+\[
+0.\dot{4}\dot{5}=0.454545\ldots
+\qquad\text{and}\qquad
+0.4\dot{5}=0.455555\ldots
+\]
+They agree in the first two decimal places. At the third decimal place, the first number has $4$ and the second has $5$. Hence $0.4\dot{5}$ is bigger.
+
+\item There are many possible answers. For example,
+\[
+0.\dot{3}\dot{5}=0.353535\ldots
+\]
+is bigger than $0.\dot{3}=0.3333\ldots$ and smaller than $0.\dot{4}=0.4444\ldots$.
+\end{enumerate}
+
+\ptitle{Part 2: Finding Fractions from Recurring Decimals}
+
+\noindent\textbf{Q4.} Fill in the gaps to turn $0.\dot{7}$ into a fraction.
+\wsol
+\textbf{Step 1:} Let $x=0.\dot{7}=0.7777\ldots$.
+
+\textbf{Step 2:} Multiplying by $10$ shifts every digit one place to the left:
+\[
+10x=7.7777\ldots
+\]
+
+\textbf{Step 3:} The tails are identical, so they cancel on subtraction:
+\[
+10x-x=7.7777\ldots-0.7777\ldots=7.
+\]
+Therefore
+\[
+9x=7.
+\]
+
+\textbf{Step 4:} Divide both sides by $9$:
+\[
+x=\frac{7}{9}.
+\]
+
+\medskip
+\noindent\textbf{Q5.} Turn $0.\dot{8}$ into a fraction.
+\wsol
+Let $x=0.\dot{8}=0.8888\ldots$.
+\[
+10x=8.8888\ldots
+\]
+Subtract:
+\[
+10x-x=8,
+\]
+so
+\[
+9x=8.
+\]
+Hence
+\[
+x=\frac{8}{9}.
+\]
+
+\medskip
+\noindent\textbf{Q6.} Turn each into a fraction in its simplest form.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.\dot{2}$: let $x=0.2222\ldots$. Then $10x=2.2222\ldots$, so $9x=2$ and $x=\frac{2}{9}$.
+
+\item $0.\dot{5}$: let $x=0.5555\ldots$. Then $10x=5.5555\ldots$, so $9x=5$ and $x=\frac{5}{9}$.
+
+\item $0.\dot{6}$: let $x=0.6666\ldots$. Then $10x=6.6666\ldots$, so $9x=6$ and $x=\frac{6}{9}=\frac{2}{3}$.
+
+\item $0.\dot{3}$: let $x=0.3333\ldots$. Then $10x=3.3333\ldots$, so $9x=3$ and $x=\frac{3}{9}=\frac{1}{3}$.
+\end{enumerate}
+
+\ptitle{Part 3: Longer Repeating Blocks}
+
+\noindent\textbf{Q7.} Fill in the gaps to turn $0.\dot{7}\dot{2}$ into a fraction.
+\wsol
+\textbf{Step 1:} Let $x=0.\dot{7}\dot{2}=0.727272\ldots$.
+
+\textbf{Step 2:} The repeating block has $2$ digits, so multiply by $100$:
+\[
+100x=72.727272\ldots
+\]
+
+\textbf{Step 3:} The tails now match, so
+\[
+100x-x=72.727272\ldots-0.727272\ldots=72.
+\]
+Thus
+\[
+99x=72.
+\]
+
+\textbf{Step 4:} Divide both sides by $99$:
+\[
+x=\frac{72}{99}=\frac{8}{11}.
+\]
+
+\medskip
+\noindent\textbf{Q8.} Turn these into fractions in their simplest form.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.\dot{1}\dot{5}$: let $x=0.151515\ldots$. Then $100x=15.151515\ldots$, so $99x=15$ and
+\[
+x=\frac{15}{99}=\frac{5}{33}.
+\]
+
+\item $0.\dot{0}\dot{6}$: let $x=0.060606\ldots$. Then $100x=6.060606\ldots$, so $99x=6$ and
+\[
+x=\frac{6}{99}=\frac{2}{33}.
+\]
+
+\item $0.\dot{5}\dot{4}$: let $x=0.545454\ldots$. Then $100x=54.545454\ldots$, so $99x=54$ and
+\[
+x=\frac{54}{99}=\frac{6}{11}.
+\]
+
+\item $0.\dot{9}\dot{0}$: let $x=0.909090\ldots$. Then $100x=90.909090\ldots$, so $99x=90$ and
+\[
+x=\frac{90}{99}=\frac{10}{11}.
+\]
+
+\item $0.\dot{1}0\dot{8}$: the repeating block is $108$, which has $3$ digits, so multiply by $1000$.
+Let $x=0.108108\ldots$. Then $1000x=108.108108\ldots$, so $999x=108$ and
+\[
+x=\frac{108}{999}=\frac{4}{37}.
+\]
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q9.}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item To decide what to multiply by, count the number of digits in the repeating block. If the block has $n$ digits, multiply by $10^n$. This moves the decimal point $n$ places, so the repeating block lines up exactly with the block in the original decimal. The tails then cancel when the two decimals are subtracted.
+
+\item $0.\dot{1}\dot{2}=0.121212\ldots$. Let $x=0.\dot{1}\dot{2}$. Then $100x=12.121212\ldots$, so
+\[
+99x=12
+\qquad\text{and}\qquad
+x=\frac{12}{99}=\frac{4}{33}.
+\]
+Ben has simply simplified Kayla's fraction. Both are correct.
+\end{enumerate}
+
+\ptitle{Part 4: When the Repeating Part Does Not Start Straight Away}
+
+\noindent\textbf{Q10.} Fill in the gaps to turn $0.2\dot{7}$ into a fraction.
+\wsol
+Let $x=0.2\dot{7}=0.27777\ldots$.
+
+Shift past the $2$:
+\[
+10x=2.7777\ldots
+\]
+Shift one more place:
+\[
+100x=27.7777\ldots
+\]
+Subtract the first from the second:
+\[
+100x-10x=27.7777\ldots-2.7777\ldots=25.
+\]
+Thus
+\[
+90x=25
+\]
+and
+\[
+x=\frac{25}{90}=\frac{5}{18}.
+\]
+
+\medskip
+\noindent\textbf{Q11.} Turn these into fractions in their simplest form.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.4\dot{3}=0.4333\ldots$. Let $x=0.4333\ldots$.
+\[
+10x=4.3333\ldots,\qquad 100x=43.3333\ldots
+\]
+Subtract:
+\[
+90x=39
+\]
+so
+\[
+x=\frac{39}{90}=\frac{13}{30}.
+\]
+
+\item $0.58\dot{3}=0.58333\ldots$. Let $x=0.58333\ldots$.
+\[
+100x=58.3333\ldots,\qquad 1000x=583.3333\ldots
+\]
+Subtract:
+\[
+900x=525
+\]
+so
+\[
+x=\frac{525}{900}=\frac{7}{12}.
+\]
+
+\item $0.08\dot{3}=0.08333\ldots$. Let $x=0.08333\ldots$.
+\[
+100x=8.3333\ldots,\qquad 1000x=83.3333\ldots
+\]
+Subtract:
+\[
+900x=75
+\]
+so
+\[
+x=\frac{75}{900}=\frac{1}{12}.
+\]
+
+\item $0.1\dot{2}\dot{4}=0.1242424\ldots$. Let $x=0.1242424\ldots$.
+\[
+10x=1.242424\ldots,\qquad 1000x=124.242424\ldots
+\]
+Subtract:
+\[
+990x=124-1=123
+\]
+so
+\[
+x=\frac{123}{990}=\frac{41}{330}.
+\]
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q12.} Turn these into improper fractions in their simplest form.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $2.\dot{7}=2.7777\ldots$. Let $x=2.7777\ldots$.
+\[
+10x=27.7777\ldots
+\]
+Subtract:
+\[
+9x=25
+\]
+so
+\[
+x=\frac{25}{9}.
+\]
+
+\item $1.\dot{4}\dot{5}=1.454545\ldots$. Let $x=1.454545\ldots$.
+\[
+100x=145.454545\ldots
+\]
+Subtract:
+\[
+99x=144
+\]
+so
+\[
+x=\frac{144}{99}=\frac{16}{11}.
+\]
+
+\item $3.\dot{1}\dot{8}=3.181818\ldots$. Let $x=3.181818\ldots$.
+\[
+100x=318.181818\ldots
+\]
+Subtract:
+\[
+99x=315
+\]
+so
+\[
+x=\frac{315}{99}=\frac{35}{11}.
+\]
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q13.} Mixed practice.
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item $0.\dot{8}$:
+$x=0.8888\ldots$, so $10x=8.8888\ldots$. Therefore $9x=8$ and $x=\frac{8}{9}$.
+
+\item $0.\dot{6}\dot{3}$:
+$x=0.636363\ldots$, so $100x=63.636363\ldots$. Therefore $99x=63$ and $x=\frac{63}{99}=\frac{7}{11}$.
+
+\item $0.2\dot{5}$:
+$x=0.2555\ldots$, so $10x=2.5555\ldots$ and $100x=25.5555\ldots$. Subtracting gives $90x=23$, so $x=\frac{23}{90}$.
+
+\item $0.\dot{0}2\dot{7}$:
+$x=0.027027\ldots$, so $1000x=27.027027\ldots$. Therefore $999x=27$ and $x=\frac{27}{999}=\frac{1}{37}$.
+
+\item $0.7\dot{2}$:
+$x=0.7222\ldots$, so $10x=7.2222\ldots$ and $100x=72.2222\ldots$. Subtracting gives $90x=65$, so $x=\frac{65}{90}=\frac{13}{18}$.
+
+\item $0.\dot{1}\dot{2}$:
+$x=0.121212\ldots$, so $100x=12.121212\ldots$. Therefore $99x=12$ and $x=\frac{12}{99}=\frac{4}{33}$.
+
+\item $0.41\dot{6}$:
+$x=0.41666\ldots$, so $100x=41.6666\ldots$ and $1000x=416.6666\ldots$. Subtracting gives $900x=375$, so $x=\frac{375}{900}=\frac{5}{12}$.
+
+\item $0.06\dot{4}$:
+$x=0.06444\ldots$, so $100x=6.4444\ldots$ and $1000x=64.4444\ldots$. Subtracting gives $900x=58$, so $x=\frac{58}{900}=\frac{29}{450}$.
+\end{enumerate}
+
+\ptitle{Part 5: Challenges}
+
+\noindent\textbf{Q14.}
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item Let $x=0.\dot{9}=0.9999\ldots$.
+\[
+10x=9.9999\ldots
+\]
+Subtract:
+\[
+10x-x=9
+\]
+so
+\[
+9x=9
+\]
+and hence
+\[
+x=1.
+\]
+
+\item A good reply to Ella is:
+
+The algebra is not a trick. If $0.\dot{9}=x$, then $10x=9.\dot{9}$, so subtracting gives $9x=9$, and therefore $x=1$.
+
+Also, $\frac13=0.\dot{3}$. Multiplying both sides by $3$ gives
+\[
+1=0.\dot{9}.
+\]
+On the number line, the numbers $0.9$, $0.99$, $0.999$, \ldots get closer and closer to $1$. Each new one closes half of the remaining gap. Since there is no positive gap left, $0.\dot{9}$ must actually equal $1$.
+
+\item There is no largest number smaller than $1$. If someone names a number $a<1$, then
+\[
+a<\frac{a+1}{2}<1.
+\]
+So there is always another number between $a$ and $1$, which is bigger than $a$ but still smaller than $1$. This is also why $0.\dot{9}$ cannot be ``just below'' $1$: there is no room for a largest number below $1$.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q15.}
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item Using short division:
+\[
+\frac12=0.5,\qquad
+\frac13=0.\dot{3},\qquad
+\frac14=0.25,\qquad
+\frac15=0.2,
+\]
+\[
+\frac16=0.1\dot{6},\qquad
+\frac17=0.\dot{1}4285\dot{7},\qquad
+\frac18=0.125,
+\]
+\[
+\frac19=0.\dot{1},\qquad
+\frac1{10}=0.1,\qquad
+\frac1{11}=0.\dot{0}\dot{9},\qquad
+\frac1{12}=0.08\dot{3},\qquad
+\frac1{16}=0.0625.
+\]
+The terminating decimals are
+\[
+\frac12,\quad\frac14,\quad\frac15,\quad\frac18,\quad\frac1{10},\quad\frac1{16}.
+\]
+
+\item The terminating denominators are:
+\[
+2=2,\quad 4=2^2,\quad 5=5,\quad 8=2^3,\quad 10=2\times5,\quad 16=2^4.
+\]
+They all have only the prime factors $2$ and $5$.
+
+\item
+\[
+\frac1{15}\text{ recurs, since }15=3\times5.
+\]
+\[
+\frac1{40}\text{ terminates, since }40=2^3\times5.
+\]
+\[
+\frac1{35}\text{ recurs, since }35=5\times7.
+\]
+\[
+\frac1{64}\text{ terminates, since }64=2^6.
+\]
+
+\item A terminating decimal can be written with denominator
+\[
+10,\ 100,\ 1000,\ \ldots
+\]
+which are all of the form $2^k5^k$. So after a fraction is written in lowest terms, its denominator can contain only $2$s and $5$s.
+
+Conversely, if the denominator contains only $2$s and $5$s, we can multiply the numerator and denominator by enough extra $2$s or $5$s to make the denominator a power of $10$, and then the decimal stops. Any other prime factor can never be removed, so such a fraction recurs.
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q16.}
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item
+\[
+\frac27=0.\dot{2}8571\dot{4},
+\]
+\[
+\frac37=0.\dot{4}2857\dot{1},
+\]
+\[
+\frac47=0.\dot{5}7142\dot{8},
+\]
+\[
+\frac57=0.\dot{7}1428\dot{5},
+\]
+\[
+\frac67=0.\dot{8}5714\dot{2}.
+\]
+
+\item Every seventh uses the same six digits in the same cyclic order:
+\[
+1\to4\to2\to8\to5\to7\to1.
+\]
+Each fraction simply starts at a different point in that cycle.
+
+\item Let $x=0.\dot{2}8571\dot{4}=0.285714285714\ldots$.
+
+The repeating block has $6$ digits, so multiply by $1\,000\,000$:
+\[
+1\,000\,000x=285\,714.285714285714\ldots
+\]
+Subtract $x$:
+\[
+999\,999x=285\,714.
+\]
+Therefore
+\[
+x=\frac{285\,714}{999\,999}.
+\]
+Dividing the numerator and denominator by $142\,857$ gives
+\[
+x=\frac27,
+\]
+which agrees with part (a).
+\end{enumerate}
+
+\medskip
+\noindent\textbf{Q17.}
+\wsol
+\begin{enumerate}[label=(\alph*),leftmargin=*]
+\item One valid example is $0.\dot{2}\dot{7}$.
+Let $x=0.\dot{2}\dot{7}=0.272727\ldots$.
+\[
+100x=27.272727\ldots
+\]
+Subtract:
+\[
+99x=27,
+\]
+so
+\[
+x=\frac{27}{99}=\frac{3}{11}.
+\]
+So $0.\dot{2}\dot{7}$ is a recurring decimal with denominator $11$.
+
+\item First,
+\[
+\frac56=0.8333\ldots=0.8\dot{3}.
+\]
+Check by turning it back: let $x=0.8\dot{3}=0.8333\ldots$.
+\[
+10x=8.3333\ldots,\qquad 100x=83.3333\ldots
+\]
+Subtract:
+\[
+100x-10x=83.3333\ldots-8.3333\ldots=75.
+\]
+Thus
+\[
+90x=75,
+\]
+so
+\[
+x=\frac{75}{90}=\frac56.
+\]
+
+\item Yes. Suppose the repeating block has $n$ digits and write the block as the whole number $N$. Shifting the decimal point by $n$ places gives
+\[
+10^n x=N+x,
+\]
+because the same repeating tail appears again. Therefore
+\[
+(10^n-1)x=N,
+\]
+so
+\[
+x=\frac{N}{10^n-1},
+\]
+which is a fraction.
+
+If the decimal has some non-repeating digits at the front, first multiply by a power of $10$ to move past those digits. Then apply the same idea to the remaining recurring part. So the subtraction always works.
+
+\item By part (c), every recurring decimal is equal to a fraction. But $\pi$ is not equal to a fraction; it is irrational. Therefore no recurring decimal can be exactly equal to $\pi$. Its decimal expansion goes on forever but never settles into a repeating block.
+\end{enumerate}
+
+\end{document}
