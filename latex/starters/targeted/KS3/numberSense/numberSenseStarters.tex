@@ -24,6 +24,16 @@
   anslab/.style  = {red, font=\tiny, visible on=<2->},
 }
 
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
 % Tighter list spacing, so eight questions fit on one frame.
 \newcommand{\qtight}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}%
@@ -172,13 +182,13 @@
 \begin{multicols}{2}
 \begin{enumerate}\qtight
 
-  \item Fill in $<$ or $>$: $7 \mathrel{\ashowq{<}} 12$, $30 \mathrel{\ashowq{>}} 3$
+  \item Fill in $<$ or $>$: $7 \mathrel{\text{\ashowq{$<$}}} 12$, $30 \mathrel{\text{\ashowq{$>$}}} 3$
 
   \item In $0.405$, what is the $4$ worth? \ashow{$4$ tenths, $0.4$}
 
   \item Chart: which is bigger, $0.4$ or $0.35$? Why? \ashow{$0.4$: $4$ tenths beats $3$}
 
-  \item Fill in $<$, $>$ or $=$: $0.4 \mathrel{\ashowq{=}} 0.40$, $0.6 \mathrel{\ashowq{>}} 0.06$
+  \item Fill in $<$, $>$ or $=$: $0.4 \mathrel{\text{\ashowq{$=$}}} 0.40$, $0.6 \mathrel{\text{\ashowq{$>$}}} 0.06$
 
   \item Mark $0.38$ on Line A. Is it nearer $0.3$ or $0.4$? \ashow{nearer $0.4$}
 
@@ -252,7 +262,7 @@
 
   \item What is each mark on the thermometer worth? Write the temperatures at A and B. \ashow{$2\,^\circ$C per mark; A $=-6$, B $=4$}
 
-  \item Which is colder, $-3$ or $-8$? Fill in: $-3 \mathrel{\ashowq{>}} -8$ \ashow{($-8$ is colder)}
+  \item Which is colder, $-3$ or $-8$? Fill in: $-3 \mathrel{\text{\ashowq{$>$}}} -8$ \ashow{($-8$ is colder)}
 
   \item Order, smallest first: $-2$, $5$, $-7$, $0$, $-1$ \ashow{($-7,-2,-1,0,5$)}
 
@@ -260,7 +270,7 @@
 
   \item Mark $-0.5$ and $-0.05$ on Line C. Which is larger? \ashow{$-0.05$}
 
-  \item Fill in $<$ or $>$: $-4.5 \mathrel{\ashowq{<}} -4.05$, $-0.3 \mathrel{\ashowq{<}} 0.03$
+  \item Fill in $<$ or $>$: $-4.5 \mathrel{\text{\ashowq{$<$}}} -4.05$, $-0.3 \mathrel{\text{\ashowq{$<$}}} 0.03$
 
   \item (Extension) Order, smallest first: $-0.08$, $0.7$, $-0.8$, $-0.75$ \ashow{($-0.8$, $-0.75$, $-0.08$, $0.7$)}
 
@@ -317,7 +327,7 @@
 \begin{multicols}{2}
 \begin{enumerate}\qtight
 
-  \item Fill in $<$ or $>$: $-6 \mathrel{\ashowq{<}} -2$
+  \item Fill in $<$ or $>$: $-6 \mathrel{\text{\ashowq{$<$}}} -2$
 
   \item Line A: is $47$ nearer $40$ or $50$? Round it to the nearest $10$. \ashow{nearer $50$, so $50$}
 

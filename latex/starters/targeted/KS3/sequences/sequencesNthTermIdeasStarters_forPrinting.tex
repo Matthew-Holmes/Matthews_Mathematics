@@ -1,0 +1,1713 @@
+% ================================================================
+% The printable version of latex/starters/targeted/KS3/sequences/sequencesNthTermIdeasStarters.tex
+%
+% This is the same deck, laid out to be handed out rather than put on
+% the board. Every slide is shown as it stands before any answer is
+% revealed, and 4 copies of it go on one page of A4, two by two, so
+% that a printed page cuts into four question sheets.
+%
+% Every slide of the deck is here, the title page included, and each takes
+% exactly one page. So page 1 is the first slide, page 2 the second, and
+% printing the pages you want is how you print the starters you want.
+%
+%   made from           latex/starters/targeted/KS3/sequences/sequencesNthTermIdeasStarters.tex
+%   pages on the sheet  8, one per slide of the deck
+%   copies of each      4, two by two on A4 landscape
+%   printing rules      version 3
+%
+% Nothing was reworded, nothing was rewritten and nothing was left out.
+% Each slide is the slide from the deck, asked for at its first step,
+% which is how the answers stay hidden.
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+\documentclass{beamer}
+\usepackage{tikz}
+\usepackage{amsmath}
+
+% ---- Minimal styling ----
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamercolor{frametitle}{fg=black}
+\setbeamerfont{frametitle}{size=\Large, series=\bfseries}
+\usefonttheme{professionalfonts}
+
+% ---- Global tikz baseline ----
+\tikzset{every picture/.style={baseline=(current bounding box.south)}}
+
+% ================================================================
+% TikZ pattern commands
+% ================================================================
+
+% Matchstick squares: n squares in a row
+\newcommand{\matchsquares}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \x in {0,...,\n} {
+      \draw[very thick, cap=round] (\x,0) -- (\x,1);
+    }
+    \foreach \x in {0,...,\the\numexpr\n-1\relax} {
+      \draw[very thick, cap=round] (\x,0)   -- (\x+1,0);
+      \draw[very thick, cap=round] (\x,1)   -- (\x+1,1);
+    }
+  \end{tikzpicture}%
+}
+
+% Matchstick triangles: chain of n triangles
+\newcommand{\matchtriangles}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \pgfmathsetmacro\h{0.866}
+    \color{#1}
+    \draw[very thick] (0,0) -- (\n,0);
+    \draw[very thick] (0,0)
+      \foreach \k in {1,...,\n} {
+        -- ({\k - 0.5}, {\h}) -- (\k,0)
+      };
+  \end{tikzpicture}%
+}
+
+% Rectangular dots: n columns x (n+1) rows
+\newcommand{\rectdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \i in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \j in {0,...,\n} {
+        \fill (0.4*\i, 0.4*\j) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% Cross / plus dots
+\newcommand{\crossdots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \fill (0,0) circle (0.07);
+    \ifnum\n>1
+      \foreach \d in {1,...,\the\numexpr\n-1\relax} {
+        \fill (0,   0.4*\d) circle (0.07);
+        \fill (0,  -0.4*\d) circle (0.07);
+        \fill ( 0.4*\d, 0)  circle (0.07);
+        \fill (-0.4*\d, 0)  circle (0.07);
+      }
+    \fi
+  \end{tikzpicture}%
+}
+
+% 4-times-table dots: n rows of 4 dots
+\newcommand{\fourtabledots}[2][black]{%
+  \begin{tikzpicture}[scale=0.60]
+    \pgfmathsetmacro\n{#2}
+    \color{#1}
+    \foreach \row in {0,...,\the\numexpr\n-1\relax} {
+      \foreach \col in {0,1,2,3} {
+        \fill (0.4*\col, 0.4*\row) circle (0.07);
+      }
+    }
+  \end{tikzpicture}%
+}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% ================================================================
+% ---------------------------------------------------------------
+% Added so this deck prints four slides to a page. Nothing above
+% this line was changed.
+% ---------------------------------------------------------------
+\usepackage{pgfpages}
+
+% 4 slides to a sheet of A4, two by two, with a thin line round each
+% so that the page can be cut up.
+%
+% Each slide keeps a margin of 1mm around it and no more, so the four fill
+% the sheet and the pieces they cut into are as big as the paper allows. Only
+% one direction actually comes out that tight: a slide is a different shape
+% from a quarter of a sheet of A4, so it is scaled to fit and the slack it
+% cannot use is left along whichever pair of edges it did not fill.
+\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=1mm]
+\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
+% There is nothing on paper to click, and a slide announcing a new section
+% would sit between two copies of the same question and put every page after
+% it out of step with the grid.
+\setbeamertemplate{navigation symbols}{}
+\AtBeginPart{}
+\AtBeginSection{}
+\AtBeginSubsection{}
+\AtBeginSubsubsection{}
+\begin{document}
+% ================================================================
+
+% ---- Title ----
+\begin{frame}<1>[plain]
+  \centering
+  {\LARGE\bfseries Sequences Starters}\\[0.5em]
+\end{frame}
+\begin{frame}<1>[plain]
+  \centering
+  {\LARGE\bfseries Sequences Starters}\\[0.5em]
+\end{frame}
+\begin{frame}<1>[plain]
+  \centering
+  {\LARGE\bfseries Sequences Starters}\\[0.5em]
+\end{frame}
+\begin{frame}<1>[plain]
+  \centering
+  {\LARGE\bfseries Sequences Starters}\\[0.5em]
+\end{frame}
+
+% ================================================================
+% STARTER 1
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 1}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Pattern}\\[0.5em]
+    \matchsquares[red]{1}\quad
+    \matchsquares[blue]{2}\quad
+    \matchsquares[green!70!black]{3}\quad
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;13 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of the sequence with position-to-term rule: $\boldsymbol{2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{2},\;\ablank{4},\;\ablank{6},\;\ablank{8},\;\ablank{10}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q4.\enspace}\;
+  Sam writes the 3 times table: $3, 6, 9, 12, 15\ldots$ \\
+  He then \textbf{adds 2} to every term.
+  Write the first 5 terms of Sam's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  % ---- Bottom row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using the matchstick pattern from Q1:\\
+    (a)\;How many matchsticks in the \textbf{10th} shape?\\
+    (b)\;Write a rule for the $n$th shape.\\[0.2em]
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Is $\boldsymbol{100}$ a term in the sequence
+    with $n$th term $3n+1$\,?\\
+    Show how you know.\\[0.2em]
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 1}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Pattern}\\[0.5em]
+    \matchsquares[red]{1}\quad
+    \matchsquares[blue]{2}\quad
+    \matchsquares[green!70!black]{3}\quad
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;13 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of the sequence with position-to-term rule: $\boldsymbol{2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{2},\;\ablank{4},\;\ablank{6},\;\ablank{8},\;\ablank{10}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q4.\enspace}\;
+  Sam writes the 3 times table: $3, 6, 9, 12, 15\ldots$ \\
+  He then \textbf{adds 2} to every term.
+  Write the first 5 terms of Sam's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  % ---- Bottom row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using the matchstick pattern from Q1:\\
+    (a)\;How many matchsticks in the \textbf{10th} shape?\\
+    (b)\;Write a rule for the $n$th shape.\\[0.2em]
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Is $\boldsymbol{100}$ a term in the sequence
+    with $n$th term $3n+1$\,?\\
+    Show how you know.\\[0.2em]
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 1}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Pattern}\\[0.5em]
+    \matchsquares[red]{1}\quad
+    \matchsquares[blue]{2}\quad
+    \matchsquares[green!70!black]{3}\quad
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;13 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of the sequence with position-to-term rule: $\boldsymbol{2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{2},\;\ablank{4},\;\ablank{6},\;\ablank{8},\;\ablank{10}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q4.\enspace}\;
+  Sam writes the 3 times table: $3, 6, 9, 12, 15\ldots$ \\
+  He then \textbf{adds 2} to every term.
+  Write the first 5 terms of Sam's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  % ---- Bottom row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using the matchstick pattern from Q1:\\
+    (a)\;How many matchsticks in the \textbf{10th} shape?\\
+    (b)\;Write a rule for the $n$th shape.\\[0.2em]
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Is $\boldsymbol{100}$ a term in the sequence
+    with $n$th term $3n+1$\,?\\
+    Show how you know.\\[0.2em]
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 1}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Pattern}\\[0.5em]
+    \matchsquares[red]{1}\quad
+    \matchsquares[blue]{2}\quad
+    \matchsquares[green!70!black]{3}\quad
+    \ashowq{\matchsquares[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;13 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of the sequence with position-to-term rule: $\boldsymbol{2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{2},\;\ablank{4},\;\ablank{6},\;\ablank{8},\;\ablank{10}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q4.\enspace}\;
+  Sam writes the 3 times table: $3, 6, 9, 12, 15\ldots$ \\
+  He then \textbf{adds 2} to every term.
+  Write the first 5 terms of Sam's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  % ---- Bottom row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using the matchstick pattern from Q1:\\
+    (a)\;How many matchsticks in the \textbf{10th} shape?\\
+    (b)\;Write a rule for the $n$th shape.\\[0.2em]
+    \ashow{(a)\;31 matchsticks.}\\
+    \ashow{(b)\;position-to-term rule:\;$3n+1$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Is $\boldsymbol{100}$ a term in the sequence
+    with $n$th term $3n+1$\,?\\
+    Show how you know.\\[0.2em]
+    \ashow{Yes, when $n=33$,}\\
+    \ashow{$3n+1=3\times33+1=99+1=100$}
+  \end{minipage}
+
+\end{frame}
+
+% ================================================================
+% STARTER 2
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 2}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dot Pattern}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;16 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{3n+1}$}\\[0.3em]
+    \footnotesize
+    \ablank{4},\;\ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Alex writes the 5 times table: $5, 10, 15, 20, 25\ldots$
+  He then \textbf{subtracts 1} from every term.
+  Write the first 5 terms of Alex's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$4,\ 9,\ 14,\ 19,\ 24$.\quad
+         $n$th term:\;$\boldsymbol{5n-1}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extend Q1}\\
+    \footnotesize
+    Using your dot pattern from Q1:\\
+    (a)\;How many dots in the \textbf{10th} picture?\\
+    (b)\;Write a rule for the $n$th picture.\\[0.2em]
+    \ashow{(a)\;40 dots.\quad (b)\;Rule:\;$4n$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Sequence A has $n$th term $4n-2$.\\
+    Sequence B has $n$th term $2n+6$.\\
+    Do they share a term \\ \emph{at the same position}? \\
+    \ashow{$4n-2=2n+6\;\Rightarrow\;n=4.$\;
+           Both equal\;\textbf{14} at position $n=4$.}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 2}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dot Pattern}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;16 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{3n+1}$}\\[0.3em]
+    \footnotesize
+    \ablank{4},\;\ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Alex writes the 5 times table: $5, 10, 15, 20, 25\ldots$
+  He then \textbf{subtracts 1} from every term.
+  Write the first 5 terms of Alex's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$4,\ 9,\ 14,\ 19,\ 24$.\quad
+         $n$th term:\;$\boldsymbol{5n-1}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extend Q1}\\
+    \footnotesize
+    Using your dot pattern from Q1:\\
+    (a)\;How many dots in the \textbf{10th} picture?\\
+    (b)\;Write a rule for the $n$th picture.\\[0.2em]
+    \ashow{(a)\;40 dots.\quad (b)\;Rule:\;$4n$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Sequence A has $n$th term $4n-2$.\\
+    Sequence B has $n$th term $2n+6$.\\
+    Do they share a term \\ \emph{at the same position}? \\
+    \ashow{$4n-2=2n+6\;\Rightarrow\;n=4.$\;
+           Both equal\;\textbf{14} at position $n=4$.}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 2}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dot Pattern}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;16 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{3n+1}$}\\[0.3em]
+    \footnotesize
+    \ablank{4},\;\ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Alex writes the 5 times table: $5, 10, 15, 20, 25\ldots$
+  He then \textbf{subtracts 1} from every term.
+  Write the first 5 terms of Alex's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$4,\ 9,\ 14,\ 19,\ 24$.\quad
+         $n$th term:\;$\boldsymbol{5n-1}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extend Q1}\\
+    \footnotesize
+    Using your dot pattern from Q1:\\
+    (a)\;How many dots in the \textbf{10th} picture?\\
+    (b)\;Write a rule for the $n$th picture.\\[0.2em]
+    \ashow{(a)\;40 dots.\quad (b)\;Rule:\;$4n$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Sequence A has $n$th term $4n-2$.\\
+    Sequence B has $n$th term $2n+6$.\\
+    Do they share a term \\ \emph{at the same position}? \\
+    \ashow{$4n-2=2n+6\;\Rightarrow\;n=4.$\;
+           Both equal\;\textbf{14} at position $n=4$.}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 2}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dot Pattern}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;16 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{3n+1}$}\\[0.3em]
+    \footnotesize
+    \ablank{4},\;\ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Alex writes the 5 times table: $5, 10, 15, 20, 25\ldots$
+  He then \textbf{subtracts 1} from every term.
+  Write the first 5 terms of Alex's sequence.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$4,\ 9,\ 14,\ 19,\ 24$.\quad
+         $n$th term:\;$\boldsymbol{5n-1}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extend Q1}\\
+    \footnotesize
+    Using your dot pattern from Q1:\\
+    (a)\;How many dots in the \textbf{10th} picture?\\
+    (b)\;Write a rule for the $n$th picture.\\[0.2em]
+    \ashow{(a)\;40 dots.\quad (b)\;Rule:\;$4n$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Sequence A has $n$th term $4n-2$.\\
+    Sequence B has $n$th term $2n+6$.\\
+    Do they share a term \\ \emph{at the same position}? \\
+    \ashow{$4n-2=2n+6\;\Rightarrow\;n=4.$\;
+           Both equal\;\textbf{14} at position $n=4$.}
+  \end{minipage}
+
+\end{frame}
+
+% ================================================================
+% STARTER 3
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 3}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    7,\;14,\;21,\;28,\;
+    \ablank{35},\;\ablank{42},\;\ablank{49}\\
+    \ashow{(add 7 each time --- the 7$\times$ table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{5n-2}$}\\[0.3em]
+    \footnotesize
+    \ablank{3},\;\ablank{8},\;\ablank{13},\;\ablank{18},\;\ablank{23}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  A sequence \textbf{starts at 5} and \textbf{increases by 3} each time.
+  Write the first 5 terms.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using your triangle pattern from Q1:\\
+    (a)\;Write a rule for the $n$th shape.\\
+    (b)\;How many matchsticks in the \textbf{20th} shape?\\[0.2em]
+    \ashow{(a)\;Rule:\;$3n$.\quad (b)\;60 matchsticks.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $4n+3$.\\
+    Which term is the \textbf{first to exceed 75}?\\
+    Show your working clearly.\\[0.2em]
+    \ashow{$4n+3>75\;\Rightarrow\;n>18.$\;
+           19th term:\;$4(19)+3=\boldsymbol{79}.$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 3}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    7,\;14,\;21,\;28,\;
+    \ablank{35},\;\ablank{42},\;\ablank{49}\\
+    \ashow{(add 7 each time --- the 7$\times$ table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{5n-2}$}\\[0.3em]
+    \footnotesize
+    \ablank{3},\;\ablank{8},\;\ablank{13},\;\ablank{18},\;\ablank{23}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  A sequence \textbf{starts at 5} and \textbf{increases by 3} each time.
+  Write the first 5 terms.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using your triangle pattern from Q1:\\
+    (a)\;Write a rule for the $n$th shape.\\
+    (b)\;How many matchsticks in the \textbf{20th} shape?\\[0.2em]
+    \ashow{(a)\;Rule:\;$3n$.\quad (b)\;60 matchsticks.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $4n+3$.\\
+    Which term is the \textbf{first to exceed 75}?\\
+    Show your working clearly.\\[0.2em]
+    \ashow{$4n+3>75\;\Rightarrow\;n>18.$\;
+           19th term:\;$4(19)+3=\boldsymbol{79}.$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 3}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    7,\;14,\;21,\;28,\;
+    \ablank{35},\;\ablank{42},\;\ablank{49}\\
+    \ashow{(add 7 each time --- the 7$\times$ table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{5n-2}$}\\[0.3em]
+    \footnotesize
+    \ablank{3},\;\ablank{8},\;\ablank{13},\;\ablank{18},\;\ablank{23}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  A sequence \textbf{starts at 5} and \textbf{increases by 3} each time.
+  Write the first 5 terms.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using your triangle pattern from Q1:\\
+    (a)\;Write a rule for the $n$th shape.\\
+    (b)\;How many matchsticks in the \textbf{20th} shape?\\[0.2em]
+    \ashow{(a)\;Rule:\;$3n$.\quad (b)\;60 matchsticks.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $4n+3$.\\
+    Which term is the \textbf{first to exceed 75}?\\
+    Show your working clearly.\\[0.2em]
+    \ashow{$4n+3>75\;\Rightarrow\;n>18.$\;
+           19th term:\;$4(19)+3=\boldsymbol{79}.$}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 3}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    7,\;14,\;21,\;28,\;
+    \ablank{35},\;\ablank{42},\;\ablank{49}\\
+    \ashow{(add 7 each time --- the 7$\times$ table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{5n-2}$}\\[0.3em]
+    \footnotesize
+    \ablank{3},\;\ablank{8},\;\ablank{13},\;\ablank{18},\;\ablank{23}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  A sequence \textbf{starts at 5} and \textbf{increases by 3} each time.
+  Write the first 5 terms.
+  What is the $n$th term rule?\\[0.2em]
+  \ashow{Terms:\;$5,\ 8,\ 11,\ 14,\ 17$.\quad
+         $n$th term:\;$\boldsymbol{3n+2}$}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Extending Q1}\\
+    \footnotesize
+    Using your triangle pattern from Q1:\\
+    (a)\;Write a rule for the $n$th shape.\\
+    (b)\;How many matchsticks in the \textbf{20th} shape?\\[0.2em]
+    \ashow{(a)\;Rule:\;$3n$.\quad (b)\;60 matchsticks.}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $4n+3$.\\
+    Which term is the \textbf{first to exceed 75}?\\
+    Show your working clearly.\\[0.2em]
+    \ashow{$4n+3>75\;\Rightarrow\;n>18.$\;
+           19th term:\;$4(19)+3=\boldsymbol{79}.$}
+  \end{minipage}
+
+\end{frame}
+
+% ================================================================
+% STARTER 4
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 4}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \rectdots[red]{1}\quad
+    \rectdots[blue]{2}\quad
+    \rectdots[green!70!black]{3}\quad
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th pattern.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;20 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;5,\;9,\;13,\;
+    \ablank{17},\;\ablank{21},\;\ablank{25}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{10-2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{8},\;\ablank{6},\;\ablank{4},\;\ablank{2},\;\ablank{0}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Mia writes the 6 times table: $6, 12, 18, 24, 30\ldots$
+  She then \textbf{subtracts 4} from every term.
+  Write the first 5 terms, find the $n$th term, and find the 50th term.\\[0.2em]
+  \ashow{Terms:\;$2,\ 8,\ 14,\ 20,\ 26$.\quad
+         $n$th term:\;$6n-4$.\quad
+         50th term:\;$\boldsymbol{296}$.}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Find the $n$th Term}\\
+    \footnotesize
+    $1,\;5,\;9,\;13,\;17,\;\ldots$\\[0.2em]
+    What is the $n$th term rule?\\[0.2em]
+    \ashow{Differences: $+4$. \;First term: 1.
+           \quad Rule:\;$\boldsymbol{4n-3}$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $10-2n$.\\
+    Which is the \textbf{last positive term}?\\
+    What is the \textbf{first negative term}?\\
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 4}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \rectdots[red]{1}\quad
+    \rectdots[blue]{2}\quad
+    \rectdots[green!70!black]{3}\quad
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th pattern.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;20 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;5,\;9,\;13,\;
+    \ablank{17},\;\ablank{21},\;\ablank{25}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{10-2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{8},\;\ablank{6},\;\ablank{4},\;\ablank{2},\;\ablank{0}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Mia writes the 6 times table: $6, 12, 18, 24, 30\ldots$
+  She then \textbf{subtracts 4} from every term.
+  Write the first 5 terms, find the $n$th term, and find the 50th term.\\[0.2em]
+  \ashow{Terms:\;$2,\ 8,\ 14,\ 20,\ 26$.\quad
+         $n$th term:\;$6n-4$.\quad
+         50th term:\;$\boldsymbol{296}$.}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Find the $n$th Term}\\
+    \footnotesize
+    $1,\;5,\;9,\;13,\;17,\;\ldots$\\[0.2em]
+    What is the $n$th term rule?\\[0.2em]
+    \ashow{Differences: $+4$. \;First term: 1.
+           \quad Rule:\;$\boldsymbol{4n-3}$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $10-2n$.\\
+    Which is the \textbf{last positive term}?\\
+    What is the \textbf{first negative term}?\\
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 4}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \rectdots[red]{1}\quad
+    \rectdots[blue]{2}\quad
+    \rectdots[green!70!black]{3}\quad
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th pattern.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;20 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;5,\;9,\;13,\;
+    \ablank{17},\;\ablank{21},\;\ablank{25}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{10-2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{8},\;\ablank{6},\;\ablank{4},\;\ablank{2},\;\ablank{0}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Mia writes the 6 times table: $6, 12, 18, 24, 30\ldots$
+  She then \textbf{subtracts 4} from every term.
+  Write the first 5 terms, find the $n$th term, and find the 50th term.\\[0.2em]
+  \ashow{Terms:\;$2,\ 8,\ 14,\ 20,\ 26$.\quad
+         $n$th term:\;$6n-4$.\quad
+         50th term:\;$\boldsymbol{296}$.}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Find the $n$th Term}\\
+    \footnotesize
+    $1,\;5,\;9,\;13,\;17,\;\ldots$\\[0.2em]
+    What is the $n$th term rule?\\[0.2em]
+    \ashow{Differences: $+4$. \;First term: 1.
+           \quad Rule:\;$\boldsymbol{4n-3}$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $10-2n$.\\
+    Which is the \textbf{last positive term}?\\
+    What is the \textbf{first negative term}?\\
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 4}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \rectdots[red]{1}\quad
+    \rectdots[blue]{2}\quad
+    \rectdots[green!70!black]{3}\quad
+    \ashowq{\rectdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th pattern.\\
+    (b)\;How many dots does it contain?\\[0.3em]
+    \ashow{(b)\;20 dots}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;5,\;9,\;13,\;
+    \ablank{17},\;\ablank{21},\;\ablank{25}\\
+    \ashow{(add 4 each time)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{10-2n}$}\\[0.3em]
+    \footnotesize
+    \ablank{8},\;\ablank{6},\;\ablank{4},\;\ablank{2},\;\ablank{0}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Mia writes the 6 times table: $6, 12, 18, 24, 30\ldots$
+  She then \textbf{subtracts 4} from every term.
+  Write the first 5 terms, find the $n$th term, and find the 50th term.\\[0.2em]
+  \ashow{Terms:\;$2,\ 8,\ 14,\ 20,\ 26$.\quad
+         $n$th term:\;$6n-4$.\quad
+         50th term:\;$\boldsymbol{296}$.}
+
+  \vspace{0.4cm}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q5.\enspace Find the $n$th Term}\\
+    \footnotesize
+    $1,\;5,\;9,\;13,\;17,\;\ldots$\\[0.2em]
+    What is the $n$th term rule?\\[0.2em]
+    \ashow{Differences: $+4$. \;First term: 1.
+           \quad Rule:\;$\boldsymbol{4n-3}$}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    The $n$th term of a sequence is $10-2n$.\\
+    Which is the \textbf{last positive term}?\\
+    What is the \textbf{first negative term}?\\
+    \ashow{$n=4$:\;$+2$ (last positive).}\\
+    \ashow{$n=5$:\;$0$.}\\
+    \ashow{$n=6$:\;$-2$ (first negative).}
+  \end{minipage}
+
+\end{frame}
+
+% ================================================================
+% STARTER 5
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 5}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \crossdots[red]{1}\quad
+    \crossdots[blue]{2}\quad
+    \crossdots[green!70!black]{3}\quad
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many dots in shape 5?\\[0.3em]
+    \ashow{(b)\;Shape 5 has 17 dots}
+
+    \vspace{0.4cm}
+
+  \textbf{Q5.\enspace}\;
+  Jake says: \\ \textit{``I start at 3 and add 4 each time.''}
+ \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
+  and (c) decide whether $\boldsymbol{59}$ is in his sequence.
+  Show your reasoning.\\[0.2em]
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
+
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;4,\;9,\;16,\;
+    \ablank{25},\;\ablank{36},\;\ablank{49}\\
+    \ashow{(square numbers,\;$n^2$)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{2n+5}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{9},\;\ablank{11},\;\ablank{13},\;\ablank{15}
+
+\vspace{0.45cm}
+
+    \small\textbf{Q4.\enspace Find the $n$th Term}\\
+    \footnotesize
+    (a)\;$3,\;5,\;7,\;9,\;11,\;\ldots$\quad
+    \ashow{$2n+1$}\\[0.3em]
+    (b)\;$6,\;10,\;14,\;18,\;22,\;\ldots$\quad
+    \ashow{$4n+2$}
+
+    \vspace{0.45cm}
+
+        \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Mia's sequence has $n$th term $3n+1$.\\
+    Jake's sequence has $n$th term $2n+6$.\\
+    Find the \textbf{first three values} that appear
+    in \emph{both} sequences.
+    What do you notice about them?\\[0.2em]
+    \ashow{Shared values:\;$10,\;16,\;22,\;\ldots$
+           \;(they increase by 6 each time).}
+    
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 5}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \crossdots[red]{1}\quad
+    \crossdots[blue]{2}\quad
+    \crossdots[green!70!black]{3}\quad
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many dots in shape 5?\\[0.3em]
+    \ashow{(b)\;Shape 5 has 17 dots}
+
+    \vspace{0.4cm}
+
+  \textbf{Q5.\enspace}\;
+  Jake says: \\ \textit{``I start at 3 and add 4 each time.''}
+ \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
+  and (c) decide whether $\boldsymbol{59}$ is in his sequence.
+  Show your reasoning.\\[0.2em]
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
+
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;4,\;9,\;16,\;
+    \ablank{25},\;\ablank{36},\;\ablank{49}\\
+    \ashow{(square numbers,\;$n^2$)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{2n+5}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{9},\;\ablank{11},\;\ablank{13},\;\ablank{15}
+
+\vspace{0.45cm}
+
+    \small\textbf{Q4.\enspace Find the $n$th Term}\\
+    \footnotesize
+    (a)\;$3,\;5,\;7,\;9,\;11,\;\ldots$\quad
+    \ashow{$2n+1$}\\[0.3em]
+    (b)\;$6,\;10,\;14,\;18,\;22,\;\ldots$\quad
+    \ashow{$4n+2$}
+
+    \vspace{0.45cm}
+
+        \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Mia's sequence has $n$th term $3n+1$.\\
+    Jake's sequence has $n$th term $2n+6$.\\
+    Find the \textbf{first three values} that appear
+    in \emph{both} sequences.
+    What do you notice about them?\\[0.2em]
+    \ashow{Shared values:\;$10,\;16,\;22,\;\ldots$
+           \;(they increase by 6 each time).}
+    
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 5}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \crossdots[red]{1}\quad
+    \crossdots[blue]{2}\quad
+    \crossdots[green!70!black]{3}\quad
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many dots in shape 5?\\[0.3em]
+    \ashow{(b)\;Shape 5 has 17 dots}
+
+    \vspace{0.4cm}
+
+  \textbf{Q5.\enspace}\;
+  Jake says: \\ \textit{``I start at 3 and add 4 each time.''}
+ \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
+  and (c) decide whether $\boldsymbol{59}$ is in his sequence.
+  Show your reasoning.\\[0.2em]
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
+
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;4,\;9,\;16,\;
+    \ablank{25},\;\ablank{36},\;\ablank{49}\\
+    \ashow{(square numbers,\;$n^2$)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{2n+5}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{9},\;\ablank{11},\;\ablank{13},\;\ablank{15}
+
+\vspace{0.45cm}
+
+    \small\textbf{Q4.\enspace Find the $n$th Term}\\
+    \footnotesize
+    (a)\;$3,\;5,\;7,\;9,\;11,\;\ldots$\quad
+    \ashow{$2n+1$}\\[0.3em]
+    (b)\;$6,\;10,\;14,\;18,\;22,\;\ldots$\quad
+    \ashow{$4n+2$}
+
+    \vspace{0.45cm}
+
+        \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Mia's sequence has $n$th term $3n+1$.\\
+    Jake's sequence has $n$th term $2n+6$.\\
+    Find the \textbf{first three values} that appear
+    in \emph{both} sequences.
+    What do you notice about them?\\[0.2em]
+    \ashow{Shared values:\;$10,\;16,\;22,\;\ldots$
+           \;(they increase by 6 each time).}
+    
+  \end{minipage}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 5}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \crossdots[red]{1}\quad
+    \crossdots[blue]{2}\quad
+    \crossdots[green!70!black]{3}\quad
+    \ashowq{\crossdots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many dots in shape 5?\\[0.3em]
+    \ashow{(b)\;Shape 5 has 17 dots}
+
+    \vspace{0.4cm}
+
+  \textbf{Q5.\enspace}\;
+  Jake says: \\ \textit{``I start at 3 and add 4 each time.''}
+ \\ (a) Write his first 5 terms, (b) find the $n$th term rule,
+  and (c) decide whether $\boldsymbol{59}$ is in his sequence.
+  Show your reasoning.\\[0.2em]
+  \ashow{(a) $3,7,11,15,19$.}\\
+  \ashow{(b) $n$th term:\;$4n-1$.}\\
+  \ashow{(c) $4n-1=59\;\Rightarrow\;n=15.$\;\textbf{Yes!} (15th term)}
+
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    1,\;4,\;9,\;16,\;
+    \ablank{25},\;\ablank{36},\;\ablank{49}\\
+    \ashow{(square numbers,\;$n^2$)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{2n+5}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{9},\;\ablank{11},\;\ablank{13},\;\ablank{15}
+
+\vspace{0.45cm}
+
+    \small\textbf{Q4.\enspace Find the $n$th Term}\\
+    \footnotesize
+    (a)\;$3,\;5,\;7,\;9,\;11,\;\ldots$\quad
+    \ashow{$2n+1$}\\[0.3em]
+    (b)\;$6,\;10,\;14,\;18,\;22,\;\ldots$\quad
+    \ashow{$4n+2$}
+
+    \vspace{0.45cm}
+
+        \small\textbf{Q6.\;Challenge}\\
+    \footnotesize
+    Mia's sequence has $n$th term $3n+1$.\\
+    Jake's sequence has $n$th term $2n+6$.\\
+    Find the \textbf{first three values} that appear
+    in \emph{both} sequences.
+    What do you notice about them?\\[0.2em]
+    \ashow{Shared values:\;$10,\;16,\;22,\;\ldots$
+           \;(they increase by 6 each time).}
+    
+  \end{minipage}
+
+\end{frame}
+
+% ================================================================
+% STARTER 6
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 6}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\
+    (c)\;Which times tables does the sequence represent?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
+
+    \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
+    \ablank{$5n$}\\[0.3em]
+    
+    \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16},\;\ablank{19}
+  \end{minipage}
+
+  \vspace{0.65cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q5.\enspace}\;
+  A sequence is made by taking the \textbf{3 times table}
+  and \textbf{subtracting 2 from every term.}\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Use your rule to find the \textbf{20th} term.\\
+  (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
+
+  %
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 6}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\
+    (c)\;Which times tables does the sequence represent?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
+
+    \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
+    \ablank{$5n$}\\[0.3em]
+    
+    \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16},\;\ablank{19}
+  \end{minipage}
+
+  \vspace{0.65cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q5.\enspace}\;
+  A sequence is made by taking the \textbf{3 times table}
+  and \textbf{subtracting 2 from every term.}\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Use your rule to find the \textbf{20th} term.\\
+  (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
+
+  %
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 6}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\
+    (c)\;Which times tables does the sequence represent?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
+
+    \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
+    \ablank{$5n$}\\[0.3em]
+    
+    \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16},\;\ablank{19}
+  \end{minipage}
+
+  \vspace{0.65cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q5.\enspace}\;
+  A sequence is made by taking the \textbf{3 times table}
+  and \textbf{subtracting 2 from every term.}\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Use your rule to find the \textbf{20th} term.\\
+  (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
+
+  %
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 6}
+
+  % ---- Top row ----
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Matchstick Triangles}\\[0.5em]
+    \matchtriangles[red]{1}\quad
+    \matchtriangles[blue]{2}\quad
+    \matchtriangles[green!70!black]{3}\quad
+    \ashowq{\matchtriangles[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th shape.\\
+    (b)\;How many matchsticks does it use?\\
+    (c)\;Which times tables does the sequence represent?\\[0.3em]
+    \ashow{(b)\;12 matchsticks}\\
+    \ashow{(c)\;The 3 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    4,\;8,\;12,\;16,\;
+    \ablank{20},\;\ablank{24},\;\ablank{28}\\[0.5em]
+
+    \small\textbf{Q3.\enspace The 3 times table has nth term rule $3n$, what is the nth term rule for the 5 times table?} \footnotesize
+    \ablank{$5n$}\\[0.3em]
+    
+    \small\textbf{Q4.\enspace Write the first 5 terms of $\boldsymbol{3n+4}$}\\[0.3em]
+    \footnotesize
+    \ablank{7},\;\ablank{10},\;\ablank{13},\;\ablank{16},\;\ablank{19}
+  \end{minipage}
+
+  \vspace{0.65cm}
+
+  % ---- Wordy ----
+  \small
+  \textbf{Q5.\enspace}\;
+  A sequence is made by taking the \textbf{3 times table}
+  and \textbf{subtracting 2 from every term.}\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Use your rule to find the \textbf{20th} term.\\
+  (d)\;Is $\boldsymbol{100}$ in the sequence? Show your working clearly.\\[0.2em]
+  \ashow{(a)\;1,\,4,\,7,\,10,\,13. \quad (b)\;$\boldsymbol{3n-2}$. \quad (c)\;$3\times20-2 = 58$.}\\
+  \ashow{(d)\;$3n-2=100 \Rightarrow 3n=102 \Rightarrow n=34$. \textbf{Yes}, 100 is the 34th term.}
+
+  %
+
+\end{frame}
+
+% ================================================================
+% STARTER 7
+% ================================================================
+\begin{frame}<1>[shrink=5]{Starter 7}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\
+    (c)\;Which times table does the sequence represent?\\[0.3em]
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time --- the 5 times table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{4n-3}$}\\[0.3em]
+    \footnotesize
+    \ablank{1},\;\ablank{5},\;\ablank{9},\;\ablank{13},\;\ablank{17}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Start with the \textbf{5 times table} and \textbf{add 1} to every term.\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Find the 20th term.\\
+  (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 7}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\
+    (c)\;Which times table does the sequence represent?\\[0.3em]
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time --- the 5 times table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{4n-3}$}\\[0.3em]
+    \footnotesize
+    \ablank{1},\;\ablank{5},\;\ablank{9},\;\ablank{13},\;\ablank{17}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Start with the \textbf{5 times table} and \textbf{add 1} to every term.\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Find the 20th term.\\
+  (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 7}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\
+    (c)\;Which times table does the sequence represent?\\[0.3em]
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time --- the 5 times table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{4n-3}$}\\[0.3em]
+    \footnotesize
+    \ablank{1},\;\ablank{5},\;\ablank{9},\;\ablank{13},\;\ablank{17}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Start with the \textbf{5 times table} and \textbf{add 1} to every term.\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Find the 20th term.\\
+  (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
+
+\end{frame}
+\begin{frame}<1>[shrink=5]{Starter 7}
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q1.\enspace Dots}\\[0.5em]
+    \fourtabledots[red]{1}\quad
+    \fourtabledots[blue]{2}\quad
+    \fourtabledots[green!70!black]{3}\quad
+    \ashowq{\fourtabledots[orange]{4}}\\[0.4em]
+    \footnotesize
+    (a)\;Draw the 4th picture.\\
+    (b)\;How many dots does it contain?\\
+    (c)\;Which times table does the sequence represent?\\[0.3em]
+    \ashow{(b)\;16 dots}\\
+    \ashow{(c)\;The 4 times table}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \small\textbf{Q2.\enspace Complete the Sequence}\\[0.4em]
+    \footnotesize
+    5,\;10,\;15,\;20,\;
+    \ablank{25},\;\ablank{30},\;\ablank{35}\\
+    \ashow{(add 5 each time --- the 5 times table)}\\[0.6em]
+    \small\textbf{Q3.\enspace Write the first 5 terms of $\boldsymbol{4n-3}$}\\[0.3em]
+    \footnotesize
+    \ablank{1},\;\ablank{5},\;\ablank{9},\;\ablank{13},\;\ablank{17}
+  \end{minipage}
+
+  \vspace{0.45cm}
+
+  \small
+  \textbf{Q4.\enspace}\;
+  Start with the \textbf{5 times table} and \textbf{add 1} to every term.\\[0.1em]
+  \footnotesize
+  (a)\;Write the first 5 terms.\\
+  (b)\;What is the $n$th term rule?\\
+  (c)\;Find the 20th term.\\
+  (d)\;Is $\boldsymbol{104}$ in the sequence? Explain how you know.\\[0.2em]
+  \ashow{(a)\;6,\,11,\,16,\,21,\,26. \quad (b)\;$\boldsymbol{5n+1}$. \quad (c)\;$5\times20+1 = 101$.}\\
+  \ashow{(d)\;$5n+1=104 \Rightarrow 5n=103 \Rightarrow n=20.6$. \textbf{No}, 104 is not a term.}
+
+\end{frame}
+
+\end{document}
