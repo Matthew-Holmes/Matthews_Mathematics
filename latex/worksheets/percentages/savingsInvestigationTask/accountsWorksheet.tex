@@ -1,0 +1,315 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=14mm,top=12mm,bottom=12mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.95]{helvet}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,raster}
+\usepackage{xcolor}
+\usepackage{enumitem}
+
+\pagestyle{empty}
+\renewcommand{\familydefault}{\sfdefault}
+
+% ---------------------------------------------------------------
+% Bank colours -- one per bank
+% ---------------------------------------------------------------
+% Page 1 banks
+\definecolor{metroline}{HTML}{1F4E9C}   % blue
+\definecolor{virgo}{HTML}{C62828}       % red
+\definecolor{coventree}{HTML}{2E7D32}   % green
+\definecolor{starlight}{HTML}{6A1B9A}   % purple
+\definecolor{chace}{HTML}{00796B}       % teal
+\definecolor{tesbury}{HTML}{E65100}     % orange
+% Page 3 banks
+\definecolor{barcourt}{HTML}{1F4E9C}    % blue
+\definecolor{santandra}{HTML}{C62828}   % red
+\definecolor{nateast}{HTML}{6A1B9A}     % purple
+\definecolor{lloydale}{HTML}{2E7D32}    % green
+\definecolor{monza}{HTML}{E65100}       % orange
+\definecolor{halifield}{HTML}{00796B}   % teal
+\definecolor{nationworth}{HTML}{AD1457} % plum
+\definecolor{trustbridge}{HTML}{8D6E00} % gold
+
+% ---------------------------------------------------------------
+% The advert box
+%   #1 colour   #2 bank name   #3 account name   #4 headline rate
+% ---------------------------------------------------------------
+\newtcolorbox{advert}[4]{
+  enhanced,
+  colback=#1!5,
+  colframe=#1,
+  boxrule=1pt,
+  arc=3mm,
+  left=3.5mm, right=3.5mm, top=6mm, bottom=6mm,
+  fonttitle=\bfseries\large,
+  colbacktitle=#1,
+  coltitle=white,
+  title={#2},
+  after title={\hfill\normalsize\mdseries #3},
+  before upper={%
+    {\color{#1}\bfseries\fontsize{20}{24}\selectfont\raggedright #4\par}%
+    \vspace{1.5mm}%
+  }
+}
+
+\newcommand{\deal}[1]{%
+  \begin{itemize}[leftmargin=4mm,itemsep=1.6mm,topsep=0mm,parsep=0mm,label=\textbullet]
+  #1
+  \end{itemize}}
+
+% Question list: name in bold, generous working space
+\newlist{qlist}{enumerate}{1}
+\setlist[qlist]{label=\textbf{\arabic*.},leftmargin=8mm,itemsep=24mm,topsep=5mm}
+
+\begin{document}
+
+% ===============================================================
+% PAGE 1 -- easier offers
+% ===============================================================
+\begin{center}
+  {\LARGE\bfseries Savings accounts, part 1}\\[1.5mm]
+  {\small Six banks, six offers. Every one of these accounts adds interest once a year.\\
+  All bank names and interest rates on this sheet are made up.}
+\end{center}
+\vspace{1mm}
+
+\begin{tcolorbox}[enhanced,colback=black!4,colframe=black!45,boxrule=0.8pt,arc=2mm,
+                  left=4mm,right=4mm,top=2.5mm,bottom=2.5mm]
+{\bfseries Simple interest} is worked out on the amount you first paid in, every year.\\
+{\bfseries Compound interest} is worked out on the amount in the account, so you earn interest on your interest.
+\end{tcolorbox}
+\vspace{2mm}
+
+\begin{tcbraster}[raster columns=2, raster equal height=rows,
+                  raster column skip=5mm, raster row skip=6mm]
+\begin{advert}{metroline}{Metroline Bank}{Simple Saver}{10\% simple interest per year}
+\deal{
+  \item Maximum balance \pounds300
+  \item No minimum deposit
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{virgo}{Virgo Money}{Long Saver}{8\% compound interest per year}
+\deal{
+  \item Minimum deposit \pounds500
+  \item No maximum
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{coventree}{Coventree}{Standard Saver}{5\% simple interest per year}
+\deal{
+  \item Building society account
+  \item No minimum deposit
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{starlight}{Starlight Bank}{Steady Saver}{5\% compound interest per year}
+\deal{
+  \item Minimum deposit \pounds100
+  \item No maximum
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{chace}{Chace}{Easy Saver}{4\% compound interest per year}
+\deal{
+  \item No minimum deposit
+  \item No maximum
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{tesbury}{Tesbury Bank}{Two-Year Saver}{6\% simple interest per year}
+\deal{
+  \item Minimum deposit \pounds200
+  \item Money must stay in for at least 2 years
+  \item No maximum
+}
+\end{advert}
+\end{tcbraster}
+
+\newpage
+% ===============================================================
+% PAGE 2 -- questions for part 1
+% ===============================================================
+\begin{center}
+  {\LARGE\bfseries Part 1 questions}\\[1.5mm]
+  {\small For each person, work out which of the six accounts gives them the most money,\\
+  and how much they would have at the end. Check the conditions carefully.}
+\end{center}
+\vspace{2mm}
+
+\begin{qlist}
+  \item \textbf{Amara} has \pounds100 and wants to save it for \textbf{1 year}.
+  \item \textbf{Ben} has \pounds200 and wants to save it for \textbf{2 years}.
+  \item \textbf{Chloe} has \pounds400 and wants to save it for \textbf{4 years}.
+  \item \textbf{Dev} has \pounds1000 and wants to save it for \textbf{3 years}.
+  \item \textbf{Erin} has \pounds500 and wants to save it for \textbf{5 years}.
+  \item \textbf{Fay} has \pounds250 to save for \textbf{3 years}. She has already decided to use either
+        Coventree or Starlight Bank. Which should she choose, and how much better off will she be?
+\end{qlist}
+
+\vfill
+\begin{tcolorbox}[enhanced,colback=black!4,colframe=black!45,boxrule=0.8pt,arc=2mm,
+                  left=4mm,right=4mm,top=3mm,bottom=3mm,
+                  title={Think about},fonttitle=\bfseries,colbacktitle=black!45]
+\begin{itemize}[leftmargin=5mm,itemsep=2mm,topsep=1mm,label=\textbullet]
+  \item Coventree and Starlight both pay 5\%. Explain why Starlight always pays at least as much as Coventree.
+  \item Ben says, ``The account with the biggest percentage is always the best one.'' Is he right? Use the accounts on this sheet to explain your answer.
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+% ===============================================================
+% PAGE 3 -- trickier offers
+% ===============================================================
+\begin{center}
+  {\LARGE\bfseries Savings accounts, part 2}\\[1.5mm]
+  {\small Eight banks, eight offers. These ones do not all add interest once a year.\\
+  All bank names and interest rates on this sheet are made up.}
+\end{center}
+\vspace{2mm}
+
+\begin{tcbraster}[raster columns=2, raster equal height=rows,
+                  raster column skip=5mm, raster row skip=5mm]
+\begin{advert}{barcourt}{Barcourt Bank}{Everyday Saver}{5\% compound interest per year}
+\deal{
+  \item No minimum deposit
+  \item Pay in or take out whenever you like
+  \item Interest added once a year
+}
+\end{advert}
+\begin{advert}{santandra}{Santandra}{Fixed Saver}{8\% compound interest per year}
+\deal{
+  \item Minimum deposit \pounds200
+  \item Money must stay in for at least 2 years
+  \item Interest added once a year
+}
+\end{advert}
+\begin{advert}{nateast}{NatEast}{Young Saver}{9\% simple interest per year}
+\deal{
+  \item For savers aged 11 to 16 only
+  \item Minimum \pounds50, maximum \pounds300
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{lloydale}{Lloydale}{Bonus Builder}{3\% compound + \pounds25 bonus}
+\deal{
+  \item \pounds25 bonus paid only after 3 full years
+  \item Minimum deposit \pounds100
+  \item No withdrawals for 3 years
+}
+\end{advert}
+\begin{advert}{monza}{Monza}{Monthly Saver}{0.5\% compound interest per month}
+\deal{
+  \item Interest added at the end of every month
+  \item Maximum balance \pounds1000
+  \item Take your money out any time
+}
+\end{advert}
+\begin{advert}{halifield}{Halifield}{Half-Year Saver}{2\% compound interest every 6 months}
+\deal{
+  \item Interest added twice a year
+  \item Minimum deposit \pounds75
+  \item No withdrawals in the first year
+}
+\end{advert}
+\begin{advert}{nationworth}{Nationworth}{Loyalty Saver}{6\% simple interest per year}
+\deal{
+  \item \pounds2 account fee taken every month
+  \item Minimum deposit \pounds250
+  \item Interest added once a year
+}
+\end{advert}
+\begin{advert}{trustbridge}{Trustbridge}{Step Saver}{2\%, then 4\%, then 6\% simple}
+\deal{
+  \item Each year's interest is worked out on your original deposit
+  \item Minimum deposit \pounds150
+  \item Money stays in for the full 3 years
+}
+\end{advert}
+\end{tcbraster}
+
+\newpage
+% ===============================================================
+% PAGE 4 -- questions for part 2
+% ===============================================================
+\begin{center}
+  {\LARGE\bfseries Part 2 questions}\\[1.5mm]
+  {\small For each person, work out which of the eight accounts gives them the most money,\\
+  and how much they would have at the end. Check the conditions carefully.}
+\end{center}
+\vspace{2mm}
+
+\begin{qlist}
+  \item \textbf{Priya} is 13. She has \pounds200 to save for \textbf{1 year}.
+  \item \textbf{Marcus} is 30. He has \pounds1000 to save for \textbf{2 years}.
+  \item \textbf{Sofia} is 28. She has \pounds150 to save for \textbf{3 years}.
+  \item \textbf{Dan} is 40. He has \pounds2000 to save for \textbf{2 years}.
+  \item \textbf{Aisha} is 25. She has \pounds500 to save for \textbf{1 year}.
+  \item \textbf{Leo} is 16. He has \pounds300 to save for \textbf{3 years}. Two accounts are very close --- find both, and work out the difference between them.
+\end{qlist}
+
+\vfill
+\begin{tcolorbox}[enhanced,colback=black!4,colframe=black!45,boxrule=0.8pt,arc=2mm,
+                  left=4mm,right=4mm,top=3mm,bottom=3mm,
+                  title={Think about},fonttitle=\bfseries,colbacktitle=black!45]
+\begin{itemize}[leftmargin=5mm,itemsep=2mm,topsep=1mm,label=\textbullet]
+  \item Trustbridge advertises a rate that rises all the way to 6\%. Explain why it is still not a good deal.
+  \item Nationworth advertises the highest simple interest rate on the sheet. Why does nobody choose it?
+  \item Halifield pays 2\% twice a year. Is that the same as 4\% once a year? Explain.
+\end{itemize}
+\end{tcolorbox}
+
+\newpage
+% ===============================================================
+% PAGE 5 -- answers
+% ===============================================================
+\begin{center}
+  {\LARGE\bfseries Answers}\\[1.5mm]
+  {\small Amounts rounded to the nearest penny.}
+\end{center}
+\vspace{3mm}
+
+{\bfseries\large Part 1}
+\begin{enumerate}[leftmargin=8mm,itemsep=2mm,topsep=2mm]
+  \item \textbf{Amara, \pounds100, 1 year --- Metroline, \pounds110.}
+        Coventree and Starlight both give \pounds105; Chace \pounds104. Virgo needs \pounds500, Tesbury needs \pounds200.
+  \item \textbf{Ben, \pounds200, 2 years --- Metroline, \pounds240.}
+        Tesbury \pounds224, Starlight \pounds220.50, Coventree \pounds220, Chace \pounds216.32.
+  \item \textbf{Chloe, \pounds400, 4 years --- Tesbury, \pounds496.}
+        Metroline is out: \pounds400 is over its \pounds300 maximum. Starlight \pounds486.20, Coventree \pounds480, Chace \pounds467.94.
+  \item \textbf{Dev, \pounds1000, 3 years --- Virgo, \pounds1259.71.}
+        Tesbury \pounds1180, Starlight \pounds1157.63, Coventree \pounds1150, Chace \pounds1124.86.
+  \item \textbf{Erin, \pounds500, 5 years --- Virgo, \pounds734.66.}
+        Tesbury \pounds650, Starlight \pounds638.14, Coventree \pounds625, Chace \pounds608.33.
+  \item \textbf{Fay --- Starlight.} \pounds289.41 against Coventree's \pounds287.50, so \pounds1.91 better off.
+\end{enumerate}
+
+\vspace{4mm}
+{\bfseries\large Part 2}
+\begin{enumerate}[leftmargin=8mm,itemsep=2mm,topsep=2mm]
+  \item \textbf{Priya, \pounds200, 1 year --- NatEast, \pounds218.}
+        Monza \pounds212.34, Barcourt \pounds210, Halifield \pounds208.08. Santandra needs 2 years; Nationworth needs \pounds250.
+  \item \textbf{Marcus, \pounds1000, 2 years --- Santandra, \pounds1166.40.}
+        Monza \pounds1127.16, Barcourt \pounds1102.50, Halifield \pounds1082.43, Nationworth \pounds1072. He is too old for NatEast.
+  \item \textbf{Sofia, \pounds150, 3 years --- Lloydale, \pounds188.91} (\pounds163.91 plus the \pounds25 bonus).
+        Monza \pounds179.50, Barcourt \pounds173.64, Halifield \pounds168.92, Trustbridge \pounds168. Santandra needs \pounds200.
+  \item \textbf{Dan, \pounds2000, 2 years --- Santandra, \pounds2332.80.}
+        Barcourt \pounds2205, Nationworth \pounds2192, Halifield \pounds2164.86. Monza is capped at \pounds1000.
+  \item \textbf{Aisha, \pounds500, 1 year --- Monza, \pounds530.84.}
+        Barcourt \pounds525, Halifield \pounds520.20, Nationworth \pounds506. Santandra needs 2 years, Lloydale needs 3.
+  \item \textbf{Leo, \pounds300, 3 years --- NatEast, \pounds381,} just ahead of \textbf{Santandra, \pounds377.91} --- a difference of \textbf{\pounds3.09}.
+        Then Monza \pounds359, Lloydale \pounds352.82, Barcourt \pounds347.29, Halifield \pounds337.85, Trustbridge \pounds336, Nationworth \pounds282.
+\end{enumerate}
+
+\vspace{4mm}
+{\bfseries\large Think about}
+\begin{itemize}[leftmargin=5mm,itemsep=2mm,topsep=2mm]
+  \item \textbf{Coventree v Starlight.} Year 1 is identical: 5\% of the same starting amount. After that Starlight charges its 5\% on a larger balance every year, so it can never fall behind.
+  \item \textbf{Biggest percentage.} No. Metroline's 10\% is the highest rate in part 1, but the \pounds300 cap makes it useless to Chloe, Dev and Erin.
+  \item \textbf{Trustbridge.} The rates are simple, worked out on the original deposit, so three years pays 2\% + 4\% + 6\% = 12\% in total --- only 4\% a year on average.
+  \item \textbf{Nationworth.} The \pounds2 monthly fee costs \pounds24 a year. On \pounds250 that fee wipes out more than the interest; you need over \pounds400 in the account before 6\% even covers it.
+  \item \textbf{Halifield.} No. Two lots of 2\% gives 1.02 $\times$ 1.02 = 1.0404, so 4.04\% a year, slightly more than 4\%.
+\end{itemize}
+
+\end{document}
