@@ -1,0 +1,973 @@
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.4cm, text margin right=0.4cm}
+\setlength{\multicolsep}{4pt}
+\setlength{\columnsep}{14pt}
+\renewcommand{\arraystretch}{0.92}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
+% Every question list on these slides is tight, so that the diagram column and
+% the question column both finish inside the slide.
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}%
+}
+
+% Braces over and under the bar models. The whole percentage goes above the bar
+% and the percentage after the change goes below it.
+\tikzset{
+  topbrace/.style    = {decorate, decoration={brace, amplitude=4pt}, thick},
+  bottombrace/.style = {decorate, decoration={brace, amplitude=4pt}, thick},
+}
+
+% The boxes and arrows the flow charts are built from.
+\tikzset{
+  fbox/.style  = {draw, rounded corners=2pt, minimum width=1.55cm,
+                  minimum height=0.42cm, inner sep=1pt, font=\small},
+  farrow/.style = {->, thick},
+  flab/.style   = {font=\scriptsize, inner sep=1.5pt},
+  rbox/.style   = {draw, rounded corners=2pt, minimum width=1.2cm,
+                   minimum height=0.42cm, inner sep=1pt, font=\small},
+  fwdarc/.style = {->, thick, bend left=32},
+  bckarc/.style = {->, thick, red!70!black, bend left=32},
+}
+
+\title{Percentages with Multipliers: Starters}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}\tightlist
+  \item \hyperlink{q-st1}{\beamergotobutton{Starter 1}}
+  \item \hyperlink{q-st2}{\beamergotobutton{Starter 2}}
+  \item \hyperlink{q-st3}{\beamergotobutton{Starter 3}}
+  \item \hyperlink{q-st4}{\beamergotobutton{Starter 4}}
+  \item \hyperlink{q-st5}{\beamergotobutton{Starter 5}}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}\tightlist
+  \item \hyperlink{work-st1}{\beamergotobutton{Starter 1}}
+  \item \hyperlink{work-st2}{\beamergotobutton{Starter 2}}
+  \item \hyperlink{work-st3}{\beamergotobutton{Starter 3}}
+  \item \hyperlink{work-st4}{\beamergotobutton{Starter 4}}
+  \item \hyperlink{work-st5}{\beamergotobutton{Starter 5}}
+\end{itemize}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 1: Multipliers for an increase and a decrease
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 1}
+\hypertarget{q-st1}{}
+\begin{columns}[T]
+
+\column{0.36\textwidth}
+\begin{center}
+\vspace{-0.9em}
+{\footnotesize\textbf{Write the multiplier\\ under each bar model.}}\\[0.4em]
+\begin{tikzpicture}[scale=0.66, every node/.style={font=\scriptsize}]
+
+% ---- Increase of 20%: a bar of 12 tenths ----
+\node[font=\small] at (2.4,1.75) {Increase by $20\%$};
+\draw[topbrace, blue!60!black] (0,0.65) -- (4.0,0.65);
+\node[blue!60!black] at (2.0,1.10) {$100\%$};
+\foreach \i in {0,...,11}{
+  \ifnum\i<10
+    \fill[blue!30] (\i*0.4,0) rectangle ++(0.4,0.55);
+  \else
+    \fill[green!45] (\i*0.4,0) rectangle ++(0.4,0.55);
+  \fi
+  \draw (\i*0.4,0) rectangle ++(0.4,0.55);
+}
+\draw[bottombrace, green!50!black] (4.8,-0.10) -- (0,-0.10);
+\node[green!50!black] at (2.4,-0.55) {$120\%$};
+\node[font=\small] at (2.4,-1.35) {Multiplier: $\times\,\ablank{1.2}$};
+
+% ---- Decrease of 30%: a bar of 10 tenths, 3 taken away ----
+\node[font=\small] at (2.0,-2.20) {Decrease by $30\%$};
+\draw[topbrace] (0,-3.25) -- (4.0,-3.25);
+\node at (2.0,-2.85) {$100\%$};
+\foreach \i in {0,...,9}{
+  \ifnum\i<7
+    \fill[red!35] (\i*0.4,-3.90) rectangle ++(0.4,0.55);
+  \else
+    \fill[gray!20] (\i*0.4,-3.90) rectangle ++(0.4,0.55);
+  \fi
+  \draw (\i*0.4,-3.90) rectangle ++(0.4,0.55);
+}
+\draw[bottombrace, red!70!black] (2.8,-4.00) -- (0,-4.00);
+\node[red!70!black] at (1.4,-4.45) {$70\%$};
+\node[font=\small] at (2.0,-5.25) {Multiplier: $\times\,\ablank{0.7}$};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.64\textwidth}
+\vspace{-1.8em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $0.35$ as a percentage and as a fraction in its simplest form.
+        \ashow{$35\% = \tfrac{7}{20}$}
+  \columnbreak
+  \item Write $\dfrac{3}{8}$ as a decimal and as a percentage.
+        \ashow{$0.375 = 37.5\%$}
+\end{multicols}
+  \item Complete the table of multipliers.
+  \vspace{0.3em}
+  \begin{center}
+  {\renewcommand{\arraystretch}{1.25}\setlength{\tabcolsep}{6pt}
+  \begin{tabular}{c|c|c}
+    Change & New amount & Multiplier\\ \hline
+    increase of $20\%$ & $120\%$ & $1.2$\\
+    increase of $5\%$  & \ablank{$105\%$} & \ablank{$1.05$}\\
+    decrease of $30\%$ & $70\%$  & \ablank{$0.7$}\\
+    decrease of $8\%$  & \ablank{$92\%$} & \ablank{$0.92$}
+  \end{tabular}}
+  \end{center}
+  \vspace{0.4em}
+\begin{multicols}{2}
+  \item Increase \pounds240 by $15\%$.
+        \ashow{$240\times1.15=$ \pounds276}
+  \columnbreak
+  \item Reduce \pounds45 by $30\%$.
+        \ashow{$45\times0.7=$ \pounds31.50}
+\end{multicols}
+  \item A school has 850 pupils. The roll rises by $6\%$. How many pupils now?
+        \ashow{$850\times1.06=901$ pupils}
+  \item Toby says ``an increase of $10\%$ is $\times1.1$, so a decrease of $10\%$ is $\times0.1$''.
+        Explain why he is wrong and give the correct multiplier.
+        \ashow{$\times0.1$ leaves only $10\%$, a decrease of $90\%$. A decrease of $10\%$ leaves $90\%$, so $\times0.9$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} Write \(0.35\) as a percentage and as a fraction in its simplest form.
+\awork{Solution: \(0.35\) means \(35\) hundredths, so \(0.35=\frac{35}{100}=35\%\). To simplify the fraction, divide numerator and denominator by \(5\):
+\[
+\frac{35}{100}=\frac{7}{20}.
+\]
+So the answers are \(35\%\) and \(\frac{7}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 2}
+\textbf{Question:} Write \(\dfrac{3}{8}\) as a decimal and as a percentage.
+\awork{Solution: First divide \(3\) by \(8\):
+\[
+\frac{3}{8}=0.375.
+\]
+To change a decimal to a percentage, multiply by \(100\):
+\[
+0.375\times100=37.5\%.
+\]
+So \(\frac{3}{8}=0.375=37.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 3}
+\textbf{Question:} Complete the table of multipliers.
+\awork{Solution: For an increase, add the percentage increase to \(100\%\). For a decrease, subtract it from \(100\%\). Then write the percentage as a decimal.
+
+\[
+\begin{array}{c|c|c}
+\text{Change} & \text{New amount} & \text{Multiplier}\\ \hline
+\text{increase of }20\% & 120\% & 1.2\\
+\text{increase of }5\% & 105\% & 1.05\\
+\text{decrease of }30\% & 70\% & 0.7\\
+\text{decrease of }8\% & 92\% & 0.92
+\end{array}
+\]
+
+So the missing entries are \(105\%\), \(1.05\), \(0.7\), \(92\%\), and \(0.92\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 4}
+\textbf{Question:} Increase \pounds240 by \(15\%\).
+\awork{Solution: An increase of \(15\%\) means the new amount is \(100\%+15\%=115\%\) of the original.
+\[
+115\%=1.15.
+\]
+So the multiplier is \(1.15\):
+\[
+240\times1.15=276.
+\]
+Thus the increased amount is \pounds276.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 5}
+\textbf{Question:} Reduce \pounds45 by \(30\%\).
+\awork{Solution: A decrease of \(30\%\) leaves \(100\%-30\%=70\%\) of the original.
+\[
+70\%=0.7.
+\]
+So the multiplier is \(0.7\):
+\[
+45\times0.7=31.5.
+\]
+Thus the reduced amount is \pounds31.50.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 6}
+\textbf{Question:} A school has 850 pupils. The roll rises by \(6\%\). How many pupils now?
+\awork{Solution: A rise of \(6\%\) gives the multiplier
+\[
+1+0.06=1.06.
+\]
+So the new roll is
+\[
+850\times1.06=901.
+\]
+The school now has \(901\) pupils.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 7}
+\textbf{Question:} Toby says ``an increase of \(10\%\) is \(\times1.1\), so a decrease of \(10\%\) is \(\times0.1\)''. Explain why he is wrong and give the correct multiplier.
+\awork{Solution: Toby is wrong because multiplying by \(0.1\) leaves only \(10\%\) of the original amount, which is a decrease of \(90\%\), not \(10\%\). A decrease of \(10\%\) leaves \(90\%\), so the multiplier is
+\[
+0.9.
+\]
+The correct multiplier is therefore \(\times0.9\).}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 2: Chains of multipliers and percentage change
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 2}
+\hypertarget{q-st2}{}
+\begin{columns}[T]
+
+\column{0.33\textwidth}
+\begin{center}
+\vspace{-0.4em}
+\begin{tikzpicture}[scale=1, every node/.style={font=\scriptsize}]
+
+% ---- Chain of two multipliers ----
+\node[fbox] (a0) at (0,0) {\pounds200};
+\node[fbox] (a1) at (0,-1.0) {\ashowq{\pounds220}};
+\node[fbox] (a2) at (0,-2.0) {\ashowq{\pounds176}};
+\draw[farrow] (a0) -- node[flab,right] {$\times 1.1$} (a1);
+\draw[farrow] (a1) -- node[flab,right] {$\times 0.8$} (a2);
+
+% ---- Reversing a multiplier ----
+\node[font=\small, text width=3.5cm, align=center] at (0,-3.15)
+  {A coat reduced by $15\%$ costs \pounds68};
+\node[rbox] (b0) at (-1.25,-4.55) {\ashowq{\pounds80}};
+\node[rbox] (b1) at ( 1.25,-4.55) {\pounds68};
+\draw[fwdarc] (b0) to node[flab, above] {$\times 0.85$} (b1);
+\draw[bckarc] (b1) to node[flab, below] {$\div\, 0.85$} (b0);
+\node[font=\scriptsize, text width=3.5cm, align=center] at (0,-6.15)
+  {Multiply to go \mbox{forwards}. \textbf{Divide} by the multiplier to go back.};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.67\textwidth}
+\vspace{-1.8em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $45\%$ as a decimal and $0.06$ as a percentage.
+        \ashow{$0.45$ and $6\%$}
+  \columnbreak
+  \item Write $\dfrac{7}{20}$ as a percentage.
+        \ashow{$35\%$}
+\end{multicols}
+\begin{multicols}{2}
+  \item Write the missing prices in the boxes of the first flow chart.
+        \ashow{\pounds220 then \pounds176}
+  \columnbreak
+  \item Write the multiplier for an increase of $3.5\%$.
+        \ashow{$\times1.035$}
+\end{multicols}
+  \item A bike costs \pounds180. The price rises by $10\%$, then the new price falls by $10\%$.
+        Find the final price, and the single multiplier for the two changes together.
+        \ashow{$180\times1.1\times0.9=$ \pounds178.20; $1.1\times0.9=0.99$, a $1\%$ decrease}
+\begin{multicols}{2}
+  \item Write the coat's original price in the empty box of the second flow chart.
+        \ashow{$68\div0.85=$ \pounds80}
+  \columnbreak
+  \item A meal costs \pounds42 after a $20\%$ service charge. Find the price before the charge.
+        \ashow{$42\div1.2=$ \pounds35}
+\end{multicols}
+  \item A jacket has $20\%$ off, then a further $10\%$ off at the till, and costs \pounds180.
+        Find the original price.
+        \ashow{$0.8\times0.9=0.72$, so $180\div0.72=$ \pounds250.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} Write \(45\%\) as a decimal and \(0.06\) as a percentage.
+\awork{Solution: To write a percentage as a decimal, divide by \(100\):
+\[
+45\%=\frac{45}{100}=0.45.
+\]
+To write a decimal as a percentage, multiply by \(100\):
+\[
+0.06\times100=6\%.
+\]
+So \(45\%=0.45\) and \(0.06=6\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 2}
+\textbf{Question:} Write \(\dfrac{7}{20}\) as a percentage.
+\awork{Solution: Scale the fraction to hundredths:
+\[
+\frac{7}{20}=\frac{35}{100}=35\%.
+\]
+Equivalently, \(\frac{7}{20}=0.35\), and \(0.35=35\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 3}
+\textbf{Question:} In the first flow chart, \pounds200 is multiplied by \(1.1\), and the result is then multiplied by \(0.8\). Write the two missing prices.
+\awork{Solution: First multiply by \(1.1\):
+\[
+\pounds200\times1.1=\pounds220.
+\]
+Then multiply that result by \(0.8\):
+\[
+\pounds220\times0.8=\pounds176.
+\]
+So the two missing boxes are \pounds220 and \pounds176.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 4}
+\textbf{Question:} Write the multiplier for an increase of \(3.5\%\).
+\awork{Solution: An increase of \(3.5\%\) leaves \(100\%+3.5\%=103.5\%\). As a decimal,
+\[
+103.5\%=\frac{103.5}{100}=1.035.
+\]
+So the multiplier is \(\times1.035\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 5}
+\textbf{Question:} A bike costs \pounds180. The price rises by \(10\%\), then the new price falls by \(10\%\). Find the final price, and the single multiplier for the two changes together.
+\awork{Solution: The multiplier for an increase of \(10\%\) is \(1.1\). The multiplier for a decrease of \(10\%\) is \(0.9\). Applying them in order gives
+\[
+180\times1.1\times0.9=178.2.
+\]
+So the final price is \pounds178.20.
+
+The single multiplier for the two changes is
+\[
+1.1\times0.9=0.99.
+\]
+Since \(0.99=99\%\), the overall effect is a \(1\%\) decrease.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 6}
+\textbf{Question:} Write the coat's original price in the empty box of the second flow chart, where a coat reduced by \(15\%\) costs \pounds68.
+\awork{Solution: A reduction of \(15\%\) leaves
+\[
+100\%-15\%=85\%=0.85.
+\]
+The original price was multiplied by \(0.85\) to give \pounds68, so to reverse this we divide by \(0.85\):
+\[
+68\div0.85=80.
+\]
+The original price was \pounds80.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 7}
+\textbf{Question:} A meal costs \pounds42 after a \(20\%\) service charge. Find the price before the charge.
+\awork{Solution: A \(20\%\) service charge means the final price is
+\[
+100\%+20\%=120\%=1.2
+\]
+times the price before the charge. So the price before the charge is
+\[
+42\div1.2=35.
+\]
+The meal cost \pounds35 before the service charge.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 8}
+\textbf{Question:} A jacket has \(20\%\) off, then a further \(10\%\) off at the till, and costs \pounds180. Find the original price.
+\awork{Solution: \(20\%\) off leaves \(80\%\), so the first multiplier is \(0.8\). A further \(10\%\) off leaves \(90\%\), so the second multiplier is \(0.9\). Together they give
+\[
+0.8\times0.9=0.72.
+\]
+The original price multiplied by \(0.72\) gives \pounds180, so the original price is
+\[
+180\div0.72=250.
+\]
+The original price was \pounds250.}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 3: Finding the original value
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 3}
+\hypertarget{q-st3}{}
+\begin{columns}[T]
+
+\column{0.36\textwidth}
+\begin{center}
+\vspace{-0.4em}
+\begin{tikzpicture}[scale=0.66, every node/.style={font=\scriptsize}]
+
+% ---- Reverse decrease shown as a bar model ----
+\draw[topbrace] (0,0.30) -- (4.0,0.30);
+\node at (2.0,0.75) {$100\%$ is \ashowq{\pounds80}};
+\foreach \i in {0,...,9}{
+  \ifnum\i<8
+    \fill[orange!35] (\i*0.4,-0.35) rectangle ++(0.4,0.55);
+  \else
+    \fill[gray!15] (\i*0.4,-0.35) rectangle ++(0.4,0.55);
+  \fi
+  \draw (\i*0.4,-0.35) rectangle ++(0.4,0.55);
+}
+\draw[bottombrace, orange!80!black] (3.2,-0.45) -- (0,-0.45);
+\node[orange!80!black] at (1.6,-0.90) {$80\%$ is \pounds64};
+
+% ---- Reverse increase shown as a flow chart ----
+\node[font=\small] at (2.0,-1.55) {Undoing an increase};
+\node[rbox] (t0) at (-0.1,-3.30) {\ashowq{\pounds45}};
+\node[rbox] (t1) at ( 4.1,-3.30) {\pounds54};
+\draw[fwdarc] (t0) to node[flab, above] {$\times 1.2$} (t1);
+\draw[bckarc] (t1) to node[flab, below] {$\div\, 1.2$} (t0);
+\node[font=\scriptsize, text width=3.9cm, align=center] at (2.0,-5.40)
+  {To undo a multiplier, divide by it.};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.64\textwidth}
+\vspace{-1.8em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\dfrac{5}{8}$ as a decimal and as a percentage.
+        \ashow{$0.625 = 62.5\%$}
+  \columnbreak
+  \item Write $24\%$ as a fraction in its simplest form.
+        \ashow{$\tfrac{24}{100}=\tfrac{6}{25}$}
+\end{multicols}
+  \item A price is reduced by $20\%$ to \pounds64. Complete the chain from the bar model.
+  \vspace{-0.2em}
+  \begin{center}
+    $80\%$ is \pounds64\\[1pt]
+    $10\%$ is \ablank{\pounds8}\\[1pt]
+    $100\%$ is \ablank{\pounds80}
+  \end{center}
+  \vspace{-0.2em}
+  \item A price is increased by $20\%$ to \pounds54. Write the original price in the empty box of
+        the flow chart.
+        \ashow{$54\div1.2=$ \pounds45}
+\begin{multicols}{2}
+  \item A jacket costs \pounds68 after a $15\%$ reduction. Find the original price.
+        \ashow{$68\div0.85=$ \pounds80}
+  \columnbreak
+  \item A salary rises by $4\%$ to \pounds33\,280. Find the salary before the rise.
+        \ashow{$33\,280\div1.04=$ \pounds32\,000}
+\end{multicols}
+  \item Sam says ``a coat reduced by $25\%$ costs \pounds60, so the original price was
+        $60+25\%$ of $60=$ \pounds75''. Explain Sam's mistake and find the correct original price.
+        \ashow{The $25\%$ was taken off the original price, not off \pounds60. \pounds60 is $75\%$, so $60\div0.75=$ \pounds80.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} Write \(\dfrac{5}{8}\) as a decimal and as a percentage.
+\awork{Solution: Divide \(5\) by \(8\):
+\[
+\frac{5}{8}=0.625.
+\]
+Multiply by \(100\) to write it as a percentage:
+\[
+0.625\times100=62.5\%.
+\]
+So \(\frac{5}{8}=0.625=62.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 2}
+\textbf{Question:} Write \(24\%\) as a fraction in its simplest form.
+\awork{Solution: A percentage is a fraction out of \(100\), so
+\[
+24\%=\frac{24}{100}.
+\]
+Divide the numerator and denominator by \(4\):
+\[
+\frac{24}{100}=\frac{6}{25}.
+\]
+So \(24\%=\frac{6}{25}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 3}
+\textbf{Question:} A price is reduced by \(20\%\) to \pounds64. Complete the chain from the bar model: \(80\%\) is \pounds64, \(10\%\) is \ldots, \(100\%\) is \ldots
+\awork{Solution: Since \(\pounds64\) represents \(80\%\), divide by \(8\) to find \(10\%\):
+\[
+80\%=\pounds64 \quad\Rightarrow\quad 10\%=\pounds8.
+\]
+Therefore
+\[
+100\%=10\times\pounds8=\pounds80.
+\]
+So the missing amounts are \(\pounds8\) for \(10\%\) and \(\pounds80\) for \(100\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 4}
+\textbf{Question:} A price is increased by \(20\%\) to \pounds54. Write the original price in the empty box of the flow chart.
+\awork{Solution: An increase of \(20\%\) has multiplier
+\[
+1+0.2=1.2.
+\]
+The original price was multiplied by \(1.2\) to give \pounds54, so undo this by dividing by \(1.2\):
+\[
+54\div1.2=45.
+\]
+The original price was \pounds45.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 5}
+\textbf{Question:} A jacket costs \pounds68 after a \(15\%\) reduction. Find the original price.
+\awork{Solution: A \(15\%\) reduction leaves
+\[
+100\%-15\%=85\%=0.85.
+\]
+So \pounds68 is \(85\%\) of the original price. Divide by \(0.85\) to reverse the multiplier:
+\[
+68\div0.85=80.
+\]
+The original price was \pounds80.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 6}
+\textbf{Question:} A salary rises by \(4\%\) to \pounds33\,280. Find the salary before the rise.
+\awork{Solution: A rise of \(4\%\) has multiplier
+\[
+1+0.04=1.04.
+\]
+So the increased salary is
+\[
+\text{original}\times1.04=\pounds33\,280.
+\]
+Divide by \(1.04\) to find the original salary:
+\[
+33\,280\div1.04=32\,000.
+\]
+The salary before the rise was \pounds32\,000.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 7}
+\textbf{Question:} Sam says ``a coat reduced by \(25\%\) costs \pounds60, so the original price was \(60+25\%\) of \(60=\) \pounds75''. Explain Sam's mistake and find the correct original price.
+\awork{Solution: Sam's mistake is adding \(25\%\) of the reduced price. The \(25\%\) was taken off the original price, not off \pounds60.
+
+After a \(25\%\) reduction, \pounds60 is only
+\[
+100\%-25\%=75\%=0.75
+\]
+of the original price. Therefore the original price is
+\[
+60\div0.75=80.
+\]
+The correct original price was \pounds80.}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 4: Simple and compound interest
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 4}
+\hypertarget{q-st4}{}
+\begin{columns}[T]
+
+\column{0.40\textwidth}
+\begin{center}
+\vspace{-0.4em}
+\begin{tikzpicture}[scale=1, every node/.style={font=\scriptsize}]
+
+\node[font=\small] at (1.35,0.75) {\pounds200 for 3 years at $10\%$};
+
+% ---- Simple interest ----
+\node[font=\small] at (0,0.20) {Simple};
+\node[fbox] (s0) at (0,-0.35) {\pounds200};
+\node[fbox] (s1) at (0,-1.13) {\pounds220};
+\node[fbox] (s2) at (0,-1.91) {\pounds240};
+\node[fbox] (s3) at (0,-2.69) {\ashowq{\pounds260}};
+\draw[farrow] (s0) -- node[flab,left] {$+\,$\pounds20} (s1);
+\draw[farrow] (s1) -- node[flab,left] {$+\,$\pounds20} (s2);
+\draw[farrow] (s2) -- node[flab,left] {$+\,$\pounds20} (s3);
+
+% ---- Compound interest ----
+\node[font=\small] at (2.7,0.20) {Compound};
+\node[fbox] (c0) at (2.7,-0.35) {\pounds200};
+\node[fbox] (c1) at (2.7,-1.13) {\pounds220};
+\node[fbox] (c2) at (2.7,-1.91) {\ashowq{\pounds242}};
+\node[fbox] (c3) at (2.7,-2.69) {\ashowq{\pounds266.20}};
+\draw[farrow] (c0) -- node[flab,right] {$\times 1.1$} (c1);
+\draw[farrow] (c1) -- node[flab,right] {$\times 1.1$} (c2);
+\draw[farrow] (c2) -- node[flab,right] {$\times 1.1$} (c3);
+
+\node[font=\scriptsize, text width=4.4cm, align=center] at (1.35,-3.60)
+  {Simple interest adds the same amount every year;
+   compound interest uses the new balance.};
+
+\end{tikzpicture}
+
+\vspace{0.4em}
+{\scriptsize
+\begin{tabular}{c|c|c}
+  Year & Simple & Compound\\ \hline
+  1 & \pounds220 & \pounds220\\
+  2 & \pounds240 & \ablank{\pounds242}\\
+  3 & \ablank{\pounds260} & \ablank{\pounds266.20}
+\end{tabular}}
+\end{center}
+
+\column{0.60\textwidth}
+\vspace{-1.8em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $3\%$ as a decimal and $0.045$ as a percentage.
+        \ashow{$0.03$ and $4.5\%$}
+  \columnbreak
+  \item Write $\dfrac{1}{40}$ as a percentage.
+        \ashow{$2.5\%$}
+\end{multicols}
+  \item Write the missing balances in the boxes and in the table.
+\begin{multicols}{2}
+  \item Find the simple interest on \pounds1200 at $5\%$ for 4 years.
+        \ashow{\pounds60 a year, so \pounds240}
+  \columnbreak
+  \item Find the value of \pounds4000 after 5 years at $3\%$ compound interest.
+        \ashow{$4000\times1.03^{5}=$ \pounds4637.10}
+\end{multicols}
+  \item Ravi saves \pounds300 for 3 years at either $6\%$ simple or $5\%$ compound.
+        Which pays more?
+        \ashow{A: \pounds354; B: $300\times1.05^{3}=$ \pounds347.29, so A pays more.}
+  \item Account A pays $10\%$ simple but holds at most \pounds300. Account B pays $5\%$ simple,
+        no maximum. Dev saves \pounds1000 for 3 years. Which is better, and by how much?
+        \ashow{A: \pounds390 plus the \pounds700 that earns nothing, so \pounds1090.
+               B: \pounds1150, so B by \pounds60.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} Write \(3\%\) as a decimal and \(0.045\) as a percentage.
+\awork{Solution: To write \(3\%\) as a decimal, divide by \(100\):
+\[
+3\%=\frac{3}{100}=0.03.
+\]
+To write \(0.045\) as a percentage, multiply by \(100\):
+\[
+0.045\times100=4.5\%.
+\]
+So \(3\%=0.03\) and \(0.045=4.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 2}
+\textbf{Question:} Write \(\dfrac{1}{40}\) as a percentage.
+\awork{Solution: Multiply the fraction by \(100\%\):
+\[
+\frac{1}{40}\times100\%=\frac{100}{40}\%=2.5\%.
+\]
+Equivalently, \(\frac{1}{40}=0.025\), and \(0.025=2.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 3}
+\textbf{Question:} For \pounds200 invested for 3 years at \(10\%\), write the missing balances in the boxes and in the table.
+\awork{Solution: With simple interest, the interest each year is
+\[
+10\%\text{ of }\pounds200=\pounds20.
+\]
+So after 3 years,
+\[
+200+3\times20=\pounds260.
+\]
+
+With compound interest, multiply by \(1.1\) each year. After year 2:
+\[
+220\times1.1=\pounds242.
+\]
+After year 3:
+\[
+242\times1.1=\pounds266.20.
+\]
+
+The missing entries are therefore: the simple-interest box after year 3 is \(\pounds260\); the compound-interest boxes after years 2 and 3 are \(\pounds242\) and \(\pounds266.20\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 4}
+\textbf{Question:} Find the simple interest on \pounds1200 at \(5\%\) for 4 years.
+\awork{Solution: Simple interest is the same amount each year. One year's interest is
+\[
+5\%\text{ of }1200=1200\times0.05=\pounds60.
+\]
+Over 4 years,
+\[
+4\times60=\pounds240.
+\]
+So the simple interest is \pounds240.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 5}
+\textbf{Question:} Find the value of \pounds4000 after 5 years at \(3\%\) compound interest.
+\awork{Solution: Compound interest of \(3\%\) means multiply by \(1.03\) once each year. After 5 years,
+\[
+4000\times1.03^5.
+\]
+Since
+\[
+1.03^5=1.159274074\ldots,
+\]
+we get
+\[
+4000\times1.03^5=4637.096297\ldots
+\]
+Rounded to the nearest penny, the value is \pounds4637.10.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 6}
+\textbf{Question:} Ravi saves \pounds300 for 3 years at either \(6\%\) simple or \(5\%\) compound. Which pays more?
+\awork{Solution: At \(6\%\) simple, the interest each year is
+\[
+300\times0.06=\pounds18.
+\]
+After 3 years,
+\[
+300+3\times18=\pounds354.
+\]
+
+At \(5\%\) compound, multiply by \(1.05\) three times:
+\[
+300\times1.05^3=300\times1.157625=\pounds347.2875.
+\]
+This is \pounds347.29 to the nearest penny.
+
+So the \(6\%\) simple account pays more; it pays \pounds6.71 more.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 7}
+\textbf{Question:} Account A pays \(10\%\) simple but holds at most \pounds300. Account B pays \(5\%\) simple, no maximum. Dev saves \pounds1000 for 3 years. Which is better, and by how much?
+\awork{Solution: With Account A, only \pounds300 can earn interest. After 3 years at \(10\%\) simple, that \pounds300 becomes
+\[
+300+3\times(10\%\text{ of }300)
+=300+3\times30
+=\pounds390.
+\]
+The remaining \pounds700 earns nothing, so the total is
+\[
+390+700=\pounds1090.
+\]
+
+With Account B, all \pounds1000 earns \(5\%\) simple interest for 3 years:
+\[
+1000+3\times(5\%\text{ of }1000)
+=1000+3\times50
+=\pounds1150.
+\]
+
+Account B is better by
+\[
+1150-1090=\pounds60.
+\]}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 5: Reading interest from a graph
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 5}
+\hypertarget{q-st5}{}
+\begin{columns}[T]
+
+\column{0.38\textwidth}
+\begin{center}
+\vspace{-0.4em}
+\begin{tikzpicture}
+\begin{axis}[
+  width=4.6cm, height=4.6cm,
+  xlabel={years}, ylabel={balance (\pounds)},
+  xlabel style={font=\scriptsize}, ylabel style={font=\scriptsize},
+  tick label style={font=\scriptsize},
+  xmin=0, xmax=5.2, ymin=450, ymax=850,
+  xtick={0,1,2,3,4,5}, ytick={500,600,700,800},
+  minor y tick num=1,
+  grid=both, grid style={black!12},
+  axis lines=left,
+]
+  \addplot[blue!70!black, very thick, mark=*, mark size=1.2pt]
+    coordinates {(0,500)(1,550)(2,600)(3,650)(4,700)(5,750)};
+  \addplot[orange!85!black, very thick, mark=*, mark size=1.2pt]
+    coordinates {(0,500)(1,550)(2,605)(3,665.5)(4,732.05)(5,805.26)};
+  \node[blue!70!black, font=\scriptsize] at (axis cs:4.3,655) {A};
+  \node[orange!85!black, font=\scriptsize] at (axis cs:3.6,730) {B};
+  \only<2->{%
+    \addplot[red, very thick, mark=*, mark size=1.2pt]
+      coordinates {(0,500)(1,600)(2,700)(3,800)};
+    \node[red, font=\scriptsize] at (axis cs:2.35,790) {C};}
+\end{axis}
+\end{tikzpicture}\\[-0.4em]
+{\scriptsize Both accounts start with \pounds500.}
+\end{center}
+
+\column{0.62\textwidth}
+\vspace{-1.8em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $1.08$ as a percentage and $0.6\%$ as a decimal.
+        \ashow{$108\%$ and $0.006$}
+  \columnbreak
+  \item Write $0.45$ as a fraction in its simplest form.
+        \ashow{$\tfrac{45}{100}=\tfrac{9}{20}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item Both accounts pay the same rate. Use the graph to find it.
+        \ashow{After 1 year both hold \pounds550, so \pounds50 on \pounds500, a rate of $10\%$}
+  \columnbreak
+  \item Which account pays simple interest, and how can you tell?
+        \ashow{A, because it rises by the same \pounds50 every year, so the graph is a straight line}
+\end{multicols}
+  \item Account C pays $20\%$ simple interest on \pounds500. Complete the table, then plot the four
+        points on the graph.
+  \vspace{0.2em}
+  \begin{center}
+  \begin{tabular}{c|c|c|c|c}
+    Years & 0 & 1 & 2 & 3\\ \hline
+    Balance & \pounds500 & \ablank{\pounds600} & \ablank{\pounds700} & \ablank{\pounds800}
+  \end{tabular}
+  \end{center}
+  \vspace{0.3em}
+  \item An account pays $2\%$ compound interest every 6 months. Is that the same as $4\%$ a year?
+        Explain your answer.
+        \ashow{No. $1.02\times1.02=1.0404$, so the year's multiplier is $1.0404$ and the rate is $4.04\%$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} Write \(1.08\) as a percentage and \(0.6\%\) as a decimal.
+\awork{Solution: To write a decimal as a percentage, multiply by \(100\):
+\[
+1.08\times100=108\%.
+\]
+To write \(0.6\%\) as a decimal, divide by \(100\):
+\[
+0.6\%=\frac{0.6}{100}=0.006.
+\]
+So \(1.08=108\%\) and \(0.6\%=0.006\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 2}
+\textbf{Question:} Write \(0.45\) as a fraction in its simplest form.
+\awork{Solution: Since \(0.45\) has two decimal places,
+\[
+0.45=\frac{45}{100}.
+\]
+Divide numerator and denominator by \(5\):
+\[
+\frac{45}{100}=\frac{9}{20}.
+\]
+So \(0.45=\frac{9}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 3}
+\textbf{Question:} Both accounts pay the same rate. From the graph, after one year both balances have risen from \pounds500 to \pounds550. Use this to find the rate.
+\awork{Solution: After one year, each account has gained
+\[
+550-500=\pounds50.
+\]
+As a percentage of the original \pounds500,
+\[
+\frac{50}{500}\times100\%=10\%.
+\]
+So the common interest rate is \(10\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 4}
+\textbf{Question:} On the graph, Account A is a straight line and Account B is a curve. Which account pays simple interest, and how can you tell?
+\awork{Solution: Account A pays simple interest.
+
+A simple-interest account adds the same amount of interest every year, so its balance increases by equal amounts each year. That produces a straight-line graph. Account A is the straight line, while Account B curves upward because compound interest grows by larger and larger amounts.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 5}
+\textbf{Question:} Account C pays \(20\%\) simple interest on \pounds500. Complete the table of balances after \(0,1,2,3\) years, then plot the four points on the graph.
+\awork{Solution: The interest each year is
+\[
+20\%\text{ of }500=500\times0.2=\pounds100.
+\]
+So after \(n\) years, the balance is
+\[
+500+100n.
+\]
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+Years & 0 & 1 & 2 & 3\\ \hline
+Balance & \pounds500 & \pounds600 & \pounds700 & \pounds800
+\end{tabular}
+\end{center}
+
+The four points to plot are \((0,500)\), \((1,600)\), \((2,700)\), and \((3,800)\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 6}
+\textbf{Question:} An account pays \(2\%\) compound interest every 6 months. Is that the same as \(4\%\) a year? Explain your answer.
+\awork{Solution: No. In 6 months the multiplier is \(1.02\). Over two 6-month periods in one year, the multiplier is
+\[
+1.02\times1.02=1.0404.
+\]
+Since \(1.0404\) corresponds to
+\[
+1.0404-1=0.0404=4.04\%,
+\]
+the effective annual rate is \(4.04\%\), not \(4\%\). The extra \(0.04\%\) comes from earning interest on the first six months' interest.}
+\end{frame}
+
+\end{document}
