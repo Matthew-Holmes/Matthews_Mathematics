@@ -1,3 +1,4 @@
+% Root file used ashow macros
 \documentclass{beamer}
 \usepackage{tikz}
 \usetikzlibrary{calc}
@@ -110,10 +111,43 @@
 
 \frame{\titlepage}
 
+\begin{frame}[t]{Contents}
+\small
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+\item \hyperlink{q-st1}{\beamergotobutton{Starter 1}}
+\item \hyperlink{q-st2}{\beamergotobutton{Starter 2}}
+\item \hyperlink{q-st3}{\beamergotobutton{Starter 3}}
+\item \hyperlink{q-st4}{\beamergotobutton{Starter 4}}
+\item \hyperlink{q-st5}{\beamergotobutton{Starter 5}}
+\item \hyperlink{q-st6}{\beamergotobutton{Starter 6}}
+\item \hyperlink{q-st7}{\beamergotobutton{Starter 7}}
+\item \hyperlink{q-st8}{\beamergotobutton{Starter 8}}
+\item \hyperlink{q-st9}{\beamergotobutton{Starter 9}}
+\end{itemize}
+\column{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+\item \hyperlink{work-st1}{\beamergotobutton{Starter 1}}
+\item \hyperlink{work-st2}{\beamergotobutton{Starter 2}}
+\item \hyperlink{work-st3}{\beamergotobutton{Starter 3}}
+\item \hyperlink{work-st4}{\beamergotobutton{Starter 4}}
+\item \hyperlink{work-st5}{\beamergotobutton{Starter 5}}
+\item \hyperlink{work-st6}{\beamergotobutton{Starter 6}}
+\item \hyperlink{work-st7}{\beamergotobutton{Starter 7}}
+\item \hyperlink{work-st8}{\beamergotobutton{Starter 8}}
+\item \hyperlink{work-st9}{\beamergotobutton{Starter 9}}
+\end{itemize}
+\end{columns}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 1: The probability scale and the words we describe it with
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 1}
+\hypertarget{q-st1}{}
 \begin{columns}[T]
 
 \column{0.42\textwidth}
@@ -206,10 +240,47 @@
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} Write \(0.25\) as a fraction in its simplest form.
+\awork{Solution: \(0.25=\frac{25}{100}\). Divide numerator and denominator by \(25\): \(\frac{25}{100}=\frac{1}{4}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 2}
+\textbf{Question:} Write \(\frac{3}{5}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{3}{5}=\frac{6}{10}=0.6\). To make a percentage, multiply by \(100\): \(0.6\times100=60\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 3}
+\textbf{Question:} Every probability is a number from \underline{\hspace{1cm}} to \underline{\hspace{1cm}}.
+\awork{Solution: Every probability is at least \(0\) and at most \(1\). So the gaps are \(0\) and \(1\): a probability is a number from \(0\) to \(1\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 4}
+\textbf{Question:} Mark events \textbf{A}, \textbf{B}, \textbf{C} and \textbf{D} on the empty scale.
+\awork{Solution: \(P(A)=\frac{1}{2}=0.5\), so A is at \(0.5\). \(P(B)=\frac{1}{7}\approx0.143\), so B is near \(0\). \(P(C)=1\), so C is at \(1\). \(P(D)=\frac{3}{4}=0.75\), so D is at \(0.75\). In order from left to right: B, A, D, C.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 5}
+\textbf{Question:} Complete the table.
+\awork{Solution: The completed table is: impossible: \(0\); unlikely: between \(0\) and \(0.5\); even chance: \(0.5\); likely: between \(0.5\) and \(1\); certain: \(1\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 6}
+\textbf{Question:} Write a probability that is unlikely but not impossible, as a fraction, a decimal and a percentage.
+\awork{Solution: Any probability strictly between \(0\) and \(0.5\) works. For example, \(\frac{1}{10}=0.1=10\%\). This is unlikely because it is less than \(0.5\), but not impossible because it is greater than \(0\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 1, Question 7}
+\textbf{Question:} Ravi says ``the probability that it rains tomorrow is \(1.4\)''. Explain why he is wrong.
+\awork{Solution: A probability cannot be greater than \(1\). \(1.4>1\), so it is not a possible probability. A probability of \(1\) would mean rain is certain; \(1.4\) would be more than certain, which is impossible.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 2: Probabilities from a bag of counters
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 2}
+\hypertarget{q-st2}{}
 \begin{columns}[T]
 
 \column{0.38\textwidth}
@@ -290,10 +361,57 @@ that the counter is red is written $P(\text{red})$.\par}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} Write \(\frac{1}{2}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{1}{2}=1\div2=0.5\). As a percentage: \(0.5\times100=50\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 2}
+\textbf{Question:} Write \(30\%\) as a fraction in its simplest form.
+\awork{Solution: \(30\%=\frac{30}{100}\). Divide by \(10\): \(\frac{30}{100}=\frac{3}{10}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 3}
+\textbf{Question:} How many counters are in the bag altogether?
+\awork{Solution: Count them by colour: \(5\) red, \(3\) blue and \(2\) yellow. \(5+3+2=10\), so there are \(10\) counters altogether.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 4}
+\textbf{Question:} Write \(P(\text{red})\) as a fraction in its simplest form.
+\awork{Solution: There are \(5\) red counters out of \(10\) counters in total. \(P(\text{red})=\frac{5}{10}=\frac{1}{2}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 5}
+\textbf{Question:} Write \(P(\text{blue})\) as a fraction, a decimal and a percentage.
+\awork{Solution: There are \(3\) blue counters out of \(10\). \(P(\text{blue})=\frac{3}{10}=0.3=30\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 6}
+\textbf{Question:} Mark \(P(\text{red})\), \(P(\text{blue})\) and \(P(\text{yellow})\) on the probability scale.
+\awork{Solution: \(P(\text{yellow})=\frac{2}{10}=0.2\), \(P(\text{blue})=\frac{3}{10}=0.3\), and \(P(\text{red})=\frac{5}{10}=0.5\). On a scale from \(0\) to \(1\), mark Y at \(0.2\), B at \(0.3\), and R at \(0.5\). So from left to right the marks are Y, B, R.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 7}
+\textbf{Question:} Write \(P(\text{not red})\) as a fraction in its simplest form.
+\awork{Solution: \(P(\text{not red})=1-P(\text{red})=1-\frac{1}{2}=\frac{1}{2}\). Alternatively, the non-red counters are \(3\) blue and \(2\) yellow, so \(\frac{5}{10}=\frac{1}{2}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 8}
+\textbf{Question:} What does \(P(\text{red})+P(\text{blue})+P(\text{yellow})\) come to, and why?
+\awork{Solution: \(P(\text{red})+P(\text{blue})+P(\text{yellow})=\frac{5}{10}+\frac{3}{10}+\frac{2}{10}=\frac{10}{10}=1\). This is \(1\) because every counter is red, blue or yellow, so one of these three colours is certain to be taken.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 2, Question 9}
+\textbf{Question:} Only red counters are added to the bag, until \(P(\text{red})\) is \(\frac{3}{4}\). How many red counters are added?
+\awork{Solution: Let \(x\) be the number of red counters added. There were \(5\) red counters and \(10\) counters in total. After adding \(x\) red counters, red \(=5+x\) and total \(=10+x\). We need \(\frac{5+x}{10+x}=\frac{3}{4}\). Cross-multiply: \(4(5+x)=3(10+x)\), so \(20+4x=30+3x\). Thus \(x=10\). Check: \(15\) red out of \(20\) is \(\frac{15}{20}=\frac{3}{4}\). So \(10\) red counters are added.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 3: Comparing probabilities, and expected numbers
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 3}
+\hypertarget{q-st3}{}
 \begin{columns}[T]
 
 \column{0.35\textwidth}
@@ -369,10 +487,52 @@ that the counter is red is written $P(\text{red})$.\par}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} Write \(\frac{3}{4}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{3}{4}=3\div4=0.75\). As a percentage: \(0.75\times100=75\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 2}
+\textbf{Question:} Write \(0.08\) as a percentage and as a fraction in its simplest form.
+\awork{Solution: \(0.08=8\%\). As a fraction, \(0.08=\frac{8}{100}\). Divide by \(4\): \(\frac{8}{100}=\frac{2}{25}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 3}
+\textbf{Question:} One chocolate is taken at random. Write \(P(\text{white})\) in its simplest form.
+\awork{Solution: There are \(3\) white chocolates. The total is \(5+4+3=12\) chocolates. \(P(\text{white})=\frac{3}{12}=\frac{1}{4}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 4}
+\textbf{Question:} Write \(P(\text{not milk})\) in its simplest form.
+\awork{Solution: There are \(4\) milk chocolates out of \(12\), so \(P(\text{milk})=\frac{4}{12}=\frac{1}{3}\). Therefore \(P(\text{not milk})=1-\frac{1}{3}=\frac{2}{3}\). Alternatively, the non-milk chocolates are \(5\) dark and \(3\) white, so \(\frac{8}{12}=\frac{2}{3}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 5}
+\textbf{Question:} Write \(P(\text{green})\) for the bag as a fraction, a decimal and a percentage.
+\awork{Solution: The bag has \(5\) green and \(3\) purple counters, so \(8\) counters in total. \(P(\text{green})=\frac{5}{8}=0.625=62.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 6}
+\textbf{Question:} Which is more likely: a dark chocolate, or a purple counter? Show your working.
+\awork{Solution: \(P(\text{dark})=\frac{5}{12}\), because there are \(5\) dark chocolates out of \(12\). \(P(\text{purple})=\frac{3}{8}\), because there are \(3\) purple counters out of \(8\). Compare with a common denominator: \(\frac{5}{12}=\frac{10}{24}\) and \(\frac{3}{8}=\frac{9}{24}\). Since \(\frac{10}{24}>\frac{9}{24}\), a dark chocolate is more likely.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 7}
+\textbf{Question:} A counter is taken from the bag at random and then replaced. This is done \(200\) times. How many green counters would you expect?
+\awork{Solution: \(P(\text{green})=\frac{5}{8}\). Expected number \(=P(\text{green})\times200=\frac{5}{8}\times200=125\). So we would expect about \(125\) green counters.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 3, Question 8}
+\textbf{Question:} Another bag holds only red and blue counters. It holds \(12\) red counters, and \(P(\text{red})=0.4\). How many counters are in it?
+\awork{Solution: Let the total number of counters be \(N\). Then \(P(\text{red})=\frac{12}{N}=0.4\). So \(12=0.4N\), and \(N=12\div0.4=30\). There are \(30\) counters in the bag.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 4: Listing outcomes systematically
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 4}
+\hypertarget{q-st4}{}
 \begin{columns}[T]
 
 \column{0.32\textwidth}
@@ -454,10 +614,57 @@ that the counter is red is written $P(\text{red})$.\par}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} Write \(\frac{2}{5}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{2}{5}=\frac{4}{10}=0.4\). As a percentage: \(0.4\times100=40\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 2}
+\textbf{Question:} Write \(65\%\) as a fraction in its simplest form.
+\awork{Solution: \(65\%=\frac{65}{100}\). Divide numerator and denominator by \(5\): \(\frac{65}{100}=\frac{13}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 3}
+\textbf{Question:} A spinner lands on red, blue or green only. \(P(\text{red})=0.35\), \(P(\text{blue})=0.4\). Write \(P(\text{green})\).
+\awork{Solution: The probabilities of all possible outcomes add to \(1\). \(P(\text{green})=1-0.35-0.4=0.25\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 4}
+\textbf{Question:} Complete the table to list every lunch deal.
+\awork{Solution: There are \(3\) sandwiches: C, H, T. There are \(2\) drinks: W, J. Systematically pair each sandwich with each drink: CW, CJ, HW, HJ, TW, TJ. These are the six entries in the table.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 5}
+\textbf{Question:} How many different lunch deals are there?
+\awork{Solution: \(3\) choices of sandwich and \(2\) choices of drink, so \(3\times2=6\) different deals.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 6}
+\textbf{Question:} A deal is chosen at random. Write \(P(\text{juice})\) in its simplest form.
+\awork{Solution: Each of the \(6\) deals is equally likely. Three of them include juice: CJ, HJ, TJ. So \(P(\text{juice})=\frac{3}{6}=\frac{1}{2}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 7}
+\textbf{Question:} Write \(P(\text{cheese with water})\).
+\awork{Solution: There is only one deal that is cheese with water: CW. Out of \(6\) equally likely deals, \(P(\text{cheese with water})=\frac{1}{6}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 8}
+\textbf{Question:} A third drink is added. How many deals are there now?
+\awork{Solution: There are still \(3\) sandwiches, but now \(3\) drinks. Number of deals \(=3\times3=9\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 4, Question 9}
+\textbf{Question:} Two fair coins are flipped. List all the outcomes systematically, then write \(P(\text{one head and one tail})\).
+\awork{Solution: List the first coin then the second: HH, HT, TH, TT. There are \(4\) equally likely outcomes. The outcomes with one head and one tail are HT and TH, so there are \(2\) of them. \(P(\text{one head and one tail})=\frac{2}{4}=\frac{1}{2}\).}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 5: A sample space of two dice
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 5}
+\hypertarget{q-st5}{}
 \begin{columns}[T]
 
 \column{0.36\textwidth}
@@ -533,10 +740,52 @@ are added together.\par}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} Write \(\frac{1}{3}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{1}{3}=0.333\ldots=0.\dot{3}\). As a percentage: \(0.\dot{3}\times100=33.\dot{3}\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 2}
+\textbf{Question:} Write \(0.36\) as a fraction in its simplest form.
+\awork{Solution: \(0.36=\frac{36}{100}\). Divide numerator and denominator by \(4\): \(\frac{36}{100}=\frac{9}{25}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 3}
+\textbf{Question:} Write the missing sums in the table.
+\awork{Solution: The table shows the sum of the two dice. For the last row, the first die is \(6\), so the sums are \(6+1=7\), \(6+2=8\), \(6+3=9\), \(6+4=10\), \(6+5=11\), \(6+6=12\). For the last column, the second die is \(6\), so the remaining missing sums are \(1+6=7\), \(2+6=8\), \(3+6=9\), \(4+6=10\), \(5+6=11\). Thus the missing entries are \(7,8,9,10,11,12\) along the bottom row and \(7,8,9,10,11\) down the right column.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 4}
+\textbf{Question:} How many outcomes are there altogether?
+\awork{Solution: There are \(6\) outcomes for the first die and \(6\) for the second die. Total outcomes \(=6\times6=36\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 5}
+\textbf{Question:} Write \(P(\text{the sum is }7)\) in its simplest form.
+\awork{Solution: The pairs giving a sum of \(7\) are \((1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\), so \(6\) outcomes. \(P(\text{sum }7)=\frac{6}{36}=\frac{1}{6}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 6}
+\textbf{Question:} Write the probability that the sum is more than \(10\), in its simplest form.
+\awork{Solution: Sums more than \(10\) are \(11\) and \(12\). Sum \(11\): \((5,6),(6,5)\), two outcomes. Sum \(12\): \((6,6)\), one outcome. Total \(3\) outcomes. \(P(\text{sum }>10)=\frac{3}{36}=\frac{1}{12}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 7}
+\textbf{Question:} Which sum is the most likely? Use its probability as a percentage to decide whether that sum is likely or unlikely.
+\awork{Solution: The sum \(7\) is the most likely, because it has the most outcomes: \(6\) out of \(36\). \(P(\text{sum }7)=\frac{6}{36}=\frac{1}{6}=16.\dot{6}\%\). Since \(16.\dot{6}\%\) is less than \(50\%\), a sum of \(7\) is still unlikely, even though it is the most likely single sum.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 5, Question 8}
+\textbf{Question:} The two dice are rolled \(180\) times. How many times would you expect a sum of \(5\)?
+\awork{Solution: The pairs giving a sum of \(5\) are \((1,4),(2,3),(3,2),(4,1)\), so \(4\) outcomes. \(P(\text{sum }5)=\frac{4}{36}=\frac{1}{9}\). Expected number \(=\frac{1}{9}\times180=20\). So expect \(20\) times.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 6: Completing a frequency tree
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 6}
+\hypertarget{q-st6}{}
 \begin{columns}[T]
 
 \column{0.38\textwidth}
@@ -600,10 +849,52 @@ is then chosen at random.\par}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 6, Question 1}
+\hypertarget{work-st6}{}
+\textbf{Question:} Write \(\frac{3}{8}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{3}{8}=3\div8=0.375\). As a percentage: \(0.375\times100=37.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 2}
+\textbf{Question:} A bag holds \(9\) red and \(1\) blue counter. Is taking a red counter likely? Give \(P(\text{red})\) as a percentage.
+\awork{Solution: There are \(9\) red counters out of \(10\) counters in total. \(P(\text{red})=\frac{9}{10}=0.9=90\%\). Since \(90\%\) is greater than \(50\%\), taking a red counter is likely.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 3}
+\textbf{Question:} Complete the frequency tree.
+\awork{Solution: The total is \(80\). \(50\) revised, so \(80-50=30\) did not revise. Of the \(50\) who revised, \(44\) passed, so \(50-44=6\) failed. Of the \(30\) who did not revise, \(12\) passed, so \(30-12=18\) failed. The missing numbers are \(30,6,18\) in the positions shown.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 4}
+\textbf{Question:} How many pupils passed the test altogether?
+\awork{Solution: Add the two passed groups: \(44\) who revised and passed plus \(12\) who did not revise and passed. \(44+12=56\). So \(56\) pupils passed.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 5}
+\textbf{Question:} Write \(P(\text{revised})\) in its simplest form.
+\awork{Solution: \(50\) pupils revised out of \(80\) pupils in total. \(P(\text{revised})=\frac{50}{80}=\frac{5}{8}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 6}
+\textbf{Question:} Write \(P(\text{revised and failed})\) in its simplest form.
+\awork{Solution: \(6\) pupils revised and failed. Out of \(80\) pupils, \(P(\text{revised and failed})=\frac{6}{80}=\frac{3}{40}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 7}
+\textbf{Question:} Write \(P(\text{passed})\) as a fraction, a decimal and a percentage.
+\awork{Solution: \(56\) pupils passed out of \(80\). \(P(\text{passed})=\frac{56}{80}=\frac{7}{10}=0.7=70\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 6, Question 8}
+\textbf{Question:} Is a pupil who revised more likely to pass than a pupil who did not revise? Use probabilities to explain your answer.
+\awork{Solution: Among those who revised, \(44\) out of \(50\) passed: \(\frac{44}{50}=0.88=88\%\). Among those who did not revise, \(12\) out of \(30\) passed: \(\frac{12}{30}=0.4=40\%\). Since \(88\%>40\%\), a pupil who revised was more likely to pass.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 7: Working backwards through a frequency tree
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 7}
+\hypertarget{q-st7}{}
 \begin{columns}[T]
 
 \column{0.40\textwidth}
@@ -666,10 +957,52 @@ for the first time, and $84$ of those passed. Altogether $130$ people passed.\pa
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 7, Question 1}
+\hypertarget{work-st7}{}
+\textbf{Question:} Write \(0.65\) as a fraction in its simplest form.
+\awork{Solution: \(0.65=\frac{65}{100}\). Divide numerator and denominator by \(5\): \(\frac{65}{100}=\frac{13}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 2}
+\textbf{Question:} Write \(\frac{7}{8}\) as a percentage.
+\awork{Solution: \(\frac{7}{8}=7\div8=0.875\). As a percentage: \(0.875\times100=87.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 3}
+\textbf{Question:} A bag holds \(7\) green and \(3\) red counters. Write \(P(\text{green})\) as a percentage.
+\awork{Solution: There are \(7\) green counters out of \(10\) counters in total. \(P(\text{green})=\frac{7}{10}=0.7=70\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 4}
+\textbf{Question:} Complete the frequency tree.
+\awork{Solution: The total is \(200\). \(120\) were taking the test for the first time, so \(200-120=80\) were retaking it. Of the \(120\) first-timers, \(84\) passed, so \(120-84=36\) failed. Altogether \(130\) passed, so the number of retakers who passed is \(130-84=46\). Therefore the number of retakers who failed is \(80-46=34\). The missing numbers are \(80,36,46,34\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 5}
+\textbf{Question:} Write \(P(\text{passed})\) in its simplest form and as a percentage.
+\awork{Solution: \(130\) people passed out of \(200\). \(P(\text{passed})=\frac{130}{200}=\frac{13}{20}=0.65=65\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 6}
+\textbf{Question:} Write the probability that a person took the test for the first time and passed.
+\awork{Solution: \(84\) people took the test for the first time and passed. Out of \(200\) people, \(P(\text{first time and passed})=\frac{84}{200}=\frac{21}{50}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 7}
+\textbf{Question:} What percentage passed on a first test, and what percentage passed on a retake?
+\awork{Solution: First test: \(84\) passed out of \(120\), so \(\frac{84}{120}=0.7=70\%\). Retake: \(46\) passed out of \(80\), so \(\frac{46}{80}=0.575=57.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 7, Question 8}
+\textbf{Question:} Jo says ``people are more likely to pass a retake, because they have had more practice''. Do these figures support Jo?
+\awork{Solution: No. The pass rate for a first test was \(70\%\), but the pass rate for a retake was \(57.5\%\). Since \(70\%>57.5\%\), people were actually less likely to pass on a retake in these figures.}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 8: Probabilities from a Venn diagram
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 8}
+\hypertarget{q-st8}{}
 \begin{columns}[T]
 
 \column{0.42\textwidth}
@@ -730,10 +1063,52 @@ football, $16$ play cricket, and $8$ play both. One pupil is then chosen at rand
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Worked Solution: Starter 8, Question 1}
+\hypertarget{work-st8}{}
+\textbf{Question:} Write \(0.2\) as a fraction in its simplest form and as a percentage.
+\awork{Solution: \(0.2=\frac{2}{10}=\frac{1}{5}\). As a percentage: \(0.2\times100=20\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 2}
+\textbf{Question:} A café sells \(4\) sandwiches and \(3\) drinks. How many deals of one sandwich and one drink are there?
+\awork{Solution: For each of the \(4\) sandwiches there are \(3\) drink choices. Number of deals \(=4\times3=12\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 3}
+\textbf{Question:} How many pupils play football but not cricket?
+\awork{Solution: \(24\) pupils play football, but \(8\) of them also play cricket. So football but not cricket \(=24-8=16\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 4}
+\textbf{Question:} Complete the Venn diagram.
+\awork{Solution: Football only: \(24-8=16\). Both: \(8\). Cricket only: \(16-8=8\). The number who play at least one sport is \(16+8+8=32\). Since there are \(40\) pupils, neither sport is \(40-32=8\). So the regions are \(16\), \(8\), \(8\), and \(8\) outside.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 5}
+\textbf{Question:} Write \(P(\text{cricket})\) in its simplest form and as a percentage.
+\awork{Solution: \(16\) pupils play cricket out of \(40\). \(P(\text{cricket})=\frac{16}{40}=\frac{2}{5}=0.4=40\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 6}
+\textbf{Question:} Write \(P(\text{neither sport})\) in its simplest form.
+\awork{Solution: \(8\) pupils play neither sport out of \(40\). \(P(\text{neither})=\frac{8}{40}=\frac{1}{5}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 7}
+\textbf{Question:} Write \(P(\text{football or cricket})\) in its simplest form and as a percentage.
+\awork{Solution: The number who play football or cricket is \(16+8+8=32\). So \(P(\text{football or cricket})=\frac{32}{40}=\frac{4}{5}=0.8=80\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 8, Question 8}
+\textbf{Question:} \(P(\text{football})+P(\text{cricket})=\frac{3}{5}+\frac{2}{5}=1\), but \(P(\text{football or cricket})=\frac{4}{5}\). Explain why these are different.
+\awork{Solution: Adding \(P(\text{football})\) and \(P(\text{cricket})\) counts the \(8\) pupils who play both sports twice. So \(\frac{3}{5}+\frac{2}{5}\) counts those pupils twice and gives \(1\). To find \(P(\text{football or cricket})\), we must count each pupil only once, so we subtract the overlap: \(\frac{3}{5}+\frac{2}{5}-\frac{8}{40}=1-\frac{1}{5}=\frac{4}{5}\).}
+\end{frame}
+
 %------------------------------------------------------------------
 % STARTER 9: Sorting into a Venn diagram, then reading probabilities off it
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter}
+\begin{frame}[t]{Starter 9}
+\hypertarget{q-st9}{}
 \begin{columns}[T]
 
 \column{0.42\textwidth}
@@ -790,6 +1165,47 @@ football, $16$ play cricket, and $8$ play both. One pupil is then chosen at rand
         \ashow{For example ``odd'' and ``even'': no number is both odd and even.}
 \end{enumerate}
 \end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 1}
+\hypertarget{work-st9}{}
+\textbf{Question:} Write \(\frac{3}{20}\) as a decimal and as a percentage.
+\awork{Solution: \(\frac{3}{20}=\frac{15}{100}=0.15\). As a percentage: \(0.15\times100=15\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 2}
+\textbf{Question:} Write \(35\%\) as a fraction in its simplest form.
+\awork{Solution: \(35\%=\frac{35}{100}\). Divide numerator and denominator by \(5\): \(\frac{35}{100}=\frac{7}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 3}
+\textbf{Question:} Write each number from \(1\) to \(20\) in the correct region.
+\awork{Solution: Multiples of \(3\): \(3,6,9,12,15,18\). Even numbers: \(2,4,6,8,10,12,14,16,18,20\). The overlap (both even and a multiple of \(3\)) is the multiples of \(6\): \(6,12,18\). Multiples of \(3\) only: \(3,9,15\). Even only: \(2,4,8,10,14,16,20\). Neither: \(1,5,7,11,13,17,19\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 4}
+\textbf{Question:} A number goes in the overlap when it is a multiple of \underline{\hspace{1cm}}.
+\awork{Solution: The overlap is for numbers that are both even and multiples of \(3\). Such numbers are multiples of \(6\). So the blank is \(6\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 5}
+\textbf{Question:} Write \(P(\text{multiple of }3)\) in its simplest form.
+\awork{Solution: There are \(6\) multiples of \(3\) from \(1\) to \(20\): \(3,6,9,12,15,18\). \(P(\text{multiple of }3)=\frac{6}{20}=\frac{3}{10}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 6}
+\textbf{Question:} Write the probability that the number is neither even nor a multiple of \(3\).
+\awork{Solution: The numbers that are neither even nor a multiple of \(3\) are \(1,5,7,11,13,17,19\), which is \(7\) numbers. \(P(\text{neither})=\frac{7}{20}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 7}
+\textbf{Question:} Is the number likely or unlikely to be a multiple of \(3\)? Use its probability as a percentage to explain.
+\awork{Solution: \(P(\text{multiple of }3)=\frac{3}{10}=0.3=30\%\). Since \(30\%\) is less than \(50\%\), it is unlikely to be a multiple of \(3\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Starter 9, Question 8}
+\textbf{Question:} Choose two new labels for the circles so that the overlap must be empty, and explain why.
+\awork{Solution: For example, label one circle ``odd numbers'' and the other ``even numbers''. No number from \(1\) to \(20\) can be both odd and even, so the overlap must be empty.}
 \end{frame}
 
 \end{document}
