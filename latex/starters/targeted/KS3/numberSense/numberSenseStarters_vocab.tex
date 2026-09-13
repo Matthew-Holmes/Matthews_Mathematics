@@ -17,22 +17,29 @@
 % to make updates to the LaTeX below if you want to edit it.
 % ================================================================
 % ==== VOCABULARY DATA - generated, do not edit ====
-% {"terms":[{"en":"counter-example","def":"an example that shows a general statement is false.","tr":null,"trdef":null},
-% {"en":"decimal","def":"a number written with a point, where the digits after the point are parts of a whole","tr":null,"trdef":null},
+% {"terms":[{"en":"decimal","def":"a number written with a point, where the digits after the point are parts of a whole","tr":null,"trdef":null},
 % {"en":"decimal place","def":"the position of a digit after the decimal point, such as tenths or hundredths","tr":null,"trdef":null},
 % {"en":"decimal point","def":"the dot used to separate the whole part of a number from the fractional part.","tr":null,"trdef":null},
 % {"en":"digit","def":"a single figure from 0 to 9 that a number is written with","tr":null,"trdef":null},
 % {"en":"dot notation","def":"a way of writing a recurring decimal by putting a dot over the digit or digits that repeat.","tr":null,"trdef":null},
 % {"en":"fraction","def":"a number written as one whole split into equal parts, with a number of those parts taken","tr":null,"trdef":null},
+% {"en":"greater than","def":"larger than another amount","tr":null,"trdef":null},
+% {"en":"hundredths","def":"the value of one part when a whole is divided into one hundred equal parts.","tr":null,"trdef":null},
 % {"en":"inequality","def":"a statement that one quantity is larger or smaller than another","tr":null,"trdef":null},
 % {"en":"integer","def":"a whole number, which may be positive, negative or zero","tr":null,"trdef":null},
-% {"en":"interval","def":"the gap between two marks on a number line or scale.","tr":null,"trdef":null},
 % {"en":"irrational","def":"a number whose decimal part never ends and never repeats, so it cannot be written as a fraction.","tr":null,"trdef":null},
+% {"en":"less than","def":"smaller than another amount","tr":null,"trdef":null},
+% {"en":"less than or equal to","def":"a number is smaller than another number or the same as it","tr":null,"trdef":null},
+% {"en":"nearest","def":"the closest among a set of choices","tr":null,"trdef":null},
 % {"en":"negative number","def":"a number less than zero, written with a minus sign.","tr":null,"trdef":null},
+% {"en":"never-ending decimal","def":"a number written with a decimal point whose digits go on without stopping","tr":null,"trdef":null},
 % {"en":"number line","def":"a straight line with numbers marked at equal distances, used to show value and order.","tr":null,"trdef":null},
 % {"en":"place value","def":"the value a digit has because of where it sits in a number","tr":null,"trdef":null},
-% {"en":"recurring decimal","def":"a decimal in which a digit or group of digits repeats forever.","tr":null,"trdef":null},
+% {"en":"positive number","def":"a number above zero, such as 5","tr":null,"trdef":null},
+% {"en":"repeating block","def":"a group of digits that repeats forever in a decimal","tr":null,"trdef":null},
 % {"en":"round","def":"to replace a number with a nearby simpler one","tr":null,"trdef":null},
+% {"en":"tenths","def":"the value of one part when a whole is divided into ten equal parts.","tr":null,"trdef":null},
+% {"en":"thousandths","def":"the value of one part when a whole is divided into one thousand equal parts.","tr":null,"trdef":null},
 % {"en":"whole number","def":"a number that is not negative and has no part after a decimal point, such as 0, 1, 2 or 3.","tr":null,"trdef":null}]}
 % ==== END VOCABULARY DATA ====
 
@@ -200,44 +207,58 @@
 
 \newcommand{\ealkeybody}{%
   \ealstart{\large\bfseries NumberSenseStarters: key vocabulary}\par\medskip
-  \ealentry{counter-example}{an example that shows a general statement is false.}
   \ealentry{decimal}{a number written with a point, where the digits after the point are parts of a whole}
   \ealentry{decimal place}{the position of a digit after the decimal point, such as tenths or hundredths}
   \ealentry{decimal point}{the dot used to separate the whole part of a number from the fractional part.}
   \ealentry{digit}{a single figure from 0 to 9 that a number is written with}
   \ealentry{dot notation}{a way of writing a recurring decimal by putting a dot over the digit or digits that repeat.}
   \ealentry{fraction}{a number written as one whole split into equal parts, with a number of those parts taken}
+  \ealentry{greater than}{larger than another amount}
+  \ealentry{hundredths}{the value of one part when a whole is divided into one hundred equal parts.}
   \ealentry{inequality}{a statement that one quantity is larger or smaller than another}
   \ealentry{integer}{a whole number, which may be positive, negative or zero}
-  \ealentry{interval}{the gap between two marks on a number line or scale.}
   \ealentry{irrational}{a number whose decimal part never ends and never repeats, so it cannot be written as a fraction.}
+  \ealentry{less than}{smaller than another amount}
+  \ealentry{less than or equal to}{a number is smaller than another number or the same as it}
+  \ealentry{nearest}{the closest among a set of choices}
   \ealentry{negative number}{a number less than zero, written with a minus sign.}
+  \ealentry{never-ending decimal}{a number written with a decimal point whose digits go on without stopping}
   \ealentry{number line}{a straight line with numbers marked at equal distances, used to show value and order.}
   \ealentry{place value}{the value a digit has because of where it sits in a number}
-  \ealentry{recurring decimal}{a decimal in which a digit or group of digits repeats forever.}
+  \ealentry{positive number}{a number above zero, such as 5}
+  \ealentry{repeating block}{a group of digits that repeats forever in a decimal}
   \ealentry{round}{to replace a number with a nearby simpler one}
+  \ealentry{tenths}{the value of one part when a whole is divided into ten equal parts.}
+  \ealentry{thousandths}{the value of one part when a whole is divided into one thousand equal parts.}
   \ealentry{whole number}{a number that is not negative and has no part after a decimal point, such as 0, 1, 2 or 3.}
 }
 
 
 \newcommand{\ealmatchrows}{%
-  {\textbf{\ealkey{counter-example}}} \ealnextcol {the dot used to separate the whole part of a number from the fractional part.} \\
-  {\textbf{\ealkey{decimal}}} \ealnextcol {a way of writing a recurring decimal by putting a dot over the digit or digits that repeat.} \\
-  {\textbf{\ealkey{decimal place}}} \ealnextcol {a statement that one quantity is larger or smaller than another} \\
-  {\textbf{\ealkey{decimal point}}} \ealnextcol {a single figure from 0 to 9 that a number is written with} \\
-  {\textbf{\ealkey{digit}}} \ealnextcol {a whole number, which may be positive, negative or zero} \\
-  {\textbf{\ealkey{dot notation}}} \ealnextcol {an example that shows a general statement is false.} \\
+  {\textbf{\ealkey{decimal}}} \ealnextcol {a single figure from 0 to 9 that a number is written with} \\
+  {\textbf{\ealkey{decimal place}}} \ealnextcol {a number written as one whole split into equal parts, with a number of those parts taken} \\
+  {\textbf{\ealkey{decimal point}}} \ealnextcol {the value of one part when a whole is divided into one hundred equal parts.} \\
+  {\textbf{\ealkey{digit}}} \ealnextcol {a way of writing a recurring decimal by putting a dot over the digit or digits that repeat.} \\
+  {\textbf{\ealkey{dot notation}}} \ealnextcol {a statement that one quantity is larger or smaller than another} \\
   {\textbf{\ealkey{fraction}}} \ealnextcol {a number written with a point, where the digits after the point are parts of a whole} \\
-  {\textbf{\ealkey{inequality}}} \ealnextcol {the position of a digit after the decimal point, such as tenths or hundredths} \\
-  {\textbf{\ealkey{integer}}} \ealnextcol {a number less than zero, written with a minus sign.} \\
-  {\textbf{\ealkey{interval}}} \ealnextcol {a number whose decimal part never ends and never repeats, so it cannot be written as a fraction.} \\
-  {\textbf{\ealkey{irrational}}} \ealnextcol {a decimal in which a digit or group of digits repeats forever.} \\
-  {\textbf{\ealkey{negative number}}} \ealnextcol {a number written as one whole split into equal parts, with a number of those parts taken} \\
-  {\textbf{\ealkey{number line}}} \ealnextcol {a number that is not negative and has no part after a decimal point, such as 0, 1, 2 or 3.} \\
-  {\textbf{\ealkey{place value}}} \ealnextcol {to replace a number with a nearby simpler one} \\
-  {\textbf{\ealkey{recurring decimal}}} \ealnextcol {the gap between two marks on a number line or scale.} \\
-  {\textbf{\ealkey{round}}} \ealnextcol {the value a digit has because of where it sits in a number} \\
-  {\textbf{\ealkey{whole number}}} \ealnextcol {a straight line with numbers marked at equal distances, used to show value and order.} \\
+  {\textbf{\ealkey{greater than}}} \ealnextcol {the position of a digit after the decimal point, such as tenths or hundredths} \\
+  {\textbf{\ealkey{hundredths}}} \ealnextcol {the dot used to separate the whole part of a number from the fractional part.} \\
+  {\textbf{\ealkey{inequality}}} \ealnextcol {smaller than another amount} \\
+  {\textbf{\ealkey{integer}}} \ealnextcol {a number whose decimal part never ends and never repeats, so it cannot be written as a fraction.} \\
+  {\textbf{\ealkey{irrational}}} \ealnextcol {a number less than zero, written with a minus sign.} \\
+  {\textbf{\ealkey{less than}}} \ealnextcol {larger than another amount} \\
+  {\textbf{\ealkey{less than or equal to}}} \ealnextcol {the value a digit has because of where it sits in a number} \\
+  {\textbf{\ealkey{nearest}}} \ealnextcol {a number above zero, such as 5} \\
+  {\textbf{\ealkey{negative number}}} \ealnextcol {a whole number, which may be positive, negative or zero} \\
+  {\textbf{\ealkey{never-ending decimal}}} \ealnextcol {a group of digits that repeats forever in a decimal} \\
+  {\textbf{\ealkey{number line}}} \ealnextcol {the value of one part when a whole is divided into ten equal parts.} \\
+  {\textbf{\ealkey{place value}}} \ealnextcol {a number is smaller than another number or the same as it} \\
+  {\textbf{\ealkey{positive number}}} \ealnextcol {the closest among a set of choices} \\
+  {\textbf{\ealkey{repeating block}}} \ealnextcol {to replace a number with a nearby simpler one} \\
+  {\textbf{\ealkey{round}}} \ealnextcol {a number written with a decimal point whose digits go on without stopping} \\
+  {\textbf{\ealkey{tenths}}} \ealnextcol {a straight line with numbers marked at equal distances, used to show value and order.} \\
+  {\textbf{\ealkey{thousandths}}} \ealnextcol {a number that is not negative and has no part after a decimal point, such as 0, 1, 2 or 3.} \\
+  {\textbf{\ealkey{whole number}}} \ealnextcol {the value of one part when a whole is divided into one thousand equal parts.} \\
 }
 
 \newcommand{\ealmatchbody}{%
@@ -262,11 +283,18 @@
     \draw[ealanswerline] (m-10-1.east) -- (m-15-2.west);
     \draw[ealanswerline] (m-11-1.east) -- (m-10-2.west);
     \draw[ealanswerline] (m-12-1.east) -- (m-9-2.west);
-    \draw[ealanswerline] (m-13-1.east) -- (m-17-2.west);
-    \draw[ealanswerline] (m-14-1.east) -- (m-16-2.west);
+    \draw[ealanswerline] (m-13-1.east) -- (m-18-2.west);
+    \draw[ealanswerline] (m-14-1.east) -- (m-19-2.west);
     \draw[ealanswerline] (m-15-1.east) -- (m-11-2.west);
-    \draw[ealanswerline] (m-16-1.east) -- (m-14-2.west);
-    \draw[ealanswerline] (m-17-1.east) -- (m-13-2.west);
+    \draw[ealanswerline] (m-16-1.east) -- (m-21-2.west);
+    \draw[ealanswerline] (m-17-1.east) -- (m-22-2.west);
+    \draw[ealanswerline] (m-18-1.east) -- (m-13-2.west);
+    \draw[ealanswerline] (m-19-1.east) -- (m-14-2.west);
+    \draw[ealanswerline] (m-20-1.east) -- (m-16-2.west);
+    \draw[ealanswerline] (m-21-1.east) -- (m-20-2.west);
+    \draw[ealanswerline] (m-22-1.east) -- (m-17-2.west);
+    \draw[ealanswerline] (m-23-1.east) -- (m-24-2.west);
+    \draw[ealanswerline] (m-24-1.east) -- (m-23-2.west);
   \end{tikzpicture}}
 
 
