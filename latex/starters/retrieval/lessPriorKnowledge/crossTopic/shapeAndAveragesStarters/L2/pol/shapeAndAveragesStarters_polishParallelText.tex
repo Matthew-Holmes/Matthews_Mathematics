@@ -14,6 +14,7 @@
 %   English text        black   RGB 0 0 0
 %   Polish text         purple  RGB 112 48 160
 %   layout macros       version 3
+%   sheet layout        version 1
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -122,12 +123,31 @@
 
 \begin{document}
 
+\title{\ealkey{Areas}, \ealkey{Perimeters} \& \ealkey{Averages}}
+\author{}
+\date{}
+
 \frame{\titlepage}
 
 %------------------------------------------------
-% SLIDE 1: Areas, Perimeters, Mean & Fractions
+% STARTER 1 (1 of 3): Q1-4
 %------------------------------------------------
-\begin{frame}{Starter}
+\begin{frame}{Starter (1 of 3)}
+
+\ealpara{1. \(6 \times 3 =\)}{1. \(6 \times 3 =\) \ashowq{18}}
+
+\ealpara{2. \(\frac{3}{24} + \frac{5}{24} =\)}{2. \(\frac{3}{24} + \frac{5}{24} =\) \ashowq{\(\frac{1}{3}\)}}
+
+\ealpara{3. \(\tfrac{1}{2} \times 4 \times 3 =\)}{3. \(\tfrac{1}{2} \times 4 \times 3 =\) \ashowq{6}}
+
+\ealpara{4. \(-3 \times -2 =\)}{4. \(-3 \times -2 =\) \ashowq{6}}
+
+\end{frame}
+
+%------------------------------------------------
+% STARTER 1 (2 of 3): Q5-8
+%------------------------------------------------
+\begin{frame}{Starter (2 of 3)}
 
 \begin{columns}
 
@@ -161,33 +181,84 @@
 
 \column{0.62\textwidth}
 \small
-\begin{enumerate}
-  \item \ealpara{Oblicz.}{$6 \times 3 =$ \ashowq{$18$}}
-  \item \ealpara{Oblicz.}{$\frac{3}{24} + \frac{5}{24} =$ \ashowq{$\frac{1}{3}$}}
-  \item \ealpara{Oblicz.}{$\tfrac{1}{2} \times 4 \times 3 =$ \ashowq{$6$}}
-  \item \ealpara{Oblicz.}{$-3 \times -2 =$ \ashowq{$6$}}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z liczb $8,\ 14,\ 20$.}{Find the \ealkey{mean} of $\ 8,\ 14,\ 20$. \ashow{$14$}}
-  \item \ealpara{Jakim \ealkeytr{ułamkiem} liczby $60$ jest $6$? \ealkeytr{Uprość} całkowicie.}{What \ealkey{fraction} of $60$ is $6$?\quad \ealkey{Simplify} fully. \ashow{$\frac{1}{10}$}}
-\end{enumerate}
 
-\vspace{0.5em}
+\ealpara{5. Oblicz \ealkeytr{średnią} z \(8,\ 14,\ 20\).}{5. Find the \ealkey{mean} of \(8,\ 14,\ 20\). \ashow{14}}
 
-\begin{enumerate}
-  \setcounter{enumi}{6}
-  \item \ealpara{Znajdź \ealkeytr{pole} każdej z figur A, B i C.}{Find the \ealkey{area} of each shape A, B and C. \ablank{$A=18$},\ \ablank{$B=36$},\ \ablank{$C=6$}.}
-  \item \ealpara{Znajdź \ealkeytr{obwód} każdej z figur A, B i C.}{Find the \ealkey{perimeter} of each shape A, B and C. \ablank{$A=18$},\ \ablank{$B=24$},\ \ablank{$C=12$}.}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z \ealkeytr{pól} trzech figur.}{Find the \ealkey{mean} \ealkey{area} of the three shapes. \ablank{$20$}.}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z \ealkeytr{obwodów} trzech figur.}{Find the \ealkey{mean} \ealkey{perimeter} of the three shapes. \ablank{$18$}.}
-  \item \ealpara{Jakim \ealkeytr{ułamkiem} całkowitego \ealkeytr{pola} jest figura C?}{What \ealkey{fraction} of the total \ealkey{area} does shape C make up? \ablank{$\frac{6}{60}=\frac{1}{10}$}.}
-\end{enumerate}
+\ealpara{6. Jakim \ealkeytr{ułamkiem} liczby \(60\) jest \(6\)? \ealkeytr{Uprość} całkowicie.}{6. What \ealkey{fraction} of \(60\) is \(6\)?\quad \ealkey{Simplify} fully. \ashow{\(\frac{1}{10}\)}}
+
+\ealpara{7. Oblicz \ealkeytr{pole} każdej figury A, B i C.}{7. Find the \ealkey{area} of each shape A, B and C. \ablank{A=18},\ \ablank{B=36},\ \ablank{C=6}.}
+
+\ealpara{8. Oblicz \ealkeytr{obwód} każdej figury A, B i C.}{8. Find the \ealkey{perimeter} of each shape A, B and C. \ablank{A=18},\ \ablank{B=24},\ \ablank{C=12}.}
 
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
-% SLIDE 2: Areas, Perimeters, Mean & Fractions
+% STARTER 1 (3 of 3): Q9-11
 %------------------------------------------------
-\begin{frame}{Starter}
+\begin{frame}{Starter (3 of 3)}
+
+\begin{columns}
+
+\column{0.38\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+
+  \draw[thick, blue] (0,9.5) rectangle (3,8.3);
+  \draw[blue, thick, <->] (0,9.85) -- (3,9.85);
+  \node[blue, above] at (1.5,9.85) {\scriptsize 6 cm};
+  \draw[blue, thick, <->] (3.35,8.3) -- (3.35,9.5);
+  \node[blue, right] at (3.35,8.9) {\scriptsize 3 cm};
+  \node[blue!70!black] at (1.5,8.9) {\small A};
+
+  \draw[thick, red!80!black] (0,6.9) rectangle (3,3.9);
+  \draw[red!80!black, thick, <->] (0,7.25) -- (3,7.25);
+  \node[red!80!black, above] at (1.5,7.25) {\scriptsize 6 cm};
+  \draw[red!80!black, thick, <->] (-0.45,3.9) -- (-0.45,6.9);
+  \node[red!80!black, left] at (-0.45,5.4) {\scriptsize 6 cm};
+  \node[red!70!black] at (1.5,5.4) {\small B};
+
+  \draw[thick, orange!80!black] (0,2.8) -- (2,2.8) -- (0,1.3) -- cycle;
+  \draw[orange!80!black] (0.22,2.8) -- (0.22,2.58) -- (0,2.58);
+  \node[orange!80!black, above] at (1.0,2.85) {\scriptsize 4 cm};
+  \node[orange!80!black, left] at (-0.1,2.05) {\scriptsize 3 cm};
+  \node[orange!80!black, right] at (1.1,2.1) {\scriptsize 5 cm};
+  \node[orange!70!black] at (0.6,2.3) {\small C};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.62\textwidth}
+\small
+
+\ealpara{9. Oblicz \ealkeytr{średnią} z \ealkeytr{pól} trzech figur.}{9. Find the \ealkey{mean} \ealkey{area} of the three shapes. \ablank{20}.}
+
+\ealpara{10. Oblicz \ealkeytr{średnią} z \ealkeytr{obwodów} trzech figur.}{10. Find the \ealkey{mean} \ealkey{perimeter} of the three shapes. \ablank{18}.}
+
+\ealpara{11. Jakim \ealkeytr{ułamkiem} całkowitego \ealkeytr{pola} jest figura C?}{11. What \ealkey{fraction} of the total \ealkey{area} does shape C make up? \ablank{\(\frac{6}{60}=\frac{1}{10}\)}.}
+
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 2 (1 of 3): Q1-4
+%------------------------------------------------
+\begin{frame}{Starter (1 of 3)}
+
+\ealpara{1. \(8 \times 4 =\)}{1. \(8 \times 4 =\) \ashowq{32}}
+
+\ealpara{2. \(\frac{7}{20} + \frac{9}{20} =\)}{2. \(\frac{7}{20} + \frac{9}{20} =\) \ashowq{\(\frac{4}{5}\)}}
+
+\ealpara{3. \(\tfrac{1}{2} \times 6 \times 4 =\)}{3. \(\tfrac{1}{2} \times 6 \times 4 =\) \ashowq{12}}
+
+\ealpara{4. \(-5 \times 4 =\)}{4. \(-5 \times 4 =\) \ashowq{-20}}
+
+\end{frame}
+
+%------------------------------------------------
+% STARTER 2 (2 of 3): Q5-8
+%------------------------------------------------
+\begin{frame}{Starter (2 of 3)}
 
 \begin{columns}
 
@@ -220,25 +291,60 @@
 
 \column{0.62\textwidth}
 \small
-\begin{enumerate}
-  \item \ealpara{Oblicz.}{$8 \times 4 =$ \ashowq{$32$}}
-  \item \ealpara{Oblicz.}{$\frac{7}{20} + \frac{9}{20} =$ \ashowq{$\frac{4}{5}$}}
-  \item \ealpara{Oblicz.}{$\tfrac{1}{2} \times 6 \times 4 =$ \ashowq{$12$}}
-  \item \ealpara{Oblicz.}{$-5 \times 4 =$ \ashowq{$-20$}}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z liczb $6,\ 12,\ 18$.}{Find the \ealkey{mean} of $\ 6,\ 12,\ 18$. \ashow{$12$}}
-  \item \ealpara{Jakim \ealkeytr{ułamkiem} liczby $80$ jest $12$? \ealkeytr{Uprość} całkowicie.}{What \ealkey{fraction} of $80$ is $12$?\quad \ealkey{Simplify} fully. \ashow{$\frac{3}{20}$}}
-\end{enumerate}
 
-\vspace{0.5em}
+\ealpara{5. Oblicz \ealkeytr{średnią} z \(6,\ 12,\ 18\).}{5. Find the \ealkey{mean} of \(6,\ 12,\ 18\). \ashow{12}}
 
-\begin{enumerate}
-  \setcounter{enumi}{6}
-  \item \ealpara{Znajdź \ealkeytr{pole} każdej z figur D, E i F.}{Find the \ealkey{area} of each shape D, E and F. \ablank{$D=32$},\ \ablank{$E=25$},\ \ablank{$F=12$}.}
-  \item \ealpara{Znajdź \ealkeytr{obwód} każdej z figur D, E i F.}{Find the \ealkey{perimeter} of each shape D, E and F. \ablank{$D=24$},\ \ablank{$E=20$},\ \ablank{$F=10+2\sqrt{13}$}.}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z \ealkeytr{pól} trzech figur.}{Find the \ealkey{mean} \ealkey{area} of the three shapes. \ablank{$23$}.}
-  \item \ealpara{Znajdź \ealkeytr{średnią} z \ealkeytr{obwodów} trzech figur.}{Find the \ealkey{mean} \ealkey{perimeter} of the three shapes. \ablank{$\frac{54+2\sqrt{13}}{3}$}.}
-  \item \ealpara{Jakim \ealkeytr{ułamkiem} całkowitego \ealkeytr{pola} jest figura F?}{What \ealkey{fraction} of the total \ealkey{area} does shape F make up? \ablank{$\frac{12}{69}=\frac{4}{23}$}.}
-\end{enumerate}
+\ealpara{6. Jakim \ealkeytr{ułamkiem} liczby \(80\) jest \(12\)? \ealkeytr{Uprość} całkowicie.}{6. What \ealkey{fraction} of \(80\) is \(12\)?\quad \ealkey{Simplify} fully. \ashow{\(\frac{3}{20}\)}}
+
+\ealpara{7. Oblicz \ealkeytr{pole} każdej figury D, E i F.}{7. Find the \ealkey{area} of each shape D, E and F. \ablank{D=32},\ \ablank{E=25},\ \ablank{F=12}.}
+
+\ealpara{8. Oblicz \ealkeytr{obwód} każdej figury D, E i F.}{8. Find the \ealkey{perimeter} of each shape D, E and F. \ablank{D=24},\ \ablank{E=20},\ \ablank{F=10+2\sqrt{13}}.}
+
+\end{columns}
+\end{frame}
+
+%------------------------------------------------
+% STARTER 2 (3 of 3): Q9-11
+%------------------------------------------------
+\begin{frame}{Starter (3 of 3)}
+
+\begin{columns}
+
+\column{0.38\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.65]
+
+  \draw[thick, blue] (0,9.5) rectangle (4,7.5);
+  \draw[blue, thick, <->] (0,9.9) -- (4,9.9);
+  \node[blue, above] at (2,9.9) {\scriptsize 8 cm};
+  \draw[blue, thick, <->] (4.4,7.5) -- (4.4,9.5);
+  \node[blue, right] at (4.4,8.5) {\scriptsize 4 cm};
+  \node[blue!70!black] at (2,8.5) {\small D};
+
+  \draw[thick, red!80!black] (0,6.5) rectangle (3,3.5);
+  \draw[red!80!black, thick, <->] (0,6.85) -- (3,6.85);
+  \node[red!80!black, above] at (1.5,6.85) {\scriptsize 5 cm};
+  \draw[red!80!black, thick, <->] (-0.45,3.5) -- (-0.45,6.5);
+  \node[red!80!black, left] at (-0.45,5) {\scriptsize 5 cm};
+  \node[red!70!black] at (1.5,5) {\small E};
+
+  \draw[thick, orange!80!black] (0,2.8) -- (3,2.8) -- (0,1.2) -- cycle;
+  \draw[orange!80!black] (0.25,2.8) -- (0.25,2.55) -- (0,2.55);
+  \node[orange!80!black, above] at (1.5,2.7) {\scriptsize 6 cm};
+  \node[orange!80!black, left] at (-0.1,2.0) {\scriptsize 4 cm};
+  \node[orange!70!black] at (0.8,2.3) {\small F};
+
+\end{tikzpicture}
+\end{center}
+
+\column{0.62\textwidth}
+\small
+
+\ealpara{9. Oblicz \ealkeytr{średnią} z \ealkeytr{pól} trzech figur.}{9. Find the \ealkey{mean} \ealkey{area} of the three shapes. \ablank{23}.}
+
+\ealpara{10. Oblicz \ealkeytr{średnią} z \ealkeytr{obwodów} trzech figur.}{10. Find the \ealkey{mean} \ealkey{perimeter} of the three shapes. \ablank{\(\frac{54+2\sqrt{13}}{3}\)}.}
+
+\ealpara{11. Jakim \ealkeytr{ułamkiem} całkowitego \ealkeytr{pola} jest figura F?}{11. What \ealkey{fraction} of the total \ealkey{area} does shape F make up? \ablank{\(\frac{12}{69}=\frac{4}{23}\)}.}
 
 \end{columns}
 \end{frame}

@@ -14,6 +14,7 @@
 %   English text        black   RGB 0 0 0
 %   Polish text         purple  RGB 112 48 160
 %   layout macros       version 3
+%   sheet layout        version 1
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -122,120 +123,115 @@
 
 \begin{document}
 
-\begin{frame}{Starter: Prior Knowledge}
-\begin{minipage}[t]{0.48\textwidth}
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
 
-\ealpara{1) \ealkeytr{arytmetyka}}{1) \ealkey{Arithmetic}}
-\begin{block}{1) \ealkey{Arithmetic}}
-\Large
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% ---------- STARTER (PRIOR KNOWLEDGE) ----------
+\begin{frame}{Starter: Prior Knowledge (1 of 3)}
+\begin{block}{}
+\ealpara{1) Arytmetyka}{1) \ealkey{Arithmetic}}
 \[
 13 + 9 = \ablank{22}
 \]
 \end{block}
 
-\vspace{6.2em}
+\vspace{1em}
 
+\begin{block}{}
+\ealpara{2) Metoda pudełkowa}{2) \ealkey{Box Method}}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw (0,0) rectangle (4,2);
+\draw (2,0) -- (2,2);
+\node at (1,-0.4) {$3$};
+\node at (3,-0.4) {$5$};
+\node at (-0.4,1) {$4$};
+\node at (1,1) {\ashowq{12}};
+\node at (3,1) {\ashowq{20}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.4em}
+\ealpara{Znajdź całkowite \ealkeytr{pole}.}{Find the total \ealkey{area}.}
+\uncover<2->{\small \ealpara{Całkowite \ealkeytr{pole} $= 32$}{Total \ealkey{area} $= 32$}}
+\end{block}
+\end{frame}
+
+\begin{frame}{Starter: Prior Knowledge (2 of 3)}
+\begin{block}{}
 \ealpara{3) Zbierz \ealkeytr{wyrazy podobne}}{3) Collect \ealkey{like terms}}
-\begin{block}{3) Collect \ealkey{like terms}}
-\Large
 \[
 3b + 4 + 2b = \ablank{5b+4}
 \]
 \end{block}
+\end{frame}
 
-\end{minipage}\hfill
-\begin{minipage}[t]{0.48\textwidth}
-
-\ealpara{2) \ealkeytr{metoda pudełkowa}}{2) \ealkey{Box Method}}
-\begin{block}{2) \ealkey{Box Method}}
-\centering
-\begin{tikzpicture}[scale=0.8]
-
-\draw (0,0) rectangle (4,2);
-\draw (2,0) -- (2,2);
-
-\node at (1,-0.4) {$3$};
-\node at (3,-0.4) {$5$};
-\node at (-0.4,1) {$4$};
-
-\node at (1,1) {\ashowq{12}};
-\node at (3,1) {\ashowq{20}};
-
-\end{tikzpicture}
-
-\vspace{0.4em}
-\ealpara{Oblicz całkowite \ealkeytr{pole}.}{Find the total \ealkey{area}.}
-\ashow{\ealpara{Całkowite \ealkeytr{pole} $= 32$}{Total \ealkey{area} $= 32$}}
-
-\end{block}
-
-\vspace{0.6em}
-
+\begin{frame}{Starter: Prior Knowledge (3 of 3)}
+\begin{block}{}
 \ealpara{4) \ealkeytr{Wymnażaj} \ealkeytr{nawias}}{4) \ealkey{Expand} the \ealkey{bracket}}
-\begin{block}{4) \ealkey{Expand} the \ealkey{bracket}}
-\Large
 \[
 2(x+6) = \ablank{2x+12}
 \]
 \end{block}
-
-\end{minipage}
 \end{frame}
 
-
+% ---------- STARTER ANSWERS ----------
 \begin{frame}{Starter: Answers}
 \begin{minipage}[t]{0.48\textwidth}
 
-\ealpara{1) \ealkeytr{arytmetyka}}{1) \ealkey{Arithmetic}}
-\begin{block}{1) \ealkey{Arithmetic}}
-\Large
+\begin{block}{}
+\ealpara{1) Arytmetyka}{1) \ealkey{Arithmetic}}
 \[
-13 + 9 = \textcolor{red}{22}
+13 + 9 = 22
 \]
 \end{block}
 
-\vspace{6.2em}
+\vspace{1em}
 
+\begin{block}{}
 \ealpara{3) Zbierz \ealkeytr{wyrazy podobne}}{3) Collect \ealkey{like terms}}
-\begin{block}{3) Collect \ealkey{like terms}}
-\Large
 \[
-3b + 4 + 2b = \textcolor{red}{5b + 4}
+3b + 4 + 2b = 5b + 4
 \]
 \end{block}
 
 \end{minipage}\hfill
 \begin{minipage}[t]{0.48\textwidth}
 
-\ealpara{2) \ealkeytr{metoda pudełkowa}}{2) \ealkey{Box Method}}
-\begin{block}{2) \ealkey{Box Method}}
-\centering
+\begin{block}{}
+\ealpara{2) Metoda pudełkowa}{2) \ealkey{Box Method}}
+\begin{center}
 \begin{tikzpicture}[scale=0.8]
-
 \draw (0,0) rectangle (4,2);
 \draw (2,0) -- (2,2);
-
 \node at (1,-0.4) {$3$};
 \node at (3,-0.4) {$5$};
 \node at (-0.4,1) {$4$};
-
-\node at (1,1) {\textcolor{red}{12}};
-\node at (3,1) {\textcolor{red}{20}};
-
+\node at (1,1) {12};
+\node at (3,1) {20};
 \end{tikzpicture}
+\end{center}
 
 \vspace{0.4em}
-\textcolor{red}{\ealpara{Całkowite \ealkeytr{pole} $= 32$}{Total \ealkey{area} $= 32$}}
-
+\ealpara{Całkowite \ealkeytr{pole} $= 32$}{Total \ealkey{area} $= 32$}
 \end{block}
 
 \vspace{0.6em}
 
+\begin{block}{}
 \ealpara{4) \ealkeytr{Wymnażaj} \ealkeytr{nawias}}{4) \ealkey{Expand} the \ealkey{bracket}}
-\begin{block}{4) \ealkey{Expand} the \ealkey{bracket}}
-\Large
 \[
-2(x+6) = \textcolor{red}{2x + 12}
+2(x+6) = 2x + 12
 \]
 \end{block}
 

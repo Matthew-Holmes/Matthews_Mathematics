@@ -14,6 +14,7 @@
 %   English text        black   RGB 0 0 0
 %   Polish text         purple  RGB 112 48 160
 %   layout macros       version 3
+%   sheet layout        version 1
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -125,14 +126,29 @@
 \frame{\titlepage}
 
 %------------------------------------------------
-% SLIDE 1: Retrieval + Squaring as a New Skill
+% SLIDE 1 (original): Starter — split into 3 slides
 %------------------------------------------------
-\begin{frame}{Starter (Rozgrzewka)}
 
-\vspace{-2em}
+\begin{frame}{Starter (1 of 3)}
+\begin{enumerate}
+  \item $4 \times 4 = \ashowq{16}$
+  \item $7 \times 7 = \ashowq{49}$
+  \item $10^2 = \ashowq{100}$
+  \item $3^2 = \ashowq{9}$
+\end{enumerate}
+\end{frame}
 
+\begin{frame}{Starter (2 of 3)}
+\begin{enumerate}
+  \setcounter{enumi}{4}
+  \item \ealpara{$2 \times 6$ i $6^2$ --- czy to jest to samo? \ashow{Nie: $12\neq 36$.}}{$2 \times 6$ and $6^2$ --- are these the same? \ashow{No: $12\neq 36$.}}
+  \item $3.14 \times 9=\ablank{28.26}$
+  \item $3.14 \times 25=\ablank{78.5}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Starter (3 of 3)}
 \begin{columns}
-
 \column{0.35\textwidth}
 \begin{center}
 \begin{tikzpicture}[scale=0.85]
@@ -159,56 +175,38 @@
 \end{center}
 
 \column{0.65\textwidth}
-\small
-\begin{enumerate}
-  \begin{multicols}{2}
-    \item $4 \times 4 = \ashowq{16}$
-    \item $7 \times 7 = \ashowq{49}$
-  \end{multicols}
-  \begin{multicols}{2}
-    \item $10^2 = \ashowq{100}$
-    \item $3^2 = \ashowq{9}$
-  \end{multicols}
-  \item \ealpara{%
-    \(2 \times 6\) oraz \(6^2\) --- czy to to samo? \ashow{Nie: \(12 \neq 36\).}%
-  }{%
-    \(2 \times 6\) and \(6^2\) --- are these the same? \ashow{No: \(12 \neq 36\).}%
-  }
-  \begin{multicols}{2}
-  \item $3.14 \times 9=\ablank{28.26}$
-  \item $3.14 \times 25=\ablank{78.5}$
-  \end{multicols}
-\end{enumerate}
-\vspace{-1em}
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item \ealpara{%
-    \ealkeytr{Koło} ma \ealkeytr{średnicę} \(14\) cm. Znajdź: \newline{} (a) \ealkeytr{promień} \ablank{7\,\text{cm}} \newline{} (b) \ealkeytr{obwód} \ablank{43.96\,\text{cm}}. (\(\pi \approx 3.14\))%
-  }{%
-    A \ealkey{circle} has \textbf{\ealkey{diameter}} \(14\) cm. Find: \newline{} (a) the \ealkey{radius} \ablank{7\,\text{cm}} \newline{} (b) the \ealkey{circumference} \ablank{43.96\,\text{cm}}. (\(\pi \approx 3.14\))%
-  }
-  \item \ealpara{%
-    \ealkeytr{Koło} ma \ealkeytr{promień} \(5\) cm. Jaki jest jego \ealkeytr{obwód}? \ablank{31.4\,\text{cm}}%
-  }{%
-    A \ealkey{circle} has \textbf{\ealkey{radius}} \(5\) cm. What is the \ealkey{circumference}? \ablank{31.4\,\text{cm}}%
-  }
-  \item \ealpara{%
-    \ealkeytr{Kwadrat} ma bok \(3\) cm i \ealkeytr{pole} \(9\) cm\(^2\). \ealkeytr{Koło} ma \ealkeytr{promień} \(1.5\) cm. Czy \ealkeytr{pole} \ealkeytr{koła} jest większe czy mniejsze niż \(9\) cm\(^2\)? \ashow{Mniejsze: \(\pi(1.5)^2 \approx 7.07\) cm\(^2\).}%
-  }{%
-    The \ealkey{square} has side \(3\) cm and \ealkey{area} \(9\) cm\(^2\). A \ealkey{circle} has \ealkey{radius} \(1.5\) cm. Is the \ealkey{circle}'s \ealkey{area} more or less than \(9\) cm\(^2\)? \ashow{Less: \(\pi(1.5)^2 \approx 7.07\) cm\(^2\).}%
-  }
+  \item \ealpara{\ealkeytr{Koło} ma \ealkeytr{średnicę} $14$ cm. Znajdź: \newline{} (a) \ealkeytr{promień} \ablank{7\,\text{cm}} \newline{} (b) \ealkeytr{obwód} \ablank{43.96\,\text{cm}}. ($\pi \approx 3.14$)}{A \ealkey{circle} has \textbf{\ealkey{diameter}} $14$ cm. Find: \newline{} (a) the \ealkey{radius} \ablank{7\,\text{cm}} \newline{} (b) the \ealkey{circumference} \ablank{43.96\,\text{cm}}. ($\pi \approx 3.14$)}
+  \item \ealpara{\ealkeytr{Koło} ma \ealkeytr{promień} $5$ cm. Jaki jest \ealkeytr{obwód}? \ablank{31.4\,\text{cm}}}{A \ealkey{circle} has \textbf{\ealkey{radius}} $5$ cm. What is the \ealkey{circumference}? \ablank{31.4\,\text{cm}}}
+  \item \ealpara{\ealkeytr{Kwadrat} ma bok $3$ cm i \ealkeytr{pole} $9$ cm$^2$. \ealkeytr{Koło} ma \ealkeytr{promień} $1.5$ cm. Czy \ealkeytr{pole} \ealkeytr{koła} jest większe czy mniejsze niż $9$ cm$^2$? \ashow{Mniejsze: $\pi(1.5)^2 \approx 7.07$ cm$^2$.}}{The \ealkey{square} has side $3$ cm and \ealkey{area} $9$ cm$^2$. A \ealkey{circle} has \ealkey{radius} $1.5$ cm. Is the \ealkey{circle}'s \ealkey{area} more or less than $9$ cm$^2$? \ashow{Less: $\pi(1.5)^2 \approx 7.07$ cm$^2$.}}
 \end{enumerate}
-
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
-% SLIDE 2: Retrieval + Radius vs Diameter + Squaring in Context
+% SLIDE 2 (original): Starter — split into 3 slides
 %------------------------------------------------
-\begin{frame}{Starter (Rozgrzewka)}
 
+\begin{frame}{Starter (1 of 3)}
+\begin{enumerate}
+  \item \ealpara{Podziel na pół $12$ cm \ablank{6\,\text{cm}}}{Halve $12$ cm \ablank{6\,\text{cm}}}
+  \item \ealpara{Podziel na pół $9.4$ cm \ablank{4.7\,\text{cm}}}{Halve $9.4$ cm \ablank{4.7\,\text{cm}}}
+  \item $6^2 = \ashowq{36}$
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Starter (2 of 3)}
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item $1.5^2 = \ashowq{2.25}$
+  \item $3 \times 4^2=\ablank{48}$
+  \item \ealpara{Prawda czy fałsz? $\pi \times (2r) = 2 \times \pi \times r$ \ashow{Prawda}}{True or false? $\pi \times (2r) = 2 \times \pi \times r$ \ashow{True}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Starter (3 of 3)}
 \begin{columns}
-
 \column{0.35\textwidth}
 \begin{center}
 \begin{tikzpicture}[scale=0.85]
@@ -231,63 +229,38 @@
 \end{center}
 
 \column{0.65\textwidth}
-\small
-\begin{enumerate}
-  \begin{multicols}{2}
-    \item \ealpara{%
-      Podziel \(12\) cm na pół \ablank{6\,\text{cm}}%
-    }{%
-      Halve \(12\) cm \ablank{6\,\text{cm}}%
-    }
-    \item \ealpara{%
-      Podziel \(9.4\) cm na pół \ablank{4.7\,\text{cm}}%
-    }{%
-      Halve \(9.4\) cm \ablank{4.7\,\text{cm}}%
-    }
-  \end{multicols}
-  \begin{multicols}{2}
-    \item $6^2 = \ashowq{36}$
-    \item $1.5^2 = \ashowq{2.25}$
-    \item $3 \times 4^2=\ablank{48}$
-    \item \ealpara{%
-      Prawda czy fałsz? \(\pi \times (2r) = 2 \times \pi \times r\) \ashow{Prawda}%
-    }{%
-      True or false? \(\pi \times (2r) = 2 \times \pi \times r\) \ashow{True}%
-    }
-  \end{multicols}
-\end{enumerate}
-\vspace{-2em}
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item \ealpara{%
-    Rozważ \ealkeytr{koło} A. \newline{} (a) Jaki jest jego \ealkeytr{obwód}? \ablank{18.84\,\text{cm}} \newline{} (b) Jakie jest jego \ealkeytr{pole}? \ablank{$28.26\,\text{cm}^2$}%
-  }{%
-    Consider \ealkey{circle} A. \newline{} (a) What is the \ealkey{circumference}? \ablank{18.84\,\text{cm}} \newline{} (b) What is the \ealkey{area}? \ablank{$28.26\,\text{cm}^2$}%
-  }
-  \item \ealpara{%
-    Rozważ \ealkeytr{koło} B. \newline{} (a) Jaki jest jego \ealkeytr{obwód}? \ablank{37.68\,\text{cm}} \newline{} (b) Jakie jest jego \ealkeytr{pole}? \ablank{$113.04\,\text{cm}^2$}%
-  }{%
-    Consider \ealkey{circle} B. \newline{} (a) What is the \ealkey{circumference}? \ablank{37.68\,\text{cm}} \newline{} (b) What is the \ealkey{area}? \ablank{$113.04\,\text{cm}^2$}%
-  }
-  \item \ealpara{%
-    Czy \ealkeytr{stosunek} \ealkeytr{obwodów} \ealkeytr{kół} A i B jest taki sam jak \ealkeytr{stosunek} \ealkeytr{pól}? \ashow{Nie: \(1:2\) wobec \(1:4\).}%
-  }{%
-    Is the \ealkey{ratio} of the \ealkey{circumferences} of \ealkey{circles} A and B the same as the \ealkey{ratio} of the \ealkey{areas}? \ashow{No: $1:2$ vs $1:4$.}%
-  }
+  \item \ealpara{Rozważ \ealkeytr{koło} A \newline{} (a) Jaki jest \ealkeytr{obwód}? \ablank{18.84\,\text{cm}} \newline{} (b) Jakie jest \ealkeytr{pole}? \ablank{$28.26\,\text{cm}^2$}}{Consider \ealkey{circle} A \newline{} (a) What is the \ealkey{circumference}? \ablank{18.84\,\text{cm}} \newline{} (b) What is the \ealkey{area}? \ablank{$28.26\,\text{cm}^2$}}
+  \item \ealpara{Rozważ \ealkeytr{koło} B \newline{} (a) Jaki jest \ealkeytr{obwód}? \ablank{37.68\,\text{cm}} \newline{} (b) Jakie jest \ealkeytr{pole}? \ablank{$113.04\,\text{cm}^2$}}{Consider \ealkey{circle} B \newline{} (a) What is the \ealkey{circumference}? \ablank{37.68\,\text{cm}} \newline{} (b) What is the \ealkey{area}? \ablank{$113.04\,\text{cm}^2$}}
+  \item \ealpara{Czy \ealkeytr{stosunek} \ealkeytr{obwodów} \ealkeytr{kół} A i B jest taki sam jak \ealkeytr{stosunek} \ealkeytr{pól}? \ashow{Nie: $1:2$ vs $1:4$.}}{Is the \ealkey{ratio} of the \ealkey{circumferences} of \ealkey{circles} A and B the same as the \ealkey{ratio} of the \ealkey{areas}? \ashow{No: $1:2$ vs $1:4$.}}
 \end{enumerate}
-
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
-% SLIDE 3: Retrieval + Area Intuition + First Explicit Area
+% SLIDE 3 (original): Starter — split into 3 slides
 %------------------------------------------------
-\begin{frame}{Starter (Rozgrzewka)}
 
-\vspace{-1em}
+\begin{frame}{Starter (1 of 3)}
+\begin{enumerate}
+  \item $5 \times 5 = \ashowq{25}$
+  \item $8^2 = \ashowq{64}$
+  \item $2.5^2 = \ashowq{6.25}$
+\end{enumerate}
+\end{frame}
 
+\begin{frame}{Starter (2 of 3)}
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item $3.14 \times 9 = \ablank{28.26}$
+  \item \ealpara{\ealkeytr{Pole} \ealkeytr{prostokąta} $7$ cm $\times$ $4$ cm $= \ashowq{28\,\text{cm}^2}$}{\ealkey{Area} of a $7$ cm $\times$ $4$ cm \ealkey{rectangle} $= \ashowq{28\,\text{cm}^2}$}
+  \item \ealpara{Jaki \ealkeytr{ułamek} $360^\circ$ to $90^\circ$? \ashow{$\frac{1}{4}$}}{What \ealkey{fraction} of $360^\circ$ is $90^\circ$? \ashow{$\frac{1}{4}$}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Starter (3 of 3)}
 \begin{columns}
-
 \column{0.35\textwidth}
 \begin{center}
 \begin{tikzpicture}[scale=0.75]
@@ -313,59 +286,38 @@
 \end{center}
 
 \column{0.65\textwidth}
-\small
-\begin{enumerate}
-  \begin{multicols}{2}
-    \item $5 \times 5 = \ashowq{25}$
-    \item $8^2 = \ashowq{64}$
-  \end{multicols}
-  \begin{multicols}{2}
-    \item $2.5^2 = \ashowq{6.25}$
-    \item $3.14 \times 9 = \ablank{28.26}$
-  \end{multicols}
-  \item \ealpara{%
-    \ealkeytr{Pole} \ealkeytr{prostokąta} o wymiarach \(7\) cm \(\times\) \(4\) cm \(= \ashowq{28\,\text{cm}^2}\)%
-  }{%
-    \ealkey{Area} of a \(7\) cm \(\times\) \(4\) cm \ealkey{rectangle} \(= \ashowq{28\,\text{cm}^2}\)%
-  }
-  \item \ealpara{%
-    Jaki \ealkeytr{ułamek} kąta \(360^\circ\) stanowi \(90^\circ\)? \ashow{\(\frac{1}{4}\)}%
-  }{%
-    What \ealkey{fraction} of \(360^\circ\) is \(90^\circ\)? \ashow{\(\frac{1}{4}\)}%
-  }
-\end{enumerate}
-
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item \ealpara{%
-    Zapisz \ealkeytr{wyrażenie} na \ealkeytr{pole} \ealkeytr{koła} na rysunku. \ashow{\(\pi r^2\)}%
-  }{%
-    Write an \ealkey{expression} for the \ealkey{area} of the \ealkey{circle} in the picture \ashow{$\pi r^2$}%
-  }
-  \item \ealpara{%
-    Zapisz \ealkeytr{wyrażenie} na \ealkeytr{pole} niebieskiego zacieniowanego obszaru na rysunku. \ashow{\(4r^2-\pi r^2\)}%
-  }{%
-    Write an \ealkey{expression} for the \ealkey{area} of the shaded blue region in the picture \ashow{$4r^2-\pi r^2$}%
-  }
-  \item \ealpara{%
-    Jeśli \ealkeytr{kwadrat} ma \ealkeytr{obwód} \(48\) cm, jakie jest \ealkeytr{pole} niebieskiego zacieniowanego obszaru? \ashow{$30.96\,\text{cm}^2$}%
-  }{%
-    If the \ealkey{square} has a \ealkey{perimeter} of \(48\) cm, what is the \ealkey{area} of the shaded blue region? \ashow{$30.96\,\text{cm}^2$}%
-  }
+  \item \ealpara{Zapisz \ealkeytr{wyrażenie} na \ealkeytr{pole} \ealkeytr{koła} na rysunku \ashow{$\pi r^2$}}{Write an \ealkey{expression} for the \ealkey{area} of the \ealkey{circle} in the picture \ashow{$\pi r^2$}}
+  \item \ealpara{Zapisz \ealkeytr{wyrażenie} na \ealkeytr{pole} niebieskiego zacieniowanego obszaru na rysunku \ashow{$4r^2-\pi r^2$}}{Write an \ealkey{expression} for the \ealkey{area} of the shaded blue region in the picture \ashow{$4r^2-\pi r^2$}}
+  \item \ealpara{Jeśli \ealkeytr{kwadrat} ma \ealkeytr{obwód} 48cm, jakie jest \ealkeytr{pole} niebieskiego zacieniowanego obszaru? \ashow{$30.96\,\text{cm}^2$}}{If the \ealkey{square} has a \ealkey{perimeter} of 48cm, what is the \ealkey{area} of the shaded blue region? \ashow{$30.96\,\text{cm}^2$}}
 \end{enumerate}
-
 \end{columns}
 \end{frame}
 
 %------------------------------------------------
-% SLIDE 4: Full Retrieval + Fluency with Area + Spot the Error
+% SLIDE 4 (original): Starter — split into 3 slides
 %------------------------------------------------
-\begin{frame}{Starter (Rozgrzewka)}
 
-\vspace{-1em}
+\begin{frame}{Starter (1 of 3)}
+\begin{enumerate}
+  \item $9^2 = \ashowq{81}$
+  \item $3.5^2 = \ashowq{12.25}$
+  \item $3.14 \times 16$ \ashow{$=50.24$}
+\end{enumerate}
+\end{frame}
 
+\begin{frame}{Starter (2 of 3)}
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item $3.14 \times 49$ \ashow{$=153.86$}
+  \item \ealpara{Podziel na pół $14$ cm. \quad Następnie \ealkeytr{podnieś do kwadratu} swoją odpowiedź. \ashow{$7$ cm, więc $49\,\text{cm}^2$}}{Halve $14$ cm. \quad Then \ealkey{square} your answer. \ashow{$7$ cm, so $49\,\text{cm}^2$}}
+  \item \ealpara{\ealkeytr{Kwadrat} ma \ealkeytr{pole} $64$ cm$^2$. Jaka jest długość jego boku \ashowq{$8$ cm}}{A \ealkey{square} has \ealkey{area} $64$ cm$^2$. What is its side length \ashowq{$8$ cm}}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Starter (3 of 3)}
 \begin{columns}
-
 \column{0.35\textwidth}
 \begin{center}
 \begin{tikzpicture}[scale=0.85]
@@ -391,52 +343,13 @@
 \end{center}
 
 \column{0.65\textwidth}
-\small
-\begin{enumerate}
-  \begin{multicols}{2}
-    \item $9^2 = \ashowq{81}$
-    \item $3.5^2 = \ashowq{12.25}$
-  \end{multicols}
-  \begin{multicols}{2}
-    \item $3.14 \times 16$ \ashow{$=50.24$}
-    \item $3.14 \times 49$ \ashow{$=153.86$}
-  \end{multicols}
-  \item \ealpara{%
-    Podziel \(14\) cm na pół. Następnie \ealkeytr{podnieś do kwadratu} swoją odpowiedź. \ashow{\(7\) cm, więc \(49\,\text{cm}^2\)}%
-  }{%
-    Halve \(14\) cm. Then \ealkey{square} your answer. \ashow{$7$ cm, so $49\,\text{cm}^2$}%
-  }
-  \item \ealpara{%
-    \ealkeytr{Kwadrat} ma \ealkeytr{pole} \(64\) cm\(^2\). Jaka jest długość jego boku? \ashowq{\(8\) cm}%
-  }{%
-    A \ealkey{square} has \ealkey{area} \(64\) cm\(^2\). What is its side length \ashowq{$8$ cm}%
-  }
-\end{enumerate}
-
 \begin{enumerate}
   \setcounter{enumi}{6}
-  \item \ealpara{%
-    \textbf{Znajdź błąd:} \textit{``\ealkeytr{Koło} Q ma \ealkeytr{średnicę} \(14\) cm, więc jego \ealkeytr{pole} wynosi \(\pi \times 14^2 \approx 615\) cm\(^2\).''} Jaki błąd został popełniony? Zapisz poprawne rozwiązanie. \ashow{Użyto \ealkeytr{średnicy}, a nie \ealkeytr{promienia}: \(\pi \times 7^2 \approx 153.86\,\text{cm}^2\).}%
-  }{%
-    \textbf{Spot the mistake:} \textit{``\ealkey{Circle} Q has \ealkey{diameter} \(14\) cm, so its \ealkey{area} is \(\pi \times 14^2 \approx 615\) cm\(^2\).''} What error was made? Write the correct solution. \ashow{Used \ealkey{diameter} not \ealkey{radius}: \(\pi \times 7^2 \approx 153.86\,\text{cm}^2\).}%
-  }
-  \item \ealpara{%
-    \textbf{\ealkeytr{Koło} P}, \ealkeytr{promień} \(4\) cm. Znajdź: (a) \ealkeytr{pole} \ablank{$50.24\,\text{cm}^2$} \quad (b) \ealkeytr{obwód} \ablank{25.12\,\text{cm}}%
-  }{%
-    \textbf{\ealkey{Circle} P}, \ealkey{radius} \(4\) cm. Find: (a) the \ealkey{area} \ablank{$50.24\,\text{cm}^2$} \quad (b) the \ealkey{circumference} \ablank{25.12\,\text{cm}}%
-  }
-  \item \ealpara{%
-    \textbf{\ealkeytr{Koło} Q}, \ealkeytr{średnica} \(14\) cm. Znajdź: (a) \ealkeytr{pole} \ablank{$153.86\,\text{cm}^2$} \quad (b) \ealkeytr{obwód} \ablank{43.96\,\text{cm}}%
-  }{%
-    \textbf{\ealkey{Circle} Q}, \ealkey{diameter} \(14\) cm. Find: (a) the \ealkey{area} \ablank{$153.86\,\text{cm}^2$} \quad (b) the \ealkey{circumference} \ablank{43.96\,\text{cm}}%
-  }
-  \item \ealpara{%
-    Które ma większe \ealkeytr{pole}: P czy Q? O około ile cm\(^2\)? \ashow{Q, o około \(103.62\,\text{cm}^2\).}%
-  }{%
-    Which has the greater \ealkey{area}, P or Q? By approximately how many cm\(^2\)? \ashow{Q, by approximately $103.62\,\text{cm}^2$.}%
-  }
+  \item \ealpara{\textbf{Znajdź błąd:} \textit{``\ealkeytr{Koło} Q ma \ealkeytr{średnicę} $14$ cm, więc jego \ealkeytr{pole} wynosi $\pi \times 14^2 \approx 615$ cm$^2$.''} Jaki błąd popełniono? Zapisz poprawne rozwiązanie. \ashow{Użyto \ealkeytr{średnicy} zamiast \ealkeytr{promienia}: $\pi \times 7^2 \approx 153.86\,\text{cm}^2$.}}{\textbf{Spot the mistake:} \textit{``\ealkey{Circle} Q has \ealkey{diameter} $14$ cm, so its \ealkey{area} is $\pi \times 14^2 \approx 615$ cm$^2$.''} What error was made? Write the correct solution. \ashow{Used \ealkey{diameter} not \ealkey{radius}: $\pi \times 7^2 \approx 153.86\,\text{cm}^2$.}}
+  \item \ealpara{\textbf{\ealkeytr{Koło} P}, \ealkeytr{promień} $4$ cm. Znajdź: (a) \ealkeytr{pole} \ablank{$50.24\,\text{cm}^2$} \quad (b) \ealkeytr{obwód} \ablank{25.12\,\text{cm}}.}{\textbf{\ealkey{Circle} P}, \ealkey{radius} $4$ cm. Find: (a) the \ealkey{area} \ablank{$50.24\,\text{cm}^2$} \quad (b) the \ealkey{circumference} \ablank{25.12\,\text{cm}}.}
+  \item \ealpara{\textbf{\ealkeytr{Koło} Q}, \ealkeytr{średnica} $14$ cm. Znajdź: (a) \ealkeytr{pole} \ablank{$153.86\,\text{cm}^2$} \quad (b) \ealkeytr{obwód} \ablank{43.96\,\text{cm}}.}{\textbf{\ealkey{Circle} Q}, \ealkey{diameter} $14$ cm. Find: (a) the \ealkey{area} \ablank{$153.86\,\text{cm}^2$} \quad (b) the \ealkey{circumference} \ablank{43.96\,\text{cm}}.}
+  \item \ealpara{Które ma większe \ealkeytr{pole}, P czy Q? O ile w przybliżeniu cm$^2$? \ashow{Q, o około $103.62\,\text{cm}^2$.}}{Which has the greater \ealkey{area}, P or Q? By approximately how many cm$^2$? \ashow{Q, by approximately $103.62\,\text{cm}^2$.}}
 \end{enumerate}
-
 \end{columns}
 \end{frame}
 

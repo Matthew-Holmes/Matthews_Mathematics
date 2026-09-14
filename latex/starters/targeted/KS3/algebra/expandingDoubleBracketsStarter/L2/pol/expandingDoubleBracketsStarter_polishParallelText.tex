@@ -14,6 +14,7 @@
 %   English text        black   RGB 0 0 0
 %   Polish text         purple  RGB 112 48 160
 %   layout macros       version 3
+%   sheet layout        version 1
 %
 % Please don't edit any information in this comment block - the server
 % compares it against the current settings and rebuilds this file when
@@ -121,76 +122,66 @@
 \begin{document}
 
 \begin{frame}
-  \centering
-  \Huge
-  \ealpara{Rozgrzewka: \ealkeytr{Wymnażanie} \ealkeytr{nawiasów}}
-          {Starter: \ealkey{Expanding} \ealkey{Brackets}}
-  \vfill
-  {\large Year 8}
+  \ealpara{Start: \ealkeytr{Wymnażanie} \ealkeytr{nawiasów}}{Starter: \ealkey{Expanding} \ealkey{Brackets}}
+  \vspace{1em}
+  \begin{center}
+    {\Large Year 8}
+  \end{center}
 \end{frame}
 
-% Starter, top row: questions 1 and 2
-\begin{frame}
-  \ealpara{Rozgrzewka: \ealkeytr{Wymnażaj} \ealkeytr{nawiasy} w każdym \ealkeytr{wyrażeniu}}
-          {Starter: \ealkey{Expand} each \ealkey{expression}}
-
-  \begin{minipage}[t]{0.48\textwidth}
-    \begin{block}{1) Single \ealkey{brackets}}
-      \ealpara{1) \ealkeytr{Pojedyncze} \ealkeytr{nawiasy}}
-              {1) Single \ealkey{brackets}}
-      \Large \(\;3(y+5)=\ablank{3y+15}\)
-    \end{block}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \begin{block}{2) Single \ealkey{brackets}}
-      \ealpara{2) \ealkeytr{Pojedyncze} \ealkeytr{nawiasy}}
-              {2) Single \ealkey{brackets}}
-      \Large \(\; a(b-5)=\ablank{ab-5a}\)
-    \end{block}
-  \end{minipage}
+\begin{frame}{Starter: Expand each expression (1 of 3)}
+  \ealpara{Start: \ealkeytr{Wymnażać nawiasy} w każdym \ealkeytr{wyrażeniu}}{Starter: \ealkey{Expand} each \ealkey{expression}}
+  \vspace{1em}
+  
+  \ealpara{1) \ealkeytr{Nawiasy} pojedyncze}{1) Single \ealkey{brackets}}
+  \begin{block}{}
+    \Large \(\;3(y+5)=\ablank{3y+15}\)
+  \end{block}
+  
+  \vspace{1em}
+  
+  \ealpara{2) \ealkeytr{Nawiasy} pojedyncze}{2) Single \ealkey{brackets}}
+  \begin{block}{}
+    \Large \(\; a(b-5)=\ablank{ab-5a}\)
+  \end{block}
 \end{frame}
 
-% Starter, bottom row: questions 3 and 4
-\begin{frame}
-  \begin{minipage}[t]{0.48\textwidth}
-    \begin{block}{3) Double \ealkey{brackets}}
-      \ealpara{3) \ealkeytr{Podwójne} \ealkeytr{nawiasy}}
-              {3) Double \ealkey{brackets}}
-      \Large \(\;(x+4)(x-2)=\ablank{x^2+2x-8}\)
-    \end{block}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.48\textwidth}
-    \begin{block}{4) What is the \ealkey{area} of the \ealkey{rectangle}?}
-      \ealpara{4) Jakie jest \ealkeytr{pole} \ealkeytr{prostokąta}?}
-              {4) What is the \ealkey{area} of the \ealkey{rectangle}?}
-      \begin{tikzpicture}[scale=0.6]
-
-        % Outer rectangle
-        \draw (0,0) rectangle (6,2);
-
-        % Vertical split
-        \draw (3,0) -- (3,2);
-
-        % Labels for widths
-        \node at (1.5,-0.3) {$f$};
-        \node at (4.5,-0.3) {$6$};
-
-        % Height label
-        \node at (-0.3,1) {$x$};
-
-        % Area labels
-        \node at (1.5,1) {\ashowq{$xf$}};
-        \node at (4.5,1) {\ashowq{$6x$}};
-
-      \end{tikzpicture}
-      \par\vspace{0.5em}
-      \ashow{\ealkey{Area} = \(x(f+6)\)}
-    \end{block}
-  \end{minipage}
+\begin{frame}{Starter: Expand each expression (2 of 3)}
+  \ealpara{Start: \ealkeytr{Wymnażać nawiasy} w każdym \ealkeytr{wyrażeniu}}{Starter: \ealkey{Expand} each \ealkey{expression}}
+  \vspace{1em}
+  
+  \ealpara{3) \ealkeytr{Nawiasy} podwójne}{3) Double \ealkey{brackets}}
+  \begin{block}{}
+    \Large \(\;(x+4)(x-2)=\ablank{x^2+2x-8}\)
+  \end{block}
 \end{frame}
 
-% Answers
-\begin{frame}
+\begin{frame}{Starter: Expand each expression (3 of 3)}
+  \ealpara{Start: \ealkeytr{Wymnażać nawiasy} w każdym \ealkeytr{wyrażeniu}}{Starter: \ealkey{Expand} each \ealkey{expression}}
+  \vspace{1em}
+  
+  \ealpara{4) Jaka jest \ealkeytr{pole} \ealkeytr{prostokąta}?}{4) What is the \ealkey{area} of the \ealkey{rectangle}?}
+  \begin{block}{}
+    \begin{tikzpicture}[scale=0.6]
+      % Outer rectangle
+      \draw (0,0) rectangle (6,2);
+      % Vertical split
+      \draw (3,0) -- (3,2);
+      % Labels for widths
+      \node at (1.5,-0.3) {$f$};
+      \node at (4.5,-0.3) {$6$};
+      % Height label
+      \node at (-0.3,1) {$x$};
+      % Area labels
+      \node at (1.5,1) {\ashowq{$xf$}};
+      \node at (4.5,1) {\ashowq{$6x$}};
+    \end{tikzpicture}
+    \par\vspace{0.5em}
+    \ashow{\ealkey{Area} = \(x(f+6)\)}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Answers}
   \ealpara{Odpowiedzi}{Answers}
   \begin{enumerate}
     \item \(3(y+5)=3y+15\)
@@ -200,16 +191,10 @@
   \end{enumerate}
 \end{frame}
 
-% Automated check note
-\begin{frame}
-  \ealpara{Automatyczne sprawdzanie: odpowiedzi mogą wymagać uwagi}
-          {Automated check: answers may need attention}
-  \ealpara{Odpowiedzi na tych slajdach mogą mieć nierozwiązane problemy z formatowaniem. Automatyczna recenzja ich nie zaakceptowała, a przepisanie ich nie rozwiązało sprawy.}
-          {The answers on these slides may have unresolved formatting issues. An automated review did not accept them, and rewriting them did not settle it.}
-  \ealpara{W recenzji napisano, że slajd „final answers” i slajd „Answers” pokazują wszystkie odpowiedzi już na pierwszej nakładce, co oznacza, że nic nie jest ukryte do czasu kliknięcia. Nie wymienia ona konkretnych slajdów, tylko te dwa tytuły slajdów. Te dwie uwagi to w zasadzie ta sama skarga powtórzona, nie sprzeczne, ale warto sprawdzić, czy pokazywanie wszystkich odpowiedzi od razu jest rzeczywiście błędem, czy zamierzonym wyborem projektowym.}
-          {The review said the ``final answers'' frame and the ``Answers'' frame each show all answers on their first overlay, meaning nothing is hidden until a click. It doesn't name specific slides, only those two frame titles. The two comments are essentially the same complaint repeated, not contradictory, but it's worth checking whether showing all answers immediately is actually a mistake or an intentional design choice.}
-  \ealpara{Sprawdź te slajdy i albo je popraw, albo zgłoś problem.}
-          {Please check these slides and either correct them or raise an issue.}
+\begin{frame}{Automated check: answers may need attention}
+  \ealpara{Automatyczna weryfikacja: odpowiedzi mogą wymagać uwagi}{Automated check: answers may need attention}
+  
+  \ealpara{Odpowiedzi na tych slajdach mogą mieć nierozwiązane problemy z formatowaniem. Automatyczna weryfikacja ich nie zaakceptowała, a przepisanie ich nie rozwiązało sprawy. Weryfikacja stwierdziła, że ramka ``final answers'' i ramka ``Answers'' pokazują wszystkie odpowiedzi już od pierwszego overlay, co oznacza, że nic nie jest ukryte do kliknięcia. Nie wymienia konkretnych slajdów, tylko te dwa tytuły ramek. Te dwa komentarze to w zasadzie to samo powtórzone, nie sprzeczne, ale warto sprawdzić, czy pokazywanie wszystkich odpowiedzi natychmiast jest rzeczywiście błędem, czy zamierzonym wyborem projektowym. Proszę sprawdzić te slajdy i albo je poprawić, albo zgłosić problem.}{The answers on these slides may have unresolved formatting issues. An automated review did not accept them, and rewriting them did not settle it. The review said the ``final answers'' frame and the ``Answers'' frame each show all answers on their first overlay, meaning nothing is hidden until a click. It doesn't name specific slides, only those two frame titles. The two comments are essentially the same complaint repeated, not contradictory, but it's worth checking whether showing all answers immediately is actually a mistake or an intentional design choice. Please check these slides and either correct them or raise an issue.}
 \end{frame}
 
 \end{document}
