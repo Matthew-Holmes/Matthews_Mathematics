@@ -1,0 +1,859 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{parskip}
+\setlist[enumerate]{itemsep=0.6em, topsep=0.4em}
+\setlist[itemize]{itemsep=0.3em, topsep=0.3em}
+\allowdisplaybreaks
+
+\begin{document}
+
+\title{Index Rules: Worked Solutions}
+\author{}
+\date{}
+\maketitle
+
+\section{Index rules with positive indices}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $4^3$ means $4\times4\times4$.
+
+\textbf{True.} The index counts how many $4$s are multiplied together:
+\[
+4^3=4\times4\times4=64.
+\]
+
+\item $2^5\times2^3=2^8$.
+
+\textbf{True.} Five $2$s multiplied by three $2$s gives eight $2$s in total, so the indices are added:
+\[
+2^5\times2^3=2^{5+3}=2^8.
+\]
+
+\item $2^5\times2^3=4^8$.
+
+\textbf{False.} Only the indices are added; the base stays as $2$. The answer is
+\[
+2^8=256,
+\]
+not $4^8=65\,536$.
+
+\item $\dfrac{7^8}{7^2}=7^4$.
+
+\textbf{False.} When dividing powers with the same base, the indices are subtracted:
+\[
+\frac{7^8}{7^2}=7^{8-2}=7^6.
+\]
+
+\item $\left(5^2\right)^3=5^5$.
+
+\textbf{False.} A power of a power multiplies the indices:
+\[
+\left(5^2\right)^3=5^{2\times3}=5^6.
+\]
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Simplify $2^3\times2^4$.
+
+\[
+2^3\times2^4=2^{3+4}=2^7.
+\]
+
+\item Simplify $5^6\div5^2$.
+
+\[
+5^6\div5^2=5^{6-2}=5^4.
+\]
+
+\item Simplify $7^5\times7$.
+
+\[
+7=7^1,\qquad 7^5\times7^1=7^{5+1}=7^6.
+\]
+
+\item Simplify $\left(3^2\right)^4$.
+
+\[
+\left(3^2\right)^4=3^{2\times4}=3^8.
+\]
+
+\item Simplify $4^3\times4^2\times4^5$.
+
+\[
+4^3\times4^2\times4^5=4^{3+2+5}=4^{10}.
+\]
+
+\item Simplify $\dfrac{6^8}{6^3\times6^2}$.
+
+First simplify the denominator:
+\[
+6^3\times6^2=6^{3+2}=6^5.
+\]
+Then
+\[
+\frac{6^8}{6^5}=6^{8-5}=6^3.
+\]
+
+\item Simplify $\left(2^3\right)^2\times2^4$.
+
+\[
+\left(2^3\right)^2=2^{3\times2}=2^6,
+\]
+so
+\[
+2^6\times2^4=2^{6+4}=2^{10}.
+\]
+
+\item Simplify $\dfrac{\left(5^3\right)^4}{5^{10}}$.
+
+\[
+\left(5^3\right)^4=5^{3\times4}=5^{12},
+\]
+so
+\[
+\frac{5^{12}}{5^{10}}=5^{12-10}=5^2.
+\]
+
+\item $3^n\times3^5=3^{12}$. Find the value of $n$.
+
+The indices add:
+\[
+3^n\times3^5=3^{n+5}.
+\]
+Therefore
+\[
+n+5=12,\qquad n=7.
+\]
+
+\item Write $8^4$ as a power of $2$.
+
+Since $8=2^3$,
+\[
+8^4=\left(2^3\right)^4=2^{3\times4}=2^{12}.
+\]
+\end{enumerate}
+
+\section{Index rules with negative indices}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $2^{-3}$ is a negative number.
+
+\textbf{False.} A negative index gives a reciprocal, not a negative answer:
+\[
+2^{-3}=\frac{1}{2^3}=\frac{1}{8},
+\]
+which is positive.
+
+\item $5^{-1}=\dfrac{1}{5}$.
+
+\textbf{True.} An index of $-1$ gives the reciprocal of the base.
+
+\item $4^{-2}=\dfrac{1}{8}$.
+
+\textbf{False.} The $-2$ is an index, not a multiplier:
+\[
+4^{-2}=\frac{1}{4^2}=\frac{1}{16}.
+\]
+
+\item $2^4\div2^7=2^{-3}$.
+
+\textbf{True.} Subtract the indices:
+\[
+2^4\div2^7=2^{4-7}=2^{-3}.
+\]
+
+\item $2^{-3}\times2^5=2^{-15}$.
+
+\textbf{False.} The indices are added, not multiplied:
+\[
+2^{-3}\times2^5=2^{-3+5}=2^2=4.
+\]
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Write $2^{-1}$ as a fraction.
+
+\[
+2^{-1}=\frac{1}{2}.
+\]
+
+\item Write $3^{-2}$ as a fraction.
+
+\[
+3^{-2}=\frac{1}{3^2}=\frac{1}{9}.
+\]
+
+\item Write $\dfrac{1}{5^3}$ using a negative index.
+
+\[
+\frac{1}{5^3}=5^{-3}.
+\]
+
+\item Write $10^{-3}$ as a decimal.
+
+\[
+10^{-3}=\frac{1}{10^3}=\frac{1}{1000}=0.001.
+\]
+
+\item Simplify $2^3\times2^{-5}$.
+
+\[
+2^3\times2^{-5}=2^{3+(-5)}=2^{-2}.
+\]
+
+\item Simplify $7^{-2}\div7^3$.
+
+\[
+7^{-2}\div7^3=7^{-2-3}=7^{-5}.
+\]
+
+\item Simplify $\left(4^{-2}\right)^3$.
+
+\[
+\left(4^{-2}\right)^3=4^{-2\times3}=4^{-6}.
+\]
+
+\item Work out $\dfrac{5^{-3}}{5^{-7}}$.
+
+\[
+\frac{5^{-3}}{5^{-7}}=5^{-3-(-7)}=5^{-3+7}=5^4=625.
+\]
+
+\item Work out $\left(\dfrac{2}{3}\right)^{-2}$.
+
+A negative index gives the reciprocal of the fraction:
+\[
+\left(\frac{2}{3}\right)^{-2}=\left(\frac{3}{2}\right)^2=\frac{9}{4}.
+\]
+
+\item $2^n\times2^{-5}=2^{-1}$. Find the value of $n$.
+
+The indices add:
+\[
+2^n\times2^{-5}=2^{n-5}.
+\]
+Therefore
+\[
+n-5=-1,\qquad n=4.
+\]
+\end{enumerate}
+
+\section{Simplifying expressions with index laws}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $x^3\times x^4=x^{12}$.
+
+\textbf{False.} The indices are added, not multiplied:
+\[
+x^3\times x^4=x^{3+4}=x^7.
+\]
+
+\item $2a^3\times3a^2=6a^5$.
+
+\textbf{True.} The numbers are multiplied and the indices are added:
+\[
+2a^3\times3a^2=(2\times3)a^{3+2}=6a^5.
+\]
+
+\item $\left(2x^3\right)^2=2x^6$.
+
+\textbf{False.} Everything inside the bracket is squared, including the $2$:
+\[
+\left(2x^3\right)^2=2^2\times x^{3\times2}=4x^6.
+\]
+
+\item $x^5+x^3=x^8$.
+
+\textbf{False.} Indices are added when terms are multiplied, not when they are added. The expression $x^5+x^3$ cannot be simplified.
+
+\item $\dfrac{12x^5}{3x^5}=4$.
+
+\textbf{True.} $12\div3=4$ and $x^5\div x^5=x^0=1$, so the result is $4$.
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Simplify $x^3\times x^4$.
+
+\[
+x^3\times x^4=x^{3+4}=x^7.
+\]
+
+\item Simplify $y^8\div y^3$.
+
+\[
+y^8\div y^3=y^{8-3}=y^5.
+\]
+
+\item Simplify $3a^2\times4a^5$.
+
+\[
+3a^2\times4a^5=(3\times4)a^{2+5}=12a^7.
+\]
+
+\item Simplify $\dfrac{20b^7}{5b^2}$.
+
+\[
+\frac{20b^7}{5b^2}=\frac{20}{5}b^{7-2}=4b^5.
+\]
+
+\item Simplify $\left(x^4\right)^3$.
+
+\[
+\left(x^4\right)^3=x^{4\times3}=x^{12}.
+\]
+
+\item Simplify $\left(3m^2\right)^3$.
+
+\[
+\left(3m^2\right)^3=3^3m^{2\times3}=27m^6.
+\]
+
+\item Simplify $5p^3q^2\times4p^2q^5$.
+
+\[
+5p^3q^2\times4p^2q^5=(5\times4)p^{3+2}q^{2+5}=20p^5q^7.
+\]
+
+\item Simplify $\dfrac{18x^6y^4}{6x^2y^4}$.
+
+\[
+\frac{18x^6y^4}{6x^2y^4}=\frac{18}{6}x^{6-2}y^{4-4}=3x^4y^0=3x^4.
+\]
+
+\item Simplify $\dfrac{\left(2x^3\right)^4}{8x^5}$.
+
+\[
+\left(2x^3\right)^4=2^4x^{3\times4}=16x^{12}.
+\]
+Then
+\[
+\frac{16x^{12}}{8x^5}=2x^{12-5}=2x^7.
+\]
+
+\item Simplify $\dfrac{6a^5b^2\times3a^2b^4}{9a^4b^3}$.
+
+First simplify the numerator:
+\[
+6a^5b^2\times3a^2b^4=18a^{5+2}b^{2+4}=18a^7b^6.
+\]
+Then
+\[
+\frac{18a^7b^6}{9a^4b^3}=2a^{7-4}b^{6-3}=2a^3b^3.
+\]
+\end{enumerate}
+
+\section{Estimating roots and powers}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $\sqrt{50}$ lies between $7$ and $8$.
+
+\textbf{True.} $7^2=49$ and $8^2=64$, and $50$ lies between those two square numbers.
+
+\item $\sqrt{20}=10$.
+
+\textbf{False.} Square rooting is not halving. Since $10^2=100$, not $20$. In fact $\sqrt{20}$ lies between $4$ and $5$, because $4^2=16$ and $5^2=25$.
+
+\item $\sqrt{1000}$ is about $100$.
+
+\textbf{False.} $100^2=10\,000$, not $1000$. Since $31^2=961$ and $32^2=1024$, we have $\sqrt{1000}\approx31.6$.
+
+\item $\sqrt[3]{30}$ lies between $3$ and $4$.
+
+\textbf{True.} $3^3=27$ and $4^3=64$, and $30$ lies between those two cube numbers.
+
+\item $\sqrt{0.64}$ is smaller than $0.64$.
+
+\textbf{False.} $0.8^2=0.64$, so
+\[
+\sqrt{0.64}=0.8,
+\]
+which is larger than $0.64$.
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Between which two whole numbers does $\sqrt{30}$ lie?
+
+Between $5$ and $6$, because
+\[
+5^2=25,\qquad 6^2=36.
+\]
+In fact $\sqrt{30}\approx5.48$.
+
+\item Between which two whole numbers does $\sqrt{75}$ lie?
+
+Between $8$ and $9$, because
+\[
+8^2=64,\qquad 9^2=81.
+\]
+In fact $\sqrt{75}\approx8.66$.
+
+\item Estimate $3.9^3$.
+
+Round $3.9$ to $4$. Then
+\[
+4^3=64,
+\]
+so $3.9^3$ is about $64$.
+
+\item Between which two whole numbers does $\sqrt[3]{50}$ lie?
+
+Between $3$ and $4$, because
+\[
+3^3=27,\qquad 4^3=64.
+\]
+In fact $\sqrt[3]{50}\approx3.68$.
+
+\item Estimate $\sqrt{17}$ to one decimal place.
+
+\[
+4^2=16,
+\]
+so $\sqrt{17}$ is just above $4$. Now
+\[
+4.1^2=16.81,\qquad 4.2^2=17.64.
+\]
+Therefore
+\[
+\sqrt{17}\approx4.1.
+\]
+
+\item Estimate $\sqrt{90}$ to one decimal place.
+
+\[
+9^2=81,\qquad 10^2=100,
+\]
+so $\sqrt{90}$ lies between $9$ and $10$. Since
+\[
+9.5^2=90.25,
+\]
+we have
+\[
+\sqrt{90}\approx9.5.
+\]
+
+\item Which is larger, $\sqrt{40}$ or $6.5$?
+
+Square both numbers:
+\[
+\left(\sqrt{40}\right)^2=40,\qquad 6.5^2=42.25.
+\]
+Since $42.25>40$, the number $6.5$ is larger.
+
+\item Estimate $\sqrt{2000}$ to the nearest whole number.
+
+\[
+44^2=1936,\qquad 45^2=2025.
+\]
+The number $2000$ is nearer to $2025$ than to $1936$, so
+\[
+\sqrt{2000}\approx45.
+\]
+
+\item Estimate $\dfrac{\sqrt{101}}{4.9}$.
+
+Round each part:
+\[
+\sqrt{101}\approx\sqrt{100}=10,\qquad 4.9\approx5.
+\]
+Therefore
+\[
+\frac{\sqrt{101}}{4.9}\approx\frac{10}{5}=2.
+\]
+
+\item A square patio has an area of $150\ \mathrm{m^2}$. Estimate the length of one side.
+
+The side length is $\sqrt{150}$. Since
+\[
+12^2=144,\qquad 13^2=169,
+\]
+the side is just over $12$. Also
+\[
+12.2^2=148.84,
+\]
+so the side is about
+\[
+12.2\ \mathrm{m}.
+\]
+\end{enumerate}
+
+\section{Indices of the form \texorpdfstring{$\frac{1}{a}$}{1/a}}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $9^{\frac{1}{2}}=3$.
+
+\textbf{True.} An index of $\frac{1}{2}$ means the square root, and $3^2=9$.
+
+\item $9^{\frac{1}{2}}=4.5$.
+
+\textbf{False.} The index is not a multiplier, so this is not half of $9$:
+\[
+9^{\frac{1}{2}}=\sqrt{9}=3.
+\]
+
+\item $8^{\frac{1}{3}}=2$.
+
+\textbf{True.} An index of $\frac{1}{3}$ means the cube root, and $2^3=8$.
+
+\item $16^{\frac{1}{4}}=4$.
+
+\textbf{False.} An index of $\frac{1}{4}$ means the fourth root, not the square root. Since $2^4=16$,
+\[
+16^{\frac{1}{4}}=2.
+\]
+It is $16^{\frac{1}{2}}$ that equals $4$.
+
+\item $100^{\frac{1}{3}}=10$.
+
+\textbf{False.} Since $10^3=1000$, not $100$, we have $\sqrt[3]{100}\approx4.6$. It is $100^{\frac{1}{2}}$ that equals $10$.
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Work out $25^{\frac{1}{2}}$.
+
+\[
+25^{\frac{1}{2}}=\sqrt{25}=5.
+\]
+
+\item Work out $64^{\frac{1}{2}}$.
+
+\[
+64^{\frac{1}{2}}=\sqrt{64}=8,
+\]
+because $8^2=64$.
+
+\item Work out $27^{\frac{1}{3}}$.
+
+\[
+27^{\frac{1}{3}}=\sqrt[3]{27}=3,
+\]
+because $3^3=27$.
+
+\item Work out $81^{\frac{1}{4}}$.
+
+\[
+81^{\frac{1}{4}}=\sqrt[4]{81}=3,
+\]
+because $3\times3\times3\times3=81$.
+
+\item Work out $1000^{\frac{1}{3}}$.
+
+\[
+1000^{\frac{1}{3}}=\sqrt[3]{1000}=10,
+\]
+because $10^3=1000$.
+
+\item Write $\sqrt[5]{x}$ using an index.
+
+\[
+\sqrt[5]{x}=x^{\frac{1}{5}}.
+\]
+
+\item Work out $\left(\dfrac{1}{16}\right)^{\frac{1}{2}}$.
+
+\[
+\left(\frac{1}{16}\right)^{\frac{1}{2}}
+=\frac{\sqrt{1}}{\sqrt{16}}
+=\frac{1}{4}.
+\]
+
+\item Work out $\left(\dfrac{8}{27}\right)^{\frac{1}{3}}$.
+
+\[
+\left(\frac{8}{27}\right)^{\frac{1}{3}}
+=\frac{\sqrt[3]{8}}{\sqrt[3]{27}}
+=\frac{2}{3}.
+\]
+
+\item Work out $0.04^{\frac{1}{2}}$.
+
+\[
+0.2\times0.2=0.04,
+\]
+so
+\[
+0.04^{\frac{1}{2}}=0.2.
+\]
+
+\item Work out $\left(\dfrac{1}{32}\right)^{\frac{1}{5}}$.
+
+Since $2^5=32$,
+\[
+\left(\frac{1}{32}\right)^{\frac{1}{5}}
+=\frac{1}{\sqrt[5]{32}}
+=\frac{1}{2}.
+\]
+\end{enumerate}
+
+\section{Indices of the form \texorpdfstring{$\frac{a}{b}$}{a/b}}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $8^{\frac{2}{3}}=4$.
+
+\textbf{True.} The denominator of the index gives the root and the numerator gives the power:
+\[
+8^{\frac{2}{3}}=\left(\sqrt[3]{8}\right)^2=2^2=4.
+\]
+
+\item $16^{\frac{3}{4}}=12$.
+
+\textbf{False.} This is not $\frac{3}{4}$ of $16$. Instead,
+\[
+16^{\frac{3}{4}}=\left(\sqrt[4]{16}\right)^3=2^3=8.
+\]
+
+\item $25^{\frac{3}{2}}=75$.
+
+\textbf{False.} The $\frac{3}{2}$ is an index, not a multiplier:
+\[
+25^{\frac{3}{2}}=\left(\sqrt{25}\right)^3=5^3=125.
+\]
+
+\item To work out $32^{\frac{3}{5}}$ you can find $\sqrt[5]{32}$ first, then cube the answer.
+
+\textbf{True.} Finding the root first keeps the numbers small:
+\[
+32^{\frac{3}{5}}=\left(\sqrt[5]{32}\right)^3=2^3=8.
+\]
+
+\item $4^{\frac{3}{2}}$ and $4^{1.5}$ mean the same thing.
+
+\textbf{True.} Since $\frac{3}{2}=1.5$, both mean
+\[
+\left(\sqrt{4}\right)^3=2^3=8.
+\]
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Work out $4^{\frac{3}{2}}$.
+
+\[
+4^{\frac{3}{2}}=\left(\sqrt{4}\right)^3=2^3=8.
+\]
+
+\item Work out $8^{\frac{2}{3}}$.
+
+\[
+8^{\frac{2}{3}}=\left(\sqrt[3]{8}\right)^2=2^2=4.
+\]
+
+\item Work out $9^{\frac{3}{2}}$.
+
+\[
+9^{\frac{3}{2}}=\left(\sqrt{9}\right)^3=3^3=27.
+\]
+
+\item Work out $16^{\frac{3}{4}}$.
+
+\[
+16^{\frac{3}{4}}=\left(\sqrt[4]{16}\right)^3=2^3=8.
+\]
+
+\item Work out $27^{\frac{2}{3}}$.
+
+\[
+27^{\frac{2}{3}}=\left(\sqrt[3]{27}\right)^2=3^2=9.
+\]
+
+\item Work out $32^{\frac{3}{5}}$.
+
+\[
+32^{\frac{3}{5}}=\left(\sqrt[5]{32}\right)^3=2^3=8.
+\]
+
+\item Work out $125^{\frac{4}{3}}$.
+
+\[
+125^{\frac{4}{3}}=\left(\sqrt[3]{125}\right)^4=5^4=625.
+\]
+
+\item Work out $\left(\dfrac{4}{9}\right)^{\frac{3}{2}}$.
+
+\[
+\left(\frac{4}{9}\right)^{\frac{3}{2}}
+=\left(\sqrt{\frac{4}{9}}\right)^3
+=\left(\frac{2}{3}\right)^3
+=\frac{8}{27}.
+\]
+
+\item Work out $0.25^{\frac{3}{2}}$.
+
+\[
+\sqrt{0.25}=0.5,
+\]
+so
+\[
+0.25^{\frac{3}{2}}=0.5^3=0.125.
+\]
+
+\item Work out $\left(\dfrac{16}{81}\right)^{\frac{3}{4}}$.
+
+\[
+\left(\frac{16}{81}\right)^{\frac{3}{4}}
+=\left(\sqrt[4]{\frac{16}{81}}\right)^3
+=\left(\frac{2}{3}\right)^3
+=\frac{8}{27}.
+\]
+\end{enumerate}
+
+\section{Simplifying expressions with negative fractional indices}
+
+\subsection*{True or false?}
+\begin{enumerate}
+\item $9^{-\frac{1}{2}}=\dfrac{1}{3}$.
+
+\textbf{True.} The $\frac{1}{2}$ gives the square root and the minus sign gives the reciprocal:
+\[
+9^{-\frac{1}{2}}=\frac{1}{\sqrt{9}}=\frac{1}{3}.
+\]
+
+\item $9^{-\frac{1}{2}}=-3$.
+
+\textbf{False.} A negative index gives a reciprocal, not a negative answer:
+\[
+9^{-\frac{1}{2}}=\frac{1}{\sqrt{9}}=\frac{1}{3}.
+\]
+
+\item $8^{-\frac{2}{3}}=\dfrac{1}{4}$.
+
+\textbf{True.} Cube root, then square, then take the reciprocal:
+\[
+8^{-\frac{2}{3}}
+=\frac{1}{\left(\sqrt[3]{8}\right)^2}
+=\frac{1}{2^2}
+=\frac{1}{4}.
+\]
+
+\item $16^{-\frac{3}{4}}=\dfrac{1}{12}$.
+
+\textbf{False.} The $\frac{3}{4}$ is an index, not a multiplier:
+\[
+16^{-\frac{3}{4}}
+=\frac{1}{\left(\sqrt[4]{16}\right)^3}
+=\frac{1}{2^3}
+=\frac{1}{8}.
+\]
+
+\item $25^{-\frac{1}{2}}$ is smaller than $25^{-\frac{3}{2}}$.
+
+\textbf{False.} The more negative the index, the smaller the result for a base bigger than $1$. Here
+\[
+25^{-\frac{1}{2}}=\frac{1}{5}=0.2,
+\]
+while
+\[
+25^{-\frac{3}{2}}=\frac{1}{125}=0.008.
+\]
+So $25^{-\frac{1}{2}}$ is larger.
+\end{enumerate}
+
+\subsection*{Quick questions}
+\begin{enumerate}
+\item Work out $4^{-\frac{1}{2}}$.
+
+\[
+4^{-\frac{1}{2}}=\frac{1}{\sqrt{4}}=\frac{1}{2}.
+\]
+
+\item Work out $8^{-\frac{1}{3}}$.
+
+\[
+8^{-\frac{1}{3}}=\frac{1}{\sqrt[3]{8}}=\frac{1}{2}.
+\]
+
+\item Work out $9^{-\frac{1}{2}}$.
+
+\[
+9^{-\frac{1}{2}}=\frac{1}{\sqrt{9}}=\frac{1}{3}.
+\]
+
+\item Work out $27^{-\frac{2}{3}}$.
+
+\[
+27^{-\frac{2}{3}}
+=\frac{1}{\left(\sqrt[3]{27}\right)^2}
+=\frac{1}{3^2}
+=\frac{1}{9}.
+\]
+
+\item Work out $16^{-\frac{3}{4}}$.
+
+\[
+16^{-\frac{3}{4}}
+=\frac{1}{\left(\sqrt[4]{16}\right)^3}
+=\frac{1}{2^3}
+=\frac{1}{8}.
+\]
+
+\item Work out $\left(\dfrac{1}{4}\right)^{-\frac{1}{2}}$.
+
+Take the reciprocal of the fraction, then square root:
+\[
+\left(\frac{1}{4}\right)^{-\frac{1}{2}}
+=4^{\frac{1}{2}}
+=2.
+\]
+
+\item Work out $\left(\dfrac{9}{16}\right)^{-\frac{1}{2}}$.
+
+Take the reciprocal of the fraction, then square root:
+\[
+\left(\frac{9}{16}\right)^{-\frac{1}{2}}
+=\left(\frac{16}{9}\right)^{\frac{1}{2}}
+=\frac{4}{3}.
+\]
+
+\item Work out $\left(\dfrac{8}{27}\right)^{-\frac{2}{3}}$.
+
+\[
+\left(\frac{8}{27}\right)^{-\frac{2}{3}}
+=\left(\frac{27}{8}\right)^{\frac{2}{3}}
+=\left(\sqrt[3]{\frac{27}{8}}\right)^2
+=\left(\frac{3}{2}\right)^2
+=\frac{9}{4}.
+\]
+
+\item Simplify $\dfrac{x^{\frac{1}{2}}}{x^{-\frac{3}{2}}}$.
+
+Subtract the indices:
+\[
+\frac{x^{\frac{1}{2}}}{x^{-\frac{3}{2}}}
+=x^{\frac{1}{2}-\left(-\frac{3}{2}\right)}
+=x^{\frac{1}{2}+\frac{3}{2}}
+=x^2.
+\]
+
+\item Simplify $\left(16x^8\right)^{-\frac{3}{4}}$.
+
+First take the positive power:
+\[
+\left(16x^8\right)^{\frac{1}{4}}
+=16^{\frac{1}{4}}x^{8\times\frac{1}{4}}
+=2x^2.
+\]
+Then cube:
+\[
+\left(2x^2\right)^3=2^3x^{2\times3}=8x^6.
+\]
+Finally take the reciprocal:
+\[
+\left(16x^8\right)^{-\frac{3}{4}}
+=\frac{1}{8x^6}.
+\]
+\end{enumerate}
+
+\end{document}
