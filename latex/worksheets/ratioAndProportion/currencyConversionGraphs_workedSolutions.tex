@@ -1,0 +1,195 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=18mm,right=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{textcomp}
+
+\newcommand{\zl}{z\l{}oty}
+\setlength{\parindent}{0pt}
+\setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=8pt, topsep=4pt}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=5pt, topsep=3pt}
+
+\newcommand{\heading}[1]{\vspace{8pt}{\large\bfseries #1}\par\vspace{2pt}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Worked Solutions: Currency Conversion Graphs}
+\end{center}
+\vspace{6pt}
+
+\heading{Part 1: Which line shows which currency?}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*]
+\setcounter{enumi}{0}
+\item 
+\begin{enumerate}
+\item Line A shows Australian dollars.
+\item \pounds1 buys 5 zloty, the most of the three currencies, so the zloty line is the steepest; that is line B. \pounds1 buys 1.20 euros, the fewest, so the euro line is the least steep; that is line C. \pounds1 buys 2 Australian dollars, which is more than 1.20 euros but less than 5 zloty, so the Australian dollar line is steeper than the euro line and less steep than the zloty line. That is line A.
+\item Using line A: \(y=2x\). For \(x=7\), \(y=2\times7=14\). So \pounds7 gives \(14\) Australian dollars.
+\item Using line C: \(y=1.2x\). \(6=1.2x\), so \(x=6\div1.2=5\). So \texteuro6 is \pounds5.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item The gradients are the exchange rates: Indian rupees \(115\), Mexican pesos \(25\), Norwegian kroner \(13.50\), Hong Kong dollars \(10.50\). From steepest to least steep, the lines are: Indian rupees, Mexican pesos, Norwegian kroner, Hong Kong dollars. All pass through \((0,0)\).
+\item At \pounds0, you receive \(0\) of any currency. Since \(\text{amount}=\text{rate}\times\text{pounds}\), when \(x=0\), \(y=0\). So every line passes through the origin \((0,0)\).
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item At \pounds20, line P gives \(1.3\times20=26\), line Q gives \(1.8\times20=36\), and line R gives \(1.1\times20=22\). From the table, P matches US dollars (\(1.30\)), Q matches Canadian dollars (\(1.80\)), and R matches Swiss francs (\(1.10\)).
+\item Singapore dollars: rate \(1.70\), so \(y=1.7x\). This line lies between P and Q. New Zealand dollars: rate \(2.20\), so \(y=2.2x\). This is steeper than Q; at \pounds10 it gives \(22\), while Q gives \(18\).
+\item Sam is wrong because line Q is only the steepest of the three lines that were drawn. The table has five currencies, and two have no line. New Zealand dollars have rate \(2.20\), which is greater than \(1.80\), so their line would be steeper than Q. Thus Q cannot be New Zealand dollars.
+\end{enumerate}
+\end{enumerate}
+
+\heading{Part 2: Measuring steepness with the gradient}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*]
+\setcounter{enumi}{3}
+\item Points on the line: \((0,0)\) and \((5,120)\). Change in \(x\): \(5-0=5\). Change in \(y\): \(120-0=120\). Gradient: \(120\div5=24\). Equation: \(y=24x\). The gradient means \pounds1 buys \(24\) South African rand.
+
+\item
+\begin{enumerate}
+\item Line S shows Japanese yen. \pounds1 buys more rupees than yen, so the rupee line must be steeper. Line T is steeper, so T is rupees and S is yen.
+\item Line S: points \((0,0)\) and \((40,8000)\). Change in \(x\): \(40\). Change in \(y\): \(8000\). Gradient: \(8000\div40=200\). Equation: \(y=200x\). Line T: points \((0,0)\) and \((40,15000)\). Change in \(x\): \(40\). Change in \(y\): \(15000\). Gradient: \(15000\div40=375\). Equation: \(y=375x\).
+\item Using S: \(y=200\times250=50000\). So \pounds250 gives \(50\,000\) yen.
+\item Using T: \(375x=30000\), so \(x=30000\div375=80\). So \(30\,000\) rupees is \pounds80.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Since \pounds1 \(=5\) \zl{}, each \(1\) \zl{} is worth \(1\div5=0.20\) pounds. The table is
+\[
+\begin{array}{c|cccc}
+\text{\zl{}} & 0 & 10 & 25 & 50\\
+\hline
+\text{\pounds} & 0 & 2 & 5 & 10
+\end{array}
+\]
+\item Draw a straight line from \((0,0)\) to \((50,10)\).
+\item Gradient \(=\dfrac{\text{change in pounds}}{\text{change in zloty}}=\dfrac{10-0}{50-0}=\dfrac{10}{50}=0.2\).
+\item The gradient \(0.2\) means each \(1\) \zl{} is worth \pounds0.20, i.e. \(20\) pence.
+\end{enumerate}
+\end{enumerate}
+
+\heading{Part 3: Flat fees and the y-intercept}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*]
+\setcounter{enumi}{6}
+\item
+Pounds converted: \(x-10\). Dollars received: \(y=1.3(x-10)\). Expand: \(y=1.3x-13\). Gradient: \(1.3\), the exchange rate. y-intercept: \(-13\), the fee of \pounds10 is worth \(1.3\times10=\$13\).
+\begin{enumerate}
+\item For \pounds100: \(y=1.3\times100-13=130-13=117\). So the bank gives \(\$117\).
+\item Want \(y=130\): \(1.3x-13=130\), so \(1.3x=143\), and \(x=143\div1.3=110\). Jo must exchange \pounds110.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Airport: no fee, rate \(1.10\), so line M (\(y=1.1x\)). High street: \pounds5 fee, rate \(1.20\), so line L (\(y=1.2(x-5)=1.2x-6\)). Online: \pounds15 fee, rate \(1.20\), so line N (\(y=1.2(x-15)=1.2x-18\)). Thus the table is: Airport M, High street L, Online N.
+\item Lines L and N are parallel because they have the same gradient, \(1.2\). This is the same exchange rate (\texteuro1.20 per \pounds1 left). The different y-intercepts come from the different flat fees.
+\item L: \(y=1.2x-6\). M: \(y=1.1x\). N: \(y=1.2x-18\).
+\item Lines L and M cross when \(1.1x=1.2x-6\). Solve: \(6=0.1x\), so \(x=60\). Then \(y=1.1\times60=66\). They cross at \pounds60, \texteuro66. This means both bureaux give \texteuro66 for \pounds60. For less than \pounds60 the airport (M) gives more euros; for more than \pounds60 the high street (L) gives more euros.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item The exchange rate is the gradient, \(1.8\). So \pounds1 buys C\$1.80.
+\item The y-intercept is \(-9\), so the fee is worth C\$9. Since each \pounds1 gives C\$1.80, the fee in pounds is \(9\div1.8=5\). So the flat fee is \pounds5.
+\item If \(x=5\), \(y=1.8\times5-9=9-9=0\). The whole \pounds5 pays the fee, leaving nothing to convert, so no Canadian dollars are given.
+\item Second bureau: same rate \(1.8\), fee \pounds10. The fee is worth \(1.8\times10=18\) Canadian dollars. Equation: \(y=1.8x-18\) (or \(y=1.8(x-10)\)). Compared with \(y=1.8x-9\): same gradient, so the lines are parallel; its y-intercept is \(-18\) instead of \(-9\), so it is \(9\) Canadian dollars lower at every \(x\).
+\end{enumerate}
+\end{enumerate}
+
+\heading{Part 4: When do two bureaux give the same amount?}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*]
+\setcounter{enumi}{9}
+\item
+\begin{enumerate}
+\item For \pounds30: Airport \(y=1.1\times30=33\). High street \(y=1.2\times30-6=36-6=30\). The airport gives more (\texteuro33 versus \texteuro30).
+\item For \pounds200: Airport \(y=1.1\times200=220\). High street \(y=1.2\times200-6=240-6=234\). The high street bureau gives \texteuro14 more.
+\item The high street line has gradient \(1.2\) and the airport line has gradient \(1.1\). So for each extra \pounds1, the high street bureau gives \(1.2-1.1=0.10\) euros more than the airport. After the lines cross at \pounds60, the high street bureau is ahead by \(0.1(x-60)\) euros. At \pounds200 this is \(0.1\times(200-60)=0.1\times140=14\) euros, as found.
+\end{enumerate}
+
+\item
+Airport: \(y=4.5x\). Town: \(y=5(x-3)=5x-15\).
+\[
+\begin{array}{c|cccc}
+x & 0 & 20 & 40 & 60\\
+\hline
+\text{Airport }y & 0 & 90 & 180 & 270\\
+\text{Town }y & -15 & 85 & 185 & 285
+\end{array}
+\]
+The town line is below the airport line at \pounds20 (\(85\) versus \(90\)) and above it at \pounds40 (\(185\) versus \(180\)), so the lines cross between \pounds20 and \pounds40.
+Solve:
+\[
+4.5x=5x-15
+\]
+\[
+0=0.5x-15
+\]
+\[
+15=0.5x
+\]
+\[
+30=x
+\]
+Then \(y=4.5\times30=135\). So they cross at \((30,135)\).
+\begin{enumerate}
+\item Draw both lines and mark the crossing point \((30,135)\).
+\item For \pounds20, the airport gives \(90\) \zl{} and the town gives \(85\) \zl{}. The airport gives more.
+\item For \pounds50, the airport gives \(4.5\times50=225\) \zl{} and the town gives \(5\times50-15=250-15=235\) \zl{}. The town bureau gives more.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Airport: \(y=1.15x\). Online: \(y=1.25(x-8)=1.25x-10\).
+\item Same amount when \(1.15x=1.25x-10\). Solve: \(10=0.1x\), so \(x=100\). Then \(y=1.15\times100=115\). So \pounds100 gives \(\$115\) at both bureaux.
+\item For \pounds400: Airport \(y=1.15\times400=460\). Online \(y=1.25\times400-10=500-10=490\). The online bureau gives \(\$30\) more. So Mia should use the online bureau.
+\end{enumerate}
+
+\item
+\begin{enumerate}
+\item Bureau E: \(y=190(x-2)=190x-380\). Bureau F: \(y=200(x-5)=200x-1000\).
+\item Same amount when \(190x-380=200x-1000\). Add \(1000\): \(190x+620=200x\). Subtract \(190x\): \(620=10x\). So \(x=62\). Then \(y=190\times62-380=11780-380=11400\) yen (or \(200\times62-1000=11400\)). So \pounds62 gives \(11\,400\) yen at both.
+\item For \pounds500: Bureau E gives \(190\times500-380=95000-380=94620\) yen. Bureau F gives \(200\times500-1000=100000-1000=99000\) yen. Bureau F gives \(99000-94620=4380\) yen more. Kenji should use Bureau F.
+\end{enumerate}
+\end{enumerate}
+
+\heading{Part 5: Challenges}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*]
+\setcounter{enumi}{13}
+\item
+\begin{enumerate}
+\item G: \(y=1.1(x-5)=1.1x-5.5\), y-intercept \(-5.5\). H: \(y=1.2(x-5)=1.2x-6\), y-intercept \(-6\).
+\item At \(x=5\): G gives \(1.1\times5-5.5=5.5-5.5=0\). H gives \(1.2\times5-6=6-6=0\). So both lines cross the x-axis at \(x=5\), i.e. at \((5,0)\). This means exchanging exactly \pounds5 pays the flat fee and leaves \pounds0 to convert, so both bureaux give \texteuro0.
+\item Tom is right for any amount over \pounds5. Both lines leave the x-axis at the same point \((5,0)\). H has gradient \(1.2\), which is greater than G's \(1.1\), so for any \(x>5\), H's line is above G's line. Solving \(1.1x-5.5=1.2x-6\) gives \(0.5=0.1x\), so \(x=5\); the lines only meet at \((5,0)\). Thus for any actual exchange over \pounds5, H gives more euros. The lower y-intercept of H just reflects that the \pounds5 fee is worth more euros at the better rate, but that part is not usable for real exchanges.
+\end{enumerate}
+
+\item
+Airport at \pounds300: \(y=1.1\times300=330\) euros.
+We need a new bureau with flat fee \(f\) and rate \(r>1.1\) such that \(r(300-f)=330\).
+For example, choose \(r=1.20\). Then \(300-f=330\div1.2=275\), so \(f=300-275=25\). Deal: rate \texteuro1.20 per \pounds1 left, flat fee \pounds25.
+Equation: \(y=1.2(x-25)=1.2x-30\).
+At \(x=300\): \(y=1.2\times300-30=360-30=330\), the same as the airport.
+Since the new gradient \(1.2\) is greater than \(1.1\), for any amount over \pounds300 the new bureau gives more euros. For amounts under \pounds300, the airport gives more euros because the new bureau's line is lower (due to the fee). So anyone exchanging more than \pounds300 should use the new bureau; anyone exchanging less than \pounds300 should use the airport.
+(Other valid examples: \(r=1.25, f=36\); \(r=1.32, f=50\).)
+
+\item
+\begin{enumerate}
+\item \pounds100 at Bureau K: \(2\%\) commission is \(0.02\times100=2\) pounds. So \pounds98 is converted. Euros received: \(98\times1.25=122.5\). So exchanging \pounds100 gives \texteuro122.50.
+\item Aisha is wrong. A commission is a percentage of the amount exchanged, not a fixed amount. If \(x=0\), the commission is \pounds0, so \(y=0\): the line passes through the origin. It does not cross the y-axis below zero. The amount converted is \(98\%\) of \(x\), i.e. \(0.98x\). Thus \(y=1.25\times0.98x=1.225x\). The gradient is \(1.225\).
+\item High street bureau: \(y=1.2(x-5)=1.2x-6\). Bureau K: \(y=1.225x\). Bureau K has a higher y-intercept (\(0\) versus \(-6\)) and a steeper gradient (\(1.225>1.2\)), so its line is above the high street line for all positive \(x\). Solving \(1.225x=1.2x-6\) gives \(0.025x=-6\), so \(x=-240\), which is not a possible number of pounds to exchange. Thus the lines never cross on a realistic graph. Bureau K is better for every amount, and the answer does not depend on how many pounds are exchanged.
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
