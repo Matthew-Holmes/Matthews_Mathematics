@@ -1,0 +1,793 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{cancel}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+% ================================================================
+% Quick Questions deck: factorising and algebraic fractions.
+%
+% Each topic opens with five true/false statements and then runs ten
+% quick questions that get gradually harder. Every question gets two
+% slides: the question on its own for the mini whiteboards, then the
+% same question again with the solution underneath in red.
+%
+% The two green topics are factorising itself, first into a single
+% bracket and then into a double bracket. The two amber topics use
+% that factorising to simplify an algebraic fraction, again single
+% brackets before double ones. The two red topics do arithmetic with
+% algebraic fractions: adding and subtracting, then multiplying and
+% dividing.
+%
+% Where the working can be drawn it is: area rectangles for taking a
+% common factor out, the 2 by 2 grid for the double brackets, a
+% struck-through common factor for the cancelling, and a flow chart
+% for dividing, where turning the second fraction upside down is a
+% step of its own. Adding and subtracting is left as written working:
+% an algebraic numerator cannot be shaded honestly, so a picture there
+% would show a different quantity from the answer.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+
+% A link in the bottom left of every slide back to the contents, so a
+% deck this long can be jumped around in during a lesson.
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{%
+    \hspace{1em}%
+    \hyperlink{contents}{%
+      \color{gray}\scriptsize$\leftarrow$~Back to contents}%
+    \hfil}%
+  \vskip4pt%
+}
+
+% Topic divider.
+\newcommand{\qtopic}[1]{%
+  \section{#1}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \tf[<statement size>][<answer size>]{<statement>}{<answer>}
+% As \qq, but with a standing "True or false?" heading above the
+% statement. The statements hunt for the usual misconceptions, so the
+% answer always says why, not just which.
+\NewDocumentCommand{\tf}{O{\LARGE}O{\Large}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% Chained working, one equation per row, so that a long simplification
+% does not have to be squeezed onto a single line. \dfrac is taller
+% than the row strut, so rows carry an explicit skip such as \\[0.95em].
+\newcommand{\work}[1]{%
+  \begin{tabular}{@{}r@{\;=\;}l@{}}#1\end{tabular}%
+}
+
+% \strike{<expression>} --- a factor crossed out because it has been
+% divided from the top and the bottom of a fraction.
+\newcommand{\strike}[1]{\cancel{#1}}
+
+% ================================================================
+% Area pictures for factorising
+% ================================================================
+
+% \pairarea{<height>}{<width one>}{<width two>}{<area one>}{<area two>}
+% One rectangle of height <height> cut into two parts. The two parts
+% have the areas of the two terms being factorised, and the height is
+% the factor taken out, so the whole rectangle is the factorised form.
+\newcommand{\pairarea}[5]{%
+  \begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+    \draw[red!60!black,thick,fill=red!8] (0,0) rectangle (3.2,1.5);
+    \draw[red!60!black,thick,fill=red!8] (3.2,0) rectangle (5.0,1.5);
+    \node[red] at (1.6,0.75) {$#4$};
+    \node[red] at (4.1,0.75) {$#5$};
+    \node[red,above=2pt] at (1.6,1.5) {$#2$};
+    \node[red,above=2pt] at (4.1,1.5) {$#3$};
+    \node[red,left=3pt] at (0,0.75) {$#1$};
+  \end{tikzpicture}%
+}
+
+% \triplearea{<height>}{<w1>}{<w2>}{<w3>}{<a1>}{<a2>}{<a3>}
+% The same picture cut into three parts, for a three term expression.
+\newcommand{\triplearea}[7]{%
+  \begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+    \draw[red!60!black,thick,fill=red!8] (0,0) rectangle (2.6,1.5);
+    \draw[red!60!black,thick,fill=red!8] (2.6,0) rectangle (4.8,1.5);
+    \draw[red!60!black,thick,fill=red!8] (4.8,0) rectangle (6.4,1.5);
+    \node[red] at (1.3,0.75) {$#5$};
+    \node[red] at (3.7,0.75) {$#6$};
+    \node[red] at (5.6,0.75) {$#7$};
+    \node[red,above=2pt] at (1.3,1.5) {$#2$};
+    \node[red,above=2pt] at (3.7,1.5) {$#3$};
+    \node[red,above=2pt] at (5.6,1.5) {$#4$};
+    \node[red,left=3pt] at (0,0.75) {$#1$};
+  \end{tikzpicture}%
+}
+
+% \quadgrid{<w1>}{<w2>}{<h1>}{<h2>}{<a>}{<b>}{<c>}{<d>}
+% The 2 by 2 grid for a double bracket. The two widths are the terms
+% of one bracket and the two heights the terms of the other, so the
+% four cells add to the quadratic and the labels round the outside
+% read off the factorised form.
+\newcommand{\quadgrid}[8]{%
+  \begin{tikzpicture}[x=1cm,y=1cm,font=\small]
+    \draw[red!60!black,thick,fill=red!8] (0,0) rectangle (2.8,1.4);
+    \draw[red!60!black,thick,fill=red!8] (2.8,0) rectangle (4.6,1.4);
+    \draw[red!60!black,thick,fill=red!8] (0,-1.1) rectangle (2.8,0);
+    \draw[red!60!black,thick,fill=red!8] (2.8,-1.1) rectangle (4.6,0);
+    \node[red] at (1.4,0.7) {$#5$};
+    \node[red] at (3.7,0.7) {$#6$};
+    \node[red] at (1.4,-0.55) {$#7$};
+    \node[red] at (3.7,-0.55) {$#8$};
+    \node[red,above=2pt] at (1.4,1.4) {$#1$};
+    \node[red,above=2pt] at (3.7,1.4) {$#2$};
+    \node[red,left=3pt] at (0,0.7) {$#3$};
+    \node[red,left=3pt] at (0,-0.55) {$#4$};
+  \end{tikzpicture}%
+}
+
+% \flow{<start>}{<first step>}{<middle>}{<second step>}{<end>}
+% A flow chart of three boxes joined by two labelled arrows. Used for
+% dividing, where turning the second fraction upside down and then
+% multiplying are separate steps, done one after the other. The step
+% labels wrap to a fixed width, so a label of a few words sits above
+% its own arrow instead of running into the boxes either side.
+\newcommand{\flow}[5]{%
+  \begin{tikzpicture}[
+      fbox/.style={draw=red!60!black, rounded corners=2pt, fill=red!8,
+                   inner sep=5pt, text=red, font=\Large},
+      farr/.style={->, red, thick, shorten >=2pt, shorten <=2pt},
+      flab/.style={above, midway, text=red, font=\small,
+                   align=center, text width=3.2cm, inner sep=2pt,
+                   execute at begin node={\hyphenpenalty=10000
+                                          \exhyphenpenalty=10000}}]
+    \node[fbox] (a) {$#1$};
+    \node[fbox, right=3.4cm of a] (b) {$#3$};
+    \node[fbox, right=3.4cm of b] (c) {$#5$};
+    \draw[farr] (a) -- node[flab]{#2} (b);
+    \draw[farr] (b) -- node[flab]{#4} (c);
+  \end{tikzpicture}%
+}
+
+% Contents-slide bullets, colour-coded by difficulty band: green for
+% the two factorising topics, orange for the two simplifying topics
+% and red for the two arithmetic ones. The green is darkened because a
+% pure green washes out on a projector.
+\setbeamertemplate{section in toc}{%
+  \ifnum\inserttocsectionnumber<3
+    \textcolor{green!55!black}{$\bullet$}%
+  \else
+    \ifnum\inserttocsectionnumber<5
+      \textcolor{orange}{$\bullet$}%
+    \else
+      \textcolor{red}{$\bullet$}%
+    \fi
+  \fi
+  ~\inserttocsection%
+}
+
+\title{Factorising and Algebraic Fractions: Quick Questions}
+\subtitle{Mini whiteboard questions, with solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[label=contents]{Contents}
+  \small
+  \tableofcontents
+\end{frame}
+
+%================================================================
+\qtopic{Factorising into single brackets}
+%================================================================
+
+\tf[\LARGE][\large]{$6x+9=3(2x+3)$}
+  {\textbf{True.} The highest common factor of $6x$ and $9$ is $3$, and
+   $3\times 2x=6x$, $3\times 3=9$.
+   \par\vspace{0.5em}
+   \pairarea{3}{2x}{3}{6x}{9}}
+
+\tf[\Large][\large]{$8x+12$ is fully factorised as $2(4x+6)$}
+  {\textbf{False.} $2$ is a common factor of $8x$ and $12$, but it is not
+   the highest common factor, so the expression is not fully
+   factorised.\\[0.3em]
+   The highest common factor of $8x$ and $12$ is $4$, so
+   $8x+12=4(2x+3)$.}
+
+\tf{$5x+10y=5(x+10y)$}
+  {\textbf{False.} Every term inside the bracket must be divided by the
+   common factor, not only the first term.\\[0.3em]
+   $10y\div 5=2y$, so $5x+10y=5(x+2y)$.}
+
+\tf{$x^{2}+x=x(x)$}
+  {\textbf{False.} $x(x)$ is $x^{2}$, so the second term has been lost.\\[0.3em]
+   $x\div x=1$, so $x^{2}+x=x(x+1)$.}
+
+\tf{$3x+3=3(x+1)$}
+  {\textbf{True.} The second term is entirely the common factor, and
+   $3\div 3=1$, so a $1$ is left inside the bracket.}
+
+\qq[\Huge][\large]{Factorise $2x+6$}
+  {The highest common factor of $2x$ and $6$ is $2$.\\[0.3em]
+   $2x+6=2(x+3)$
+   \par\vspace{0.5em}
+   \pairarea{2}{x}{3}{2x}{6}}
+
+\qq[\Huge][\LARGE]{Factorise $9x+24$}
+  {The highest common factor of $9x$ and $24$ is $3$.\\[0.3em]
+   $9x\div 3=3x$ and $24\div 3=8$.\\[0.3em]
+   $9x+24=3(3x+8)$}
+
+\qq[\Huge][\LARGE]{Factorise $6y-15$}
+  {The highest common factor of $6y$ and $15$ is $3$.\\[0.3em]
+   $6y-15=3(2y-5)$}
+
+\qq[\Huge][\LARGE]{Factorise $10a+15b$}
+  {The highest common factor of $10a$ and $15b$ is $5$.\\[0.3em]
+   $10a+15b=5(2a+3b)$}
+
+\qq[\Huge][\large]{Factorise $x^{2}+7x$}
+  {The highest common factor of $x^{2}$ and $7x$ is $x$.\\[0.3em]
+   $x^{2}+7x=x(x+7)$
+   \par\vspace{0.5em}
+   \pairarea{x}{x}{7}{x^{2}}{7x}}
+
+\qq[\Huge][\large]{Factorise $12x^{2}+8x$}
+  {The highest common factor of $12x^{2}$ and $8x$ is $4x$.\\[0.3em]
+   $12x^{2}+8x=4x(3x+2)$
+   \par\vspace{0.5em}
+   \pairarea{4x}{3x}{2}{12x^{2}}{8x}}
+
+\qq[\Huge][\LARGE]{Factorise $6x^{3}-9x^{2}$}
+  {The highest common factor of the numbers is $3$ and of the powers of
+   $x$ is $x^{2}$, so the highest common factor is $3x^{2}$.\\[0.3em]
+   $6x^{3}-9x^{2}=3x^{2}(2x-3)$}
+
+\qq[\Huge][\LARGE]{Factorise $4x^{2}y+6xy^{2}$}
+  {Both terms contain $2$, $x$ and $y$, so the highest common factor is
+   $2xy$.\\[0.3em]
+   $4x^{2}y+6xy^{2}=2xy(2x+3y)$}
+
+\qq[\Huge][\large]{Factorise $8x^{3}+12x^{2}+20x$}
+  {The highest common factor of $8x^{3}$, $12x^{2}$ and $20x$ is $4x$.\\[0.3em]
+   $8x^{3}+12x^{2}+20x=4x(2x^{2}+3x+5)$
+   \par\vspace{0.5em}
+   \triplearea{4x}{2x^{2}}{3x}{5}{8x^{3}}{12x^{2}}{20x}}
+
+\qq[\LARGE][\large]{Factorise $5(x+1)+x(x+1)$}
+  {The bracket $(x+1)$ is a common factor of both terms.\\[0.3em]
+   $5(x+1)+x(x+1)=(x+1)(x+5)$
+   \par\vspace{0.5em}
+   \pairarea{x+1}{x}{5}{x(x+1)}{5(x+1)}}
+
+%================================================================
+\qtopic{Factorising into double brackets}
+%================================================================
+
+\tf[\LARGE][\large]{$x^{2}-9=(x-3)(x-3)$}
+  {\textbf{False.} $(x-3)(x-3)$ expands to $x^{2}-6x+9$.\\[0.3em]
+   The signs must be opposite: $x^{2}-9=(x+3)(x-3)$.
+   \par\vspace{0.4em}
+   \quadgrid{x}{3}{x}{-3}{x^2}{3x}{-3x}{-9}}
+
+\tf{$x^{2}+9=(x+3)(x+3)$}
+  {\textbf{False.} $(x+3)(x+3)$ expands to $x^{2}+6x+9$.\\[0.3em]
+   $x^{2}+9$ is a sum of two squares, and it does not factorise.}
+
+\tf{$x^{2}+2x-15=(x+5)(x-3)$}
+  {\textbf{True.} $5\times(-3)=-15$ and $5+(-3)=2$.}
+
+\tf{$x^{2}-2x-8=(x+4)(x-2)$}
+  {\textbf{False.} $(x+4)(x-2)$ expands to $x^{2}+2x-8$, so the signs are
+   the wrong way round.\\[0.3em]
+   $x^{2}-2x-8=(x-4)(x+2)$}
+
+\tf[\Large][\large]{To factorise $x^{2}+7x+12$ we need two numbers\\[0.3em]
+   that multiply to $12$ and add to $7$}
+  {\textbf{True.} The two numbers multiply to the constant term and add
+   to the coefficient of $x$.\\[0.3em]
+   The numbers are $3$ and $4$, so $x^{2}+7x+12=(x+3)(x+4)$.}
+
+\qq[\Huge][\large]{Factorise $x^{2}+5x+6$}
+  {Two numbers that multiply to $6$ and add to $5$: $2$ and $3$.\\[0.3em]
+   $x^{2}+5x+6=(x+2)(x+3)$
+   \par\vspace{0.5em}
+   \quadgrid{x}{2}{x}{3}{x^2}{2x}{3x}{6}}
+
+\qq[\Huge][\LARGE]{Factorise $x^{2}+9x+20$}
+  {Two numbers that multiply to $20$ and add to $9$: $4$ and $5$.\\[0.3em]
+   $x^{2}+9x+20=(x+4)(x+5)$}
+
+\qq[\Huge][\large]{Factorise $x^{2}+3x-10$}
+  {Two numbers that multiply to $-10$ and add to $3$: $5$ and $-2$.\\[0.3em]
+   $x^{2}+3x-10=(x+5)(x-2)$
+   \par\vspace{0.5em}
+   \quadgrid{x}{5}{x}{-2}{x^2}{5x}{-2x}{-10}}
+
+\qq[\Huge][\LARGE]{Factorise $x^{2}-7x+12$}
+  {The constant term is positive and the coefficient of $x$ is negative,
+   so both numbers are negative: $-3$ and $-4$.\\[0.3em]
+   $x^{2}-7x+12=(x-3)(x-4)$}
+
+\qq[\Huge][\LARGE]{Factorise $x^{2}-2x-15$}
+  {Two numbers that multiply to $-15$ and add to $-2$: $-5$ and $3$.\\[0.3em]
+   $x^{2}-2x-15=(x-5)(x+3)$}
+
+\qq[\Huge][\LARGE]{Factorise $x^{2}-49$}
+  {This is a difference of two squares, with $x^{2}=(x)^{2}$ and
+   $49=7^{2}$.\\[0.3em]
+   $x^{2}-49=(x+7)(x-7)$}
+
+\qq[\Huge][\large]{Factorise $2x^{2}+7x+3$}
+  {The $2x^{2}$ comes from $2x\times x$, and the $3$ from $1\times 3$.\\[0.3em]
+   $2x^{2}+7x+3=(2x+1)(x+3)$
+   \par\vspace{0.5em}
+   \quadgrid{2x}{1}{x}{3}{2x^2}{x}{6x}{3}}
+
+\qq[\Huge][\large]{Factorise $2x^{2}+10x+12$}
+  {Take the common factor of $2$ out first.\\[0.3em]
+   $2x^{2}+10x+12=2(x^{2}+5x+6)$\\[0.3em]
+   $x^{2}+5x+6=(x+2)(x+3)$, so $2x^{2}+10x+12=2(x+2)(x+3)$.
+   \par\vspace{0.5em}
+   \triplearea{2}{x^{2}}{5x}{6}{2x^{2}}{10x}{12}}
+
+\qq[\Huge][\LARGE]{Factorise $9x^{2}-16$}
+  {This is a difference of two squares, with $9x^{2}=(3x)^{2}$ and
+   $16=4^{2}$.\\[0.3em]
+   $9x^{2}-16=(3x+4)(3x-4)$}
+
+\qq[\Huge][\large]{Factorise $6x^{2}-x-12$}
+  {The $6x^{2}$ comes from $3x\times 2x$, and the $-12$ from
+   $4\times(-3)$.\\[0.3em]
+   $6x^{2}-x-12=(3x+4)(2x-3)$
+   \par\vspace{0.5em}
+   \quadgrid{3x}{4}{2x}{-3}{6x^2}{8x}{-9x}{-12}}
+
+%================================================================
+\qtopic{Simplifying algebraic fractions with single brackets}
+%================================================================
+
+\tf[\LARGE][\large]{$\dfrac{x+2}{2}=x$}
+  {\textbf{False.} The $2$ on the bottom divides the whole numerator,
+   not the term $2$ on its own.\\[0.3em]
+   $x+2$ has no common factor, so $\dfrac{x+2}{2}$ does not
+   simplify.\\[0.3em]
+   When $x=4$: $\dfrac{4+2}{2}=3$, not $4$.}
+
+\tf[\LARGE][\large]{$\dfrac{3x+6}{3}=x+2$}
+  {\textbf{True.} $3$ is a factor of the whole numerator:
+   $3x+6=3(x+2)$.\\[0.3em]
+   $\dfrac{\strike{3}(x+2)}{\strike{3}}=x+2$}
+
+\tf[\LARGE][\large]{$\dfrac{x+3}{x}=3$}
+  {\textbf{False.} $x$ is a term of the numerator, not a factor of the
+   whole numerator.\\[0.3em]
+   $\dfrac{x+3}{x}$ does not simplify.\\[0.3em]
+   When $x=1$: $\dfrac{1+3}{1}=4$, not $3$.}
+
+\tf[\LARGE][\large]{$\dfrac{6x+9}{3}=2x+9$}
+  {\textbf{False.} Every term of the numerator is divided by $3$, not
+   the first term on its own.\\[0.3em]
+   $6x+9=3(2x+3)$, so the fraction simplifies to $2x+3$.}
+
+\tf[\LARGE][\large]{$\dfrac{5x+10}{5x}=\dfrac{x+2}{x}$}
+  {\textbf{True.} $5$ is a common factor of the whole numerator and the
+   whole denominator.\\[0.3em]
+   $\dfrac{\strike{5}(x+2)}{\strike{5}x}=\dfrac{x+2}{x}$}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{2x+10}{2}$}
+  {Factorise the numerator.\\[0.3em]
+   $\dfrac{2x+10}{2}=\dfrac{\strike{2}(x+5)}{\strike{2}}=x+5$
+   \par\vspace{0.5em}
+   \pairarea{2}{x}{5}{2x}{10}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{5x-15}{5}$}
+  {The highest common factor of the numerator is $5$.\\[0.3em]
+   $\dfrac{5(x-3)}{5}=\dfrac{\strike{5}(x-3)}{\strike{5}}=x-3$}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{2x+8}{x+4}$}
+  {Factorise the numerator.\\[0.3em]
+   $\dfrac{2x+8}{x+4}=\dfrac{2\strike{(x+4)}}{\strike{(x+4)}}=2$
+   \par\vspace{0.5em}
+   \pairarea{2}{x}{4}{2x}{8}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{3x-12}{x-4}$}
+  {Factorise the numerator: $3x-12=3(x-4)$.\\[0.3em]
+   $\dfrac{3\strike{(x-4)}}{\strike{(x-4)}}=3$}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{x^{2}+3x}{x}$}
+  {The highest common factor of the numerator is $x$.\\[0.3em]
+   $\dfrac{x(x+3)}{x}=\dfrac{\strike{x}(x+3)}{\strike{x}}=x+3$
+   \par\vspace{0.5em}
+   \pairarea{x}{x}{3}{x^{2}}{3x}}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{3x^{2}+6x+9}{3}$}
+  {$3$ is a factor of all three terms of the numerator.\\[0.3em]
+   $\dfrac{\strike{3}(x^{2}+2x+3)}{\strike{3}}=x^{2}+2x+3$
+   \par\vspace{0.5em}
+   \triplearea{3}{x^{2}}{2x}{3}{3x^{2}}{6x}{9}}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{4x^{2}+6x}{2x}$}
+  {The highest common factor of the numerator is $2x$.\\[0.3em]
+   $\dfrac{2x(2x+3)}{2x}=\dfrac{\strike{2x}(2x+3)}{\strike{2x}}=2x+3$
+   \par\vspace{0.5em}
+   \pairarea{2x}{2x}{3}{4x^{2}}{6x}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{4x+12}{6x+18}$}
+  {Factorise the numerator and the denominator.
+   \par\vspace{0.4em}
+   \work{$\dfrac{4x+12}{6x+18}$ & $\dfrac{4(x+3)}{6(x+3)}$\\[0.95em]
+         $\dfrac{4\strike{(x+3)}}{6\strike{(x+3)}}$ & $\dfrac{4}{6}=\dfrac{2}{3}$}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{10}{5x+20}$}
+  {Factorise the denominator: $5x+20=5(x+4)$.\\[0.3em]
+   $\dfrac{\strike{5}\times 2}{\strike{5}(x+4)}=\dfrac{2}{x+4}$}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{6x^{2}+9x}{4x^{2}+6x}$}
+  {The highest common factor is $3x$ on the top and $2x$ on the bottom.
+   \par\vspace{0.4em}
+   \work{$\dfrac{6x^{2}+9x}{4x^{2}+6x}$ & $\dfrac{3x(2x+3)}{2x(2x+3)}$\\[0.95em]
+         $\dfrac{3\strike{x}\strike{(2x+3)}}{2\strike{x}\strike{(2x+3)}}$ & $\dfrac{3}{2}$}}
+
+%================================================================
+\qtopic{Simplifying algebraic fractions with double brackets}
+%================================================================
+
+\tf[\LARGE][\large]{$\dfrac{x^{2}+5x+6}{x+2}=x+3$}
+  {\textbf{True.} $x^{2}+5x+6=(x+2)(x+3)$, so $(x+2)$ is a factor of
+   the whole numerator and cancels.\\[0.3em]
+   $\dfrac{\strike{(x+2)}(x+3)}{\strike{(x+2)}}=x+3$}
+
+\tf[\LARGE][\large]{$\dfrac{x^{2}+7x}{x^{2}+2x}=\dfrac{7}{2}$}
+  {\textbf{False.} $x^{2}$ is a term, not a factor of the whole
+   numerator, so it cannot be cancelled.\\[0.3em]
+   $\dfrac{x(x+7)}{x(x+2)}=\dfrac{x+7}{x+2}$}
+
+\tf[\LARGE][\large]{$\dfrac{x-3}{3-x}=1$}
+  {\textbf{False.} The two brackets are not the same:
+   $3-x=-(x-3)$.\\[0.3em]
+   $\dfrac{x-3}{-(x-3)}=-1$\\[0.3em]
+   When $x=5$: $\dfrac{2}{-2}=-1$.}
+
+\tf[\LARGE][\large]{$\dfrac{x^{2}-25}{x-5}=x+5$}
+  {\textbf{True.} The numerator is a difference of two squares:
+   $x^{2}-25=(x-5)(x+5)$.\\[0.3em]
+   $\dfrac{\strike{(x-5)}(x+5)}{\strike{(x-5)}}=x+5$}
+
+\tf[\LARGE][\large]{$\dfrac{x^{2}-16}{x^{2}+8x+16}=1$}
+  {\textbf{False.} $(x-4)$ and $(x+4)$ are different brackets and do
+   not cancel.\\[0.3em]
+   $\dfrac{(x-4)(x+4)}{(x+4)(x+4)}=\dfrac{x-4}{x+4}$}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{x^{2}+8x+15}{x+5}$}
+  {Factorise the numerator. Two numbers with a sum of $8$ and a product
+   of $15$: $3$ and $5$.\\[0.3em]
+   $\dfrac{(x+3)\strike{(x+5)}}{\strike{(x+5)}}=x+3$}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{x^{2}+7x+12}{x+3}$}
+  {Two numbers with a sum of $7$ and a product of $12$: $3$ and $4$.\\[0.3em]
+   $\dfrac{\strike{(x+3)}(x+4)}{\strike{(x+3)}}=x+4$}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{x^{2}-36}{x+6}$}
+  {The numerator is a difference of two squares:
+   $x^{2}-36=(x+6)(x-6)$.\\[0.3em]
+   $\dfrac{\strike{(x+6)}(x-6)}{\strike{(x+6)}}=x-6$}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{x^{2}+2x-8}{x-2}$}
+  {Two numbers with a sum of $2$ and a product of $-8$: $4$ and $-2$.\\[0.3em]
+   $\dfrac{(x+4)\strike{(x-2)}}{\strike{(x-2)}}=x+4$
+   \par\vspace{0.5em}
+   \quadgrid{x}{4}{x}{-2}{x^{2}}{4x}{-2x}{-8}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{x^{2}+6x+8}{x^{2}+5x+4}$}
+  {Factorise the numerator and the denominator.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x^{2}+6x+8}{x^{2}+5x+4}$ & $\dfrac{(x+2)(x+4)}{(x+1)(x+4)}$\\[0.95em]
+         $\dfrac{(x+2)\strike{(x+4)}}{(x+1)\strike{(x+4)}}$ & $\dfrac{x+2}{x+1}$}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{x^{2}-x-6}{x^{2}-9}$}
+  {The denominator is a difference of two squares.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x^{2}-x-6}{x^{2}-9}$ & $\dfrac{(x-3)(x+2)}{(x-3)(x+3)}$\\[0.95em]
+         $\dfrac{\strike{(x-3)}(x+2)}{\strike{(x-3)}(x+3)}$ & $\dfrac{x+2}{x+3}$}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{3x+6}{x^{2}+5x+6}$}
+  {The numerator has a common factor of $3$; the denominator
+   factorises into two brackets.
+   \par\vspace{0.4em}
+   \work{$\dfrac{3x+6}{x^{2}+5x+6}$ & $\dfrac{3(x+2)}{(x+2)(x+3)}$\\[0.95em]
+         $\dfrac{3\strike{(x+2)}}{\strike{(x+2)}(x+3)}$ & $\dfrac{3}{x+3}$}}
+
+\qq[\LARGE][\normalsize]{Simplify $\dfrac{2x^{2}+7x+3}{x+3}$}
+  {The coefficient of $x^{2}$ is $2$, so one bracket starts with $2x$.\\[0.3em]
+   $\dfrac{(2x+1)\strike{(x+3)}}{\strike{(x+3)}}=2x+1$
+   \par\vspace{0.5em}
+   \quadgrid{2x}{1}{x}{3}{2x^{2}}{x}{6x}{3}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{2x^{2}-8}{x^{2}+4x+4}$}
+  {Take the common factor of $2$ out of the numerator first.
+   \par\vspace{0.4em}
+   \work{$\dfrac{2x^{2}-8}{x^{2}+4x+4}$ & $\dfrac{2(x^{2}-4)}{(x+2)(x+2)}$\\[0.95em]
+         $\dfrac{2(x^{2}-4)}{(x+2)(x+2)}$ & $\dfrac{2(x-2)\strike{(x+2)}}{(x+2)\strike{(x+2)}}$\\[0.95em]
+         $\dfrac{2x^{2}-8}{x^{2}+4x+4}$ & $\dfrac{2(x-2)}{x+2}$}}
+
+\qq[\LARGE][\large]{Simplify $\dfrac{6x^{2}+x-2}{4x^{2}-1}$}
+  {The denominator is a difference of two squares.
+   \par\vspace{0.4em}
+   \work{$6x^{2}+x-2$ & $(3x+2)(2x-1)$\\[0.95em]
+         $4x^{2}-1$ & $(2x-1)(2x+1)$\\[0.95em]
+         $\dfrac{(3x+2)\strike{(2x-1)}}{(2x+1)\strike{(2x-1)}}$ & $\dfrac{3x+2}{2x+1}$}}
+
+%================================================================
+\qtopic{Adding and subtracting algebraic fractions}
+%================================================================
+
+\tf[\LARGE][\Large]{$\dfrac{2}{x}+\dfrac{3}{x}=\dfrac{5}{2x}$}
+  {\textbf{False.} The denominators are already the same, so only the
+   numerators are added.\\[0.3em]
+   $\dfrac{2}{x}+\dfrac{3}{x}=\dfrac{5}{x}$}
+
+\tf[\LARGE][\Large]{$\dfrac{x}{3}+\dfrac{x}{4}=\dfrac{7x}{12}$}
+  {\textbf{True.} The common denominator is $12$.\\[0.3em]
+   $\dfrac{4x}{12}+\dfrac{3x}{12}=\dfrac{7x}{12}$}
+
+\tf[\LARGE][\large]{$\dfrac{1}{x}+\dfrac{1}{y}=\dfrac{1}{x+y}$}
+  {\textbf{False.} Test it with $x=2$ and $y=3$: the left side is
+   $\dfrac{5}{6}$ and the right side is $\dfrac{1}{5}$.\\[0.3em]
+   The common denominator is $xy$, so the answer is $\dfrac{x+y}{xy}$.}
+
+\tf[\Large][\large]{$\dfrac{4}{x}-\dfrac{x-3}{x}=\dfrac{4-x-3}{x}$}
+  {\textbf{False.} The minus sign applies to the whole second numerator,
+   so the $-3$ becomes $+3$.\\[0.3em]
+   $\dfrac{4-(x-3)}{x}=\dfrac{4-x+3}{x}=\dfrac{7-x}{x}$}
+
+\tf[\Large][\large]{The common denominator of $\dfrac{1}{x+1}$ and
+   $\dfrac{2}{x+3}$ is $(x+1)(x+3)$}
+  {\textbf{True.} The denominators are multiplied, not added.\\[0.3em]
+   The common denominator is $(x+1)(x+3)$, not $x+4$.}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{3}{x}+\dfrac{4}{x}$}
+  {The denominators are the same, so the numerators are added.\\[0.4em]
+   $\dfrac{3}{x}+\dfrac{4}{x}=\dfrac{7}{x}$}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{x}{2}+\dfrac{x}{5}$}
+  {The common denominator is $10$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x}{2}+\dfrac{x}{5}$ & $\dfrac{5x}{10}+\dfrac{2x}{10}$\\[0.95em]
+         $\dfrac{5x}{10}+\dfrac{2x}{10}$ & $\dfrac{7x}{10}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{x}{4}+\dfrac{3x}{8}$}
+  {$8$ is a multiple of $4$, so the common denominator is $8$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x}{4}+\dfrac{3x}{8}$ & $\dfrac{2x}{8}+\dfrac{3x}{8}$\\[0.95em]
+         $\dfrac{2x}{8}+\dfrac{3x}{8}$ & $\dfrac{5x}{8}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{2x}{5}-\dfrac{x}{3}$}
+  {The common denominator is $15$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{2x}{5}-\dfrac{x}{3}$ & $\dfrac{6x}{15}-\dfrac{5x}{15}$\\[0.95em]
+         $\dfrac{6x}{15}-\dfrac{5x}{15}$ & $\dfrac{x}{15}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{x+1}{2}+\dfrac{x+2}{3}$}
+  {The common denominator is $6$. Each numerator is multiplied by the
+   same factor as its denominator.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x+1}{2}+\dfrac{x+2}{3}$ & $\dfrac{3(x+1)+2(x+2)}{6}$\\[0.95em]
+         $\dfrac{3x+3+2x+4}{6}$ & $\dfrac{5x+7}{6}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{2x+3}{4}-\dfrac{x-1}{6}$}
+  {The common denominator is $12$. The minus sign applies to the whole
+   second numerator.
+   \par\vspace{0.4em}
+   \work{$\dfrac{2x+3}{4}-\dfrac{x-1}{6}$ & $\dfrac{3(2x+3)-2(x-1)}{12}$\\[0.95em]
+         $\dfrac{6x+9-2x+2}{12}$ & $\dfrac{4x+11}{12}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{2}{x}+\dfrac{3}{y}$}
+  {The common denominator is $xy$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{2}{x}+\dfrac{3}{y}$ & $\dfrac{2y}{xy}+\dfrac{3x}{xy}$\\[0.95em]
+         $\dfrac{2y}{xy}+\dfrac{3x}{xy}$ & $\dfrac{3x+2y}{xy}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{1}{x+1}+\dfrac{2}{x+3}$}
+  {The common denominator is $(x+1)(x+3)$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{1}{x+1}+\dfrac{2}{x+3}$ & $\dfrac{(x+3)+2(x+1)}{(x+1)(x+3)}$\\[0.95em]
+         $\dfrac{x+3+2x+2}{(x+1)(x+3)}$ & $\dfrac{3x+5}{(x+1)(x+3)}$}}
+
+\qq[\LARGE][\large]{Write as a single fraction\\[0.4em]
+   $\dfrac{3}{x-1}-\dfrac{2}{x+2}$}
+  {The common denominator is $(x-1)(x+2)$. The minus sign applies to the
+   whole second numerator.
+   \par\vspace{0.4em}
+   \work{$\dfrac{3}{x-1}-\dfrac{2}{x+2}$ & $\dfrac{3(x+2)-2(x-1)}{(x-1)(x+2)}$\\[0.95em]
+         $\dfrac{3x+6-2x+2}{(x-1)(x+2)}$ & $\dfrac{x+8}{(x-1)(x+2)}$}}
+
+\qq[\LARGE][\small]{Write as a single fraction\\[0.4em]
+   $\dfrac{1}{x-2}+\dfrac{3}{x^{2}-4}$}
+  {Factorise the second denominator, then write both fractions over
+   $(x-2)(x+2)$.
+   \par\vspace{0.4em}
+   \work{$x^{2}-4$ & $(x-2)(x+2)$\\[1.3em]
+         $\dfrac{1}{x-2}$ & $\dfrac{x+2}{(x-2)(x+2)}$\\[1.3em]
+         $\dfrac{1}{x-2}+\dfrac{3}{x^{2}-4}$ & $\dfrac{x+2+3}{(x-2)(x+2)}$\\[1.3em]
+         $\dfrac{x+2+3}{(x-2)(x+2)}$ & $\dfrac{x+5}{(x-2)(x+2)}$}}
+
+%================================================================
+\qtopic{Multiplying and dividing algebraic fractions}
+%================================================================
+
+\tf[\Large][\large]{To work out $\dfrac{a}{b}\div\dfrac{c}{d}$ you turn the
+   first fraction upside down}
+  {\textbf{False.} It is the second fraction that is turned upside down,
+   and the two fractions are then multiplied.\\[0.3em]
+   $\dfrac{a}{b}\div\dfrac{c}{d}=\dfrac{a}{b}\times\dfrac{d}{c}$}
+
+\tf[\Large][\large]{$\dfrac{x}{2}\times\dfrac{3}{5}$ can be worked out
+   without finding a common denominator}
+  {\textbf{True.} A common denominator is needed for adding and
+   subtracting, not for multiplying.\\[0.3em]
+   The numerators are multiplied and the denominators are multiplied, so
+   the answer is $\dfrac{3x}{10}$.}
+
+\tf[\LARGE][\large]{$\dfrac{a}{b}\times\dfrac{c}{d}=\dfrac{a+c}{b+d}$}
+  {\textbf{False.} Test it with $\dfrac{1}{2}\times\dfrac{1}{2}$: the left
+   side is $\dfrac{1}{4}$ and the right side is $\dfrac{2}{4}=\dfrac{1}{2}$.\\[0.3em]
+   $\dfrac{a}{b}\times\dfrac{c}{d}=\dfrac{ac}{bd}$}
+
+\tf[\Large][\large]{$\dfrac{x}{4}\div 2=\dfrac{x}{2}$}
+  {\textbf{False.} The whole number $2$ is the fraction $\dfrac{2}{1}$,
+   so it is turned upside down and the two are multiplied.\\[0.3em]
+   $\dfrac{x}{4}\div\dfrac{2}{1}=\dfrac{x}{4}\times\dfrac{1}{2}=\dfrac{x}{8}$\\[0.3em]
+   When $x=8$: $2\div 2=1$, not $4$.}
+
+\tf[\Large][\large]{$\dfrac{x+1}{4}\times\dfrac{8}{x+1}$ simplifies to $2$}
+  {\textbf{True.} Cancelling across a multiplication sign is allowed,
+   because $x+1$ is a factor of a whole numerator and of a whole
+   denominator.\\[0.3em]
+   $\dfrac{8\strike{(x+1)}}{4\strike{(x+1)}}=\dfrac{8}{4}=2$}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{x}{2}\times\dfrac{3}{x}$}
+  {Multiply the numerators and multiply the denominators, then cancel the
+   common factor $x$.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x}{2}\times\dfrac{3}{x}$ & $\dfrac{3x}{2x}$\\[0.95em]
+         $\dfrac{3\strike{x}}{2\strike{x}}$ & $\dfrac{3}{2}$}}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{3x}{4}\times\dfrac{8}{9x}$}
+  {\work{$\dfrac{3x}{4}\times\dfrac{8}{9x}$ & $\dfrac{24x}{36x}$\\[0.95em]
+         $\dfrac{24\strike{x}}{36\strike{x}}$ & $\dfrac{24}{36}$\\[0.95em]
+         $\dfrac{24}{36}$ & $\dfrac{2}{3}$}}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{x}{5}\div\dfrac{x}{2}$}
+  {\flow{\tfrac{x}{5}\div\tfrac{x}{2}}{turn the second fraction upside
+   down and multiply}{\tfrac{x}{5}\times\tfrac{2}{x}}{cancel the common
+   factor $x$}{\tfrac{2}{5}}}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{x}{3}\div\dfrac{2}{x}$}
+  {\flow{\tfrac{x}{3}\div\tfrac{2}{x}}{turn the second fraction upside
+   down and multiply}{\tfrac{x}{3}\times\tfrac{x}{2}}{multiply the
+   numerators and the denominators}{\tfrac{x^{2}}{6}}}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{x+1}{3}\times\dfrac{6}{x+2}$}
+  {The two brackets are different, so only the numbers cancel.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x+1}{3}\times\dfrac{6}{x+2}$ & $\dfrac{6(x+1)}{3(x+2)}$\\[0.95em]
+         $\dfrac{6(x+1)}{3(x+2)}$ & $\dfrac{2(x+1)}{x+2}$}}
+
+\qq[\LARGE][\small]{Simplify\\[0.4em]
+   $\dfrac{x+2}{5}\div\dfrac{x+2}{10}$}
+  {Turn the second fraction upside down and multiply.
+   \par\vspace{0.4em}
+   \work{$\dfrac{x+2}{5}\div\dfrac{x+2}{10}$ & $\dfrac{x+2}{5}\times\dfrac{10}{x+2}$\\[0.95em]
+         $\dfrac{x+2}{5}\times\dfrac{10}{x+2}$ & $\dfrac{10(x+2)}{5(x+2)}$\\[0.95em]
+         $\dfrac{10\strike{(x+2)}}{5\strike{(x+2)}}$ & $2$}}
+
+\qq[\LARGE][\large]{Simplify\\[0.4em]
+   $\dfrac{5x^{3}}{4}\div\dfrac{x}{8}$}
+  {\flow{\tfrac{5x^{3}}{4}\div\tfrac{x}{8}}{turn the second fraction
+   upside down and multiply}{\tfrac{5x^{3}}{4}\times\tfrac{8}{x}}{divide
+   the numbers and subtract the indices}{10x^{2}}}
+
+\qq[\Large][\small]{Simplify\\[0.4em]
+   $\dfrac{x^{2}-9}{x+1}\times\dfrac{x+1}{x-3}$}
+  {$x^{2}-9$ is the difference of two squares.
+   \par\vspace{0.4em}
+   \work{$x^{2}-9$ & $(x-3)(x+3)$\\[0.95em]
+         $\dfrac{x^{2}-9}{x+1}\times\dfrac{x+1}{x-3}$ & $\dfrac{(x-3)(x+3)(x+1)}{(x+1)(x-3)}$\\[0.95em]
+         $\dfrac{\strike{(x-3)}(x+3)\strike{(x+1)}}{\strike{(x+1)}\strike{(x-3)}}$ & $x+3$}}
+
+\qq[\Large][\small]{Simplify\\[0.4em]
+   $\dfrac{x^{2}+7x+10}{x-1}\div\dfrac{x+2}{x-1}$}
+  {Factorise the quadratic, then turn the second fraction upside down and
+   multiply.
+   \par\vspace{0.4em}
+   \work{$x^{2}+7x+10$ & $(x+2)(x+5)$\\[0.95em]
+         $\dfrac{(x+2)(x+5)}{x-1}\div\dfrac{x+2}{x-1}$ & $\dfrac{(x+2)(x+5)}{x-1}\times\dfrac{x-1}{x+2}$\\[0.95em]
+         $\dfrac{\strike{(x+2)}(x+5)\strike{(x-1)}}{\strike{(x-1)}\strike{(x+2)}}$ & $x+5$}}
+
+\qq[\Large][\footnotesize]{Simplify\\[0.4em]
+   $\dfrac{x^{2}+3x+2}{x^{2}-1}\div\dfrac{x^{2}+4x+4}{x^{2}-x}$}
+  {Factorise all four quadratics, then turn the second fraction upside
+   down and multiply.
+   \par\vspace{0.4em}
+   \work{$x^{2}+3x+2$ & $(x+1)(x+2)$\\[0.95em]
+         $x^{2}-1$ & $(x+1)(x-1)$\\[0.95em]
+         $x^{2}+4x+4$ & $(x+2)(x+2)$\\[0.95em]
+         $x^{2}-x$ & $x(x-1)$\\[0.95em]
+         $\dfrac{(x+1)(x+2)}{(x+1)(x-1)}\times\dfrac{x(x-1)}{(x+2)(x+2)}$ & $\dfrac{(x+1)(x+2)\,x\,(x-1)}{(x+1)(x-1)(x+2)(x+2)}$\\[1.5em]
+         $\dfrac{\strike{(x+1)}\strike{(x+2)}\,x\,\strike{(x-1)}}{\strike{(x+1)}\strike{(x-1)}\strike{(x+2)}(x+2)}$ & $\dfrac{x}{x+2}$}}
+\end{document}
