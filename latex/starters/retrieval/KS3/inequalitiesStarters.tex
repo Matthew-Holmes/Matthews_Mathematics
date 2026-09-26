@@ -1,0 +1,505 @@
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{calc}
+
+% ================================================================
+% Retrieval starters for a Year 9 class, used across the inequalities
+% unit.
+%
+% Every starter draws on each of the three earlier topics: fractions,
+% decimals and percentages; probability, including frequency trees; and
+% standard form, including calculating with it. Each starter uses more of
+% the inequalities unit than the one before, in the order it is taught:
+%
+%   1  comparing and ordering numbers with < and >, and reading x > 0.3
+%   2  one-sided inequalities on a number line: open and filled circles,
+%      and the integers that satisfy them
+%   3  double inequalities. The rule for standard form, 1 <= A < 10, and
+%      the probability scale, 0 <= p <= 1, are both double inequalities.
+%   4  solving one- and two-step inequalities, and forming one from a
+%      frequency tree
+%   5  unknowns on both sides, solving double inequalities, and forming
+%      inequalities from probabilities
+%
+% Within each starter the questions run from retrieval of the earlier
+% topics to the new idea, and the last question on each starter is a
+% challenge that connects to the lesson.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.4cm, text margin right=0.4cm}
+\setlength{\multicolsep}{4pt}
+\setlength{\columnsep}{20pt}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% A gap drawn as a dotted box, used here for the < or > that goes between two
+% numbers. The answer appears in red inside the box on overlay 2.
+\newcommand{\abox}[1]{%
+  \tikz[baseline=(b.base)]\node[draw=gray, densely dotted, inner sep=1.5pt] (b)
+    {\alt<2->{\textcolor{red}{#1}}{\phantom{#1}}};%
+}
+
+% A gap inside a frequency tree: a question mark on the first overlay and the
+% answer in red on the second, in the same font as the numbers beside it. The
+% question mark takes up the width of the answer, so that a box which is widened
+% by its answer is already that wide on the first overlay.
+\newcommand{\dgap}[1]{\alt<2->{\textcolor{red}{#1}}{\makebox[\widthof{#1}]{?}}}
+
+% Every question list on these slides is tight, so that the diagram column and
+% the question column both finish inside the slide.
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}%
+}
+
+% ================================================================
+% The pictures these starters are built from.
+%
+% Every number line is about 3.9 cm long and starts at x = 0, so that the
+% lines in one column sit directly under each other. Each is drawn in a scope
+% whose x unit is one step along that line, shifted so that its left end is
+% at 0; a coordinate on the line is then the value it stands for.
+% ================================================================
+\tikzset{
+  dhead/.style = {font=\scriptsize\bfseries, anchor=west},
+  nlab/.style  = {font=\scriptsize, below, inner sep=2pt},
+  % The circle at the end of an inequality sits just above the line, over its
+  % value: open when the value is not included (< or >), filled when it is
+  % (<= or >=). Put the answer style first, so that an open circle keeps its
+  % white fill.
+  opendot/.style   = {circle, draw, thick, fill=white, inner sep=0pt, minimum size=5pt},
+  closeddot/.style = {circle, draw, thick, fill, inner sep=0pt, minimum size=5pt},
+  ineq/.style      = {thick, -{Stealth[length=5pt]}},
+  vans/.style      = {anslab, font=\scriptsize},
+}
+\newcommand{\dotheight}{0.3}
+
+% \intline{min}{max}: a number line with a tick and a label at every integer,
+% running 0.3 of a step past each end.
+\newcommand{\intline}[2]{%
+  \draw[thick] ({#1-0.3},0) -- ({#2+0.3},0);
+  \foreach \v in {#1,...,#2} {
+    \draw (\v,-0.07) -- (\v,0.07);
+    \node[nlab] at (\v,-0.07) {$\v$};
+  }}
+
+% Frequency trees, drawn with boxes so that an expression such as 40 - x fits.
+% The boxes are all one size so that a gap does not move them, and a branch
+% label is filled white so that it masks the branch it sits on.
+\tikzset{
+  ftnode/.style  = {draw, rounded corners=2pt, minimum width=0.74cm,
+                    minimum height=0.42cm, inner xsep=2pt, inner ysep=1pt, font=\scriptsize},
+  ftlab/.style   = {font=\tiny, inner sep=1pt, fill=white},
+  ftarrow/.style = {-, thick},
+}
+
+\title{Inequalities: Starters}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+%------------------------------------------------------------------
+% STARTER 1: Comparing and ordering numbers with < and >
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 1: Inequality Symbols}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 0.3 to 0.4 in hundredths. One step is 0.01, so a
+% coordinate of 5 stands for 0.35. ----
+\begin{scope}[x=0.36cm, shift={(0.4,0)}]
+\node[dhead] at (-0.4,0.9) {Number line A};
+\draw[thick] (-0.4,0) -- (10.4,0);
+\foreach \v in {0,...,10} \draw (\v,-0.07) -- (\v,0.07);
+\node[nlab] at (0,-0.07)  {$0.3$};
+\node[nlab] at (10,-0.07) {$0.4$};
+% --- Q3 answer: 32%, 0.35 and 3/8 = 0.375 marked ---
+\foreach \v/\lab in {2/{$32\%$}, 5/{$0.35$}, 7.5/{$\tfrac38$}} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {\lab};
+}
+\end{scope}
+
+% ---- Frequency tree: 60 people at a film, and who bought popcorn ----
+\begin{scope}[yshift=-2.55cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {$60$};
+\node[ftnode] (a)  at (1.65,0.9)   {$35$};
+\node[ftnode] (c)  at (1.65,-0.9)  {\dgap{$25$}};
+\node[ftnode] (ap) at (3.65,1.35)  {$21$};
+\node[ftnode] (an) at (3.65,0.45)  {\dgap{$14$}};
+\node[ftnode] (cp) at (3.65,-0.45) {$18$};
+\node[ftnode] (cn) at (3.65,-1.35) {\dgap{$7$}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {adult} (a);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {child} (c);
+\draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {popcorn} (ap);
+\draw[ftarrow] (a) -- node[ftlab, below=1pt, pos=0.4] {no popcorn} (an);
+\draw[ftarrow] (c) -- node[ftlab, above=1pt, pos=0.4] {popcorn} (cp);
+\draw[ftarrow] (c) -- node[ftlab, below=1pt, pos=0.4] {no popcorn} (cn);
+\end{scope}
+
+% --- Q8 answer: -0.3 to 0 in steps of 0.05, with -0.2 and -0.15 marked. One step
+% is 0.01, so a coordinate of -15 stands for -0.15. ---
+\begin{scope}[x=0.12cm, shift={(32.5,0)}, yshift=-5.0cm]
+\node[anslab, font=\scriptsize\bfseries, anchor=west] at (-32.5,0.75) {Q8};
+\draw[ans] (-30,0) -- (0,0);
+\foreach \v in {-30,-25,...,0} \draw[ans, thin] (\v,-0.07) -- (\v,0.07);
+\foreach \v/\lab in {-30/-0.3, -20/-0.2, -10/-0.1, 0/0}
+  \node[vans, below, inner sep=2pt] at (\v,-0.07) {$\lab$};
+\fill[ans] (-20,0) circle (1.8pt);
+\fill[ans] (-15,0) circle (1.8pt);
+\node[vans, anchor=south east, inner sep=1pt] at (-19.2,0.1) {$-0.2$};
+\node[vans, anchor=south west, inner sep=1pt] at (-15.8,0.1) {$-0.15$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac38$ as a decimal and as a percentage.
+        \ashow{$0.375=37.5\%$}
+  \columnbreak
+  \item Write $32\,000$ in standard form.
+        \ashow{$3.2\times10^4$}
+\end{multicols}
+  \item Mark $32\%$, $0.35$ and $\frac38$ on number line A. Write them in order, using $<$.
+        \ashow{$32\%<0.35<\tfrac38$}
+\begin{multicols}{2}
+  \item Write $<$ or $>$.\\[1pt]
+        $3.2\times10^4$ \abox{$>$} $9.8\times10^3$\\[1pt]
+        $6\times10^{-3}$ \abox{$<$} $2\times10^{-2}$
+  \columnbreak
+  \item $60$ people watched a film. Complete the frequency tree.
+\end{multicols}
+  \item An adult is chosen at random. Find the probability that they bought popcorn,
+        as a percentage. Do the same for a child. Write $<$ or $>$ between them.
+        \ashow{$\tfrac{21}{35}=60\%$ and $\tfrac{18}{25}=72\%$, so $60\%<72\%$}
+  \item $x>0.3$ means ``$x$ is greater than $0.3$''. Which of these could $x$ be?\\[1pt]
+        \hspace*{1em}$\tfrac25$ \quad $0.29$ \quad $3\times10^{-1}$ \quad $31\%$ \quad $\tfrac14$\\
+        \ashow{$\tfrac25$ and $31\%$, \; but not $3\times10^{-1}=0.3$}
+  \item (Challenge) $0.2>0.15$. Is $-0.2>-0.15$? Explain using a number line.
+        \ashow{No: \; $-0.2<-0.15$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 2: One-sided inequalities on a number line
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 2: Inequalities on a Number Line}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -3 to 5, to draw x >= 2 on ----
+\begin{scope}[x=0.48cm, shift={(3.3,0)}]
+\node[dhead] at (-3.3,0.8) {Number line A};
+\intline{-3}{5}
+% --- Q3 answer: x >= 2 ---
+\node[ans, closeddot] (a) at (2,\dotheight) {};
+\draw[ans, ineq] (a) -- (5.3,\dotheight);
+\end{scope}
+
+% ---- Number line B: x < -1, already drawn ----
+\begin{scope}[x=0.48cm, shift={(3.3,0)}, yshift=-1.6cm]
+\node[dhead] at (-3.3,0.8) {Number line B};
+\intline{-3}{5}
+\node[opendot] (b) at (-1,\dotheight) {};
+\draw[ineq] (b) -- (-3.3,\dotheight);
+\end{scope}
+
+% ---- Number line C: 0 to 3 in halves, to draw y > 3/2 on ----
+\begin{scope}[x=1.1cm, shift={(0.25,0)}, yshift=-3.2cm]
+\node[dhead] at (-0.25,0.8) {Number line C};
+\draw[thick] (-0.25,0) -- (3.25,0);
+\foreach \v in {0,0.5,...,3} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {0,...,3} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q5 answer: y > 3/2 ---
+\node[ans, opendot] (c) at (1.5,\dotheight) {};
+\draw[ans, ineq] (c) -- (3.25,\dotheight);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $0.45$ as a fraction and as a percentage.
+        \ashow{$\tfrac{9}{20}=45\%$}
+  \columnbreak
+  \item Write $6.1\times10^{-3}$ as an ordinary number.
+        \ashow{$0.0061$}
+\end{multicols}
+  \item Draw $x\geq2$ on number line A. Can $x$ be equal to $2$?
+        \ashow{Yes: $\geq$ includes $2$, so the circle is filled.}
+  \item Write the inequality on number line B, and two integers that satisfy it.
+        \ashow{$x<-1$; \; for example $-2$ and $-3$}
+  \item Draw $y>\frac32$ on number line C. Does $y=150\%$ satisfy it?
+        \ashow{No: $150\%=\tfrac32$, not more than $\tfrac32$.}
+  \item Which of these satisfy $n>4\times10^3$?\\[1pt]
+        \hspace*{1em}$4000$ \quad $3.9\times10^4$ \quad $0.5\times10^4$ \quad $4.01\times10^3$\\
+        \ashow{All except $4000$, which equals $4\times10^3$}
+  \item A match ends in a win, a draw or a loss. $P(\text{win})=0.35$ and
+        $P(\text{draw})=\frac15$. Find $P(\text{loss})$ as a percentage. Write $<$ or $>$
+        between $P(\text{win})$ and $P(\text{loss})$.
+        \ashow{$45\%$, so $P(\text{win})<P(\text{loss})$}
+  \item (Challenge) $x$ is an integer, $x>-3$ and $x\leq2$. List the values $x$ can take.
+        \ashow{$-2,\ -1,\ 0,\ 1,\ 2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 3: Double inequalities, in standard form and in probability
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 3: Double Inequalities}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -3 to 4, to draw -2 < x <= 3 on ----
+\begin{scope}[x=0.51cm, shift={(3.3,0)}]
+\node[dhead] at (-3.3,0.8) {Number line A};
+\intline{-3}{4}
+% --- Q3 answer: -2 < x <= 3 ---
+\node[ans, opendot]   (l) at (-2,\dotheight) {};
+\node[ans, closeddot] (r) at (3,\dotheight)  {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+% ---- Number line B: the values of A in standard form, 1 <= A < 10 ----
+\begin{scope}[x=0.37cm, shift={(0.3,0)}, yshift=-1.6cm]
+\node[dhead] at (-0.3,0.8) {Number line B};
+\intline{0}{10}
+\node[closeddot] (l) at (1,\dotheight)  {};
+\node[opendot]   (r) at (10,\dotheight) {};
+\draw[thick] (l) -- (r);
+\end{scope}
+
+% ---- Number line C: the probability scale, 0 to 1 in tenths ----
+\begin{scope}[x=3.8cm, shift={(0.02,0)}, yshift=-3.2cm]
+\node[dhead] at (-0.02,0.8) {Number line C};
+\draw[thick] (0,0) -- (1,0);
+\foreach \v in {0,0.1,...,1.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v/\lab in {0/0, 0.5/0.5, 1/1} \node[nlab] at (\v,-0.07) {$\lab$};
+% --- Q7 answer: 0.6 < p <= 1 ---
+\node[ans, opendot]   (l) at (0.6,\dotheight) {};
+\node[ans, closeddot] (r) at (1,\dotheight)   {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac{7}{20}$ as a decimal and as a percentage.
+        \ashow{$0.35=35\%$}
+  \columnbreak
+  \item Work out $(3\times10^4)\times(2\times10^3)$.
+        \ashow{$6\times10^7$}
+\end{multicols}
+  \item Draw $-2<x\leq3$ on number line A. List the integers that satisfy it.
+        \ashow{$-1,\ 0,\ 1,\ 2,\ 3$}
+  \item Standard form is $A\times10^n$. Number line B shows the values $A$ can take.
+        Write them as a double inequality.
+        \ashow{$1\leq A<10$}
+  \item Which of these are in standard form?\\[1pt]
+        \hspace*{1em}$0.8\times10^3$ \quad $10\times10^2$ \quad $1\times10^5$ \quad $9.9\times10^{-4}$
+        \ashow{$1\times10^5$ and $9.9\times10^{-4}$. \; $0.8$ is less than $1$, and $10$ is not less than $10$.}
+  \item Write $\frac14<x<40\%$ using decimals. Does $x=\frac13$ satisfy it?
+        \ashow{$0.25<x<0.4$; \; yes, $\tfrac13=0.\dot{3}$}
+  \item Every probability $p$ satisfies $0\leq p\leq1$. The probability of rain tomorrow
+        is more than $60\%$. Show the values $p$ can take on number line C, and write
+        them as a double inequality.
+        \ashow{$0.6<p\leq1$}
+  \item (Challenge) $0.6<P(\text{rain})\leq1$. Write a double inequality for
+        $P(\text{no rain})$.
+        \ashow{$0\leq P(\text{no rain})<0.4$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 4: Solving inequalities, and forming one from a frequency tree
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 4: Solving Inequalities}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 0 to 8, to show the solution of 11 > 2x + 3 on ----
+\begin{scope}[x=0.46cm, shift={(0.3,0)}]
+\node[dhead] at (-0.3,0.8) {Number line A};
+\intline{0}{8}
+% --- Q3 answer: x < 4 ---
+\node[ans, opendot] (a) at (4,\dotheight) {};
+\draw[ans, ineq] (a) -- (-0.3,\dotheight);
+\end{scope}
+
+% ---- Frequency tree: 40 pupils, x of them in the choir ----
+\begin{scope}[yshift=-2.65cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {$40$};
+\node[ftnode] (c)  at (1.65,0.9)   {$x$};
+\node[ftnode] (n)  at (1.65,-0.9)  {\dgap{$40-x$}};
+\node[ftnode] (cb) at (3.65,1.35)  {$6$};
+\node[ftnode] (cg) at (3.65,0.45)  {\dgap{$x-6$}};
+\node[ftnode] (nb) at (3.65,-0.45) {$15$};
+\node[ftnode] (ng) at (3.65,-1.35) {\dgap{$25-x$}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {choir} (c);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt, align=center] {not in\\choir} (n);
+\draw[ftarrow] (c) -- node[ftlab, above=1pt, pos=0.4] {boy} (cb);
+\draw[ftarrow] (c) -- node[ftlab, below=1pt, pos=0.4] {girl} (cg);
+\draw[ftarrow] (n) -- node[ftlab, above=1pt, pos=0.4] {boy} (nb);
+\draw[ftarrow] (n) -- node[ftlab, below=1pt, pos=0.4] {girl} (ng);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $12\%$ as a decimal and as a fraction in its simplest form.
+        \ashow{$0.12=\tfrac{3}{25}$}
+  \columnbreak
+  \item Work out $(8\times10^6)\div(2\times10^2)$.
+        \ashow{$4\times10^4$}
+\end{multicols}
+  \item Solve $11>2x+3$. Show the solution on number line A.
+        \ashow{$8>2x$, so $4>x$, which is $x<4$}
+\begin{multicols}{2}
+  \item $30\%$ of $y$ is less than $6$. Write an inequality and solve it.
+        \ashow{$0.3y<6$, so $y<20$}
+  \columnbreak
+  \item Solve $3m\leq1.2\times10^5$, giving $m$ in standard form.
+        \ashow{$m\leq4\times10^4$}
+\end{multicols}
+  \item $40$ pupils were asked if they sing in the choir. Complete the frequency tree in
+        terms of $x$.
+  \item There are more girls than boys in the choir. Write an inequality in $x$ and
+        solve it.
+        \ashow{$x-6>6$, so $x>12$}
+  \item (Challenge) The probability that a pupil chosen at random is in the choir is also
+        less than $0.4$. List the values $x$ can take.
+        \ashow{$0.4\times40=16$, so $12<x<16$: \; $x=13$, $14$ or $15$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 5: Unknowns on both sides, and double inequalities to solve
+%------------------------------------------------------------------
+\begin{frame}[t]{Starter 5: Solving Double Inequalities}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -4 to 4, to show the solution of -5 <= 2x + 1 < 7 on ----
+\begin{scope}[x=0.48cm, shift={(4.3,0)}]
+\node[dhead] at (-4.3,0.8) {Number line A};
+\intline{-4}{4}
+% --- Q6 answer: -3 <= x < 3 ---
+\node[ans, closeddot] (l) at (-3,\dotheight) {};
+\node[ans, opendot]   (r) at (3,\dotheight)  {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+% ---- Frequency tree: 5 x 10^3 phones from two factories, and the faulty ones ----
+\begin{scope}[yshift=-2.65cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {\dgap{$5000$}};
+\node[ftnode] (a)  at (1.65,0.9)   {$3000$};
+\node[ftnode] (b)  at (1.65,-0.9)  {\dgap{$2000$}};
+\node[ftnode] (af) at (3.65,1.35)  {$6$};
+\node[ftnode] (an) at (3.65,0.45)  {\dgap{$2994$}};
+\node[ftnode] (bf) at (3.65,-0.45) {$10$};
+\node[ftnode] (bn) at (3.65,-1.35) {\dgap{$1990$}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {factory A} (a);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {factory B} (b);
+\draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {faulty} (af);
+\draw[ftarrow] (a) -- node[ftlab, below=1pt, pos=0.4] {not faulty} (an);
+\draw[ftarrow] (b) -- node[ftlab, above=1pt, pos=0.4] {faulty} (bf);
+\draw[ftarrow] (b) -- node[ftlab, below=1pt, pos=0.4] {not faulty} (bn);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac18$ as a decimal and as a percentage.
+        \ashow{$0.125=12.5\%$}
+  \columnbreak
+  \item Write $0.0032$ in standard form.
+        \ashow{$3.2\times10^{-3}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item Solve $5x-3\leq2x+9$.
+        \ashow{$3x\leq12$, so $x\leq4$}
+  \columnbreak
+  \item A company made $5\times10^3$ phones. Complete the frequency tree.
+\end{multicols}
+  \item Write the probability that a phone from factory A is faulty in standard form. Do
+        the same for factory B. Write $<$ or $>$ between them.
+        \ashow{$\tfrac{6}{3000}=2\times10^{-3}\ <\ \tfrac{10}{2000}=5\times10^{-3}$}
+  \item Solve $-5\leq2x+1<7$. Show it on number line A, and list the integers that
+        satisfy it.
+        \ashow{$-3\leq x<3$; \; $-3,\ -2,\ -1,\ 0,\ 1,\ 2$}
+  \item A biased spinner lands on red with probability $2x-0.4$. Use
+        $0\leq P(\text{red})\leq1$ to find the values $x$ can take.
+        \ashow{$0.4\leq2x\leq1.4$, so $0.2\leq x\leq0.7$}
+  \item (Challenge) A bag holds $4$ red and $n$ blue counters. $P(\text{red})<20\%$.
+        Find the smallest value $n$ can take.
+        \ashow{$0.2(4+n)>4$, so $4+n>20$ and $n>16$; \; $n=17$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\end{document}
