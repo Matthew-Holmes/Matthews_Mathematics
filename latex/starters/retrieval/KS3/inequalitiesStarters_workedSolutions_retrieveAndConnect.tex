@@ -1,0 +1,834 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/KS3/inequalitiesStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/KS3/inequalitiesStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{calc}
+
+% ================================================================
+% Retrieval starters for a Year 9 class, used across the inequalities
+% unit.
+%
+% Every starter draws on each of the three earlier topics: fractions,
+% decimals and percentages; probability, including frequency trees; and
+% standard form, including calculating with it. Each starter uses more of
+% the inequalities unit than the one before, in the order it is taught:
+%
+%   1  comparing and ordering numbers with < and >, and reading x > 0.3
+%   2  one-sided inequalities on a number line: open and filled circles,
+%      and the integers that satisfy them
+%   3  double inequalities. The rule for standard form, 1 <= A < 10, and
+%      the probability scale, 0 <= p <= 1, are both double inequalities.
+%   4  solving one- and two-step inequalities, and forming one from a
+%      frequency tree
+%   5  unknowns on both sides, solving double inequalities, and forming
+%      inequalities from probabilities
+%
+% Within each starter the questions run from retrieval of the earlier
+% topics to the new idea, and the last question on each starter is a
+% challenge that connects to the lesson.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.4cm, text margin right=0.4cm}
+\setlength{\multicolsep}{4pt}
+\setlength{\columnsep}{20pt}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
+% Every question list on these slides is tight, so that the diagram column and
+% the question column both finish inside the slide.
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}%
+}
+
+% ================================================================
+% The pictures these starters are built from.
+%
+% Every number line is about 3.9 cm long and starts at x = 0, so that the
+% lines in one column sit directly under each other. Each is drawn in a scope
+% whose x unit is one step along that line, shifted so that its left end is
+% at 0; a coordinate on the line is then the value it stands for.
+% ================================================================
+\tikzset{
+  dhead/.style = {font=\scriptsize\bfseries, anchor=west},
+  nlab/.style  = {font=\scriptsize, below, inner sep=2pt},
+  % The circle at the end of an inequality sits just above the line, over its
+  % value: open when the value is not included (< or >), filled when it is
+  % (<= or >=). Put the answer style first, so that an open circle keeps its
+  % white fill.
+  opendot/.style   = {circle, draw, thick, fill=white, inner sep=0pt, minimum size=5pt},
+  closeddot/.style = {circle, draw, thick, fill, inner sep=0pt, minimum size=5pt},
+  ineq/.style      = {thick, -{Stealth[length=5pt]}},
+  vans/.style      = {anslab, font=\scriptsize},
+}
+\newcommand{\dotheight}{0.3}
+
+% \intline{min}{max}: a number line with a tick and a label at every integer,
+% running 0.3 of a step past each end.
+\newcommand{\intline}[2]{%
+  \draw[thick] ({#1-0.3},0) -- ({#2+0.3},0);
+  \foreach \v in {#1,...,#2} {
+    \draw (\v,-0.07) -- (\v,0.07);
+    \node[nlab] at (\v,-0.07) {$\v$};
+  }}
+
+% Frequency trees, drawn with boxes so that an expression such as 40 - x fits.
+% The boxes are all one size so that a gap does not move them, and a branch
+% label is filled white so that it masks the branch it sits on.
+\tikzset{
+  ftnode/.style  = {draw, rounded corners=2pt, minimum width=0.74cm,
+                    minimum height=0.42cm, inner xsep=2pt, inner ysep=1pt, font=\scriptsize},
+  ftlab/.style   = {font=\tiny, inner sep=1pt, fill=white},
+  ftarrow/.style = {-, thick},
+}
+
+\title{Inequalities: Retrieve and Connects}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+\item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+\item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 1: Comparing and ordering numbers with < and >
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect: Inequality Symbols}
+\hypertarget{q-st1}{}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 0.3 to 0.4 in hundredths. One step is 0.01, so a
+% coordinate of 5 stands for 0.35. ----
+\begin{scope}[x=0.36cm, shift={(0.4,0)}]
+\node[dhead] at (-0.4,0.9) {Number line A};
+\draw[thick] (-0.4,0) -- (10.4,0);
+\foreach \v in {0,...,10} \draw (\v,-0.07) -- (\v,0.07);
+\node[nlab] at (0,-0.07)  {$0.3$};
+\node[nlab] at (10,-0.07) {$0.4$};
+% --- Q3 answer: 32%, 0.35 and 3/8 = 0.375 marked ---
+\foreach \v/\lab in {2/{$32\%$}, 5/{$0.35$}, 7.5/{$\tfrac38$}} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {\lab};
+}
+\end{scope}
+
+% ---- Frequency tree: 60 people at a film, and who bought popcorn ----
+\begin{scope}[yshift=-2.55cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {$60$};
+\node[ftnode] (a)  at (1.65,0.9)   {$35$};
+\node[ftnode] (c)  at (1.65,-0.9)  {\ashowq{25}};
+\node[ftnode] (ap) at (3.65,1.35)  {$21$};
+\node[ftnode] (an) at (3.65,0.45)  {\ashowq{14}};
+\node[ftnode] (cp) at (3.65,-0.45) {$18$};
+\node[ftnode] (cn) at (3.65,-1.35) {\ashowq{7}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {adult} (a);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {child} (c);
+\draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {popcorn} (ap);
+\draw[ftarrow] (a) -- node[ftlab, below=1pt, pos=0.4] {no popcorn} (an);
+\draw[ftarrow] (c) -- node[ftlab, above=1pt, pos=0.4] {popcorn} (cp);
+\draw[ftarrow] (c) -- node[ftlab, below=1pt, pos=0.4] {no popcorn} (cn);
+\end{scope}
+
+% --- Q8 answer: -0.3 to 0 in steps of 0.05, with -0.2 and -0.15 marked. One step
+% is 0.01, so a coordinate of -15 stands for -0.15. ---
+\begin{scope}[x=0.12cm, shift={(32.5,0)}, yshift=-5.0cm]
+\node[anslab, font=\scriptsize\bfseries, anchor=west] at (-32.5,0.75) {Q8};
+\draw[ans] (-30,0) -- (0,0);
+\foreach \v in {-30,-25,...,0} \draw[ans, thin] (\v,-0.07) -- (\v,0.07);
+\foreach \v/\lab in {-30/-0.3, -20/-0.2, -10/-0.1, 0/0}
+  \node[vans, below, inner sep=2pt] at (\v,-0.07) {$\lab$};
+\fill[ans] (-20,0) circle (1.8pt);
+\fill[ans] (-15,0) circle (1.8pt);
+\node[vans, anchor=south east, inner sep=1pt] at (-19.2,0.1) {$-0.2$};
+\node[vans, anchor=south west, inner sep=1pt] at (-15.8,0.1) {$-0.15$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac38$ as a decimal and as a percentage.
+        \ashow{$0.375=37.5\%$}
+  \columnbreak
+  \item Write $32\,000$ in standard form.
+        \ashow{$3.2\times10^4$}
+\end{multicols}
+  \item Mark $32\%$, $0.35$ and $\frac38$ on number line A. Write them in order, using $<$.
+        \ashow{$32\%<0.35<\tfrac38$}
+\begin{multicols}{2}
+  \item Write $<$ or $>$.\\[1pt]
+        $3.2\times10^4$ \ablank{$>$} $9.8\times10^3$\\[1pt]
+        $6\times10^{-3}$ \ablank{$<$} $2\times10^{-2}$
+  \columnbreak
+  \item $60$ people watched a film. Complete the frequency tree.
+\end{multicols}
+  \item An adult is chosen at random. Find the probability that they bought popcorn,
+        as a percentage. Do the same for a child. Write $<$ or $>$ between them.
+        \ashow{$\tfrac{21}{35}=60\%$ and $\tfrac{18}{25}=72\%$, so $60\%<72\%$}
+  \item $x>0.3$ means ``$x$ is greater than $0.3$''. Which of these could $x$ be?\\[1pt]
+        \hspace*{1em}$\tfrac25$ \quad $0.29$ \quad $3\times10^{-1}$ \quad $31\%$ \quad $\tfrac14$\\
+        \ashow{$\tfrac25$ and $31\%$, \; but not $3\times10^{-1}=0.3$}
+  \item (Challenge) $0.2>0.15$. Is $-0.2>-0.15$? Explain using a number line.
+        \ashow{No: \; $-0.2<-0.15$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\footnotesize
+\textbf{Question:} Write $\frac38$ as a decimal and as a percentage.
+
+\awork{Solution: \(\frac38 = 3 \div 8 = 0.375\). To get a percentage, multiply by \(100\): \(0.375 \times 100 = 37.5\%\). So \(\frac38 = 0.375 = 37.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 2}
+\footnotesize
+\textbf{Question:} Write $32\,000$ in standard form.
+
+\awork{Solution: Standard form is \(A\times10^n\) with \(1\le A<10\). Write \(32\,000 = 3.2 \times 10\,000 = 3.2\times10^4\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 3}
+\footnotesize
+\textbf{Question:} Mark $32\%$, $0.35$ and $\frac38$ on number line A. Write them in order, using $<$.
+
+\awork{Solution: Convert to decimals: \(32\%=0.32\), \(0.35=0.35\), \(\frac38=0.375\). On the number line from \(0.3\) to \(0.4\), \(0.32\) is \(2\) hundredths along, \(0.35\) is \(5\) hundredths along, and \(0.375\) is \(7.5\) hundredths along. So the order is \(32\% < 0.35 < \frac38\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 4}
+\footnotesize
+\textbf{Question:} Write $<$ or $>$ between \(3.2\times10^4\) and \(9.8\times10^3\), and between \(6\times10^{-3}\) and \(2\times10^{-2}\).
+
+\awork{Solution: \(3.2\times10^4=32\,000\) and \(9.8\times10^3=9\,800\), so \(3.2\times10^4 > 9.8\times10^3\). For the second, \(6\times10^{-3}=0.006\) and \(2\times10^{-2}=0.02\), so \(6\times10^{-3} < 2\times10^{-2}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 5}
+\footnotesize
+\textbf{Question:} $60$ people watched a film. Complete the frequency tree.
+
+\awork{Solution: The total is \(60\). The adult branch is \(35\), so the child branch is \(60-35=25\). For adults, \(21\) bought popcorn, so \(35-21=14\) did not. For children, \(18\) bought popcorn, so \(25-18=7\) did not. Thus the missing values are: child \(25\), adult no popcorn \(14\), child no popcorn \(7\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 6}
+\footnotesize
+\textbf{Question:} An adult is chosen at random. Find the probability that they bought popcorn, as a percentage. Do the same for a child. Write $<$ or $>$ between them.
+
+\awork{Solution: For adults: \(P(\text{popcorn})=\frac{21}{35}=0.6=60\%\). For children: \(P(\text{popcorn})=\frac{18}{25}=0.72=72\%\). Since \(60\% < 72\%\), the adult probability is less than the child probability.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 7}
+\footnotesize
+\textbf{Question:} $x>0.3$ means ``$x$ is greater than $0.3$''. Which of these could $x$ be? \(\frac25\), \(0.29\), \(3\times10^{-1}\), \(31\%\), \(\frac14\).
+
+\awork{Solution: Convert each to a decimal. \(\frac25=0.4\), \(0.29=0.29\), \(3\times10^{-1}=0.3\), \(31\%=0.31\), \(\frac14=0.25\). We need \(x>0.3\), so \(x\) must be strictly more than \(0.3\). The valid values are \(\frac25=0.4\) and \(31\%=0.31\). \(3\times10^{-1}=0.3\) is not valid because it is equal to \(0.3\), not greater.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 8}
+\footnotesize
+\textbf{Question:} (Challenge) $0.2>0.15$. Is $-0.2>-0.15$? Explain using a number line.
+
+\awork{Solution: No. On a number line, negative numbers are to the left of \(0\). The point \(-0.2\) is further left than \(-0.15\), so \(-0.2 < -0.15\). The order reverses when taking negatives: from \(0.2>0.15\), we get \(-0.2<-0.15\).}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 2: One-sided inequalities on a number line
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect: Inequalities on a Number Line}
+\hypertarget{q-st2}{}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -3 to 5, to draw x >= 2 on ----
+\begin{scope}[x=0.48cm, shift={(3.3,0)}]
+\node[dhead] at (-3.3,0.8) {Number line A};
+\intline{-3}{5}
+% --- Q3 answer: x >= 2 ---
+\node[ans, closeddot] (a) at (2,\dotheight) {};
+\draw[ans, ineq] (a) -- (5.3,\dotheight);
+\end{scope}
+
+% ---- Number line B: x < -1, already drawn ----
+\begin{scope}[x=0.48cm, shift={(3.3,0)}, yshift=-1.6cm]
+\node[dhead] at (-3.3,0.8) {Number line B};
+\intline{-3}{5}
+\node[opendot] (b) at (-1,\dotheight) {};
+\draw[ineq] (b) -- (-3.3,\dotheight);
+\end{scope}
+
+% ---- Number line C: 0 to 3 in halves, to draw y > 3/2 on ----
+\begin{scope}[x=1.1cm, shift={(0.25,0)}, yshift=-3.2cm]
+\node[dhead] at (-0.25,0.8) {Number line C};
+\draw[thick] (-0.25,0) -- (3.25,0);
+\foreach \v in {0,0.5,...,3} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {0,...,3} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q5 answer: y > 3/2 ---
+\node[ans, opendot] (c) at (1.5,\dotheight) {};
+\draw[ans, ineq] (c) -- (3.25,\dotheight);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $0.45$ as a fraction and as a percentage.
+        \ashow{$\tfrac{9}{20}=45\%$}
+  \columnbreak
+  \item Write $6.1\times10^{-3}$ as an ordinary number.
+        \ashow{$0.0061$}
+\end{multicols}
+  \item Draw $x\geq2$ on number line A. Can $x$ be equal to $2$?
+        \ashow{Yes: $\geq$ includes $2$, so the circle is filled.}
+  \item Write the inequality on number line B, and two integers that satisfy it.
+        \ashow{$x<-1$; \; for example $-2$ and $-3$}
+  \item Draw $y>\frac32$ on number line C. Does $y=150\%$ satisfy it?
+        \ashow{No: $150\%=\tfrac32$, not more than $\tfrac32$.}
+  \item Which of these satisfy $n>4\times10^3$?\\[1pt]
+        \hspace*{1em}$4000$ \quad $3.9\times10^4$ \quad $0.5\times10^4$ \quad $4.01\times10^3$\\
+        \ashow{All except $4000$, which equals $4\times10^3$}
+  \item A match ends in a win, a draw or a loss. $P(\text{win})=0.35$ and
+        $P(\text{draw})=\frac15$. Find $P(\text{loss})$ as a percentage. Write $<$ or $>$
+        between $P(\text{win})$ and $P(\text{loss})$.
+        \ashow{$45\%$, so $P(\text{win})<P(\text{loss})$}
+  \item (Challenge) $x$ is an integer, $x>-3$ and $x\leq2$. List the values $x$ can take.
+        \ashow{$-2,\ -1,\ 0,\ 1,\ 2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\footnotesize
+\textbf{Question:} Write $0.45$ as a fraction and as a percentage.
+
+\awork{Solution: \(0.45=\frac{45}{100}=\frac{9}{20}\). Multiply by \(100\): \(0.45\times100=45\%\). So \(0.45=\frac{9}{20}=45\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 2}
+\footnotesize
+\textbf{Question:} Write $6.1\times10^{-3}$ as an ordinary number.
+
+\awork{Solution: \(10^{-3}\) means divide by \(1000\), so \(6.1\times10^{-3}=6.1\div1000=0.0061\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 3}
+\footnotesize
+\textbf{Question:} Draw $x\geq2$ on number line A. Can $x$ be equal to $2$?
+
+\awork{Solution: The inequality \(x\ge2\) means \(x\) is \(2\) or greater. On number line A, place a filled circle at \(2\) and draw an arrow to the right. Yes, \(x\) can equal \(2\), because the \(\ge\) sign includes equality.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 4}
+\footnotesize
+\textbf{Question:} Write the inequality on number line B, and two integers that satisfy it.
+
+\awork{Solution: Number line B has an open circle at \(-1\) and an arrow pointing left. The open circle means \(-1\) is not included, so the inequality is \(x<-1\). Two integers that satisfy it are \(-2\) and \(-3\) (any integer less than \(-1\) works).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 5}
+\footnotesize
+\textbf{Question:} Draw $y>\frac32$ on number line C. Does $y=150\%$ satisfy it?
+
+\awork{Solution: \(\frac32=1.5\). On number line C, draw an open circle at \(1.5\) and an arrow to the right. \(150\%=1.5\), which equals \(\frac32\), but the inequality is \(y>\frac32\), so \(y\) must be strictly greater. Therefore \(y=150\%\) does not satisfy it.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 6}
+\footnotesize
+\textbf{Question:} Which of these satisfy $n>4\times10^3$? \(4000\), \(3.9\times10^4\), \(0.5\times10^4\), \(4.01\times10^3\).
+
+\awork{Solution: \(4\times10^3=4000\). Compare each: \(4000\) is equal to \(4000\), so it does not satisfy \(n>4000\). \(3.9\times10^4=39\,000>4000\), so yes. \(0.5\times10^4=5000>4000\), so yes. \(4.01\times10^3=4010>4000\), so yes. Therefore all except \(4000\) satisfy the inequality.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 7}
+\footnotesize
+\textbf{Question:} A match ends in a win, a draw or a loss. $P(\text{win})=0.35$ and $P(\text{draw})=\frac15$. Find $P(\text{loss})$ as a percentage. Write $<$ or $>$ between $P(\text{win})$ and $P(\text{loss})$.
+
+\awork{Solution: Convert \(P(\text{draw})=\frac15=0.2\). The probabilities sum to \(1\), so \(P(\text{loss})=1-0.35-0.2=0.45=45\%\). Compare \(P(\text{win})=35\%\) and \(P(\text{loss})=45\%\), so \(P(\text{win})<P(\text{loss})\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 8}
+\footnotesize
+\textbf{Question:} (Challenge) $x$ is an integer, $x>-3$ and $x\leq2$. List the values $x$ can take.
+
+\awork{Solution: The inequality \(x>-3\) means \(x\) is greater than \(-3\), so \(-3\) is not included. The inequality \(x\le2\) means \(x\) is less than or equal to \(2\), so \(2\) is included. The integers satisfying both are \(-2,\ -1,\ 0,\ 1,\ 2\).}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 3: Double inequalities, in standard form and in probability
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect: Double Inequalities}
+\hypertarget{q-st3}{}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -3 to 4, to draw -2 < x <= 3 on ----
+\begin{scope}[x=0.51cm, shift={(3.3,0)}]
+\node[dhead] at (-3.3,0.8) {Number line A};
+\intline{-3}{4}
+% --- Q3 answer: -2 < x <= 3 ---
+\node[ans, opendot]   (l) at (-2,\dotheight) {};
+\node[ans, closeddot] (r) at (3,\dotheight)  {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+% ---- Number line B: the values of A in standard form, 1 <= A < 10 ----
+\begin{scope}[x=0.37cm, shift={(0.3,0)}, yshift=-1.6cm]
+\node[dhead] at (-0.3,0.8) {Number line B};
+\intline{0}{10}
+\node[closeddot] (l) at (1,\dotheight)  {};
+\node[opendot]   (r) at (10,\dotheight) {};
+\draw[thick] (l) -- (r);
+\end{scope}
+
+% ---- Number line C: the probability scale, 0 to 1 in tenths ----
+\begin{scope}[x=3.8cm, shift={(0.02,0)}, yshift=-3.2cm]
+\node[dhead] at (-0.02,0.8) {Number line C};
+\draw[thick] (0,0) -- (1,0);
+\foreach \v in {0,0.1,...,1.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v/\lab in {0/0, 0.5/0.5, 1/1} \node[nlab] at (\v,-0.07) {$\lab$};
+% --- Q7 answer: 0.6 < p <= 1 ---
+\node[ans, opendot]   (l) at (0.6,\dotheight) {};
+\node[ans, closeddot] (r) at (1,\dotheight)   {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac{7}{20}$ as a decimal and as a percentage.
+        \ashow{$0.35=35\%$}
+  \columnbreak
+  \item Work out $(3\times10^4)\times(2\times10^3)$.
+        \ashow{$6\times10^7$}
+\end{multicols}
+  \item Draw $-2<x\leq3$ on number line A. List the integers that satisfy it.
+        \ashow{$-1,\ 0,\ 1,\ 2,\ 3$}
+  \item Standard form is $A\times10^n$. Number line B shows the values $A$ can take.
+        Write them as a double inequality.
+        \ashow{$1\leq A<10$}
+  \item Which of these are in standard form?\\[1pt]
+        \hspace*{1em}$0.8\times10^3$ \quad $10\times10^2$ \quad $1\times10^5$ \quad $9.9\times10^{-4}$
+        \ashow{$1\times10^5$ and $9.9\times10^{-4}$. \; $0.8$ is less than $1$, and $10$ is not less than $10$.}
+  \item Write $\frac14<x<40\%$ using decimals. Does $x=\frac13$ satisfy it?
+        \ashow{$0.25<x<0.4$; \; yes, $\tfrac13=0.\dot{3}$}
+  \item Every probability $p$ satisfies $0\leq p\leq1$. The probability of rain tomorrow
+        is more than $60\%$. Show the values $p$ can take on number line C, and write
+        them as a double inequality.
+        \ashow{$0.6<p\leq1$}
+  \item (Challenge) $0.6<P(\text{rain})\leq1$. Write a double inequality for
+        $P(\text{no rain})$.
+        \ashow{$0\leq P(\text{no rain})<0.4$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\footnotesize
+\textbf{Question:} Write $\frac{7}{20}$ as a decimal and as a percentage.
+
+\awork{Solution: \(\frac{7}{20}=\frac{7\times5}{20\times5}=\frac{35}{100}=0.35\). As a percentage, \(0.35\times100=35\%\). So \(\frac{7}{20}=0.35=35\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 2}
+\footnotesize
+\textbf{Question:} Work out $(3\times10^4)\times(2\times10^3)$.
+
+\awork{Solution: Multiply the numbers and the powers of \(10\) separately: \(3\times2=6\) and \(10^4\times10^3=10^{4+3}=10^7\). So the product is \(6\times10^7\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 3}
+\footnotesize
+\textbf{Question:} Draw $-2<x\leq3$ on number line A. List the integers that satisfy it.
+
+\awork{Solution: The inequality \(-2<x\le3\) means \(x\) is greater than \(-2\) but less than or equal to \(3\). On number line A, use an open circle at \(-2\) and a filled circle at \(3\), and join them. The integers are \(-1,\ 0,\ 1,\ 2,\ 3\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 4}
+\footnotesize
+\textbf{Question:} Standard form is $A\times10^n$. Number line B shows the values $A$ can take. Write them as a double inequality.
+
+\awork{Solution: Number line B runs from a filled circle at \(1\) to an open circle at \(10\). This means \(A\) is at least \(1\) but strictly less than \(10\), so the double inequality is \(1\le A<10\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 5}
+\footnotesize
+\textbf{Question:} Which of these are in standard form? \(0.8\times10^3\), \(10\times10^2\), \(1\times10^5\), \(9.9\times10^{-4}\).
+
+\awork{Solution: Standard form requires \(A\) to satisfy \(1\le A<10\). \(0.8\times10^3\) is not standard form because \(0.8<1\). \(10\times10^2\) is not standard form because \(10\) is not less than \(10\). \(1\times10^5\) is standard form. \(9.9\times10^{-4}\) is standard form. So the valid ones are \(1\times10^5\) and \(9.9\times10^{-4}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 6}
+\footnotesize
+\textbf{Question:} Write $\frac14<x<40\%$ using decimals. Does $x=\frac13$ satisfy it?
+
+\awork{Solution: \(\frac14=0.25\) and \(40\%=0.4\), so the inequality becomes \(0.25<x<0.4\). Now \(\frac13=0.\overline{3}\approx0.333\), which lies between \(0.25\) and \(0.4\). Yes, \(x=\frac13\) satisfies it.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 7}
+\footnotesize
+\textbf{Question:} Every probability $p$ satisfies $0\leq p\leq1$. The probability of rain tomorrow is more than $60\%$. Show the values $p$ can take on number line C, and write them as a double inequality.
+
+\awork{Solution: \(60\%=0.6\). The probability is more than \(0.6\), so \(p>0.6\), and it is still a probability, so \(p\le1\). On number line C, put an open circle at \(0.6\), a filled circle at \(1\), and join them. The double inequality is \(0.6<p\le1\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 8}
+\footnotesize
+\textbf{Question:} (Challenge) $0.6<P(\text{rain})\leq1$. Write a double inequality for $P(\text{no rain})$.
+
+\awork{Solution: Since \(P(\text{no rain})=1-P(\text{rain})\), the direction of the inequalities reverses. If \(P(\text{rain})>0.6\), then \(P(\text{no rain})<1-0.6=0.4\). If \(P(\text{rain})\le1\), then \(P(\text{no rain})\ge1-1=0\). So \(0\le P(\text{no rain})<0.4\).}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 4: Solving inequalities, and forming one from a frequency tree
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect: Solving Inequalities}
+\hypertarget{q-st4}{}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 0 to 8, to show the solution of 11 > 2x + 3 on ----
+\begin{scope}[x=0.46cm, shift={(0.3,0)}]
+\node[dhead] at (-0.3,0.8) {Number line A};
+\intline{0}{8}
+% --- Q3 answer: x < 4 ---
+\node[ans, opendot] (a) at (4,\dotheight) {};
+\draw[ans, ineq] (a) -- (-0.3,\dotheight);
+\end{scope}
+
+% ---- Frequency tree: 40 pupils, x of them in the choir ----
+\begin{scope}[yshift=-2.65cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {$40$};
+\node[ftnode] (c)  at (1.65,0.9)   {$x$};
+\node[ftnode] (n)  at (1.65,-0.9)  {\ashowq{$40-x$}};
+\node[ftnode] (cb) at (3.65,1.35)  {$6$};
+\node[ftnode] (cg) at (3.65,0.45)  {\ashowq{$x-6$}};
+\node[ftnode] (nb) at (3.65,-0.45) {$15$};
+\node[ftnode] (ng) at (3.65,-1.35) {\ashowq{$25-x$}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {choir} (c);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt, align=center] {not in\\choir} (n);
+\draw[ftarrow] (c) -- node[ftlab, above=1pt, pos=0.4] {boy} (cb);
+\draw[ftarrow] (c) -- node[ftlab, below=1pt, pos=0.4] {girl} (cg);
+\draw[ftarrow] (n) -- node[ftlab, above=1pt, pos=0.4] {boy} (nb);
+\draw[ftarrow] (n) -- node[ftlab, below=1pt, pos=0.4] {girl} (ng);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $12\%$ as a decimal and as a fraction in its simplest form.
+        \ashow{$0.12=\tfrac{3}{25}$}
+  \columnbreak
+  \item Work out $(8\times10^6)\div(2\times10^2)$.
+        \ashow{$4\times10^4$}
+\end{multicols}
+  \item Solve $11>2x+3$. Show the solution on number line A.
+        \ashow{$8>2x$, so $4>x$, which is $x<4$}
+\begin{multicols}{2}
+  \item $30\%$ of $y$ is less than $6$. Write an inequality and solve it.
+        \ashow{$0.3y<6$, so $y<20$}
+  \columnbreak
+  \item Solve $3m\leq1.2\times10^5$, giving $m$ in standard form.
+        \ashow{$m\leq4\times10^4$}
+\end{multicols}
+  \item $40$ pupils were asked if they sing in the choir. Complete the frequency tree in
+        terms of $x$.
+  \item There are more girls than boys in the choir. Write an inequality in $x$ and
+        solve it.
+        \ashow{$x-6>6$, so $x>12$}
+  \item (Challenge) The probability that a pupil chosen at random is in the choir is also
+        less than $0.4$. List the values $x$ can take.
+        \ashow{$0.4\times40=16$, so $12<x<16$: \; $x=13$, $14$ or $15$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\footnotesize
+\textbf{Question:} Write $12\%$ as a decimal and as a fraction in its simplest form.
+
+\awork{Solution: \(12\%=0.12\). As a fraction, \(12\%=\frac{12}{100}=\frac{3}{25}\) by dividing numerator and denominator by \(4\). So \(12\%=0.12=\frac{3}{25}\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 2}
+\footnotesize
+\textbf{Question:} Work out $(8\times10^6)\div(2\times10^2)$.
+
+\awork{Solution: Divide the numbers and the powers of \(10\) separately: \(8\div2=4\) and \(10^6\div10^2=10^{6-2}=10^4\). So the result is \(4\times10^4\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 3}
+\footnotesize
+\textbf{Question:} Solve $11>2x+3$. Show the solution on number line A.
+
+\awork{Solution: Subtract \(3\) from both sides: \(11-3>2x\), so \(8>2x\). Divide both sides by \(2\): \(4>x\). This is the same as \(x<4\). On number line A, draw an open circle at \(4\) and an arrow to the left.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 4}
+\footnotesize
+\textbf{Question:} $30\%$ of $y$ is less than $6$. Write an inequality and solve it.
+
+\awork{Solution: \(30\%\) of \(y\) is \(0.3y\). The statement gives \(0.3y<6\). Divide both sides by \(0.3\) (or multiply by \(10/3\)): \(y<20\). So the solution is \(y<20\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 5}
+\footnotesize
+\textbf{Question:} Solve $3m\leq1.2\times10^5$, giving $m$ in standard form.
+
+\awork{Solution: \(1.2\times10^5=120\,000\). Divide both sides by \(3\): \(m\le120\,000\div3=40\,000\). In standard form, \(40\,000=4\times10^4\). So \(m\le4\times10^4\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 6}
+\footnotesize
+\textbf{Question:} $40$ pupils were asked if they sing in the choir. Complete the frequency tree in terms of $x$.
+
+\awork{Solution: The total is \(40\). If \(x\) pupils are in the choir, then \(40-x\) are not in the choir. In the choir, \(6\) are boys, so \(x-6\) are girls. Among those not in the choir, \(15\) are boys, so the girls are \((40-x)-15=25-x\). Thus the missing entries are \(40-x\), \(x-6\), and \(25-x\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 7}
+\footnotesize
+\textbf{Question:} There are more girls than boys in the choir. Write an inequality in $x$ and solve it.
+
+\awork{Solution: In the choir, girls \(=x-6\) and boys \(=6\). More girls than boys gives \(x-6>6\). Add \(6\) to both sides: \(x>12\). So \(x>12\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 8}
+\footnotesize
+\textbf{Question:} (Challenge) The probability that a pupil chosen at random is in the choir is also less than $0.4$. List the values $x$ can take.
+
+\awork{Solution: \(P(\text{in choir})=\frac{x}{40}\). We already have \(x>12\) from the previous question. The extra condition is \(\frac{x}{40}<0.4\). Multiply both sides by \(40\): \(x<16\). So \(12<x<16\). Since \(x\) is a number of pupils, it must be an integer. The possible values are \(x=13,\ 14,\ 15\).}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 5: Unknowns on both sides, and double inequalities to solve
+%------------------------------------------------------------------
+\begin{frame}[t]{Retrieve and Connect: Solving Double Inequalities}
+\hypertarget{q-st5}{}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -4 to 4, to show the solution of -5 <= 2x + 1 < 7 on ----
+\begin{scope}[x=0.48cm, shift={(4.3,0)}]
+\node[dhead] at (-4.3,0.8) {Number line A};
+\intline{-4}{4}
+% --- Q6 answer: -3 <= x < 3 ---
+\node[ans, closeddot] (l) at (-3,\dotheight) {};
+\node[ans, opendot]   (r) at (3,\dotheight)  {};
+\draw[ans] (l) -- (r);
+\end{scope}
+
+% ---- Frequency tree: 5 x 10^3 phones from two factories, and the faulty ones ----
+\begin{scope}[yshift=-2.65cm]
+\node[dhead] at (0,1.75) {Frequency tree};
+\node[ftnode] (t)  at (0.37,0)    {\ashowq{5000}};
+\node[ftnode] (a)  at (1.65,0.9)   {$3000$};
+\node[ftnode] (b)  at (1.65,-0.9)  {\ashowq{2000}};
+\node[ftnode] (af) at (3.65,1.35)  {$6$};
+\node[ftnode] (an) at (3.65,0.45)  {\ashowq{2994}};
+\node[ftnode] (bf) at (3.65,-0.45) {$10$};
+\node[ftnode] (bn) at (3.65,-1.35) {\ashowq{1990}};
+\draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {factory A} (a);
+\draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {factory B} (b);
+\draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {faulty} (af);
+\draw[ftarrow] (a) -- node[ftlab, below=1pt, pos=0.4] {not faulty} (an);
+\draw[ftarrow] (b) -- node[ftlab, above=1pt, pos=0.4] {faulty} (bf);
+\draw[ftarrow] (b) -- node[ftlab, below=1pt, pos=0.4] {not faulty} (bn);
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item Write $\frac18$ as a decimal and as a percentage.
+        \ashow{$0.125=12.5\%$}
+  \columnbreak
+  \item Write $0.0032$ in standard form.
+        \ashow{$3.2\times10^{-3}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item Solve $5x-3\leq2x+9$.
+        \ashow{$3x\leq12$, so $x\leq4$}
+  \columnbreak
+  \item A company made $5\times10^3$ phones. Complete the frequency tree.
+\end{multicols}
+  \item Write the probability that a phone from factory A is faulty in standard form. Do
+        the same for factory B. Write $<$ or $>$ between them.
+        \ashow{$\tfrac{6}{3000}=2\times10^{-3}\ <\ \tfrac{10}{2000}=5\times10^{-3}$}
+  \item Solve $-5\leq2x+1<7$. Show it on number line A, and list the integers that
+        satisfy it.
+        \ashow{$-3\leq x<3$; \; $-3,\ -2,\ -1,\ 0,\ 1,\ 2$}
+  \item A biased spinner lands on red with probability $2x-0.4$. Use
+        $0\leq P(\text{red})\leq1$ to find the values $x$ can take.
+        \ashow{$0.4\leq2x\leq1.4$, so $0.2\leq x\leq0.7$}
+  \item (Challenge) A bag holds $4$ red and $n$ blue counters. $P(\text{red})<20\%$.
+        Find the smallest value $n$ can take.
+        \ashow{$0.2(4+n)>4$, so $4+n>20$ and $n>16$; \; $n=17$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\footnotesize
+\textbf{Question:} Write $\frac18$ as a decimal and as a percentage.
+
+\awork{Solution: \(\frac18=1\div8=0.125\). As a percentage, \(0.125\times100=12.5\%\). So \(\frac18=0.125=12.5\%\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 2}
+\footnotesize
+\textbf{Question:} Write $0.0032$ in standard form.
+
+\awork{Solution: Move the decimal point so that the number is between \(1\) and \(10\): \(0.0032=3.2\times10^{-3}\). The power is \(-3\) because the decimal point moved \(3\) places to the right.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 3}
+\footnotesize
+\textbf{Question:} Solve $5x-3\leq2x+9$.
+
+\awork{Solution: Subtract \(2x\) from both sides: \(3x-3\le9\). Add \(3\) to both sides: \(3x\le12\). Divide both sides by \(3\): \(x\le4\). So the solution is \(x\le4\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 4}
+\footnotesize
+\textbf{Question:} A company made $5\times10^3$ phones. Complete the frequency tree.
+
+\awork{Solution: \(5\times10^3=5000\). Factory A made \(3000\), so factory B made \(5000-3000=2000\). For factory A, \(6\) were faulty, so \(3000-6=2994\) were not faulty. For factory B, \(10\) were faulty, so \(2000-10=1990\) were not faulty. The missing values are \(5000\), \(2000\), \(2994\), and \(1990\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 5}
+\footnotesize
+\textbf{Question:} Write the probability that a phone from factory A is faulty in standard form. Do the same for factory B. Write $<$ or $>$ between them.
+
+\awork{Solution: For factory A: \(P(\text{faulty})=\frac{6}{3000}=0.002=2\times10^{-3}\). For factory B: \(P(\text{faulty})=\frac{10}{2000}=0.005=5\times10^{-3}\). Since \(2\times10^{-3}<5\times10^{-3}\), the probability for factory A is less than for factory B.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 6}
+\footnotesize
+\textbf{Question:} Solve $-5\leq2x+1<7$. Show it on number line A, and list the integers that satisfy it.
+
+\awork{Solution: Subtract \(1\) from all three parts: \(-6\le2x<6\). Divide all three parts by \(2\): \(-3\le x<3\). On number line A, put a filled circle at \(-3\), an open circle at \(3\), and join them. The integers satisfying this are \(-3,\ -2,\ -1,\ 0,\ 1,\ 2\).}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 7}
+\footnotesize
+\textbf{Question:} A biased spinner lands on red with probability $2x-0.4$. Use $0\leq P(\text{red})\leq1$ to find the values $x$ can take.
+
+\awork{Solution: Since \(0\le P(\text{red})\le1\), we have \(0\le2x-0.4\le1\). Add \(0.4\) to all parts: \(0.4\le2x\le1.4\). Divide all parts by \(2\): \(0.2\le x\le0.7\). So \(x\) can take any value from \(0.2\) to \(0.7\) inclusive.}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 8}
+\footnotesize
+\textbf{Question:} (Challenge) A bag holds $4$ red and $n$ blue counters. $P(\text{red})<20\%$. Find the smallest value $n$ can take.
+
+\awork{Solution: Total counters \(=4+n\), so \(P(\text{red})=\frac{4}{4+n}\). \(20\%=0.2=\frac15\). The condition is \(\frac{4}{4+n}<\frac15\). Multiply both sides by \(4+n\) (which is positive): \(4<\frac{4+n}{5}\). Multiply by \(5\): \(20<4+n\). Subtract \(4\): \(16<n\), so \(n>16\). Since \(n\) is a whole number of blue counters, the smallest possible value is \(n=17\).}
+\end{frame}
+
+\end{document}
