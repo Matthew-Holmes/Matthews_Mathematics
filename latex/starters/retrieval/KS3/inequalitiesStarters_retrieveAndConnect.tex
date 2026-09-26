@@ -1,3 +1,18 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/KS3/inequalitiesStarters.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/KS3/inequalitiesStarters.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
 \documentclass{beamer}
 \usepackage{tikz}
 \usetikzlibrary{calc, arrows.meta}
@@ -54,15 +69,18 @@
   anslab/.style  = {red, font=\tiny, visible on=<2->},
 }
 
-% Used by the worked solutions rather than by this deck, so that each worked
-% solution is first a question with room to write in and then the answer.
-\newlength{\aworkpad}
-\setlength{\aworkpad}{8mm}
-\newcommand{\awork}[1]{%
-  \par\vspace{\aworkpad}%
-  \uncover<2->{#1}%
-  \par\vspace{\aworkpad}%
+% A gap drawn as a dotted box, used here for the < or > that goes between two
+% numbers. The answer appears in red inside the box on overlay 2.
+\newcommand{\abox}[1]{%
+  \tikz[baseline=(b.base)]\node[draw=gray, densely dotted, inner sep=1.5pt] (b)
+    {\alt<2->{\textcolor{red}{#1}}{\phantom{#1}}};%
 }
+
+% A gap inside a frequency tree: a question mark on the first overlay and the
+% answer in red on the second, in the same font as the numbers beside it. The
+% question mark takes up the width of the answer, so that a box which is widened
+% by its answer is already that wide on the first overlay.
+\newcommand{\dgap}[1]{\alt<2->{\textcolor{red}{#1}}{\makebox[\widthof{#1}]{?}}}
 
 % Every question list on these slides is tight, so that the diagram column and
 % the question column both finish inside the slide.
@@ -111,7 +129,7 @@
   ftarrow/.style = {-, thick},
 }
 
-\title{Inequalities: Starters}
+\title{Inequalities: Retrieve and Connects}
 \author{}
 \date{}
 
@@ -122,7 +140,7 @@
 %------------------------------------------------------------------
 % STARTER 1: Comparing and ordering numbers with < and >
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 1: Inequality Symbols}
+\begin{frame}[t]{Retrieve and Connect: Inequality Symbols}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -149,11 +167,11 @@
 \node[dhead] at (0,1.75) {Frequency tree};
 \node[ftnode] (t)  at (0.37,0)    {$60$};
 \node[ftnode] (a)  at (1.65,0.9)   {$35$};
-\node[ftnode] (c)  at (1.65,-0.9)  {\ashowq{25}};
+\node[ftnode] (c)  at (1.65,-0.9)  {\dgap{$25$}};
 \node[ftnode] (ap) at (3.65,1.35)  {$21$};
-\node[ftnode] (an) at (3.65,0.45)  {\ashowq{14}};
+\node[ftnode] (an) at (3.65,0.45)  {\dgap{$14$}};
 \node[ftnode] (cp) at (3.65,-0.45) {$18$};
-\node[ftnode] (cn) at (3.65,-1.35) {\ashowq{7}};
+\node[ftnode] (cn) at (3.65,-1.35) {\dgap{$7$}};
 \draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {adult} (a);
 \draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {child} (c);
 \draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {popcorn} (ap);
@@ -193,8 +211,8 @@
         \ashow{$32\%<0.35<\tfrac38$}
 \begin{multicols}{2}
   \item Write $<$ or $>$.\\[1pt]
-        $3.2\times10^4$ \ablank{$>$} $9.8\times10^3$\\[1pt]
-        $6\times10^{-3}$ \ablank{$<$} $2\times10^{-2}$
+        $3.2\times10^4$ \abox{$>$} $9.8\times10^3$\\[1pt]
+        $6\times10^{-3}$ \abox{$<$} $2\times10^{-2}$
   \columnbreak
   \item $60$ people watched a film. Complete the frequency tree.
 \end{multicols}
@@ -213,7 +231,7 @@
 %------------------------------------------------------------------
 % STARTER 2: One-sided inequalities on a number line
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 2: Inequalities on a Number Line}
+\begin{frame}[t]{Retrieve and Connect: Inequalities on a Number Line}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -283,7 +301,7 @@
 %------------------------------------------------------------------
 % STARTER 3: Double inequalities, in standard form and in probability
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 3: Double Inequalities}
+\begin{frame}[t]{Retrieve and Connect: Double Inequalities}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -358,7 +376,7 @@
 %------------------------------------------------------------------
 % STARTER 4: Solving inequalities, and forming one from a frequency tree
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 4: Solving Inequalities}
+\begin{frame}[t]{Retrieve and Connect: Solving Inequalities}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -379,11 +397,11 @@
 \node[dhead] at (0,1.75) {Frequency tree};
 \node[ftnode] (t)  at (0.37,0)    {$40$};
 \node[ftnode] (c)  at (1.65,0.9)   {$x$};
-\node[ftnode] (n)  at (1.65,-0.9)  {\ashowq{$40-x$}};
+\node[ftnode] (n)  at (1.65,-0.9)  {\dgap{$40-x$}};
 \node[ftnode] (cb) at (3.65,1.35)  {$6$};
-\node[ftnode] (cg) at (3.65,0.45)  {\ashowq{$x-6$}};
+\node[ftnode] (cg) at (3.65,0.45)  {\dgap{$x-6$}};
 \node[ftnode] (nb) at (3.65,-0.45) {$15$};
-\node[ftnode] (ng) at (3.65,-1.35) {\ashowq{$25-x$}};
+\node[ftnode] (ng) at (3.65,-1.35) {\dgap{$25-x$}};
 \draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {choir} (c);
 \draw[ftarrow] (t) -- node[ftlab, below left=-1pt, align=center] {not in\\choir} (n);
 \draw[ftarrow] (c) -- node[ftlab, above=1pt, pos=0.4] {boy} (cb);
@@ -429,7 +447,7 @@
 %------------------------------------------------------------------
 % STARTER 5: Unknowns on both sides, and double inequalities to solve
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 5: Solving Double Inequalities}
+\begin{frame}[t]{Retrieve and Connect: Solving Double Inequalities}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -449,13 +467,13 @@
 % ---- Frequency tree: 5 x 10^3 phones from two factories, and the faulty ones ----
 \begin{scope}[yshift=-2.65cm]
 \node[dhead] at (0,1.75) {Frequency tree};
-\node[ftnode] (t)  at (0.37,0)    {\ashowq{5000}};
+\node[ftnode] (t)  at (0.37,0)    {\dgap{$5000$}};
 \node[ftnode] (a)  at (1.65,0.9)   {$3000$};
-\node[ftnode] (b)  at (1.65,-0.9)  {\ashowq{2000}};
+\node[ftnode] (b)  at (1.65,-0.9)  {\dgap{$2000$}};
 \node[ftnode] (af) at (3.65,1.35)  {$6$};
-\node[ftnode] (an) at (3.65,0.45)  {\ashowq{2994}};
+\node[ftnode] (an) at (3.65,0.45)  {\dgap{$2994$}};
 \node[ftnode] (bf) at (3.65,-0.45) {$10$};
-\node[ftnode] (bn) at (3.65,-1.35) {\ashowq{1990}};
+\node[ftnode] (bn) at (3.65,-1.35) {\dgap{$1990$}};
 \draw[ftarrow] (t) -- node[ftlab, above left=-1pt] {factory A} (a);
 \draw[ftarrow] (t) -- node[ftlab, below left=-1pt] {factory B} (b);
 \draw[ftarrow] (a) -- node[ftlab, above=1pt, pos=0.4] {faulty} (af);
