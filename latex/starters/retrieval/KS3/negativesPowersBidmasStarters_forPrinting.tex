@@ -1,0 +1,2912 @@
+% ================================================================
+% The printable version of latex/starters/retrieval/KS3/negativesPowersBidmasStarters.tex
+%
+% This is the same deck, laid out to be handed out rather than put on
+% the board. Every slide is shown as it stands before any answer is
+% revealed, and 4 copies of it go on one page of A4, two by two, so
+% that a printed page cuts into four question sheets.
+%
+% Every slide of the deck is here, the title page included, and each takes
+% exactly one page. So page 1 is the first slide, page 2 the second, and
+% printing the pages you want is how you print the starters you want.
+%
+%   made from           latex/starters/retrieval/KS3/negativesPowersBidmasStarters.tex
+%   pages on the sheet  9, one per slide of the deck
+%   copies of each      4, two by two on A4 landscape
+%   printing rules      version 3
+%
+% Nothing was reworded, nothing was rewritten and nothing was left out.
+% Each slide is the slide from the deck, asked for at its first step,
+% which is how the answers stay hidden.
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ================================================================
+% Retrieval starters for a Year 7 top set, used across the negative
+% numbers, powers and roots, and BIDMAS units.
+%
+% The class has already covered inequalities, rounding, written methods
+% for adding and subtracting decimals (with money problems), and written
+% methods for multiplying and dividing, including place value and
+% multiplying and dividing by powers of 10. Each starter uses more of the
+% new units than the one before:
+%
+%   1  ordering and comparing negative numbers, on number lines
+%   2  adding and subtracting across zero
+%   3  adding and subtracting negative numbers
+%   4  multiplying and dividing negative numbers
+%   5  squares, cubes, square roots and cube roots
+%   6  index notation, powers of 10, and estimating square roots
+%   7  BIDMAS
+%   8  BIDMAS with powers, roots and negative numbers
+%
+% The methods follow the ones the class was taught:
+%   - A scaffolded decimal multiplication is scaffolded for both methods,
+%     the lattice method and scaling to whole numbers (make both numbers
+%     whole, multiply, then divide by the power of 10 used). The scaling
+%     scaffold sits under the lattice with "or" between them, so that
+%     pupils can see they only need to do one of the two.
+%   - Division by a decimal is done with equivalent fractions: the
+%     division is written as a fraction, and the numerator and denominator
+%     are multiplied by the same power of 10.
+%   - Bus stop division turns a division or a fraction into a decimal that
+%     either stops (7 / 8 in starter 1) or recurs (2 / 3 in starter 2, and
+%     then without a diagram in starters 3, 4, 7 and 8).
+%   - Dividing and writing a fraction are shown to be the same thing,
+%     using baguettes shared between teachers (starters 3 and 6), and the
+%     fraction bar is treated as a division in BIDMAS (starters 7 and 8).
+% The scaffolds fade: starter 4 gives the lattice's decimal points and a
+% full equivalent-fraction chain, starter 5 leaves the decimal points for
+% pupils to mark, and starter 6 leaves more of the chain out. The bus stop
+% divisions are drawn out for pupils in starters 1 and 2 only.
+%
+% The last question on each starter is a challenge.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.4cm, text margin right=0.4cm}
+\setlength{\multicolsep}{2pt}
+\setlength{\columnsep}{20pt}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% A gap drawn as a dotted box, for a missing number or symbol in a line of
+% working. The answer appears in red inside the box on overlay 2.
+\newcommand{\abox}[1]{%
+  \tikz[baseline=(b.base)]\node[draw=gray, densely dotted, inner sep=1.5pt] (b)
+    {\alt<2->{\textcolor{red}{#1}}{\phantom{#1}}};%
+}
+
+% Every question list on these slides is tight, so that the diagram column and
+% the question column both finish inside the slide.
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}%
+}
+
+% A pattern of calculations set out in a column under a diagram, with the
+% equals signs lined up: \begin{pattern} 5-2 & 3\\ ... \end{pattern}
+\newenvironment{pattern}[1]
+  {\par\vspace{0.5em}{\scriptsize\bfseries #1}\par\vspace{0.2em}\footnotesize
+   \hspace*{0.3cm}\begin{tabular}{@{}r@{${}={}$}l@{}}}
+  {\end{tabular}\par}
+
+% The two methods for a decimal multiplication are set one above the other
+% in the diagram column, the lattice first and then the scaling scaffold, with
+% \orrule between them to show that pupils only need to do one of the two.
+\newcommand{\orrule}{%
+  \par\vspace{0.2em}\noindent
+  \tikz[baseline=-0.6ex]{\draw[gray] (0,0) -- (1.55,0);
+    \node[font=\footnotesize\bfseries] at (1.95,0) {or};
+    \draw[gray] (2.35,0) -- (3.9,0);}%
+  \par\vspace{0.1em}}
+\newenvironment{scaling}
+  {\par{\scriptsize\bfseries Scaling to whole numbers}\par\vspace{0.15em}\footnotesize
+   \hspace*{0.15cm}\begin{tabular}{@{}l@{}}}
+  {\end{tabular}\par}
+
+% A temperature in degrees Celsius: \dC{-4}.
+\newcommand{\dC}[1]{$#1\,^{\circ}$C}
+
+% ================================================================
+% The pictures these starters are built from.
+%
+% Every number line is about 3.8 cm long and starts at x = 0. Each is drawn
+% in a scope whose x unit is one step along that line, shifted so that its
+% left end is at 0; a coordinate on the line is then the value it stands for.
+% ================================================================
+\tikzset{
+  dhead/.style = {font=\scriptsize\bfseries, anchor=west},
+  nlab/.style  = {font=\scriptsize, below, inner sep=2pt},
+  vans/.style  = {anslab, font=\scriptsize},
+}
+
+% ---- Lattice multiplication, drawn as on the lattice method slides ----
+% The top-left corner of the lattice is at the origin and each cell is one
+% unit, so a lattice is drawn inside a scope that sets the cell size. The
+% digits of the first number go along the top and the digits of the second
+% number down the right-hand side. Each cell is cut by a diagonal from its
+% top-right corner to its bottom-left corner, with the tens digit of its
+% product above the diagonal and the units digit below it. The digits of the
+% answer are read down the left-hand side and then along the bottom.
+\tikzset{
+  lcellline/.style = {draw=blue!55!black, line width=0.6pt},
+  ldiagline/.style = {draw=blue!55!black!45, line width=0.5pt},
+  ldigit/.style    = {font=\scriptsize\bfseries},
+}
+% \lgrid{cols}{rows}: the cells and their diagonals
+\newcommand{\lgrid}[2]{%
+  \foreach \c in {1,...,#1}{%
+    \foreach \r in {1,...,#2}{%
+      \draw[lcellline] ({\c-1},{-\r+1}) rectangle ({\c},{-\r});
+      \draw[ldiagline] ({\c},{-\r+1}) -- ({\c-1},{-\r});}}%
+}
+% \ltop{col}{digit} and \lside{cols}{row}{digit}: the two numbers
+\newcommand{\ltop}[2]{\node[ldigit] at ({#1-0.5},0.3) {#2};}
+\newcommand{\lside}[3]{\node[ldigit] at ({#1+0.3},{-#2+0.5}) {#3};}
+% Answers. \lcell{col}{row}{tens}{units} fills a cell; \lleft{row}{digit} and
+% \lbot{rows}{col}{digit} are the digits of the answer.
+\newcommand{\lcell}[4]{%
+  \node[vans] at ({#1-0.7},{-#2+0.7}) {#3};
+  \node[vans] at ({#1-0.3},{-#2+0.3}) {#4};}
+\newcommand{\lleft}[2]{\node[vans, font=\scriptsize\bfseries] at (-0.3,{-#1+0.5}) {#2};}
+\newcommand{\lbot}[3]{\node[vans, font=\scriptsize\bfseries] at ({#2-0.5},{-#1-0.3}) {#3};}
+% A decimal point on the edge of a lattice, or in its answer.
+\newcommand{\lpoint}[3][]{\fill[#1] (#2,#3) circle (1.7pt);}
+
+% ---- Bus stop division ----
+% The dividend sits on the baseline y = 0 and the answer on y = 0.55, digit
+% above digit, with the bus stop drawn between them. A remainder carried to
+% the next digit is written small, just before that digit. \busframe{divisor}
+% {right end} draws the divisor and the bus stop.
+\tikzset{
+  bsd/.style     = {font=\footnotesize, inner sep=0pt, anchor=base},
+  bsa/.style     = {bsd, red, visible on=<2->},
+  bscarry/.style = {font=\tiny, inner sep=0pt, anchor=base, red, visible on=<2->},
+}
+\newcommand{\busframe}[2]{%
+  \node[bsd, anchor=base east] at (-0.1,0) {$#1$};
+  \draw[thick] (0,-0.12) -- (0,0.4) -- (#2,0.4);}
+
+% ---- Baguettes ----
+% \baguette{x}{y}: a baguette 3.6 cm long and 0.36 cm high, with its
+% bottom-left corner at (x,y) and the usual diagonal scores across its top.
+% The scores sit in the middle of each quarter, so they never land on a cut.
+\newcommand{\baguette}[2]{%
+  \draw[fill=orange!35!yellow!40, draw=brown!70!black, thick, rounded corners=0.17cm]
+    (#1,#2) rectangle ++(3.6,0.36);
+  \foreach \i in {0,...,3}
+    \draw[brown!60!black, line width=0.5pt] ({#1+0.9*\i+0.35},{#2+0.08}) -- ++(0.2,0.2);}
+% \bagcuts{y}: the three cuts that split the baguette at height y into quarters
+\newcommand{\bagcuts}[1]{%
+  \foreach \i in {1,2,3} \draw[ans] ({0.9*\i},{#1-0.06}) -- ({0.9*\i},{#1+0.42});}
+% \baglabels{y}{a}{b}{c}{d}: who gets each quarter, written under it
+\newcommand{\baglabels}[5]{%
+  \foreach \i/\lab in {0/#2, 1/#3, 2/#4, 3/#5}
+    \node[vans, inner sep=1pt] at ({0.9*\i+0.45},{#1-0.16}) {\lab};}
+
+\title{Negative Numbers, Powers \& BIDMAS: Starters}
+\author{}
+\date{}
+
+% ---------------------------------------------------------------
+% Added so this deck prints four slides to a page. Nothing above
+% this line was changed.
+% ---------------------------------------------------------------
+\usepackage{pgfpages}
+
+% 4 slides to a sheet of A4, two by two, with a thin line round each
+% so that the page can be cut up.
+%
+% Each slide keeps a margin of 1mm around it and no more, so the four fill
+% the sheet and the pieces they cut into are as big as the paper allows. Only
+% one direction actually comes out that tight: a slide is a different shape
+% from a quarter of a sheet of A4, so it is scaled to fit and the slack it
+% cannot use is left along whichever pair of edges it did not fill.
+\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=1mm]
+\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
+% There is nothing on paper to click, and a slide announcing a new section
+% would sit between two copies of the same question and put every page after
+% it out of step with the grid.
+\setbeamertemplate{navigation symbols}{}
+\AtBeginPart{}
+\AtBeginSection{}
+\AtBeginSubsection{}
+\AtBeginSubsubsection{}
+\begin{document}
+
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+
+%------------------------------------------------------------------
+% STARTER 1: Ordering and comparing negative numbers
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 1: Ordering Negative Numbers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -10 to 10 ----
+\begin{scope}[x=0.185cm, shift={(10.3,0)}]
+\node[dhead] at (-10.3,0.85) {Number line A};
+\draw[thick] (-10.3,0) -- (10.3,0);
+\foreach \v in {-10,...,10} \draw (\v,-0.06) -- (\v,0.06);
+\foreach \v in {-10,-5,0,5,10} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q4 answer: the four temperatures ---
+\foreach \v in {-9,-4,-1,3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Number line B: -1 to 0 in tenths ----
+\begin{scope}[x=3.8cm, shift={(1,0)}, yshift=-1.7cm]
+\node[dhead] at (-1,0.85) {Number line B};
+\draw[thick] (-1,0) -- (0,0);
+\foreach \v in {-1,-0.9,...,0.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {-1,-0.5,0} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q9 answer: -0.7 and -0.3 ---
+\foreach \v in {-0.7,-0.3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Bus stop division for 7 / 8, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-3.7cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{8}{2.15}
+\foreach \x/\d in {0.3/7, 0.55/., 0.85/0, 1.35/0, 1.85/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: 7 / 8 = 0.875, carrying 7, then 6, then 4 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/8, 1.35/7, 1.85/5} \node[bsa] at (\x,0.55) {$\d$};
+\foreach \x/\c in {0.85/7, 1.35/6, 1.85/4} \node[bscarry] at ({\x-0.16},0.12) {$\c$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3.8\times100$ \ashow{$=380$}
+  \columnbreak
+  \item $45\div1000$ \ashow{$=0.045$}
+\end{multicols}
+  \item Complete the bus stop division to write $\frac78$ as a decimal.
+        \ashow{$0.875$}
+  \item At midday it is \dC{-4} in Oslo, \dC{-9} in Moscow, \dC{3} in London and
+        \dC{-1} in Reykjavík. Mark these on number line A. Write them in order,
+        coldest first.
+        \ashow{$-9$, \; $-4$, \; $-1$, \; $3$}
+  \item[] Write $<$ or $>$ in each box.
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-9$ \abox{$<$} $-4$
+  \columnbreak
+  \item $-1$ \abox{$>$} $-10$
+  \columnbreak
+  \item $0$ \abox{$>$} $-0.5$
+\end{multicols}}
+  \item How many degrees warmer is London than Moscow?
+        \ashow{$12$ degrees}
+  \item Mark $-0.3$ and $-0.7$ on number line B. Which is greater?
+        \ashow{$-0.3$, because it is further right}
+\begin{multicols}{2}
+  \item Round $-4.7$ to the nearest integer.
+        \ashow{$-5$}
+  \columnbreak
+  \item Round $-1.46$ to $1$ decimal place.
+        \ashow{$-1.5$}
+\end{multicols}
+  \item (Challenge) List the integers $n$ with $-3<n\leq1$.
+        \ashow{$-2,\ -1,\ 0,\ 1$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 1: Ordering Negative Numbers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -10 to 10 ----
+\begin{scope}[x=0.185cm, shift={(10.3,0)}]
+\node[dhead] at (-10.3,0.85) {Number line A};
+\draw[thick] (-10.3,0) -- (10.3,0);
+\foreach \v in {-10,...,10} \draw (\v,-0.06) -- (\v,0.06);
+\foreach \v in {-10,-5,0,5,10} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q4 answer: the four temperatures ---
+\foreach \v in {-9,-4,-1,3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Number line B: -1 to 0 in tenths ----
+\begin{scope}[x=3.8cm, shift={(1,0)}, yshift=-1.7cm]
+\node[dhead] at (-1,0.85) {Number line B};
+\draw[thick] (-1,0) -- (0,0);
+\foreach \v in {-1,-0.9,...,0.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {-1,-0.5,0} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q9 answer: -0.7 and -0.3 ---
+\foreach \v in {-0.7,-0.3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Bus stop division for 7 / 8, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-3.7cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{8}{2.15}
+\foreach \x/\d in {0.3/7, 0.55/., 0.85/0, 1.35/0, 1.85/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: 7 / 8 = 0.875, carrying 7, then 6, then 4 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/8, 1.35/7, 1.85/5} \node[bsa] at (\x,0.55) {$\d$};
+\foreach \x/\c in {0.85/7, 1.35/6, 1.85/4} \node[bscarry] at ({\x-0.16},0.12) {$\c$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3.8\times100$ \ashow{$=380$}
+  \columnbreak
+  \item $45\div1000$ \ashow{$=0.045$}
+\end{multicols}
+  \item Complete the bus stop division to write $\frac78$ as a decimal.
+        \ashow{$0.875$}
+  \item At midday it is \dC{-4} in Oslo, \dC{-9} in Moscow, \dC{3} in London and
+        \dC{-1} in Reykjavík. Mark these on number line A. Write them in order,
+        coldest first.
+        \ashow{$-9$, \; $-4$, \; $-1$, \; $3$}
+  \item[] Write $<$ or $>$ in each box.
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-9$ \abox{$<$} $-4$
+  \columnbreak
+  \item $-1$ \abox{$>$} $-10$
+  \columnbreak
+  \item $0$ \abox{$>$} $-0.5$
+\end{multicols}}
+  \item How many degrees warmer is London than Moscow?
+        \ashow{$12$ degrees}
+  \item Mark $-0.3$ and $-0.7$ on number line B. Which is greater?
+        \ashow{$-0.3$, because it is further right}
+\begin{multicols}{2}
+  \item Round $-4.7$ to the nearest integer.
+        \ashow{$-5$}
+  \columnbreak
+  \item Round $-1.46$ to $1$ decimal place.
+        \ashow{$-1.5$}
+\end{multicols}
+  \item (Challenge) List the integers $n$ with $-3<n\leq1$.
+        \ashow{$-2,\ -1,\ 0,\ 1$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 1: Ordering Negative Numbers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -10 to 10 ----
+\begin{scope}[x=0.185cm, shift={(10.3,0)}]
+\node[dhead] at (-10.3,0.85) {Number line A};
+\draw[thick] (-10.3,0) -- (10.3,0);
+\foreach \v in {-10,...,10} \draw (\v,-0.06) -- (\v,0.06);
+\foreach \v in {-10,-5,0,5,10} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q4 answer: the four temperatures ---
+\foreach \v in {-9,-4,-1,3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Number line B: -1 to 0 in tenths ----
+\begin{scope}[x=3.8cm, shift={(1,0)}, yshift=-1.7cm]
+\node[dhead] at (-1,0.85) {Number line B};
+\draw[thick] (-1,0) -- (0,0);
+\foreach \v in {-1,-0.9,...,0.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {-1,-0.5,0} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q9 answer: -0.7 and -0.3 ---
+\foreach \v in {-0.7,-0.3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Bus stop division for 7 / 8, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-3.7cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{8}{2.15}
+\foreach \x/\d in {0.3/7, 0.55/., 0.85/0, 1.35/0, 1.85/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: 7 / 8 = 0.875, carrying 7, then 6, then 4 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/8, 1.35/7, 1.85/5} \node[bsa] at (\x,0.55) {$\d$};
+\foreach \x/\c in {0.85/7, 1.35/6, 1.85/4} \node[bscarry] at ({\x-0.16},0.12) {$\c$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3.8\times100$ \ashow{$=380$}
+  \columnbreak
+  \item $45\div1000$ \ashow{$=0.045$}
+\end{multicols}
+  \item Complete the bus stop division to write $\frac78$ as a decimal.
+        \ashow{$0.875$}
+  \item At midday it is \dC{-4} in Oslo, \dC{-9} in Moscow, \dC{3} in London and
+        \dC{-1} in Reykjavík. Mark these on number line A. Write them in order,
+        coldest first.
+        \ashow{$-9$, \; $-4$, \; $-1$, \; $3$}
+  \item[] Write $<$ or $>$ in each box.
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-9$ \abox{$<$} $-4$
+  \columnbreak
+  \item $-1$ \abox{$>$} $-10$
+  \columnbreak
+  \item $0$ \abox{$>$} $-0.5$
+\end{multicols}}
+  \item How many degrees warmer is London than Moscow?
+        \ashow{$12$ degrees}
+  \item Mark $-0.3$ and $-0.7$ on number line B. Which is greater?
+        \ashow{$-0.3$, because it is further right}
+\begin{multicols}{2}
+  \item Round $-4.7$ to the nearest integer.
+        \ashow{$-5$}
+  \columnbreak
+  \item Round $-1.46$ to $1$ decimal place.
+        \ashow{$-1.5$}
+\end{multicols}
+  \item (Challenge) List the integers $n$ with $-3<n\leq1$.
+        \ashow{$-2,\ -1,\ 0,\ 1$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 1: Ordering Negative Numbers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -10 to 10 ----
+\begin{scope}[x=0.185cm, shift={(10.3,0)}]
+\node[dhead] at (-10.3,0.85) {Number line A};
+\draw[thick] (-10.3,0) -- (10.3,0);
+\foreach \v in {-10,...,10} \draw (\v,-0.06) -- (\v,0.06);
+\foreach \v in {-10,-5,0,5,10} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q4 answer: the four temperatures ---
+\foreach \v in {-9,-4,-1,3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Number line B: -1 to 0 in tenths ----
+\begin{scope}[x=3.8cm, shift={(1,0)}, yshift=-1.7cm]
+\node[dhead] at (-1,0.85) {Number line B};
+\draw[thick] (-1,0) -- (0,0);
+\foreach \v in {-1,-0.9,...,0.01} \draw (\v,-0.07) -- (\v,0.07);
+\foreach \v in {-1,-0.5,0} \node[nlab] at (\v,-0.07) {$\v$};
+% --- Q9 answer: -0.7 and -0.3 ---
+\foreach \v in {-0.7,-0.3} {
+  \fill[ans] (\v,0) circle (1.8pt);
+  \node[vans, above, inner sep=1.5pt] at (\v,0.07) {$\v$};
+}
+\end{scope}
+
+% ---- Bus stop division for 7 / 8, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-3.7cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{8}{2.15}
+\foreach \x/\d in {0.3/7, 0.55/., 0.85/0, 1.35/0, 1.85/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: 7 / 8 = 0.875, carrying 7, then 6, then 4 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/8, 1.35/7, 1.85/5} \node[bsa] at (\x,0.55) {$\d$};
+\foreach \x/\c in {0.85/7, 1.35/6, 1.85/4} \node[bscarry] at ({\x-0.16},0.12) {$\c$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3.8\times100$ \ashow{$=380$}
+  \columnbreak
+  \item $45\div1000$ \ashow{$=0.045$}
+\end{multicols}
+  \item Complete the bus stop division to write $\frac78$ as a decimal.
+        \ashow{$0.875$}
+  \item At midday it is \dC{-4} in Oslo, \dC{-9} in Moscow, \dC{3} in London and
+        \dC{-1} in Reykjavík. Mark these on number line A. Write them in order,
+        coldest first.
+        \ashow{$-9$, \; $-4$, \; $-1$, \; $3$}
+  \item[] Write $<$ or $>$ in each box.
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-9$ \abox{$<$} $-4$
+  \columnbreak
+  \item $-1$ \abox{$>$} $-10$
+  \columnbreak
+  \item $0$ \abox{$>$} $-0.5$
+\end{multicols}}
+  \item How many degrees warmer is London than Moscow?
+        \ashow{$12$ degrees}
+  \item Mark $-0.3$ and $-0.7$ on number line B. Which is greater?
+        \ashow{$-0.3$, because it is further right}
+\begin{multicols}{2}
+  \item Round $-4.7$ to the nearest integer.
+        \ashow{$-5$}
+  \columnbreak
+  \item Round $-1.46$ to $1$ decimal place.
+        \ashow{$-1.5$}
+\end{multicols}
+  \item (Challenge) List the integers $n$ with $-3<n\leq1$.
+        \ashow{$-2,\ -1,\ 0,\ 1$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 2: Adding and subtracting across zero
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 2: Adding \& Subtracting Across Zero}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -5 to 3, for -3 + 5 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}]
+\node[dhead] at (-5.3,1.1) {Number line A};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q4 answer: start at -3 and jump 5 to the right ---
+\fill[ans] (-3,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (-3,0.1) to[out=30, in=150]
+  node[vans, above, inner sep=1pt] {$+5$} (2,0.1);
+\end{scope}
+
+% ---- Number line B: -5 to 3, for 2 - 7 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}, yshift=-2.05cm]
+\node[dhead] at (-5.3,1.1) {Number line B};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q5 answer: start at 2 and jump 7 to the left ---
+\fill[ans] (2,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (2,0.1) to[out=150, in=30]
+  node[vans, above, inner sep=1pt] {$-7$} (-5,0.1);
+\end{scope}
+
+% ---- Bus stop division for 2 / 3, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-4.1cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{3}{2.65}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/0, 1.35/0, 1.85/0, 2.35/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: the remainder is 2 every time, so the 6s never stop ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/6, 1.35/6, 1.85/6, 2.35/6} \node[bsa] at (\x,0.55) {$\d$};
+\node[bsa, anchor=base west] at (2.5,0.55) {$\ldots$};
+\foreach \x in {0.85, 1.35, 1.85, 2.35} \node[bscarry] at ({\x-0.16},0.12) {$2$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $12.4-3.75$ \ashow{$=8.65$}
+  \columnbreak
+  \item Round $6.349$ to $1$ decimal place.
+        \ashow{$6.3$}
+\end{multicols}
+  \item Complete the bus stop division for $2\div3$. What do you notice? Write the
+        answer with a recurring dot, and to $2$ decimal places.
+        \ashow{The remainder is always $2$. \; $0.\dot{6}\approx0.67$}
+\begin{multicols}{2}
+  \item Work out $-3+5$ by drawing the jump on number line A.
+        \ashow{$2$}
+  \columnbreak
+  \item Work out $2-7$ by drawing the jump on number line B.
+        \ashow{$-5$}
+\end{multicols}
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-6+4$ \ashow{$=-2$}
+  \columnbreak
+  \item $-2-5$ \ashow{$=-7$}
+  \columnbreak
+  \item $-8+8$ \ashow{$=0$}
+\end{multicols}}
+  \item The temperature is \dC{-4}. It rises by $7$ degrees, then falls by $10$
+        degrees. What is the temperature now?
+        \ashow{$-4+7-10=-7$, \; so \dC{-7}}
+  \item Amir has £$3.50$ in his bank account. He spends £$5.20$. What is his balance
+        now?
+        \ashow{$5.20-3.50=1.70$, so his balance is $-$£$1.70$}
+\begin{multicols}{2}
+  \item $-2.5+1.2$ \ashow{$=-1.3$}
+  \columnbreak
+  \item $-0.6-0.8$ \ashow{$=-1.4$}
+\end{multicols}
+  \item[] (Challenge) Find the missing numbers.
+\begin{multicols}{2}
+  \item $-3+{}$\abox{$7.5$}${}=4.5$
+  \columnbreak
+  \item \abox{$4$}${}-6=-2$
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 2: Adding \& Subtracting Across Zero}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -5 to 3, for -3 + 5 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}]
+\node[dhead] at (-5.3,1.1) {Number line A};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q4 answer: start at -3 and jump 5 to the right ---
+\fill[ans] (-3,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (-3,0.1) to[out=30, in=150]
+  node[vans, above, inner sep=1pt] {$+5$} (2,0.1);
+\end{scope}
+
+% ---- Number line B: -5 to 3, for 2 - 7 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}, yshift=-2.05cm]
+\node[dhead] at (-5.3,1.1) {Number line B};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q5 answer: start at 2 and jump 7 to the left ---
+\fill[ans] (2,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (2,0.1) to[out=150, in=30]
+  node[vans, above, inner sep=1pt] {$-7$} (-5,0.1);
+\end{scope}
+
+% ---- Bus stop division for 2 / 3, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-4.1cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{3}{2.65}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/0, 1.35/0, 1.85/0, 2.35/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: the remainder is 2 every time, so the 6s never stop ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/6, 1.35/6, 1.85/6, 2.35/6} \node[bsa] at (\x,0.55) {$\d$};
+\node[bsa, anchor=base west] at (2.5,0.55) {$\ldots$};
+\foreach \x in {0.85, 1.35, 1.85, 2.35} \node[bscarry] at ({\x-0.16},0.12) {$2$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $12.4-3.75$ \ashow{$=8.65$}
+  \columnbreak
+  \item Round $6.349$ to $1$ decimal place.
+        \ashow{$6.3$}
+\end{multicols}
+  \item Complete the bus stop division for $2\div3$. What do you notice? Write the
+        answer with a recurring dot, and to $2$ decimal places.
+        \ashow{The remainder is always $2$. \; $0.\dot{6}\approx0.67$}
+\begin{multicols}{2}
+  \item Work out $-3+5$ by drawing the jump on number line A.
+        \ashow{$2$}
+  \columnbreak
+  \item Work out $2-7$ by drawing the jump on number line B.
+        \ashow{$-5$}
+\end{multicols}
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-6+4$ \ashow{$=-2$}
+  \columnbreak
+  \item $-2-5$ \ashow{$=-7$}
+  \columnbreak
+  \item $-8+8$ \ashow{$=0$}
+\end{multicols}}
+  \item The temperature is \dC{-4}. It rises by $7$ degrees, then falls by $10$
+        degrees. What is the temperature now?
+        \ashow{$-4+7-10=-7$, \; so \dC{-7}}
+  \item Amir has £$3.50$ in his bank account. He spends £$5.20$. What is his balance
+        now?
+        \ashow{$5.20-3.50=1.70$, so his balance is $-$£$1.70$}
+\begin{multicols}{2}
+  \item $-2.5+1.2$ \ashow{$=-1.3$}
+  \columnbreak
+  \item $-0.6-0.8$ \ashow{$=-1.4$}
+\end{multicols}
+  \item[] (Challenge) Find the missing numbers.
+\begin{multicols}{2}
+  \item $-3+{}$\abox{$7.5$}${}=4.5$
+  \columnbreak
+  \item \abox{$4$}${}-6=-2$
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 2: Adding \& Subtracting Across Zero}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -5 to 3, for -3 + 5 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}]
+\node[dhead] at (-5.3,1.1) {Number line A};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q4 answer: start at -3 and jump 5 to the right ---
+\fill[ans] (-3,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (-3,0.1) to[out=30, in=150]
+  node[vans, above, inner sep=1pt] {$+5$} (2,0.1);
+\end{scope}
+
+% ---- Number line B: -5 to 3, for 2 - 7 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}, yshift=-2.05cm]
+\node[dhead] at (-5.3,1.1) {Number line B};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q5 answer: start at 2 and jump 7 to the left ---
+\fill[ans] (2,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (2,0.1) to[out=150, in=30]
+  node[vans, above, inner sep=1pt] {$-7$} (-5,0.1);
+\end{scope}
+
+% ---- Bus stop division for 2 / 3, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-4.1cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{3}{2.65}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/0, 1.35/0, 1.85/0, 2.35/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: the remainder is 2 every time, so the 6s never stop ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/6, 1.35/6, 1.85/6, 2.35/6} \node[bsa] at (\x,0.55) {$\d$};
+\node[bsa, anchor=base west] at (2.5,0.55) {$\ldots$};
+\foreach \x in {0.85, 1.35, 1.85, 2.35} \node[bscarry] at ({\x-0.16},0.12) {$2$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $12.4-3.75$ \ashow{$=8.65$}
+  \columnbreak
+  \item Round $6.349$ to $1$ decimal place.
+        \ashow{$6.3$}
+\end{multicols}
+  \item Complete the bus stop division for $2\div3$. What do you notice? Write the
+        answer with a recurring dot, and to $2$ decimal places.
+        \ashow{The remainder is always $2$. \; $0.\dot{6}\approx0.67$}
+\begin{multicols}{2}
+  \item Work out $-3+5$ by drawing the jump on number line A.
+        \ashow{$2$}
+  \columnbreak
+  \item Work out $2-7$ by drawing the jump on number line B.
+        \ashow{$-5$}
+\end{multicols}
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-6+4$ \ashow{$=-2$}
+  \columnbreak
+  \item $-2-5$ \ashow{$=-7$}
+  \columnbreak
+  \item $-8+8$ \ashow{$=0$}
+\end{multicols}}
+  \item The temperature is \dC{-4}. It rises by $7$ degrees, then falls by $10$
+        degrees. What is the temperature now?
+        \ashow{$-4+7-10=-7$, \; so \dC{-7}}
+  \item Amir has £$3.50$ in his bank account. He spends £$5.20$. What is his balance
+        now?
+        \ashow{$5.20-3.50=1.70$, so his balance is $-$£$1.70$}
+\begin{multicols}{2}
+  \item $-2.5+1.2$ \ashow{$=-1.3$}
+  \columnbreak
+  \item $-0.6-0.8$ \ashow{$=-1.4$}
+\end{multicols}
+  \item[] (Challenge) Find the missing numbers.
+\begin{multicols}{2}
+  \item $-3+{}$\abox{$7.5$}${}=4.5$
+  \columnbreak
+  \item \abox{$4$}${}-6=-2$
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 2: Adding \& Subtracting Across Zero}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: -5 to 3, for -3 + 5 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}]
+\node[dhead] at (-5.3,1.1) {Number line A};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q4 answer: start at -3 and jump 5 to the right ---
+\fill[ans] (-3,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (-3,0.1) to[out=30, in=150]
+  node[vans, above, inner sep=1pt] {$+5$} (2,0.1);
+\end{scope}
+
+% ---- Number line B: -5 to 3, for 2 - 7 ----
+\begin{scope}[x=0.46cm, shift={(5.3,0)}, yshift=-2.05cm]
+\node[dhead] at (-5.3,1.1) {Number line B};
+\draw[thick] (-5.3,0) -- (3.3,0);
+\foreach \v in {-5,...,3} {
+  \draw (\v,-0.07) -- (\v,0.07);
+  \node[nlab] at (\v,-0.07) {$\v$};
+}
+% --- Q5 answer: start at 2 and jump 7 to the left ---
+\fill[ans] (2,0) circle (1.6pt);
+\draw[ans, -{Stealth[length=4pt]}] (2,0.1) to[out=150, in=30]
+  node[vans, above, inner sep=1pt] {$-7$} (-5,0.1);
+\end{scope}
+
+% ---- Bus stop division for 2 / 3, with the zeros written in ----
+\begin{scope}[xshift=0.35cm, yshift=-4.1cm]
+\node[dhead] at (-0.35,1.15) {Bus stop for Q3};
+\busframe{3}{2.65}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/0, 1.35/0, 1.85/0, 2.35/0} \node[bsd] at (\x,0) {$\d$};
+% --- Q3 answer: the remainder is 2 every time, so the 6s never stop ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/6, 1.35/6, 1.85/6, 2.35/6} \node[bsa] at (\x,0.55) {$\d$};
+\node[bsa, anchor=base west] at (2.5,0.55) {$\ldots$};
+\foreach \x in {0.85, 1.35, 1.85, 2.35} \node[bscarry] at ({\x-0.16},0.12) {$2$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $12.4-3.75$ \ashow{$=8.65$}
+  \columnbreak
+  \item Round $6.349$ to $1$ decimal place.
+        \ashow{$6.3$}
+\end{multicols}
+  \item Complete the bus stop division for $2\div3$. What do you notice? Write the
+        answer with a recurring dot, and to $2$ decimal places.
+        \ashow{The remainder is always $2$. \; $0.\dot{6}\approx0.67$}
+\begin{multicols}{2}
+  \item Work out $-3+5$ by drawing the jump on number line A.
+        \ashow{$2$}
+  \columnbreak
+  \item Work out $2-7$ by drawing the jump on number line B.
+        \ashow{$-5$}
+\end{multicols}
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-6+4$ \ashow{$=-2$}
+  \columnbreak
+  \item $-2-5$ \ashow{$=-7$}
+  \columnbreak
+  \item $-8+8$ \ashow{$=0$}
+\end{multicols}}
+  \item The temperature is \dC{-4}. It rises by $7$ degrees, then falls by $10$
+        degrees. What is the temperature now?
+        \ashow{$-4+7-10=-7$, \; so \dC{-7}}
+  \item Amir has £$3.50$ in his bank account. He spends £$5.20$. What is his balance
+        now?
+        \ashow{$5.20-3.50=1.70$, so his balance is $-$£$1.70$}
+\begin{multicols}{2}
+  \item $-2.5+1.2$ \ashow{$=-1.3$}
+  \columnbreak
+  \item $-0.6-0.8$ \ashow{$=-1.4$}
+\end{multicols}
+  \item[] (Challenge) Find the missing numbers.
+\begin{multicols}{2}
+  \item $-3+{}$\abox{$7.5$}${}=4.5$
+  \columnbreak
+  \item \abox{$4$}${}-6=-2$
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 3: Adding and subtracting negative numbers, and sharing baguettes
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 3: Adding \& Subtracting Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Three baguettes, to share between teachers A, B, C and D ----
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q8 answer: cut each baguette into quarters, one quarter each ---
+\foreach \y in {0,-0.8,-1.6} {
+  \bagcuts{\y}
+  \baglabels{\y}{A}{B}{C}{D}
+}
+
+\end{tikzpicture}
+
+\begin{pattern}{Pattern for Q4}
+  $5-2$      & $3$\\
+  $5-1$      & \abox{$4$}\\
+  $5-0$      & \abox{$5$}\\
+  $5-(-1)$   & \abox{$6$}\\
+  $5-(-2)$   & \abox{$7$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-4+9$ \ashow{$=5$}
+  \columnbreak
+  \item $-4-9$ \ashow{$=-13$}
+  \columnbreak
+  \item $6.05-2.8$ \ashow{$=3.25$}
+\end{multicols}}
+  \item Complete the pattern on the left. What is subtracting $-1$ the same as?
+        \ashow{Adding $1$}
+\begin{multicols}{2}
+  \item $6+(-4)$ \ashow{$=6-4=2$}
+  \columnbreak
+  \item $-3-(-8)$ \ashow{$=-3+8=5$}
+\end{multicols}
+  \item It is \dC{5} at the foot of a mountain and \dC{-12} at the top. How much colder
+        is the top? Write this as a subtraction.
+        \ashow{$5-(-12)=17$ degrees}
+  \item Three baguettes are shared equally between teachers A, B, C and D. Show on
+        the diagram how to cut them. What fraction of a baguette does each teacher get?
+        \ashow{Three quarters of a baguette}
+\begin{multicols}{2}
+  \item Write $3\div4$ as a fraction.
+        \ashow{$\dfrac34$}
+  \columnbreak
+  \item Write $3\div4$ as a decimal.
+        \ashow{$0.75$}
+\end{multicols}
+  \item (Challenge) Seven baguettes are shared equally between three teachers. Write
+        each share as a division, a fraction and a recurring decimal.
+        \ashow{$7\div3=\dfrac73=2.\dot{3}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 3: Adding \& Subtracting Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Three baguettes, to share between teachers A, B, C and D ----
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q8 answer: cut each baguette into quarters, one quarter each ---
+\foreach \y in {0,-0.8,-1.6} {
+  \bagcuts{\y}
+  \baglabels{\y}{A}{B}{C}{D}
+}
+
+\end{tikzpicture}
+
+\begin{pattern}{Pattern for Q4}
+  $5-2$      & $3$\\
+  $5-1$      & \abox{$4$}\\
+  $5-0$      & \abox{$5$}\\
+  $5-(-1)$   & \abox{$6$}\\
+  $5-(-2)$   & \abox{$7$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-4+9$ \ashow{$=5$}
+  \columnbreak
+  \item $-4-9$ \ashow{$=-13$}
+  \columnbreak
+  \item $6.05-2.8$ \ashow{$=3.25$}
+\end{multicols}}
+  \item Complete the pattern on the left. What is subtracting $-1$ the same as?
+        \ashow{Adding $1$}
+\begin{multicols}{2}
+  \item $6+(-4)$ \ashow{$=6-4=2$}
+  \columnbreak
+  \item $-3-(-8)$ \ashow{$=-3+8=5$}
+\end{multicols}
+  \item It is \dC{5} at the foot of a mountain and \dC{-12} at the top. How much colder
+        is the top? Write this as a subtraction.
+        \ashow{$5-(-12)=17$ degrees}
+  \item Three baguettes are shared equally between teachers A, B, C and D. Show on
+        the diagram how to cut them. What fraction of a baguette does each teacher get?
+        \ashow{Three quarters of a baguette}
+\begin{multicols}{2}
+  \item Write $3\div4$ as a fraction.
+        \ashow{$\dfrac34$}
+  \columnbreak
+  \item Write $3\div4$ as a decimal.
+        \ashow{$0.75$}
+\end{multicols}
+  \item (Challenge) Seven baguettes are shared equally between three teachers. Write
+        each share as a division, a fraction and a recurring decimal.
+        \ashow{$7\div3=\dfrac73=2.\dot{3}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 3: Adding \& Subtracting Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Three baguettes, to share between teachers A, B, C and D ----
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q8 answer: cut each baguette into quarters, one quarter each ---
+\foreach \y in {0,-0.8,-1.6} {
+  \bagcuts{\y}
+  \baglabels{\y}{A}{B}{C}{D}
+}
+
+\end{tikzpicture}
+
+\begin{pattern}{Pattern for Q4}
+  $5-2$      & $3$\\
+  $5-1$      & \abox{$4$}\\
+  $5-0$      & \abox{$5$}\\
+  $5-(-1)$   & \abox{$6$}\\
+  $5-(-2)$   & \abox{$7$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-4+9$ \ashow{$=5$}
+  \columnbreak
+  \item $-4-9$ \ashow{$=-13$}
+  \columnbreak
+  \item $6.05-2.8$ \ashow{$=3.25$}
+\end{multicols}}
+  \item Complete the pattern on the left. What is subtracting $-1$ the same as?
+        \ashow{Adding $1$}
+\begin{multicols}{2}
+  \item $6+(-4)$ \ashow{$=6-4=2$}
+  \columnbreak
+  \item $-3-(-8)$ \ashow{$=-3+8=5$}
+\end{multicols}
+  \item It is \dC{5} at the foot of a mountain and \dC{-12} at the top. How much colder
+        is the top? Write this as a subtraction.
+        \ashow{$5-(-12)=17$ degrees}
+  \item Three baguettes are shared equally between teachers A, B, C and D. Show on
+        the diagram how to cut them. What fraction of a baguette does each teacher get?
+        \ashow{Three quarters of a baguette}
+\begin{multicols}{2}
+  \item Write $3\div4$ as a fraction.
+        \ashow{$\dfrac34$}
+  \columnbreak
+  \item Write $3\div4$ as a decimal.
+        \ashow{$0.75$}
+\end{multicols}
+  \item (Challenge) Seven baguettes are shared equally between three teachers. Write
+        each share as a division, a fraction and a recurring decimal.
+        \ashow{$7\div3=\dfrac73=2.\dot{3}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 3: Adding \& Subtracting Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Three baguettes, to share between teachers A, B, C and D ----
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q8 answer: cut each baguette into quarters, one quarter each ---
+\foreach \y in {0,-0.8,-1.6} {
+  \bagcuts{\y}
+  \baglabels{\y}{A}{B}{C}{D}
+}
+
+\end{tikzpicture}
+
+\begin{pattern}{Pattern for Q4}
+  $5-2$      & $3$\\
+  $5-1$      & \abox{$4$}\\
+  $5-0$      & \abox{$5$}\\
+  $5-(-1)$   & \abox{$6$}\\
+  $5-(-2)$   & \abox{$7$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $-4+9$ \ashow{$=5$}
+  \columnbreak
+  \item $-4-9$ \ashow{$=-13$}
+  \columnbreak
+  \item $6.05-2.8$ \ashow{$=3.25$}
+\end{multicols}}
+  \item Complete the pattern on the left. What is subtracting $-1$ the same as?
+        \ashow{Adding $1$}
+\begin{multicols}{2}
+  \item $6+(-4)$ \ashow{$=6-4=2$}
+  \columnbreak
+  \item $-3-(-8)$ \ashow{$=-3+8=5$}
+\end{multicols}
+  \item It is \dC{5} at the foot of a mountain and \dC{-12} at the top. How much colder
+        is the top? Write this as a subtraction.
+        \ashow{$5-(-12)=17$ degrees}
+  \item Three baguettes are shared equally between teachers A, B, C and D. Show on
+        the diagram how to cut them. What fraction of a baguette does each teacher get?
+        \ashow{Three quarters of a baguette}
+\begin{multicols}{2}
+  \item Write $3\div4$ as a fraction.
+        \ashow{$\dfrac34$}
+  \columnbreak
+  \item Write $3\div4$ as a decimal.
+        \ashow{$0.75$}
+\end{multicols}
+  \item (Challenge) Seven baguettes are shared equally between three teachers. Write
+        each share as a division, a fraction and a recurring decimal.
+        \ashow{$7\div3=\dfrac73=2.\dot{3}$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 4: Multiplying and dividing negative numbers
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 4: Multiplying \& Dividing Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Lattice for 1.35 x 4. The decimal point of 1.35 is marked on the top
+% edge, and the decimal point of 4, which comes after the 4, at the bottom of
+% the right-hand edge. ----
+\node[dhead] at (0,1.0) {Lattice for Q9};
+\begin{scope}[x=0.85cm, y=0.85cm, xshift=0.5cm]
+\lgrid{3}{1}
+\ltop{1}{1}\ltop{2}{3}\ltop{3}{5}
+\lside{3}{1}{4}
+\lpoint{1}{0.3}
+\lpoint{3.3}{-1}
+% --- Q9 answer ---
+\lcell{1}{1}{0}{4}\lcell{2}{1}{1}{2}\lcell{3}{1}{2}{0}
+\lleft{1}{0}
+\lbot{1}{1}{5}\lbot{1}{2}{4}\lbot{1}{3}{0}
+% the two decimal points meet on the bottom edge, so the point in the answer
+% goes between the 5 and the 4
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (3.2,-1) -- (1,-1);
+\lpoint[ans]{1}{-1.3}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.35\times100=135$\\
+  $135\times4=\abox{$540$}$\\
+  We multiplied by $100$, so\\
+  $1.35\times4=\abox{$5.40$}$
+\end{scaling}
+
+\begin{pattern}{Pattern for Q4}
+  $(-3)\times2$      & $-6$\\
+  $(-3)\times1$      & $-3$\\
+  $(-3)\times0$      & \abox{$0$}\\
+  $(-3)\times(-1)$   & \abox{$3$}\\
+  $(-3)\times(-2)$   & \abox{$6$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $-7+3$ \ashow{$=-4$}
+  \columnbreak
+  \item $4-(-6)$ \ashow{$=10$}
+\end{multicols}
+  \item Use bus stop division to work out $5\div6$.
+        \ashow{$0.8\dot{3}$}
+  \item Complete the pattern on the left. Is a negative number multiplied by a
+        negative number positive or negative?
+        \ashow{Positive}
+\begin{multicols}{2}
+  \item $5\times(-4)$ \ashow{$=-20$}
+  \columnbreak
+  \item $(-6)\times(-3)$ \ashow{$=18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-20\div5$ \ashow{$=-4$}
+  \columnbreak
+  \item $-18\div(-2)$ \ashow{$=9$}
+\end{multicols}
+  \item Find the cost of $4$ baguettes at £$1.35$ each. Use one of the two methods on
+        the left.
+        \ashow{£$5.40$}
+  \item The staff room fund has £$5.00$, and pays for the four baguettes. What is its
+        balance now?
+        \ashow{$5.00-5.40=-0.40$, so $-$£$0.40$}
+  \item $-4.8\div0.6=\dfrac{-4.8}{0.6}=\dfrac{-4.8\times10}{0.6\times10}
+        =\dfrac{\abox{$-48$}}{\abox{$6$}}=\abox{$-8$}$
+  \item[] \vspace{3pt}(Challenge)
+\begin{multicols}{2}
+  \item $(-0.3)\times(-0.4)$ \ashow{$=0.12$}
+  \columnbreak
+  \item $-1.2\div(-0.04)$ \ashow{$=\dfrac{-120}{-4}=30$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 4: Multiplying \& Dividing Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Lattice for 1.35 x 4. The decimal point of 1.35 is marked on the top
+% edge, and the decimal point of 4, which comes after the 4, at the bottom of
+% the right-hand edge. ----
+\node[dhead] at (0,1.0) {Lattice for Q9};
+\begin{scope}[x=0.85cm, y=0.85cm, xshift=0.5cm]
+\lgrid{3}{1}
+\ltop{1}{1}\ltop{2}{3}\ltop{3}{5}
+\lside{3}{1}{4}
+\lpoint{1}{0.3}
+\lpoint{3.3}{-1}
+% --- Q9 answer ---
+\lcell{1}{1}{0}{4}\lcell{2}{1}{1}{2}\lcell{3}{1}{2}{0}
+\lleft{1}{0}
+\lbot{1}{1}{5}\lbot{1}{2}{4}\lbot{1}{3}{0}
+% the two decimal points meet on the bottom edge, so the point in the answer
+% goes between the 5 and the 4
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (3.2,-1) -- (1,-1);
+\lpoint[ans]{1}{-1.3}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.35\times100=135$\\
+  $135\times4=\abox{$540$}$\\
+  We multiplied by $100$, so\\
+  $1.35\times4=\abox{$5.40$}$
+\end{scaling}
+
+\begin{pattern}{Pattern for Q4}
+  $(-3)\times2$      & $-6$\\
+  $(-3)\times1$      & $-3$\\
+  $(-3)\times0$      & \abox{$0$}\\
+  $(-3)\times(-1)$   & \abox{$3$}\\
+  $(-3)\times(-2)$   & \abox{$6$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $-7+3$ \ashow{$=-4$}
+  \columnbreak
+  \item $4-(-6)$ \ashow{$=10$}
+\end{multicols}
+  \item Use bus stop division to work out $5\div6$.
+        \ashow{$0.8\dot{3}$}
+  \item Complete the pattern on the left. Is a negative number multiplied by a
+        negative number positive or negative?
+        \ashow{Positive}
+\begin{multicols}{2}
+  \item $5\times(-4)$ \ashow{$=-20$}
+  \columnbreak
+  \item $(-6)\times(-3)$ \ashow{$=18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-20\div5$ \ashow{$=-4$}
+  \columnbreak
+  \item $-18\div(-2)$ \ashow{$=9$}
+\end{multicols}
+  \item Find the cost of $4$ baguettes at £$1.35$ each. Use one of the two methods on
+        the left.
+        \ashow{£$5.40$}
+  \item The staff room fund has £$5.00$, and pays for the four baguettes. What is its
+        balance now?
+        \ashow{$5.00-5.40=-0.40$, so $-$£$0.40$}
+  \item $-4.8\div0.6=\dfrac{-4.8}{0.6}=\dfrac{-4.8\times10}{0.6\times10}
+        =\dfrac{\abox{$-48$}}{\abox{$6$}}=\abox{$-8$}$
+  \item[] \vspace{3pt}(Challenge)
+\begin{multicols}{2}
+  \item $(-0.3)\times(-0.4)$ \ashow{$=0.12$}
+  \columnbreak
+  \item $-1.2\div(-0.04)$ \ashow{$=\dfrac{-120}{-4}=30$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 4: Multiplying \& Dividing Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Lattice for 1.35 x 4. The decimal point of 1.35 is marked on the top
+% edge, and the decimal point of 4, which comes after the 4, at the bottom of
+% the right-hand edge. ----
+\node[dhead] at (0,1.0) {Lattice for Q9};
+\begin{scope}[x=0.85cm, y=0.85cm, xshift=0.5cm]
+\lgrid{3}{1}
+\ltop{1}{1}\ltop{2}{3}\ltop{3}{5}
+\lside{3}{1}{4}
+\lpoint{1}{0.3}
+\lpoint{3.3}{-1}
+% --- Q9 answer ---
+\lcell{1}{1}{0}{4}\lcell{2}{1}{1}{2}\lcell{3}{1}{2}{0}
+\lleft{1}{0}
+\lbot{1}{1}{5}\lbot{1}{2}{4}\lbot{1}{3}{0}
+% the two decimal points meet on the bottom edge, so the point in the answer
+% goes between the 5 and the 4
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (3.2,-1) -- (1,-1);
+\lpoint[ans]{1}{-1.3}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.35\times100=135$\\
+  $135\times4=\abox{$540$}$\\
+  We multiplied by $100$, so\\
+  $1.35\times4=\abox{$5.40$}$
+\end{scaling}
+
+\begin{pattern}{Pattern for Q4}
+  $(-3)\times2$      & $-6$\\
+  $(-3)\times1$      & $-3$\\
+  $(-3)\times0$      & \abox{$0$}\\
+  $(-3)\times(-1)$   & \abox{$3$}\\
+  $(-3)\times(-2)$   & \abox{$6$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $-7+3$ \ashow{$=-4$}
+  \columnbreak
+  \item $4-(-6)$ \ashow{$=10$}
+\end{multicols}
+  \item Use bus stop division to work out $5\div6$.
+        \ashow{$0.8\dot{3}$}
+  \item Complete the pattern on the left. Is a negative number multiplied by a
+        negative number positive or negative?
+        \ashow{Positive}
+\begin{multicols}{2}
+  \item $5\times(-4)$ \ashow{$=-20$}
+  \columnbreak
+  \item $(-6)\times(-3)$ \ashow{$=18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-20\div5$ \ashow{$=-4$}
+  \columnbreak
+  \item $-18\div(-2)$ \ashow{$=9$}
+\end{multicols}
+  \item Find the cost of $4$ baguettes at £$1.35$ each. Use one of the two methods on
+        the left.
+        \ashow{£$5.40$}
+  \item The staff room fund has £$5.00$, and pays for the four baguettes. What is its
+        balance now?
+        \ashow{$5.00-5.40=-0.40$, so $-$£$0.40$}
+  \item $-4.8\div0.6=\dfrac{-4.8}{0.6}=\dfrac{-4.8\times10}{0.6\times10}
+        =\dfrac{\abox{$-48$}}{\abox{$6$}}=\abox{$-8$}$
+  \item[] \vspace{3pt}(Challenge)
+\begin{multicols}{2}
+  \item $(-0.3)\times(-0.4)$ \ashow{$=0.12$}
+  \columnbreak
+  \item $-1.2\div(-0.04)$ \ashow{$=\dfrac{-120}{-4}=30$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 4: Multiplying \& Dividing Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Lattice for 1.35 x 4. The decimal point of 1.35 is marked on the top
+% edge, and the decimal point of 4, which comes after the 4, at the bottom of
+% the right-hand edge. ----
+\node[dhead] at (0,1.0) {Lattice for Q9};
+\begin{scope}[x=0.85cm, y=0.85cm, xshift=0.5cm]
+\lgrid{3}{1}
+\ltop{1}{1}\ltop{2}{3}\ltop{3}{5}
+\lside{3}{1}{4}
+\lpoint{1}{0.3}
+\lpoint{3.3}{-1}
+% --- Q9 answer ---
+\lcell{1}{1}{0}{4}\lcell{2}{1}{1}{2}\lcell{3}{1}{2}{0}
+\lleft{1}{0}
+\lbot{1}{1}{5}\lbot{1}{2}{4}\lbot{1}{3}{0}
+% the two decimal points meet on the bottom edge, so the point in the answer
+% goes between the 5 and the 4
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (3.2,-1) -- (1,-1);
+\lpoint[ans]{1}{-1.3}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.35\times100=135$\\
+  $135\times4=\abox{$540$}$\\
+  We multiplied by $100$, so\\
+  $1.35\times4=\abox{$5.40$}$
+\end{scaling}
+
+\begin{pattern}{Pattern for Q4}
+  $(-3)\times2$      & $-6$\\
+  $(-3)\times1$      & $-3$\\
+  $(-3)\times0$      & \abox{$0$}\\
+  $(-3)\times(-1)$   & \abox{$3$}\\
+  $(-3)\times(-2)$   & \abox{$6$}
+\end{pattern}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $-7+3$ \ashow{$=-4$}
+  \columnbreak
+  \item $4-(-6)$ \ashow{$=10$}
+\end{multicols}
+  \item Use bus stop division to work out $5\div6$.
+        \ashow{$0.8\dot{3}$}
+  \item Complete the pattern on the left. Is a negative number multiplied by a
+        negative number positive or negative?
+        \ashow{Positive}
+\begin{multicols}{2}
+  \item $5\times(-4)$ \ashow{$=-20$}
+  \columnbreak
+  \item $(-6)\times(-3)$ \ashow{$=18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-20\div5$ \ashow{$=-4$}
+  \columnbreak
+  \item $-18\div(-2)$ \ashow{$=9$}
+\end{multicols}
+  \item Find the cost of $4$ baguettes at £$1.35$ each. Use one of the two methods on
+        the left.
+        \ashow{£$5.40$}
+  \item The staff room fund has £$5.00$, and pays for the four baguettes. What is its
+        balance now?
+        \ashow{$5.00-5.40=-0.40$, so $-$£$0.40$}
+  \item $-4.8\div0.6=\dfrac{-4.8}{0.6}=\dfrac{-4.8\times10}{0.6\times10}
+        =\dfrac{\abox{$-48$}}{\abox{$6$}}=\abox{$-8$}$
+  \item[] \vspace{3pt}(Challenge)
+\begin{multicols}{2}
+  \item $(-0.3)\times(-0.4)$ \ashow{$=0.12$}
+  \columnbreak
+  \item $-1.2\div(-0.04)$ \ashow{$=\dfrac{-120}{-4}=30$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 5: Squares, cubes, square roots and cube roots
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 5: Squares, Cubes \& Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Square A, with area 49 cm^2 ----
+\node[dhead] at (0,0.75) {Square A};
+\draw[fill=green!8] (0.25,-1.05) rectangle (1.3,0);
+\node at (0.775,-0.33) {Area};
+\node at (0.775,-0.72) {$49$\,cm$^2$};
+% --- Q4 answer: the side length, where the question mark was ---
+\node[below, inner sep=1.5pt] at (0.775,-1.05) {\alt<2->{\textcolor{red}{$7$\,cm}}{$?$}};
+
+% ---- Cube B: 3 by 3 by 3 centimetre cubes, drawn in oblique projection ----
+\begin{scope}[xshift=2.0cm, yshift=-1.05cm, scale=0.87]
+\node[dhead] at (0,2.1) {Cube B};
+% one centimetre along the front is 0.4, and one centimetre of depth is (0.15,0.12)
+\draw[fill=blue!6]  (0,0) rectangle (1.2,1.2);
+\draw[fill=blue!14] (0,1.2) -- (0.45,1.56) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\draw[fill=blue!3]  (1.2,0) -- (1.65,0.36) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\foreach \i in {1,2} {
+  \draw[black!50] ({0.4*\i},0) -- ({0.4*\i},1.2);
+  \draw[black!50] (0,{0.4*\i}) -- (1.2,{0.4*\i});
+  \draw[black!50] ({0.4*\i},1.2) -- ({0.4*\i+0.45},1.56);
+  \draw[black!50] ({0.15*\i},{1.2+0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] ({1.2+0.15*\i},{0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] (1.2,{0.4*\i}) -- (1.65,{0.4*\i+0.36});
+}
+\draw (0,0) rectangle (1.2,1.2);
+\node[below, inner sep=1.5pt] at (0.6,0) {$3$\,cm};
+\end{scope}
+
+% ---- Lattice for 1.2 x 1.2. Pupils mark the decimal points themselves. ----
+\node[dhead] at (0,-1.75) {Lattice for Q10};
+\begin{scope}[x=0.7cm, y=0.7cm, xshift=0.75cm, yshift=-2.35cm]
+\lgrid{2}{2}
+\ltop{1}{1}\ltop{2}{2}
+\lside{2}{1}{1}\lside{2}{2}{2}
+% --- Q10 answer ---
+\lcell{1}{1}{0}{1}\lcell{2}{1}{0}{2}
+\lcell{1}{2}{0}{2}\lcell{2}{2}{0}{4}
+\lleft{1}{0}\lleft{2}{1}
+\lbot{2}{1}{4}\lbot{2}{2}{4}
+% the decimal points meet in the middle; the diagonal leaves at the corner
+\lpoint[ans]{1}{0.3}
+\lpoint[ans]{2.3}{-1}
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (2.2,-1) -- (1,-1);
+\draw[ans, -{Stealth[length=4pt]}] (1,-1) -- (-0.05,-2.05);
+\lpoint[ans]{-0.2}{-2.2}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.2\times10=12$\\
+  $12\times12=\abox{$144$}$\\
+  We multiplied by $10\times10$, so\\
+  $1.2^2=\abox{$1.44$}$
+\end{scaling}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $(-4)\times(-5)$ \ashow{$=20$}
+  \columnbreak
+  \item $-24\div6$ \ashow{$=-4$}
+  \columnbreak
+  \item Round $7.482$ to $1$ d.p.
+        \ashow{$7.5$}
+\end{multicols}}
+  \item Square A has area $49$\,cm$^2$. Find its side length, using $\sqrt{\phantom{x}}$.
+        \ashow{$\sqrt{49}=7$\,cm}
+  \item Cube B is made of centimetre cubes. Find its volume, written as a power.
+        \ashow{$3^3=27$\,cm$^3$}
+\begin{multicols}{4}
+  \item $6^2$ \ashow{$=36$}
+  \columnbreak
+  \item $4^3$ \ashow{$=64$}
+  \columnbreak
+  \item $\sqrt{81}$ \ashow{$=9$}
+  \columnbreak
+  \item $\sqrt[3]{1000}$ \ashow{$=10$}
+\end{multicols}
+  \item Work out $1.2^2=1.2\times1.2$ using one method on the left. On the lattice,
+        mark the decimal points yourself.
+        \ashow{$1.44$}
+\begin{multicols}{2}
+  \item $(-3)^2$ \ashow{$=9$}
+  \columnbreak
+  \item $(-2)^3$ \ashow{$=-8$}
+\end{multicols}
+\begin{multicols}{2}
+  \item (Challenge) Find two numbers whose square is $64$.
+        \ashow{$8$ and $-8$}
+  \columnbreak
+  \item (Challenge) Is there a number whose square is $-64$?
+        \ashow{No: a square is never negative.}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 5: Squares, Cubes \& Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Square A, with area 49 cm^2 ----
+\node[dhead] at (0,0.75) {Square A};
+\draw[fill=green!8] (0.25,-1.05) rectangle (1.3,0);
+\node at (0.775,-0.33) {Area};
+\node at (0.775,-0.72) {$49$\,cm$^2$};
+% --- Q4 answer: the side length, where the question mark was ---
+\node[below, inner sep=1.5pt] at (0.775,-1.05) {\alt<2->{\textcolor{red}{$7$\,cm}}{$?$}};
+
+% ---- Cube B: 3 by 3 by 3 centimetre cubes, drawn in oblique projection ----
+\begin{scope}[xshift=2.0cm, yshift=-1.05cm, scale=0.87]
+\node[dhead] at (0,2.1) {Cube B};
+% one centimetre along the front is 0.4, and one centimetre of depth is (0.15,0.12)
+\draw[fill=blue!6]  (0,0) rectangle (1.2,1.2);
+\draw[fill=blue!14] (0,1.2) -- (0.45,1.56) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\draw[fill=blue!3]  (1.2,0) -- (1.65,0.36) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\foreach \i in {1,2} {
+  \draw[black!50] ({0.4*\i},0) -- ({0.4*\i},1.2);
+  \draw[black!50] (0,{0.4*\i}) -- (1.2,{0.4*\i});
+  \draw[black!50] ({0.4*\i},1.2) -- ({0.4*\i+0.45},1.56);
+  \draw[black!50] ({0.15*\i},{1.2+0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] ({1.2+0.15*\i},{0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] (1.2,{0.4*\i}) -- (1.65,{0.4*\i+0.36});
+}
+\draw (0,0) rectangle (1.2,1.2);
+\node[below, inner sep=1.5pt] at (0.6,0) {$3$\,cm};
+\end{scope}
+
+% ---- Lattice for 1.2 x 1.2. Pupils mark the decimal points themselves. ----
+\node[dhead] at (0,-1.75) {Lattice for Q10};
+\begin{scope}[x=0.7cm, y=0.7cm, xshift=0.75cm, yshift=-2.35cm]
+\lgrid{2}{2}
+\ltop{1}{1}\ltop{2}{2}
+\lside{2}{1}{1}\lside{2}{2}{2}
+% --- Q10 answer ---
+\lcell{1}{1}{0}{1}\lcell{2}{1}{0}{2}
+\lcell{1}{2}{0}{2}\lcell{2}{2}{0}{4}
+\lleft{1}{0}\lleft{2}{1}
+\lbot{2}{1}{4}\lbot{2}{2}{4}
+% the decimal points meet in the middle; the diagonal leaves at the corner
+\lpoint[ans]{1}{0.3}
+\lpoint[ans]{2.3}{-1}
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (2.2,-1) -- (1,-1);
+\draw[ans, -{Stealth[length=4pt]}] (1,-1) -- (-0.05,-2.05);
+\lpoint[ans]{-0.2}{-2.2}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.2\times10=12$\\
+  $12\times12=\abox{$144$}$\\
+  We multiplied by $10\times10$, so\\
+  $1.2^2=\abox{$1.44$}$
+\end{scaling}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $(-4)\times(-5)$ \ashow{$=20$}
+  \columnbreak
+  \item $-24\div6$ \ashow{$=-4$}
+  \columnbreak
+  \item Round $7.482$ to $1$ d.p.
+        \ashow{$7.5$}
+\end{multicols}}
+  \item Square A has area $49$\,cm$^2$. Find its side length, using $\sqrt{\phantom{x}}$.
+        \ashow{$\sqrt{49}=7$\,cm}
+  \item Cube B is made of centimetre cubes. Find its volume, written as a power.
+        \ashow{$3^3=27$\,cm$^3$}
+\begin{multicols}{4}
+  \item $6^2$ \ashow{$=36$}
+  \columnbreak
+  \item $4^3$ \ashow{$=64$}
+  \columnbreak
+  \item $\sqrt{81}$ \ashow{$=9$}
+  \columnbreak
+  \item $\sqrt[3]{1000}$ \ashow{$=10$}
+\end{multicols}
+  \item Work out $1.2^2=1.2\times1.2$ using one method on the left. On the lattice,
+        mark the decimal points yourself.
+        \ashow{$1.44$}
+\begin{multicols}{2}
+  \item $(-3)^2$ \ashow{$=9$}
+  \columnbreak
+  \item $(-2)^3$ \ashow{$=-8$}
+\end{multicols}
+\begin{multicols}{2}
+  \item (Challenge) Find two numbers whose square is $64$.
+        \ashow{$8$ and $-8$}
+  \columnbreak
+  \item (Challenge) Is there a number whose square is $-64$?
+        \ashow{No: a square is never negative.}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 5: Squares, Cubes \& Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Square A, with area 49 cm^2 ----
+\node[dhead] at (0,0.75) {Square A};
+\draw[fill=green!8] (0.25,-1.05) rectangle (1.3,0);
+\node at (0.775,-0.33) {Area};
+\node at (0.775,-0.72) {$49$\,cm$^2$};
+% --- Q4 answer: the side length, where the question mark was ---
+\node[below, inner sep=1.5pt] at (0.775,-1.05) {\alt<2->{\textcolor{red}{$7$\,cm}}{$?$}};
+
+% ---- Cube B: 3 by 3 by 3 centimetre cubes, drawn in oblique projection ----
+\begin{scope}[xshift=2.0cm, yshift=-1.05cm, scale=0.87]
+\node[dhead] at (0,2.1) {Cube B};
+% one centimetre along the front is 0.4, and one centimetre of depth is (0.15,0.12)
+\draw[fill=blue!6]  (0,0) rectangle (1.2,1.2);
+\draw[fill=blue!14] (0,1.2) -- (0.45,1.56) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\draw[fill=blue!3]  (1.2,0) -- (1.65,0.36) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\foreach \i in {1,2} {
+  \draw[black!50] ({0.4*\i},0) -- ({0.4*\i},1.2);
+  \draw[black!50] (0,{0.4*\i}) -- (1.2,{0.4*\i});
+  \draw[black!50] ({0.4*\i},1.2) -- ({0.4*\i+0.45},1.56);
+  \draw[black!50] ({0.15*\i},{1.2+0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] ({1.2+0.15*\i},{0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] (1.2,{0.4*\i}) -- (1.65,{0.4*\i+0.36});
+}
+\draw (0,0) rectangle (1.2,1.2);
+\node[below, inner sep=1.5pt] at (0.6,0) {$3$\,cm};
+\end{scope}
+
+% ---- Lattice for 1.2 x 1.2. Pupils mark the decimal points themselves. ----
+\node[dhead] at (0,-1.75) {Lattice for Q10};
+\begin{scope}[x=0.7cm, y=0.7cm, xshift=0.75cm, yshift=-2.35cm]
+\lgrid{2}{2}
+\ltop{1}{1}\ltop{2}{2}
+\lside{2}{1}{1}\lside{2}{2}{2}
+% --- Q10 answer ---
+\lcell{1}{1}{0}{1}\lcell{2}{1}{0}{2}
+\lcell{1}{2}{0}{2}\lcell{2}{2}{0}{4}
+\lleft{1}{0}\lleft{2}{1}
+\lbot{2}{1}{4}\lbot{2}{2}{4}
+% the decimal points meet in the middle; the diagonal leaves at the corner
+\lpoint[ans]{1}{0.3}
+\lpoint[ans]{2.3}{-1}
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (2.2,-1) -- (1,-1);
+\draw[ans, -{Stealth[length=4pt]}] (1,-1) -- (-0.05,-2.05);
+\lpoint[ans]{-0.2}{-2.2}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.2\times10=12$\\
+  $12\times12=\abox{$144$}$\\
+  We multiplied by $10\times10$, so\\
+  $1.2^2=\abox{$1.44$}$
+\end{scaling}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $(-4)\times(-5)$ \ashow{$=20$}
+  \columnbreak
+  \item $-24\div6$ \ashow{$=-4$}
+  \columnbreak
+  \item Round $7.482$ to $1$ d.p.
+        \ashow{$7.5$}
+\end{multicols}}
+  \item Square A has area $49$\,cm$^2$. Find its side length, using $\sqrt{\phantom{x}}$.
+        \ashow{$\sqrt{49}=7$\,cm}
+  \item Cube B is made of centimetre cubes. Find its volume, written as a power.
+        \ashow{$3^3=27$\,cm$^3$}
+\begin{multicols}{4}
+  \item $6^2$ \ashow{$=36$}
+  \columnbreak
+  \item $4^3$ \ashow{$=64$}
+  \columnbreak
+  \item $\sqrt{81}$ \ashow{$=9$}
+  \columnbreak
+  \item $\sqrt[3]{1000}$ \ashow{$=10$}
+\end{multicols}
+  \item Work out $1.2^2=1.2\times1.2$ using one method on the left. On the lattice,
+        mark the decimal points yourself.
+        \ashow{$1.44$}
+\begin{multicols}{2}
+  \item $(-3)^2$ \ashow{$=9$}
+  \columnbreak
+  \item $(-2)^3$ \ashow{$=-8$}
+\end{multicols}
+\begin{multicols}{2}
+  \item (Challenge) Find two numbers whose square is $64$.
+        \ashow{$8$ and $-8$}
+  \columnbreak
+  \item (Challenge) Is there a number whose square is $-64$?
+        \ashow{No: a square is never negative.}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 5: Squares, Cubes \& Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Square A, with area 49 cm^2 ----
+\node[dhead] at (0,0.75) {Square A};
+\draw[fill=green!8] (0.25,-1.05) rectangle (1.3,0);
+\node at (0.775,-0.33) {Area};
+\node at (0.775,-0.72) {$49$\,cm$^2$};
+% --- Q4 answer: the side length, where the question mark was ---
+\node[below, inner sep=1.5pt] at (0.775,-1.05) {\alt<2->{\textcolor{red}{$7$\,cm}}{$?$}};
+
+% ---- Cube B: 3 by 3 by 3 centimetre cubes, drawn in oblique projection ----
+\begin{scope}[xshift=2.0cm, yshift=-1.05cm, scale=0.87]
+\node[dhead] at (0,2.1) {Cube B};
+% one centimetre along the front is 0.4, and one centimetre of depth is (0.15,0.12)
+\draw[fill=blue!6]  (0,0) rectangle (1.2,1.2);
+\draw[fill=blue!14] (0,1.2) -- (0.45,1.56) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\draw[fill=blue!3]  (1.2,0) -- (1.65,0.36) -- (1.65,1.56) -- (1.2,1.2) -- cycle;
+\foreach \i in {1,2} {
+  \draw[black!50] ({0.4*\i},0) -- ({0.4*\i},1.2);
+  \draw[black!50] (0,{0.4*\i}) -- (1.2,{0.4*\i});
+  \draw[black!50] ({0.4*\i},1.2) -- ({0.4*\i+0.45},1.56);
+  \draw[black!50] ({0.15*\i},{1.2+0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] ({1.2+0.15*\i},{0.12*\i}) -- ({1.2+0.15*\i},{1.2+0.12*\i});
+  \draw[black!50] (1.2,{0.4*\i}) -- (1.65,{0.4*\i+0.36});
+}
+\draw (0,0) rectangle (1.2,1.2);
+\node[below, inner sep=1.5pt] at (0.6,0) {$3$\,cm};
+\end{scope}
+
+% ---- Lattice for 1.2 x 1.2. Pupils mark the decimal points themselves. ----
+\node[dhead] at (0,-1.75) {Lattice for Q10};
+\begin{scope}[x=0.7cm, y=0.7cm, xshift=0.75cm, yshift=-2.35cm]
+\lgrid{2}{2}
+\ltop{1}{1}\ltop{2}{2}
+\lside{2}{1}{1}\lside{2}{2}{2}
+% --- Q10 answer ---
+\lcell{1}{1}{0}{1}\lcell{2}{1}{0}{2}
+\lcell{1}{2}{0}{2}\lcell{2}{2}{0}{4}
+\lleft{1}{0}\lleft{2}{1}
+\lbot{2}{1}{4}\lbot{2}{2}{4}
+% the decimal points meet in the middle; the diagonal leaves at the corner
+\lpoint[ans]{1}{0.3}
+\lpoint[ans]{2.3}{-1}
+\draw[ans, dashed] (1,0.2) -- (1,-1);
+\draw[ans, dashed] (2.2,-1) -- (1,-1);
+\draw[ans, -{Stealth[length=4pt]}] (1,-1) -- (-0.05,-2.05);
+\lpoint[ans]{-0.2}{-2.2}
+\end{scope}
+
+\end{tikzpicture}
+
+\orrule
+\begin{scaling}
+  $1.2\times10=12$\\
+  $12\times12=\abox{$144$}$\\
+  We multiplied by $10\times10$, so\\
+  $1.2^2=\abox{$1.44$}$
+\end{scaling}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+{\setlength{\columnsep}{14pt}%
+\begin{multicols}{3}
+  \item $(-4)\times(-5)$ \ashow{$=20$}
+  \columnbreak
+  \item $-24\div6$ \ashow{$=-4$}
+  \columnbreak
+  \item Round $7.482$ to $1$ d.p.
+        \ashow{$7.5$}
+\end{multicols}}
+  \item Square A has area $49$\,cm$^2$. Find its side length, using $\sqrt{\phantom{x}}$.
+        \ashow{$\sqrt{49}=7$\,cm}
+  \item Cube B is made of centimetre cubes. Find its volume, written as a power.
+        \ashow{$3^3=27$\,cm$^3$}
+\begin{multicols}{4}
+  \item $6^2$ \ashow{$=36$}
+  \columnbreak
+  \item $4^3$ \ashow{$=64$}
+  \columnbreak
+  \item $\sqrt{81}$ \ashow{$=9$}
+  \columnbreak
+  \item $\sqrt[3]{1000}$ \ashow{$=10$}
+\end{multicols}
+  \item Work out $1.2^2=1.2\times1.2$ using one method on the left. On the lattice,
+        mark the decimal points yourself.
+        \ashow{$1.44$}
+\begin{multicols}{2}
+  \item $(-3)^2$ \ashow{$=9$}
+  \columnbreak
+  \item $(-2)^3$ \ashow{$=-8$}
+\end{multicols}
+\begin{multicols}{2}
+  \item (Challenge) Find two numbers whose square is $64$.
+        \ashow{$8$ and $-8$}
+  \columnbreak
+  \item (Challenge) Is there a number whose square is $-64$?
+        \ashow{No: a square is never negative.}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 6: Index notation, powers of 10, and estimating square roots
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 6: Powers \& Estimating Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 6 to 9 in tenths ----
+\begin{scope}[x=1.25cm, shift={(-5.95,0)}]
+\node[dhead] at (5.95,0.85) {Number line A};
+\draw[thick] (5.95,0) -- (9.05,0);
+\foreach \v in {6,6.1,...,9.01} \draw (\v,-0.05) -- (\v,0.05);
+\foreach \v in {6,...,9} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q8 answer: sqrt 50 is just above 7, because 50 is just above 49 ---
+\fill[ans] (7.07,0) circle (1.8pt);
+\node[vans, above, inner sep=1.5pt] at (7.07,0.07) {$\sqrt{50}$};
+\end{scope}
+
+% ---- Three baguettes, to share out 0.75 of a baguette at a time ----
+\begin{scope}[yshift=-2.05cm]
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q11 answer: quarters, handed out three at a time to teachers 1 to 4 ---
+\foreach \y in {0,-0.8,-1.6} {\bagcuts{\y}}
+\baglabels{0}{1}{1}{1}{2}
+\baglabels{-0.8}{2}{2}{3}{3}
+\baglabels{-1.6}{3}{4}{4}{4}
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $7^2$ \ashow{$=49$}
+  \columnbreak
+  \item $\sqrt{144}$ \ashow{$=12$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-2.4+5$ \ashow{$=2.6$}
+  \columnbreak
+  \item $-3\times(-1.5)$ \ashow{$=4.5$}
+\end{multicols}
+  \item Write $2\times2\times2\times2\times2$ as a power, and work it out. Write $<$ or
+        $>$ between $2^5$ and $5^2$.
+        \ashow{$2^5=32>25$}
+\begin{multicols}{2}
+  \item $10^4$ \ashow{$=10\,000$}
+  \columnbreak
+  \item $3.7\times10^3$ \ashow{$=3700$}
+\end{multicols}
+  \item Complete \; $\abox{$7$}<\sqrt{50}<\abox{$8$}$, \; and mark $\sqrt{50}$ on
+        number line A.
+        \ashow{Just above $7$, as $50$ is near $49$}
+\begin{multicols}{2}
+  \item $0.7^2$ \ashow{$=0.49$}
+  \columnbreak
+  \item $\sqrt{0.49}$ \ashow{$=0.7$}
+\end{multicols}
+  \item Each teacher eats $0.75$ of a baguette. Show on the diagram how many teachers
+        $3$ baguettes can feed. \;
+        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\abox{$300$}}{\abox{$75$}}=\abox{$4$}$
+  \vspace{3pt}\item (Challenge) A baguette is $0.6$\,m long. Each teacher's portion is $0.15$\,m
+        long. How many portions can be cut from $3$ baguettes?
+        \ashow{$0.6\div0.15=\dfrac{60}{15}=4$; \; $3\times4=12$ portions}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 6: Powers \& Estimating Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 6 to 9 in tenths ----
+\begin{scope}[x=1.25cm, shift={(-5.95,0)}]
+\node[dhead] at (5.95,0.85) {Number line A};
+\draw[thick] (5.95,0) -- (9.05,0);
+\foreach \v in {6,6.1,...,9.01} \draw (\v,-0.05) -- (\v,0.05);
+\foreach \v in {6,...,9} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q8 answer: sqrt 50 is just above 7, because 50 is just above 49 ---
+\fill[ans] (7.07,0) circle (1.8pt);
+\node[vans, above, inner sep=1.5pt] at (7.07,0.07) {$\sqrt{50}$};
+\end{scope}
+
+% ---- Three baguettes, to share out 0.75 of a baguette at a time ----
+\begin{scope}[yshift=-2.05cm]
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q11 answer: quarters, handed out three at a time to teachers 1 to 4 ---
+\foreach \y in {0,-0.8,-1.6} {\bagcuts{\y}}
+\baglabels{0}{1}{1}{1}{2}
+\baglabels{-0.8}{2}{2}{3}{3}
+\baglabels{-1.6}{3}{4}{4}{4}
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $7^2$ \ashow{$=49$}
+  \columnbreak
+  \item $\sqrt{144}$ \ashow{$=12$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-2.4+5$ \ashow{$=2.6$}
+  \columnbreak
+  \item $-3\times(-1.5)$ \ashow{$=4.5$}
+\end{multicols}
+  \item Write $2\times2\times2\times2\times2$ as a power, and work it out. Write $<$ or
+        $>$ between $2^5$ and $5^2$.
+        \ashow{$2^5=32>25$}
+\begin{multicols}{2}
+  \item $10^4$ \ashow{$=10\,000$}
+  \columnbreak
+  \item $3.7\times10^3$ \ashow{$=3700$}
+\end{multicols}
+  \item Complete \; $\abox{$7$}<\sqrt{50}<\abox{$8$}$, \; and mark $\sqrt{50}$ on
+        number line A.
+        \ashow{Just above $7$, as $50$ is near $49$}
+\begin{multicols}{2}
+  \item $0.7^2$ \ashow{$=0.49$}
+  \columnbreak
+  \item $\sqrt{0.49}$ \ashow{$=0.7$}
+\end{multicols}
+  \item Each teacher eats $0.75$ of a baguette. Show on the diagram how many teachers
+        $3$ baguettes can feed. \;
+        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\abox{$300$}}{\abox{$75$}}=\abox{$4$}$
+  \vspace{3pt}\item (Challenge) A baguette is $0.6$\,m long. Each teacher's portion is $0.15$\,m
+        long. How many portions can be cut from $3$ baguettes?
+        \ashow{$0.6\div0.15=\dfrac{60}{15}=4$; \; $3\times4=12$ portions}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 6: Powers \& Estimating Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 6 to 9 in tenths ----
+\begin{scope}[x=1.25cm, shift={(-5.95,0)}]
+\node[dhead] at (5.95,0.85) {Number line A};
+\draw[thick] (5.95,0) -- (9.05,0);
+\foreach \v in {6,6.1,...,9.01} \draw (\v,-0.05) -- (\v,0.05);
+\foreach \v in {6,...,9} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q8 answer: sqrt 50 is just above 7, because 50 is just above 49 ---
+\fill[ans] (7.07,0) circle (1.8pt);
+\node[vans, above, inner sep=1.5pt] at (7.07,0.07) {$\sqrt{50}$};
+\end{scope}
+
+% ---- Three baguettes, to share out 0.75 of a baguette at a time ----
+\begin{scope}[yshift=-2.05cm]
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q11 answer: quarters, handed out three at a time to teachers 1 to 4 ---
+\foreach \y in {0,-0.8,-1.6} {\bagcuts{\y}}
+\baglabels{0}{1}{1}{1}{2}
+\baglabels{-0.8}{2}{2}{3}{3}
+\baglabels{-1.6}{3}{4}{4}{4}
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $7^2$ \ashow{$=49$}
+  \columnbreak
+  \item $\sqrt{144}$ \ashow{$=12$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-2.4+5$ \ashow{$=2.6$}
+  \columnbreak
+  \item $-3\times(-1.5)$ \ashow{$=4.5$}
+\end{multicols}
+  \item Write $2\times2\times2\times2\times2$ as a power, and work it out. Write $<$ or
+        $>$ between $2^5$ and $5^2$.
+        \ashow{$2^5=32>25$}
+\begin{multicols}{2}
+  \item $10^4$ \ashow{$=10\,000$}
+  \columnbreak
+  \item $3.7\times10^3$ \ashow{$=3700$}
+\end{multicols}
+  \item Complete \; $\abox{$7$}<\sqrt{50}<\abox{$8$}$, \; and mark $\sqrt{50}$ on
+        number line A.
+        \ashow{Just above $7$, as $50$ is near $49$}
+\begin{multicols}{2}
+  \item $0.7^2$ \ashow{$=0.49$}
+  \columnbreak
+  \item $\sqrt{0.49}$ \ashow{$=0.7$}
+\end{multicols}
+  \item Each teacher eats $0.75$ of a baguette. Show on the diagram how many teachers
+        $3$ baguettes can feed. \;
+        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\abox{$300$}}{\abox{$75$}}=\abox{$4$}$
+  \vspace{3pt}\item (Challenge) A baguette is $0.6$\,m long. Each teacher's portion is $0.15$\,m
+        long. How many portions can be cut from $3$ baguettes?
+        \ashow{$0.6\div0.15=\dfrac{60}{15}=4$; \; $3\times4=12$ portions}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 6: Powers \& Estimating Roots}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- Number line A: 6 to 9 in tenths ----
+\begin{scope}[x=1.25cm, shift={(-5.95,0)}]
+\node[dhead] at (5.95,0.85) {Number line A};
+\draw[thick] (5.95,0) -- (9.05,0);
+\foreach \v in {6,6.1,...,9.01} \draw (\v,-0.05) -- (\v,0.05);
+\foreach \v in {6,...,9} {
+  \draw (\v,-0.1) -- (\v,0.1);
+  \node[nlab] at (\v,-0.1) {$\v$};
+}
+% --- Q8 answer: sqrt 50 is just above 7, because 50 is just above 49 ---
+\fill[ans] (7.07,0) circle (1.8pt);
+\node[vans, above, inner sep=1.5pt] at (7.07,0.07) {$\sqrt{50}$};
+\end{scope}
+
+% ---- Three baguettes, to share out 0.75 of a baguette at a time ----
+\begin{scope}[yshift=-2.05cm]
+\node[dhead] at (0,0.75) {Three baguettes};
+\foreach \y in {0,-0.8,-1.6} {\baguette{0}{\y}}
+% --- Q11 answer: quarters, handed out three at a time to teachers 1 to 4 ---
+\foreach \y in {0,-0.8,-1.6} {\bagcuts{\y}}
+\baglabels{0}{1}{1}{1}{2}
+\baglabels{-0.8}{2}{2}{3}{3}
+\baglabels{-1.6}{3}{4}{4}{4}
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $7^2$ \ashow{$=49$}
+  \columnbreak
+  \item $\sqrt{144}$ \ashow{$=12$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-2.4+5$ \ashow{$=2.6$}
+  \columnbreak
+  \item $-3\times(-1.5)$ \ashow{$=4.5$}
+\end{multicols}
+  \item Write $2\times2\times2\times2\times2$ as a power, and work it out. Write $<$ or
+        $>$ between $2^5$ and $5^2$.
+        \ashow{$2^5=32>25$}
+\begin{multicols}{2}
+  \item $10^4$ \ashow{$=10\,000$}
+  \columnbreak
+  \item $3.7\times10^3$ \ashow{$=3700$}
+\end{multicols}
+  \item Complete \; $\abox{$7$}<\sqrt{50}<\abox{$8$}$, \; and mark $\sqrt{50}$ on
+        number line A.
+        \ashow{Just above $7$, as $50$ is near $49$}
+\begin{multicols}{2}
+  \item $0.7^2$ \ashow{$=0.49$}
+  \columnbreak
+  \item $\sqrt{0.49}$ \ashow{$=0.7$}
+\end{multicols}
+  \item Each teacher eats $0.75$ of a baguette. Show on the diagram how many teachers
+        $3$ baguettes can feed. \;
+        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\abox{$300$}}{\abox{$75$}}=\abox{$4$}$
+  \vspace{3pt}\item (Challenge) A baguette is $0.6$\,m long. Each teacher's portion is $0.15$\,m
+        long. How many portions can be cut from $3$ baguettes?
+        \ashow{$0.6\div0.15=\dfrac{60}{15}=4$; \; $3\times4=12$ portions}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 7: BIDMAS
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 7: BIDMAS}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A receipt from the staff room café, with a torn bottom edge ----
+\node[dhead] at (0,0.3) {Receipt};
+\draw[fill=yellow!4, draw=black!60]
+  (0,0) -- (3.9,0) -- (3.9,-2.1)
+  \foreach \i in {1,...,13} { -- ({3.9-0.3*\i+0.15},-2.2) -- ({3.9-0.3*\i},-2.1) }
+  -- cycle;
+\node[font=\scriptsize\bfseries] at (1.95,-0.3) {Staff Room Café};
+\node[anchor=west] at (0.15,-0.75) {$3$ baguettes};
+\node[anchor=east] at (3.75,-0.75) {£$1.20$ each};
+\node[anchor=west] at (0.15,-1.15) {$2$ coffees};
+\node[anchor=east] at (3.75,-1.15) {£$2.45$ each};
+\draw[black!50, dashed] (0.15,-1.45) -- (3.75,-1.45);
+\node[anchor=west, font=\scriptsize\bfseries] at (0.15,-1.8) {Total};
+% --- Q9 answer: the total ---
+\node[anchor=east] at (3.75,-1.8)
+  {\alt<2->{\textcolor{red}{£$8.50$}}{£\,?}};
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $4^2-\sqrt9$ \ashow{$=16-3=13$}
+  \columnbreak
+  \item $(-12)\div2\times3$ \ashow{$=-6\times3=-18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $3+4\times5$ \ashow{$=3+20=23$}
+  \columnbreak
+  \item $(3+4)\times5$ \ashow{$=7\times5=35$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $20-12\div3$ \ashow{$=20-4=16$}
+  \columnbreak
+  \item $(20-12)\div3$, as a recurring decimal
+        \ashow{$=8\div3=2.\dot{6}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $\dfrac{18+6}{4}$ \ashow{$=\dfrac{24}{4}=6$}
+  \columnbreak
+  \item $18+6\div4$ \ashow{$=18+1.5=19.5$}
+\end{multicols}
+  \item Three teachers buy the items on the receipt. Write one calculation for the total
+        cost, and work it out.
+        \ashow{$3\times1.20+2\times2.45=3.60+4.90=$ £$8.50$}
+  \item They share the cost equally. Write one calculation, with brackets, for each
+        share, to the nearest penny.
+        \ashow{$(3\times1.20+2\times2.45)\div3=2.833\ldots\approx$ £$2.83$}
+  \item[] (Challenge) Put brackets into $2+6\times5-3$ to make each number.
+\begin{multicols}{2}
+  \item $16$ \ashow{\; $(2+6)\times(5-3)$}
+  \columnbreak
+  \item $37$ \ashow{\; $(2+6)\times5-3$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 7: BIDMAS}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A receipt from the staff room café, with a torn bottom edge ----
+\node[dhead] at (0,0.3) {Receipt};
+\draw[fill=yellow!4, draw=black!60]
+  (0,0) -- (3.9,0) -- (3.9,-2.1)
+  \foreach \i in {1,...,13} { -- ({3.9-0.3*\i+0.15},-2.2) -- ({3.9-0.3*\i},-2.1) }
+  -- cycle;
+\node[font=\scriptsize\bfseries] at (1.95,-0.3) {Staff Room Café};
+\node[anchor=west] at (0.15,-0.75) {$3$ baguettes};
+\node[anchor=east] at (3.75,-0.75) {£$1.20$ each};
+\node[anchor=west] at (0.15,-1.15) {$2$ coffees};
+\node[anchor=east] at (3.75,-1.15) {£$2.45$ each};
+\draw[black!50, dashed] (0.15,-1.45) -- (3.75,-1.45);
+\node[anchor=west, font=\scriptsize\bfseries] at (0.15,-1.8) {Total};
+% --- Q9 answer: the total ---
+\node[anchor=east] at (3.75,-1.8)
+  {\alt<2->{\textcolor{red}{£$8.50$}}{£\,?}};
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $4^2-\sqrt9$ \ashow{$=16-3=13$}
+  \columnbreak
+  \item $(-12)\div2\times3$ \ashow{$=-6\times3=-18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $3+4\times5$ \ashow{$=3+20=23$}
+  \columnbreak
+  \item $(3+4)\times5$ \ashow{$=7\times5=35$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $20-12\div3$ \ashow{$=20-4=16$}
+  \columnbreak
+  \item $(20-12)\div3$, as a recurring decimal
+        \ashow{$=8\div3=2.\dot{6}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $\dfrac{18+6}{4}$ \ashow{$=\dfrac{24}{4}=6$}
+  \columnbreak
+  \item $18+6\div4$ \ashow{$=18+1.5=19.5$}
+\end{multicols}
+  \item Three teachers buy the items on the receipt. Write one calculation for the total
+        cost, and work it out.
+        \ashow{$3\times1.20+2\times2.45=3.60+4.90=$ £$8.50$}
+  \item They share the cost equally. Write one calculation, with brackets, for each
+        share, to the nearest penny.
+        \ashow{$(3\times1.20+2\times2.45)\div3=2.833\ldots\approx$ £$2.83$}
+  \item[] (Challenge) Put brackets into $2+6\times5-3$ to make each number.
+\begin{multicols}{2}
+  \item $16$ \ashow{\; $(2+6)\times(5-3)$}
+  \columnbreak
+  \item $37$ \ashow{\; $(2+6)\times5-3$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 7: BIDMAS}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A receipt from the staff room café, with a torn bottom edge ----
+\node[dhead] at (0,0.3) {Receipt};
+\draw[fill=yellow!4, draw=black!60]
+  (0,0) -- (3.9,0) -- (3.9,-2.1)
+  \foreach \i in {1,...,13} { -- ({3.9-0.3*\i+0.15},-2.2) -- ({3.9-0.3*\i},-2.1) }
+  -- cycle;
+\node[font=\scriptsize\bfseries] at (1.95,-0.3) {Staff Room Café};
+\node[anchor=west] at (0.15,-0.75) {$3$ baguettes};
+\node[anchor=east] at (3.75,-0.75) {£$1.20$ each};
+\node[anchor=west] at (0.15,-1.15) {$2$ coffees};
+\node[anchor=east] at (3.75,-1.15) {£$2.45$ each};
+\draw[black!50, dashed] (0.15,-1.45) -- (3.75,-1.45);
+\node[anchor=west, font=\scriptsize\bfseries] at (0.15,-1.8) {Total};
+% --- Q9 answer: the total ---
+\node[anchor=east] at (3.75,-1.8)
+  {\alt<2->{\textcolor{red}{£$8.50$}}{£\,?}};
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $4^2-\sqrt9$ \ashow{$=16-3=13$}
+  \columnbreak
+  \item $(-12)\div2\times3$ \ashow{$=-6\times3=-18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $3+4\times5$ \ashow{$=3+20=23$}
+  \columnbreak
+  \item $(3+4)\times5$ \ashow{$=7\times5=35$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $20-12\div3$ \ashow{$=20-4=16$}
+  \columnbreak
+  \item $(20-12)\div3$, as a recurring decimal
+        \ashow{$=8\div3=2.\dot{6}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $\dfrac{18+6}{4}$ \ashow{$=\dfrac{24}{4}=6$}
+  \columnbreak
+  \item $18+6\div4$ \ashow{$=18+1.5=19.5$}
+\end{multicols}
+  \item Three teachers buy the items on the receipt. Write one calculation for the total
+        cost, and work it out.
+        \ashow{$3\times1.20+2\times2.45=3.60+4.90=$ £$8.50$}
+  \item They share the cost equally. Write one calculation, with brackets, for each
+        share, to the nearest penny.
+        \ashow{$(3\times1.20+2\times2.45)\div3=2.833\ldots\approx$ £$2.83$}
+  \item[] (Challenge) Put brackets into $2+6\times5-3$ to make each number.
+\begin{multicols}{2}
+  \item $16$ \ashow{\; $(2+6)\times(5-3)$}
+  \columnbreak
+  \item $37$ \ashow{\; $(2+6)\times5-3$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 7: BIDMAS}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A receipt from the staff room café, with a torn bottom edge ----
+\node[dhead] at (0,0.3) {Receipt};
+\draw[fill=yellow!4, draw=black!60]
+  (0,0) -- (3.9,0) -- (3.9,-2.1)
+  \foreach \i in {1,...,13} { -- ({3.9-0.3*\i+0.15},-2.2) -- ({3.9-0.3*\i},-2.1) }
+  -- cycle;
+\node[font=\scriptsize\bfseries] at (1.95,-0.3) {Staff Room Café};
+\node[anchor=west] at (0.15,-0.75) {$3$ baguettes};
+\node[anchor=east] at (3.75,-0.75) {£$1.20$ each};
+\node[anchor=west] at (0.15,-1.15) {$2$ coffees};
+\node[anchor=east] at (3.75,-1.15) {£$2.45$ each};
+\draw[black!50, dashed] (0.15,-1.45) -- (3.75,-1.45);
+\node[anchor=west, font=\scriptsize\bfseries] at (0.15,-1.8) {Total};
+% --- Q9 answer: the total ---
+\node[anchor=east] at (3.75,-1.8)
+  {\alt<2->{\textcolor{red}{£$8.50$}}{£\,?}};
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $4^2-\sqrt9$ \ashow{$=16-3=13$}
+  \columnbreak
+  \item $(-12)\div2\times3$ \ashow{$=-6\times3=-18$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $3+4\times5$ \ashow{$=3+20=23$}
+  \columnbreak
+  \item $(3+4)\times5$ \ashow{$=7\times5=35$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $20-12\div3$ \ashow{$=20-4=16$}
+  \columnbreak
+  \item $(20-12)\div3$, as a recurring decimal
+        \ashow{$=8\div3=2.\dot{6}$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $\dfrac{18+6}{4}$ \ashow{$=\dfrac{24}{4}=6$}
+  \columnbreak
+  \item $18+6\div4$ \ashow{$=18+1.5=19.5$}
+\end{multicols}
+  \item Three teachers buy the items on the receipt. Write one calculation for the total
+        cost, and work it out.
+        \ashow{$3\times1.20+2\times2.45=3.60+4.90=$ £$8.50$}
+  \item They share the cost equally. Write one calculation, with brackets, for each
+        share, to the nearest penny.
+        \ashow{$(3\times1.20+2\times2.45)\div3=2.833\ldots\approx$ £$2.83$}
+  \item[] (Challenge) Put brackets into $2+6\times5-3$ to make each number.
+\begin{multicols}{2}
+  \item $16$ \ashow{\; $(2+6)\times(5-3)$}
+  \columnbreak
+  \item $37$ \ashow{\; $(2+6)\times5-3$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 8: BIDMAS with powers, roots and negative numbers
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Starter 8: BIDMAS with Powers \& Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A square with side 3 + 2, split into 3 by 3, 2 by 2 and two 3 by 2 parts.
+% One unit is 0.6 cm. ----
+\node[dhead] at (0,0.75) {Square with side $3+2$};
+\begin{scope}[x=0.6cm, y=0.6cm, xshift=0.45cm, yshift=-3.1cm]
+% --- Q10 answer: the two 3 by 2 rectangles that 3^2 + 2^2 leaves out ---
+\fill[ansfill, red!25] (3,2) rectangle (5,5);
+\fill[ansfill, red!25] (0,0) rectangle (3,2);
+\draw[thick] (0,0) rectangle (5,5);
+\draw (3,0) -- (3,5);
+\draw (0,2) -- (5,2);
+\node[above] at (1.5,5) {$3$};
+\node[above] at (4,5)   {$2$};
+\node[left]  at (0,3.5) {$3$};
+\node[left]  at (0,1)   {$2$};
+\node[vans] at (1.5,3.5) {$3^2=9$};
+\node[vans] at (4,3.5)   {$6$};
+\node[vans] at (1.5,1)   {$6$};
+\node[vans] at (4,1)     {$2^2=4$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5+3\times2.5$ \ashow{$=5+7.5=12.5$}
+  \columnbreak
+  \item $\sqrt{64}-2^3$ \ashow{$=8-8=0$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-3^2$ \ashow{$=-9$}
+  \columnbreak
+  \item $(-3)^2$ \ashow{$=9$}
+\end{multicols}
+  \item Explain why your answers to Q3 and Q4 are different.
+        \ashow{In $-3^2$ only the $3$ is squared.}
+\begin{multicols}{2}
+  \item $2\times5^2$ \ashow{$=2\times25=50$}
+  \columnbreak
+  \item $(2\times5)^2$ \ashow{$=10^2=100$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $(3+2)^2$ \ashow{$=25$}
+  \columnbreak
+  \item $3^2+2^2$ \ashow{$=13$}
+\end{multicols}
+  \item Use the diagram to explain why your answers to Q8 and Q9 are different.
+        \ashow{$3^2+2^2$ leaves out the two $3\times2$ rectangles.}
+  \vspace{3pt}\item $\dfrac{4^2+2^3}{-9}$, as a recurring decimal
+        \ashow{$=\dfrac{24}{-9}=-2.\dot{6}$}
+\vspace{3pt}
+\begin{multicols}{2}
+  \item $\sqrt{36+64}$ \ashow{$=\sqrt{100}=10$}
+  \columnbreak
+  \item $\sqrt{36}+\sqrt{64}$ \ashow{$=6+8=14$}
+\end{multicols}
+  \item[] (Challenge) Use $2$, $3$ and $4$ once each, with any operations, powers or
+        brackets, to make each number.
+\begin{multicols}{2}
+  \item $-10$ \ashow{\; for example $2-3\times4$}
+  \columnbreak
+  \item $36$ \ashow{\; for example $3^2\times4$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 8: BIDMAS with Powers \& Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A square with side 3 + 2, split into 3 by 3, 2 by 2 and two 3 by 2 parts.
+% One unit is 0.6 cm. ----
+\node[dhead] at (0,0.75) {Square with side $3+2$};
+\begin{scope}[x=0.6cm, y=0.6cm, xshift=0.45cm, yshift=-3.1cm]
+% --- Q10 answer: the two 3 by 2 rectangles that 3^2 + 2^2 leaves out ---
+\fill[ansfill, red!25] (3,2) rectangle (5,5);
+\fill[ansfill, red!25] (0,0) rectangle (3,2);
+\draw[thick] (0,0) rectangle (5,5);
+\draw (3,0) -- (3,5);
+\draw (0,2) -- (5,2);
+\node[above] at (1.5,5) {$3$};
+\node[above] at (4,5)   {$2$};
+\node[left]  at (0,3.5) {$3$};
+\node[left]  at (0,1)   {$2$};
+\node[vans] at (1.5,3.5) {$3^2=9$};
+\node[vans] at (4,3.5)   {$6$};
+\node[vans] at (1.5,1)   {$6$};
+\node[vans] at (4,1)     {$2^2=4$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5+3\times2.5$ \ashow{$=5+7.5=12.5$}
+  \columnbreak
+  \item $\sqrt{64}-2^3$ \ashow{$=8-8=0$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-3^2$ \ashow{$=-9$}
+  \columnbreak
+  \item $(-3)^2$ \ashow{$=9$}
+\end{multicols}
+  \item Explain why your answers to Q3 and Q4 are different.
+        \ashow{In $-3^2$ only the $3$ is squared.}
+\begin{multicols}{2}
+  \item $2\times5^2$ \ashow{$=2\times25=50$}
+  \columnbreak
+  \item $(2\times5)^2$ \ashow{$=10^2=100$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $(3+2)^2$ \ashow{$=25$}
+  \columnbreak
+  \item $3^2+2^2$ \ashow{$=13$}
+\end{multicols}
+  \item Use the diagram to explain why your answers to Q8 and Q9 are different.
+        \ashow{$3^2+2^2$ leaves out the two $3\times2$ rectangles.}
+  \vspace{3pt}\item $\dfrac{4^2+2^3}{-9}$, as a recurring decimal
+        \ashow{$=\dfrac{24}{-9}=-2.\dot{6}$}
+\vspace{3pt}
+\begin{multicols}{2}
+  \item $\sqrt{36+64}$ \ashow{$=\sqrt{100}=10$}
+  \columnbreak
+  \item $\sqrt{36}+\sqrt{64}$ \ashow{$=6+8=14$}
+\end{multicols}
+  \item[] (Challenge) Use $2$, $3$ and $4$ once each, with any operations, powers or
+        brackets, to make each number.
+\begin{multicols}{2}
+  \item $-10$ \ashow{\; for example $2-3\times4$}
+  \columnbreak
+  \item $36$ \ashow{\; for example $3^2\times4$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 8: BIDMAS with Powers \& Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A square with side 3 + 2, split into 3 by 3, 2 by 2 and two 3 by 2 parts.
+% One unit is 0.6 cm. ----
+\node[dhead] at (0,0.75) {Square with side $3+2$};
+\begin{scope}[x=0.6cm, y=0.6cm, xshift=0.45cm, yshift=-3.1cm]
+% --- Q10 answer: the two 3 by 2 rectangles that 3^2 + 2^2 leaves out ---
+\fill[ansfill, red!25] (3,2) rectangle (5,5);
+\fill[ansfill, red!25] (0,0) rectangle (3,2);
+\draw[thick] (0,0) rectangle (5,5);
+\draw (3,0) -- (3,5);
+\draw (0,2) -- (5,2);
+\node[above] at (1.5,5) {$3$};
+\node[above] at (4,5)   {$2$};
+\node[left]  at (0,3.5) {$3$};
+\node[left]  at (0,1)   {$2$};
+\node[vans] at (1.5,3.5) {$3^2=9$};
+\node[vans] at (4,3.5)   {$6$};
+\node[vans] at (1.5,1)   {$6$};
+\node[vans] at (4,1)     {$2^2=4$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5+3\times2.5$ \ashow{$=5+7.5=12.5$}
+  \columnbreak
+  \item $\sqrt{64}-2^3$ \ashow{$=8-8=0$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-3^2$ \ashow{$=-9$}
+  \columnbreak
+  \item $(-3)^2$ \ashow{$=9$}
+\end{multicols}
+  \item Explain why your answers to Q3 and Q4 are different.
+        \ashow{In $-3^2$ only the $3$ is squared.}
+\begin{multicols}{2}
+  \item $2\times5^2$ \ashow{$=2\times25=50$}
+  \columnbreak
+  \item $(2\times5)^2$ \ashow{$=10^2=100$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $(3+2)^2$ \ashow{$=25$}
+  \columnbreak
+  \item $3^2+2^2$ \ashow{$=13$}
+\end{multicols}
+  \item Use the diagram to explain why your answers to Q8 and Q9 are different.
+        \ashow{$3^2+2^2$ leaves out the two $3\times2$ rectangles.}
+  \vspace{3pt}\item $\dfrac{4^2+2^3}{-9}$, as a recurring decimal
+        \ashow{$=\dfrac{24}{-9}=-2.\dot{6}$}
+\vspace{3pt}
+\begin{multicols}{2}
+  \item $\sqrt{36+64}$ \ashow{$=\sqrt{100}=10$}
+  \columnbreak
+  \item $\sqrt{36}+\sqrt{64}$ \ashow{$=6+8=14$}
+\end{multicols}
+  \item[] (Challenge) Use $2$, $3$ and $4$ once each, with any operations, powers or
+        brackets, to make each number.
+\begin{multicols}{2}
+  \item $-10$ \ashow{\; for example $2-3\times4$}
+  \columnbreak
+  \item $36$ \ashow{\; for example $3^2\times4$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Starter 8: BIDMAS with Powers \& Negatives}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.36\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+
+% ---- A square with side 3 + 2, split into 3 by 3, 2 by 2 and two 3 by 2 parts.
+% One unit is 0.6 cm. ----
+\node[dhead] at (0,0.75) {Square with side $3+2$};
+\begin{scope}[x=0.6cm, y=0.6cm, xshift=0.45cm, yshift=-3.1cm]
+% --- Q10 answer: the two 3 by 2 rectangles that 3^2 + 2^2 leaves out ---
+\fill[ansfill, red!25] (3,2) rectangle (5,5);
+\fill[ansfill, red!25] (0,0) rectangle (3,2);
+\draw[thick] (0,0) rectangle (5,5);
+\draw (3,0) -- (3,5);
+\draw (0,2) -- (5,2);
+\node[above] at (1.5,5) {$3$};
+\node[above] at (4,5)   {$2$};
+\node[left]  at (0,3.5) {$3$};
+\node[left]  at (0,1)   {$2$};
+\node[vans] at (1.5,3.5) {$3^2=9$};
+\node[vans] at (4,3.5)   {$6$};
+\node[vans] at (1.5,1)   {$6$};
+\node[vans] at (4,1)     {$2^2=4$};
+\end{scope}
+
+\end{tikzpicture}
+
+\column{0.64\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5+3\times2.5$ \ashow{$=5+7.5=12.5$}
+  \columnbreak
+  \item $\sqrt{64}-2^3$ \ashow{$=8-8=0$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $-3^2$ \ashow{$=-9$}
+  \columnbreak
+  \item $(-3)^2$ \ashow{$=9$}
+\end{multicols}
+  \item Explain why your answers to Q3 and Q4 are different.
+        \ashow{In $-3^2$ only the $3$ is squared.}
+\begin{multicols}{2}
+  \item $2\times5^2$ \ashow{$=2\times25=50$}
+  \columnbreak
+  \item $(2\times5)^2$ \ashow{$=10^2=100$}
+\end{multicols}
+\begin{multicols}{2}
+  \item $(3+2)^2$ \ashow{$=25$}
+  \columnbreak
+  \item $3^2+2^2$ \ashow{$=13$}
+\end{multicols}
+  \item Use the diagram to explain why your answers to Q8 and Q9 are different.
+        \ashow{$3^2+2^2$ leaves out the two $3\times2$ rectangles.}
+  \vspace{3pt}\item $\dfrac{4^2+2^3}{-9}$, as a recurring decimal
+        \ashow{$=\dfrac{24}{-9}=-2.\dot{6}$}
+\vspace{3pt}
+\begin{multicols}{2}
+  \item $\sqrt{36+64}$ \ashow{$=\sqrt{100}=10$}
+  \columnbreak
+  \item $\sqrt{36}+\sqrt{64}$ \ashow{$=6+8=14$}
+\end{multicols}
+  \item[] (Challenge) Use $2$, $3$ and $4$ once each, with any operations, powers or
+        brackets, to make each number.
+\begin{multicols}{2}
+  \item $-10$ \ashow{\; for example $2-3\times4$}
+  \columnbreak
+  \item $36$ \ashow{\; for example $3^2\times4$}
+\end{multicols}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\end{document}

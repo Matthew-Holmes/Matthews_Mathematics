@@ -1,3 +1,18 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/KS3/negativesPowersBidmasStarters.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/KS3/negativesPowersBidmasStarters.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
 \documentclass{beamer}
 \usepackage{tikz}
 \usetikzlibrary{calc, arrows.meta}
@@ -71,14 +86,11 @@
   anslab/.style  = {red, font=\tiny, visible on=<2->},
 }
 
-% Used by the worked solutions rather than by this deck, so that each worked
-% solution is first a question with room to write in and then the answer.
-\newlength{\aworkpad}
-\setlength{\aworkpad}{8mm}
-\newcommand{\awork}[1]{%
-  \par\vspace{\aworkpad}%
-  \uncover<2->{#1}%
-  \par\vspace{\aworkpad}%
+% A gap drawn as a dotted box, for a missing number or symbol in a line of
+% working. The answer appears in red inside the box on overlay 2.
+\newcommand{\abox}[1]{%
+  \tikz[baseline=(b.base)]\node[draw=gray, densely dotted, inner sep=1.5pt] (b)
+    {\alt<2->{\textcolor{red}{#1}}{\phantom{#1}}};%
 }
 
 % Every question list on these slides is tight, so that the diagram column and
@@ -188,7 +200,7 @@
   \foreach \i/\lab in {0/#2, 1/#3, 2/#4, 3/#5}
     \node[vans, inner sep=1pt] at ({0.9*\i+0.45},{#1-0.16}) {\lab};}
 
-\title{Negative Numbers, Powers \& BIDMAS: Starters}
+\title{Negative Numbers, Powers \& BIDMAS: Retrieve and Connects}
 \author{}
 \date{}
 
@@ -199,7 +211,7 @@
 %------------------------------------------------------------------
 % STARTER 1: Ordering and comparing negative numbers
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 1: Ordering Negative Numbers}
+\begin{frame}[t]{Retrieve and Connect: Ordering Negative Numbers}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -265,11 +277,11 @@
   \item[] Write $<$ or $>$ in each box.
 {\setlength{\columnsep}{14pt}%
 \begin{multicols}{3}
-  \item $-9$ \ablank{$<$} $-4$
+  \item $-9$ \abox{$<$} $-4$
   \columnbreak
-  \item $-1$ \ablank{$>$} $-10$
+  \item $-1$ \abox{$>$} $-10$
   \columnbreak
-  \item $0$ \ablank{$>$} $-0.5$
+  \item $0$ \abox{$>$} $-0.5$
 \end{multicols}}
   \item How many degrees warmer is London than Moscow?
         \ashow{$12$ degrees}
@@ -291,7 +303,7 @@
 %------------------------------------------------------------------
 % STARTER 2: Adding and subtracting across zero
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 2: Adding \& Subtracting Across Zero}
+\begin{frame}[t]{Retrieve and Connect: Adding \& Subtracting Across Zero}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -380,9 +392,9 @@
 \end{multicols}
   \item[] (Challenge) Find the missing numbers.
 \begin{multicols}{2}
-  \item $-3+{}$\ablank{$7.5$}${}=4.5$
+  \item $-3+{}$\abox{$7.5$}${}=4.5$
   \columnbreak
-  \item \ablank{$4$}${}-6=-2$
+  \item \abox{$4$}${}-6=-2$
 \end{multicols}
 \end{enumerate}
 \end{columns}
@@ -391,7 +403,7 @@
 %------------------------------------------------------------------
 % STARTER 3: Adding and subtracting negative numbers, and sharing baguettes
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 3: Adding \& Subtracting Negatives}
+\begin{frame}[t]{Retrieve and Connect: Adding \& Subtracting Negatives}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -411,10 +423,10 @@
 
 \begin{pattern}{Pattern for Q4}
   $5-2$      & $3$\\
-  $5-1$      & \ablank{$4$}\\
-  $5-0$      & \ablank{$5$}\\
-  $5-(-1)$   & \ablank{$6$}\\
-  $5-(-2)$   & \ablank{$7$}
+  $5-1$      & \abox{$4$}\\
+  $5-0$      & \abox{$5$}\\
+  $5-(-1)$   & \abox{$6$}\\
+  $5-(-2)$   & \abox{$7$}
 \end{pattern}
 
 \column{0.64\textwidth}
@@ -459,7 +471,7 @@
 %------------------------------------------------------------------
 % STARTER 4: Multiplying and dividing negative numbers
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 4: Multiplying \& Dividing Negatives}
+\begin{frame}[t]{Retrieve and Connect: Multiplying \& Dividing Negatives}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -492,17 +504,17 @@
 \orrule
 \begin{scaling}
   $1.35\times100=135$\\
-  $135\times4=\ablank{540}$\\
+  $135\times4=\abox{$540$}$\\
   We multiplied by $100$, so\\
-  $1.35\times4=\ablank{5.40}$
+  $1.35\times4=\abox{$5.40$}$
 \end{scaling}
 
 \begin{pattern}{Pattern for Q4}
   $(-3)\times2$      & $-6$\\
   $(-3)\times1$      & $-3$\\
-  $(-3)\times0$      & \ablank{$0$}\\
-  $(-3)\times(-1)$   & \ablank{$3$}\\
-  $(-3)\times(-2)$   & \ablank{$6$}
+  $(-3)\times0$      & \abox{$0$}\\
+  $(-3)\times(-1)$   & \abox{$3$}\\
+  $(-3)\times(-2)$   & \abox{$6$}
 \end{pattern}
 
 \column{0.64\textwidth}
@@ -536,7 +548,7 @@
         balance now?
         \ashow{$5.00-5.40=-0.40$, so $-$£$0.40$}
   \item $-4.8\div0.6=\dfrac{-4.8}{0.6}=\dfrac{-4.8\times10}{0.6\times10}
-        =\dfrac{\ablank{-48}}{\ablank{6}}=\ablank{-8}$
+        =\dfrac{\abox{$-48$}}{\abox{$6$}}=\abox{$-8$}$
   \item[] \vspace{3pt}(Challenge)
 \begin{multicols}{2}
   \item $(-0.3)\times(-0.4)$ \ashow{$=0.12$}
@@ -550,7 +562,7 @@
 %------------------------------------------------------------------
 % STARTER 5: Squares, cubes, square roots and cube roots
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 5: Squares, Cubes \& Roots}
+\begin{frame}[t]{Retrieve and Connect: Squares, Cubes \& Roots}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -563,7 +575,7 @@
 \node at (0.775,-0.33) {Area};
 \node at (0.775,-0.72) {$49$\,cm$^2$};
 % --- Q4 answer: the side length, where the question mark was ---
-\node[below, inner sep=1.5pt] at (0.775,-1.05) {\ashowq{$7$\,cm}};
+\node[below, inner sep=1.5pt] at (0.775,-1.05) {\alt<2->{\textcolor{red}{$7$\,cm}}{$?$}};
 
 % ---- Cube B: 3 by 3 by 3 centimetre cubes, drawn in oblique projection ----
 \begin{scope}[xshift=2.0cm, yshift=-1.05cm, scale=0.87]
@@ -609,9 +621,9 @@
 \orrule
 \begin{scaling}
   $1.2\times10=12$\\
-  $12\times12=\ablank{144}$\\
+  $12\times12=\abox{$144$}$\\
   We multiplied by $10\times10$, so\\
-  $1.2^2=\ablank{1.44}$
+  $1.2^2=\abox{$1.44$}$
 \end{scaling}
 
 \column{0.64\textwidth}
@@ -662,7 +674,7 @@
 %------------------------------------------------------------------
 % STARTER 6: Index notation, powers of 10, and estimating square roots
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 6: Powers \& Estimating Roots}
+\begin{frame}[t]{Retrieve and Connect: Powers \& Estimating Roots}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -718,7 +730,7 @@
   \columnbreak
   \item $3.7\times10^3$ \ashow{$=3700$}
 \end{multicols}
-  \item Complete \; $\ablank{7}<\sqrt{50}<\ablank{8}$, \; and mark $\sqrt{50}$ on
+  \item Complete \; $\abox{$7$}<\sqrt{50}<\abox{$8$}$, \; and mark $\sqrt{50}$ on
         number line A.
         \ashow{Just above $7$, as $50$ is near $49$}
 \begin{multicols}{2}
@@ -728,7 +740,7 @@
 \end{multicols}
   \item Each teacher eats $0.75$ of a baguette. Show on the diagram how many teachers
         $3$ baguettes can feed. \;
-        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\ablank{300}}{\ablank{75}}=\ablank{4}$
+        $3\div0.75=\dfrac{3}{0.75}=\dfrac{\abox{$300$}}{\abox{$75$}}=\abox{$4$}$
   \vspace{3pt}\item (Challenge) A baguette is $0.6$\,m long. Each teacher's portion is $0.15$\,m
         long. How many portions can be cut from $3$ baguettes?
         \ashow{$0.6\div0.15=\dfrac{60}{15}=4$; \; $3\times4=12$ portions}
@@ -739,7 +751,7 @@
 %------------------------------------------------------------------
 % STARTER 7: BIDMAS
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 7: BIDMAS}
+\begin{frame}[t]{Retrieve and Connect: BIDMAS}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -761,7 +773,7 @@
 \node[anchor=west, font=\scriptsize\bfseries] at (0.15,-1.8) {Total};
 % --- Q9 answer: the total ---
 \node[anchor=east] at (3.75,-1.8)
-  {£\,\ashowq{$8.50$}};
+  {\alt<2->{\textcolor{red}{£$8.50$}}{£\,?}};
 
 \end{tikzpicture}
 
@@ -809,7 +821,7 @@
 %------------------------------------------------------------------
 % STARTER 8: BIDMAS with powers, roots and negative numbers
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 8: BIDMAS with Powers \& Negatives}
+\begin{frame}[t]{Retrieve and Connect: BIDMAS with Powers \& Negatives}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
