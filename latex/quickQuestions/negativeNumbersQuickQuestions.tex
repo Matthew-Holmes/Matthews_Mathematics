@@ -1,0 +1,773 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+% ================================================================
+% Quick Questions deck: arithmetic with negative numbers.
+%
+% Each topic opens with five true/false statements and then runs ten
+% quick questions that get gradually harder. Every question gets two
+% slides: the question on its own for the mini whiteboards, then the
+% same question again with the solution underneath in red.
+%
+% The green topic is ordering positive and negative integers. The two
+% amber topics are the four operations with negative integers: adding
+% and subtracting, then multiplying and dividing. The two red topics
+% multiply several numbers in a row, deciding whether the product is
+% positive or negative, and then use all four operations with negative
+% decimals.
+%
+% Where the working can be drawn it is: number lines for ordering, with
+% jumps along the line for adding and subtracting (split at zero when a
+% jump crosses it) and for multiplying a negative number by a positive
+% whole number; a pattern of calculations for subtracting a negative
+% number and for multiplying two negative numbers; and a chain of
+% running products for repeated multiplication, which shows the sign
+% changing each time a negative number is multiplied in. Multiplying
+% two negative decimals is left as written working, scaling to whole
+% numbers, and dividing by a decimal is done with equivalent fractions.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+
+% A link in the bottom left of every slide back to the contents, so a
+% deck this long can be jumped around in during a lesson.
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{%
+    \hspace{1em}%
+    \hyperlink{contents}{%
+      \color{gray}\scriptsize$\leftarrow$~Back to contents}%
+    \hfil}%
+  \vskip4pt%
+}
+
+% Topic divider.
+\newcommand{\qtopic}[1]{%
+  \section{#1}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \tf[<statement size>][<answer size>]{<statement>}{<answer>}
+% As \qq, but with a standing "True or false?" heading above the
+% statement. The statements hunt for the usual misconceptions, so the
+% answer always says why, not just which.
+\NewDocumentCommand{\tf}{O{\LARGE}O{\Large}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering
+        {\usebeamercolor[fg]{structure}\Large\bfseries True or false?}
+        \par\vspace{1em}
+        #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% Chained working, one equation per row, so that a calculation of
+% several steps does not have to be squeezed onto a single line. It is
+% also used for the patterns of calculations, with the equals signs
+% lined up. \dfrac is taller than the row strut, so rows with a
+% fraction carry an explicit skip such as \\[0.95em].
+\newcommand{\work}[1]{%
+  \begin{tabular}{@{}r@{\;=\;}l@{}}#1\end{tabular}%
+}
+
+% A temperature in degrees Celsius: \dC{-4}.
+\newcommand{\dC}[1]{$#1\,^{\circ}$C}
+
+% ================================================================
+% Number lines
+% ================================================================
+
+% \begin{numline}[<cm per unit>]{<left>}{<right>}{<tick step>}{<labels>}
+%   ... \nlpt, \nlptlab, \nlopen, \nljump ...
+% \end{numline}
+% A horizontal number line from <left> to <right>, with a tick every
+% <tick step> and the numbers in the comma-separated list <labels>
+% written underneath. The x unit is one unit of the number line, so
+% anything drawn inside the environment is placed at the value it
+% stands for.
+\NewDocumentEnvironment{numline}{O{0.6}mmmm}{%
+  \begin{tikzpicture}[x=#1cm, y=1cm, font=\small]
+    \draw[red!55!black, thick, <->]
+      ([xshift=-0.35cm]#2,0) -- ([xshift=0.35cm]#3,0);
+    \pgfmathtruncatemacro{\nlticks}{round(((#3)-(#2))/(#4))}
+    \foreach \i in {0,...,\nlticks}{%
+      \draw[red!55!black] ({#2+\i*(#4)},-0.1) -- ({#2+\i*(#4)},0.1);}
+    \foreach \v in {#5}{%
+      \node[red!55!black, below=3pt, font=\small, inner sep=1pt]
+        at (\v,0) {$\v$};}
+}{%
+  \end{tikzpicture}%
+}
+
+% \nlpt{<value>} marks a point on the line. \nlptlab[<raise>]{<value>}
+% {<label>} marks it and writes <label> above it; the raise lifts a
+% label clear of a neighbour that sits close by.
+\newcommand{\nlpt}[1]{\fill[red] (#1,0) circle (3pt);}
+\newcommand{\nlptlab}[3][3pt]{%
+  \fill[red] (#2,0) circle (3pt);
+  \node[red, above=#1, font=\normalsize, inner sep=1pt] at (#2,0) {#3};}
+
+% \nlopen{<value>} is an open circle, for an end point that is not
+% included, as in inequality notation.
+\newcommand{\nlopen}[1]{\draw[red, thick, fill=white] (#1,0) circle (3pt);}
+
+% \nljump[<height>]{<from>}{<to>}{<step>} is a jump along the line,
+% drawn as an arc above it with the step written on top. A larger
+% <height> lifts one jump over another that covers the same stretch.
+\newcommand{\nljump}[4][0.75]{%
+  \draw[red, thick, ->, shorten >=1pt]
+    (#2,0.14) .. controls +(0,#1) and +(0,#1) ..
+    node[above, font=\small, inner sep=1.5pt] {$#4$} (#3,0.14);}
+
+% ================================================================
+% Running products
+% ================================================================
+
+% \chain{<first number>}{<step>/<product so far>,...}
+% A row of boxes holding the product so far, joined by arrows labelled
+% with the number multiplied in at that step. Reading along the row
+% shows the sign changing every time a negative number is multiplied
+% in, and staying the same when a positive number is.
+\newcommand{\chain}[2]{%
+  \begin{tikzpicture}[
+      fbox/.style={draw=red!60!black, rounded corners=2pt, fill=red!8,
+                   inner sep=4pt, text=red, font=\Large,
+                   minimum width=1.2cm},
+      farr/.style={->, red, thick, shorten >=1pt, shorten <=1pt}]
+    \node[fbox] (n0) {$#1$};
+    \foreach \op/\val [count=\i, remember=\i as \j (initially 0)] in {#2}{%
+      \node[fbox, right=1.3cm of n\j] (n\i) {$\val$};
+      \draw[farr] (n\j) -- node[above, text=red, font=\normalsize]{$\op$} (n\i);}
+  \end{tikzpicture}%
+}
+
+% Contents-slide bullets, colour-coded by difficulty band: green for
+% ordering, orange for the two topics on the four operations with
+% integers, and red for repeated multiplication and negative decimals.
+% The green is darkened because a pure green washes out on a projector.
+\setbeamertemplate{section in toc}{%
+  \ifnum\inserttocsectionnumber<2
+    \textcolor{green!55!black}{$\bullet$}%
+  \else
+    \ifnum\inserttocsectionnumber<4
+      \textcolor{orange}{$\bullet$}%
+    \else
+      \textcolor{red}{$\bullet$}%
+    \fi
+  \fi
+  ~\inserttocsection%
+}
+
+\title{Negative Numbers: Quick Questions}
+\subtitle{Mini whiteboard questions, with solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[label=contents]{Contents}
+  \small
+  \tableofcontents
+\end{frame}
+
+%================================================================
+\qtopic{Ordering positive and negative integers}
+%================================================================
+
+\tf[\LARGE][\large]{$-8$ is greater than $-3$}
+  {\textbf{False.} $-8$ is further to the left on the number line, so
+   $-8$ is less than $-3$.\\[0.3em]
+   $-8<-3$
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-9}{1}{1}{-9,...,1}
+     \nlpt{-8} \nlpt{-3}
+   \end{numline}}
+
+\tf{$-1$ is greater than $-100$}
+  {\textbf{True.} $-1$ is to the right of $-100$ on the number line, and
+   the numbers get larger as we move to the right.\\[0.3em]
+   $-1>-100$}
+
+\tf{$0$ is the smallest number}
+  {\textbf{False.} Every negative number is less than $0$.\\[0.3em]
+   For example, $-1<0$.}
+
+\tf{$-6<2$}
+  {\textbf{True.} Every negative number is less than every positive
+   number.}
+
+\tf[\LARGE][\large]{In order from smallest to largest:\\[0.3em]
+   $-2,\ -5,\ -9$}
+  {\textbf{False.} The larger the number after the minus sign, the
+   further the number is to the left of $0$, so the smaller it is.\\[0.3em]
+   In order from smallest to largest: $-9,\ -5,\ -2$
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-10}{0}{1}{-10,...,0}
+     \nlpt{-9} \nlpt{-5} \nlpt{-2}
+   \end{numline}}
+
+\qq[\Huge][\large]{Which is larger, $-4$ or $2$?}
+  {$2$ is to the right of $-4$ on the number line, so $2$ is larger.
+   \par\vspace{0.5em}
+   \begin{numline}[1.3]{-5}{3}{1}{-5,...,3}
+     \nlpt{-4} \nlpt{2}
+   \end{numline}}
+
+\qq[\Huge][\large]{Which is smaller, $-7$ or $-2$?}
+  {$-7$ is to the left of $-2$ on the number line, so $-7$ is smaller.
+   \par\vspace{0.5em}
+   \begin{numline}[1.2]{-8}{1}{1}{-8,...,1}
+     \nlpt{-7} \nlpt{-2}
+   \end{numline}}
+
+\qq[\Huge][\large]{Write $<$ or $>$ in the box\\[0.5em]
+   $-6\ \ \boxed{\phantom{\,>\,}}\ \ {-9}$}
+  {$-6$ is to the right of $-9$ on the number line.\\[0.3em]
+   $-6>-9$
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-10}{0}{1}{-10,...,0}
+     \nlpt{-9} \nlpt{-6}
+   \end{numline}}
+
+\qq[\LARGE][\large]{Write these numbers in order,\\[0.3em]smallest first\\[0.6em]
+   $3,\quad -1,\quad -5,\quad 0,\quad 2$}
+  {$-5,\ -1,\ 0,\ 2,\ 3$
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-6}{4}{1}{-6,...,4}
+     \nlpt{-5} \nlpt{-1} \nlpt{0} \nlpt{2} \nlpt{3}
+   \end{numline}}
+
+\qq[\LARGE][\large]{Write these numbers in order,\\[0.3em]smallest first\\[0.6em]
+   $-12,\quad 8,\quad -3,\quad -20,\quad 5$}
+  {$-20,\ -12,\ -3,\ 5,\ 8$
+   \par\vspace{0.5em}
+   \begin{numline}[0.37]{-20}{10}{1}{-20,-15,...,10}
+     \nlptlab{-20}{$-20$} \nlptlab{-12}{$-12$} \nlptlab{-3}{$-3$}
+     \nlptlab{5}{$5$} \nlptlab{8}{$8$}
+   \end{numline}}
+
+\qq[\LARGE][\large]{Write these numbers in order,\\[0.3em]largest first\\[0.6em]
+   $-14,\quad -41,\quad -4,\quad -11,\quad -1$}
+  {$-1,\ -4,\ -11,\ -14,\ -41$\\[0.3em]
+   $-41$ is the furthest to the left of $0$, so it is the smallest.
+   \par\vspace{0.5em}
+   \begin{numline}[0.25]{-45}{0}{5}{-40,-30,...,0}
+     \nlptlab{-41}{$-41$} \nlptlab[15pt]{-14}{$-14$} \nlptlab{-11}{$-11$}
+     \nlptlab{-4}{$-4$} \nlptlab[15pt]{-1}{$-1$}
+   \end{numline}}
+
+\qq[\Large][\large]{The temperatures in four cities at midnight\\[0.6em]
+   \begin{tabular}{cccc}
+     Oslo & London & Warsaw & Berlin\\
+     \dC{-8} & \dC{5} & \dC{-3} & \dC{-1}
+   \end{tabular}\\[0.6em]
+   Write the cities in order, coldest first.}
+  {Oslo, Warsaw, Berlin, London
+   \par\vspace{0.5em}
+   \begin{numline}[0.74]{-9}{6}{1}{-9,...,6}
+     \nlptlab{-8}{Oslo} \nlptlab{-3}{Warsaw} \nlptlab{-1}{Berlin}
+     \nlptlab{5}{London}
+   \end{numline}}
+
+\qq[\LARGE][\large]{List the integers that are\\[0.3em]
+   greater than $-4$ and less than $1$}
+  {$-3,\ -2,\ -1,\ 0$\\[0.3em]
+   $-4$ and $1$ are not included, and $0$ is an integer.
+   \par\vspace{0.5em}
+   \begin{numline}[1.4]{-5}{2}{1}{-5,...,2}
+     \nlopen{-4} \nlpt{-3} \nlpt{-2} \nlpt{-1} \nlpt{0} \nlopen{1}
+   \end{numline}}
+
+\qq[\LARGE][\large]{$n$ is an integer and $-5<n\leq -2$\\[0.4em]
+   List the possible values of $n$}
+  {$n=-4,\ -3$ or $-2$\\[0.3em]
+   $n$ must be greater than $-5$, so $-5$ is not included.
+   $n$ can be equal to $-2$, so $-2$ is included.
+   \par\vspace{0.5em}
+   \begin{numline}[1.4]{-6}{1}{1}{-6,...,1}
+     \nlopen{-5} \nlpt{-4} \nlpt{-3} \nlpt{-2}
+   \end{numline}}
+
+\qq[\LARGE][\large]{Which number is halfway\\[0.3em]between $-9$ and $3$?}
+  {From $-9$ to $3$ is $12$ steps, and half of $12$ is $6$.\\[0.3em]
+   $-9+6=-3$ and $3-6=-3$, so $-3$ is halfway.
+   \par\vspace{0.5em}
+   \begin{numline}[0.78]{-10}{4}{1}{-10,...,4}
+     \nlpt{-9} \nlpt{3}
+     \nljump{-9}{-3}{+6} \nljump{3}{-3}{-6}
+   \end{numline}}
+
+%================================================================
+\qtopic{Adding and subtracting with negative numbers}
+%================================================================
+
+\tf[\LARGE][\large]{$-3+5=-8$}
+  {\textbf{False.} Start at $-3$ and move $5$ to the right.\\[0.3em]
+   $-3+5=2$
+   \par\vspace{0.5em}
+   \begin{numline}[1.4]{-4}{3}{1}{-4,...,3}
+     \nljump{-3}{0}{+3} \nljump{0}{2}{+2}
+   \end{numline}}
+
+\tf[\LARGE][\large]{$4-7=-3$}
+  {\textbf{True.} Start at $4$ and move $7$ to the left. The first $4$
+   steps take us to $0$, and the other $3$ take us to $-3$.
+   \par\vspace{0.5em}
+   \begin{numline}[1.2]{-4}{5}{1}{-4,...,5}
+     \nljump{4}{0}{-4} \nljump{0}{-3}{-3}
+   \end{numline}}
+
+\tf[\LARGE][\large]{$6-(-2)=4$}
+  {\textbf{False.} In the pattern, each answer is $1$ more than the one
+   above.\\[0.3em]
+   \begin{minipage}[c]{0.3\textwidth}
+     \centering
+     \work{$6-2$ & $4$\\ $6-1$ & $5$\\ $6-0$ & $6$\\
+           $6-(-1)$ & $7$\\ $6-(-2)$ & $8$}
+   \end{minipage}%
+   \begin{minipage}[c]{0.55\textwidth}
+     \centering
+     Subtracting $-2$ is the same as adding $2$.\\[0.3em]
+     $6-(-2)=6+2=8$
+   \end{minipage}}
+
+\tf{$5+(-3)$ is the same as $5-3$}
+  {\textbf{True.} Adding $-3$ is the same as subtracting $3$.\\[0.3em]
+   Both are equal to $2$.}
+
+\tf[\LARGE][\large]{Two negatives make a positive,\\[0.3em]so $-4-6=10$}
+  {\textbf{False.} That rule is for multiplying and dividing, not for
+   adding and subtracting.\\[0.3em]
+   Start at $-4$ and move $6$ to the left: $-4-6=-10$
+   \par\vspace{0.5em}
+   \begin{numline}[0.9]{-11}{1}{1}{-11,...,1}
+     \nljump{-4}{-10}{-6}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-2+6$}
+  {$-2+6=4$
+   \par\vspace{0.5em}
+   \begin{numline}[1.3]{-3}{5}{1}{-3,...,5}
+     \nljump{-2}{0}{+2} \nljump{0}{4}{+4}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $3-8$}
+  {$3-8=-5$
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-6}{4}{1}{-6,...,4}
+     \nljump{3}{0}{-3} \nljump{0}{-5}{-5}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-5-4$}
+  {$-5-4=-9$
+   \par\vspace{0.5em}
+   \begin{numline}[1.0]{-10}{1}{1}{-10,...,1}
+     \nljump{-5}{-9}{-4}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $7+(-3)$}
+  {Adding $-3$ is the same as subtracting $3$.\\[0.3em]
+   $7+(-3)=7-3=4$
+   \par\vspace{0.5em}
+   \begin{numline}[1.2]{-1}{8}{1}{-1,...,8}
+     \nljump{7}{4}{-3}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $2-(-5)$}
+  {Subtracting $-5$ is the same as adding $5$.\\[0.3em]
+   $2-(-5)=2+5=7$
+   \par\vspace{0.5em}
+   \begin{numline}[1.2]{-1}{8}{1}{-1,...,8}
+     \nljump{2}{7}{+5}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-6-(-9)$}
+  {Subtracting $-9$ is the same as adding $9$.\\[0.3em]
+   $-6-(-9)=-6+9=3$
+   \par\vspace{0.5em}
+   \begin{numline}[1.0]{-7}{4}{1}{-7,...,4}
+     \nljump{-6}{0}{+6} \nljump{0}{3}{+3}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-8+(-7)$}
+  {Adding $-7$ is the same as subtracting $7$.\\[0.3em]
+   $-8+(-7)=-8-7=-15$
+   \par\vspace{0.5em}
+   \begin{numline}[0.65]{-16}{1}{1}{-16,-14,...,0}
+     \nljump{-8}{-15}{-7}
+   \end{numline}}
+
+\qq[\Large][\large]{A bank account has a balance of $-$\pounds$35$.\\[0.3em]
+   \pounds$50$ is paid in, then \pounds$28$ is spent.\\[0.3em]
+   What is the balance now?}
+  {\work{$-35+50$ & $15$\\[0.2em] $15-28$ & $-13$}\\[0.3em]
+   The balance is $-$\pounds$13$.}
+
+\qq[\Large][\large]{At midnight the temperature is \dC{-4}.\\[0.3em]
+   By noon it is \dC{9}.\\[0.3em]
+   By how many degrees has the temperature risen?}
+  {$9-(-4)=9+4=13$\\[0.3em]
+   The temperature has risen by $13$ degrees.
+   \par\vspace{0.5em}
+   \begin{numline}[0.74]{-5}{10}{1}{-5,...,10}
+     \nljump{-4}{0}{+4} \nljump{0}{9}{+9}
+   \end{numline}}
+
+\qq[\Huge][\large]{Find the missing number\\[0.5em]
+   $-3-\boxed{\phantom{00}}=5$}
+  {$5$ is larger than $-3$, so the number being subtracted must be
+   negative.\\[0.3em]
+   $-3-(-8)=-3+8=5$, so the missing number is $-8$.
+   \par\vspace{0.5em}
+   \begin{numline}[1.1]{-4}{6}{1}{-4,...,6}
+     \nljump{-3}{0}{+3} \nljump{0}{5}{+5}
+   \end{numline}}
+
+%================================================================
+\qtopic{Multiplying and dividing with negative numbers}
+%================================================================
+
+\tf[\LARGE][\large]{$(-3)\times(-2)=-6$}
+  {\textbf{False.} In the pattern, each answer is $3$ more than the one
+   above.\\[0.3em]
+   \begin{minipage}[c]{0.32\textwidth}
+     \centering
+     \work{$(-3)\times 2$ & $-6$\\ $(-3)\times 1$ & $-3$\\
+           $(-3)\times 0$ & $0$\\ $(-3)\times(-1)$ & $3$\\
+           $(-3)\times(-2)$ & $6$}
+   \end{minipage}%
+   \begin{minipage}[c]{0.55\textwidth}
+     \centering
+     A negative number multiplied by a negative number is positive.\\[0.3em]
+     $(-3)\times(-2)=6$
+   \end{minipage}}
+
+\tf[\LARGE][\large]{$4\times(-5)=-20$}
+  {\textbf{True.} $4\times(-5)$ is four lots of $-5$.
+   \par\vspace{0.5em}
+   \begin{numline}[0.46]{-22}{2}{1}{-20,-15,...,0}
+     \nljump{0}{-5}{-5} \nljump{-5}{-10}{-5}
+     \nljump{-10}{-15}{-5} \nljump{-15}{-20}{-5}
+   \end{numline}}
+
+\tf{$-20\div(-4)=-5$}
+  {\textbf{False.} $(-4)\times 5=-20$, so $-20\div(-4)=5$.\\[0.3em]
+   The signs are the same, so the answer is positive.}
+
+\tf{$-18\div 3=-6$}
+  {\textbf{True.} $3\times(-6)=-18$, so $-18\div 3=-6$.\\[0.3em]
+   The signs are different, so the answer is negative.}
+
+\tf[\LARGE][\Large]{$(-7)\times 3$ and $7\times(-3)$\\[0.3em]
+   give the same answer}
+  {\textbf{True.} Each has one negative number, so each answer is
+   negative.\\[0.3em]
+   $(-7)\times 3=-21$ and $7\times(-3)=-21$}
+
+\qq[\Huge][\large]{Work out $3\times(-4)$}
+  {$3\times(-4)$ is three lots of $-4$.\\[0.3em]
+   $3\times(-4)=-12$
+   \par\vspace{0.5em}
+   \begin{numline}[0.78]{-13}{1}{1}{-12,-8,-4,0}
+     \nljump{0}{-4}{-4} \nljump{-4}{-8}{-4} \nljump{-8}{-12}{-4}
+   \end{numline}}
+
+\qq{Work out $(-6)\times(-3)$}
+  {The signs are the same, so the answer is positive.\\[0.3em]
+   $(-6)\times(-3)=18$}
+
+\qq{Work out $-15\div 5$}
+  {The signs are different, so the answer is negative.\\[0.3em]
+   $-15\div 5=-3$, because $5\times(-3)=-15$.}
+
+\qq{Work out $24\div(-6)$}
+  {The signs are different, so the answer is negative.\\[0.3em]
+   $24\div(-6)=-4$, because $(-6)\times(-4)=24$.}
+
+\qq{Work out $-35\div(-7)$}
+  {The signs are the same, so the answer is positive.\\[0.3em]
+   $-35\div(-7)=5$, because $(-7)\times 5=-35$.}
+
+\qq{Work out $(-9)\times(-8)$}
+  {The signs are the same, so the answer is positive.\\[0.3em]
+   $(-9)\times(-8)=72$}
+
+\qq{Work out $\dfrac{-56}{8}$}
+  {The fraction bar means divide: $-56\div 8$.\\[0.3em]
+   The signs are different, so the answer is negative.\\[0.3em]
+   $\dfrac{-56}{8}=-7$}
+
+\qq[\Huge][\LARGE]{Find the missing number\\[0.5em]
+   $(-4)\times\boxed{\phantom{00}}=28$}
+  {$28$ is positive, so the missing number has the same sign as $-4$.\\[0.3em]
+   $28\div(-4)=-7$, so the missing number is $-7$.}
+
+\qq[\Large][\large]{Over $6$ hours the temperature changes by \dC{-18}.\\[0.3em]
+   It changes by the same amount each hour.\\[0.3em]
+   What is the change each hour?}
+  {$-18\div 6=-3$\\[0.3em]
+   The temperature changes by \dC{-3} each hour, which is a fall of
+   $3$ degrees.
+   \par\vspace{0.5em}
+   \begin{numline}[0.55]{-19}{1}{1}{-18,-15,...,0}
+     \nljump{0}{-3}{-3} \nljump{-3}{-6}{-3} \nljump{-6}{-9}{-3}
+     \nljump{-9}{-12}{-3} \nljump{-12}{-15}{-3} \nljump{-15}{-18}{-3}
+   \end{numline}}
+
+\qq[\LARGE][\LARGE]{Find two integers whose\\[0.3em]
+   product is $-12$ and whose sum is $1$}
+  {The product is negative, so one integer is negative and the other is
+   positive.\\[0.3em]
+   $4\times(-3)=-12$ and $4+(-3)=1$\\[0.3em]
+   The integers are $4$ and $-3$.}
+
+%================================================================
+\qtopic{Repeated multiplication with negative numbers}
+%================================================================
+
+\tf[\LARGE][\large]{$(-2)\times(-3)\times(-1)$ is positive}
+  {\textbf{False.} Each negative number changes the sign of the
+   product. There are three negative numbers, and three is odd, so the
+   product is negative.
+   \par\vspace{0.6em}
+   \chain{-2}{\times(-3)/6,\times(-1)/-6}}
+
+\tf[\LARGE][\Large]{$(-3)^{2}=-9$}
+  {\textbf{False.} $(-3)^{2}$ means $(-3)\times(-3)$.\\[0.3em]
+   The signs are the same, so $(-3)^{2}=9$.}
+
+\tf[\LARGE][\Large]{$(-1)^{100}=1$}
+  {\textbf{True.} There are $100$ negative numbers multiplied together,
+   and $100$ is even, so the product is positive.\\[0.3em]
+   $(-1)\times(-1)=1$, and each pair of $(-1)$s gives $1$.}
+
+\tf[\LARGE][\large]{$(-2)\times 5\times(-1)\times 3$ is negative,\\[0.3em]
+   because it has negative numbers in it}
+  {\textbf{False.} There are two negative numbers, and two is even, so the
+   product is positive.
+   \par\vspace{0.6em}
+   \chain{-2}{\times 5/-10,\times(-1)/10,\times 3/30}}
+
+\tf[\LARGE][\large]{$(-2)^{3}=-8$}
+  {\textbf{True.} $(-2)^{3}$ means $(-2)\times(-2)\times(-2)$. There are
+   three negative numbers, and three is odd, so the product is negative.
+   \par\vspace{0.6em}
+   \chain{-2}{\times(-2)/4,\times(-2)/-8}}
+
+\qq[\Huge][\large]{Work out $(-2)\times(-3)\times 4$}
+  {Two negative numbers: two is even, so the product is positive.
+   \par\vspace{0.6em}
+   \chain{-2}{\times(-3)/6,\times 4/24}}
+
+\qq[\Huge][\large]{Work out $(-1)\times(-5)\times(-2)$}
+  {Three negative numbers: three is odd, so the product is negative.
+   \par\vspace{0.6em}
+   \chain{-1}{\times(-5)/5,\times(-2)/-10}}
+
+\qq{Work out $(-4)^{2}$}
+  {$(-4)^{2}=(-4)\times(-4)=16$}
+
+\qq[\Huge][\large]{Work out $(-2)^{3}$}
+  {$(-2)^{3}=(-2)\times(-2)\times(-2)$\\[0.3em]
+   Three negative numbers: three is odd, so the product is negative.
+   \par\vspace{0.6em}
+   \chain{-2}{\times(-2)/4,\times(-2)/-8}}
+
+\qq[\Huge][\large]{Work out $3\times(-2)\times(-5)\times(-1)$}
+  {Three negative numbers: three is odd, so the product is negative.
+   \par\vspace{0.6em}
+   \chain{3}{\times(-2)/-6,\times(-5)/30,\times(-1)/-30}}
+
+\qq{Work out $(-1)^{7}$}
+  {Seven negative numbers are multiplied together.\\[0.3em]
+   Seven is odd, so the product is negative.\\[0.3em]
+   $(-1)^{7}=-1$}
+
+\qq[\Huge][\large]{Work out $(-2)^{5}$}
+  {Five negative numbers: five is odd, so the product is negative.
+   \par\vspace{0.6em}
+   \chain{-2}{\times(-2)/4,\times(-2)/-8,\times(-2)/16,\times(-2)/-32}}
+
+\qq[\LARGE][\LARGE]{Is this product positive or negative?\\[0.6em]
+   $(-3)\times(-7)\times(-11)\times(-13)\times(-2)$}
+  {There are five negative numbers.\\[0.3em]
+   Five is odd, so the product is negative.\\[0.3em]
+   There is no need to work out the product.}
+
+\qq{Work out $\dfrac{(-6)\times(-4)}{-3}$}
+  {\work{$(-6)\times(-4)$ & $24$\\[0.3em]
+         $24\div(-3)$ & $-8$}}
+
+\qq[\LARGE][\LARGE]{Four integers multiply to give $-24$.\\[0.3em]
+   Write down one possible set\\[0.1em] of four integers.}
+  {An odd number of the integers must be negative.\\[0.3em]
+   For example, $(-1)\times 2\times 3\times 4=-24$\\[0.3em]
+   or $(-1)\times(-2)\times(-3)\times 4=-24$}
+
+%================================================================
+\qtopic{Arithmetic with negative decimals}
+%================================================================
+
+\tf[\LARGE][\large]{$-1.5+0.7=-2.2$}
+  {\textbf{False.} Adding $0.7$ moves $0.7$ to the right, towards $0$.\\[0.3em]
+   $-1.5+0.7=-0.8$
+   \par\vspace{0.5em}
+   \begin{numline}[4.4]{-2}{0.5}{0.1}{-2,-1.5,-1,-0.5,0,0.5}
+     \nljump{-1.5}{-0.8}{+0.7}
+   \end{numline}}
+
+\tf[\LARGE][\large]{$0.4-0.9=-0.5$}
+  {\textbf{True.} The first $0.4$ takes us to $0$, and the other $0.5$
+   takes us to $-0.5$.
+   \par\vspace{0.5em}
+   \begin{numline}[5.5]{-1}{1}{0.1}{-1,-0.5,0,0.5,1}
+     \nljump{0.4}{0}{-0.4} \nljump{0}{-0.5}{-0.5}
+   \end{numline}}
+
+\tf[\LARGE][\large]{$(-0.2)\times(-0.3)=0.6$}
+  {\textbf{False.} The sign is right, but the size is not.\\[0.3em]
+   $0.2\times 10=2$ and $0.3\times 10=3$, and $2\times 3=6$.\\[0.3em]
+   We multiplied by $10$ twice, so we divide by $100$.\\[0.3em]
+   $(-0.2)\times(-0.3)=0.06$}
+
+\tf[\LARGE][\Large]{$-2.4\div 0.6=-4$}
+  {\textbf{True.} We multiply the numerator and the denominator by $10$.\\[0.3em]
+   \work{$-2.4\div 0.6$ & $\dfrac{-2.4}{0.6}$\\[0.95em]
+                        & $\dfrac{-24}{6}$\\[0.95em]
+                        & $-4$}}
+
+\tf[\LARGE][\large]{$-3.5-(-1.2)=-4.7$}
+  {\textbf{False.} Subtracting $-1.2$ is the same as adding $1.2$.\\[0.3em]
+   $-3.5-(-1.2)=-3.5+1.2=-2.3$
+   \par\vspace{0.5em}
+   \begin{numline}[3.6]{-4}{-1}{0.1}{-4,-3.5,-3,-2.5,-2,-1.5,-1}
+     \nljump{-3.5}{-2.3}{+1.2}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-2.5+4$}
+  {$-2.5+4=1.5$
+   \par\vspace{0.5em}
+   \begin{numline}[2.2]{-3}{2}{0.5}{-3,...,2}
+     \nljump{-2.5}{0}{+2.5} \nljump{0}{1.5}{+1.5}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $0.6-1.5$}
+  {$0.6-1.5=-0.9$
+   \par\vspace{0.5em}
+   \begin{numline}[5.5]{-1}{1}{0.1}{-1,-0.5,0,0.5,1}
+     \nljump{0.6}{0}{-0.6} \nljump{0}{-0.9}{-0.9}
+   \end{numline}}
+
+\qq[\Huge][\large]{Work out $-1.3-2.4$}
+  {$-1.3-2.4=-3.7$
+   \par\vspace{0.5em}
+   \begin{numline}[2.75]{-4}{0}{0.1}{-4,-3,-2,-1,0}
+     \nljump{-1.3}{-3.7}{-2.4}
+   \end{numline}}
+
+\qq{Work out $3.2-(-1.7)$}
+  {Subtracting $-1.7$ is the same as adding $1.7$.\\[0.3em]
+   $3.2-(-1.7)=3.2+1.7=4.9$}
+
+\qq[\Huge][\large]{Work out $(-0.3)\times 4$}
+  {$(-0.3)\times 4$ is four lots of $-0.3$.\\[0.3em]
+   $(-0.3)\times 4=-1.2$
+   \par\vspace{0.5em}
+   \begin{numline}[6.8]{-1.5}{0.1}{0.1}{-1.5,-1.2,-0.9,-0.6,-0.3,0}
+     \nljump{0}{-0.3}{-0.3} \nljump{-0.3}{-0.6}{-0.3}
+     \nljump{-0.6}{-0.9}{-0.3} \nljump{-0.9}{-1.2}{-0.3}
+   \end{numline}}
+
+\qq[\Huge][\Large]{Work out $(-0.6)\times(-0.7)$}
+  {The signs are the same, so the answer is positive.\\[0.3em]
+   $0.6\times 10=6$ and $0.7\times 10=7$, and $6\times 7=42$.\\[0.3em]
+   We multiplied by $10$ twice, so we divide by $100$.\\[0.3em]
+   $(-0.6)\times(-0.7)=0.42$}
+
+\qq[\Huge][\Large]{Work out $-3.6\div 0.4$}
+  {We multiply the numerator and the denominator by $10$.\\[0.3em]
+   \work{$-3.6\div 0.4$ & $\dfrac{-3.6}{0.4}$\\[0.95em]
+                        & $\dfrac{-36}{4}$\\[0.95em]
+                        & $-9$}}
+
+\qq[\Huge][\Large]{Work out $-1.2\div(-0.03)$}
+  {We multiply the numerator and the denominator by $100$.\\[0.3em]
+   \work{$-1.2\div(-0.03)$ & $\dfrac{-1.2}{-0.03}$\\[0.95em]
+                           & $\dfrac{-120}{-3}$\\[0.95em]
+                           & $40$}}
+
+\qq[\Large][\large]{At 6\,am the temperature is \dC{-2.4}.\\[0.3em]
+   It rises by \dC{0.8} every hour for $4$ hours.\\[0.3em]
+   What is the temperature at 10\,am?}
+  {$4\times 0.8=3.2$, and $-2.4+3.2=0.8$\\[0.3em]
+   The temperature at 10\,am is \dC{0.8}.
+   \par\vspace{0.5em}
+   \begin{numline}[3.3]{-2.5}{1}{0.1}{-2.4,-1.6,-0.8,0,0.8}
+     \nljump{-2.4}{-1.6}{+0.8} \nljump{-1.6}{-0.8}{+0.8}
+     \nljump{-0.8}{0}{+0.8} \nljump{0}{0.8}{+0.8}
+   \end{numline}}
+
+\qq[\Large][\LARGE]{The temperatures on three nights were\\[0.4em]
+   \dC{-1.2},\quad \dC{0.5}\quad and\quad \dC{-2.3}\\[0.4em]
+   Work out the mean temperature.}
+  {\work{$-1.2+0.5+(-2.3)$ & $-3$\\[0.3em]
+         $-3\div 3$ & $-1$}\\[0.3em]
+   The mean temperature is \dC{-1}.}
+
+\end{document}
