@@ -1,3 +1,19 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/KS3/solvingEquationsStarters_workedSolutions.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/KS3/solvingEquationsStarters_workedSolutions.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% Root file used ashow macros
 \documentclass{beamer}
 \usepackage{tikz}
 \usetikzlibrary{calc, arrows.meta, decorations.pathreplacing}
@@ -7,6 +23,7 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{textcomp} % for \texteuro
 
 % ================================================================
 % Retrieval starters for a Year 8 top set, used across the solving
@@ -180,7 +197,7 @@
   \node[anchor=east] at ({#1+1.85},-1.05) {#4};
 }
 
-\title{Solving Equations: Starters}
+\title{Solving Equations: Retrieve and Connects}
 \author{}
 \date{}
 
@@ -188,11 +205,39 @@
 
 \frame{\titlepage}
 
+\begin{frame}{Contents}
+\small
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Questions and short answers}
+\begin{itemize}
+\item \hyperlink{q-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{q-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{q-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{q-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{q-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\item \hyperlink{q-st6}{\beamergotobutton{Retrieve and Connect 6}}
+\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}
+\textbf{Worked solutions}
+\begin{itemize}
+\item \hyperlink{work-st1}{\beamergotobutton{Retrieve and Connect 1}}
+\item \hyperlink{work-st2}{\beamergotobutton{Retrieve and Connect 2}}
+\item \hyperlink{work-st3}{\beamergotobutton{Retrieve and Connect 3}}
+\item \hyperlink{work-st4}{\beamergotobutton{Retrieve and Connect 4}}
+\item \hyperlink{work-st5}{\beamergotobutton{Retrieve and Connect 5}}
+\item \hyperlink{work-st6}{\beamergotobutton{Retrieve and Connect 6}}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 1: Missing numbers in words, and algebraic manipulation.
-% No equation is solved formally here.
+% STARTER 1
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 1: Missing Numbers \& Expressions}
+\begin{frame}[t]{Retrieve and Connect: Missing Numbers \& Expressions}
+\hypertarget{q-st1}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -264,10 +309,174 @@
 \end{columns}
 \end{frame}
 
+% Worked solutions for Starter 1
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 1}
+\hypertarget{work-st1}{}
+\textbf{Question:} $\frac25 = ?$ as a percentage.
+\awork{Solution: 
+\[
+\frac25 = \frac{2\times20}{5\times20} = \frac{40}{100} = 40\%.
+\]
+Multiply numerator and denominator by 20 to make the denominator 100.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 2}
+\textbf{Question:} $3^{-2} = ?$
+\awork{Solution: 
+\[
+3^{-2} = \frac{1}{3^2} = \frac{1}{9}.
+\]
+A negative index means take the reciprocal.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 3}
+\textbf{Question:} $0.2^{-1} = ?$
+\awork{Solution: 
+\[
+0.2 = \frac{2}{10} = \frac15, \quad \text{so} \quad 0.2^{-1} = \left(\frac15\right)^{-1} = 5.
+\]
+Write the decimal as a fraction, then flip it.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 4}
+\textbf{Question:} What number multiplied by $7$ makes $21$?
+\awork{Solution: Let the number be $x$. Then
+\[
+7x = 21.
+\]
+Divide both sides by $7$:
+\[
+x = \frac{21}{7} = 3.
+\]
+So the number is $3$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 5}
+\textbf{Question:} What number plus $8$ makes $3$?
+\awork{Solution: Let the number be $x$. Then
+\[
+x + 8 = 3.
+\]
+Subtract $8$ from both sides:
+\[
+x = 3 - 8 = -5.
+\]
+So the number is $-5$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 6}
+\textbf{Question:} What number multiplied by $1.2$ makes $60$?
+\awork{Solution: Let the number be $x$. Then
+\[
+1.2x = 60.
+\]
+Divide both sides by $1.2$:
+\[
+x = \frac{60}{1.2} = \frac{600}{12} = 50.
+\]
+So the number is $50$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 7}
+\textbf{Question:} How many \pounds1.50 tickets can \pounds12 buy?
+\awork{Solution: Let $n$ be the number of tickets. Then
+\[
+1.5n = 12.
+\]
+Divide both sides by $1.5$:
+\[
+n = \frac{12}{1.5} = \frac{120}{15} = 8.
+\]
+So $8$ tickets can be bought.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 8}
+\textbf{Question:} Simplify $3a+5b-a+2b$.
+\awork{Solution: Collect like terms:
+\[
+3a - a = 2a, \qquad 5b + 2b = 7b.
+\]
+So the simplified expression is
+\[
+2a + 7b.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 9}
+\textbf{Question:} Simplify $2a\times3a^4$.
+\awork{Solution: Multiply the coefficients and the powers of $a$:
+\[
+2a \times 3a^4 = (2\times3) \times (a^1 \times a^4) = 6a^{1+4} = 6a^5.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 10}
+\textbf{Question:} Expand $4(2x+3)$ using the grid.
+\awork{Solution: Using the grid:
+\[
+4 \times 2x = 8x, \qquad 4 \times 3 = 12.
+\]
+So
+\[
+4(2x+3) = 8x + 12.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 11}
+\textbf{Question:} Expand and simplify $3(x+2)-2(x-1)$.
+\awork{Solution: Expand each bracket:
+\[
+3(x+2) = 3x + 6, \qquad -2(x-1) = -2x + 2.
+\]
+Add the results:
+\[
+3x + 6 - 2x + 2 = x + 8.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 12}
+\textbf{Question:} Find $5-3x$ when $x=-2$.
+\awork{Solution: Substitute $x=-2$:
+\[
+5 - 3(-2) = 5 + 6 = 11.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 1, Question 13}
+\textbf{Question:} (Challenge) Think of a number, double it and add $6$. Halve the result, then subtract the number you started with. Show with algebra that you always get $3$.
+\awork{Solution: Let the starting number be $x$.
+\[
+\text{Double it: } 2x, \qquad \text{add }6: 2x+6.
+\]
+Halve the result:
+\[
+\frac{2x+6}{2} = x+3.
+\]
+Subtract the original number:
+\[
+(x+3) - x = 3.
+\]
+So the final result is always $3$.
+}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 2: One- and two-step equations
+% STARTER 2
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 2: One- \& Two-Step Equations}
+\begin{frame}[t]{Retrieve and Connect: One- \& Two-Step Equations}
+\hypertarget{q-st2}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -340,10 +549,160 @@
 \end{columns}
 \end{frame}
 
+% Worked solutions for Starter 2
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 1}
+\hypertarget{work-st2}{}
+\textbf{Question:} $\frac38 = ?\%$
+\awork{Solution: 
+\[
+\frac38 = 0.375 = 37.5\%.
+\]
+Or multiply by $100$:
+\[
+\frac38 \times 100 = \frac{300}{8} = 37.5.
+\]
+So $\frac38 = 37.5\%$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 2}
+\textbf{Question:} $2^{-3} = ?$
+\awork{Solution: 
+\[
+2^{-3} = \frac{1}{2^3} = \frac{1}{8}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 3}
+\textbf{Question:} $0.5^{-2} = ?$
+\awork{Solution: 
+\[
+0.5 = \frac12, \quad \text{so} \quad 0.5^{-2} = \left(\frac12\right)^{-2} = 2^2 = 4.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 4}
+\textbf{Question:} I think of a number $x$, multiply it by $4$ and subtract $7$ to get $29$. Write an equation, then complete the working on the left.
+\awork{Solution: The equation is
+\[
+4x - 7 = 29.
+\]
+Add $7$ to both sides:
+\[
+4x = 36.
+\]
+Divide both sides by $4$:
+\[
+x = 9.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 5}
+\textbf{Question:} Solve $3x+5=26$.
+\awork{Solution: 
+\[
+3x + 5 = 26.
+\]
+Subtract $5$:
+\[
+3x = 21.
+\]
+Divide by $3$:
+\[
+x = 7.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 6}
+\textbf{Question:} Solve $7-2x=15$.
+\awork{Solution: 
+\[
+7 - 2x = 15.
+\]
+Subtract $7$:
+\[
+-2x = 8.
+\]
+Divide by $-2$:
+\[
+x = -4.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 7}
+\textbf{Question:} Complete the sentence: a reduction by $20\%$ leaves $80\%$ of the original amount. To find the amount after the reduction we multiply the original by \ablank{$0.8$}.
+\awork{Solution: The multiplier is
+\[
+1 - 0.20 = 0.80 = 0.8.
+\]
+So we multiply the original by $0.8$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 8}
+\textbf{Question:} A price falls by $20\%$ to \pounds36. Solve an equation to find the original price, \pounds$p$.
+\awork{Solution: After a $20\%$ reduction, the price is $80\%$ of the original. So
+\[
+0.8p = 36.
+\]
+Divide both sides by $0.8$:
+\[
+p = \frac{36}{0.8} = \frac{360}{8} = 45.
+\]
+So the original price was \pounds45.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 9}
+\textbf{Question:} Complete the flow chart. How much was invested?
+\awork{Solution: The flow chart shows an amount multiplied by $1.1$ twice to get \pounds242. Work backwards:
+\[
+242 \div 1.1 = \frac{242}{1.1} = \frac{2420}{11} = 220,
+\]
+\[
+220 \div 1.1 = \frac{220}{1.1} = \frac{2200}{11} = 200.
+\]
+So \pounds200 was invested.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 10}
+\textbf{Question:} Use the graph to change \texteuro36 into pounds. Check by solving $1.2x=36$.
+\awork{Solution: From the graph, \texteuro36 corresponds to \pounds30. Check:
+\[
+1.2x = 36 \Rightarrow x = \frac{36}{1.2} = \frac{360}{12} = 30.
+\]
+So \texteuro36 is \pounds30.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 2, Question 11}
+\textbf{Question:} (Challenge) Solve $2^{x+4}=\frac18$.
+\awork{Solution: Write $\frac18 = 2^{-3}$. Then
+\[
+2^{x+4} = 2^{-3}.
+\]
+Since the bases are the same, equate the exponents:
+\[
+x + 4 = -3.
+\]
+Subtract $4$:
+\[
+x = -7.
+\]
+}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 3: The unknown on both sides
+% STARTER 3
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 3: Unknowns on Both Sides}
+\begin{frame}[t]{Retrieve and Connect: Unknowns on Both Sides}
+\hypertarget{q-st3}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -433,10 +792,173 @@
 \end{columns}
 \end{frame}
 
+% Worked solutions for Starter 3
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 1}
+\hypertarget{work-st3}{}
+\textbf{Question:} What is $0.45$ as a fraction?
+\awork{Solution: 
+\[
+0.45 = \frac{45}{100} = \frac{9}{20}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 2}
+\textbf{Question:} Simplify $3x^{-2}\times4x^5$.
+\awork{Solution: Multiply coefficients and add indices:
+\[
+3 \times 4 = 12, \qquad x^{-2} \times x^5 = x^{-2+5} = x^3.
+\]
+So
+\[
+3x^{-2} \times 4x^5 = 12x^3.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 3}
+\textbf{Question:} Use the bar model to solve $4x+3=2x+15$.
+\awork{Solution: From the bar model, take $2x$ from both sides:
+\[
+4x+3 - 2x = 2x+15 - 2x \Rightarrow 2x+3 = 15.
+\]
+Subtract $3$:
+\[
+2x = 12.
+\]
+Divide by $2$:
+\[
+x = 6.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 4}
+\textbf{Question:} Solve $7x-4=3x+24$.
+\awork{Solution: 
+\[
+7x - 4 = 3x + 24.
+\]
+Subtract $3x$ from both sides:
+\[
+4x - 4 = 24.
+\]
+Add $4$:
+\[
+4x = 28.
+\]
+Divide by $4$:
+\[
+x = 7.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 5}
+\textbf{Question:} Solve $6(x-2)=2x+8$.
+\awork{Solution: Expand the bracket:
+\[
+6x - 12 = 2x + 8.
+\]
+Subtract $2x$:
+\[
+4x - 12 = 8.
+\]
+Add $12$:
+\[
+4x = 20.
+\]
+Divide by $4$:
+\[
+x = 5.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 6}
+\textbf{Question:} A has \pounds500 at $6\%$ and B has \pounds400 at $10\%$ simple interest a year. Write each balance after $n$ years.
+\awork{Solution: A earns $500 \times 0.06 = 30$ per year. So balance A is
+\[
+500 + 30n.
+\]
+B earns $400 \times 0.10 = 40$ per year. So balance B is
+\[
+400 + 40n.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 7}
+\textbf{Question:} When are the balances equal? Solve an equation, then check on the graph.
+\awork{Solution: Set the balances equal:
+\[
+500 + 30n = 400 + 40n.
+\]
+Subtract $400$:
+\[
+100 + 30n = 40n.
+\]
+Subtract $30n$:
+\[
+100 = 10n.
+\]
+Divide by $10$:
+\[
+n = 10.
+\]
+At $10$ years, both balances are \pounds800, which matches the graph.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 8}
+\textbf{Question:} Solve $7^{3x}=7^{x+8}$.
+\awork{Solution: Bases are the same, so equate exponents:
+\[
+3x = x + 8.
+\]
+Subtract $x$:
+\[
+2x = 8.
+\]
+Divide by $2$:
+\[
+x = 4.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 9}
+\textbf{Question:} What is \pounds250 in euros, at \texteuro1.16 per \pounds1?
+\awork{Solution: Multiply:
+\[
+250 \times 1.16 = 250 \times (1 + 0.16) = 250 + 40 = 290.
+\]
+So \pounds250 is \texteuro290.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 3, Question 10}
+\textbf{Question:} (Challenge) $x=0.\dot7$. Use $10x-x$ to write $x$ as a fraction.
+\awork{Solution: Let $x = 0.777\ldots$. Then
+\[
+10x = 7.777\ldots
+\]
+Subtract $x$:
+\[
+10x - x = 7.777\ldots - 0.777\ldots = 7.
+\]
+So
+\[
+9x = 7 \Rightarrow x = \frac{7}{9}.
+\]
+}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 4: The unknown in the denominator
+% STARTER 4
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 4: Unknown in the Denominator}
+\begin{frame}[t]{Retrieve and Connect: Unknown in the Denominator}
+\hypertarget{q-st4}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -513,10 +1035,174 @@
 \end{columns}
 \end{frame}
 
+% Worked solutions for Starter 4
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 1}
+\hypertarget{work-st4}{}
+\textbf{Question:} $\frac{7}{20} = ?\%$
+\awork{Solution: 
+\[
+\frac{7}{20} = \frac{7\times5}{20\times5} = \frac{35}{100} = 35\%.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 2}
+\textbf{Question:} $0.4^{-2} = ?$
+\awork{Solution: 
+\[
+0.4 = \frac{4}{10} = \frac{2}{5}, \quad \text{so} \quad 0.4^{-2} = \left(\frac{2}{5}\right)^{-2} = \left(\frac{5}{2}\right)^2 = \frac{25}{4}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 3}
+\textbf{Question:} Complete the table. Which is the better buy, A or B?
+\awork{Solution: 
+Pack A: \pounds1.60 for $4$ rolls, so per roll:
+\[
+1.60 \div 4 = 0.40 \text{ (40p)}.
+\]
+Pack B: \pounds2.10 for $6$ rolls, so per roll:
+\[
+2.10 \div 6 = 0.35 \text{ (35p)}.
+\]
+Pack B is cheaper per roll, so B is the better buy.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 4}
+\textbf{Question:} Solve an equation to find $n$ for pack C.
+\awork{Solution: Pack C has $n$ rolls at \pounds3.60, and costs $30$p per roll, i.e. \pounds0.30. So
+\[
+0.30n = 3.60.
+\]
+Divide by $0.30$:
+\[
+n = \frac{3.60}{0.30} = \frac{360}{30} = 12.
+\]
+So $n = 12$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 5}
+\textbf{Question:} Solve $\frac{12}{x}=3$.
+\awork{Solution: Multiply both sides by $x$:
+\[
+12 = 3x.
+\]
+Divide by $3$:
+\[
+x = 4.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 6}
+\textbf{Question:} Solve $\frac{35}{x-2}=5$.
+\awork{Solution: Multiply both sides by $x-2$:
+\[
+35 = 5(x-2).
+\]
+Divide by $5$:
+\[
+7 = x - 2.
+\]
+Add $2$:
+\[
+x = 9.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 7}
+\textbf{Question:} Solve $3+\frac{18}{x}=9$.
+\awork{Solution: Subtract $3$:
+\[
+\frac{18}{x} = 6.
+\]
+Multiply by $x$:
+\[
+18 = 6x.
+\]
+Divide by $6$:
+\[
+x = 3.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 8}
+\textbf{Question:} A \pounds80 bill has $5\%$ service added, and is split equally at \pounds12 each. Solve an equation to find the number of people, $p$.
+\awork{Solution: Total bill with service:
+\[
+80 \times 1.05 = 84.
+\]
+Split equally:
+\[
+\frac{84}{p} = 12.
+\]
+Multiply by $p$:
+\[
+84 = 12p.
+\]
+Divide by $12$:
+\[
+p = 7.
+\]
+So there are $7$ people.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 9}
+\textbf{Question:} Solve $5x^{-1}=20$.
+\awork{Solution: 
+\[
+5x^{-1} = \frac{5}{x} = 20.
+\]
+Multiply by $x$:
+\[
+5 = 20x.
+\]
+Divide by $20$:
+\[
+x = \frac{5}{20} = \frac{1}{4}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 4, Question 10}
+\textbf{Question:} (Challenge) Solve $\frac{50}{x+2}=0.8^{-2}$.
+\awork{Solution: First, 
+\[
+0.8^{-2} = \left(\frac{4}{5}\right)^{-2} = \left(\frac{5}{4}\right)^2 = \frac{25}{16}.
+\]
+So
+\[
+\frac{50}{x+2} = \frac{25}{16}.
+\]
+Cross-multiply:
+\[
+50 \times 16 = 25(x+2).
+\]
+\[
+800 = 25(x+2).
+\]
+Divide by $25$:
+\[
+32 = x + 2.
+\]
+Subtract $2$:
+\[
+x = 30.
+\]
+}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 5: Equations with algebraic fractions
+% STARTER 5
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 5: Equations with Fractions}
+\begin{frame}[t]{Retrieve and Connect: Equations with Fractions}
+\hypertarget{q-st5}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -596,10 +1282,193 @@
 \end{columns}
 \end{frame}
 
+% Worked solutions for Starter 5
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 1}
+\hypertarget{work-st5}{}
+\textbf{Question:} $\frac13+\frac14$
+\awork{Solution: Common denominator $12$:
+\[
+\frac{1}{3} + \frac{1}{4} = \frac{4}{12} + \frac{3}{12} = \frac{7}{12}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 2}
+\textbf{Question:} $\left(\frac34\right)^{-2}$
+\awork{Solution: 
+\[
+\left(\frac{3}{4}\right)^{-2} = \left(\frac{4}{3}\right)^2 = \frac{16}{9}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 3}
+\textbf{Question:} Solve $\frac{x+2}{3}=5$.
+\awork{Solution: Multiply both sides by $3$:
+\[
+x + 2 = 15.
+\]
+Subtract $2$:
+\[
+x = 13.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 4}
+\textbf{Question:} Solve $\frac{2x-1}{5}=3$.
+\awork{Solution: Multiply both sides by $5$:
+\[
+2x - 1 = 15.
+\]
+Add $1$:
+\[
+2x = 16.
+\]
+Divide by $2$:
+\[
+x = 8.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 5}
+\textbf{Question:} Solve $\frac{x}{3}+\frac{x}{4}=14$.
+\awork{Solution: Common denominator $12$:
+\[
+\frac{4x}{12} + \frac{3x}{12} = \frac{7x}{12} = 14.
+\]
+Multiply by $12$:
+\[
+7x = 168.
+\]
+Divide by $7$:
+\[
+x = 24.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 6}
+\textbf{Question:} Solve $\frac{x+3}{2}=\frac{x+7}{3}$.
+\awork{Solution: Cross-multiply:
+\[
+3(x+3) = 2(x+7).
+\]
+Expand:
+\[
+3x + 9 = 2x + 14.
+\]
+Subtract $2x$:
+\[
+x + 9 = 14.
+\]
+Subtract $9$:
+\[
+x = 5.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 7}
+\textbf{Question:} A car loses $25\%$ of its value each year. Complete the flow chart, then solve an equation for $v$.
+\awork{Solution: The multiplier for a $25\%$ loss is $1 - 0.25 = 0.75 = \frac34$. After two years:
+\[
+v \times \frac34 \times \frac34 = v \times \frac{9}{16} = 3600.
+\]
+So
+\[
+\frac{9}{16}v = 3600.
+\]
+Multiply by $16$:
+\[
+9v = 57600.
+\]
+Divide by $9$:
+\[
+v = 6400.
+\]
+So the initial value was \pounds6400.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 8}
+\textbf{Question:} Sam has \pounds$x$. He spends $\frac13$ on a game and $\frac14$ on food, leaving \pounds15. Shade the bar, then solve an equation for $x$.
+\awork{Solution: Total spent:
+\[
+\frac{1}{3} + \frac{1}{4} = \frac{4}{12} + \frac{3}{12} = \frac{7}{12}.
+\]
+Remaining:
+\[
+1 - \frac{7}{12} = \frac{5}{12}.
+\]
+So
+\[
+\frac{5}{12}x = 15.
+\]
+Multiply by $12$:
+\[
+5x = 180.
+\]
+Divide by $5$:
+\[
+x = 36.
+\]
+So Sam had \pounds36.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 9}
+\textbf{Question:} Solve $\left(\frac23\right)^{x}=\frac94$.
+\awork{Solution: Note that
+\[
+\frac{9}{4} = \left(\frac{3}{2}\right)^2 = \left(\frac{2}{3}\right)^{-2}.
+\]
+So
+\[
+\left(\frac{2}{3}\right)^x = \left(\frac{2}{3}\right)^{-2}.
+\]
+Equate exponents:
+\[
+x = -2.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 5, Question 10}
+\textbf{Question:} (Challenge) \pounds3 buys $x$ rolls and \pounds4 buys $x+4$ rolls, at the same price per roll. Find $x$.
+\awork{Solution: Price per roll for the first purchase:
+\[
+\frac{3}{x}.
+\]
+Price per roll for the second purchase:
+\[
+\frac{4}{x+4}.
+\]
+Since the price per roll is the same:
+\[
+\frac{3}{x} = \frac{4}{x+4}.
+\]
+Cross-multiply:
+\[
+3(x+4) = 4x.
+\]
+Expand:
+\[
+3x + 12 = 4x.
+\]
+Subtract $3x$:
+\[
+x = 12.
+\]
+}
+\end{frame}
+
 %------------------------------------------------------------------
-% STARTER 6: Simultaneous equations
+% STARTER 6
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 6: Simultaneous Equations}
+\begin{frame}[t]{Retrieve and Connect: Simultaneous Equations}
+\hypertarget{q-st6}{}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -657,6 +1526,158 @@
         \ashow{$x+y=6$, \; $x-y=-2$; \; $x=2$, \; $y=4$}
 \end{enumerate}
 \end{columns}
+\end{frame}
+
+% Worked solutions for Starter 6
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 1}
+\hypertarget{work-st6}{}
+\textbf{Question:} $0.125$ as a fraction
+\awork{Solution: 
+\[
+0.125 = \frac{125}{1000} = \frac{1}{8}.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 2}
+\textbf{Question:} $2^{-1}+2^{-2}$ as a percentage
+\awork{Solution: 
+\[
+2^{-1} = \frac{1}{2}, \qquad 2^{-2} = \frac{1}{4}.
+\]
+Sum:
+\[
+\frac{1}{2} + \frac{1}{4} = \frac{2}{4} + \frac{1}{4} = \frac{3}{4} = 75\%.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 3}
+\textbf{Question:} Write each receipt as an equation, with $c$ for a coffee and $k$ for a cake. Subtract to find $k$ and $c$.
+\awork{Solution: The equations are
+\[
+2c + 3k = 9.30 \quad (1)
+\]
+\[
+2c + k = 5.50 \quad (2)
+\]
+Subtract (2) from (1):
+\[
+(2c+3k) - (2c+k) = 9.30 - 5.50 \Rightarrow 2k = 3.80.
+\]
+So
+\[
+k = 1.90.
+\]
+Substitute into (2):
+\[
+2c + 1.90 = 5.50 \Rightarrow 2c = 3.60 \Rightarrow c = 1.80.
+\]
+So a coffee is \pounds1.80 and a cake is \pounds1.90.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 4}
+\textbf{Question:} Solve $x+y=10$ and $x-y=4$.
+\awork{Solution: Add the two equations:
+\[
+(x+y) + (x-y) = 10 + 4 \Rightarrow 2x = 14 \Rightarrow x = 7.
+\]
+Substitute into $x+y=10$:
+\[
+7 + y = 10 \Rightarrow y = 3.
+\]
+So $x=7$, $y=3$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 5}
+\textbf{Question:} Solve $2x+3y=13$ and $x+y=5$.
+\awork{Solution: From $x+y=5$, we have $x = 5 - y$.
+Substitute into $2x+3y=13$:
+\[
+2(5-y) + 3y = 13.
+\]
+\[
+10 - 2y + 3y = 13.
+\]
+\[
+10 + y = 13 \Rightarrow y = 3.
+\]
+Then $x = 5 - 3 = 2$.
+So $x=2$, $y=3$.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 6}
+\textbf{Question:} Write two equations from the table, and solve them. Find the interest rate.
+\awork{Solution: Let $P$ be the principal and $I$ the annual interest. From the table:
+\[
+P + 2I = 560 \quad (1)
+\]
+\[
+P + 5I = 650 \quad (2)
+\]
+Subtract (1) from (2):
+\[
+3I = 90 \Rightarrow I = 30.
+\]
+Substitute into (1):
+\[
+P + 60 = 560 \Rightarrow P = 500.
+\]
+Interest rate:
+\[
+\frac{I}{P} = \frac{30}{500} = 0.06 = 6\%.
+\]
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 7}
+\textbf{Question:} Write the euros, $y$, that each bureau gives for \pounds$x$. When are they equal?
+\awork{Solution: Airport: no fee, \texteuro1.10 per \pounds1. So
+\[
+y = 1.1x.
+\]
+High Street: \pounds5 fee, then \texteuro1.20 per \pounds1 left. So
+\[
+y = 1.2(x - 5) = 1.2x - 6.
+\]
+Set equal:
+\[
+1.1x = 1.2x - 6.
+\]
+\[
+6 = 0.1x.
+\]
+\[
+x = \frac{6}{0.1} = 60.
+\]
+So they are equal when exchanging \pounds60.
+}
+\end{frame}
+
+\begin{frame}[t]{Worked Solution: Retrieve and Connect 6, Question 8}
+\textbf{Question:} (Challenge) Solve $2^x\times2^y=64$ and $3^x\div3^y=\frac19$.
+\awork{Solution: 
+First equation:
+\[
+2^x \times 2^y = 2^{x+y} = 64 = 2^6 \Rightarrow x+y = 6.
+\]
+Second equation:
+\[
+3^x \div 3^y = 3^{x-y} = \frac{1}{9} = 3^{-2} \Rightarrow x-y = -2.
+\]
+Add the two equations:
+\[
+(x+y) + (x-y) = 6 + (-2) \Rightarrow 2x = 4 \Rightarrow x = 2.
+\]
+Then from $x+y=6$:
+\[
+2 + y = 6 \Rightarrow y = 4.
+\]
+So $x=2$, $y=4$.
+}
 \end{frame}
 
 \end{document}

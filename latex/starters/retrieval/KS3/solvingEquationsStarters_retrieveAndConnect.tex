@@ -1,3 +1,18 @@
+% ================================================================
+% The Retrieve and Connect version of latex/starters/retrieval/KS3/solvingEquationsStarters.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/retrieval/KS3/solvingEquationsStarters.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
 \documentclass{beamer}
 \usepackage{tikz}
 \usetikzlibrary{calc, arrows.meta, decorations.pathreplacing}
@@ -180,7 +195,7 @@
   \node[anchor=east] at ({#1+1.85},-1.05) {#4};
 }
 
-\title{Solving Equations: Starters}
+\title{Solving Equations: Retrieve and Connects}
 \author{}
 \date{}
 
@@ -192,7 +207,7 @@
 % STARTER 1: Missing numbers in words, and algebraic manipulation.
 % No equation is solved formally here.
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 1: Missing Numbers \& Expressions}
+\begin{frame}[t]{Retrieve and Connect: Missing Numbers \& Expressions}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -267,7 +282,7 @@
 %------------------------------------------------------------------
 % STARTER 2: One- and two-step equations
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 2: One- \& Two-Step Equations}
+\begin{frame}[t]{Retrieve and Connect: One- \& Two-Step Equations}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -300,8 +315,9 @@
 ]
   \addplot[blue!70!black, very thick, domain=0:50] {1.2*x};
   % --- Q9 answer: across from 36 euros to the line, and down to 30 pounds ---
-  \draw[ans, dashed] (axis cs:0,36) -- (axis cs:30,36) -- (axis cs:30,0);
-  \fill[ans] (axis cs:30,36) circle (1.8pt);
+  \only<2->{%
+    \draw[red, thick, dashed] (axis cs:0,36) -- (axis cs:30,36) -- (axis cs:30,0);
+    \fill[red] (axis cs:30,36) circle (1.8pt);}
 \end{axis}
 \end{tikzpicture}
 
@@ -343,7 +359,7 @@
 %------------------------------------------------------------------
 % STARTER 3: The unknown on both sides
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 3: Unknowns on Both Sides}
+\begin{frame}[t]{Retrieve and Connect: Unknowns on Both Sides}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -391,8 +407,9 @@
   \addplot[orange!85!black, very thick, domain=0:12] {400+40*x}
     node[pos=0.25, below right, font=\scriptsize, inner sep=1pt] {B};
   % --- Q7 answer: the lines cross after 10 years, at 800 pounds ---
-  \draw[ans, dashed] (axis cs:10,400) -- (axis cs:10,800) -- (axis cs:0,800);
-  \fill[ans] (axis cs:10,800) circle (1.8pt);
+  \only<2->{%
+    \draw[red, thick, dashed] (axis cs:10,400) -- (axis cs:10,800) -- (axis cs:0,800);
+    \fill[red] (axis cs:10,800) circle (1.8pt);}
 \end{axis}
 \end{tikzpicture}
 
@@ -436,7 +453,7 @@
 %------------------------------------------------------------------
 % STARTER 4: The unknown in the denominator
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 4: Unknown in the Denominator}
+\begin{frame}[t]{Retrieve and Connect: Unknown in the Denominator}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -516,7 +533,7 @@
 %------------------------------------------------------------------
 % STARTER 5: Equations with algebraic fractions
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 5: Equations with Fractions}
+\begin{frame}[t]{Retrieve and Connect: Equations with Fractions}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -599,7 +616,7 @@
 %------------------------------------------------------------------
 % STARTER 6: Simultaneous equations
 %------------------------------------------------------------------
-\begin{frame}[t]{Starter 6: Simultaneous Equations}
+\begin{frame}[t]{Retrieve and Connect: Simultaneous Equations}
 \begin{columns}[T,onlytextwidth]
 
 \column{0.36\textwidth}
@@ -644,10 +661,10 @@
   \item[] Solve each pair of equations.
 \begin{multicols}{2}
   \item $\begin{aligned}[t] x+y&=10\\ x-y&=4 \end{aligned}$
-        \quad\ashow{$x=7$, \; $y=3$}
+        \quad\ashow{$\begin{aligned}[t] x&=7\\ y&=3 \end{aligned}$}
   \columnbreak
   \item $\begin{aligned}[t] 2x+3y&=13\\ x+y&=5 \end{aligned}$
-        \quad\ashow{$x=2$, \; $y=3$}
+        \quad\ashow{$\begin{aligned}[t] x&=2\\ y&=3 \end{aligned}$}
 \end{multicols}
   \item Write two equations from the table, and solve them. Find the interest rate.
         \ashow{$P+2I=560$, \; $P+5I=650$; \; $I=30$, \; $P=500$; \; $6\%$}
