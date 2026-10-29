@@ -97,5 +97,13 @@ aws s3 cp "$OBJECTS_TXT" "s3://$AWS_S3_BUCKET/manifest.txt"
 while read -r key; do
   [[ -z "$key" ]] && continue
   debug "Deleting s3://$AWS_S3_BUCKET/$key"
-  aws s3 rm "s3://$AWS_S3_BUCKET/$key"
+  # delete-objects, not s3 rm: a body-less DELETE signs a Content-Length that never
+  # reaches Garage, which refuses it. delete-objects carries a body, and answers 200
+  # even when the key fails, so its Errors are checked
+  out=$(aws s3api delete-objects --bucket "$AWS_S3_BUCKET" \
+    --delete "$(jq -n --arg k "$key" '{Objects: [{Key: $k}], Quiet: true}')")
+  errors=$(jq -r '.Errors[]? | "\(.Code): \(.Message)"' <<< "$out")
+  [[ -z "$errors" ]] || { echo "delete failed: $key - $errors" >&2; exit 1; }
 done < "$TMP_DELETE"
+
+
