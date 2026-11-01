@@ -112,10 +112,12 @@
 
 % The section headings, kept tight so the parts do not eat the page.
 \newcommand{\heading}[1]{%
-  \vspace{2pt}
-  {\color{blue!45!black}\rule{\linewidth}{1pt}}\\[1pt]
-  {\large\bfseries #1}\\[-6pt]
-  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}
+  \par\vspace{2pt}%
+  {\color{blue!45!black}\rule{\linewidth}{1pt}}\par
+  \vspace{1pt}%
+  {\large\bfseries #1\par}%
+  \vspace{-6pt}%
+  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}\par
   \vspace{2pt}}
 \newcommand{\parttitle}[2]{\heading{Part #1: #2}}
 
