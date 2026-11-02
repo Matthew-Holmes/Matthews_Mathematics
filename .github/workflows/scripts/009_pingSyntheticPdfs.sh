@@ -7,14 +7,16 @@ set -euo pipefail
 # The site passes the request on to the SyntheticPDFs generator, which only
 # listens on the droplet's loopback, so this is the one way to reach it from here.
 #
-# Nothing here may fail the build. The PDFs have already been published, and
-# without the generator the pipeline still works, it just stops writing derived
-# files. So every problem is reported as a warning, in two places:
+# A missing key fails the run, because generation can never start until the
+# secret is set. Nothing else here may fail the build. The PDFs have already been
+# published, and without the generator the pipeline still works, it just stops
+# writing derived files. So every other problem is reported as a warning, in two
+# places:
 #   * the step log, as a ::warning annotation on the run's front page
 #   * the job summary, with what to do about it
 #
 # Usage: WEBSHEETS_TRIGGER_KEY=<key> 009_pingSyntheticPdfs.sh
-# Always exits 0.
+# Exits 1 if the key is missing, otherwise 0.
 # -----------------------------------------------------------------------------
 PING_URL="${SYNTHETIC_PDFS_PING_URL:-https://matthewsmathematics.uk/api/public/syntheticPDFs/ping}"
 KEY_HEADER="X-WebSheets-Trigger-Key"
@@ -58,9 +60,17 @@ warn() {
 }
 
 if [[ -z "$TRIGGER_KEY" ]]; then
-  warn "The $SECRET_NAME secret is not set" \
-    "The generator was not asked to run, because the ping needs a key. Add it as a repository secret named <code>$SECRET_NAME</code> at $SECRET_PAGE."
-  exit 0
+  echo "::error title=Generation ping::The $SECRET_NAME secret is not set"
+
+  summary ""
+  summary "## Generation ping"
+  summary ""
+  summary ":x: **The $SECRET_NAME secret is not set**"
+  summary ""
+  summary "The generator was not asked to run, because the ping needs a key. Add it as a repository secret named <code>$SECRET_NAME</code> at $SECRET_PAGE."
+  summary ""
+  summary "This does not affect the PDFs above."
+  exit 1
 fi
 
 BODY_FILE=$(mktemp)
