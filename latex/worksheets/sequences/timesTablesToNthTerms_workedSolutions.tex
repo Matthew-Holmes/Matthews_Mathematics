@@ -1,0 +1,283 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=16mm,right=16mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=4pt, topsep=2pt}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=3pt, topsep=2pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Worked Solutions: From Times Tables to the $n$th Term}
+\end{center}
+
+\section*{Part 1: Times tables}
+
+\textbf{Q1.} The first six terms are:
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}}\hline
+Table & \(\times1\) & \(\times2\) & \(\times3\) & \(\times4\) & \(\times5\) & \(\times6\)\\\hline
+2 & 2 & 4 & 6 & 8 & 10 & 12\\
+5 & 5 & 10 & 15 & 20 & 25 & 30\\
+3 & 3 & 6 & 9 & 12 & 15 & 18\\
+7 & 7 & 14 & 21 & 28 & 35 & 42\\
+12 & 12 & 24 & 36 & 48 & 60 & 72\\
+15 & 15 & 30 & 45 & 60 & 75 & 90\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q2.} Decimal times tables:
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}}\hline
+Table & \(\times1\) & \(\times2\) & \(\times3\) & \(\times4\) & \(\times5\) & \(\times6\)\\\hline
+\(0.1\) & \(0.1\) & \(0.2\) & \(0.3\) & \(0.4\) & \(0.5\) & \(0.6\)\\
+\(0.5\) & \(0.5\) & \(1\) & \(1.5\) & \(2\) & \(2.5\) & \(3\)\\
+\(1.5\) & \(1.5\) & \(3\) & \(4.5\) & \(6\) & \(7.5\) & \(9\)\\
+\(0.25\) & \(0.25\) & \(0.5\) & \(0.75\) & \(1\) & \(1.25\) & \(1.5\)\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q3.} Fraction times tables, in simplest form:
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}}\hline
+Table & \(\times1\) & \(\times2\) & \(\times3\) & \(\times4\) & \(\times5\) & \(\times6\)\\\hline
+\(\frac12\) & \(\frac12\) & \(1\) & \(\frac32\) & \(2\) & \(\frac52\) & \(3\)\\
+\(\frac14\) & \(\frac14\) & \(\frac12\) & \(\frac34\) & \(1\) & \(\frac54\) & \(\frac32\)\\
+\(\frac13\) & \(\frac13\) & \(\frac23\) & \(1\) & \(\frac43\) & \(\frac53\) & \(2\)\\
+\(\frac34\) & \(\frac34\) & \(\frac32\) & \(\frac94\) & \(3\) & \(\frac{15}{4}\) & \(\frac92\)\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q4.} Percentage times tables:
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}}\hline
+Table & \(\times1\) & \(\times2\) & \(\times3\) & \(\times4\) & \(\times5\) & \(\times6\)\\\hline
+\(10\%\) & \(10\%\) & \(20\%\) & \(30\%\) & \(40\%\) & \(50\%\) & \(60\%\)\\
+\(25\%\) & \(25\%\) & \(50\%\) & \(75\%\) & \(100\%\) & \(125\%\) & \(150\%\)\\
+\(5\%\) & \(5\%\) & \(10\%\) & \(15\%\) & \(20\%\) & \(25\%\) & \(30\%\)\\
+\(12.5\%\) & \(12.5\%\) & \(25\%\) & \(37.5\%\) & \(50\%\) & \(62.5\%\) & \(75\%\)\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q5.} Negative times tables:
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}}\hline
+Table & \(\times1\) & \(\times2\) & \(\times3\) & \(\times4\) & \(\times5\) & \(\times6\)\\\hline
+\(-2\) & \(-2\) & \(-4\) & \(-6\) & \(-8\) & \(-10\) & \(-12\)\\
+\(-5\) & \(-5\) & \(-10\) & \(-15\) & \(-20\) & \(-25\) & \(-30\)\\
+\(-0.5\) & \(-0.5\) & \(-1\) & \(-1.5\) & \(-2\) & \(-2.5\) & \(-3\)\\
+\(-\frac14\) & \(-\frac14\) & \(-\frac12\) & \(-\frac34\) & \(-1\) & \(-\frac54\) & \(-\frac32\)\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q6.}
+\begin{enumerate}[label=(\alph*)]
+\item \(9,18,\mathbf{27},36\). This is the 9 times table.
+\item \(0.7,\mathbf{1.4},2.1,2.8\). This is the \(0.7\) times table.
+\item \(\frac15,\mathbf{\frac25},\frac35,\mathbf{\frac45}\). This is the \(\frac15\) times table.
+\item \(\mathbf{-6},-12,-18,\mathbf{-24}\). This is the \(-6\) times table.
+\end{enumerate}
+
+\textbf{Q7.} Complete table:
+\begin{center}\small
+\begin{tabular}{|p{5.8cm}|*{5}{C{1.1cm}|}C{1.8cm}|}\hline
+Number of tickets, minutes or hours & 1 & 2 & 3 & 4 & 5 & Table\\\hline
+Cost of cinema tickets at \pounds7.50 each
+& \pounds7.50 & \pounds15.00 & \pounds22.50 & \pounds30.00 & \pounds37.50 & \(7.5n\)\\\hline
+Height above sea level of a submarine going down \(30\)\,m each minute
+& \(-30\) & \(-60\) & \(-90\) & \(-120\) & \(-150\) & \(-30n\)\\\hline
+Battery used by a phone that uses \(15\%\) of its charge each hour
+& \(15\%\) & \(30\%\) & \(45\%\) & \(60\%\) & \(75\%\) & \(15n\%\)\\\hline
+\end{tabular}
+\end{center}
+The times tables are therefore \(7.5n\) (or the \pounds7.50 times table), \(-30n\), and \(15n\%\).
+
+\section*{Part 2: Substituting into expressions}
+
+\textbf{Q8.}
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}c|}\hline
+Expression & \(n=1\) & \(n=2\) & \(n=3\) & \(n=4\) & \(n=5\) & \(n=10\) & Times table\\\hline
+\(2n\) & 2 & 4 & 6 & 8 & 10 & 20 & 2\\
+\(3n\) & 3 & 6 & 9 & 12 & 15 & 30 & 3\\
+\(7n\) & 7 & 14 & 21 & 28 & 35 & 70 & 7\\
+\(12n\) & 12 & 24 & 36 & 48 & 60 & 120 & 12\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q9.}
+\begin{center}\small
+\begin{tabular}{|c|*{6}{c|}c|}\hline
+Expression & \(n=1\) & \(n=2\) & \(n=3\) & \(n=4\) & \(n=5\) & \(n=10\) & Times table\\\hline
+\(0.1n\) & \(0.1\) & \(0.2\) & \(0.3\) & \(0.4\) & \(0.5\) & \(1\) & \(0.1\)\\
+\(0.5n\) & \(0.5\) & \(1\) & \(1.5\) & \(2\) & \(2.5\) & \(5\) & \(0.5\)\\
+\(\frac14n\) & \(\frac14\) & \(\frac12\) & \(\frac34\) & \(1\) & \(\frac54\) & \(\frac52\) & \(\frac14\)\\
+\(5n\%\) & \(5\%\) & \(10\%\) & \(15\%\) & \(20\%\) & \(25\%\) & \(50\%\) & \(5\%\)\\
+\(-2n\) & \(-2\) & \(-4\) & \(-6\) & \(-8\) & \(-10\) & \(-20\) & \(-2\)\\
+\(-0.5n\) & \(-0.5\) & \(-1\) & \(-1.5\) & \(-2\) & \(-2.5\) & \(-5\) & \(-0.5\)\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q10.}
+\begin{enumerate}[label=(\alph*)]
+\item The 100th term of \(7n\) is \(7\times100=700\).
+\item The 100th term of \(0.5n\) is \(0.5\times100=50\).
+\item The 20th term of \(-3n\) is \(-3\times20=-60\).
+\item No. If \(7n=60\), then
+\[
+n=\frac{60}{7}=8\frac47,
+\]
+which is not a position number \(1,2,3,\ldots\). Equivalently, \(7\times8=56\) and \(7\times9=63\), so 60 lies between consecutive terms and is not a term of the sequence.
+\end{enumerate}
+
+\section*{Part 3: Matching sequences to their \(n\)th terms}
+
+\textbf{Q11.}
+\begin{enumerate}[label=(\alph*)]
+\item Matching sequences to their \(n\)th terms:
+\begin{center}\small
+\begin{tabular}{|c|c|}\hline
+Sequence & \(n\)th term\\\hline
+\(6,12,18,24,\ldots\) & \(6n\)\\
+\(0.4,0.8,1.2,1.6,\ldots\) & \(0.4n\)\\
+\(-4,-8,-12,-16,\ldots\) & \(-4n\)\\
+\(\frac14,\frac12,\frac34,1,\ldots\) & \(0.25n\) or \(\frac14n\)\\
+\(20\%,40\%,60\%,80\%,\ldots\) & \(20n\%\)\\
+\(-0.5,-1,-1.5,-2,\ldots\) & \(-0.5n\)\\\hline
+\end{tabular}
+\end{center}
+The two \(n\)th terms left over are \(n+6\) and \(0.5n\).
+
+\item First four terms:
+\[
+n+6:\quad 7,\ 8,\ 9,\ 10,\ldots
+\]
+\[
+0.5n:\quad 0.5,\ 1,\ 1.5,\ 2,\ldots
+\]
+\end{enumerate}
+
+\section*{Part 4: Picture sequences}
+
+\textbf{Q12.}
+\begin{center}\small
+\begin{tabular}{|l|*{6}{c|}c|}\hline
+Picture sequence & Pattern 1 & Pattern 2 & Pattern 3 & Pattern 4 & Pattern 5 & Pattern 10 & \(n\)th term\\\hline
+(a) Dots & 3 & 6 & 9 & 12 & 15 & 30 & \(3n\)\\
+(b) Separate squares of matchsticks & 4 & 8 & 12 & 16 & 20 & 40 & \(4n\)\\
+(c) Separate hexagons of matchsticks & 6 & 12 & 18 & 24 & 30 & 60 & \(6n\)\\\hline
+\end{tabular}
+\end{center}
+For (a), pattern \(n\) has \(n\) rows of 3 dots, giving \(3n\) dots. For (b), each square uses 4 matchsticks, so \(n\) squares use \(4n\). For (c), each hexagon uses 6 matchsticks, so \(n\) hexagons use \(6n\).
+
+\textbf{Q13.}
+\begin{center}\small
+\begin{tabular}{|l|*{6}{c|}c|}\hline
+Picture sequence & Pattern 1 & Pattern 2 & Pattern 3 & Pattern 4 & Pattern 5 & Pattern 10 & \(n\)th term\\\hline
+(a) Zigzag matchsticks & 2 & 4 & 6 & 8 & 10 & 20 & \(2n\)\\
+(b) Tooth triangles & 3 & 6 & 9 & 12 & 15 & 30 & \(3n\)\\
+(c) Cross of dots & 4 & 8 & 12 & 16 & 20 & 40 & \(4n\)\\\hline
+\end{tabular}
+\end{center}
+The zigzag has \(2n\) matchsticks. Each triangle uses 3 matchsticks and the triangles do not share sides, so \(n\) triangles use \(3n\) matchsticks. The cross has four arms of \(n\) dots, so it has \(4n\) dots.
+
+\section*{Part 5: Matching and drawing picture sequences}
+
+\textbf{Q14.} Matching picture sequences to their \(n\)th terms:
+\begin{center}\small
+\begin{tabular}{|c|c|c|}\hline
+Picture sequence & Counting & \(n\)th term\\\hline
+A: dice showing five & 5 dots per die, so \(5n\) dots & \(5n\)\\
+B: tables with chairs & 4 chairs per table, so \(4n\) chairs & \(4n\)\\
+C: star of dots & 3 arms of \(n\) dots, so \(3n\) dots & \(3n\)\\
+D: flowers of dots & centre \(+\) 6 petals \(=7\) dots per flower, so \(7n\) & \(7n\)\\
+E: rows of 2 dots & \(n\) rows of 2, so \(2n\) dots & \(2n\)\\
+F: houses of matchsticks & 6 matchsticks per house, so \(6n\) & \(6n\)\\\hline
+\end{tabular}
+\end{center}
+The three \(n\)th terms left over are
+\[
+5n+1,\qquad n+4,\qquad 3n-2.
+\]
+
+\textbf{Q15.} Sample answers. In each case, draw patterns 1, 2 and 3 with the stated numbers of objects.
+\begin{enumerate}[label=(\alph*)]
+\item \(3n\): use \(3,6,9\) objects in patterns 1, 2 and 3. For example, draw 3 dots, then 6 dots, then 9 dots in matching arrangements.
+\item \(5n\): use \(5,10,15\) objects in patterns 1, 2 and 3.
+\item \(8n\): use \(8,16,24\) objects in patterns 1, 2 and 3.
+\item \(\frac12n\): the numbers are
+\[
+\frac12,\quad 1,\quad \frac32.
+\]
+This can be drawn if half-objects are allowed, for example half a matchstick, one matchstick, and one and a half matchsticks. With whole objects only, pattern 1 cannot be shown exactly.
+\item One possible choice is \(4n\). Then draw \(4,8,12\) objects in patterns 1, 2 and 3.
+\item No. The term \(-2n\) gives
+\[
+-2,\ -4,\ -6,\ldots
+\]
+for \(n=1,2,3,\ldots\), and a picture cannot contain a negative number of objects.
+\end{enumerate}
+
+\section*{Part 6: Always, sometimes or never?}
+
+\textbf{Q16--Q27.}
+\begin{center}\small
+\begin{tabular}{|p{6.4cm}|p{2.2cm}|p{6.2cm}|}\hline
+\textbf{Statement} & \textbf{Answer} & \textbf{Reason}\\\hline
+Q16. A term of the 6 times table is also a term of the 3 times table.
+& Always
+& Every multiple of 6 is a multiple of 3, since \(6n=3(2n)\).\\\hline
+Q17. A term of the 3 times table is also a term of the 6 times table.
+& Sometimes
+& True for multiples such as 6; false for 3, because 3 is not a multiple of 6.\\\hline
+Q18. A term of the \(25\%\) times table is more than \(100\%\).
+& Sometimes
+& \(25n\%\) is more than \(100\%\) only when \(n>4\). For example, \(n=1\) gives \(25\%\), but \(n=5\) gives \(125\%\).\\\hline
+Q19. Adding 2 to every term of a times table gives another times table.
+& Never
+& Adding 2 to \(an\) gives \(an+2\). For example, \(3,6,9,\ldots\) becomes \(5,8,11,\ldots\), which is not a standard times table.\\\hline
+Q20. A term of the sequence \(2n+1\) is even.
+& Never
+& \(2n\) is even, so \(2n+1\) is always odd.\\\hline
+Q21. \(-2n\) is less than \(-n\).
+& Always
+& For \(n\ge1\), \(2n>n\), so \(-2n<-n\).\\\hline
+Q22. \(3n\) is greater than \(n+2\).
+& Sometimes
+& \(3n>n+2\) is equivalent to \(2n>2\), i.e. \(n>1\). It is true for \(n\ge2\), but false for \(n=1\) because \(3=3\).\\\hline
+Q23. In the sequence \(3n+1\), doubling the position doubles the term.
+& Never
+& The term at position \(2n\) is \(3(2n)+1=6n+1\), while twice the term at position \(n\) is \(2(3n+1)=6n+2\). These differ by 1.\\\hline
+Q24. A number that is a term of both \(3n\) and \(5n\) is also a term of \(15n\).
+& Always
+& Common multiples of 3 and 5 are exactly the multiples of 15.\\\hline
+Q25. The number of chairs in a pattern of these tables is even.
+& Always
+& Each table has 4 chairs, so \(n\) tables have \(4n\) chairs, which is even.\\\hline
+Q26. The number of dots on a row of these dice is even.
+& Sometimes
+& Each die shows 5 dots, so \(n\) dice show \(5n\) dots. This is even when \(n\) is even and odd when \(n\) is odd.\\\hline
+Q27. A pattern of these hexagons uses exactly 100 matchsticks.
+& Never
+& Each hexagon uses 6 matchsticks, so a pattern of \(n\) hexagons uses \(6n\) matchsticks. But \(100\) is not divisible by 6.\\\hline
+\end{tabular}
+\end{center}
+
+\textbf{Q28.} Sample statements:
+\begin{itemize}
+\item Always: Every term of the sequence \(6n\) is a multiple of 3.
+\item Sometimes: A term of the sequence \(4n\) is greater than 10. This is true for \(n=3\) because \(4\times3=12\), but false for \(n=1\) because \(4\times1=4\).
+\item Never: A term of the sequence \(5n\) is negative. Since \(n=1,2,3,\ldots\), every term \(5n\) is positive.
+\end{itemize}
+
+\end{document}
