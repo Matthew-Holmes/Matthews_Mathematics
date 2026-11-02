@@ -1,0 +1,489 @@
+\documentclass[aspectratio=169]{beamer}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{matrix,calc,arrows.meta}
+
+% ================================================================
+% Quick Questions deck: rearranging equations.
+%
+% Each topic runs ten quick questions that get gradually harder.
+% Every question gets two slides: the question on its own for the
+% mini whiteboards, then the same question again with the worked
+% solution underneath in red.
+%
+% The two green topics use function machines to solve equations and
+% to rearrange equations. The two amber topics change the subject of
+% a formula with one step, then with two or more steps. The three red
+% topics rearrange formulae that involve brackets, formulae with the
+% unknown on both sides, and the SUVAT formulae.
+%
+% The working is set out with the balance method: a curved arrow on
+% each side of the equation goes from one line to the next, labelled
+% with what was done to both sides. A line that only rewrites one
+% side (expanding, factorising) or swaps the sides has a word beside
+% it and no arrows, so an arrow always means the same thing. The
+% function machine topics show the machine next to the same working,
+% run backwards in the same order as the balance steps.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+
+% A link in the bottom left of every slide back to the contents, so a
+% deck this long can be jumped around in during a lesson.
+\setbeamertemplate{footline}{%
+  \hbox to\paperwidth{%
+    \hspace{1em}%
+    \hyperlink{contents}{%
+      \color{gray}\scriptsize$\leftarrow$~Back to contents}%
+    \hfil}%
+  \vskip4pt%
+}
+
+% Topic divider.
+\newcommand{\qtopic}[1]{%
+  \section{#1}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      {\usebeamercolor[fg]{structure}\Huge\bfseries #1}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% \qq[<question size>][<solution size>]{<question>}{<solution>}
+% The two optional sizes drop the type for the wordier questions and
+% the longer solutions, so nothing runs off the slide.
+\NewDocumentCommand{\qq}{O{\Huge}O{\LARGE}+m+m}{%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+  \begin{frame}
+    \vfill
+    \begin{center}
+      \begin{minipage}{0.92\textwidth}
+        \centering #1 #3
+        \par\vspace{0.9em}
+        {\color{red}#2 #4}
+      \end{minipage}
+    \end{center}
+    \vfill
+  \end{frame}%
+}
+
+% The wording of the questions.
+\newcommand{\subj}[2]{Make $#1$ the subject of $#2$}
+\newcommand{\fmsolve}[1]{Use a function machine to solve $#1$}
+\newcommand{\fmsubj}[2]{Use a function machine to make $#1$\\ the subject of $#2$}
+
+% \side[<width of the left part>]{<left>}{<right>}
+% Two pieces of working next to each other, for a solution that would
+% be too tall with one above the other.
+\NewDocumentCommand{\side}{O{0.5}+m+m}{%
+  \begin{minipage}[c]{#1\linewidth}\centering #2\end{minipage}\hfill
+  \begin{minipage}[c]{\dimexpr0.98\linewidth-#1\linewidth\relax}%
+    \centering #3\end{minipage}%
+}
+
+% ================================================================
+% Balance-method working
+% ================================================================
+
+% \work{<lines>}{<steps>}
+% <lines> is a comma separated list of equations, with the equals
+% signs lined up. <steps> is a comma separated list with one entry
+% for each gap between two lines:
+%   -5, \div 3     a curved arrow on each side, labelled in maths mode
+%   swap sides/    a word on the left and no arrows
+%   /factorise     a word on the right and no arrows
+% The arrows sit just outside the widest line, so they stay in a
+% column however much the lines change length.
+\tikzset{
+  wmat/.style={matrix of math nodes, ampersand replacement=\&,
+               row sep=0.5em, column sep=1pt, nodes={inner sep=1.5pt},
+               column 1/.style={anchor=base east},
+               column 2/.style={anchor=base},
+               column 3/.style={anchor=base west}},
+  warc/.style={-{Stealth[length=6pt]}, thick, red},
+}
+\newtoks\workbody
+\def\workrow#1=#2\relax{%
+  \global\workbody\expandafter{\the\workbody #1\&=\&#2\\}}
+\newcommand{\workmatrix}[1]{\matrix[wmat] (w) {#1};}
+\newcommand{\work}[2]{%
+  \global\workbody{}%
+  \foreach \row in {#1}{\expandafter\workrow\row\relax}%
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \expandafter\workmatrix\expandafter{\the\workbody}
+    \foreach \opl/\opr [count=\k] in {#2}{%
+      \pgfmathtruncatemacro{\n}{\k+1}
+      \coordinate (lt) at ([xshift=-4pt]w.west |- w-\k-2.center);
+      \coordinate (lb) at ([xshift=-4pt]w.west |- w-\n-2.center);
+      \coordinate (rt) at ([xshift=4pt]w.east |- w-\k-2.center);
+      \coordinate (rb) at ([xshift=4pt]w.east |- w-\n-2.center);
+      \ifx\opl\opr
+        \draw[warc] (lt) to[bend right=60] node[left] {$\opl$} (lb);
+        \draw[warc] (rt) to[bend left=60] node[right] {$\opr$} (rb);
+      \else
+        \node[left, font=\normalsize] at ($(lt)!0.5!(lb)$) {\opl};
+        \node[right, font=\normalsize] at ($(rt)!0.5!(rb)$) {\opr};
+      \fi
+    }
+  \end{tikzpicture}%
+}
+
+% ================================================================
+% Function machines
+% ================================================================
+
+% \fmachine{<top boxes>}{<top operations>}{<bottom boxes>}{<bottom operations>}
+% All four are comma separated lists, read from left to right. Top
+% row: the equation as a function machine, with the unknown going in
+% and the right-hand side coming out. Bottom row: the machine run
+% backwards from the output, each operation replaced by its inverse.
+\tikzset{
+  fmat/.style={matrix of math nodes, ampersand replacement=\&,
+               column sep=0.95cm, row sep=0.55cm,
+               nodes={draw=red!60!black, rounded corners=2pt, fill=red!8,
+                      inner sep=4pt, text=red,
+                      minimum width=1.2cm, minimum height=0.8cm}},
+  marr/.style={-{Stealth[length=5pt]}, red, thick,
+               shorten >=1pt, shorten <=1pt},
+  mlab/.style={above, text=red, font=\normalsize},
+}
+\newtoks\fmbody
+\newcommand{\fmcells}[1]{%
+  \foreach \cell [count=\k] in {#1}{%
+    \ifnum\k>1 \global\fmbody\expandafter{\the\fmbody\&}\fi
+    \global\fmbody\expandafter{\the\expandafter\fmbody\cell}%
+  }%
+  \global\fmbody\expandafter{\the\fmbody\\}%
+}
+\newcommand{\fmmatrix}[1]{\matrix[fmat] (f) {#1};}
+\newcommand{\fmachine}[4]{%
+  \global\fmbody{}%
+  \fmcells{#1}\fmcells{#3}%
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \expandafter\fmmatrix\expandafter{\the\fmbody}
+    \foreach \op [count=\k] in {#2}{%
+      \pgfmathtruncatemacro{\n}{\k+1}
+      \draw[marr] (f-1-\k) -- node[mlab] {$\op$} (f-1-\n);
+    }
+    \foreach \op [count=\k] in {#4}{%
+      \pgfmathtruncatemacro{\n}{\k+1}
+      \draw[marr] (f-2-\n) -- node[mlab] {$\op$} (f-2-\k);
+    }
+  \end{tikzpicture}%
+}
+
+% Contents-slide bullets, colour-coded by difficulty band: green for
+% the function machines, orange for changing the subject and red for
+% the harder formulae. The green is darkened because a pure green
+% washes out on a projector.
+\setbeamertemplate{section in toc}{%
+  \ifnum\inserttocsectionnumber<3
+    \textcolor{green!55!black}{$\bullet$}%
+  \else
+    \ifnum\inserttocsectionnumber<5
+      \textcolor{orange}{$\bullet$}%
+    \else
+      \textcolor{red}{$\bullet$}%
+    \fi
+  \fi
+  ~\inserttocsection%
+}
+
+\title{Rearranging Equations: Quick Questions}
+\subtitle{Mini whiteboard questions, with solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[label=contents]{Contents}
+  \tableofcontents
+\end{frame}
+
+%================================================================
+\qtopic{Using function machines to solve equations}
+%================================================================
+
+\qq[\LARGE][\Large]{\fmsolve{x+7=15}}
+  {\side[0.45]{\fmachine{x, 15}{+7}{8, 15}{-7}}
+     {\work{x+7=15, x=8}{-7}}}
+
+\qq[\LARGE][\Large]{\fmsolve{4x=28}}
+  {\side[0.45]{\fmachine{x, 28}{\times 4}{7, 28}{\div 4}}
+     {\work{4x=28, x=7}{\div 4}}}
+
+\qq[\LARGE][\Large]{\fmsolve{2x+3=11}}
+  {\side[0.6]{\fmachine{x, 2x, 11}{\times 2, +3}{4, 8, 11}{\div 2, -3}}
+     {\work{2x+3=11, 2x=8, x=4}{-3, \div 2}}}
+
+\qq[\LARGE][\Large]{\fmsolve{3x-5=16}}
+  {\side[0.6]{\fmachine{x, 3x, 16}{\times 3, -5}{7, 21, 16}{\div 3, +5}}
+     {\work{3x-5=16, 3x=21, x=7}{+5, \div 3}}}
+
+\qq[\LARGE][\Large]{\fmsolve{\dfrac{x}{2}+3=7}}
+  {\side[0.6]{\fmachine{x, \dfrac{x}{2}, 7}{\div 2, +3}{8, 4, 7}{\times 2, -3}}
+     {\work{\dfrac{x}{2}+3=7, \dfrac{x}{2}=4, x=8}{-3, \times 2}}}
+
+\qq[\LARGE][\Large]{\fmsolve{\dfrac{x+3}{2}=5}}
+  {\side[0.6]{\fmachine{x, x+3, 5}{+3, \div 2}{7, 10, 5}{-3, \times 2}}
+     {\work{\dfrac{x+3}{2}=5, x+3=10, x=7}{\times 2, -3}}}
+
+\qq[\LARGE][\Large]{\fmsolve{5(x-2)=30}}
+  {\side[0.6]{\fmachine{x, x-2, 30}{-2, \times 5}{8, 6, 30}{+2, \div 5}}
+     {\work{5(x-2)=30, x-2=6, x=8}{\div 5, +2}}}
+
+\qq[\LARGE][\Large]{\fmsolve{4x+13=5}}
+  {\side[0.6]{\fmachine{x, 4x, 5}{\times 4, +13}{-2, -8, 5}{\div 4, -13}}
+     {\work{4x+13=5, 4x=-8, x=-2}{-13, \div 4}}}
+
+\qq[\LARGE][\Large]{\fmsolve{3(x+4)-5=16}}
+  {\side[0.66]{\fmachine{x, x+4, 3(x+4), 16}{+4, \times 3, -5}{3, 7, 21, 16}{-4, \div 3, +5}}
+     {\work{3(x+4)-5=16, 3(x+4)=21, x+4=7, x=3}{+5, \div 3, -4}}}
+
+\qq[\LARGE][\Large]{\fmsolve{\dfrac{2x-1}{3}=5}}
+  {\side[0.66]{\fmachine{x, 2x, 2x-1, 5}{\times 2, -1, \div 3}{8, 16, 15, 5}{\div 2, +1, \times 3}}
+     {\work{\dfrac{2x-1}{3}=5, 2x-1=15, 2x=16, x=8}{\times 3, +1, \div 2}}}
+
+%================================================================
+\qtopic{Using function machines to rearrange equations}
+%================================================================
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=x+4}}
+  {\side[0.45]{\fmachine{x, y}{+4}{y-4, y}{-4}}
+     {\work{y=x+4, y-4=x, x=y-4}{-4, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=x-6}}
+  {\side[0.45]{\fmachine{x, y}{-6}{y+6, y}{+6}}
+     {\work{y=x-6, y+6=x, x=y+6}{+6, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=5x}}
+  {\side[0.45]{\fmachine{x, y}{\times 5}{\dfrac{y}{5}, y}{\div 5}}
+     {\work{y=5x, \dfrac{y}{5}=x, x=\dfrac{y}{5}}{\div 5, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=\dfrac{x}{3}}}
+  {\side[0.45]{\fmachine{x, y}{\div 3}{3y, y}{\times 3}}
+     {\work{y=\dfrac{x}{3}, 3y=x, x=3y}{\times 3, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=2x+3}}
+  {\side[0.6]{\fmachine{x, 2x, y}{\times 2, +3}{\dfrac{y-3}{2}, y-3, y}{\div 2, -3}}
+     {\work{y=2x+3, y-3=2x, \dfrac{y-3}{2}=x, x=\dfrac{y-3}{2}}{-3, \div 2, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=4x-1}}
+  {\side[0.6]{\fmachine{x, 4x, y}{\times 4, -1}{\dfrac{y+1}{4}, y+1, y}{\div 4, +1}}
+     {\work{y=4x-1, y+1=4x, \dfrac{y+1}{4}=x, x=\dfrac{y+1}{4}}{+1, \div 4, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=\dfrac{x}{2}+5}}
+  {\side[0.6]{\fmachine{x, \dfrac{x}{2}, y}{\div 2, +5}{2(y-5), y-5, y}{\times 2, -5}}
+     {\work{y=\dfrac{x}{2}+5, y-5=\dfrac{x}{2}, 2(y-5)=x, x=2(y-5)}{-5, \times 2, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=\dfrac{x+1}{3}}}
+  {\side[0.6]{\fmachine{x, x+1, y}{+1, \div 3}{3y-1, 3y, y}{-1, \times 3}}
+     {\work{y=\dfrac{x+1}{3}, 3y=x+1, 3y-1=x, x=3y-1}{\times 3, -1, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=6(x-2)}}
+  {\side[0.6]{\fmachine{x, x-2, y}{-2, \times 6}{\dfrac{y}{6}+2, \dfrac{y}{6}, y}{+2, \div 6}}
+     {\work{y=6(x-2), \dfrac{y}{6}=x-2, \dfrac{y}{6}+2=x, x=\dfrac{y}{6}+2}{\div 6, +2, swap sides/}}}
+
+\qq[\LARGE][\Large]{\fmsubj{x}{y=\dfrac{3x-2}{5}}}
+  {\side[0.66]{\fmachine{x, 3x, 3x-2, y}{\times 3, -2, \div 5}{\dfrac{5y+2}{3}, 5y+2, 5y, y}{\div 3, +2, \times 5}}
+     {\work{y=\dfrac{3x-2}{5}, 5y=3x-2, 5y+2=3x, \dfrac{5y+2}{3}=x, x=\dfrac{5y+2}{3}}{\times 5, +2, \div 3, swap sides/}}}
+
+%================================================================
+\qtopic{Changing the subject of a formula with one step}
+%================================================================
+
+\qq{\subj{x}{x+4=y}}
+  {\work{x+4=y, x=y-4}{-4}}
+
+\qq{\subj{x}{y=x-9}}
+  {\work{y=x-9, y+9=x, x=y+9}{+9, swap sides/}}
+
+\qq{\subj{b}{a+b=c}}
+  {\work{a+b=c, b=c-a}{-a}}
+
+\qq{\subj{p}{p-q=r}}
+  {\work{p-q=r, p=r+q}{+q}}
+
+\qq{\subj{w}{A=lw}}
+  {\work{A=lw, \dfrac{A}{l}=w, w=\dfrac{A}{l}}{\div l, swap sides/}}
+
+\qq{\subj{R}{V=IR}}
+  {\work{V=IR, \dfrac{V}{I}=R, R=\dfrac{V}{I}}{\div I, swap sides/}}
+
+\qq{\subj{d}{C=\pi d}}
+  {\work{C=\pi d, \dfrac{C}{\pi}=d, d=\dfrac{C}{\pi}}{\div \pi, swap sides/}}
+
+\qq{\subj{d}{s=\dfrac{d}{t}}}
+  {\work{s=\dfrac{d}{t}, st=d, d=st}{\times t, swap sides/}}
+
+\qq[\LARGE][\Large]{A square has side length $l$ and area $A=l^2$.\\[0.2em]
+   Make $l$ the subject of the formula.}
+  {\work{A=l^2, \sqrt{A}=l, l=\sqrt{A}}{\sqrt{\phantom{x}}, swap sides/}
+   \par\vspace{0.3em}
+   $l$ is a length, so we take the positive square root.}
+
+\qq{\subj{x}{y=\sqrt{x}}}
+  {\work{y=\sqrt{x}, y^2=x, x=y^2}{\text{square}, swap sides/}}
+
+%================================================================
+\qtopic{Changing the subject of a formula with two or more steps}
+%================================================================
+
+\qq{\subj{x}{y=2x+1}}
+  {\work{y=2x+1, y-1=2x, \dfrac{y-1}{2}=x, x=\dfrac{y-1}{2}}{-1, \div 2, swap sides/}}
+
+\qq{\subj{x}{y=mx+c}}
+  {\work{y=mx+c, y-c=mx, \dfrac{y-c}{m}=x, x=\dfrac{y-c}{m}}{-c, \div m, swap sides/}}
+
+\qq{\subj{x}{y=ax-b}}
+  {\work{y=ax-b, y+b=ax, \dfrac{y+b}{a}=x, x=\dfrac{y+b}{a}}{+b, \div a, swap sides/}}
+
+\qq{\subj{x}{y=\dfrac{x}{3}-2}}
+  {\work{y=\dfrac{x}{3}-2, y+2=\dfrac{x}{3}, 3(y+2)=x, x=3(y+2)}{+2, \times 3, swap sides/}}
+
+\qq{\subj{l}{P=2l+2w}}
+  {\work{P=2l+2w, P-2w=2l, \dfrac{P-2w}{2}=l, l=\dfrac{P-2w}{2}}{-2w, \div 2, swap sides/}}
+
+\qq{\subj{h}{A=\dfrac{1}{2}bh}}
+  {\work{A=\dfrac{1}{2}bh, 2A=bh, \dfrac{2A}{b}=h, h=\dfrac{2A}{b}}{\times 2, \div b, swap sides/}}
+
+\qq{\subj{c}{a=b-c}}
+  {\work{a=b-c, a+c=b, c=b-a}{+c, -a}}
+
+\qq{\subj{x}{y=5-2x}}
+  {\work{y=5-2x, y+2x=5, 2x=5-y, x=\dfrac{5-y}{2}}{+2x, -y, \div 2}}
+
+\qq[\LARGE][\Large]{A circle has radius $r$ and area $A=\pi r^2$.\\[0.2em]
+   Make $r$ the subject of the formula.}
+  {\side[0.6]{\work{A=\pi r^2, \dfrac{A}{\pi}=r^2, \sqrt{\dfrac{A}{\pi}}=r, r=\sqrt{\dfrac{A}{\pi}}}{\div \pi, \sqrt{\phantom{x}}, swap sides/}}
+     {$r$ is a length, so we take the positive square root.}}
+
+\qq[\LARGE][\Large]{An object with mass $m$ and speed $v$ has\\ kinetic energy $E=\dfrac{1}{2}mv^2$.
+   Make $v$ the subject of the formula.}
+  {\side[0.6]{\work{E=\dfrac{1}{2}mv^2, 2E=mv^2, \dfrac{2E}{m}=v^2, \sqrt{\dfrac{2E}{m}}=v, v=\sqrt{\dfrac{2E}{m}}}{\times 2, \div m, \sqrt{\phantom{x}}, swap sides/}}
+     {$v$ is a speed, so we take the positive square root.}}
+
+%================================================================
+\qtopic{Rearranging formulae with brackets}
+%================================================================
+
+\qq{\subj{x}{y=3(x+2)}}
+  {\work{y=3(x+2), \dfrac{y}{3}=x+2, \dfrac{y}{3}-2=x, x=\dfrac{y}{3}-2}{\div 3, -2, swap sides/}}
+
+\qq{\subj{x}{y=4(x-1)}}
+  {\work{y=4(x-1), \dfrac{y}{4}=x-1, \dfrac{y}{4}+1=x, x=\dfrac{y}{4}+1}{\div 4, +1, swap sides/}}
+
+\qq{\subj{x}{y=a(x+b)}}
+  {\work{y=a(x+b), \dfrac{y}{a}=x+b, \dfrac{y}{a}-b=x, x=\dfrac{y}{a}-b}{\div a, -b, swap sides/}}
+
+\qq{\subj{l}{P=2(l+w)}}
+  {\work{P=2(l+w), \dfrac{P}{2}=l+w, \dfrac{P}{2}-w=l, l=\dfrac{P}{2}-w}{\div 2, -w, swap sides/}}
+
+\qq{\subj{x}{y=a(b-x)}}
+  {\work{y=a(b-x), \dfrac{y}{a}=b-x, \dfrac{y}{a}+x=b, x=b-\dfrac{y}{a}}{\div a, +x, -\dfrac{y}{a}}}
+
+\qq[\Huge][\Large]{\subj{x}{y=2(x+3)+1}}
+  {\work{y=2(x+3)+1, y-1=2(x+3), \dfrac{y-1}{2}=x+3, \dfrac{y-1}{2}-3=x, x=\dfrac{y-1}{2}-3}{-1, \div 2, -3, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{F}{C=\dfrac{5(F-32)}{9}}}
+  {\work{C=\dfrac{5(F-32)}{9}, 9C=5(F-32), \dfrac{9C}{5}=F-32, \dfrac{9C}{5}+32=F, F=\dfrac{9C}{5}+32}{\times 9, \div 5, +32, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{a}{A=\dfrac{1}{2}(a+b)h}}
+  {\work{A=\dfrac{1}{2}(a+b)h, 2A=(a+b)h, \dfrac{2A}{h}=a+b, \dfrac{2A}{h}-b=a, a=\dfrac{2A}{h}-b}{\times 2, \div h, -b, swap sides/}}
+
+\qq{\subj{x}{y=(x+2)^2}}
+  {\work{y=(x+2)^2, \pm\sqrt{y}=x+2, \pm\sqrt{y}-2=x, x=\pm\sqrt{y}-2}{\sqrt{\phantom{x}}, -2, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{x}{y=3(x-1)^2+2}}
+  {\side{\work{y=3(x-1)^2+2, y-2=3(x-1)^2, \dfrac{y-2}{3}=(x-1)^2}{-2, \div 3}}
+     {\work{\dfrac{y-2}{3}=(x-1)^2, \pm\sqrt{\dfrac{y-2}{3}}=x-1, x=\pm\sqrt{\dfrac{y-2}{3}}+1}{\sqrt{\phantom{x}}, +1 \text{ and swap}/}}}
+
+%================================================================
+\qtopic{Rearranging formulae with the unknown on both sides}
+%================================================================
+
+\qq{\subj{x}{3x+a=x+b}}
+  {\work{3x+a=x+b, 2x+a=b, 2x=b-a, x=\dfrac{b-a}{2}}{-x, -a, \div 2}}
+
+\qq{\subj{x}{5x-p=2x+q}}
+  {\work{5x-p=2x+q, 3x-p=q, 3x=q+p, x=\dfrac{q+p}{3}}{-2x, +p, \div 3}}
+
+\qq{\subj{x}{ax+bx=c}}
+  {\work{ax+bx=c, x(a+b)=c, x=\dfrac{c}{a+b}}{factorise/, \div (a+b)}}
+
+\qq{\subj{x}{ax=bx+c}}
+  {\work{ax=bx+c, ax-bx=c, x(a-b)=c, x=\dfrac{c}{a-b}}{-bx, factorise/, \div (a-b)}}
+
+\qq[\Huge][\Large]{\subj{x}{ax+b=cx+d}}
+  {\work{ax+b=cx+d, ax-cx+b=d, ax-cx=d-b, x(a-c)=d-b, x=\dfrac{d-b}{a-c}}{-cx, -b, factorise/, \div (a-c)}}
+
+\qq[\Huge][\Large]{\subj{x}{px+q=r-sx}}
+  {\work{px+q=r-sx, px+sx+q=r, px+sx=r-q, x(p+s)=r-q, x=\dfrac{r-q}{p+s}}{+sx, -q, factorise/, \div (p+s)}}
+
+\qq[\Huge][\Large]{\subj{x}{a(x+b)=cx}}
+  {\side[0.46]{\work{a(x+b)=cx, ax+ab=cx, ab=cx-ax}{expand/, -ax}}
+     {\work{ab=cx-ax, ab=x(c-a), \dfrac{ab}{c-a}=x, x=\dfrac{ab}{c-a}}{/factorise, \div (c-a), swap sides/}}}
+
+\qq[\Huge][\Large]{\subj{x}{y=\dfrac{x}{x+1}}}
+  {\side[0.46]{\work{y=\dfrac{x}{x+1}, y(x+1)=x, xy+y=x, y=x-xy}{\times (x+1), expand/, -xy}}
+     {\work{y=x-xy, y=x(1-y), \dfrac{y}{1-y}=x, x=\dfrac{y}{1-y}}{/factorise, \div (1-y), swap sides/}}}
+
+\qq[\Huge][\Large]{\subj{x}{y=\dfrac{x+1}{x-1}}}
+  {\side[0.52]{\work{y=\dfrac{x+1}{x-1}, y(x-1)=x+1, xy-y=x+1, xy-x-y=1}{\times (x-1), expand/, -x}}
+     {\work{xy-x-y=1, xy-x=1+y, x(y-1)=1+y, x=\dfrac{1+y}{y-1}}{+y, factorise/, \div (y-1)}}}
+
+\qq[\Huge][\Large]{\subj{x}{y=\dfrac{2x+3}{x-4}}}
+  {\side[0.53]{\work{y=\dfrac{2x+3}{x-4}, y(x-4)=2x+3, xy-4y=2x+3, xy-2x-4y=3}{\times (x-4), expand/, -2x}}
+     {\work{xy-2x-4y=3, xy-2x=3+4y, x(y-2)=3+4y, x=\dfrac{3+4y}{y-2}}{+4y, factorise/, \div (y-2)}}}
+
+%================================================================
+\qtopic{Rearranging SUVAT formulae}
+%================================================================
+
+\qq{\subj{u}{v=u+at}}
+  {\work{v=u+at, v-at=u, u=v-at}{-at, swap sides/}}
+
+\qq{\subj{a}{v=u+at}}
+  {\work{v=u+at, v-u=at, \dfrac{v-u}{t}=a, a=\dfrac{v-u}{t}}{-u, \div t, swap sides/}}
+
+\qq{\subj{t}{v=u+at}}
+  {\work{v=u+at, v-u=at, \dfrac{v-u}{a}=t, t=\dfrac{v-u}{a}}{-u, \div a, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{t}{s=\dfrac{1}{2}(u+v)t}}
+  {\work{s=\dfrac{1}{2}(u+v)t, 2s=(u+v)t, \dfrac{2s}{u+v}=t, t=\dfrac{2s}{u+v}}{\times 2, \div (u+v), swap sides/}}
+
+\qq[\Huge][\Large]{\subj{v}{s=\dfrac{1}{2}(u+v)t}}
+  {\work{s=\dfrac{1}{2}(u+v)t, 2s=(u+v)t, \dfrac{2s}{t}=u+v, \dfrac{2s}{t}-u=v, v=\dfrac{2s}{t}-u}{\times 2, \div t, -u, swap sides/}}
+
+\qq{\subj{v}{v^2=u^2+2as}}
+  {\work{v^2=u^2+2as, v=\pm\sqrt{u^2+2as}}{\sqrt{\phantom{x}}}
+   \par\vspace{0.3em}
+   \Large $v$ is a velocity, which can be positive or negative.}
+
+\qq{\subj{s}{v^2=u^2+2as}}
+  {\work{v^2=u^2+2as, v^2-u^2=2as, \dfrac{v^2-u^2}{2a}=s, s=\dfrac{v^2-u^2}{2a}}{-u^2, \div 2a, swap sides/}}
+
+\qq{\subj{u}{v^2=u^2+2as}}
+  {\work{v^2=u^2+2as, v^2-2as=u^2, \pm\sqrt{v^2-2as}=u, u=\pm\sqrt{v^2-2as}}{-2as, \sqrt{\phantom{x}}, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{u}{s=ut+\dfrac{1}{2}at^2}}
+  {\work{s=ut+\dfrac{1}{2}at^2, s-\dfrac{1}{2}at^2=ut, \dfrac{s-\frac{1}{2}at^2}{t}=u, u=\dfrac{s-\frac{1}{2}at^2}{t}}{-\tfrac{1}{2}at^2, \div t, swap sides/}}
+
+\qq[\Huge][\Large]{\subj{a}{s=vt-\dfrac{1}{2}at^2}}
+  {\work{s=vt-\dfrac{1}{2}at^2, s+\dfrac{1}{2}at^2=vt, \dfrac{1}{2}at^2=vt-s, at^2=2(vt-s), a=\dfrac{2(vt-s)}{t^2}}{+\tfrac{1}{2}at^2, -s, \times 2, \div t^2}}
+
+\end{document}
