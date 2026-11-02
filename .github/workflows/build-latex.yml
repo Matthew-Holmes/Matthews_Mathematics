@@ -170,3 +170,13 @@ jobs:
       - name: Report documents that failed to compile
         if: always() && hashFiles('latexCompileResults.ndjson') != ''
         run: DEBUG=1 .github/workflows/scripts/008_reportCompileFailures.sh latexCompileResults.ndjson latex
+
+      # Last on purpose, and it still runs after a failed compile: step 008 fails the
+      # run over one broken document, and the rest of the repository still wants
+      # generating. Problems here are warnings, because the PDFs are already published.
+      - name: Ask the website to start a generation run
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: .github/workflows/scripts/009_pingSyntheticPdfs.sh
+        env:
+          WEBSHEETS_TRIGGER_KEY: ${{ secrets.WEBSHEETS_TRIGGER_KEY }}
