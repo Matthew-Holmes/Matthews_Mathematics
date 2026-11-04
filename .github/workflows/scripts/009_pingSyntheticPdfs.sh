@@ -128,7 +128,7 @@ case "$HTTP_CODE" in
         "Server said: <code>$(html_escape "$DETAIL")</code>. Either the generator could not be reached, or it found a dictionary file it cannot read, in which case the run still went ahead. The generator's log on the droplet says which."
     else
       warn "The website returned an error (HTTP $HTTP_CODE)" \
-        "The reply had no detail, so it probably came from Cloudflare or nginx rather than the site itself. The generator was probably not asked to run."
+        "The reply had no detail, so it came from Cloudflare, nginx or an unhandled error in the website. The website's log on the droplet says which, and the generator may still have been asked to run."
     fi
     ;;
 esac
