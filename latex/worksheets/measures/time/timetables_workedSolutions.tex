@@ -1,0 +1,201 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array,tabularx,enumitem,xcolor}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.15}
+\newcommand{\ans}[1]{\textcolor{red!75!black}{\textbf{#1}}}
+\title{Going Places! --- Worked Solutions}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Method used throughout}
+At a frozen time, find the last scheduled stop before that time and the next scheduled stop after it. If the frozen time lies between two stops, the vehicle is moving. The fraction of the way along that section is
+\[
+\frac{\text{time since last stop}}{\text{time from last stop to next stop}}.
+\]
+If a timetable has a gap at a stop, the vehicle \emph{goes straight past} that stop without stopping. Positions are approximate when a vehicle passes a stop without stopping: we spread the time evenly over the whole non-stop stretch.
+
+\section*{Part A: Frozen moments}
+
+\subsection*{1. Frozen at 09:30 --- A34 buses only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+A34 09:00 from Berrick & Downton & Hatfield & At 09:30 it is between Downton 09:21 and Hatfield 09:38. \(09{:}30-09{:}21=9\) min of the 17-min section. \ans{Moving}.\\
+A34 09:10 from Berrick & Tweed & Downton & At 09:30 it is between Tweed 09:25 and Downton 09:31. \(09{:}30-09{:}25=5\) min of the 6-min section. \ans{Moving}.\\
+A34 09:45 from Berrick & --- & --- & At 09:30 it has not left Berrick. \ans{Not started}.\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{2. Frozen at 10:00 --- C-18 buses only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+C-18 09:10 from Woodley & Berrick & Hatfield & Between Berrick 09:42 and Hatfield 10:08: \(10{:}00-09{:}42=18\) min of 26. \ans{Moving}.\\
+C-18A 09:32 from Woodley & Marcton & Hatfield & Between Marcton 09:44 and Hatfield 10:30: \(10{:}00-09{:}44=16\) min of 46. \ans{Moving}.\\
+C-18B 09:56 from Woodley & Woodley & Marcton & Between Woodley 09:56 and Marcton 10:10: \(10{:}00-09{:}56=4\) min of 14. \ans{Moving}.\\
+C-18 10:34 from Woodley & --- & --- & At 10:00 it has not left Woodley. \ans{Not started}.\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{3. Frozen at 09:20 --- trains only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+Train 08:12 from Abley & Chesterham & Greenham & Between Chesterham 08:24 and Greenham 09:32: \(09{:}20-08{:}24=56\) min of 68. It passes Berrick without stopping. \ans{Moving}.\\
+Train 08:44 from Abley & Berrick & Hadley & Between Berrick 09:18 and Hadley 10:30: \(09{:}20-09{:}18=2\) min of 72. \ans{Moving}.\\
+Train 08:59 from Abley & Abley & Hadley & Between Abley 08:59 and Hadley 10:19: \(09{:}20-08{:}59=21\) min of 80. \ans{Moving}.\\
+Train 09:24 from Abley & --- & --- & At 09:20 it has not left Abley. \ans{Not started}.\\
+Train 09:55 from Abley & --- & --- & At 09:20 it has not left Abley. \ans{Not started}.\\
+\bottomrule
+\end{tabularx}
+
+\textbf{Think about it.} The 08:12 train has done 56 of the 68 minutes from Chesterham to Greenham, so it has already passed Berrick and is between Berrick and Greenham. Since 56/68 is about five-sixths of the journey, it is much nearer Greenham. It reaches Greenham at 09:32.
+
+\subsection*{4. Frozen at 09:50 --- A34 buses only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+A34 09:00 from Berrick & Hatfield & Greenham & Between Hatfield 09:38 and Greenham 09:56: \(09{:}50-09{:}38=12\) min of 18. \ans{Moving}.\\
+A34 09:10 from Berrick & Hatfield & Greenham & Between Hatfield 09:48 and Greenham 10:06: \(09{:}50-09{:}48=2\) min of 18. \ans{Moving}.\\
+A34 09:45 from Berrick & Berrick & Tweed & Between Berrick 09:45 and Tweed 10:05: \(09{:}50-09{:}45=5\) min of 20. \ans{Moving}.\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{5. Frozen at 10:40 --- C-18 buses only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+C-18 09:10 from Woodley & --- & --- & It reached Frey at 10:25. \ans{Finished}.\\
+C-18A 09:32 from Woodley & Hatfield & Frey & Between Hatfield 10:30 and Frey 10:47: \(10{:}40-10{:}30=10\) min of 17. \ans{Moving}.\\
+C-18B 09:56 from Woodley & Marcton & Frey & Between Marcton 10:10 and Frey 11:12: \(10{:}40-10{:}10=30\) min of 62. \ans{Moving}.\\
+C-18 10:34 from Woodley & Woodley & Marcton & Between Woodley 10:34 and Marcton 10:46: \(10{:}40-10{:}34=6\) min of 12. \ans{Moving}.\\
+\bottomrule
+\end{tabularx}
+
+\textbf{Think about it.} At 09:50 both A34 buses are between Hatfield and Greenham. The 09:00 bus is 12 minutes into the 18-minute section, while the 09:10 bus is only 2 minutes into it. So the 09:00 bus is in front by 10 minutes. It stays 10 minutes ahead and never catches up: the 09:00 bus reaches Greenham at 09:56 and the 09:10 bus at 10:06.
+
+\subsection*{6. Frozen at 10:00 --- trains only}
+\begin{tabularx}{\linewidth}{@{}l l l X@{}}
+\toprule
+Vehicle & Last stop & Next stop & Working / status\\
+\midrule
+Train 08:12 from Abley & --- & --- & It reached Hadley at 09:58. \ans{Finished}.\\
+Train 08:44 from Abley & Berrick & Hadley & Between Berrick 09:18 and Hadley 10:30: \(10{:}00-09{:}18=42\) min of 72. \ans{Moving}.\\
+Train 08:59 from Abley & Abley & Hadley & Between Abley 08:59 and Hadley 10:19: \(10{:}00-08{:}59=61\) min of 80. \ans{Moving}.\\
+Train 09:24 from Abley & Chesterham & Berrick & Between Chesterham 09:48 and Berrick 10:01: \(10{:}00-09{:}48=12\) min of 13. \ans{Moving}.\\
+Train 09:55 from Abley & Abley & Chesterham & Between Abley 09:55 and Chesterham 10:07: \(10{:}00-09{:}55=5\) min of 12. \ans{Moving}.\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{7. Challenge --- frozen at 10:20}
+\begin{tabularx}{\linewidth}{@{}l l l l X@{}}
+\toprule
+Vehicle & Status & Last stop & Next stop & Working / note\\
+\midrule
+A34 09:00 from Berrick & \ans{Finished} & --- & --- & Reached Greenham 09:56.\\
+A34 09:10 from Berrick & \ans{Finished} & --- & --- & Reached Greenham 10:06.\\
+A34 09:45 from Berrick & \ans{Moving} & Downton & Hatfield & Between Downton 10:15 and Hatfield 10:30: \(10{:}20-10{:}15=5\) min of 15.\\
+C-18 09:10 from Woodley & \ans{Moving} & Hatfield & Frey & Between Hatfield 10:08 and Frey 10:25: \(10{:}20-10{:}08=12\) min of 17.\\
+C-18A 09:32 from Woodley & \ans{Moving} & Marcton & Hatfield & Between Marcton 09:44 and Hatfield 10:30: \(10{:}20-09{:}44=36\) min of 46. It passes Berrick without stopping.\\
+C-18B 09:56 from Woodley & \ans{Moving} & Marcton & Frey & Between Marcton 10:10 and Frey 11:12: \(10{:}20-10{:}10=10\) min of 62. It passes Berrick and Hatfield without stopping.\\
+C-18 10:34 from Woodley & \ans{Not started} & --- & --- & Has not left Woodley.\\
+Train 08:12 from Abley & \ans{Finished} & --- & --- & Reached Hadley 09:58.\\
+Train 08:44 from Abley & \ans{Moving} & Berrick & Hadley & Between Berrick 09:18 and Hadley 10:30: \(10{:}20-09{:}18=62\) min of 72. It passes Greenham without stopping.\\
+Train 08:59 from Abley & \ans{Finished} & --- & --- & Reached Hadley 10:19.\\
+Train 09:24 from Abley & \ans{Finished} & --- & --- & Terminates at Berrick, reached 10:01.\\
+Train 09:55 from Abley & \ans{Moving} & Chesterham & Berrick & Between Chesterham 10:07 and Berrick 10:29: \(10{:}20-10{:}07=13\) min of 22.\\
+\bottomrule
+\end{tabularx}
+
+\ans{Moving at 10:20: six vehicles} --- A34 09:45, C-18 09:10, C-18A 09:32, C-18B 09:56, Train 08:44 and Train 09:55.
+
+\section*{Part B: Zoom in}
+
+\subsection*{Zoom 1: A34 at 09:27}
+At 09:27:
+\begin{itemize}
+\item the 09:00 bus is between Downton 09:21 and Hatfield 09:38, \(09{:}27-09{:}21=6\) min into a 17-min section. This is \(P\);
+\item the 09:10 bus is between Tweed 09:25 and Downton 09:31, \(09{:}27-09{:}25=2\) min into a 6-min section. This is \(Q\).
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{\alph*)},leftmargin=*]
+\item \ans{\(P=09{:}00\) from Berrick; \(Q=09{:}10\) from Berrick.}
+\item \(P\) reaches Hatfield at 09:38, so the time from 09:27 is \(09{:}38-09{:}27=11\) min. It reaches Greenham at 09:56, so \(09{:}56-09{:}27=29\) min. \ans{11 min; 29 min.}
+\item \(Q\) reaches Downton at 09:31, so \(09{:}31-09{:}27=4\) min. It reaches Greenham at 10:06, so \(10{:}06-09{:}27=39\) min. \ans{4 min; 39 min.}
+\item At 09:45, \(P\) is between Hatfield 09:38 and Greenham 09:56. It has travelled \(09{:}45-09{:}38=7\) min of the 18-min section. Mark the cross \(7/18\) of the way from Hatfield to Greenham.
+\item The next A34 at Tweed after 09:27 is the 09:45 bus from Berrick, which reaches Tweed at 10:05. Waiting time: \(10{:}05-09{:}27=38\) min. \ans{38 min.}
+\end{enumerate}
+
+\subsection*{Zoom 2: C-18 road at 10:05}
+At 10:05:
+\begin{itemize}
+\item C-18 09:10 is between Berrick 09:42 and Hatfield 10:08, \(10{:}05-09{:}42=23\) min into 26. This is \(R\).
+\item C-18A 09:32 is between Marcton 09:44 and Hatfield 10:30, \(10{:}05-09{:}44=21\) min into 46. This is \(S\).
+\item C-18B 09:56 is between Woodley 09:56 and Marcton 10:10, \(10{:}05-09{:}56=9\) min into 14. This is \(T\).
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{\alph*)},leftmargin=*]
+\item \ans{\(R=\text{C-18 (09:10)}\), \(S=\text{C-18A (09:32)}\), \(T=\text{C-18B (09:56)}\).}
+\item To Frey: \(R\) arrives 10:25, so \(10{:}25-10{:}05=20\) min. \(S\) arrives 10:47, so \(42\) min. \(T\) arrives 11:12, so \(11{:}12-10{:}05=67\) min \(=1\) h \(7\) min. \ans{20 min; 42 min; 1 h 7 min.}
+\item \(S\) is the C-18A. The timetable has no Berrick time for the C-18A, so it does not stop at Berrick. Karen cannot get on it. \ans{It does not stop at Berrick.}
+\item The next C-18 that stops at Berrick after 10:05 is the 10:34 from Woodley. It reaches Berrick at 11:09 and Frey at 11:49. Waiting time: \(11{:}09-10{:}05=64\) min \(=1\) h \(4\) min. \ans{11:09 C-18; wait 1 h 4 min.}
+\item At 10:15, \(R\) is between Hatfield 10:08 and Frey 10:25. It has travelled \(10{:}15-10{:}08=7\) min of 17. Mark the cross \(7/17\) of the way from Hatfield to Frey.
+\end{enumerate}
+
+\subsection*{Zoom 3: railway at 10:10}
+At 10:10:
+\begin{itemize}
+\item The 08:59 train is between Abley 08:59 and Hadley 10:19, \(71\) min into 80. This is \(J\).
+\item The 08:44 train is between Berrick 09:18 and Hadley 10:30, \(10{:}10-09{:}18=52\) min into 72. This is \(K\).
+\item The 09:24 train terminates at Berrick, reaching it at 10:01. This is \(L\).
+\item The 09:55 train is between Chesterham 10:07 and Berrick 10:29, \(10{:}10-10{:}07=3\) min into 22. This is \(M\).
+\end{itemize}
+
+\begin{enumerate}[label=\textbf{\alph*)},leftmargin=*]
+\item \ans{\(J=08{:}59\), \(K=08{:}44\), \(L=09{:}24\), \(M=09{:}55\) from Abley.}
+\item To Hadley: \(J\) arrives 10:19, so 9 min. \(K\) arrives 10:30, so 20 min. \(L\) never reaches Hadley because it terminates at Berrick. \(M\) arrives 11:36, so \(11{:}36-10{:}10=86\) min \(=1\) h \(26\) min. \ans{9 min; 20 min; never; 1 h 26 min.}
+\item \(J\) leaves Abley at 08:59, 15 minutes after \(K\), but \(J\) reaches Hadley at 10:19 and \(K\) at 10:30. Since \(J\) starts later but finishes earlier, it must overtake \(K\). \ans{\(J\) leaves later but arrives at Hadley earlier.}
+\item Priya is at Greenham at 10:10. \(K\) passes Greenham but does not stop there. The next train that stops at Greenham is the 09:55 train from Abley, which reaches Greenham at 11:10 and Hadley at 11:36. Waiting time: \(11{:}10-10{:}10=60\) min \(=1\) hour. \ans{The 11:10 train; wait 1 hour.}
+\item \(M\) is the 09:55 train. At 10:20 it is between Chesterham 10:07 and Berrick 10:29, having travelled \(10{:}20-10{:}07=13\) min of 22. Mark the cross \(13/22\) of the way from Chesterham to Berrick.
+\end{enumerate}
+
+\section*{Part C: Countdown boards}
+
+\subsection*{(a) Due-in columns}
+\begin{tabularx}{\linewidth}{@{}l l l l X@{}}
+\toprule
+Board & Service & To & Departs & Due in\\
+\midrule
+Berrick, time now 09:40 & C-18 & Frey & 09:42 & \(09{:}42-09{:}40=2\) min\\
+Berrick, time now 09:40 & A34 & Greenham & 09:45 & \(09{:}45-09{:}40=5\) min\\
+Berrick, time now 09:40 & Train & Hadley & 10:29 & \(10{:}29-09{:}40=49\) min\\
+Berrick, time now 09:40 & C-18 & Frey & 11:09 & \(11{:}09-09{:}40=89\) min \(=1\) h \(29\) min\\
+\midrule
+Hatfield, time now 10:00 & C-18 & Frey & 10:08 & 8 min\\
+Hatfield, time now 10:00 & A34 & Greenham & 10:30 & 30 min\\
+Hatfield, time now 10:00 & C-18A & Frey & 10:30 & 30 min\\
+Hatfield, time now 10:00 & C-18 & Frey & 11:32 & \(11{:}32-10{:}00=92\) min \(=1\) h \(32\) min\\
+\bottomrule
+\end{tabularx}
+
+\subsection*{(b) Lily at Berrick at 09:40}
+Lily wants Hatfield. The C-18 at Berrick departs 09:42 and arrives at Hatfield 10:08. The A34 departs Berrick 09:45 but arrives Hatfield at 10:30, later. So \ans{Lily should catch the 09:42 C-18; she arrives at Hatfield at 10:08.} This is \(10{:}08-09{:}40=28\) min after 09:40.
+
+\subsection*{(c) Hatfield at 10:00 to Frey}
+The 10:08 C-18 reaches Frey at 10:25. The C-18A at 10:30 reaches Frey at 10:47, and the next C-18 at 11:32 reaches Frey at 11:49. So the first bus is the \ans{10:08 C-18}, arriving at Frey at 10:25. Time from 10:00: \(10{:}25-10{:}00=25\) min.
+
+\subsection*{(d) Make your own}
+Answers will vary. A correct board should use departure times from the timetable and compute ``Due in'' by subtracting the board's current time from each departure time.
+
+\end{document}
