@@ -1,0 +1,275 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1.25cm, top=1.1cm, bottom=1.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{amsmath,amssymb}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\definecolor{ttdark}{HTML}{2B2D5C}
+\definecolor{ttaccent}{HTML}{D9480F}
+\newcommand{\banner}[1]{{\color{ttdark}\large\bfseries #1}\par\vspace{-4pt}{\color{ttdark}\rule{\linewidth}{1pt}}\par\vspace{2pt}}
+\newcommand{\ans}[1]{\textcolor{ttaccent}{\bfseries #1}}
+
+\begin{document}
+
+\begin{center}
+{\LARGE\bfseries Worked Solutions}\\[2pt]
+{\large Time Travellers! --- Calendars, conversions and timelines}
+\end{center}
+
+\banner{Part A \quad Calendar hops --- small jumps}
+
+Starting point: \textbf{Saturday 31 October 2026, 10:00}. Unless a time is asked for, the time stays 10:00.
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=6pt]
+\item $1$ week $=7$ days. So $31$ October $+7$ days is $7$ November, and the weekday stays Saturday.
+
+\ans{Saturday 7 November 2026, 10:00}
+
+\item $10$ days $=1$ week $+3$ days. One week forward gives Saturday 7 November; then $3$ more days gives Tuesday.
+
+\ans{Tuesday 10 November 2026, 10:00}
+
+\item $2$ weeks back $=14$ days. So $31$ October $-14$ days is $17$ October.
+
+\ans{Saturday 17 October 2026, 10:00}
+
+\item $3$ weeks $+2$ days $=21+2=23$ days. From Saturday 31 October, $21$ days lands on Saturday 21 November, and $2$ more days gives Monday 23 November.
+
+\ans{Monday 23 November 2026, 10:00}
+
+\item $45$ days back $=6$ weeks $+3$ days. Six weeks back from Saturday 31 October is Saturday 19 September; $3$ more days back is Wednesday 16 September.
+
+\ans{Wednesday 16 September 2026, 10:00}
+
+\item $100$ hours $=4$ days $4$ hours. Four days after Saturday 31 October is Wednesday 4 November. The time is $10{:}00+4$ hours $=14{:}00$.
+
+\ans{Wednesday 4 November 2026 at 14:00}
+
+\item From 5 November to 30 November is $25$ days, and from 30 November to 25 December is another $25$ days. Total $=50$ days. Also
+$50=7\times7+1$.
+
+\ans{50 days $=7$ weeks and $1$ day}
+
+\item Christmas Day is $55$ days after 31 October:
+$55=7\times7+6$, not a multiple of $7$. Whole-week jumps from a Saturday always land on a Saturday. The nearest reachable Saturdays are
+$7\times7=49$ days after 31 October, which is 19 December, and
+$8\times7=56$ days after 31 October, which is 26 December.
+
+\ans{No. The nearest reachable dates are Saturday 19 December 2026 and Saturday 26 December 2026.}
+
+\item On these calendars the 13ths are: 13 September Sunday, 13 October Tuesday, 13 November Friday, 13 December Sunday.
+
+\ans{Friday 13 November 2026}
+\end{enumerate}
+
+\banner{Part B \quad Conversion station --- medium jumps}
+
+\textbf{1. Conversions}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}rcl@{\qquad}rcl@{}}
+3 weeks & $=3\times7=$ & \ans{21} days & 4 centuries & $=4\times10=$ & \ans{40} decades\\[2pt]
+2 days & $=2\times24=$ & \ans{48} hours & 2 millennia & $=2\times10=$ & \ans{20} centuries\\[2pt]
+180 minutes & $=180\div60=$ & \ans{3} hours & 7200 seconds & $=7200\div3600=$ & \ans{2} hours\\[2pt]
+5 decades & $=5\times10=$ & \ans{50} years & 3 days & $=3\times24\times60=$ & \ans{4320} minutes
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, start=2, itemsep=6pt]
+\item Write each dial reading in a more sensible way.
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+72 hours & $=72\div24=3$ days\\[2pt]
+420 days & $=420\div7=60$ weeks\\[2pt]
+1000 hours & $=1000\div24=41$ days $16$ hours\\[2pt]
+1\,000\,000 seconds & $=11$ days $13$ hours $46$ minutes $40$ seconds
+\end{tabular}
+\end{center}
+
+For the challenge reading:
+\[
+1\,000\,000\div60=16\,666\text{ remainder }40,
+\]
+\[
+16\,666\div60=277\text{ remainder }46,
+\]
+\[
+277\div24=11\text{ remainder }13.
+\]
+So the answer is \ans{11 d 13 h 46 min 40 s}.
+
+\item A leap year must be divisible by $4$, except century years, which must be divisible by $400$.
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+\item 2028 is divisible by $4$ and is not a century year, so it is a leap year.
+\item 2030 is not divisible by $4$, so it is not a leap year.
+\item 2100 is a century year but not divisible by $400$, so it is not a leap year.
+\item 2400 is divisible by $400$, so it is a leap year.
+\end{itemize}
+
+\ans{2028 and 2400}
+
+\item Convert each jump to days:
+\begin{itemize}[leftmargin=1.2em, itemsep=1pt]
+\item $1\,000\,000$ seconds $=11$ d $13$ h $46$ min $40$ s $\approx 11.57$ days.
+\item $50\,000$ minutes $=50\,000\div60=833\frac13$ hours $=34$ d $17$ h $20$ min $\approx 34.72$ days.
+\item $0.1$ years $=0.1\times365=36.5$ days.
+\item $1000$ hours $=41$ d $16$ h $\approx 41.67$ days.
+\item $6$ weeks $=42$ days.
+\end{itemize}
+
+\ans{$1\,000\,000$ s $<$ $50\,000$ min $<$ $0.1$ years $<$ $1000$ hours $<$ $6$ weeks}
+\end{enumerate}
+
+\banner{Part C \quad Timeline jumps --- giant leaps}
+
+Remember: there is no year $0$. From $a$ BC to AD $b$, the number of years is
+$a+b-1$.
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=6pt]
+\item Mark on the big timeline:
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+Tutankhamun dies, 1323 BC & between 1500 BC and 1000 BC, at about $x=4.81$\\[2pt]
+First Olympic Games, 776 BC & between 1000 BC and 500 BC, at about $x=6.38$\\[2pt]
+Romans invade Britain, AD 43 & just to the right of the 1 BC/AD 1 line, at about $x=8.72$\\[2pt]
+Battle of Hastings, AD 1066 & just to the right of AD 1000, at about $x=11.66$
+\end{tabular}
+\end{center}
+
+\item
+\begin{enumerate}[label=(\alph*), leftmargin=1.4em, itemsep=1pt]
+\item Battle of Hastings: $2026-1066=960$ years.
+\item Roman invasion: $2026-43=1983$ years.
+\item First Olympic Games: $2026+776-1=2801$ years.
+\item Great Pyramid: $2026+2560-1=4585$ years.
+\end{enumerate}
+
+\ans{(a) 960 years \quad (b) 1983 years \quad (c) 2801 years \quad (d) 4585 years}
+
+\item $960=9\times100+6\times10$, so $9$ centuries and $6$ decades.
+
+\ans{9 centuries and 6 decades}
+
+\item
+\begin{enumerate}[label=(\alph*), leftmargin=1.4em, itemsep=2pt]
+\item BACK $3$ millennia $=3000$ years. From AD 2026 back to 1 BC is $2026$ years. The remaining $3000-2026=974$ years before 1 BC gives 975 BC. Check: $2026+975-1=3000$.
+\item FORWARD $5$ centuries $=500$ years. $2026+500=2526$, so AD 2526.
+\item BACK $25$ centuries $=2500$ years. If the landing year is $B$ BC, then $2026+B-1=2500$, so $B=475$.
+\end{enumerate}
+
+\ans{(a) 975 BC \quad (b) AD 2526 \quad (c) 475 BC}
+
+\item Zoomed timeline positions:
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+Magna Carta, 1215 & just after 1200, about $x=3.36$\\[2pt]
+Great Fire of London, 1666 & between 1600 and 1700, about $x=10.42$\\[2pt]
+Moon landing, 1969 & just before 2000, about $x=15.15$\\[2pt]
+Today, 2026 & just after 2020, about $x=16.05$
+\end{tabular}
+\end{center}
+
+\item
+\begin{enumerate}[label=(\alph*), leftmargin=1.4em, itemsep=1pt]
+\item Magna Carta to Great Fire: $1666-1215=451$ years.
+\item Moon landing to today: $2026-1969=57$ years.
+\end{enumerate}
+
+\ans{(a) 451 years \quad (b) 57 years}
+
+\item Distance from Great Fire 1666 to Hastings 1066:
+$1666-1066=600$ years.
+
+Distance from Great Fire 1666 to today 2026:
+$2026-1666=360$ years.
+
+Since $360<600$, the Great Fire is closer to today. It is $600-360=240$ years closer to today than to the Battle of Hastings.
+
+\ans{Closer to today, by 240 years.}
+\end{enumerate}
+
+\banner{Part D \quad Mission log --- getting home}
+
+Starting point: AD 2026. Battery: $100\%$. Cost: every century of travel costs $2\%$.
+
+\begin{center}
+\begin{tabular}{c|l|c|c}
+\toprule
+Jump & Dial & From & Lands in\\
+\midrule
+1 & BACK 3 centuries & AD 2026 & AD 1726\\
+2 & FORWARD 25 years & AD 1726 & AD 1751\\
+3 & BACK 2 millennia & AD 1751 & 250 BC\\
+4 & FORWARD 1500 years & 250 BC & AD 1251\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For jump 3: from AD 1751 back to 1 BC is $1751$ years. The remaining $2000-1751=249$ years before 1 BC gives 250 BC.
+
+For jump 4: from 250 BC to AD 1 is $250$ years. The remaining $1500-250=1250$ years forward from AD 1 gives AD 1251.
+
+\begin{enumerate}[label=\textbf{\arabic*.}, leftmargin=*, itemsep=6pt]
+\item From AD 1251 to AD 2026:
+$2026-1251=775$ years.
+
+\ans{FORWARD 775 years}
+
+\item Total distance travelled:
+$300+25+2000+1500=3825$ years.
+
+In centuries:
+$3825\div100=38.25$ centuries.
+
+\ans{3825 years $=38.25$ centuries}
+
+\item Battery used:
+$38.25\times2\%=76.5\%$.
+
+Battery left:
+$100\%-76.5\%=23.5\%$.
+
+\ans{76.5\% used; 23.5\% left}
+
+\item The jump home is $775$ years $=7.75$ centuries.
+Battery needed:
+$7.75\times2\%=15.5\%$.
+
+She has $23.5\%$ left, and $23.5\%>15.5\%$, so yes, she has enough battery. After the jump home she has
+$23.5\%-15.5\%=8\%$ left.
+
+\ans{Yes. She needs 15.5\% and has 23.5\%; she arrives home with 8\% left.}
+
+\item One possible mission:
+\begin{center}
+\begin{tabular}{c|l|c|c}
+\toprule
+Jump & Dial setting & Lands in & Battery used\\
+\midrule
+1 & BACK 4585 years & 2560 BC (Great Pyramid) & $45.85\times2\%=91.7\%$\\
+2 & FORWARD 3625 years & AD 1066 (Battle of Hastings) & $36.25\times2\%=72.5\%$\\
+3 & FORWARD 903 years & AD 1969 (Moon landing) & $9.03\times2\%=18.06\%$\\
+Home & FORWARD 57 years & AD 2026 & $0.57\times2\%=1.14\%$\\
+\midrule
+\multicolumn{3}{r}{\textbf{Total battery used}} & \ans{183.4\%}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Here the total distance is
+$4585+3625+903+57=9170$ years $=91.70$ centuries, so the battery needed is
+$91.70\times2\%=183.4\%$. This is more than $100\%$, so this mission would need a recharge.
+
+\ans{Total distance 9170 years; battery used 183.4\%. Many other valid routes are possible, but any route visiting all three places and returning home uses more than one full battery.}
+\end{enumerate}
+
+\end{document}
