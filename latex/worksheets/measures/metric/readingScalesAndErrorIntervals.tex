@@ -1,0 +1,531 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=10mm,bottom=10mm,left=14mm,right=14mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing}
+
+% ================================================================
+% Reading scales and error intervals.
+%
+% A Year 7 sheet on how accurate a measurement read from a scale is.
+% Part 1 shows enlarged views of the scales on rulers, a metre rule,
+% a measuring jug, a measuring cylinder, kitchen scales, luggage
+% scales and a river depth gauge. Pupils work out what one gap
+% between two ticks is worth, then round each measurement to the
+% nearest tick. The scaffold under each picture fades as the part
+% goes on.
+%
+% Part 2 introduces the lower bound, the upper bound and the error
+% interval of a reading. The worked example is a metre rule marked
+% in centimetres, which is accurate to plus or minus 0.5 cm. It is
+% followed by the same layout with gaps, then the same layout with
+% fewer gaps, then the readings from Part 1 again with only the
+% inequality as a frame, and then a table of measurements with no
+% frame. Part 3 has reverse problems, questions about whether a
+% reading can be trusted, a scale for pupils to design, and ends
+% with an open task about an instrument of their own choosing.
+%
+% The sheet is written on and is four sides of A4. The \newpage
+% commands are placed so that no question is split across a page.
+%
+% In every picture the end of the object, the surface of the liquid
+% or the pointer is drawn 0.3 or 0.7 of a gap past a tick, so that
+% the nearest tick is clear and a reading is never a halfway case.
+% Each picture is drawn from the value in the comment beside it, so
+% a reading can be changed by changing one coordinate.
+%
+% Readings: Q1 14 cm, Q2 76 cm, Q3 340 ml, Q4 36 ml, Q5 440 g,
+% Q6 5.4 cm, Q7 23.6 kg, Q8 1.3 m.
+% ================================================================
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\multicolsep}{3pt}
+\setlength{\columnsep}{14pt}
+\setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=7pt, topsep=3pt, parsep=2pt}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=5pt, topsep=3pt, parsep=1pt}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+\newcommand{\ansline}[1][2.2cm]{\underline{\hspace{#1}}}
+% A full-width line to write an explanation on.
+\newcommand{\wline}{\par\vspace{15pt}\noindent\rule{\linewidth}{0.4pt}}
+% The strut that sets the height of a table row to be written in.
+\newcommand{\rowstrut}{\rule[-3.5mm]{0pt}{9.5mm}}
+
+% The questions in Part 1 sit side by side in minipages, so they are
+% numbered by hand with this counter. The lists in Parts 2 and 3
+% carry on from it.
+\newcounter{qn}
+\newcommand{\q}{\refstepcounter{qn}\textbf{Q\theqn.}\ }
+
+% A worked example: the method shown in full before it is practised.
+% The boxes are drawn in pale tints, with a pale title bar, so that
+% the printed sheet uses little toner.
+\newtcolorbox{wex}[1]{colback=blue!2,colframe=blue!30,boxrule=0.6pt,
+  colbacktitle=blue!8,coltitle=blue!50!black,
+  left=6pt,right=6pt,top=4pt,bottom=5pt,
+  title={\bfseries\small Worked example: #1},fonttitle=\small,
+  toptitle=1pt,bottomtitle=1pt}
+
+% The idea a part is built on, stated once and boxed.
+\newtcolorbox{keyidea}{colback=orange!3,colframe=orange!35,boxrule=0.6pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt}
+
+% The section headings, kept tight so the parts do not eat the page.
+\newcommand{\parttitle}[2]{%
+  \vspace{1pt}
+  {\color{blue!45!black}\rule{\linewidth}{1pt}}\\[1pt]
+  {\large\bfseries Part #1: #2}\\[-6pt]
+  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}
+  \par\vspace{-3pt}}
+
+% ----------------------------------------------------------------
+% Close-up pictures of scales.
+%
+% Each picture is clipped to a rounded window between \zoomclip and
+% \zoomframe, and a small magnifying glass on the corner of the
+% window shows that the view is enlarged.
+\tikzset{
+  tick/.style={line width=0.5pt},
+  ticklab/.style={font=\scriptsize, inner sep=1.5pt},
+  scalebody/.style={fill=yellow!7, draw=black!60, line width=0.5pt},
+  water/.style={fill=blue!13},
+  surface/.style={blue!60!black, line width=0.9pt},
+}
+\newcommand{\zoomclip}[4]{%
+  \def\zxa{#1}\def\zya{#2}\def\zxb{#3}\def\zyb{#4}%
+  \begin{scope}\clip[rounded corners=6pt] (#1,#2) rectangle (#3,#4);}
+\newcommand{\zoomframe}{%
+  \end{scope}
+  \draw[black!55, line width=0.9pt, rounded corners=6pt] (\zxa,\zya) rectangle (\zxb,\zyb);
+  \draw[black!55, line width=1.8pt, line cap=round] ($(\zxb,\zyb)+(0.14,0.14)$) -- ++(0.22,0.22);
+  \draw[black!55, line width=0.8pt, fill=white] (\zxb,\zyb) circle (0.19);}
+
+% Ticks along the top edge of a horizontal scale, hanging down from
+% y = 0, with tick i at x = i times the gap.
+% \hticks{first i}{last i}{cm per gap}{label every}{longer tick every}{value at i=0}{value per gap}
+\newcommand{\hticks}[7]{%
+  \foreach \i in {#1,...,#2}{%
+    \pgfmathtruncatemacro{\islab}{ifthenelse(mod(\i,#4)==0,1,0)}%
+    \pgfmathtruncatemacro{\ismid}{ifthenelse(mod(\i,#5)==0,1,0)}%
+    \ifnum\islab=1
+      \draw[tick] ({\i*(#3)},0) -- ++(0,-0.5);
+      \pgfmathsetmacro{\val}{#6+\i*(#7)}%
+      \node[ticklab,below] at ({\i*(#3)},-0.5) {\pgfmathprintnumber{\val}};
+    \else\ifnum\ismid=1
+      \draw[tick] ({\i*(#3)},0) -- ++(0,-0.36);
+    \else
+      \draw[tick] ({\i*(#3)},0) -- ++(0,-0.22);
+    \fi\fi}}
+
+% Ticks up the side of a vertical scale, pointing right from x = 0,
+% with tick i at y = i times the gap. A negative gap makes the values
+% increase downwards.
+% \vticks{first i}{last i}{cm per gap}{label every}{longer tick every}{value at i=0}{value per gap}{unit}
+\newcommand{\vticks}[8]{%
+  \foreach \i in {#1,...,#2}{%
+    \pgfmathtruncatemacro{\islab}{ifthenelse(mod(\i,#4)==0,1,0)}%
+    \pgfmathtruncatemacro{\ismid}{ifthenelse(mod(\i,#5)==0,1,0)}%
+    \ifnum\islab=1
+      \draw[tick] (0,{\i*(#3)}) -- ++(0.75,0);
+      \pgfmathsetmacro{\val}{#6+\i*(#7)}%
+      \node[ticklab,right] at (0.75,{\i*(#3)}) {\pgfmathprintnumber{\val}\,#8};
+    \else\ifnum\ismid=1
+      \draw[tick] (0,{\i*(#3)}) -- ++(0.55,0);
+    \else
+      \draw[tick] (0,{\i*(#3)}) -- ++(0.38,0);
+    \fi\fi}}
+
+% A pencil lying along the top of a ruler, with its tip at x = #1.
+\newcommand{\pencil}[1]{%
+  \filldraw[fill=yellow!35, draw=black!70] (-3,0.05) rectangle ({#1-1.0},0.59);
+  \draw[black!35] (-3,0.32) -- ({#1-1.0},0.32);
+  \filldraw[fill=orange!15, draw=black!70] ({#1-1.0},0.05) -- (#1,0.32) -- ({#1-1.0},0.59) -- cycle;
+  \fill[black!65] ({#1-0.3},0.239) -- (#1,0.32) -- ({#1-0.3},0.401) -- cycle;}
+
+% Part 1 layouts. A horizontal picture goes between the question and
+% its answer lines. A tall picture goes to the left, with the
+% question and answer lines beside it.
+\newcommand{\hcell}[3]{%
+  \begin{minipage}[t]{0.485\linewidth}
+  #1\par\smallskip
+  {\centering #2\par}\smallskip
+  #3
+  \end{minipage}}
+\newcommand{\vcell}[3]{%
+  \begin{minipage}[t]{0.485\linewidth}
+  \begin{minipage}[t]{3.95cm}\vspace{0pt}#2\end{minipage}\hfill
+  \begin{minipage}[t]{\dimexpr\linewidth-4.15cm\relax}\vspace{0pt}\raggedright #1\par\medskip #3\end{minipage}
+  \end{minipage}}
+
+% ----------------------------------------------------------------
+% A number line for an error interval: three ticks one gap apart,
+% then any extra drawing (the interval itself in the worked example).
+\newcommand{\numline}[4]{%
+  \begin{tikzpicture}[x=2.3cm, baseline=(current bounding box.north)]
+  \draw[line width=0.7pt, {Stealth[length=5pt]}-{Stealth[length=5pt]}] (-0.4,0) -- (2.4,0);
+  \foreach \x/\l in {0/#1,1/#2,2/#3}{%
+    \draw[tick] (\x,0.15) -- (\x,-0.15);
+    \node[ticklab,below] at (\x,-0.17) {\l};}
+  #4
+  \end{tikzpicture}}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Reading Scales and Error Intervals}
+\end{center}
+\vspace{-9pt}
+
+\parttitle{1}{Reading a scale to the nearest tick}
+
+The marks on a measuring scale are called \textbf{ticks}. Each picture is an
+enlarged view of part of a scale. Work out what one gap between two ticks is
+worth, then write the measurement to the nearest tick.
+
+\medskip
+% Q1: tip of the pencil at 13.7 cm, so x = (13.7 - 9) * 1.1 = 5.17.
+\hcell{\q A pencil is measured with a ruler marked in centimetres. The other
+end of the pencil is at 0\,cm.}
+{\begin{tikzpicture}
+  \zoomclip{0.7}{-1.35}{8.1}{0.9}
+    \filldraw[scalebody] (-1,-1.15) rectangle (9,0);
+    \hticks{0}{8}{1.1}{1}{1}{9}{1}
+    \node[ticklab] at (7.15,-0.95) {cm};
+    \pencil{5.17}
+  \zoomframe
+\end{tikzpicture}}
+{The tip is between \ansline[1.3cm]\,cm and \ansline[1.3cm]\,cm.\\[4pt]
+It is nearest to \ansline[1.3cm]\,cm.}%
+\hfill
+% Q2: edge of the door at 76.3 cm, so x = 6.3 * 0.62 = 3.906.
+\hcell{\q The width of a door is measured with a metre rule marked in
+centimetres. The metre rule starts at the other side of the door.}
+{\begin{tikzpicture}
+  \zoomclip{-0.6}{-1.35}{6.8}{0.9}
+    \filldraw[fill=brown!14, draw=black!70] (-2,0.04) rectangle (3.906,2);
+    \foreach \y in {0.3,0.62} \draw[brown!40] (-2,\y) .. controls (0,{\y+0.06}) and (2,{\y-0.06}) .. (3.906,\y);
+    \filldraw[scalebody] (-2,-1.15) rectangle (8,0);
+    \hticks{-2}{12}{0.62}{10}{5}{70}{1}
+    \node[ticklab] at (5.0,-0.95) {cm};
+  \zoomframe
+\end{tikzpicture}}
+{One gap between two ticks is worth \ansline[1.3cm]\,cm.\\[4pt]
+Reading to the nearest tick: \ansline[1.3cm]\,cm.}
+
+\vfill
+% Q3: surface of the water at 334 ml, so y = (334 - 300) / 20 * 0.5 = 0.85.
+\vcell{\q Water is poured into a measuring jug.}
+{\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \zoomclip{-0.6}{-1.5}{3.0}{2.75}
+    \fill[water] (-0.2,-3) rectangle (4,0.85);
+    \draw[surface] (-0.2,0.85) -- (4,0.85);
+    \draw[black!55, line width=1.4pt] (-0.2,-3) -- (-0.2,4);
+    \vticks{-4}{6}{0.5}{5}{100}{300}{20}{ml}
+  \zoomframe
+\end{tikzpicture}}
+{One gap is worth \ansline[1.3cm]\,ml.\\[8pt]
+Reading to the nearest tick:\\[4pt] \ansline[1.6cm]\,ml.}%
+\hfill
+% Q4: surface of the liquid at 36.6 ml, so y = (36.6 - 30) / 2 * 0.5 = 1.65.
+\vcell{\q Liquid is poured into a measuring cylinder.}
+{\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \zoomclip{-0.5}{-0.75}{2.9}{3.25}
+    \fill[water] (-0.1,-2) rectangle (2.5,1.65);
+    \draw[surface] (-0.1,1.65) -- (2.5,1.65);
+    \draw[black!55, line width=1.2pt] (-0.1,-2) -- (-0.1,4);
+    \draw[black!55, line width=1.2pt] (2.5,-2) -- (2.5,4);
+    \begin{scope}[xshift=0.1cm]
+      \vticks{-2}{7}{0.5}{5}{100}{30}{2}{ml}
+    \end{scope}
+  \zoomframe
+\end{tikzpicture}}
+{One gap is worth \ansline[1.3cm]\,ml.\\[8pt]
+Reading to the nearest tick:\\[4pt] \ansline[1.6cm]\,ml.}
+
+\vfill
+% Q5: needle at 437 g. Each 10 g is 4.6 degrees, with 450 g straight
+% up, so the needle is at 90 + 1.3 * 4.6 = 95.98 degrees.
+\hcell{\q Flour is weighed on kitchen scales.}
+{\begin{tikzpicture}
+  \zoomclip{-3.4}{3.9}{3.4}{6.55}
+    \draw[black!50, line width=2pt] (0,0) circle (6.35);
+    \foreach \i in {-8,...,8} \draw[tick] ({90-4.6*\i}:6) -- ({90-4.6*\i}:5.7);
+    \draw[tick] (90:6) -- (90:5.55);
+    \foreach \i/\v in {-5/400,5/500}{%
+      \draw[tick] ({90-4.6*\i}:6) -- ({90-4.6*\i}:5.4);
+      \node[ticklab] at ({90-4.6*\i}:5.12) {\v};}
+    \node[ticklab] at (1.3,4.25) {grams};
+    \draw[red!70!black, line width=1pt] (0,0) -- (95.98:5.95);
+  \zoomframe
+\end{tikzpicture}}
+{One gap is worth \ansline[1.3cm]\,g.\\[4pt]
+Reading to the nearest tick: \ansline[1.3cm]\,g.}%
+\hfill
+% Q6: end of the rubber at 5.37 cm, so x = 3.7 * 0.3 = 1.11.
+\hcell{\q A rubber is measured with a ruler marked in millimetres. The other
+end of the rubber is at 0\,cm.}
+{\begin{tikzpicture}
+  \zoomclip{-3.3}{-1.35}{4.1}{0.9}
+    \filldraw[fill=blue!10, draw=black!70] (-5,0.04) rectangle (-1.2,0.75);
+    \filldraw[fill=red!10, draw=black!70] (-1.2,0.04) rectangle (1.11,0.75);
+    \filldraw[scalebody] (-5,-1.15) rectangle (6,0);
+    \hticks{-12}{15}{0.3}{10}{5}{5}{0.1}
+    \node[ticklab] at (3.65,-0.95) {cm};
+  \zoomframe
+\end{tikzpicture}}
+{One gap is worth \ansline[0.9cm]\,mm, which is \ansline[0.9cm]\,cm.\\[4pt]
+Reading to the nearest tick: \ansline[1.3cm]\,cm.}
+
+\vfill
+% Q7: pointer at 23.66 kg. The values increase downwards, so
+% y = -(23.66 - 23) / 0.2 * 0.5 = -1.65.
+\vcell{\q A suitcase is weighed with luggage scales. The numbers on these
+scales increase downwards.}
+{\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \zoomclip{-0.6}{-3.0}{3.0}{1.25}
+    \filldraw[fill=black!4, draw=black!55] (-0.3,-5) rectangle (2.6,3);
+    \vticks{-3}{7}{-0.5}{5}{100}{23}{0.2}{kg}
+    \draw[red!70!black, line width=1.2pt] (-0.3,-1.65) -- (1.0,-1.65);
+    \fill[red!70!black] (-0.3,-1.47) -- (-0.05,-1.65) -- (-0.3,-1.83) -- cycle;
+  \zoomframe
+\end{tikzpicture}}
+{One gap is worth \ansline[1.3cm]\,kg.\\[8pt]
+Reading to the nearest tick:\\[4pt] \ansline[1.6cm]\,kg.}%
+\hfill
+% Q8: surface of the river at 1.27 m, so y = 2.7 * 0.4 = 1.08.
+\vcell{\q A depth gauge is a post that stands on the river bed and is marked
+in metres. It shows the depth of the water.}
+{\begin{tikzpicture}[baseline=(current bounding box.north)]
+  \zoomclip{-1.0}{-0.35}{2.4}{4.3}
+    \filldraw[fill=white, draw=black!60] (-0.1,-2) rectangle (1.9,6);
+    \fill[water, fill opacity=0.8] (-2,-2) rectangle (3,1.08);
+    \vticks{-2}{11}{0.4}{10}{5}{1}{0.1}{m}
+    \draw[surface] (-2,1.08) -- (3,1.08);
+  \zoomframe
+\end{tikzpicture}}
+{Reading to the nearest tick:\\[4pt] \ansline[1.6cm]\,m.}
+
+\newpage
+\parttitle{2}{Error intervals}
+
+\begin{keyidea}
+When we read a scale to the nearest tick, the reading is not the exact
+measurement. The true measurement could be up to half of one gap below the
+reading, or up to half of one gap above it. On a metre rule marked in
+centimetres one gap is 1\,cm, so a reading of 73\,cm is accurate to
+$\pm\,0.5$\,cm. The symbol $\pm$ means ``plus or minus''.
+
+\smallskip
+The smallest value the true measurement could be is the \textbf{lower bound}.
+The true measurement must be less than the \textbf{upper bound}: a length of
+exactly 73.5\,cm is halfway between two ticks, and halfway values are rounded
+up, so it would be read as 74\,cm.
+
+\smallskip
+The \textbf{error interval} gives every value the true measurement could be.
+We write it with the inequality symbols $\le$, which means ``is less than or
+equal to'', and $<$, which means ``is less than''.
+\end{keyidea}
+
+\begin{wex}{a metre rule marked in centimetres}
+A table is measured with a metre rule marked in centimetres. The reading to the
+nearest tick is 73\,cm.
+
+\smallskip
+\begin{minipage}[t]{0.61\linewidth}\vspace{0pt}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}ll@{}}
+Reading to the nearest tick & 73\,cm\\
+Gap between two ticks & 1\,cm\\
+Half of the gap & $1\div2=0.5$\,cm\\
+Lower bound & $73-0.5=72.5$\,cm\\
+Upper bound & $73+0.5=73.5$\,cm\\
+Error interval & $72.5\,\text{cm}\le\text{length}<73.5\,\text{cm}$
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\linewidth}\vspace{14pt}
+\centering
+\numline{72\,cm}{73\,cm}{74\,cm}{%
+  \draw[densely dashed, black!55] (0.5,-0.15) -- (0.5,0.55);
+  \draw[densely dashed, black!55] (1.5,-0.15) -- (1.5,0.55);
+  \draw[line width=3.5pt, blue!25] (0.5,0) -- (1.5,0);
+  \fill[blue!55!black] (0.5,0) circle (2.5pt);
+  \draw[blue!55!black, line width=1pt, fill=white] (1.5,0) circle (2.5pt);
+  \node[ticklab, above, align=center] at (0.5,0.55) {lower bound\\72.5\,cm};
+  \node[ticklab, above, align=center] at (1.5,0.55) {upper bound\\73.5\,cm};
+  \draw[decorate, decoration={brace, mirror, amplitude=3pt}] (0.52,-0.62) -- (0.98,-0.62)
+    node[midway, below=3pt, ticklab] {0.5\,cm};
+  \draw[decorate, decoration={brace, mirror, amplitude=3pt}] (1.02,-0.62) -- (1.48,-0.62)
+    node[midway, below=3pt, ticklab] {0.5\,cm};}
+
+\smallskip
+{\scriptsize The filled circle shows that 72.5\,cm is included.\\
+The open circle shows that 73.5\,cm is not included.}
+\end{minipage}
+\end{wex}
+
+\begin{enumerate}\setcounter{enumi}{\value{qn}}
+\item A shelf is measured with a metre rule marked in centimetres. The reading
+to the nearest tick is 48\,cm. Complete the working to find the error interval,
+then show the error interval on the number line.
+
+\smallskip
+\begin{minipage}[t]{0.61\linewidth}\vspace{0pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}ll@{}}
+Reading to the nearest tick & 48\,cm\\
+Gap between two ticks & \ansline[1.1cm]\,cm\\
+Half of the gap & \ansline[1.1cm]${}\div2={}$\ansline[1.1cm]\,cm\\
+Lower bound & $48-{}$\ansline[1.1cm]${}={}$\ansline[1.1cm]\,cm\\
+Upper bound & $48+{}$\ansline[1.1cm]${}={}$\ansline[1.1cm]\,cm\\
+Error interval & \ansline[1.1cm]\,cm $\le$ length $<$ \ansline[1.1cm]\,cm
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\linewidth}\vspace{30pt}
+\centering
+\numline{47\,cm}{48\,cm}{49\,cm}{}
+\end{minipage}
+
+\item Water is poured into a measuring jug marked every 20\,ml. The reading to
+the nearest tick is 180\,ml. Find the error interval, then show it on the
+number line.
+
+\smallskip
+\begin{minipage}[t]{0.61\linewidth}\vspace{0pt}
+\renewcommand{\arraystretch}{1.6}
+\begin{tabular}{@{}ll@{}}
+Reading to the nearest tick & 180\,ml\\
+Gap between two ticks & \ansline[3.6cm]\\
+Half of the gap & \ansline[3.6cm]\\
+Lower bound & \ansline[3.6cm]\\
+Upper bound & \ansline[3.6cm]\\
+Error interval & \ansline[1.1cm]\,ml $\le$ volume $<$ \ansline[1.1cm]\,ml
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.38\linewidth}\vspace{30pt}
+\centering
+\numline{160\,ml}{180\,ml}{200\,ml}{}
+\end{minipage}
+
+\item Go back to Part 1. Write the error interval for each of these readings.
+
+\smallskip
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{@{}l@{\ \ }l@{\qquad\quad}l@{\ \ }l@{}}
+Q1: & \ansline[1.5cm]\,cm $\le$ length $<$ \ansline[1.5cm]\,cm &
+Q3: & \ansline[1.5cm]\,ml $\le$ volume $<$ \ansline[1.5cm]\,ml\\
+Q6: & \ansline[1.5cm]\,cm $\le$ length $<$ \ansline[1.5cm]\,cm &
+Q7: & \ansline[1.5cm]\,kg $\le$ mass $<$ \ansline[1.5cm]\,kg
+\end{tabular}
+
+\newpage
+\item Complete the table. The first column says what is measured, and how far
+apart the ticks are on the scale that is used.
+
+\smallskip
+{\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{|>{\raggedright\arraybackslash}m{5.0cm}|C{1.4cm}|C{1.45cm}|C{1.45cm}|C{1.45cm}|C{4.65cm}|}
+\hline
+\textbf{What is measured} & \textbf{Reading} & \textbf{Half of the gap} & \textbf{Lower bound} & \textbf{Upper bound} & \textbf{Error interval}\\\hline
+A pencil, with a ruler marked every 1\,cm & 15\,cm\rowstrut & & & & \\\hline
+A beetle, with a ruler marked every 1\,mm & 23\,mm\rowstrut & & & & \\\hline
+A bag of flour, with kitchen scales marked every 10\,g & 510\,g\rowstrut & & & & \\\hline
+A pupil's height, with a height chart marked every 2\,cm & 148\,cm\rowstrut & & & & \\\hline
+Orange juice, with a jug marked every 50\,ml & 250\,ml\rowstrut & & & & \\\hline
+A parcel, with scales marked every 0.2\,kg & 3.4\,kg\rowstrut & & & & \\\hline
+Medicine, with a syringe marked every 0.5\,ml & 2.5\,ml\rowstrut & & & & \\\hline
+A garden, with a tape measure marked every 10\,cm & 12.4\,m\rowstrut & & & & \\\hline
+\end{tabular}}
+\end{enumerate}
+
+\parttitle{3}{Using error intervals}
+
+\begin{enumerate}[resume]
+\item Each error interval below comes from a reading to the nearest tick. Find
+the reading, and find the gap between two ticks on the scale that was used.
+
+\smallskip
+\renewcommand{\arraystretch}{1.8}
+\begin{tabular}{@{}l@{\qquad}l@{\qquad}l@{}}
+(a) $30.5\,\text{cm}\le\text{length}<31.5\,\text{cm}$ & Reading: \ansline[1.8cm] & Gap: \ansline[1.8cm]\\
+(b) $245\,\text{g}\le\text{mass}<255\,\text{g}$ & Reading: \ansline[1.8cm] & Gap: \ansline[1.8cm]\\
+(c) $1.35\,\text{m}\le\text{height}<1.45\,\text{m}$ & Reading: \ansline[1.8cm] & Gap: \ansline[1.8cm]
+\end{tabular}
+
+\item Leo weighs his suitcase with luggage scales marked every 0.2\,kg. The
+reading is 23.0\,kg. His airline allows suitcases with a mass of 23\,kg or
+less. Can Leo be sure that his suitcase is allowed? Explain using the error
+interval.
+\wline\wline\wline
+
+\item Sam measures a leaf with a ruler marked in millimetres. Sam says, ``The
+ticks on my ruler are very close together, so the leaf is exactly 6.3\,cm
+long.'' Is Sam right? Explain.
+\wline\wline\wline
+
+\newpage
+\item A biscuit recipe works if the mass of butter is at least 195\,g and less
+than 205\,g. A chef adds butter to a bowl until the scales read 200\,g. Scales
+A are marked every 10\,g. Scales B are marked every 50\,g.
+\begin{enumerate}
+\item Write the error interval for the reading of 200\,g on scales A.\\[4pt]
+\ansline[1.6cm]\,g $\le$ mass $<$ \ansline[1.6cm]\,g
+\item Write the error interval for the reading of 200\,g on scales B.\\[4pt]
+\ansline[1.6cm]\,g $\le$ mass $<$ \ansline[1.6cm]\,g
+\item Which scales should the chef use? Explain.
+\wline\wline
+\end{enumerate}
+
+\item \begin{minipage}[t]{0.68\linewidth}
+Draw ticks on the empty scale of this measuring jug so that a reading of
+300\,ml has the error interval
+\[295\,\text{ml}\le\text{volume}<305\,\text{ml}.\]
+The tick for 300\,ml has been drawn for you. Label at least two more ticks.
+
+\medskip
+Explain how you chose the gap between the ticks.
+\wline\wline
+\end{minipage}\hfill
+\begin{minipage}[t]{0.27\linewidth}
+\centering
+\begin{tikzpicture}[baseline=(current bounding box.north)]
+  % The jug: a spout at the top left and a handle on the right.
+  \draw[black!60, line width=1pt, rounded corners=4pt]
+    (-0.35,5.05) -- (0,4.65) -- (0,0) -- (2.4,0) -- (2.4,5.05);
+  \draw[black!60, line width=2.5pt, rounded corners=6pt]
+    (2.4,4.4) -- (3.0,4.4) -- (3.0,1.4) -- (2.4,1.4);
+  \draw[tick] (0.2,2.5) -- ++(0.75,0);
+  \node[ticklab,right] at (0.95,2.5) {300\,ml};
+\end{tikzpicture}
+\end{minipage}
+
+\item \textbf{Challenge.} Ana measures a shelf with a metre rule marked in
+centimetres, and the reading is 80\,cm. She measures the gap between two walls
+with the same metre rule, and the reading is also 80\,cm. Will the shelf
+definitely fit in the gap? Explain using error intervals.
+\wline\wline\wline\wline
+
+\item Choose a measuring instrument at home or at school, such as bathroom
+scales, a measuring spoon or a tape measure.
+\begin{enumerate}
+\item Name the instrument, and say how far apart the ticks on its scale are.
+\wline
+\item Make up a reading on this scale, and write its error interval.
+\wline
+\item Describe one job that this instrument is accurate enough for, and one
+job that it is not accurate enough for. Explain using the error interval.
+\wline\wline\wline
+\end{enumerate}
+\end{enumerate}
+
+\end{document}
