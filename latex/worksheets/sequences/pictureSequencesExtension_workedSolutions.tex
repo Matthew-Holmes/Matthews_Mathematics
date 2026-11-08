@@ -1,0 +1,372 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=16mm,right=16mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{xcolor}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\renewcommand{\arraystretch}{1.2}
+\setlist[itemize]{leftmargin=*,itemsep=2pt,topsep=2pt}
+
+\begin{document}
+
+\begin{center}
+  {\Large\bfseries Worked Solutions}\\[2pt]
+  {\large Picture Sequences and the \boldmath\(n\)th Term}
+\end{center}
+
+\section*{Part 1: Linear sequences}
+
+\paragraph{Worked example: row of squares.}
+Each pattern has 1 matchstick at the start, and then \(n\) groups of 3 matchsticks. Hence pattern \(n\) has
+\[
+1+3n=3n+1
+\]
+matchsticks.
+
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Matchsticks}&4&7&10&13&16&31&3n+1
+\end{array}
+\]
+
+\paragraph{Q1. Row of houses.}
+Each pattern has 1 starting matchstick, and then \(n\) groups of 5 matchsticks. Therefore the number of matchsticks is
+\[
+1+5n=5n+1.
+\]
+The completed table is:
+
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Matchsticks}&6&11&16&21&26&51&5n+1
+\end{array}
+\]
+
+\paragraph{Q2. Tables in a caf\'e.}
+Each table has 2 chairs, one above and one below, giving \(2n\) chairs. There is also 1 chair at each end, so the total is
+\[
+2n+2.
+\]
+The completed table is:
+
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Chairs}&4&6&8&10&12&22&2n+2
+\end{array}
+\]
+The rings should show \(n\) pairs of chairs plus the two end chairs.
+
+\paragraph{Q3. Dot sequences.}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item A cross has one centre dot and four arms of \(n\) dots, so
+\[
+1+4n=4n+1.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&5&9&13&17&21&41&4n+1
+\end{array}
+\]
+
+\item An L-shape has two arms of \(n\) dots, but the corner dot is counted twice. Hence
+\[
+n+n-1=2n-1.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&1&3&5&7&9&19&2n-1
+\end{array}
+\]
+The \(-1\) comes from subtracting the corner dot, which is shared by the two arms.
+\end{enumerate}
+
+\paragraph{Q4. Using the \(n\)th terms.}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item For the row of squares,
+\[
+3n+1=61,\qquad 3n=60,\qquad n=20.
+\]
+So pattern 20 uses 61 matchsticks.
+
+\item For the tables,
+\[
+2n+2=30,\qquad 2n=28,\qquad n=14.
+\]
+So 14 tables are needed.
+
+\item For the houses,
+\[
+5n+1=100,\qquad 5n=99,\qquad n=19.8.
+\]
+This is not a whole number, so a row of houses cannot use exactly 100 matchsticks.
+\end{enumerate}
+
+\paragraph{Q5. Drawing sequences.}
+Any drawing with the correct number of objects is acceptable.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item \(2n+3\): patterns 1, 2 and 3 have \(5,7,9\) objects. Start with 3 and add 2 each time.
+\item \(4n-1\): patterns 1, 2 and 3 have \(3,7,11\) objects. Start with 3 and add 4 each time.
+\item \(5n+2\): patterns 1, 2 and 3 have \(7,12,17\) objects. Start with 7 and add 5 each time.
+\end{enumerate}
+
+\section*{Part 2: Square numbers}
+
+\paragraph{Q6. Squares of dots.}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item A square of \(n\) by \(n\) dots has \(n^2\) dots.
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&1&4&9&16&25&100&n^2
+\end{array}
+\]
+
+\item Pattern 5 splits as
+\[
+25=1+3+5+7+9.
+\]
+The L-shape added to make pattern \(n\) has \(2n-1\) dots, because it has \(n\) dots on each arm and the corner dot is shared.
+\end{enumerate}
+
+\paragraph{Q7. Squares with dots added or taken away.}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item A square of \(n^2\) dots plus 2 more gives \(n^2+2\).
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&3&6&11&18&27&102&n^2+2\\
+n^2&1&4&9&16&25&100&n^2
+\end{array}
+\]
+
+\item Pattern \(n\) is a rectangle with \(n\) columns and \(n+1\) rows, so it has
+\[
+n(n+1)=n^2+n
+\]
+dots.
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&2&6&12&20&30&110&n^2+n\\
+n^2&1&4&9&16&25&100&n^2
+\end{array}
+\]
+
+\item Two squares of \(n\) by \(n\) dots give
+\[
+2n^2.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&2&8&18&32&50&200&2n^2
+\end{array}
+\]
+
+\item A square of \(n^2\) dots with one dot removed gives
+\[
+n^2-1.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&0&3&8&15&24&99&n^2-1
+\end{array}
+\]
+\end{enumerate}
+
+\paragraph{Q8. Staircases.}
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item The staircase counts are triangular numbers:
+\[
+1,\ 3,\ 6,\ 10,\ 15,\ 55.
+\]
+
+\item Two copies of pattern \(n\) fit together to make an \(n\) by \(n+1\) rectangle, so the rectangle has
+\[
+n(n+1)
+\]
+dots.
+
+\item Therefore one staircase has half of this:
+\[
+\frac{n(n+1)}{2}.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Dots}&1&3&6&10&15&55&\dfrac{n(n+1)}{2}
+\end{array}
+\]
+\end{enumerate}
+
+\paragraph{Q9. Drawing sequences.}
+Any drawing with the correct number of objects is acceptable.
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt]
+\item \(n^2+3\): patterns 1, 2 and 3 have \(4,7,12\) objects. Draw an \(n\) by \(n\) square and add 3 dots.
+\item \(3n^2\): patterns 1, 2 and 3 have \(3,12,27\) objects. Draw three \(n\) by \(n\) squares.
+\item \(n^2+2n=n(n+2)\): patterns 1, 2 and 3 have \(3,8,15\) objects. Draw an \(n\) by \(n+2\) rectangle of dots.
+\end{enumerate}
+
+\section*{Part 3: Pixel art sequences}
+
+\paragraph{Q10. Pixel rocket.}
+The rocket has 1 nose pixel, \(3n\) body pixels, a row of 5 pixels, and 2 extra side pixels. Hence
+\[
+1+3n+5+2=3n+8.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Pixels}&11&14&17&20&23&38&3n+8
+\end{array}
+\]
+\begin{enumerate}[label=(\alph*),leftmargin=*,itemsep=4pt,start=2]
+\item For 50 pixels,
+\[
+3n+8=50,\qquad 3n=42,\qquad n=14.
+\]
+So rocket pattern 14 has 50 pixels.
+
+\item For 100 pixels,
+\[
+3n+8=100,\qquad 3n=92,
+\]
+which does not give a whole number. So a rocket cannot have exactly 100 pixels.
+\end{enumerate}
+
+\paragraph{Q11. Pixel heart.}
+Each of the 16 heart pixels becomes an \(n\) by \(n\) block, so the number of pixels is
+\[
+16n^2.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Pixels}&16&64&144&256&400&1600&16n^2
+\end{array}
+\]
+Pattern 2 is twice as wide and twice as tall as pattern 1. Each original pixel becomes a \(2\) by \(2\) block, so the number of pixels is multiplied by
+\[
+2\times 2=4,
+\]
+not by 2.
+
+\paragraph{Q12. Pixel pyramid.}
+The pyramid has rows of \(1,3,5,\ldots,2n-1\) pixels. These are the first \(n\) odd numbers, and their sum is
+\[
+1+3+5+\cdots +(2n-1)=n^2.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Pixels}&1&4&9&16&25&100&n^2
+\end{array}
+\]
+For pattern 4, moving the shaded pixels from the left side into the gaps on the right turns the pyramid into a \(4\) by \(4\) square. More generally, the pyramid rearranges into an \(n\) by \(n\) square, which has \(n^2\) pixels. Hence the pyramid has \(n^2\) pixels.
+
+\paragraph{Q13. Frame around a square picture.}
+The picture has \(n^2\) pixels. The frame is
+\[
+(n+2)^2-n^2=4n+4
+\]
+pixels. Hence the total is
+\[
+(n+2)^2=n^2+4n+4.
+\]
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Picture}&1&4&9&16&25&100&n^2\\
+\text{Frame}&8&12&16&20&24&44&4n+4\\
+\text{Total}&9&16&25&36&49&144&(n+2)^2
+\end{array}
+\]
+The frame can be counted as a top row of \(n+2\) pixels, a bottom row of \(n+2\) pixels, and then \(n\) pixels on each of the left and right sides. Thus
+\[
+2(n+2)+2n=4n+4.
+\]
+
+\paragraph{Q14. Design your own sequence.}
+One possible design is a robot with an \(n\) by \(n\) square body and one extra pixel at each corner. Pattern \(n\) then has
+\[
+n^2+4
+\]
+pixels.
+
+\[
+\begin{array}{@{}lccccccc@{}}
+\text{Pattern }n&1&2&3&4&5&10&n\\ \hline
+\text{Pixels}&5&8&13&20&29&104&n^2+4
+\end{array}
+\]
+Many other designs are possible.
+
+\section*{Part 4: Always, sometimes or never?}
+
+\paragraph{Q15.} \textbf{Always.} \(3n+1\) is one more than \(3n\), and \(3n\) is a multiple of 3.
+
+\paragraph{Q16.} \textbf{Never.} \(4n+2\) leaves remainder 2 when divided by 4, so it cannot be a multiple of 4. For example, when \(n=1\), \(4n+2=6\).
+
+\paragraph{Q17.} \textbf{Sometimes.} If \(n=5\), then \(2n+5=15\), which is a multiple of 5. If \(n=1\), then \(2n+5=7\), which is not a multiple of 5.
+
+\paragraph{Q18.} \textbf{Sometimes.} If the coefficient of \(n\) is even, such as \(2n+1\), every term is odd: \(3,5,7,\ldots\). If the coefficient is odd, such as \(3n+1\), the parity alternates: \(4,7,10,\ldots\), and \(4\) is even.
+
+\paragraph{Q19.} \textbf{Sometimes.} For \(n=3\), \(n^2=9>6=2n\). But for \(n=1\), \(n^2=1\) is not greater than \(2\). Also \(n=2\) gives equality: \(4=4\).
+
+\paragraph{Q20.} \textbf{Always.}
+\[
+n^2+n=n(n+1).
+\]
+These are consecutive integers, so one of them is even. Hence the product is even.
+
+\paragraph{Q21.} \textbf{Never.} A square number ends in one of the digits \(0,1,4,5,6,9\). It cannot end in 7.
+
+\paragraph{Q22.} \textbf{Never.} For \(n\ge 1\),
+\[
+n^2<n^2+1<(n+1)^2,
+\]
+so \(n^2+1\) lies between two consecutive square numbers and cannot itself be a square number.
+
+\paragraph{Q23.} \textbf{Always.} The difference between consecutive square numbers is
+\[
+(n+1)^2-n^2=2n+1,
+\]
+which is odd.
+
+\paragraph{Q24.} \textbf{Never.} The heart in pattern \(n\) has \(16n^2\) pixels. Doubling the pattern number gives
+\[
+16(2n)^2=64n^2=4(16n^2),
+\]
+which is four times as many pixels, not twice as many.
+
+\paragraph{Q25.} \textbf{Always.} The frame has
+\[
+4n+4=4(n+1)
+\]
+pixels, which is a multiple of 4.
+
+\paragraph{Q26.} \textbf{Sometimes.} A staircase in pattern \(n\) has
+\[
+\frac{n(n+1)}{2}
+\]
+dots. For \(n=1\), this is 1, which is odd. For \(n=3\), this is 6, which is even.
+
+\paragraph{Q27. Own statements.}
+One possible set of answers is:
+\begin{itemize}
+\item \textbf{Always:} A term of \(6n+2\) is even, because \(6n+2=2(3n+1)\).
+\item \textbf{Sometimes:} A term of \(3n+2\) is a multiple of 5. This is true for \(n=1\), giving 5, but false for \(n=2\), giving 8.
+\item \textbf{Never:} A term of \(5n+2\) is a multiple of 5, because it always leaves remainder 2 when divided by 5.
+\end{itemize}
+
+\end{document}
