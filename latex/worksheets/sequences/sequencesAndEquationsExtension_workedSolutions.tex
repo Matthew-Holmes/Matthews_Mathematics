@@ -1,0 +1,1015 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=16mm,bottom=16mm,left=18mm,right=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks
+
+\newtcolorbox{solbox}[1]{
+  breakable,
+  colback=blue!2,
+  colframe=blue!40!black,
+  boxrule=0.6pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  title={#1},
+  fonttitle=\bfseries,
+  coltitle=white
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Sequences and Equations}\\[2pt]
+  {\large Worked Solutions}
+\end{center}
+
+\section*{Part 1: When do two sequences meet?}
+
+\begin{solbox}{Q1. \(7n+2\) and \(4n+26\)}
+Set the \(n\)th terms equal:
+\begin{align*}
+7n+2&=4n+26\\
+3n+2&=26 &&\text{subtract }4n\\
+3n&=24 &&\text{subtract }2\\
+n&=8 &&\text{divide by }3.
+\end{align*}
+Check:
+\[
+7(8)+2=56+2=58,\qquad 4(8)+26=32+26=58.
+\]
+So the terms in position \(\boxed{8}\) are equal.
+\end{solbox}
+
+\begin{solbox}{Q2. \(9n-4\) and \(5n+20\)}
+\[
+9n-4=5n+20
+\]
+Subtract \(5n\) from both sides:
+\[
+4n-4=20.
+\]
+Add \(4\) to both sides:
+\[
+4n=24.
+\]
+Divide by \(4\):
+\[
+n=6.
+\]
+Check:
+\[
+9(6)-4=54-4=50,\qquad 5(6)+20=30+20=50.
+\]
+So the terms in position \(\boxed{6}\) are equal.
+\end{solbox}
+
+\begin{solbox}{Q3. Two candles}
+\begin{enumerate}[label=(\alph*)]
+\item Candle A is \(30\) cm tall and burns down \(2\) cm per hour, so after \(n\) hours its height is
+\[
+30-2n.
+\]
+Candle B is \(21\) cm tall and burns down \(1\) cm per hour, so after \(n\) hours its height is
+\[
+21-n.
+\]
+\item Set the heights equal:
+\[
+30-2n=21-n.
+\]
+Add \(2n\) to both sides:
+\[
+30=21+n,
+\]
+so
+\[
+n=9.
+\]
+After \(9\) hours the height of A is \(30-2(9)=12\) cm, and the height of B is \(21-9=12\) cm. So they are the same height after \(\boxed{9\text{ hours}}\), and they are then \(\boxed{12\text{ cm}}\) tall.
+
+\item Candle A burns out when
+\[
+30-2n=0 \quad\Rightarrow\quad 2n=30 \quad\Rightarrow\quad n=15.
+\]
+Candle B burns out when
+\[
+21-n=0 \quad\Rightarrow\quad n=21.
+\]
+Therefore candle A burns out first, after \(15\) hours, because \(15<21\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q4. Two phones}
+\begin{enumerate}[label=(\alph*)]
+\item Ella's charge after \(n\) hours is
+\[
+100-3n.
+\]
+Finn's charge after \(n\) hours is
+\[
+64+6n.
+\]
+\item Set the charges equal:
+\[
+100-3n=64+6n.
+\]
+Add \(3n\) to both sides:
+\[
+100=64+9n.
+\]
+Subtract \(64\):
+\[
+36=9n.
+\]
+Divide by \(9\):
+\[
+n=4.
+\]
+After \(4\) hours, Ella has \(100-12=88\%\) and Finn has \(64+24=88\%\).
+
+So the phones have the same charge after \(\boxed{4\text{ hours}}\), at \(\boxed{88\%}\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q5. Sequences that do not meet}
+\begin{enumerate}[label=(\alph*)]
+\item Set the terms equal:
+\[
+4n+1=2n+8.
+\]
+Subtract \(2n\):
+\[
+2n+1=8.
+\]
+Subtract \(1\):
+\[
+2n=7.
+\]
+Divide by \(2\):
+\[
+n=3.5.
+\]
+Since \(n\) must be a positive whole number, this is impossible. Therefore \(4n+1\) and \(2n+8\) never have equal terms in the same position.
+
+\item Compare \(6n+1\) and \(6n+5\):
+\[
+(6n+5)-(6n+1)=4.
+\]
+So for every whole number \(n\), the second sequence is always \(4\) more than the first. They can never be equal. Equivalently, subtracting gives \(5=1\), which is impossible.
+
+\item Set the terms equal:
+\[
+4n+1=2n+c.
+\]
+Subtract \(2n\):
+\[
+2n+1=c,
+\]
+so
+\[
+2n=c-1.
+\]
+For \(n\) to be a positive whole number, \(c-1\) must be a positive even number. Therefore \(c\) must be odd and at least \(3\).
+
+For example,
+\[
+c=3,\quad c=5,\quad c=7.
+\]
+All possible values of \(c\) are odd numbers at least \(3\).
+\end{enumerate}
+\end{solbox}
+
+\section*{Part 2: Comparing terms in different positions}
+
+\begin{solbox}{Q6. First three terms \(x+1\), \(2x+3\), \(4x-1\)}
+\begin{enumerate}[label=(\alph*)]
+\item In a linear sequence, the difference between consecutive terms is constant. Therefore
+\[
+(2x+3)-(x+1)=(4x-1)-(2x+3).
+\]
+The left side is the difference between the 2nd and 1st terms; the right side is the difference between the 3rd and 2nd terms.
+
+\item Simplify:
+\[
+(2x+3)-(x+1)=x+2,
+\]
+and
+\[
+(4x-1)-(2x+3)=2x-4.
+\]
+So
+\[
+x+2=2x-4.
+\]
+Add \(4\) to both sides:
+\[
+x+6=2x.
+\]
+Subtract \(x\):
+\[
+6=x.
+\]
+So \(x=6\).
+
+The first three terms are
+\[
+x+1=7,\qquad 2x+3=15,\qquad 4x-1=23.
+\]
+The common difference is \(15-7=8\), so the \(n\)th term is
+\[
+7+8(n-1)=8n-1.
+\]
+Thus the sequence is
+\[
+\boxed{7,\ 15,\ 23,\ldots}
+\]
+with \(n\)th term
+\[
+\boxed{8n-1}.
+\]
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q7. Houses and triangles}
+The triangle pattern has \(2n+1\) matchsticks.
+
+Ali makes \(n\) houses, which use \(5n+1\) matchsticks.
+
+Bea makes \(n+12\) triangles, because she makes \(12\) more triangles than Ali makes houses. These use
+\[
+2(n+12)+1
+\]
+matchsticks.
+
+Set the numbers of matchsticks equal:
+\[
+5n+1=2(n+12)+1.
+\]
+Expand the brackets:
+\[
+5n+1=2n+24+1,
+\]
+so
+\[
+5n+1=2n+25.
+\]
+Subtract \(2n\):
+\[
+3n+1=25.
+\]
+Subtract \(1\):
+\[
+3n=24.
+\]
+Divide by \(3\):
+\[
+n=8.
+\]
+So Ali makes \(8\) houses, and Bea makes \(8+12=20\) triangles.
+
+Check:
+\[
+5(8)+1=41,\qquad 2(20)+1=41.
+\]
+Therefore Ali makes \(\boxed{8\text{ houses}}\), Bea makes \(\boxed{20\text{ triangles}}\), and each uses \(\boxed{41\text{ matchsticks}}\).
+\end{solbox}
+
+\begin{solbox}{Q8. Fence}
+\begin{enumerate}[label=(\alph*)]
+\item A fence with \(n\) panels has \(n+1\) posts: one at each end and one between each pair of panels.
+
+At garden centre A:
+\[
+n\text{ panels cost }25n\text{ pounds},
+\]
+and
+\[
+n+1\text{ posts cost }8(n+1)\text{ pounds}.
+\]
+So the total cost is
+\[
+\boxed{25n+8(n+1)\text{ pounds}}.
+\]
+
+\item A fence from A costs \(\pounds338\), so
+\[
+25n+8(n+1)=338.
+\]
+Expand:
+\[
+25n+8n+8=338.
+\]
+So
+\[
+33n+8=338.
+\]
+Subtract \(8\):
+\[
+33n=330.
+\]
+Divide by \(33\):
+\[
+n=10.
+\]
+So the fence has \(\boxed{10\text{ panels}}\).
+
+\item At garden centre B, a panel costs \(\pounds31\) and a post costs \(\pounds4\). The cost is
+\[
+31n+4(n+1).
+\]
+Set the two costs equal:
+\[
+25n+8(n+1)=31n+4(n+1).
+\]
+Expand:
+\[
+25n+8n+8=31n+4n+4.
+\]
+So
+\[
+33n+8=35n+4.
+\]
+Subtract \(33n\):
+\[
+8=2n+4.
+\]
+Subtract \(4\):
+\[
+4=2n.
+\]
+Divide by \(2\):
+\[
+n=2.
+\]
+So the two garden centres charge the same for \(\boxed{2\text{ panels}}\).
+
+For \(10\) panels:
+\[
+\text{A: }25(10)+8(11)=250+88=338,
+\]
+and
+\[
+\text{B: }31(10)+4(11)=310+44=354.
+\]
+Therefore garden centre A is cheaper for \(10\) panels, by \(\pounds16\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q9. Cells}
+\begin{enumerate}[label=(\alph*)]
+\item At the start there are \(x\) cells.
+
+After \(1\) hour:
+\[
+3x-5.
+\]
+After \(2\) hours:
+\[
+3(3x-5)-5=9x-15-5=9x-20.
+\]
+After \(3\) hours:
+\[
+3(9x-20)-5=27x-60-5=27x-65.
+\]
+So the completed table is:
+\[
+\begin{array}{c|c}
+\text{Hours} & \text{Cells}\\ \hline
+0 & x\\
+1 & 3x-5\\
+2 & 9x-20\\
+3 & 27x-65
+\end{array}
+\]
+
+\item After \(3\) hours there are \(205\) cells, so
+\[
+27x-65=205.
+\]
+Add \(65\):
+\[
+27x=270.
+\]
+Divide by \(27\):
+\[
+x=10.
+\]
+So there were \(\boxed{10\text{ cells}}\) at the start.
+
+Check:
+\[
+10\to 3(10)-5=25\to 3(25)-5=70\to 3(70)-5=205.
+\]
+\end{enumerate}
+\end{solbox}
+
+\section*{Part 3: The unknown in the denominator}
+
+\begin{solbox}{Q10. Pizza slices}
+Each slice has angle
+\[
+\frac{360}{n}
+\]
+degrees.
+\begin{enumerate}[label=(\alph*)]
+\item For each slice to be \(40^\circ\):
+\[
+\frac{360}{n}=40.
+\]
+Multiply both sides by \(n\):
+\[
+360=40n.
+\]
+Divide by \(40\):
+\[
+n=9.
+\]
+So the pizza must be cut into \(\boxed{9\text{ slices}}\).
+
+Check:
+\[
+\frac{360}{9}=40^\circ.
+\]
+
+\item For each slice to be \(25^\circ\):
+\[
+\frac{360}{n}=25.
+\]
+Multiply by \(n\):
+\[
+360=25n.
+\]
+Divide by \(25\):
+\[
+n=\frac{360}{25}=14.4.
+\]
+Since the number of slices must be a whole number, this is impossible. So a pizza cannot be cut into equal slices with angle \(25^\circ\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q11. Garden path}
+\begin{enumerate}[label=(\alph*)]
+\item Pattern \(n\) has \(n\) grey slabs in the middle row. The grid has \(3\) rows and each row has \(n+2\) slabs, so the total number of slabs is
+\[
+3(n+2)=3n+6.
+\]
+The table is:
+\[
+\begin{array}{c|cccccc}
+\text{Pattern }n & 1&2&3&4&5&10\\ \hline
+\text{Grey slabs} & 1&2&3&4&5&10\\
+\text{All slabs} & 9&12&15&18&21&36
+\end{array}
+\]
+The \(n\)th term for grey slabs is
+\[
+\boxed{n}.
+\]
+The \(n\)th term for all slabs is
+\[
+\boxed{3n+6}.
+\]
+
+\item The fraction of the slabs that are grey is
+\[
+\boxed{\frac{n}{3n+6}}.
+\]
+
+\item Set the fraction equal to \(\frac{3}{10}\):
+\[
+\frac{n}{3n+6}=\frac{3}{10}.
+\]
+Multiply both sides by \(10\) and by \(3n+6\):
+\[
+10n=3(3n+6).
+\]
+Expand:
+\[
+10n=9n+18.
+\]
+Subtract \(9n\):
+\[
+n=18.
+\]
+So pattern \(\boxed{18}\) has exactly \(\frac{3}{10}\) of its slabs grey.
+
+Check:
+\[
+\text{grey}=18,\qquad \text{all}=3(18)+6=60,\qquad \frac{18}{60}=\frac{3}{10}.
+\]
+
+\item Set the fraction equal to \(\frac{1}{3}\):
+\[
+\frac{n}{3n+6}=\frac{1}{3}.
+\]
+Multiply both sides by \(3\) and by \(3n+6\):
+\[
+3n=3n+6.
+\]
+Subtract \(3n\):
+\[
+0=6,
+\]
+which is impossible. So no pattern has exactly \(\frac{1}{3}\) of its slabs grey.
+
+From the picture, the number of white slabs is
+\[
+(3n+6)-n=2n+6.
+\]
+There are always \(6\) more than twice the \(n\) grey slabs, so the white border is always more than twice the grey row. Hence the grey fraction is always less than \(\frac13\).
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q12. Fraction bars}
+\begin{enumerate}[label=(\alph*)]
+\item Pattern \(n\) has \(2n+1\) equal parts, and \(2n-1\) of them are shaded. So the fraction shaded is
+\[
+\boxed{\frac{2n-1}{2n+1}}.
+\]
+
+\item For \(0.92\) shaded:
+\[
+\frac{2n-1}{2n+1}=0.92=\frac{23}{25}.
+\]
+Cross-multiply:
+\[
+25(2n-1)=23(2n+1).
+\]
+Expand:
+\[
+50n-25=46n+23.
+\]
+Subtract \(46n\):
+\[
+4n-25=23.
+\]
+Add \(25\):
+\[
+4n=48.
+\]
+Divide by \(4\):
+\[
+n=12.
+\]
+So pattern \(\boxed{12}\) has \(0.92\) of its bar shaded.
+
+Check:
+\[
+\frac{2(12)-1}{2(12)+1}=\frac{23}{25}=0.92.
+\]
+
+\item For \(0.95\) shaded:
+\[
+\frac{2n-1}{2n+1}=0.95=\frac{19}{20}.
+\]
+Cross-multiply:
+\[
+20(2n-1)=19(2n+1).
+\]
+Expand:
+\[
+40n-20=38n+19.
+\]
+Subtract \(38n\):
+\[
+2n-20=19.
+\]
+Add \(20\):
+\[
+2n=39.
+\]
+Divide by \(2\):
+\[
+n=19.5.
+\]
+This is not a whole number, so there is no pattern with \(0.95\) of its bar shaded.
+
+\item As \(n\) gets larger,
+\[
+\frac{2n-1}{2n+1}
+\]
+gets closer and closer to \(1\). Indeed,
+\[
+\frac{2n-1}{2n+1}=1-\frac{2}{2n+1}.
+\]
+The fraction \(\frac{2}{2n+1}\) gets smaller as \(n\) increases, so the shaded fraction approaches \(1\).
+
+It never reaches \(1\), because \(2n-1\) is always \(2\) less than \(2n+1\). So there are always \(2\) unshaded parts.
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q13. Minibus and coach}
+Let \(n\) people go on the minibus. Then the coach carries \(n+20\) people.
+
+The cost per person on the minibus is
+\[
+\frac{360}{n}.
+\]
+The cost per person on the coach is
+\[
+\frac{600}{n+20}.
+\]
+These are equal:
+\[
+\frac{360}{n}=\frac{600}{n+20}.
+\]
+Cross-multiply:
+\[
+360(n+20)=600n.
+\]
+Expand:
+\[
+360n+7200=600n.
+\]
+Subtract \(360n\):
+\[
+7200=240n.
+\]
+Divide by \(240\):
+\[
+n=30.
+\]
+So \(30\) people go on the minibus and \(30+20=50\) people go on the coach.
+
+Each person pays
+\[
+\frac{360}{30}=12
+\]
+pounds. Check:
+\[
+\frac{600}{50}=12.
+\]
+Therefore \(\boxed{30\text{ people go on the minibus}}\), and each pays \(\boxed{\pounds12}\).
+\end{solbox}
+
+\section*{Part 4: Finding an unknown \(n\)th term}
+
+\begin{solbox}{Q14. Stack of chairs}
+Let the height of a stack of \(n\) chairs be
+\[
+an+b.
+\]
+A stack of \(4\) chairs is \(115\) cm, so
+\[
+4a+b=115. \tag{1}
+\]
+A stack of \(10\) chairs is \(175\) cm, so
+\[
+10a+b=175. \tag{2}
+\]
+Subtract (1) from (2):
+\[
+6a=60.
+\]
+Divide by \(6\):
+\[
+a=10.
+\]
+Substitute \(a=10\) into (1):
+\[
+4(10)+b=115,
+\]
+so
+\[
+40+b=115.
+\]
+Subtract \(40\):
+\[
+b=75.
+\]
+Therefore the \(n\)th term is
+\[
+\boxed{10n+75}.
+\]
+Each chair adds \(10\) cm to the height.
+
+Check with (2):
+\[
+10(10)+75=100+75=175.
+\]
+
+For a stack \(2.05\) m tall, the height is \(205\) cm:
+\[
+10n+75=205.
+\]
+Subtract \(75\):
+\[
+10n=130.
+\]
+Divide by \(10\):
+\[
+n=13.
+\]
+So there are \(\boxed{13\text{ chairs}}\) in a stack that is \(2.05\) m tall.
+\end{solbox}
+
+\begin{solbox}{Q15. Sequences \(an+5\) and \(bn+6\)}
+\begin{enumerate}[label=(\alph*)]
+\item The 3rd term of \(an+5\) is
+\[
+3a+5.
+\]
+The 2nd term of \(bn+6\) is
+\[
+2b+6.
+\]
+These are equal:
+\[
+3a+5=2b+6.
+\]
+Subtract \(2b\) and \(5\):
+\[
+3a-2b=1. \tag{1}
+\]
+The 1st terms are \(a+5\) and \(b+6\). They add to \(18\):
+\[
+(a+5)+(b+6)=18.
+\]
+So
+\[
+a+b+11=18,
+\]
+and therefore
+\[
+a+b=7. \tag{2}
+\]
+
+\item Solve
+\[
+3a-2b=1,\qquad a+b=7.
+\]
+Multiply \(a+b=7\) by \(2\):
+\[
+2a+2b=14. \tag{3}
+\]
+Add (1) and (3):
+\[
+(3a-2b)+(2a+2b)=1+14,
+\]
+so
+\[
+5a=15.
+\]
+Thus
+\[
+a=3.
+\]
+Substitute into \(a+b=7\):
+\[
+3+b=7,
+\]
+so
+\[
+b=4.
+\]
+Therefore
+\[
+\boxed{a=3,\quad b=4}.
+\]
+
+\item The first sequence is \(3n+5\). Its first five terms are
+\[
+8,\ 11,\ 14,\ 17,\ 20.
+\]
+The second sequence is \(4n+6\). Its first five terms are
+\[
+10,\ 14,\ 18,\ 22,\ 26.
+\]
+So the first five terms are
+\[
+\boxed{3n+5:\ 8,\ 11,\ 14,\ 17,\ 20}
+\]
+and
+\[
+\boxed{4n+6:\ 10,\ 14,\ 18,\ 22,\ 26}.
+\]
+
+\item The 4th term of \(an+5\) is
+\[
+4a+5.
+\]
+The 4th term of \(bn+6\) is
+\[
+4b+6.
+\]
+If they were equal, then
+\[
+4a+5=4b+6.
+\]
+Subtract \(4b\) and \(5\):
+\[
+4a-4b=1,
+\]
+so
+\[
+4(a-b)=1.
+\]
+The left side is a multiple of \(4\) when \(a\) and \(b\) are whole numbers. The right side is \(1\), which is not a multiple of \(4\). This is impossible. Therefore the 4th terms can never be equal when \(a\) and \(b\) are whole numbers.
+\end{enumerate}
+\end{solbox}
+
+\begin{solbox}{Q16. Garden centre C}
+Let a panel cost \(p\) pounds and a post cost \(q\) pounds.
+
+A fence of \(3\) panels has \(4\) posts, so
+\[
+3p+4q=138. \tag{1}
+\]
+A fence of \(5\) panels has \(6\) posts, so
+\[
+5p+6q=222. \tag{2}
+\]
+Eliminate \(q\). Multiply (1) by \(3\):
+\[
+9p+12q=414. \tag{3}
+\]
+Multiply (2) by \(2\):
+\[
+10p+12q=444. \tag{4}
+\]
+Subtract (3) from (4):
+\[
+p=30.
+\]
+Substitute \(p=30\) into (1):
+\[
+3(30)+4q=138.
+\]
+So
+\[
+90+4q=138.
+\]
+Subtract \(90\):
+\[
+4q=48.
+\]
+Divide by \(4\):
+\[
+q=12.
+\]
+Therefore a panel costs \(\boxed{\pounds30}\) and a post costs \(\boxed{\pounds12}\).
+
+Check with \(5\) panels:
+\[
+5(30)+6(12)=150+72=222.
+\]
+\end{solbox}
+
+\begin{solbox}{Q17. Fibonacci-type sequence}
+The terms are:
+\[
+\begin{array}{c|cccccc}
+\text{Term} & 1\text{st} & 2\text{nd} & 3\text{rd} & 4\text{th} & 5\text{th} & 6\text{th}\\ \hline
+\text{Value} & x & y & x+y & x+2y & 2x+3y & 3x+5y
+\end{array}
+\]
+Given the 5th term is \(31\) and the 6th term is \(50\):
+\[
+2x+3y=31, \tag{1}
+\]
+\[
+3x+5y=50. \tag{2}
+\]
+Multiply (1) by \(3\):
+\[
+6x+9y=93. \tag{3}
+\]
+Multiply (2) by \(2\):
+\[
+6x+10y=100. \tag{4}
+\]
+Subtract (3) from (4):
+\[
+y=7.
+\]
+Substitute \(y=7\) into (1):
+\[
+2x+3(7)=31.
+\]
+So
+\[
+2x+21=31.
+\]
+Subtract \(21\):
+\[
+2x=10.
+\]
+Divide by \(2\):
+\[
+x=5.
+\]
+Therefore
+\[
+\boxed{x=5,\quad y=7}.
+\]
+The sequence is
+\[
+\boxed{5,\ 7,\ 12,\ 19,\ 31,\ 50}.
+\]
+\end{solbox}
+
+\begin{solbox}{Q18. Open problem leading to \(3(n+4)=5n-2\)}
+One possible problem is:
+
+Kai has \(4\) more boxes than Lily. Each of Kai's boxes contains \(3\) pens. Lily has \(n\) boxes, each containing \(5\) pens, but she has given away \(2\) pens. Kai and Lily have the same number of pens. Find \(n\).
+
+Kai has \(n+4\) boxes with \(3\) pens in each, so he has
+\[
+3(n+4)
+\]
+pens. Lily has \(5n\) pens before giving \(2\) away, so she has
+\[
+5n-2
+\]
+pens. These are equal:
+\[
+3(n+4)=5n-2.
+\]
+Expand:
+\[
+3n+12=5n-2.
+\]
+Add \(2\) to both sides:
+\[
+3n+14=5n.
+\]
+Subtract \(3n\):
+\[
+14=2n.
+\]
+Divide by \(2\):
+\[
+n=7.
+\]
+So Lily has \(7\) boxes and Kai has \(11\) boxes. Each has
+\[
+3(11)=33,\qquad 5(7)-2=33
+\]
+pens.
+\end{solbox}
+
+\begin{solbox}{Q19. Designing sequences}
+\begin{enumerate}[label=(\alph*)]
+\item One possible pair is
+\[
+\boxed{4n+7}
+\]
+which increases, and
+\[
+\boxed{97-5n}
+\]
+which decreases.
+
+At the 10th term:
+\[
+4(10)+7=47,
+\]
+and
+\[
+97-5(10)=97-50=47.
+\]
+So both have 10th term \(47\).
+
+\item No. Suppose two linear sequences are
+\[
+an+b
+\]
+and
+\[
+cn+d.
+\]
+If their 10th terms are equal, then
+\[
+10a+b=10c+d. \tag{1}
+\]
+If their 20th terms are also equal, then
+\[
+20a+b=20c+d. \tag{2}
+\]
+Subtract (1) from (2):
+\[
+10a=10c,
+\]
+so
+\[
+a=c.
+\]
+Substitute \(a=c\) into (1):
+\[
+10a+b=10a+d,
+\]
+so
+\[
+b=d.
+\]
+Therefore the two sequences are exactly the same. Two different linear sequences cannot have equal 10th terms and equal 20th terms.
+\end{enumerate}
+\end{solbox}
+
+\end{document}
