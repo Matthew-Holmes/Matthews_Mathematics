@@ -30,58 +30,86 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
+% A sans serif font with a single-storey a, as children write it. It is
+% used for the mathematics as well as the text.
+\usepackage{tgadventor}
+\renewcommand*{\familydefault}{\sfdefault}
+\usepackage[italic]{mathastext}
 \usepackage{tikz}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{arrows.meta,decorations.pathreplacing}
 
 % ================================================================
-% Algebraic terminology: a one-page sheet for a Year 7 class meeting
+% Algebraic terminology: a three-page sheet for a Year 7 class meeting
 % algebra for the first time.
 %
-% Part 1 labels the parts of an expression. A labelled example of
-% 5x+3 sits beside the definitions, then Q1 is the same picture of
-% 7y-2 with the names left blank. Q2 labels a longer expression with
-% two variables, and asks for a term as well.
+% Every page has the same two kinds of question. The first labels the
+% parts of an expression, by writing their names in boxes. The second
+% fills in the gaps in sentences about an expression, then goes the
+% other way, from a description to the expression, and ends with an
+% open task. The expressions have from 2 to 5 terms.
 %
-% Part 2 fills in the gaps in sentences about an expression. Q3 gives
-% most of each sentence and Q4 gives less. Q5 goes the other way, from
-% the description to the expression, and Q6 is an open task.
+% Page 1 has the definitions and a labelled example of 5x+3, and there
+% are no negative numbers. Some of the names are already in the boxes,
+% and some of the gaps are filled in, so that pupils can make a start.
+% Page 2 has negative constants and coefficients, and a coefficient of
+% 1 or -1 that is not written. Page 3 adds decimals, squared terms, a
+% constant that is not at the end, and an expression with no constant.
 %
-% The sheet is one side of A4 in 14pt type, so that it can also be
-% printed at A5 (the type is then about 10pt). The boxes and gaps are
-% sized to be written in at A5. The answers are in a comment beside
-% each question.
+% The sheet is A4 in 14pt type, so that it can also be printed at A5
+% (the type is then about 10pt). The boxes and gaps are sized to be
+% written in at A5. The answers are in a comment beside each question.
 % ================================================================
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
+% Ragged right, so that the spaces between words are all the same.
+\AtBeginDocument{\raggedright}
 
 % The idea the sheet is built on, boxed and only faintly tinted, so the
 % sheet is cheap to print.
 \newtcolorbox{keyidea}{colback=orange!3,colframe=orange!35,boxrule=0.6pt,
   left=6pt,right=6pt,top=4pt,bottom=4pt}
 
-% The section headings, between two thin rules.
-\newcommand{\parttitle}[2]{%
-  {\color{blue!45!black}\rule{\linewidth}{1pt}}\\[1pt]
-  {\large\bfseries Part #1: #2}\\[-8pt]
-  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}
-  \par\vspace{2pt}}
+% An instruction for the questions after it.
+\newcommand{\instruction}[1]{\par{\large\bfseries #1}\par\vspace{6pt}}
 
 % A question number, and gaps to write in: \lgap for a letter, \gap for
-% a number or a term, \wgap for a word or an expression. The strut
-% keeps the lines far enough apart to write on at A5.
+% a number or a term, \tgap for a term with a decimal in it, and \wgap
+% for a word or an expression. The strut keeps the lines far enough
+% apart to write on at A5.
 \newcommand{\qn}[1]{\textbf{Q#1.}\ }
 \newcommand{\gapstrut}{\rule[-1.5mm]{0pt}{7.5mm}}
-\newcommand{\lgap}{\gapstrut\underline{\hspace{1.1cm}}}
+\newcommand{\lgap}{\gapstrut\underline{\hspace{1cm}}}
 \newcommand{\gap}{\gapstrut\underline{\hspace{1.4cm}}}
+\newcommand{\tgap}{\gapstrut\underline{\hspace{1.5cm}}}
 \newcommand{\wgap}{\gapstrut\underline{\hspace{3.4cm}}}
 
-% A Part 1 question: the number on the left, the picture centred.
+% A gap that is filled in already, so that pupils can make a start:
+% \given{$4$} for a number or a term, and \lgiven{$x$} for a letter.
+\newcommand{\given}[1]{\gapstrut\underline{\makebox[1.4cm]{#1}}}
+\newcommand{\lgiven}[1]{\gapstrut\underline{\makebox[1cm]{#1}}}
+
+% An answer line at the right-hand end of a question. It goes on the
+% last line of the question if there is room, and on a line of its own
+% if not. (This is the \signed macro from The TeXbook, with \hfill in
+% place of \hfil so that it still reaches the right margin when the
+% text is ragged right.)
+\newcommand{\answerline}[1]{{\unskip\nobreak\hfill\penalty50
+  \hskip2em\hbox{}\nobreak\hfill\gapstrut\underline{\hspace{#1}}%
+  \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+% A labelling question: the number on the left, the picture centred.
 \newcommand{\labelq}[2]{%
   \par\noindent\begin{minipage}[c]{1.3cm}\qn{#1}\end{minipage}\hfill
   #2\hfill\hspace*{1.3cm}\par}
+
+% A fill-in-the-gaps question: the expression large, then the sentences.
+\newenvironment{gapq}[3]
+  {\begin{minipage}[t]{#1\linewidth}\raggedright
+   \qn{#2}\quad{\Large $#3$}\par}
+  {\end{minipage}}
 
 % ================================================================
 % Labelled expressions
@@ -92,6 +120,8 @@
   % measured in the body font and come out shorter than the letters.
   part/.style={inner xsep=0pt, inner ysep=2pt, font=\LARGE,
                text height=15pt, text depth=5pt},
+  namebox/.style={draw, minimum width=3.8cm, minimum height=0.95cm,
+                  inner sep=2pt},
   arr/.style={-{Stealth[length=7pt]}, thick, shorten >=3pt},
   brc/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt}, thick},
   brcd/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt,
@@ -122,6 +152,45 @@
     \node[namebox, anchor=north] at ([yshift=-0.4cm]m) {#9};
   \end{tikzpicture}%
 }
+
+% The other labelled expressions are built from the same pieces, so
+% that a box can point at any part.
+%
+% \labelled{<first part>}{<parts and boxes>} draws the picture. Each
+% part of the expression is a node with a name. \pfirst{c}{4} starts
+% the expression with the part named c, \pnext{a}{c}{a} puts the part
+% named a straight after c in the same term, and \pterm{t}{a}{+9b}
+% starts a new term after a small gap.
+%
+% A box points at a part from the left of the first part (\bleft),
+% the right of the last part (\bright), or above or below any part
+% (\babove, \bbelow). \brabove and \brbelow put a brace over or under
+% the parts from one named part to another, with a box beyond it.
+\newcommand{\labelled}[2]{%
+  \begin{tikzpicture}[baseline=(#1.base)]#2\end{tikzpicture}}
+\newcommand{\pfirst}[2]{\node[part] (#1) {$#2$};}
+\newcommand{\pnext}[3]{%
+  \node[part, anchor=base west] (#1) at (#2.base east) {$#3$};}
+\newcommand{\pterm}[3]{%
+  \node[part, anchor=base west] (#1) at ([xshift=9pt]#2.base east) {$#3$};}
+\newcommand{\bleft}[2]{%
+  \node[namebox, anchor=east] (#1L) at ([xshift=-0.6cm]#1.west) {#2};
+  \draw[arr] (#1L.east) -- (#1.west);}
+\newcommand{\bright}[2]{%
+  \node[namebox, anchor=west] (#1R) at ([xshift=0.6cm]#1.east) {#2};
+  \draw[arr] (#1R.west) -- (#1.east);}
+\newcommand{\babove}[2]{%
+  \node[namebox, anchor=south] (#1A) at ([yshift=0.45cm]#1.north) {#2};
+  \draw[arr] (#1A.south) -- (#1.north);}
+\newcommand{\bbelow}[2]{%
+  \node[namebox, anchor=north] (#1B) at ([yshift=-0.45cm]#1.south) {#2};
+  \draw[arr] (#1B.north) -- (#1.south);}
+\newcommand{\brabove}[3]{%
+  \draw[brc] (#1.north west) -- (#2.north east) coordinate[midway] (bm);
+  \node[namebox, anchor=south] at ([yshift=0.5cm]bm) {#3};}
+\newcommand{\brbelow}[3]{%
+  \draw[brcd] (#1.south west) -- (#2.south east) coordinate[midway] (bm);
+  \node[namebox, anchor=north] at ([yshift=-0.4cm]bm) {#3};}
 
 % Characters this language's font has not got are borrowed from another,
 % rather than being silently dropped - see docs/translated-sheet-latex.md
@@ -191,100 +260,256 @@
 }
 
 \begin{document}
-\begin{ealglossed}
-\vspace*{0.5cm}
 
+\begin{ealglossed}
 \begin{center}
   {\LARGE\bfseries \ealgloss{Algebraic}{algebraiczna} Terminology}
 \end{center}
-\vspace{-4pt}
+\end{ealglossed}
+\vspace{6pt}
 
 \begin{keyidea}
-\begin{minipage}[c]{0.53\linewidth}
+\begin{minipage}[c]{0.57\linewidth}
 \raggedright
-A \textbf{\ealgloss{variable}{zmienna}} is a letter that stands for a number.
+\begin{ealglossed}
+A \ealgloss{variable}{zmienna} is a letter that could be any number.
 
 \vspace{3pt}
-A \textbf{\ealgloss{term}{wyraz}} is a number, a \ealgloss{variable}{zmienna}, or numbers and \ealgloss{variables}{zmienne}
+A \ealgloss{term}{wyraz} is a number, a \ealgloss{variable}{zmienna}, or numbers and \ealgloss{variables}{zmienne}
 multiplied together. The \ealgloss{sign}{znak} in front of a \ealgloss{term}{wyrazem} belongs to the \ealgloss{term}{wyrazu}.
 
 \vspace{3pt}
-The \textbf{\ealgloss{coefficient}{współczynnik}} of a \ealgloss{term}{wyrazu} is the number that multiplies the
+The \ealgloss{coefficient}{współczynnik} of a \ealgloss{term}{wyrazu} is the number that multiplies the
 \ealgloss{variables}{zmienne} in it.
 
 \vspace{3pt}
-A \textbf{\ealgloss{constant}{stała}} is a \ealgloss{term}{wyraz} with no \ealgloss{variable}{zmiennej} in it.
+A \ealgloss{constant}{stała} is a \ealgloss{term}{wyraz} with no \ealgloss{variable}{zmiennej} in it.
 
 \vspace{3pt}
-An \textbf{\ealgloss{expression}{wyrażenie}} is \ealgloss{terms}{wyrazy} added or subtracted, with no equals \ealgloss{sign}{znaku}.
+\ealgloss{Terms}{Wyrazy} added or subtracted, with no equals \ealgloss{sign}{znaku}, make an \ealgloss{expression}{wyrażenie}.
+\end{ealglossed}
 \end{minipage}\hfill
-\begin{minipage}[c]{0.45\linewidth}
+\begin{minipage}[c]{0.41\linewidth}
 \centering
-\anatomy[2.3cm][0.4cm]{5}{x}{+3}{\small \ealgloss{coefficient}{współczynnik}}{\small \ealgloss{variable}{zmienna}}{\small \ealgloss{constant}{stała}}{\small \ealgloss{expression}{wyrażenie}}
+\tikzset{part/.append style={font=\Large}}%
+\begin{ealglossed}
+\anatomy[1.9cm][0.3cm]{5}{x}{+3}{\ealgloss{coefficient}{współczynnik}}{\ealgloss{variable}{zmienna}}{\ealgloss{constant}{stała}}{\ealgloss{expression}{wyrażenie}}
+\end{ealglossed}
 \end{minipage}
 \end{keyidea}
 
-\vspace{6pt}
+\vspace{8pt}
+\instruction{Write the name of each part in its box.}
 
-\parttitle{1}{Write the name of each part in its box}
-
-\vspace{4pt}
-\labelq{1}{\anatomy{7}{y}{-2}{}{}{}{}}
+\begin{ealglossed}
+\labelq{1}{\anatomy{4}{y}{+9}{}{\ealgloss{variable}{zmienna}}{}{\ealgloss{expression}{wyrażenie}}}
+\end{ealglossed}
 
 \vspace{14pt}
-\labelq{2}{%
-\begin{tikzpicture}[baseline=(a.base),
-    namebox/.style={draw, minimum width=3.8cm, minimum height=0.95cm, inner sep=2pt}]
-  \node[part] (c) {$4$};
-  \node[part, anchor=base west] (a) at (c.base east) {$a$};
-  \node[part, anchor=base west] (t) at ([xshift=9pt]a.base east) {$+9b$};
-  \node[part, anchor=base west] (k) at ([xshift=9pt]t.base east) {$-6$};
-  \node[namebox, anchor=east] (cl) at ([xshift=-0.6cm]c.west) {};
-  \draw[arr] (cl.east) -- (c.west);
-  \node[namebox, anchor=north] (al) at ([yshift=-0.45cm]a.south) {};
-  \draw[arr] (al.north) -- (a.south);
-  \draw[brc] (t.north west) -- (t.north east) coordinate[midway] (m);
-  \node[namebox, anchor=south] at ([yshift=0.5cm]m) {};
-  \node[namebox, anchor=west] (kl) at ([xshift=0.6cm]k.east) {};
-  \draw[arr] (kl.west) -- (k.east);
-\end{tikzpicture}}
+\begin{ealglossed}
+\labelq{2}{\labelled{c}{%
+  \pfirst{c}{2}\pnext{a}{c}{a}\pterm{t}{a}{+6b}\pterm{k}{t}{+5}%
+  \bleft{c}{}\bbelow{a}{}\brabove{t}{t}{\ealgloss{term}{wyraz}}\bright{k}{}}}
+\end{ealglossed}
 
-\vspace{10pt}
+\vspace{12pt}
+\instruction{Fill in the gaps.}
 
-\parttitle{2}{Fill in the gaps}
-
-\begin{minipage}[t]{0.5\linewidth}
-\qn{3} \quad {\Large $4xy+2z-5$}
-
+\begin{gapq}{0.5}{3}{5xy+3z+7}
+\begin{ealglossed}
 This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
 
-Its $3$ \ealgloss{variables}{zmienne} are \lgap, \lgap\ and \lgap.
+Its \ealgloss{variables}{zmienne} are \lgiven{$x$}, \lgiven{$y$} and \lgap.
 
-The \ealgloss{coefficient}{współczynnik} of the \ealgloss{term}{wyrazu} $xy$ is \gap.
+The \ealgloss{coefficient}{współczynnik} of $xy$ is \gap.
 
 The \ealgloss{constant}{stała} is \gap.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.47\linewidth}
-\qn{4} \quad {\Large $6m-n+8$}
+\end{ealglossed}
+\end{gapq}\hfill
+\begin{gapq}{0.47}{4}{2m+9n+3p+4}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \given{$4$} \ealgloss{terms}{wyrazy}.
 
-The \ealgloss{terms}{wyrazy} are \gap, \gap\ and \gap.
+The \ealgloss{coefficient}{współczynnik} of $n$ is \gap.
+
+The \ealgloss{coefficient}{współczynnik} of $p$ is \gap.
+
+The $4$ is called the \wgap.
+\end{ealglossed}
+\end{gapq}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{5} An \ealgloss{expression}{wyrażenie} has the \ealgloss{variable}{zmienną} $p$. The \ealgloss{coefficient}{współczynnik} of $p$ is
+$2$ and the \ealgloss{constant}{stała} is $7$. Write down the~\ealgloss{expression}{wyrażenie}.
+\answerline{3.4cm}
+\end{ealglossed}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{6} Write an \ealgloss{expression}{wyrażenie} that has $3$ \ealgloss{terms}{wyrazy}, $2$ \ealgloss{variables}{zmienne} and
+a~\ealgloss{constant}{stałą}~of~$8$. \answerline{5.5cm}
+\end{ealglossed}
+
+\newpage
+
+\instruction{Write the name of each part in its box.}
+
+\labelq{7}{\anatomy{7}{y}{-2}{}{}{}{}}
+
+\vspace{14pt}
+\labelq{8}{\labelled{c}{%
+  \pfirst{c}{4}\pnext{a}{c}{a}\pterm{t}{a}{+9b}\pterm{k}{t}{-6}%
+  \bleft{c}{}\bbelow{a}{}\brabove{t}{t}{}\bright{k}{}}}
+
+\vspace{14pt}
+\labelq{9}{\labelled{c}{%
+  \pfirst{c}{3}\pnext{p}{c}{p}\pnext{q}{p}{q}\pterm{k}{q}{-8}%
+  \bleft{c}{}\babove{p}{}\bbelow{q}{}\bright{k}{}}}
+
+\vspace{12pt}
+\instruction{Fill in the gaps.}
+
+\begin{gapq}{0.5}{10}{4xy+2z-5}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
+
+Its \ealgloss{variables}{zmienne} are \lgap, \lgap\ and \lgap.
+
+The \ealgloss{coefficient}{współczynnik} of $xy$ is \gap.
+
+The \ealgloss{constant}{stała} is \gap.
+\end{ealglossed}
+\end{gapq}\hfill
+\begin{gapq}{0.47}{11}{6m-n+2p+8}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
 
 The \ealgloss{coefficient}{współczynnik} of $m$ is \gap.
 
 The \ealgloss{coefficient}{współczynnik} of $n$ is \gap.
 
 The $8$ is called the \wgap.
-\end{minipage}
-
-\vspace{12pt}
-\qn{5} An \ealgloss{expression}{wyrażenie} has the \ealgloss{variables}{zmienne} $p$ and $q$. The \ealgloss{coefficient}{współczynnik} of
-$p$ is $3$, the \ealgloss{coefficient}{współczynnik} of $q$ is $-5$ and the \ealgloss{constant}{stała} is $4$.
-Write down the \ealgloss{expression}{wyrażenie}. \hfill \wgap
-
-\vspace{12pt}
-\qn{6} Write an \ealgloss{expression}{wyrażenie} that has $4$ \ealgloss{terms}{wyrazy}, $2$ \ealgloss{variables}{zmienne} and a
-\ealgloss{constant}{stałą} of $-1$.\par
-\hfill\gapstrut\underline{\hspace{5.5cm}}
-
 \end{ealglossed}
+\end{gapq}
+
+\vspace{12pt}
+\begin{gapq}{0.5}{12}{-3ab+7}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
+
+Its \ealgloss{variables}{zmienne} are \lgiven{$a$} and \lgap.
+
+The \ealgloss{coefficient}{współczynnik} of $ab$ is \gap.
+
+The \ealgloss{constant}{stała} is \gap.
+\end{ealglossed}
+\end{gapq}\hfill
+\begin{gapq}{0.47}{13}{2a+b-4c+d-9}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \given{$5$} \ealgloss{terms}{wyrazów}.
+
+The \ealgloss{coefficient}{współczynnik} of $b$ is \gap.
+
+The \ealgloss{coefficient}{współczynnik} of $c$ is \gap.
+
+The \ealgloss{constant}{stała} is \gap.
+\end{ealglossed}
+\end{gapq}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{14} An \ealgloss{expression}{wyrażenie} has the \ealgloss{variables}{zmienne} $p$ and $q$. The \ealgloss{coefficient}{współczynnik} of
+$p$ is $3$, the \ealgloss{coefficient}{współczynnik} of $q$ is $-5$ and the \ealgloss{constant}{stała} is $4$.
+Write down the~\ealgloss{expression}{wyrażenie}. \answerline{3.4cm}
+\end{ealglossed}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{15} Write an \ealgloss{expression}{wyrażenie} that has $4$ \ealgloss{terms}{wyrazy}, $2$ \ealgloss{variables}{zmienne} and
+a~\ealgloss{constant}{stałą}~of~$-1$. \answerline{5.5cm}
+\end{ealglossed}
+
+\newpage
+
+\instruction{Write the name of each part in its box.}
+
+\labelq{16}{\labelled{k}{%
+  \pfirst{k}{8}\pterm{c}{k}{-3}\pnext{x}{c}{x}%
+  \bleft{k}{}\babove{c}{}\bright{x}{}\brbelow{k}{x}{}}}
+
+\vspace{14pt}
+\labelq{17}{\labelled{c}{%
+  \pfirst{c}{2}\pnext{a}{c}{a}\pterm{k}{a}{-7}\pterm{d}{k}{+0.5}\pnext{b}{d}{b}%
+  \bleft{c}{}\babove{k}{}\bright{b}{}\brbelow{d}{b}{}}}
+
+\vspace{14pt}
+\labelq{18}{\labelled{c}{%
+  \pfirst{c}{-4}\pnext{m}{c}{m}\pnext{n}{m}{n}\pterm{k}{n}{+1.5}%
+  \bleft{c}{}\babove{m}{}\brbelow{c}{n}{}\bright{k}{}}}
+
+\vspace{12pt}
+\instruction{Fill in the gaps.}
+
+\begin{gapq}{0.5}{19}{0.5a-b+2.5+3c}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
+
+The \ealgloss{coefficient}{współczynnik} of $a$ is \gap.
+
+The \ealgloss{coefficient}{współczynnik} of $b$ is \gap.
+
+The \ealgloss{constant}{stała} is \gap.
+\end{ealglossed}
+\end{gapq}\hfill
+\begin{gapq}{0.47}{20}{9-0.5k^2}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
+
+Its \ealgloss{variable}{zmienna} is \lgap.
+
+The \ealgloss{constant}{stała} is \gap.
+
+The \ealgloss{coefficient}{współczynnik} of $k^2$ is \gap.
+\end{ealglossed}
+\end{gapq}
+
+\vspace{12pt}
+\begin{gapq}{0.5}{21}{2xy-5x+0.3y}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \gap\ \ealgloss{terms}{wyrazy}.
+
+The \ealgloss{coefficient}{współczynnik} of $xy$ is \gap.
+
+$-5$ is the \ealgloss{coefficient}{współczynnikiem} of \gap.
+
+This \ealgloss{expression}{wyrażenie} has no \wgap.
+\end{ealglossed}
+\end{gapq}\hfill
+\begin{gapq}{0.47}{22}{x^2+x-y+xy-3}
+\begin{ealglossed}
+This \ealgloss{expression}{wyrażenie} has \given{$5$} \ealgloss{terms}{wyrazów}.
+
+The \ealgloss{coefficient}{współczynnik} of $x^2$ is \gap.
+
+The \ealgloss{coefficient}{współczynnik} of $xy$ is \gap.
+
+The \ealgloss{constant}{stała} is \gap.
+\end{ealglossed}
+\end{gapq}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{23} An \ealgloss{expression}{wyrażenie} has the \ealgloss{variables}{zmienne} $x$, $y$ and $z$. The
+\ealgloss{coefficient}{współczynnik} of $x$ is $-1$, the \ealgloss{coefficient}{współczynnik} of $y$ is $0.5$, the
+\ealgloss{coefficient}{współczynnik} of $z$ is $2$ and the \ealgloss{constant}{stała} is $-3$. Write down the~\ealgloss{expression}{wyrażenie}. \answerline{3.4cm}
+\end{ealglossed}
+
+\vspace{12pt}
+\begin{ealglossed}
+\qn{24} Write an \ealgloss{expression}{wyrażenie} that has $5$ \ealgloss{terms}{wyrazów}, $3$ \ealgloss{variables}{zmienne} and a
+\ealgloss{constant}{stałą} of~$0.5$, where every \ealgloss{coefficient}{współczynnik} is \ealgloss{negative}{ujemny}.
+\answerline{5.5cm}
+\end{ealglossed}
+
 \end{document}

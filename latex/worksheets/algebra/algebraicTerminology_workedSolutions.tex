@@ -1,143 +1,292 @@
-\documentclass[14pt,a4paper]{extarticle}
-\usepackage[a4paper,top=12mm,bottom=12mm,left=14mm,right=14mm]{geometry}
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=16mm,right=16mm]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{xcolor}
-\usepackage{tikz}
 \usepackage[most]{tcolorbox}
-\usetikzlibrary{arrows.meta,decorations.pathreplacing}
 
-\pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{4pt}
 
-\newtcolorbox{solbox}{breakable, colback=blue!2, colframe=blue!35!black,
-  boxrule=0.6pt, left=6pt, right=6pt, top=4pt, bottom=4pt}
-
-\newcommand{\parttitle}[2]{%
-  {\color{blue!45!black}\rule{\linewidth}{1pt}}\\[1pt]
-  {\large\bfseries Part #1: #2}\\[-8pt]
-  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}
-  \par\vspace{2pt}}
-
-\newcommand{\answer}[1]{\textbf{\color{blue!50!black}#1}}
-
-\tikzset{
-  part/.style={inner xsep=0pt, inner ysep=2pt, font=\LARGE,
-               text height=15pt, text depth=5pt},
-  arr/.style={-{Stealth[length=7pt]}, thick, shorten >=3pt},
-  brc/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt}, thick},
-  brcd/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt,
-               mirror}, thick},
+\newtcolorbox{solbox}{
+  colback=blue!3,
+  colframe=blue!40,
+  boxrule=0.6pt,
+  left=6pt,
+  right=6pt,
+  top=4pt,
+  bottom=4pt
 }
 
-\NewDocumentCommand{\anatomy}{O{3.8cm}O{0.6cm}mmmmmmm}{%
-  \begin{tikzpicture}[baseline=(v.base),
-      namebox/.style={draw, minimum width=#1, minimum height=0.95cm,
-                      inner sep=2pt}]
-    \node[part] (c) {$#3$};
-    \node[part, anchor=base west] (v) at (c.base east) {$#4$};
-    \node[part, anchor=base west] (k) at ([xshift=9pt]v.base east) {$#5$};
-    \node[namebox, anchor=east] (cl) at ([xshift=-#2]c.west) {#6};
-    \draw[arr] (cl.east) -- (c.west);
-    \node[namebox, anchor=south] (vl) at ([yshift=0.45cm]v.north) {#7};
-    \draw[arr] (vl.south) -- (v.north);
-    \node[namebox, anchor=west] (kl) at ([xshift=#2]k.east) {#8};
-    \draw[arr] (kl.west) -- (k.east);
-    \draw[brcd] (c.south west) -- (k.south east) coordinate[midway] (m);
-    \node[namebox, anchor=north] at ([yshift=-0.4cm]m) {#9};
-  \end{tikzpicture}%
-}
+\newcommand{\solQ}[1]{\textbf{#1.}\ }
+\newcommand{\ans}[1]{\par\noindent\textbf{Answer: }#1\par}
 
 \begin{document}
+\raggedright
 
 \begin{center}
-  {\LARGE\bfseries Algebraic Terminology: Worked Solutions}
-\end{center}
-\vspace{-4pt}
-
-\textbf{Answers are highlighted in blue.} The sign in front of a term belongs to that term.
-
-\vspace{6pt}
-\parttitle{1}{Write the name of each part in its box}
-
-\begin{solbox}
-\textbf{Q1.} For the expression \(7y-2\):
-
-\begin{center}
-\anatomy[2.8cm][0.45cm]{7}{y}{-2}{\small coefficient}{\small variable}{\small constant}{\small expression}
+  {\LARGE\bfseries Algebraic Terminology}\\[2pt]
+  {\large Worked Solutions}
 \end{center}
 
-\textbf{Solution:} The coefficient is \answer{\(7\)}, the variable is \answer{\(y\)}, the constant is \answer{\(-2\)}, and the whole expression is \answer{\(7y-2\)}. The \(7y\) and \(-2\) are the two terms; the sign in front of \(2\) belongs to the term, so the constant is \(-2\), not \(2\).
-\end{solbox}
+In these solutions, remember: the sign in front of a term belongs to that term, and a coefficient includes its sign. A constant is a term with no variable.
+
+\section*{Page 1}
 
 \begin{solbox}
-\textbf{Q2.} For the expression \(4a+9b-6\):
-
-\begin{center}
-\begin{tikzpicture}[baseline=(a.base),
-    namebox/.style={draw, minimum width=3.0cm, minimum height=0.95cm, inner sep=2pt}]
-  \node[part] (c) {$4$};
-  \node[part, anchor=base west] (a) at (c.base east) {$a$};
-  \node[part, anchor=base west] (t) at ([xshift=9pt]a.base east) {$+9b$};
-  \node[part, anchor=base west] (k) at ([xshift=9pt]t.base east) {$-6$};
-  \node[namebox, anchor=east] (cl) at ([xshift=-0.6cm]c.west) {\small coefficient};
-  \draw[arr] (cl.east) -- (c.west);
-  \node[namebox, anchor=north] (al) at ([yshift=-0.45cm]a.south) {\small variable};
-  \draw[arr] (al.north) -- (a.south);
-  \draw[brc] (t.north west) -- (t.north east) coordinate[midway] (m);
-  \node[namebox, anchor=south] at ([yshift=0.5cm]m) {\small term};
-  \node[namebox, anchor=west] (kl) at ([xshift=0.6cm]k.east) {\small constant};
-  \draw[arr] (kl.west) -- (k.east);
-\end{tikzpicture}
-\end{center}
-
-\textbf{Solution:} The terms are \answer{\(4a\), \(+9b\) and \(-6\)}. The coefficient of \(a\) is \answer{\(4\)}; the variable in that term is \(a\). The term \answer{\(9b\)} is labelled as a term (its coefficient is \(9\) and its variable is \(b\)). The constant is \answer{\(-6\)}.
-\end{solbox}
-
-\vspace{6pt}
-\parttitle{2}{Fill in the gaps}
-
-\begin{solbox}
-\textbf{Q3.} Consider \(4xy+2z-5\).
-
+\solQ{Q1} In \(4y+9\):
 \begin{itemize}
-  \item This expression has \answer{\(3\)} terms: \(4xy\), \(2z\) and \(-5\).
-  \item Its \(3\) variables are \answer{\(x\), \(y\) and \(z\)}.
-  \item The coefficient of the term \(xy\) is \answer{\(4\)}, because \(4xy\) means \(4\times xy\).
-  \item The constant is \answer{\(-5\)}, because \(-5\) has no variable. The sign belongs to the term.
+  \item \(4\) is the coefficient of \(y\).
+  \item \(y\) is the variable (already named).
+  \item \(+9\) is the constant because it has no variable.
+  \item \(4y+9\) is the expression (already named).
 \end{itemize}
+\ans{coefficient \(=4\); constant \(=+9\).}
 \end{solbox}
 
 \begin{solbox}
-\textbf{Q4.} Consider \(6m-n+8\).
-
+\solQ{Q2} In \(2a+6b+5\):
 \begin{itemize}
-  \item The terms are \answer{\(6m\), \(-n\) and \(8\)}. The sign in front of \(n\) belongs to that term, so it is \(-n\), not \(n\).
-  \item The coefficient of \(m\) is \answer{\(6\)}.
-  \item The coefficient of \(n\) is \answer{\(-1\)}, because \(-n=-1\times n\).
-  \item The \(8\) is called the \answer{constant}.
+  \item The box pointing to \(2\): \(2\) is the coefficient of \(a\).
+  \item The box below \(a\): \(a\) is a variable.
+  \item The brace over \(+6b\) already says term.
+  \item The box pointing to \(+5\): \(+5\) is the constant.
 \end{itemize}
+\ans{coefficient \(=2\); variable \(=a\); term \(=+6b\) (given); constant \(=+5\).}
 \end{solbox}
 
 \begin{solbox}
-\textbf{Q5.} An expression has variables \(p\) and \(q\). The coefficient of \(p\) is \(3\), the coefficient of \(q\) is \(-5\), and the constant is \(4\).
-
-\begin{center}
-  \answer{\(3p-5q+4\)}
-\end{center}
-(or any reordering, such as \(3p+4-5q\)). Explanation: \(3p\) has coefficient \(3\); \(-5q\) has coefficient \(-5\); \(4\) is the constant. The sign in front of \(5q\) belongs to the term, giving coefficient \(-5\).
+\solQ{Q3} In \(5xy+3z+7\):
+\begin{itemize}
+  \item The terms are \(5xy\), \(+3z\), and \(+7\), so there are \(3\) terms.
+  \item The variables are \(x\), \(y\), and \(z\).
+  \item The coefficient of \(xy\) is \(5\).
+  \item The constant is \(7\).
+\end{itemize}
+\ans{3 terms; variables \(x,y,z\); coefficient of \(xy\) is \(5\); constant \(7\).}
 \end{solbox}
 
 \begin{solbox}
-\textbf{Q6.} Write an expression with \(4\) terms, \(2\) variables and a constant of \(-1\).
+\solQ{Q4} In \(2m+9n+3p+4\):
+\begin{itemize}
+  \item There are \(4\) terms: \(2m\), \(+9n\), \(+3p\), \(+4\).
+  \item The coefficient of \(n\) is \(9\).
+  \item The coefficient of \(p\) is \(3\).
+  \item \(4\) has no variable, so it is the constant.
+\end{itemize}
+\ans{coefficient of \(n\) is \(9\); coefficient of \(p\) is \(3\); \(4\) is the constant.}
+\end{solbox}
 
-One possible answer is
-\begin{center}
-  \answer{\(5a+2b+ab-1\)}
-\end{center}
-Its terms are \(5a\), \(2b\), \(ab\) and \(-1\): that is \(4\) terms. The variables are \(a\) and \(b\) (\(2\) variables). The constant is \(-1\). Many other answers are possible, for example \(3x+4y-xy-1\).
+\begin{solbox}
+\solQ{Q5} The coefficient of \(p\) is \(2\), so the \(p\)-term is \(2p\). The constant is \(7\), so add \(+7\).
+\[
+2p+7
+\]
+The terms may be written in either order, so \(7+2p\) is also correct.
+\ans{\(2p+7\) (or \(7+2p\)).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q6} We need three separate terms, two different variables, and a constant \(8\). One correct answer is
+\[
+4a+3b+8.
+\]
+It has terms \(4a\), \(3b\), and \(8\); the variables are \(a\) and \(b\); and the constant is \(8\).
+\ans{Example: \(4a+3b+8\). Many other answers are possible.}
+\end{solbox}
+
+\section*{Page 2}
+
+\begin{solbox}
+\solQ{Q7} In \(7y-2\):
+\begin{itemize}
+  \item \(7\) is the coefficient of \(y\).
+  \item \(y\) is the variable.
+  \item \(-2\) is the constant; the minus sign belongs to the term.
+  \item \(7y-2\) is the expression.
+\end{itemize}
+\ans{coefficient \(=7\); variable \(=y\); constant \(=-2\); expression \(=7y-2\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q8} In \(4a+9b-6\):
+\begin{itemize}
+  \item \(4\) is the coefficient of \(a\).
+  \item \(a\) is a variable.
+  \item \(+9b\) is a term, so the empty brace over it should say term.
+  \item \(-6\) is the constant.
+\end{itemize}
+\ans{coefficient \(=4\); variable \(=a\); term \(=+9b\); constant \(=-6\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q9} In \(3pq-8\):
+\begin{itemize}
+  \item \(3\) is the coefficient of \(pq\).
+  \item \(p\) and \(q\) are variables.
+  \item \(-8\) is the constant.
+\end{itemize}
+\ans{coefficient \(=3\); variables \(=p\) and \(q\); constant \(=-8\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q10} In \(4xy+2z-5\):
+\begin{itemize}
+  \item Terms: \(4xy\), \(+2z\), \(-5\), so there are \(3\) terms.
+  \item Variables: \(x\), \(y\), \(z\).
+  \item Coefficient of \(xy\) is \(4\).
+  \item Constant is \(-5\).
+\end{itemize}
+\ans{3 terms; variables \(x,y,z\); coefficient of \(xy\) is \(4\); constant \(-5\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q11} In \(6m-n+2p+8\):
+\begin{itemize}
+  \item Terms: \(6m\), \(-n\), \(+2p\), \(+8\), so there are \(4\) terms.
+  \item Coefficient of \(m\) is \(6\).
+  \item Since \(-n=-1\cdot n\), the coefficient of \(n\) is \(-1\).
+  \item \(8\) is the constant.
+\end{itemize}
+\ans{4 terms; coefficient of \(m\) is \(6\); coefficient of \(n\) is \(-1\); \(8\) is the constant.}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q12} In \(-3ab+7\):
+\begin{itemize}
+  \item Terms: \(-3ab\) and \(+7\), so there are \(2\) terms.
+  \item Variables: \(a\) and \(b\).
+  \item Coefficient of \(ab\) is \(-3\).
+  \item Constant is \(7\).
+\end{itemize}
+\ans{2 terms; variables \(a,b\); coefficient of \(ab\) is \(-3\); constant \(7\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q13} In \(2a+b-4c+d-9\):
+\begin{itemize}
+  \item Terms: \(2a\), \(+b\), \(-4c\), \(+d\), \(-9\), so there are \(5\) terms.
+  \item Since \(b=1b\), the coefficient of \(b\) is \(1\).
+  \item The coefficient of \(c\) is \(-4\).
+  \item The constant is \(-9\).
+\end{itemize}
+\ans{coefficient of \(b\) is \(1\); coefficient of \(c\) is \(-4\); constant is \(-9\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q14} The coefficient of \(p\) is \(3\), so use \(3p\). The coefficient of \(q\) is \(-5\), so use \(-5q\). The constant is \(4\), so add \(+4\).
+\[
+3p-5q+4
+\]
+The terms may be in any order.
+\ans{\(3p-5q+4\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q15} We need four unlike terms, two variables, and constant \(-1\). One correct answer is
+\[
+5a+2b+ab-1.
+\]
+Its four terms are \(5a\), \(2b\), \(ab\), and \(-1\); the variables are \(a\) and \(b\); and the constant is \(-1\).
+\ans{Example: \(5a+2b+ab-1\). Many other answers are possible.}
+\end{solbox}
+
+\section*{Page 3}
+
+\begin{solbox}
+\solQ{Q16} In \(8-3x\):
+\begin{itemize}
+  \item \(8\) has no variable, so \(8\) is the constant.
+  \item \(-3\) is the coefficient of \(x\).
+  \item \(x\) is the variable.
+  \item \(8-3x\) is the expression.
+\end{itemize}
+\ans{constant \(=8\); coefficient \(=-3\); variable \(=x\); expression \(=8-3x\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q17} In \(2a-7+0.5b\):
+\begin{itemize}
+  \item \(2\) is the coefficient of \(a\).
+  \item \(-7\) is the constant.
+  \item \(b\) is a variable.
+  \item \(+0.5b\) is a term, so the empty brace under it should say term.
+\end{itemize}
+\ans{coefficient \(=2\); constant \(=-7\); variable \(=b\); term \(=+0.5b\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q18} In \(-4mn+1.5\):
+\begin{itemize}
+  \item \(-4\) is the coefficient of \(mn\).
+  \item \(m\) is a variable, and \(n\) is also a variable.
+  \item \(-4mn\) is a term.
+  \item \(+1.5\) is the constant.
+\end{itemize}
+\ans{coefficient \(=-4\); variable \(=m\); term \(=-4mn\); constant \(=+1.5\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q19} In \(0.5a-b+2.5+3c\):
+\begin{itemize}
+  \item Terms: \(0.5a\), \(-b\), \(+2.5\), \(+3c\), so there are \(4\) terms.
+  \item Coefficient of \(a\) is \(0.5\).
+  \item Since \(-b=-1\cdot b\), the coefficient of \(b\) is \(-1\).
+  \item The constant is \(2.5\), even though it is not at the end.
+\end{itemize}
+\ans{4 terms; coefficient of \(a\) is \(0.5\); coefficient of \(b\) is \(-1\); constant \(2.5\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q20} In \(9-0.5k^2\):
+\begin{itemize}
+  \item Terms: \(9\) and \(-0.5k^2\), so there are \(2\) terms.
+  \item The variable is \(k\).
+  \item The constant is \(9\).
+  \item The coefficient of \(k^2\) is \(-0.5\).
+\end{itemize}
+\ans{2 terms; variable \(k\); constant \(9\); coefficient of \(k^2\) is \(-0.5\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q21} In \(2xy-5x+0.3y\):
+\begin{itemize}
+  \item Terms: \(2xy\), \(-5x\), \(+0.3y\), so there are \(3\) terms.
+  \item Coefficient of \(xy\) is \(2\).
+  \item \(-5\) is the coefficient of \(x\).
+  \item There is no term without a variable, so there is no constant.
+\end{itemize}
+\ans{3 terms; coefficient of \(xy\) is \(2\); \(-5\) is the coefficient of \(x\); no constant.}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q22} In \(x^2+x-y+xy-3\):
+\begin{itemize}
+  \item Terms: \(x^2\), \(+x\), \(-y\), \(+xy\), \(-3\), so there are \(5\) terms.
+  \item Since \(x^2=1x^2\), the coefficient of \(x^2\) is \(1\).
+  \item Since \(xy=1xy\), the coefficient of \(xy\) is \(1\).
+  \item The constant is \(-3\).
+\end{itemize}
+\ans{5 terms; coefficient of \(x^2\) is \(1\); coefficient of \(xy\) is \(1\); constant \(-3\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q23} The coefficient of \(x\) is \(-1\), so the \(x\)-term is \(-x\), not written as \(-1x\). The coefficient of \(y\) is \(0.5\), so use \(0.5y\). The coefficient of \(z\) is \(2\), so use \(2z\). The constant is \(-3\).
+\[
+-x+0.5y+2z-3
+\]
+The terms may be in any order.
+\ans{\(-x+0.5y+2z-3\).}
+\end{solbox}
+
+\begin{solbox}
+\solQ{Q24} We need five terms, three variables, constant \(0.5\), and every variable-term coefficient negative. One correct answer is
+\[
+-a-2b-3c-ab+0.5.
+\]
+The five terms are \(-a\), \(-2b\), \(-3c\), \(-ab\), and \(+0.5\). The variables are \(a\), \(b\), and \(c\); the constant is \(0.5\); and the coefficients \(-1,-2,-3,-1\) are all negative.
+\ans{Example: \(-a-2b-3c-ab+0.5\). Many other answers are possible.}
 \end{solbox}
 
 \end{document}

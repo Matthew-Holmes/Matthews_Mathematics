@@ -26,8 +26,10 @@
 % {"en":"coefficient","def":"the number in front of a letter, showing how many of it there are","tr":"wsp\u00F3\u0142czynnik","trdef":"liczba stoj\u0105ca przed liter\u0105, pokazuj\u0105ca, ile jest tych liter"},
 % {"en":"constant","def":"a fixed number that stands alone, like 3 in 3x\u002B3.","tr":"sta\u0142a","trdef":"sta\u0142a liczba, kt\u00F3ra stoi samodzielnie, na przyk\u0142ad 3 w wyra\u017Ceniu 3x\u002B3."},
 % {"en":"expression","def":"a group of numbers and letters joined by operations, with no equals sign","tr":"wyra\u017Cenie","trdef":"grupa liczb i liter po\u0142\u0105czonych dzia\u0142aniami, bez znaku r\u00F3wno\u015Bci"},
+% {"en":"negative","def":"below zero; a number or term with a minus sign is below zero.","tr":"ujemny","trdef":"poni\u017Cej zera; liczba lub wyraz ze znakiem minus jest poni\u017Cej zera."},
 % {"en":"sign","def":"The plus or minus mark that tells whether a value is positive or negative.","tr":"znak","trdef":"Znak plus lub minus, kt\u00F3ry informuje, czy warto\u015B\u0107 jest dodatnia, czy ujemna."},
 % {"en":"term","def":"one part of an expression or one number in a sequence","tr":"wyraz","trdef":"jedna cz\u0119\u015B\u0107 wyra\u017Cenia lub jedna liczba w ci\u0105gu"},
+% {"en":"unlike terms","def":"terms with different letter parts, so they cannot be combined into one term","tr":"wyrazy niepodobne","trdef":"wyrazy o r\u00F3\u017Cnych cz\u0119\u015Bciach literowych, wi\u0119c nie mo\u017Cna ich po\u0142\u0105czy\u0107 w jeden wyraz"},
 % {"en":"variable","def":"a letter standing for a quantity that can change","tr":"zmienna","trdef":"litera oznaczaj\u0105ca wielko\u015B\u0107, kt\u00F3ra mo\u017Ce si\u0119 zmienia\u0107"}]}
 % ==== END VOCABULARY DATA ====
 
@@ -213,20 +215,24 @@
   \ealentry{coefficient}{\ealtrmeaning{współczynnik}{liczba stojąca przed literą, pokazująca, ile jest tych liter}}
   \ealentry{constant}{\ealtrmeaning{stała}{stała liczba, która stoi samodzielnie, na przykład 3 w wyrażeniu 3x+3.}}
   \ealentry{expression}{\ealtrmeaning{wyrażenie}{grupa liczb i liter połączonych działaniami, bez znaku równości}}
+  \ealentry{negative}{\ealtrmeaning{ujemny}{poniżej zera; liczba lub wyraz ze znakiem minus jest poniżej zera.}}
   \ealentry{sign}{\ealtrmeaning{znak}{Znak plus lub minus, który informuje, czy wartość jest dodatnia, czy ujemna.}}
   \ealentry{term}{\ealtrmeaning{wyraz}{jedna część wyrażenia lub jedna liczba w ciągu}}
+  \ealentry{unlike terms}{\ealtrmeaning{wyrazy niepodobne}{wyrazy o różnych częściach literowych, więc nie można ich połączyć w jeden wyraz}}
   \ealentry{variable}{\ealtrmeaning{zmienna}{litera oznaczająca wielkość, która może się zmieniać}}
 }
 
 
 \newcommand{\ealmatchrows}{%
   {\textbf{\ealkey{algebraic}}} \ealnextcol {\ealtrmeaning{wyrażenie}{grupa liczb i liter połączonych działaniami, bez znaku równości}} \\
-  {\textbf{\ealkey{coefficient}}} \ealnextcol {\ealtrmeaning{znak}{Znak plus lub minus, który informuje, czy wartość jest dodatnia, czy ujemna.}} \\
-  {\textbf{\ealkey{constant}}} \ealnextcol {\ealtrmeaning{współczynnik}{liczba stojąca przed literą, pokazująca, ile jest tych liter}} \\
+  {\textbf{\ealkey{coefficient}}} \ealnextcol {\ealtrmeaning{stała}{stała liczba, która stoi samodzielnie, na przykład 3 w wyrażeniu 3x+3.}} \\
+  {\textbf{\ealkey{constant}}} \ealnextcol {\ealtrmeaning{ujemny}{poniżej zera; liczba lub wyraz ze znakiem minus jest poniżej zera.}} \\
   {\textbf{\ealkey{expression}}} \ealnextcol {\ealtrmeaning{wyraz}{jedna część wyrażenia lub jedna liczba w ciągu}} \\
-  {\textbf{\ealkey{sign}}} \ealnextcol {\ealtrmeaning{zmienna}{litera oznaczająca wielkość, która może się zmieniać}} \\
-  {\textbf{\ealkey{term}}} \ealnextcol {\ealtrmeaning{algebraiczny}{używający liter do oznaczania nieznanych liczb.}} \\
-  {\textbf{\ealkey{variable}}} \ealnextcol {\ealtrmeaning{stała}{stała liczba, która stoi samodzielnie, na przykład 3 w wyrażeniu 3x+3.}} \\
+  {\textbf{\ealkey{negative}}} \ealnextcol {\ealtrmeaning{wyrazy niepodobne}{wyrazy o różnych częściach literowych, więc nie można ich połączyć w jeden wyraz}} \\
+  {\textbf{\ealkey{sign}}} \ealnextcol {\ealtrmeaning{algebraiczny}{używający liter do oznaczania nieznanych liczb.}} \\
+  {\textbf{\ealkey{term}}} \ealnextcol {\ealtrmeaning{współczynnik}{liczba stojąca przed literą, pokazująca, ile jest tych liter}} \\
+  {\textbf{\ealkey{unlike terms}}} \ealnextcol {\ealtrmeaning{zmienna}{litera oznaczająca wielkość, która może się zmieniać}} \\
+  {\textbf{\ealkey{variable}}} \ealnextcol {\ealtrmeaning{znak}{Znak plus lub minus, który informuje, czy wartość jest dodatnia, czy ujemna.}} \\
 }
 
 \newcommand{\ealmatchbody}{%
@@ -240,12 +246,14 @@
   \ealstart\begin{tikzpicture}
     \matrix (m) [ealmatchgrid] {\ealmatchrows};
     \draw[ealanswerline] (m-1-1.east) -- (m-6-2.west);
-    \draw[ealanswerline] (m-2-1.east) -- (m-3-2.west);
-    \draw[ealanswerline] (m-3-1.east) -- (m-7-2.west);
+    \draw[ealanswerline] (m-2-1.east) -- (m-7-2.west);
+    \draw[ealanswerline] (m-3-1.east) -- (m-2-2.west);
     \draw[ealanswerline] (m-4-1.east) -- (m-1-2.west);
-    \draw[ealanswerline] (m-5-1.east) -- (m-2-2.west);
-    \draw[ealanswerline] (m-6-1.east) -- (m-4-2.west);
-    \draw[ealanswerline] (m-7-1.east) -- (m-5-2.west);
+    \draw[ealanswerline] (m-5-1.east) -- (m-3-2.west);
+    \draw[ealanswerline] (m-6-1.east) -- (m-9-2.west);
+    \draw[ealanswerline] (m-7-1.east) -- (m-4-2.west);
+    \draw[ealanswerline] (m-8-1.east) -- (m-5-2.west);
+    \draw[ealanswerline] (m-9-1.east) -- (m-8-2.west);
   \end{tikzpicture}}
 
 
