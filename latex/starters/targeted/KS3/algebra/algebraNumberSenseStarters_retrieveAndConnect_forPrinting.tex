@@ -1,0 +1,2138 @@
+% ================================================================
+% The printable version of latex/starters/targeted/KS3/algebra/algebraNumberSenseStarters_retrieveAndConnect.tex
+%
+% This is the same deck, laid out to be handed out rather than put on
+% the board. Every slide is shown as it stands before any answer is
+% revealed, and 4 copies of it go on one page of A4, two by two, so
+% that a printed page cuts into four question sheets.
+%
+% Every slide of the deck is here, the title page included, and each takes
+% exactly one page. So page 1 is the first slide, page 2 the second, and
+% printing the pages you want is how you print the starters you want.
+%
+%   made from           latex/starters/targeted/KS3/algebra/algebraNumberSenseStarters_retrieveAndConnect.tex
+%   pages on the sheet  9, one per slide of the deck
+%   copies of each      4, two by two on A4 landscape
+%   printing rules      version 3
+%
+% Nothing was reworded, nothing was rewritten and nothing was left out.
+% Each slide is the slide from the deck, asked for at its first step,
+% which is how the answers stay hidden.
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+% ================================================================
+% The Retrieve and Connect version of latex/starters/targeted/KS3/algebra/algebraNumberSenseStarters.tex
+%
+% This is the same deck as the one above, made by renaming the titles in it.
+% Every slide that was a numbered starter is now titled
+% "Retrieve and Connect", and the word is renamed wherever else a title
+% used it. Nothing outside a title has been changed.
+%
+%   made from           latex/starters/targeted/KS3/algebra/algebraNumberSenseStarters.tex
+%   retitling rules     version 1
+%
+% Please don't edit this file. It is written again from the one it was
+% made from whenever that changes, so an edit here would be lost - edit
+% that file instead and this one follows.
+% ================================================================
+\documentclass{beamer}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta, matrix, fit, shapes.geometric}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ================================================================
+% Starters for a Year 7 class meeting algebra for the first time, used
+% across the algebra unit.
+%
+% Each starter links an algebraic idea to the number work the class has
+% already done, with decimals and negative numbers throughout. Most
+% starters open with number calculations that the algebra later on the
+% slide uses, and every starter has a sentence to complete with the
+% words variable, term, coefficient, constant, expression, equation or
+% solution. There are no bar models.
+%
+%   1  notation: what 3a, ab, a^2 and a/4 mean
+%   2  substitution, with whole numbers, decimals and negative numbers
+%   3  collecting like terms
+%   4  multiplying and dividing terms, and powers
+%   5  equations and their solutions, and one-step equations that add
+%      or subtract
+%   6  one-step equations that multiply or divide
+%   7  two-step equations
+%   8  two-step equations with decimals and negative numbers
+%
+% Starters 1 to 4 have no equations. Starters 5 to 8 build up to
+% solving two-step equations, and each of them asks pupils to circle the
+% reverse of an operation.
+%
+% The methods follow the ones the class was taught:
+%   - Equations are solved by doing the same thing to both sides, never
+%     with a flow chart. In the working, a curved arrow on each side goes
+%     from one line of the equation to the next, with the operation
+%     beside it. Starters 5 to 7 give the operations, and starter 8
+%     leaves them blank.
+%   - Bus stop division divides a decimal by a whole number, and
+%     division by a decimal is done with equivalent fractions, for
+%     example 6 / 0.5 = 60 / 5 = 12.
+%
+% The tables have their first entries filled in, as examples. An
+% instruction that belongs to several questions has a bullet, and its
+% questions are indented under it. The last question on each starter is
+% a challenge, and in starters 1, 2 and 4 the challenge asks whether a
+% statement is always, sometimes or never true.
+% ================================================================
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=0.4cm, text margin right=0.4cm}
+\setlength{\multicolsep}{2pt}
+\setlength{\columnsep}{20pt}
+
+% ================================================================
+% Answer-overlay helpers
+% ================================================================
+\newcommand{\ablank}[1]{%
+  \alt<2>{\textcolor{red}{#1}}{\underline{\phantom{#1}}}%
+}
+\newcommand{\ashow}[1]{\uncover<2->{\textcolor{red}{\small #1}}}
+\newcommand{\ashowq}[1]{\alt<2->{\textcolor{red}{\small #1}}{?}}
+
+% Answers drawn straight on to a TikZ diagram, revealed on overlay 2 like \ashow.
+% Space is reserved on overlay 1, so the diagram does not move between slides.
+\usetikzlibrary{overlay-beamer-styles}
+\tikzset{
+  ans/.style     = {red, thick, visible on=<2->},
+  ansfill/.style = {red!15, visible on=<2->},
+  anslab/.style  = {red, font=\tiny, visible on=<2->},
+}
+
+% Used by the worked solutions rather than by this deck, so that each worked
+% solution is first a question with room to write in and then the answer.
+\newlength{\aworkpad}
+\setlength{\aworkpad}{8mm}
+\newcommand{\awork}[1]{%
+  \par\vspace{\aworkpad}%
+  \uncover<2->{#1}%
+  \par\vspace{\aworkpad}%
+}
+
+% Every question list on these slides is tight, so that the diagram column and
+% the question column both finish inside the slide.
+\newcommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}%
+}
+
+% An instruction that belongs to several questions: \instr{Solve each
+% equation.} puts it beside a bullet, where the question numbers go, and
+% the questions in the subqs environment after it are indented under it.
+% Their numbers carry on from the questions before them.
+\setbeamertemplate{enumerate subitem}{\insertsubenumlabel.}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setlength{\leftmarginii}{1.4em}
+\newcommand{\instr}[1]{%
+  \item[{\usebeamercolor[fg]{itemize item}\usebeamertemplate{itemize item}}] #1}
+\newenvironment{subqs}
+  {\begin{enumerate}\tightlist\setcounter{enumii}{\value{enumi}}}
+  {\setcounter{enumi}{\value{enumii}}\end{enumerate}}
+
+% A temperature in degrees Celsius: \dC{-4}.
+\newcommand{\dC}[1]{$#1\,^{\circ}$C}
+
+% ================================================================
+% The pictures these starters are built from.
+% ================================================================
+\tikzset{
+  dhead/.style = {font=\scriptsize\bfseries, anchor=west},
+  vans/.style  = {anslab, font=\scriptsize},
+}
+
+% A heading over a table or a picture in the diagram column.
+\newcommand{\dheading}[1]{{\scriptsize\bfseries #1}\par\vspace{0.2em}}
+
+% A blank in a table. It is never narrower than 1.6em, so that a one-digit
+% answer still leaves a blank that can be seen. \tgiven is an entry that is
+% filled in already, as an example, and is the same width.
+\newcommand{\tblank}[1]{\ablank{\makebox[1.6em]{#1}}}
+\newcommand{\tgiven}[1]{\makebox[1.6em]{#1}}
+
+% Options to circle. \circleops{n}{k} writes +k, -k, \times k and \div k in a
+% row, and circles the n-th of them in red on the answer slide. With k empty
+% it writes the four signs on their own. The circle takes up no room in the
+% line, so the options sit in the same places whichever one is circled, and
+% the quads between them keep it clear of its neighbours.
+\newcommand{\opt}[1]{\tikz[baseline=(o.base)]\node[inner sep=1.5pt, minimum width=1.6em] (o) {#1};}
+\newcommand{\optc}[1]{\tikz[baseline=(o.base)]{%
+  \node[inner sep=1.5pt, minimum width=1.6em] (o) {#1};
+  \node[ans, draw, ellipse, inner sep=0pt, fit=(o), overlay] {};}}
+\newcommand{\circleops}[2]{%
+  \ifnum#1=1 \optc{$+#2$}\else\opt{$+#2$}\fi\quad
+  \ifnum#1=2 \optc{$-#2$}\else\opt{$-#2$}\fi\quad
+  \ifnum#1=3 \optc{$\times#2$}\else\opt{$\times#2$}\fi\quad
+  \ifnum#1=4 \optc{$\div#2$}\else\opt{$\div#2$}\fi}
+
+% Solving an equation by doing the same thing to both sides. The lines of the
+% equation are the rows of a matrix, lined up on the equals sign, and a curved
+% arrow on each side goes from one line to the next, with the operation beside
+% it. The operations are a list, one for each step:
+%   \bothsides{Working for Q6}{3n+4 \& = \& 19\\ 3n \& = \& \ablank{15}\\
+%     n \& = \& \ablank{5}\\}{-4, \div3}
+% An operation given as \ablank{...} is left for pupils to write in.
+\tikzset{
+  bsline/.style  = {matrix of math nodes, ampersand replacement=\&,
+                    row sep=0.85em, column sep=0.15em,
+                    nodes={inner sep=1pt, font=\footnotesize},
+                    column 1/.style={anchor=base east},
+                    column 2/.style={anchor=base},
+                    column 3/.style={anchor=base west}},
+  bsarrow/.style = {-{Stealth[length=3.5pt]}, blue!55!black, semithick},
+  bslab/.style   = {font=\scriptsize, text=blue!55!black, inner sep=0.5pt},
+}
+\newcommand{\bothsides}[3]{%
+  \par{\scriptsize\bfseries #1}\par\vspace{0.2em}%
+  \begin{tikzpicture}[baseline=(current bounding box.north)]
+    \matrix (m) [bsline] {#2};
+    \foreach \op [count=\i, evaluate=\i as \j using int(\i+1)] in {#3} {
+      \draw[bsarrow] ([xshift=-1pt]m.west |- m-\i-2.center) to[bend right=45]
+        node[bslab, left] {$\op$} ([xshift=-1pt]m.west |- m-\j-2.center);
+      \draw[bsarrow] ([xshift=1pt]m.east |- m-\i-2.center) to[bend left=45]
+        node[bslab, right] {$\op$} ([xshift=1pt]m.east |- m-\j-2.center);
+    }
+  \end{tikzpicture}\par}
+
+% ---- Bus stop division ----
+% The dividend sits on the baseline y = 0 and the answer on y = 0.55, digit
+% above digit, with the bus stop drawn between them. A remainder carried to
+% the next digit is written small, just before that digit. \busframe{divisor}
+% {right end} draws the divisor and the bus stop.
+\tikzset{
+  bsd/.style     = {font=\footnotesize, inner sep=0pt, anchor=base},
+  bsa/.style     = {bsd, red, visible on=<2->},
+  bscarry/.style = {font=\tiny, inner sep=0pt, anchor=base, red, visible on=<2->},
+}
+\newcommand{\busframe}[2]{%
+  \node[bsd, anchor=base east] at (-0.1,0) {$#1$};
+  \draw[thick] (0,-0.12) -- (0,0.4) -- (#2,0.4);}
+
+% \rect{length}{width}{label in the middle}: a rectangle 2.5 cm by 1.1 cm,
+% with its length written above it and its width to its left.
+\newcommand{\rect}[3]{%
+  \draw[thick, fill=blue!6] (0.9,0) rectangle (3.4,1.1);
+  \node[above] at (2.15,1.1) {$#1$};
+  \node[left] at (0.9,0.55) {$#2$};
+  \node at (2.15,0.55) {#3};}
+
+\title{Algebra \& Number Sense: Retrieve and Connects}
+\author{}
+\date{}
+
+% ---------------------------------------------------------------
+% Added so this deck prints four slides to a page. Nothing above
+% this line was changed.
+% ---------------------------------------------------------------
+\usepackage{pgfpages}
+
+% 4 slides to a sheet of A4, two by two, with a thin line round each
+% so that the page can be cut up.
+%
+% Each slide keeps a margin of 1mm around it and no more, so the four fill
+% the sheet and the pieces they cut into are as big as the paper allows. Only
+% one direction actually comes out that tight: a slide is a different shape
+% from a quarter of a sheet of A4, so it is scaled to fit and the slack it
+% cannot use is left along whichever pair of edges it did not fill.
+\pgfpagesuselayout{4 on 1}[a4paper,landscape,border shrink=1mm]
+\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
+% There is nothing on paper to click, and a slide announcing a new section
+% would sit between two copies of the same question and put every page after
+% it out of step with the grid.
+\setbeamertemplate{navigation symbols}{}
+\AtBeginPart{}
+\AtBeginSection{}
+\AtBeginSubsection{}
+\AtBeginSubsubsection{}
+\begin{document}
+
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+\frame<1>{\titlepage}
+
+%------------------------------------------------------------------
+% STARTER 1: Algebraic notation. No equations.
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Algebraic Notation}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q3}
+% --- Q3 answer: the right-hand column. The first row is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l|l@{}}
+  With $\times$ or $\div$ & In algebra\\ \hline
+  $3\times a$ & \tgiven{$3a$}\\
+  $a\times b$ & \tblank{$ab$}\\
+  $a\times a$ & \tblank{$a^2$}\\
+  $a\div4$    & \tblank{$\dfrac{a}{4}$}\\[2pt]
+  $1\times a$ & \tblank{$a$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3\times(-2)={}$\ashow{$-6$}
+  \columnbreak
+  \item $3\times0.4={}$\ashow{$1.2$}
+\end{multicols}
+  \item Write each one in algebra, in the table on the left. The first one
+        is done for you.
+  \instr{Find the value of $3a$:}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item when $a=5$ \ashow{$15$, not $35$}
+    \columnbreak
+    \item when $a=0.4$ \ashow{$1.2$}
+    \columnbreak
+    \item when $a=-2$ \ashow{$-6$}
+  \end{multicols}}
+  \end{subqs}
+  \item In $7y+2$, the $7$ is the \ablank{coefficient}, $y$ is the
+        \ablank{variable} and $2$ is the \ablank{constant}.
+  \instr{Write an expression for each one.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $n$ multiplied by $4$, then $3$ added \ashow{$4n+3$}
+    \columnbreak
+    \item $n$ divided by $2$, then $1$ subtracted \ashow{$\tfrac{n}{2}-1$}
+  \end{multicols}
+  \end{subqs}
+  \instr{Is each statement always, sometimes or never true? Try some values
+         of $a$ and $b$.}
+  \begin{subqs}
+    \item (Challenge) $ab$ and $ba$ have the same value.
+          \ashow{Always, for example $5\times3=3\times5$.}
+    \item (Challenge) $a-b$ and $b-a$ have the same value.
+          \ashow{Sometimes: only when $a=b$, because $5-3=2$ but $3-5=-2$.}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Algebraic Notation}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q3}
+% --- Q3 answer: the right-hand column. The first row is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l|l@{}}
+  With $\times$ or $\div$ & In algebra\\ \hline
+  $3\times a$ & \tgiven{$3a$}\\
+  $a\times b$ & \tblank{$ab$}\\
+  $a\times a$ & \tblank{$a^2$}\\
+  $a\div4$    & \tblank{$\dfrac{a}{4}$}\\[2pt]
+  $1\times a$ & \tblank{$a$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3\times(-2)={}$\ashow{$-6$}
+  \columnbreak
+  \item $3\times0.4={}$\ashow{$1.2$}
+\end{multicols}
+  \item Write each one in algebra, in the table on the left. The first one
+        is done for you.
+  \instr{Find the value of $3a$:}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item when $a=5$ \ashow{$15$, not $35$}
+    \columnbreak
+    \item when $a=0.4$ \ashow{$1.2$}
+    \columnbreak
+    \item when $a=-2$ \ashow{$-6$}
+  \end{multicols}}
+  \end{subqs}
+  \item In $7y+2$, the $7$ is the \ablank{coefficient}, $y$ is the
+        \ablank{variable} and $2$ is the \ablank{constant}.
+  \instr{Write an expression for each one.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $n$ multiplied by $4$, then $3$ added \ashow{$4n+3$}
+    \columnbreak
+    \item $n$ divided by $2$, then $1$ subtracted \ashow{$\tfrac{n}{2}-1$}
+  \end{multicols}
+  \end{subqs}
+  \instr{Is each statement always, sometimes or never true? Try some values
+         of $a$ and $b$.}
+  \begin{subqs}
+    \item (Challenge) $ab$ and $ba$ have the same value.
+          \ashow{Always, for example $5\times3=3\times5$.}
+    \item (Challenge) $a-b$ and $b-a$ have the same value.
+          \ashow{Sometimes: only when $a=b$, because $5-3=2$ but $3-5=-2$.}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Algebraic Notation}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q3}
+% --- Q3 answer: the right-hand column. The first row is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l|l@{}}
+  With $\times$ or $\div$ & In algebra\\ \hline
+  $3\times a$ & \tgiven{$3a$}\\
+  $a\times b$ & \tblank{$ab$}\\
+  $a\times a$ & \tblank{$a^2$}\\
+  $a\div4$    & \tblank{$\dfrac{a}{4}$}\\[2pt]
+  $1\times a$ & \tblank{$a$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3\times(-2)={}$\ashow{$-6$}
+  \columnbreak
+  \item $3\times0.4={}$\ashow{$1.2$}
+\end{multicols}
+  \item Write each one in algebra, in the table on the left. The first one
+        is done for you.
+  \instr{Find the value of $3a$:}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item when $a=5$ \ashow{$15$, not $35$}
+    \columnbreak
+    \item when $a=0.4$ \ashow{$1.2$}
+    \columnbreak
+    \item when $a=-2$ \ashow{$-6$}
+  \end{multicols}}
+  \end{subqs}
+  \item In $7y+2$, the $7$ is the \ablank{coefficient}, $y$ is the
+        \ablank{variable} and $2$ is the \ablank{constant}.
+  \instr{Write an expression for each one.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $n$ multiplied by $4$, then $3$ added \ashow{$4n+3$}
+    \columnbreak
+    \item $n$ divided by $2$, then $1$ subtracted \ashow{$\tfrac{n}{2}-1$}
+  \end{multicols}
+  \end{subqs}
+  \instr{Is each statement always, sometimes or never true? Try some values
+         of $a$ and $b$.}
+  \begin{subqs}
+    \item (Challenge) $ab$ and $ba$ have the same value.
+          \ashow{Always, for example $5\times3=3\times5$.}
+    \item (Challenge) $a-b$ and $b-a$ have the same value.
+          \ashow{Sometimes: only when $a=b$, because $5-3=2$ but $3-5=-2$.}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Algebraic Notation}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q3}
+% --- Q3 answer: the right-hand column. The first row is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{@{}l|l@{}}
+  With $\times$ or $\div$ & In algebra\\ \hline
+  $3\times a$ & \tgiven{$3a$}\\
+  $a\times b$ & \tblank{$ab$}\\
+  $a\times a$ & \tblank{$a^2$}\\
+  $a\div4$    & \tblank{$\dfrac{a}{4}$}\\[2pt]
+  $1\times a$ & \tblank{$a$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3\times(-2)={}$\ashow{$-6$}
+  \columnbreak
+  \item $3\times0.4={}$\ashow{$1.2$}
+\end{multicols}
+  \item Write each one in algebra, in the table on the left. The first one
+        is done for you.
+  \instr{Find the value of $3a$:}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item when $a=5$ \ashow{$15$, not $35$}
+    \columnbreak
+    \item when $a=0.4$ \ashow{$1.2$}
+    \columnbreak
+    \item when $a=-2$ \ashow{$-6$}
+  \end{multicols}}
+  \end{subqs}
+  \item In $7y+2$, the $7$ is the \ablank{coefficient}, $y$ is the
+        \ablank{variable} and $2$ is the \ablank{constant}.
+  \instr{Write an expression for each one.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $n$ multiplied by $4$, then $3$ added \ashow{$4n+3$}
+    \columnbreak
+    \item $n$ divided by $2$, then $1$ subtracted \ashow{$\tfrac{n}{2}-1$}
+  \end{multicols}
+  \end{subqs}
+  \instr{Is each statement always, sometimes or never true? Try some values
+         of $a$ and $b$.}
+  \begin{subqs}
+    \item (Challenge) $ab$ and $ba$ have the same value.
+          \ashow{Always, for example $5\times3=3\times5$.}
+    \item (Challenge) $a-b$ and $b-a$ have the same value.
+          \ashow{Sometimes: only when $a=b$, because $5-3=2$ but $3-5=-2$.}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 2: Substitution. No equations.
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Substitution}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q4}
+% --- Q4 answer: the value of each expression. Three of them are given as
+% examples: 2x and x+3 when x = 4, and 5-x when x = 0.5. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c@{}}
+  $x$   & $2x$ & $x+3$ & $5-x$\\ \hline
+  $4$   & \tgiven{$8$}  & \tgiven{$7$}   & \tblank{$1$}\\
+  $0.5$ & \tblank{$1$}  & \tblank{$3.5$} & \tgiven{$4.5$}\\
+  $-2$  & \tblank{$-4$} & \tblank{$1$}   & \tblank{$7$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5-(-2)={}$\ashow{$7$}
+  \columnbreak
+  \item $4\times(-3)={}$\ashow{$-12$}
+\end{multicols}
+  \item Replacing a variable with a number is called \ablank{substitution}.
+  \item Complete the table on the left. Three of the answers are done for
+        you.
+  \instr{Find the value of $4a-1$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item when $a=3$ \ashow{$12-1=11$}
+    \columnbreak
+    \item when $a=-3$ \ashow{$-12-1=-13$}
+  \end{multicols}
+  \end{subqs}
+  \item Find the value of $3x^2$ when $x=2$.
+        \ashow{$3\times4=12$. The power comes first, so it is not $6^2$.}
+  \item A taxi journey of $m$ miles costs \pounds$(2.5m+3)$. How much does a
+        $4$ mile journey cost?
+        \ashow{$2.5\times4+3=13$, so \pounds13}
+  \item In $2.5m+3$, the coefficient of $m$ is \ablank{$2.5$} and the
+        constant is \ablank{$3$}.
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $2x$ is bigger than $x$.
+        \ashow{Sometimes. It is true when $x$ is positive, but when $x=-1$,
+        $2x=-2$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Substitution}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q4}
+% --- Q4 answer: the value of each expression. Three of them are given as
+% examples: 2x and x+3 when x = 4, and 5-x when x = 0.5. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c@{}}
+  $x$   & $2x$ & $x+3$ & $5-x$\\ \hline
+  $4$   & \tgiven{$8$}  & \tgiven{$7$}   & \tblank{$1$}\\
+  $0.5$ & \tblank{$1$}  & \tblank{$3.5$} & \tgiven{$4.5$}\\
+  $-2$  & \tblank{$-4$} & \tblank{$1$}   & \tblank{$7$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5-(-2)={}$\ashow{$7$}
+  \columnbreak
+  \item $4\times(-3)={}$\ashow{$-12$}
+\end{multicols}
+  \item Replacing a variable with a number is called \ablank{substitution}.
+  \item Complete the table on the left. Three of the answers are done for
+        you.
+  \instr{Find the value of $4a-1$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item when $a=3$ \ashow{$12-1=11$}
+    \columnbreak
+    \item when $a=-3$ \ashow{$-12-1=-13$}
+  \end{multicols}
+  \end{subqs}
+  \item Find the value of $3x^2$ when $x=2$.
+        \ashow{$3\times4=12$. The power comes first, so it is not $6^2$.}
+  \item A taxi journey of $m$ miles costs \pounds$(2.5m+3)$. How much does a
+        $4$ mile journey cost?
+        \ashow{$2.5\times4+3=13$, so \pounds13}
+  \item In $2.5m+3$, the coefficient of $m$ is \ablank{$2.5$} and the
+        constant is \ablank{$3$}.
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $2x$ is bigger than $x$.
+        \ashow{Sometimes. It is true when $x$ is positive, but when $x=-1$,
+        $2x=-2$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Substitution}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q4}
+% --- Q4 answer: the value of each expression. Three of them are given as
+% examples: 2x and x+3 when x = 4, and 5-x when x = 0.5. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c@{}}
+  $x$   & $2x$ & $x+3$ & $5-x$\\ \hline
+  $4$   & \tgiven{$8$}  & \tgiven{$7$}   & \tblank{$1$}\\
+  $0.5$ & \tblank{$1$}  & \tblank{$3.5$} & \tgiven{$4.5$}\\
+  $-2$  & \tblank{$-4$} & \tblank{$1$}   & \tblank{$7$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5-(-2)={}$\ashow{$7$}
+  \columnbreak
+  \item $4\times(-3)={}$\ashow{$-12$}
+\end{multicols}
+  \item Replacing a variable with a number is called \ablank{substitution}.
+  \item Complete the table on the left. Three of the answers are done for
+        you.
+  \instr{Find the value of $4a-1$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item when $a=3$ \ashow{$12-1=11$}
+    \columnbreak
+    \item when $a=-3$ \ashow{$-12-1=-13$}
+  \end{multicols}
+  \end{subqs}
+  \item Find the value of $3x^2$ when $x=2$.
+        \ashow{$3\times4=12$. The power comes first, so it is not $6^2$.}
+  \item A taxi journey of $m$ miles costs \pounds$(2.5m+3)$. How much does a
+        $4$ mile journey cost?
+        \ashow{$2.5\times4+3=13$, so \pounds13}
+  \item In $2.5m+3$, the coefficient of $m$ is \ablank{$2.5$} and the
+        constant is \ablank{$3$}.
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $2x$ is bigger than $x$.
+        \ashow{Sometimes. It is true when $x$ is positive, but when $x=-1$,
+        $2x=-2$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Substitution}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\dheading{Table for Q4}
+% --- Q4 answer: the value of each expression. Three of them are given as
+% examples: 2x and x+3 when x = 4, and 5-x when x = 0.5. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c@{}}
+  $x$   & $2x$ & $x+3$ & $5-x$\\ \hline
+  $4$   & \tgiven{$8$}  & \tgiven{$7$}   & \tblank{$1$}\\
+  $0.5$ & \tblank{$1$}  & \tblank{$3.5$} & \tgiven{$4.5$}\\
+  $-2$  & \tblank{$-4$} & \tblank{$1$}   & \tblank{$7$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $5-(-2)={}$\ashow{$7$}
+  \columnbreak
+  \item $4\times(-3)={}$\ashow{$-12$}
+\end{multicols}
+  \item Replacing a variable with a number is called \ablank{substitution}.
+  \item Complete the table on the left. Three of the answers are done for
+        you.
+  \instr{Find the value of $4a-1$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item when $a=3$ \ashow{$12-1=11$}
+    \columnbreak
+    \item when $a=-3$ \ashow{$-12-1=-13$}
+  \end{multicols}
+  \end{subqs}
+  \item Find the value of $3x^2$ when $x=2$.
+        \ashow{$3\times4=12$. The power comes first, so it is not $6^2$.}
+  \item A taxi journey of $m$ miles costs \pounds$(2.5m+3)$. How much does a
+        $4$ mile journey cost?
+        \ashow{$2.5\times4+3=13$, so \pounds13}
+  \item In $2.5m+3$, the coefficient of $m$ is \ablank{$2.5$} and the
+        constant is \ablank{$3$}.
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $2x$ is bigger than $x$.
+        \ashow{Sometimes. It is true when $x$ is positive, but when $x=-1$,
+        $2x=-2$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 3: Collecting like terms. No equations.
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Collecting Like Terms}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q10};
+\rect{2x}{x+1.5}{}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2+5={}$\ashow{$3$}
+    \item $4-9={}$\ashow{$-5$}
+    \item $0.3+0.4={}$\ashow{$0.7$}
+    \columnbreak
+    \item $-2a+5a={}$\ashow{$3a$}
+    \item $4y-9y={}$\ashow{$-5y$}
+    \item $0.3x+0.4x={}$\ashow{$0.7x$}
+  \end{multicols}
+  \end{subqs}
+  \item $3x$ and $4x$ are called \ablank{like terms}, because only their
+        \ablank{coefficients} are different.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $5a+2b-3a+b={}$\ashow{$2a+3b$}
+    \columnbreak
+    \item $1.5m-4+2.5m+6={}$\ashow{$4m+2$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the perimeter of the rectangle, and simplify it.
+        \ashow{$2x+2x+(x+1.5)+(x+1.5)=6x+3$}
+  \item Ali simplifies $3x+4y$ to $7xy$. Test this with $x=2$ and $y=10$.
+        \ashow{$3x+4y=6+40=46$, but $7xy=140$}
+  \item (Challenge) Write an expression with four terms that simplifies to
+        $-3x+0.5$.
+        \ashow{For example $x-4x+1-0.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Collecting Like Terms}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q10};
+\rect{2x}{x+1.5}{}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2+5={}$\ashow{$3$}
+    \item $4-9={}$\ashow{$-5$}
+    \item $0.3+0.4={}$\ashow{$0.7$}
+    \columnbreak
+    \item $-2a+5a={}$\ashow{$3a$}
+    \item $4y-9y={}$\ashow{$-5y$}
+    \item $0.3x+0.4x={}$\ashow{$0.7x$}
+  \end{multicols}
+  \end{subqs}
+  \item $3x$ and $4x$ are called \ablank{like terms}, because only their
+        \ablank{coefficients} are different.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $5a+2b-3a+b={}$\ashow{$2a+3b$}
+    \columnbreak
+    \item $1.5m-4+2.5m+6={}$\ashow{$4m+2$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the perimeter of the rectangle, and simplify it.
+        \ashow{$2x+2x+(x+1.5)+(x+1.5)=6x+3$}
+  \item Ali simplifies $3x+4y$ to $7xy$. Test this with $x=2$ and $y=10$.
+        \ashow{$3x+4y=6+40=46$, but $7xy=140$}
+  \item (Challenge) Write an expression with four terms that simplifies to
+        $-3x+0.5$.
+        \ashow{For example $x-4x+1-0.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Collecting Like Terms}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q10};
+\rect{2x}{x+1.5}{}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2+5={}$\ashow{$3$}
+    \item $4-9={}$\ashow{$-5$}
+    \item $0.3+0.4={}$\ashow{$0.7$}
+    \columnbreak
+    \item $-2a+5a={}$\ashow{$3a$}
+    \item $4y-9y={}$\ashow{$-5y$}
+    \item $0.3x+0.4x={}$\ashow{$0.7x$}
+  \end{multicols}
+  \end{subqs}
+  \item $3x$ and $4x$ are called \ablank{like terms}, because only their
+        \ablank{coefficients} are different.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $5a+2b-3a+b={}$\ashow{$2a+3b$}
+    \columnbreak
+    \item $1.5m-4+2.5m+6={}$\ashow{$4m+2$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the perimeter of the rectangle, and simplify it.
+        \ashow{$2x+2x+(x+1.5)+(x+1.5)=6x+3$}
+  \item Ali simplifies $3x+4y$ to $7xy$. Test this with $x=2$ and $y=10$.
+        \ashow{$3x+4y=6+40=46$, but $7xy=140$}
+  \item (Challenge) Write an expression with four terms that simplifies to
+        $-3x+0.5$.
+        \ashow{For example $x-4x+1-0.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Collecting Like Terms}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q10};
+\rect{2x}{x+1.5}{}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2+5={}$\ashow{$3$}
+    \item $4-9={}$\ashow{$-5$}
+    \item $0.3+0.4={}$\ashow{$0.7$}
+    \columnbreak
+    \item $-2a+5a={}$\ashow{$3a$}
+    \item $4y-9y={}$\ashow{$-5y$}
+    \item $0.3x+0.4x={}$\ashow{$0.7x$}
+  \end{multicols}
+  \end{subqs}
+  \item $3x$ and $4x$ are called \ablank{like terms}, because only their
+        \ablank{coefficients} are different.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $5a+2b-3a+b={}$\ashow{$2a+3b$}
+    \columnbreak
+    \item $1.5m-4+2.5m+6={}$\ashow{$4m+2$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the perimeter of the rectangle, and simplify it.
+        \ashow{$2x+2x+(x+1.5)+(x+1.5)=6x+3$}
+  \item Ali simplifies $3x+4y$ to $7xy$. Test this with $x=2$ and $y=10$.
+        \ashow{$3x+4y=6+40=46$, but $7xy=140$}
+  \item (Challenge) Write an expression with four terms that simplifies to
+        $-3x+0.5$.
+        \ashow{For example $x-4x+1-0.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 4: Multiplying and dividing terms, and powers. No equations.
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Multiplying Terms \& Powers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q8};
+\rect{2a}{3b}{}
+% --- Q8 answer: the area, written in the rectangle ---
+\node[vans] at (2.15,0.55) {area $=6ab$};
+\end{tikzpicture}
+
+\vspace{1.2em}
+\dheading{Table for Q9}
+% --- Q9 answer: the squares. The first one is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c|c@{}}
+  $a$   & $3$ & $1$ & $0.5$ & $-2$\\ \hline
+  $a^2$ & \tgiven{$9$} & \tblank{$1$} & \tblank{$0.25$} & \tblank{$4$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-4\times3={}$\ashow{$-12$}
+    \item $0.5\times0.5={}$\ashow{$0.25$}
+    \columnbreak
+    \item $-4\times3a={}$\ashow{$-12a$}
+    \item $0.5a\times0.5a={}$\ashow{$0.25a^2$}
+  \end{multicols}
+  \end{subqs}
+  \item In $0.25a^2$, the $0.25$ is the \ablank{coefficient} and the $2$ is
+        the \ablank{power}.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $4x\times x={}$\ashow{$4x^2$}
+    \columnbreak
+    \item $-12a\div4={}$\ashow{$-3a$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the area of the rectangle. Find the area when
+        $a=1.5$ and $b=2$.
+        \ashow{$2a\times3b=6ab$, \; $6\times1.5\times2=18$}
+  \item Complete the table. The first one is done for you. For which value
+        of $a$ is $a^2$ smaller than $a$?
+        \ashow{$a=0.5$}
+  \instr{Find the value of each expression when $a=3$.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2a^2={}$\ashow{$2\times9=18$}
+    \columnbreak
+    \item $(2a)^2={}$\ashow{$6^2=36$}
+  \end{multicols}
+  \end{subqs}
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $a^2$ is bigger than $a$.
+        \ashow{Sometimes. It is not true when $a$ is from $0$ to $1$, for
+        example $0.5^2=0.25$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Multiplying Terms \& Powers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q8};
+\rect{2a}{3b}{}
+% --- Q8 answer: the area, written in the rectangle ---
+\node[vans] at (2.15,0.55) {area $=6ab$};
+\end{tikzpicture}
+
+\vspace{1.2em}
+\dheading{Table for Q9}
+% --- Q9 answer: the squares. The first one is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c|c@{}}
+  $a$   & $3$ & $1$ & $0.5$ & $-2$\\ \hline
+  $a^2$ & \tgiven{$9$} & \tblank{$1$} & \tblank{$0.25$} & \tblank{$4$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-4\times3={}$\ashow{$-12$}
+    \item $0.5\times0.5={}$\ashow{$0.25$}
+    \columnbreak
+    \item $-4\times3a={}$\ashow{$-12a$}
+    \item $0.5a\times0.5a={}$\ashow{$0.25a^2$}
+  \end{multicols}
+  \end{subqs}
+  \item In $0.25a^2$, the $0.25$ is the \ablank{coefficient} and the $2$ is
+        the \ablank{power}.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $4x\times x={}$\ashow{$4x^2$}
+    \columnbreak
+    \item $-12a\div4={}$\ashow{$-3a$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the area of the rectangle. Find the area when
+        $a=1.5$ and $b=2$.
+        \ashow{$2a\times3b=6ab$, \; $6\times1.5\times2=18$}
+  \item Complete the table. The first one is done for you. For which value
+        of $a$ is $a^2$ smaller than $a$?
+        \ashow{$a=0.5$}
+  \instr{Find the value of each expression when $a=3$.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2a^2={}$\ashow{$2\times9=18$}
+    \columnbreak
+    \item $(2a)^2={}$\ashow{$6^2=36$}
+  \end{multicols}
+  \end{subqs}
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $a^2$ is bigger than $a$.
+        \ashow{Sometimes. It is not true when $a$ is from $0$ to $1$, for
+        example $0.5^2=0.25$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Multiplying Terms \& Powers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q8};
+\rect{2a}{3b}{}
+% --- Q8 answer: the area, written in the rectangle ---
+\node[vans] at (2.15,0.55) {area $=6ab$};
+\end{tikzpicture}
+
+\vspace{1.2em}
+\dheading{Table for Q9}
+% --- Q9 answer: the squares. The first one is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c|c@{}}
+  $a$   & $3$ & $1$ & $0.5$ & $-2$\\ \hline
+  $a^2$ & \tgiven{$9$} & \tblank{$1$} & \tblank{$0.25$} & \tblank{$4$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-4\times3={}$\ashow{$-12$}
+    \item $0.5\times0.5={}$\ashow{$0.25$}
+    \columnbreak
+    \item $-4\times3a={}$\ashow{$-12a$}
+    \item $0.5a\times0.5a={}$\ashow{$0.25a^2$}
+  \end{multicols}
+  \end{subqs}
+  \item In $0.25a^2$, the $0.25$ is the \ablank{coefficient} and the $2$ is
+        the \ablank{power}.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $4x\times x={}$\ashow{$4x^2$}
+    \columnbreak
+    \item $-12a\div4={}$\ashow{$-3a$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the area of the rectangle. Find the area when
+        $a=1.5$ and $b=2$.
+        \ashow{$2a\times3b=6ab$, \; $6\times1.5\times2=18$}
+  \item Complete the table. The first one is done for you. For which value
+        of $a$ is $a^2$ smaller than $a$?
+        \ashow{$a=0.5$}
+  \instr{Find the value of each expression when $a=3$.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2a^2={}$\ashow{$2\times9=18$}
+    \columnbreak
+    \item $(2a)^2={}$\ashow{$6^2=36$}
+  \end{multicols}
+  \end{subqs}
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $a^2$ is bigger than $a$.
+        \ashow{Sometimes. It is not true when $a$ is from $0$ to $1$, for
+        example $0.5^2=0.25$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Multiplying Terms \& Powers}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q8};
+\rect{2a}{3b}{}
+% --- Q8 answer: the area, written in the rectangle ---
+\node[vans] at (2.15,0.55) {area $=6ab$};
+\end{tikzpicture}
+
+\vspace{1.2em}
+\dheading{Table for Q9}
+% --- Q9 answer: the squares. The first one is an example. ---
+{\footnotesize
+\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}c|c|c|c|c@{}}
+  $a$   & $3$ & $1$ & $0.5$ & $-2$\\ \hline
+  $a^2$ & \tgiven{$9$} & \tblank{$1$} & \tblank{$0.25$} & \tblank{$4$}
+\end{tabular}}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to simplify the expression
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-4\times3={}$\ashow{$-12$}
+    \item $0.5\times0.5={}$\ashow{$0.25$}
+    \columnbreak
+    \item $-4\times3a={}$\ashow{$-12a$}
+    \item $0.5a\times0.5a={}$\ashow{$0.25a^2$}
+  \end{multicols}
+  \end{subqs}
+  \item In $0.25a^2$, the $0.25$ is the \ablank{coefficient} and the $2$ is
+        the \ablank{power}.
+  \instr{Simplify each expression.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $4x\times x={}$\ashow{$4x^2$}
+    \columnbreak
+    \item $-12a\div4={}$\ashow{$-3a$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an expression for the area of the rectangle. Find the area when
+        $a=1.5$ and $b=2$.
+        \ashow{$2a\times3b=6ab$, \; $6\times1.5\times2=18$}
+  \item Complete the table. The first one is done for you. For which value
+        of $a$ is $a^2$ smaller than $a$?
+        \ashow{$a=0.5$}
+  \instr{Find the value of each expression when $a=3$.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2a^2={}$\ashow{$2\times9=18$}
+    \columnbreak
+    \item $(2a)^2={}$\ashow{$6^2=36$}
+  \end{multicols}
+  \end{subqs}
+  \item (Challenge) Is this statement always, sometimes or never true?
+        $a^2$ is bigger than $a$.
+        \ashow{Sometimes. It is not true when $a$ is from $0$ to $1$, for
+        example $0.5^2=0.25$.}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 5: Equations and their solutions; adding and subtracting
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Equations \& Solutions}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q10 answer: x = -4 ---
+\bothsides{Working for Q10}{x+7 \& = \& 3\\ x \& = \& \ablank{-4}\\}{-7}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3-7={}$\ashow{$-4$}
+  \columnbreak
+  \item $1-2.5={}$\ashow{$-1.5$}
+\end{multicols}
+  \instr{Is each one an expression or an equation?}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item $4x+1$ \ashow{expression}
+    \columnbreak
+    \item $4x+1=9$ \ashow{equation}
+    \columnbreak
+    \item $9=x-3$ \ashow{equation}
+  \end{multicols}}
+  \end{subqs}
+  \item A value of $x$ that makes an equation true is called a
+        \ablank{solution}.
+  \item Is $x=2$ a solution of $4x+1=9$?
+        \ashow{Yes, because $4\times2+1=9$}
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{addition} \circleops{2}{}
+    \item \makebox[2.2cm][l]{subtraction} \circleops{1}{}
+  \end{subqs}
+  \item Solve $x+7=3$, using the working on the left.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $x-5=-2$ \ashow{$x=3$}
+    \columnbreak
+    \item $x+2.5=1$ \ashow{$x=-1.5$}
+  \end{multicols}
+  \end{subqs}
+  \item The temperature rose by \dC{6} to \dC{-2}. Solve an equation to find
+        the temperature before, $t$.
+        \ashow{$t+6=-2$, \; $t=-8$}
+  \item (Challenge) Write an equation like $x+7=3$ whose solution is
+        $x=-2.5$.
+        \ashow{For example $x+4=1.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Equations \& Solutions}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q10 answer: x = -4 ---
+\bothsides{Working for Q10}{x+7 \& = \& 3\\ x \& = \& \ablank{-4}\\}{-7}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3-7={}$\ashow{$-4$}
+  \columnbreak
+  \item $1-2.5={}$\ashow{$-1.5$}
+\end{multicols}
+  \instr{Is each one an expression or an equation?}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item $4x+1$ \ashow{expression}
+    \columnbreak
+    \item $4x+1=9$ \ashow{equation}
+    \columnbreak
+    \item $9=x-3$ \ashow{equation}
+  \end{multicols}}
+  \end{subqs}
+  \item A value of $x$ that makes an equation true is called a
+        \ablank{solution}.
+  \item Is $x=2$ a solution of $4x+1=9$?
+        \ashow{Yes, because $4\times2+1=9$}
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{addition} \circleops{2}{}
+    \item \makebox[2.2cm][l]{subtraction} \circleops{1}{}
+  \end{subqs}
+  \item Solve $x+7=3$, using the working on the left.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $x-5=-2$ \ashow{$x=3$}
+    \columnbreak
+    \item $x+2.5=1$ \ashow{$x=-1.5$}
+  \end{multicols}
+  \end{subqs}
+  \item The temperature rose by \dC{6} to \dC{-2}. Solve an equation to find
+        the temperature before, $t$.
+        \ashow{$t+6=-2$, \; $t=-8$}
+  \item (Challenge) Write an equation like $x+7=3$ whose solution is
+        $x=-2.5$.
+        \ashow{For example $x+4=1.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Equations \& Solutions}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q10 answer: x = -4 ---
+\bothsides{Working for Q10}{x+7 \& = \& 3\\ x \& = \& \ablank{-4}\\}{-7}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3-7={}$\ashow{$-4$}
+  \columnbreak
+  \item $1-2.5={}$\ashow{$-1.5$}
+\end{multicols}
+  \instr{Is each one an expression or an equation?}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item $4x+1$ \ashow{expression}
+    \columnbreak
+    \item $4x+1=9$ \ashow{equation}
+    \columnbreak
+    \item $9=x-3$ \ashow{equation}
+  \end{multicols}}
+  \end{subqs}
+  \item A value of $x$ that makes an equation true is called a
+        \ablank{solution}.
+  \item Is $x=2$ a solution of $4x+1=9$?
+        \ashow{Yes, because $4\times2+1=9$}
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{addition} \circleops{2}{}
+    \item \makebox[2.2cm][l]{subtraction} \circleops{1}{}
+  \end{subqs}
+  \item Solve $x+7=3$, using the working on the left.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $x-5=-2$ \ashow{$x=3$}
+    \columnbreak
+    \item $x+2.5=1$ \ashow{$x=-1.5$}
+  \end{multicols}
+  \end{subqs}
+  \item The temperature rose by \dC{6} to \dC{-2}. Solve an equation to find
+        the temperature before, $t$.
+        \ashow{$t+6=-2$, \; $t=-8$}
+  \item (Challenge) Write an equation like $x+7=3$ whose solution is
+        $x=-2.5$.
+        \ashow{For example $x+4=1.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Equations \& Solutions}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q10 answer: x = -4 ---
+\bothsides{Working for Q10}{x+7 \& = \& 3\\ x \& = \& \ablank{-4}\\}{-7}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3-7={}$\ashow{$-4$}
+  \columnbreak
+  \item $1-2.5={}$\ashow{$-1.5$}
+\end{multicols}
+  \instr{Is each one an expression or an equation?}
+  \begin{subqs}
+  {\setlength{\columnsep}{12pt}%
+  \begin{multicols}{3}
+    \item $4x+1$ \ashow{expression}
+    \columnbreak
+    \item $4x+1=9$ \ashow{equation}
+    \columnbreak
+    \item $9=x-3$ \ashow{equation}
+  \end{multicols}}
+  \end{subqs}
+  \item A value of $x$ that makes an equation true is called a
+        \ablank{solution}.
+  \item Is $x=2$ a solution of $4x+1=9$?
+        \ashow{Yes, because $4\times2+1=9$}
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{addition} \circleops{2}{}
+    \item \makebox[2.2cm][l]{subtraction} \circleops{1}{}
+  \end{subqs}
+  \item Solve $x+7=3$, using the working on the left.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $x-5=-2$ \ashow{$x=3$}
+    \columnbreak
+    \item $x+2.5=1$ \ashow{$x=-1.5$}
+  \end{multicols}
+  \end{subqs}
+  \item The temperature rose by \dC{6} to \dC{-2}. Solve an equation to find
+        the temperature before, $t$.
+        \ashow{$t+6=-2$, \; $t=-8$}
+  \item (Challenge) Write an equation like $x+7=3$ whose solution is
+        $x=-2.5$.
+        \ashow{For example $x+4=1.5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 6: One-step equations that multiply or divide
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: One-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q5 answer: x = 0.7 ---
+\bothsides{Working for Q5}{4x \& = \& 2.8\\ x \& = \& \ablank{0.7}\\}{\div4}
+
+\vspace{1em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+% ---- Bus stop division for 2.8 / 4 ----
+\begin{scope}[xshift=0.6cm]
+\node[dhead] at (-0.6,1.1) {Bus stop for Q2};
+\busframe{4}{1.15}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/8} \node[bsd] at (\x,0) {$\d$};
+% --- Q2 answer: 2.8 / 4 = 0.7, carrying 2 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/7} \node[bsa] at (\x,0.55) {$\d$};
+\node[bscarry] at ({0.85-0.16},0.12) {$2$};
+\end{scope}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to solve the equation
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-18\div3={}$\ashow{$-6$}
+    \item $2.8\div4={}$\ashow{$0.7$}
+    \item $6\div0.5={}$\ashow{$\tfrac{60}{5}=12$}
+    \columnbreak
+    \item $3x=-18$ \ashow{$x=-6$}
+    \item $4x=2.8$ \ashow{$x=0.7$}
+    \item $0.5x=6$ \ashow{$x=12$}
+  \end{multicols}
+  \end{subqs}
+  \item In $4x=2.8$, the $4$ is the \ablank{coefficient} of $x$.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{multiplication} \circleops{4}{}
+    \item \makebox[2.2cm][l]{division} \circleops{3}{}
+  \end{subqs}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2x=10$ \ashow{$x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{5}=-2$ \ashow{$x=-10$}
+  \end{multicols}
+  \end{subqs}
+  \item Five friends share a bill equally, and each pays \pounds7.40. Solve
+        an equation to find the bill, \pounds$b$.
+        \ashow{$\tfrac{b}{5}=7.40$, \; $b=37$}
+  \instr{Write an equation with the solution $x=-0.5$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item (Challenge) where $x$ is multiplied by a number
+          \ashow{For example $4x=-2$}
+    \columnbreak
+    \item (Challenge) where $x$ is divided by a number
+          \ashow{For example $\tfrac{x}{2}=-0.25$}
+  \end{multicols}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: One-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q5 answer: x = 0.7 ---
+\bothsides{Working for Q5}{4x \& = \& 2.8\\ x \& = \& \ablank{0.7}\\}{\div4}
+
+\vspace{1em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+% ---- Bus stop division for 2.8 / 4 ----
+\begin{scope}[xshift=0.6cm]
+\node[dhead] at (-0.6,1.1) {Bus stop for Q2};
+\busframe{4}{1.15}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/8} \node[bsd] at (\x,0) {$\d$};
+% --- Q2 answer: 2.8 / 4 = 0.7, carrying 2 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/7} \node[bsa] at (\x,0.55) {$\d$};
+\node[bscarry] at ({0.85-0.16},0.12) {$2$};
+\end{scope}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to solve the equation
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-18\div3={}$\ashow{$-6$}
+    \item $2.8\div4={}$\ashow{$0.7$}
+    \item $6\div0.5={}$\ashow{$\tfrac{60}{5}=12$}
+    \columnbreak
+    \item $3x=-18$ \ashow{$x=-6$}
+    \item $4x=2.8$ \ashow{$x=0.7$}
+    \item $0.5x=6$ \ashow{$x=12$}
+  \end{multicols}
+  \end{subqs}
+  \item In $4x=2.8$, the $4$ is the \ablank{coefficient} of $x$.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{multiplication} \circleops{4}{}
+    \item \makebox[2.2cm][l]{division} \circleops{3}{}
+  \end{subqs}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2x=10$ \ashow{$x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{5}=-2$ \ashow{$x=-10$}
+  \end{multicols}
+  \end{subqs}
+  \item Five friends share a bill equally, and each pays \pounds7.40. Solve
+        an equation to find the bill, \pounds$b$.
+        \ashow{$\tfrac{b}{5}=7.40$, \; $b=37$}
+  \instr{Write an equation with the solution $x=-0.5$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item (Challenge) where $x$ is multiplied by a number
+          \ashow{For example $4x=-2$}
+    \columnbreak
+    \item (Challenge) where $x$ is divided by a number
+          \ashow{For example $\tfrac{x}{2}=-0.25$}
+  \end{multicols}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: One-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q5 answer: x = 0.7 ---
+\bothsides{Working for Q5}{4x \& = \& 2.8\\ x \& = \& \ablank{0.7}\\}{\div4}
+
+\vspace{1em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+% ---- Bus stop division for 2.8 / 4 ----
+\begin{scope}[xshift=0.6cm]
+\node[dhead] at (-0.6,1.1) {Bus stop for Q2};
+\busframe{4}{1.15}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/8} \node[bsd] at (\x,0) {$\d$};
+% --- Q2 answer: 2.8 / 4 = 0.7, carrying 2 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/7} \node[bsa] at (\x,0.55) {$\d$};
+\node[bscarry] at ({0.85-0.16},0.12) {$2$};
+\end{scope}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to solve the equation
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-18\div3={}$\ashow{$-6$}
+    \item $2.8\div4={}$\ashow{$0.7$}
+    \item $6\div0.5={}$\ashow{$\tfrac{60}{5}=12$}
+    \columnbreak
+    \item $3x=-18$ \ashow{$x=-6$}
+    \item $4x=2.8$ \ashow{$x=0.7$}
+    \item $0.5x=6$ \ashow{$x=12$}
+  \end{multicols}
+  \end{subqs}
+  \item In $4x=2.8$, the $4$ is the \ablank{coefficient} of $x$.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{multiplication} \circleops{4}{}
+    \item \makebox[2.2cm][l]{division} \circleops{3}{}
+  \end{subqs}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2x=10$ \ashow{$x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{5}=-2$ \ashow{$x=-10$}
+  \end{multicols}
+  \end{subqs}
+  \item Five friends share a bill equally, and each pays \pounds7.40. Solve
+        an equation to find the bill, \pounds$b$.
+        \ashow{$\tfrac{b}{5}=7.40$, \; $b=37$}
+  \instr{Write an equation with the solution $x=-0.5$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item (Challenge) where $x$ is multiplied by a number
+          \ashow{For example $4x=-2$}
+    \columnbreak
+    \item (Challenge) where $x$ is divided by a number
+          \ashow{For example $\tfrac{x}{2}=-0.25$}
+  \end{multicols}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: One-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q5 answer: x = 0.7 ---
+\bothsides{Working for Q5}{4x \& = \& 2.8\\ x \& = \& \ablank{0.7}\\}{\div4}
+
+\vspace{1em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+% ---- Bus stop division for 2.8 / 4 ----
+\begin{scope}[xshift=0.6cm]
+\node[dhead] at (-0.6,1.1) {Bus stop for Q2};
+\busframe{4}{1.15}
+\foreach \x/\d in {0.3/2, 0.55/., 0.85/8} \node[bsd] at (\x,0) {$\d$};
+% --- Q2 answer: 2.8 / 4 = 0.7, carrying 2 ---
+\foreach \x/\d in {0.3/0, 0.55/., 0.85/7} \node[bsa] at (\x,0.55) {$\d$};
+\node[bscarry] at ({0.85-0.16},0.12) {$2$};
+\end{scope}
+\end{tikzpicture}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+  \instr{Work out each calculation, then use it to solve the equation
+         beside it.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-18\div3={}$\ashow{$-6$}
+    \item $2.8\div4={}$\ashow{$0.7$}
+    \item $6\div0.5={}$\ashow{$\tfrac{60}{5}=12$}
+    \columnbreak
+    \item $3x=-18$ \ashow{$x=-6$}
+    \item $4x=2.8$ \ashow{$x=0.7$}
+    \item $0.5x=6$ \ashow{$x=12$}
+  \end{multicols}
+  \end{subqs}
+  \item In $4x=2.8$, the $4$ is the \ablank{coefficient} of $x$.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.2cm][l]{multiplication} \circleops{4}{}
+    \item \makebox[2.2cm][l]{division} \circleops{3}{}
+  \end{subqs}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $-2x=10$ \ashow{$x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{5}=-2$ \ashow{$x=-10$}
+  \end{multicols}
+  \end{subqs}
+  \item Five friends share a bill equally, and each pays \pounds7.40. Solve
+        an equation to find the bill, \pounds$b$.
+        \ashow{$\tfrac{b}{5}=7.40$, \; $b=37$}
+  \instr{Write an equation with the solution $x=-0.5$:}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item (Challenge) where $x$ is multiplied by a number
+          \ashow{For example $4x=-2$}
+    \columnbreak
+    \item (Challenge) where $x$ is divided by a number
+          \ashow{For example $\tfrac{x}{2}=-0.25$}
+  \end{multicols}
+  \end{subqs}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 7: Two-step equations, with the operations given
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Two-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the right-hand side of each line ---
+\bothsides{Working for Q6}{3n+4 \& = \& 19\\ 3n \& = \& \ablank{15}\\
+  n \& = \& \ablank{5}\\}{-4, \div3}
+
+\vspace{0.8em}
+% --- Q10 answer: the right-hand side of each line ---
+\bothsides{Working for Q10}{4x+9 \& = \& 1\\ 4x \& = \& \ablank{-8}\\
+  x \& = \& \ablank{-2}\\}{-9, \div4}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $1-9={}$\ashow{$-8$}
+  \columnbreak
+  \item $-8\div4={}$\ashow{$-2$}
+\end{multicols}
+  \item In $3n+4=19$, the left-hand side is an \ablank{expression}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.6cm][l]{adding $4$} \circleops{2}{4}
+    \item \makebox[2.6cm][l]{multiplying by $3$} \circleops{4}{3}
+  \end{subqs}
+  \item I think of a number, $n$. I multiply it by $3$ and add $4$, and I
+        get $19$. Write an equation, then complete the working on the left.
+        \ashow{$3n+4=19$}
+  \item Check your answer to Q6 by substituting it into $3n+4$.
+        \ashow{$3\times5+4=19$ \checkmark}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2x+5=11$ \ashow{$2x=6$, \; $x=3$}
+    \columnbreak
+    \item $5x-3=17$ \ashow{$5x=20$, \; $x=4$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $4x+9=1$, with the working on the left
+    \columnbreak
+    \item $2x-1=6$ \ashow{$2x=7$, \; $x=3.5$}
+  \end{multicols}
+  \end{subqs}
+  \item A plumber charges a \pounds20 call-out fee and \pounds35 an hour. A
+        bill is \pounds125. Solve an equation to find the number of hours,
+        $h$.
+        \ashow{$35h+20=125$, \; $h=3$}
+  \item (Challenge) Solve $x+2x+3=18$.
+        \ashow{$3x+3=18$, \; $x=5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Two-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the right-hand side of each line ---
+\bothsides{Working for Q6}{3n+4 \& = \& 19\\ 3n \& = \& \ablank{15}\\
+  n \& = \& \ablank{5}\\}{-4, \div3}
+
+\vspace{0.8em}
+% --- Q10 answer: the right-hand side of each line ---
+\bothsides{Working for Q10}{4x+9 \& = \& 1\\ 4x \& = \& \ablank{-8}\\
+  x \& = \& \ablank{-2}\\}{-9, \div4}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $1-9={}$\ashow{$-8$}
+  \columnbreak
+  \item $-8\div4={}$\ashow{$-2$}
+\end{multicols}
+  \item In $3n+4=19$, the left-hand side is an \ablank{expression}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.6cm][l]{adding $4$} \circleops{2}{4}
+    \item \makebox[2.6cm][l]{multiplying by $3$} \circleops{4}{3}
+  \end{subqs}
+  \item I think of a number, $n$. I multiply it by $3$ and add $4$, and I
+        get $19$. Write an equation, then complete the working on the left.
+        \ashow{$3n+4=19$}
+  \item Check your answer to Q6 by substituting it into $3n+4$.
+        \ashow{$3\times5+4=19$ \checkmark}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2x+5=11$ \ashow{$2x=6$, \; $x=3$}
+    \columnbreak
+    \item $5x-3=17$ \ashow{$5x=20$, \; $x=4$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $4x+9=1$, with the working on the left
+    \columnbreak
+    \item $2x-1=6$ \ashow{$2x=7$, \; $x=3.5$}
+  \end{multicols}
+  \end{subqs}
+  \item A plumber charges a \pounds20 call-out fee and \pounds35 an hour. A
+        bill is \pounds125. Solve an equation to find the number of hours,
+        $h$.
+        \ashow{$35h+20=125$, \; $h=3$}
+  \item (Challenge) Solve $x+2x+3=18$.
+        \ashow{$3x+3=18$, \; $x=5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Two-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the right-hand side of each line ---
+\bothsides{Working for Q6}{3n+4 \& = \& 19\\ 3n \& = \& \ablank{15}\\
+  n \& = \& \ablank{5}\\}{-4, \div3}
+
+\vspace{0.8em}
+% --- Q10 answer: the right-hand side of each line ---
+\bothsides{Working for Q10}{4x+9 \& = \& 1\\ 4x \& = \& \ablank{-8}\\
+  x \& = \& \ablank{-2}\\}{-9, \div4}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $1-9={}$\ashow{$-8$}
+  \columnbreak
+  \item $-8\div4={}$\ashow{$-2$}
+\end{multicols}
+  \item In $3n+4=19$, the left-hand side is an \ablank{expression}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.6cm][l]{adding $4$} \circleops{2}{4}
+    \item \makebox[2.6cm][l]{multiplying by $3$} \circleops{4}{3}
+  \end{subqs}
+  \item I think of a number, $n$. I multiply it by $3$ and add $4$, and I
+        get $19$. Write an equation, then complete the working on the left.
+        \ashow{$3n+4=19$}
+  \item Check your answer to Q6 by substituting it into $3n+4$.
+        \ashow{$3\times5+4=19$ \checkmark}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2x+5=11$ \ashow{$2x=6$, \; $x=3$}
+    \columnbreak
+    \item $5x-3=17$ \ashow{$5x=20$, \; $x=4$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $4x+9=1$, with the working on the left
+    \columnbreak
+    \item $2x-1=6$ \ashow{$2x=7$, \; $x=3.5$}
+  \end{multicols}
+  \end{subqs}
+  \item A plumber charges a \pounds20 call-out fee and \pounds35 an hour. A
+        bill is \pounds125. Solve an equation to find the number of hours,
+        $h$.
+        \ashow{$35h+20=125$, \; $h=3$}
+  \item (Challenge) Solve $x+2x+3=18$.
+        \ashow{$3x+3=18$, \; $x=5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Two-Step Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.32\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the right-hand side of each line ---
+\bothsides{Working for Q6}{3n+4 \& = \& 19\\ 3n \& = \& \ablank{15}\\
+  n \& = \& \ablank{5}\\}{-4, \div3}
+
+\vspace{0.8em}
+% --- Q10 answer: the right-hand side of each line ---
+\bothsides{Working for Q10}{4x+9 \& = \& 1\\ 4x \& = \& \ablank{-8}\\
+  x \& = \& \ablank{-2}\\}{-9, \div4}
+
+\column{0.68\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $1-9={}$\ashow{$-8$}
+  \columnbreak
+  \item $-8\div4={}$\ashow{$-2$}
+\end{multicols}
+  \item In $3n+4=19$, the left-hand side is an \ablank{expression}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.6cm][l]{adding $4$} \circleops{2}{4}
+    \item \makebox[2.6cm][l]{multiplying by $3$} \circleops{4}{3}
+  \end{subqs}
+  \item I think of a number, $n$. I multiply it by $3$ and add $4$, and I
+        get $19$. Write an equation, then complete the working on the left.
+        \ashow{$3n+4=19$}
+  \item Check your answer to Q6 by substituting it into $3n+4$.
+        \ashow{$3\times5+4=19$ \checkmark}
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $2x+5=11$ \ashow{$2x=6$, \; $x=3$}
+    \columnbreak
+    \item $5x-3=17$ \ashow{$5x=20$, \; $x=4$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $4x+9=1$, with the working on the left
+    \columnbreak
+    \item $2x-1=6$ \ashow{$2x=7$, \; $x=3.5$}
+  \end{multicols}
+  \end{subqs}
+  \item A plumber charges a \pounds20 call-out fee and \pounds35 an hour. A
+        bill is \pounds125. Solve an equation to find the number of hours,
+        $h$.
+        \ashow{$35h+20=125$, \; $h=3$}
+  \item (Challenge) Solve $x+2x+3=18$.
+        \ashow{$3x+3=18$, \; $x=5$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+%------------------------------------------------------------------
+% STARTER 8: Two-step equations with decimals and negative numbers,
+% with the operations left blank
+%------------------------------------------------------------------
+\begin{frame}<1>[t]{Retrieve and Connect: Decimals \& Negatives in Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.34\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the operations, and the right-hand side of each line ---
+\bothsides{Working for Q6}{2x-1.2 \& = \& 3\\ 2x \& = \& \ablank{4.2}\\
+  x \& = \& \ablank{2.1}\\}{\ablank{+1.2}, \ablank{\div2}}
+
+\vspace{1.2em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q11};
+\rect{2x}{x+0.5}{perimeter $13$\,cm}
+\end{tikzpicture}
+
+\column{0.66\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3+1.2={}$\ashow{$4.2$}
+  \columnbreak
+  \item $4.2\div2={}$\ashow{$2.1$}
+\end{multicols}
+  \item In $2x-1.2=3$, the coefficient of $x$ is \ablank{$2$}, and the
+        constant on the left-hand side is \ablank{$-1.2$}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.3cm][l]{subtracting $1.2$} \circleops{1}{1.2}
+    \item \makebox[2.3cm][l]{multiplying by $2$} \circleops{4}{2}
+  \end{subqs}
+  \item Solve $2x-1.2=3$. Write the operations beside the arrows.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $3x+8=-7$ \ashow{$3x=-15$, \; $x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{2}+3=-1$ \ashow{$\tfrac{x}{2}=-4$, \; $x=-8$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $5x-2.5=10$ \ashow{$5x=12.5$, \; $x=2.5$}
+    \columnbreak
+    \item $0.5x+4=1$
+          \ashow{$0.5x=-3$, \; $x=\tfrac{-3}{0.5}=\tfrac{-30}{5}=-6$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an equation for the perimeter of the rectangle, and solve it.
+        \ashow{$6x+1=13$, \; $x=2$}
+  \item (Challenge) Write a two-step equation with the solution $x=-0.5$.
+        \ashow{For example $2x+3=2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Decimals \& Negatives in Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.34\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the operations, and the right-hand side of each line ---
+\bothsides{Working for Q6}{2x-1.2 \& = \& 3\\ 2x \& = \& \ablank{4.2}\\
+  x \& = \& \ablank{2.1}\\}{\ablank{+1.2}, \ablank{\div2}}
+
+\vspace{1.2em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q11};
+\rect{2x}{x+0.5}{perimeter $13$\,cm}
+\end{tikzpicture}
+
+\column{0.66\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3+1.2={}$\ashow{$4.2$}
+  \columnbreak
+  \item $4.2\div2={}$\ashow{$2.1$}
+\end{multicols}
+  \item In $2x-1.2=3$, the coefficient of $x$ is \ablank{$2$}, and the
+        constant on the left-hand side is \ablank{$-1.2$}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.3cm][l]{subtracting $1.2$} \circleops{1}{1.2}
+    \item \makebox[2.3cm][l]{multiplying by $2$} \circleops{4}{2}
+  \end{subqs}
+  \item Solve $2x-1.2=3$. Write the operations beside the arrows.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $3x+8=-7$ \ashow{$3x=-15$, \; $x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{2}+3=-1$ \ashow{$\tfrac{x}{2}=-4$, \; $x=-8$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $5x-2.5=10$ \ashow{$5x=12.5$, \; $x=2.5$}
+    \columnbreak
+    \item $0.5x+4=1$
+          \ashow{$0.5x=-3$, \; $x=\tfrac{-3}{0.5}=\tfrac{-30}{5}=-6$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an equation for the perimeter of the rectangle, and solve it.
+        \ashow{$6x+1=13$, \; $x=2$}
+  \item (Challenge) Write a two-step equation with the solution $x=-0.5$.
+        \ashow{For example $2x+3=2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Decimals \& Negatives in Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.34\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the operations, and the right-hand side of each line ---
+\bothsides{Working for Q6}{2x-1.2 \& = \& 3\\ 2x \& = \& \ablank{4.2}\\
+  x \& = \& \ablank{2.1}\\}{\ablank{+1.2}, \ablank{\div2}}
+
+\vspace{1.2em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q11};
+\rect{2x}{x+0.5}{perimeter $13$\,cm}
+\end{tikzpicture}
+
+\column{0.66\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3+1.2={}$\ashow{$4.2$}
+  \columnbreak
+  \item $4.2\div2={}$\ashow{$2.1$}
+\end{multicols}
+  \item In $2x-1.2=3$, the coefficient of $x$ is \ablank{$2$}, and the
+        constant on the left-hand side is \ablank{$-1.2$}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.3cm][l]{subtracting $1.2$} \circleops{1}{1.2}
+    \item \makebox[2.3cm][l]{multiplying by $2$} \circleops{4}{2}
+  \end{subqs}
+  \item Solve $2x-1.2=3$. Write the operations beside the arrows.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $3x+8=-7$ \ashow{$3x=-15$, \; $x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{2}+3=-1$ \ashow{$\tfrac{x}{2}=-4$, \; $x=-8$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $5x-2.5=10$ \ashow{$5x=12.5$, \; $x=2.5$}
+    \columnbreak
+    \item $0.5x+4=1$
+          \ashow{$0.5x=-3$, \; $x=\tfrac{-3}{0.5}=\tfrac{-30}{5}=-6$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an equation for the perimeter of the rectangle, and solve it.
+        \ashow{$6x+1=13$, \; $x=2$}
+  \item (Challenge) Write a two-step equation with the solution $x=-0.5$.
+        \ashow{For example $2x+3=2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+\begin{frame}<1>[t]{Retrieve and Connect: Decimals \& Negatives in Equations}
+\begin{columns}[T,onlytextwidth]
+
+\column{0.34\textwidth}
+\vspace{-0.4em}
+% --- Q6 answer: the operations, and the right-hand side of each line ---
+\bothsides{Working for Q6}{2x-1.2 \& = \& 3\\ 2x \& = \& \ablank{4.2}\\
+  x \& = \& \ablank{2.1}\\}{\ablank{+1.2}, \ablank{\div2}}
+
+\vspace{1.2em}
+\begin{tikzpicture}[every node/.style={font=\scriptsize}]
+\node[dhead] at (0,1.65) {Rectangle for Q11};
+\rect{2x}{x+0.5}{perimeter $13$\,cm}
+\end{tikzpicture}
+
+\column{0.66\textwidth}
+\vspace{-1.5em}
+\footnotesize
+\begin{enumerate}\tightlist
+\begin{multicols}{2}
+  \item $3+1.2={}$\ashow{$4.2$}
+  \columnbreak
+  \item $4.2\div2={}$\ashow{$2.1$}
+\end{multicols}
+  \item In $2x-1.2=3$, the coefficient of $x$ is \ablank{$2$}, and the
+        constant on the left-hand side is \ablank{$-1.2$}.
+  \instr{Circle the operation that is the reverse of:}
+  \begin{subqs}
+    \item \makebox[2.3cm][l]{subtracting $1.2$} \circleops{1}{1.2}
+    \item \makebox[2.3cm][l]{multiplying by $2$} \circleops{4}{2}
+  \end{subqs}
+  \item Solve $2x-1.2=3$. Write the operations beside the arrows.
+  \instr{Solve each equation.}
+  \begin{subqs}
+  \begin{multicols}{2}
+    \item $3x+8=-7$ \ashow{$3x=-15$, \; $x=-5$}
+    \columnbreak
+    \item $\dfrac{x}{2}+3=-1$ \ashow{$\tfrac{x}{2}=-4$, \; $x=-8$}
+  \end{multicols}
+  \begin{multicols}{2}
+    \item $5x-2.5=10$ \ashow{$5x=12.5$, \; $x=2.5$}
+    \columnbreak
+    \item $0.5x+4=1$
+          \ashow{$0.5x=-3$, \; $x=\tfrac{-3}{0.5}=\tfrac{-30}{5}=-6$}
+  \end{multicols}
+  \end{subqs}
+  \item Write an equation for the perimeter of the rectangle, and solve it.
+        \ashow{$6x+1=13$, \; $x=2$}
+  \item (Challenge) Write a two-step equation with the solution $x=-0.5$.
+        \ashow{For example $2x+3=2$}
+\end{enumerate}
+\end{columns}
+\end{frame}
+
+\end{document}
