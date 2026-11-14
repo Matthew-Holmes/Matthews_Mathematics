@@ -3,59 +3,87 @@
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amssymb}
+% A sans serif font with a single-storey a, as children write it. It is
+% used for the mathematics as well as the text.
+\usepackage{tgadventor}
+\renewcommand*{\familydefault}{\sfdefault}
+\usepackage[italic]{mathastext}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage[most]{tcolorbox}
 \usetikzlibrary{arrows.meta,decorations.pathreplacing}
 
 % ================================================================
-% Algebraic terminology: a one-page sheet for a Year 7 class meeting
+% Algebraic terminology: a three-page sheet for a Year 7 class meeting
 % algebra for the first time.
 %
-% Part 1 labels the parts of an expression. A labelled example of
-% 5x+3 sits beside the definitions, then Q1 is the same picture of
-% 7y-2 with the names left blank. Q2 labels a longer expression with
-% two variables, and asks for a term as well.
+% Every page has the same two kinds of question. The first labels the
+% parts of an expression, by writing their names in boxes. The second
+% fills in the gaps in sentences about an expression, then goes the
+% other way, from a description to the expression, and ends with an
+% open task. The expressions have from 2 to 5 terms.
 %
-% Part 2 fills in the gaps in sentences about an expression. Q3 gives
-% most of each sentence and Q4 gives less. Q5 goes the other way, from
-% the description to the expression, and Q6 is an open task.
+% Page 1 has the definitions and a labelled example of 5x+3, and there
+% are no negative numbers. Some of the names are already in the boxes,
+% and some of the gaps are filled in, so that pupils can make a start.
+% Page 2 has negative constants and coefficients, and a coefficient of
+% 1 or -1 that is not written. Page 3 adds decimals, squared terms, a
+% constant that is not at the end, and an expression with no constant.
 %
-% The sheet is one side of A4 in 14pt type, so that it can also be
-% printed at A5 (the type is then about 10pt). The boxes and gaps are
-% sized to be written in at A5. The answers are in a comment beside
-% each question.
+% The sheet is A4 in 14pt type, so that it can also be printed at A5
+% (the type is then about 10pt). The boxes and gaps are sized to be
+% written in at A5. The answers are in a comment beside each question.
 % ================================================================
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
+% Ragged right, so that the spaces between words are all the same.
+\AtBeginDocument{\raggedright}
 
 % The idea the sheet is built on, boxed and only faintly tinted, so the
 % sheet is cheap to print.
 \newtcolorbox{keyidea}{colback=orange!3,colframe=orange!35,boxrule=0.6pt,
   left=6pt,right=6pt,top=4pt,bottom=4pt}
 
-% The section headings, between two thin rules.
-\newcommand{\parttitle}[2]{%
-  {\color{blue!45!black}\rule{\linewidth}{1pt}}\\[1pt]
-  {\large\bfseries Part #1: #2}\\[-8pt]
-  {\color{blue!45!black}\rule{\linewidth}{0.4pt}}
-  \par\vspace{2pt}}
+% An instruction for the questions after it.
+\newcommand{\instruction}[1]{\par{\large\bfseries #1}\par\vspace{6pt}}
 
 % A question number, and gaps to write in: \lgap for a letter, \gap for
-% a number or a term, \wgap for a word or an expression. The strut
-% keeps the lines far enough apart to write on at A5.
+% a number or a term, \tgap for a term with a decimal in it, and \wgap
+% for a word or an expression. The strut keeps the lines far enough
+% apart to write on at A5.
 \newcommand{\qn}[1]{\textbf{Q#1.}\ }
 \newcommand{\gapstrut}{\rule[-1.5mm]{0pt}{7.5mm}}
-\newcommand{\lgap}{\gapstrut\underline{\hspace{1.1cm}}}
+\newcommand{\lgap}{\gapstrut\underline{\hspace{1cm}}}
 \newcommand{\gap}{\gapstrut\underline{\hspace{1.4cm}}}
+\newcommand{\tgap}{\gapstrut\underline{\hspace{1.5cm}}}
 \newcommand{\wgap}{\gapstrut\underline{\hspace{3.4cm}}}
 
-% A Part 1 question: the number on the left, the picture centred.
+% A gap that is filled in already, so that pupils can make a start:
+% \given{$4$} for a number or a term, and \lgiven{$x$} for a letter.
+\newcommand{\given}[1]{\gapstrut\underline{\makebox[1.4cm]{#1}}}
+\newcommand{\lgiven}[1]{\gapstrut\underline{\makebox[1cm]{#1}}}
+
+% An answer line at the right-hand end of a question. It goes on the
+% last line of the question if there is room, and on a line of its own
+% if not. (This is the \signed macro from The TeXbook, with \hfill in
+% place of \hfil so that it still reaches the right margin when the
+% text is ragged right.)
+\newcommand{\answerline}[1]{{\unskip\nobreak\hfill\penalty50
+  \hskip2em\hbox{}\nobreak\hfill\gapstrut\underline{\hspace{#1}}%
+  \parfillskip=0pt \finalhyphendemerits=0 \par}}
+
+% A labelling question: the number on the left, the picture centred.
 \newcommand{\labelq}[2]{%
   \par\noindent\begin{minipage}[c]{1.3cm}\qn{#1}\end{minipage}\hfill
   #2\hfill\hspace*{1.3cm}\par}
+
+% A fill-in-the-gaps question: the expression large, then the sentences.
+\newenvironment{gapq}[3]
+  {\begin{minipage}[t]{#1\linewidth}\raggedright
+   \qn{#2}\quad{\Large $#3$}\par}
+  {\end{minipage}}
 
 % ================================================================
 % Labelled expressions
@@ -66,6 +94,8 @@
   % measured in the body font and come out shorter than the letters.
   part/.style={inner xsep=0pt, inner ysep=2pt, font=\LARGE,
                text height=15pt, text depth=5pt},
+  namebox/.style={draw, minimum width=3.8cm, minimum height=0.95cm,
+                  inner sep=2pt},
   arr/.style={-{Stealth[length=7pt]}, thick, shorten >=3pt},
   brc/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt}, thick},
   brcd/.style={decorate, decoration={brace, amplitude=6pt, raise=3pt,
@@ -97,7 +127,51 @@
   \end{tikzpicture}%
 }
 
+% The other labelled expressions are built from the same pieces, so
+% that a box can point at any part.
+%
+% \labelled{<first part>}{<parts and boxes>} draws the picture. Each
+% part of the expression is a node with a name. \pfirst{c}{4} starts
+% the expression with the part named c, \pnext{a}{c}{a} puts the part
+% named a straight after c in the same term, and \pterm{t}{a}{+9b}
+% starts a new term after a small gap.
+%
+% A box points at a part from the left of the first part (\bleft),
+% the right of the last part (\bright), or above or below any part
+% (\babove, \bbelow). \brabove and \brbelow put a brace over or under
+% the parts from one named part to another, with a box beyond it.
+\newcommand{\labelled}[2]{%
+  \begin{tikzpicture}[baseline=(#1.base)]#2\end{tikzpicture}}
+\newcommand{\pfirst}[2]{\node[part] (#1) {$#2$};}
+\newcommand{\pnext}[3]{%
+  \node[part, anchor=base west] (#1) at (#2.base east) {$#3$};}
+\newcommand{\pterm}[3]{%
+  \node[part, anchor=base west] (#1) at ([xshift=9pt]#2.base east) {$#3$};}
+\newcommand{\bleft}[2]{%
+  \node[namebox, anchor=east] (#1L) at ([xshift=-0.6cm]#1.west) {#2};
+  \draw[arr] (#1L.east) -- (#1.west);}
+\newcommand{\bright}[2]{%
+  \node[namebox, anchor=west] (#1R) at ([xshift=0.6cm]#1.east) {#2};
+  \draw[arr] (#1R.west) -- (#1.east);}
+\newcommand{\babove}[2]{%
+  \node[namebox, anchor=south] (#1A) at ([yshift=0.45cm]#1.north) {#2};
+  \draw[arr] (#1A.south) -- (#1.north);}
+\newcommand{\bbelow}[2]{%
+  \node[namebox, anchor=north] (#1B) at ([yshift=-0.45cm]#1.south) {#2};
+  \draw[arr] (#1B.north) -- (#1.south);}
+\newcommand{\brabove}[3]{%
+  \draw[brc] (#1.north west) -- (#2.north east) coordinate[midway] (bm);
+  \node[namebox, anchor=south] at ([yshift=0.5cm]bm) {#3};}
+\newcommand{\brbelow}[3]{%
+  \draw[brcd] (#1.south west) -- (#2.south east) coordinate[midway] (bm);
+  \node[namebox, anchor=north] at ([yshift=-0.4cm]bm) {#3};}
+
 \begin{document}
+
+% ================================================================
+% PAGE 1: the definitions, some names and gaps filled in, and no
+% negative numbers
+% ================================================================
 
 \begin{center}
   {\LARGE\bfseries Algebraic Terminology}
@@ -105,9 +179,9 @@
 \vspace{-4pt}
 
 \begin{keyidea}
-\begin{minipage}[c]{0.53\linewidth}
+\begin{minipage}[c]{0.57\linewidth}
 \raggedright
-A \textbf{variable} is a letter that stands for a number.
+A \textbf{variable} is a letter that could be any number.
 
 \vspace{3pt}
 A \textbf{term} is a number, a variable, or numbers and variables
@@ -121,84 +195,230 @@ variables in it.
 A \textbf{constant} is a term with no variable in it.
 
 \vspace{3pt}
-An \textbf{expression} is terms added or subtracted, with no equals sign.
+Terms added or subtracted, with no equals sign, make an \textbf{expression}.
 \end{minipage}\hfill
-\begin{minipage}[c]{0.45\linewidth}
+\begin{minipage}[c]{0.41\linewidth}
 \centering
-\anatomy[2.3cm][0.4cm]{5}{x}{+3}{\small coefficient}{\small variable}{\small constant}{\small expression}
+% The example is drawn a size smaller than the questions, so that it
+% fits beside the definitions.
+\tikzset{part/.append style={font=\Large}}%
+\anatomy[1.9cm][0.3cm]{5}{x}{+3}{\small coefficient}{\small variable}{\small constant}{\small expression}
 \end{minipage}
 \end{keyidea}
 
-\vspace{6pt}
-% ================================================================
-\parttitle{1}{Write the name of each part in its box}
-% ================================================================
+\vspace{8pt}
+\instruction{Write the name of each part in its box.}
 
-\vspace{4pt}
-% Answers: coefficient (7), variable (y), constant (-2), expression.
-\labelq{1}{\anatomy{7}{y}{-2}{}{}{}{}}
+% Answers: coefficient (4), constant (+9). The variable and the
+% expression are named already.
+\labelq{1}{\anatomy{4}{y}{+9}{}{variable}{}{expression}}
 
 \vspace{14pt}
-% Answers: coefficient (4), variable (a), term (9b), constant (-6).
-\labelq{2}{%
-\begin{tikzpicture}[baseline=(a.base),
-    namebox/.style={draw, minimum width=3.8cm, minimum height=0.95cm, inner sep=2pt}]
-  \node[part] (c) {$4$};
-  \node[part, anchor=base west] (a) at (c.base east) {$a$};
-  \node[part, anchor=base west] (t) at ([xshift=9pt]a.base east) {$+9b$};
-  \node[part, anchor=base west] (k) at ([xshift=9pt]t.base east) {$-6$};
-  \node[namebox, anchor=east] (cl) at ([xshift=-0.6cm]c.west) {};
-  \draw[arr] (cl.east) -- (c.west);
-  \node[namebox, anchor=north] (al) at ([yshift=-0.45cm]a.south) {};
-  \draw[arr] (al.north) -- (a.south);
-  \draw[brc] (t.north west) -- (t.north east) coordinate[midway] (m);
-  \node[namebox, anchor=south] at ([yshift=0.5cm]m) {};
-  \node[namebox, anchor=west] (kl) at ([xshift=0.6cm]k.east) {};
-  \draw[arr] (kl.west) -- (k.east);
-\end{tikzpicture}}
+% Answers: coefficient (2), variable (a), constant (+5). The term is
+% named already.
+\labelq{2}{\labelled{c}{%
+  \pfirst{c}{2}\pnext{a}{c}{a}\pterm{t}{a}{+6b}\pterm{k}{t}{+5}%
+  \bleft{c}{}\bbelow{a}{}\brabove{t}{t}{term}\bright{k}{}}}
 
-\vspace{10pt}
-% ================================================================
-\parttitle{2}{Fill in the gaps}
-% ================================================================
+\vspace{12pt}
+\instruction{Fill in the gaps.}
 
-\begin{minipage}[t]{0.5\linewidth}
-% Answers: 3 terms; x, y and z; 4; -5.
-\qn{3} \quad {\Large $4xy+2z-5$}
-
+% Answers: 3 terms; z (x and y are given); 5; 7.
+\begin{gapq}{0.5}{3}{5xy+3z+7}
 This expression has \gap\ terms.
 
-Its $3$ variables are \lgap, \lgap\ and \lgap.
+Its variables are \lgiven{$x$}, \lgiven{$y$} and \lgap.
 
-The coefficient of the term $xy$ is \gap.
+The coefficient of $xy$ is \gap.
 
 The constant is \gap.
-\end{minipage}\hfill
-\begin{minipage}[t]{0.47\linewidth}
-% Answers: 6m, -n and 8; 6; -1; the constant.
-\qn{4} \quad {\Large $6m-n+8$}
+\end{gapq}\hfill
+% Answers: (4 terms is given); 9; 3; the constant.
+\begin{gapq}{0.47}{4}{2m+9n+3p+4}
+This expression has \given{$4$} terms.
 
-The terms are \gap, \gap\ and \gap.
+The coefficient of $n$ is \gap.
+
+The coefficient of $p$ is \gap.
+
+The $4$ is called the \wgap.
+\end{gapq}
+
+\vspace{12pt}
+% Answer: 2p+7 (the terms can be in either order).
+\qn{5} An expression has the variable $p$. The coefficient of $p$ is
+$2$ and the constant is $7$. Write down the~expression.
+\answerline{3.4cm}
+
+\vspace{12pt}
+% Answer: open. For example 4a+3b+8: a term in each variable, and the
+% term 8.
+\qn{6} Write an expression that has $3$ terms, $2$ variables and
+a~constant~of~$8$. \answerline{5.5cm}
+
+\newpage
+% ================================================================
+% PAGE 2: negative constants and coefficients
+% ================================================================
+
+\instruction{Write the name of each part in its box.}
+
+% Answers: coefficient (7), variable (y), constant (-2), expression.
+\labelq{7}{\anatomy{7}{y}{-2}{}{}{}{}}
+
+\vspace{14pt}
+% Answers: coefficient (4), variable (a), term (+9b), constant (-6).
+\labelq{8}{\labelled{c}{%
+  \pfirst{c}{4}\pnext{a}{c}{a}\pterm{t}{a}{+9b}\pterm{k}{t}{-6}%
+  \bleft{c}{}\bbelow{a}{}\brabove{t}{t}{}\bright{k}{}}}
+
+\vspace{14pt}
+% Answers: coefficient (3), variable (p), variable (q), constant (-8).
+\labelq{9}{\labelled{c}{%
+  \pfirst{c}{3}\pnext{p}{c}{p}\pnext{q}{p}{q}\pterm{k}{q}{-8}%
+  \bleft{c}{}\babove{p}{}\bbelow{q}{}\bright{k}{}}}
+
+\vspace{12pt}
+\instruction{Fill in the gaps.}
+
+% Answers: 3 terms; x, y and z; 4; -5.
+\begin{gapq}{0.5}{10}{4xy+2z-5}
+This expression has \gap\ terms.
+
+Its variables are \lgap, \lgap\ and \lgap.
+
+The coefficient of $xy$ is \gap.
+
+The constant is \gap.
+\end{gapq}\hfill
+% Answers: 4 terms; 6; -1; the constant.
+\begin{gapq}{0.47}{11}{6m-n+2p+8}
+This expression has \gap\ terms.
 
 The coefficient of $m$ is \gap.
 
 The coefficient of $n$ is \gap.
 
 The $8$ is called the \wgap.
-\end{minipage}
+\end{gapq}
+
+\vspace{12pt}
+% Answers: 2 terms; b (a is given); -3; 7.
+\begin{gapq}{0.5}{12}{-3ab+7}
+This expression has \gap\ terms.
+
+Its variables are \lgiven{$a$} and \lgap.
+
+The coefficient of $ab$ is \gap.
+
+The constant is \gap.
+\end{gapq}\hfill
+% Answers: (5 terms is given); 1; -4; -9.
+\begin{gapq}{0.47}{13}{2a+b-4c+d-9}
+This expression has \given{$5$} terms.
+
+The coefficient of $b$ is \gap.
+
+The coefficient of $c$ is \gap.
+
+The constant is \gap.
+\end{gapq}
 
 \vspace{12pt}
 % Answer: 3p-5q+4 (the terms can be in any order).
-\qn{5} An expression has the variables $p$ and $q$. The coefficient of
+\qn{14} An expression has the variables $p$ and $q$. The coefficient of
 $p$ is $3$, the coefficient of $q$ is $-5$ and the constant is $4$.
-Write down the expression. \hfill \wgap
+Write down the~expression. \answerline{3.4cm}
 
 \vspace{12pt}
 % Answer: open. For example 5a+2b+ab-1. It needs four terms that are
 % not like terms (so that it cannot be simplified to fewer), two
 % letters for the variables, and the term -1.
-\qn{6} Write an expression that has $4$ terms, $2$ variables and a
-constant of $-1$.\par
-\hfill\gapstrut\underline{\hspace{5.5cm}}
+\qn{15} Write an expression that has $4$ terms, $2$ variables and
+a~constant~of~$-1$. \answerline{5.5cm}
+
+\newpage
+% ================================================================
+% PAGE 3: decimals, squared terms, and the constant in other places
+% ================================================================
+
+\instruction{Write the name of each part in its box.}
+
+% Answers: constant (8), coefficient (-3), variable (x), expression.
+\labelq{16}{\labelled{k}{%
+  \pfirst{k}{8}\pterm{c}{k}{-3}\pnext{x}{c}{x}%
+  \bleft{k}{}\babove{c}{}\bright{x}{}\brbelow{k}{x}{}}}
+
+\vspace{14pt}
+% Answers: coefficient (2), constant (-7), variable (b), term (+0.5b).
+\labelq{17}{\labelled{c}{%
+  \pfirst{c}{2}\pnext{a}{c}{a}\pterm{k}{a}{-7}\pterm{d}{k}{+0.5}\pnext{b}{d}{b}%
+  \bleft{c}{}\babove{k}{}\bright{b}{}\brbelow{d}{b}{}}}
+
+\vspace{14pt}
+% Answers: coefficient (-4), variable (m), term (-4mn), constant (+1.5).
+\labelq{18}{\labelled{c}{%
+  \pfirst{c}{-4}\pnext{m}{c}{m}\pnext{n}{m}{n}\pterm{k}{n}{+1.5}%
+  \bleft{c}{}\babove{m}{}\brbelow{c}{n}{}\bright{k}{}}}
+
+\vspace{12pt}
+\instruction{Fill in the gaps.}
+
+% Answers: 4 terms; 0.5; -1; 2.5.
+\begin{gapq}{0.5}{19}{0.5a-b+2.5+3c}
+This expression has \gap\ terms.
+
+The coefficient of $a$ is \gap.
+
+The coefficient of $b$ is \gap.
+
+The constant is \gap.
+\end{gapq}\hfill
+% Answers: 2 terms; k; 9; -0.5.
+\begin{gapq}{0.47}{20}{9-0.5k^2}
+This expression has \gap\ terms.
+
+Its variable is \lgap.
+
+The constant is \gap.
+
+The coefficient of $k^2$ is \gap.
+\end{gapq}
+
+\vspace{12pt}
+% Answers: 3 terms; 2; x (the term is -5x); the constant.
+\begin{gapq}{0.5}{21}{2xy-5x+0.3y}
+This expression has \gap\ terms.
+
+The coefficient of $xy$ is \gap.
+
+$-5$ is the coefficient of \gap.
+
+This expression has no \wgap.
+\end{gapq}\hfill
+% Answers: (5 terms is given); 1; 1; -3.
+\begin{gapq}{0.47}{22}{x^2+x-y+xy-3}
+This expression has \given{$5$} terms.
+
+The coefficient of $x^2$ is \gap.
+
+The coefficient of $xy$ is \gap.
+
+The constant is \gap.
+\end{gapq}
+
+\vspace{12pt}
+% Answer: -x+0.5y+2z-3 (the terms can be in any order).
+\qn{23} An expression has the variables $x$, $y$ and $z$. The
+coefficient of $x$ is $-1$, the coefficient of $y$ is $0.5$, the
+coefficient of $z$ is $2$ and the constant is $-3$. Write down the~expression. \answerline{3.4cm}
+
+\vspace{12pt}
+% Answer: open. For example -a-2b-3c-ab+0.5: a term in each of the
+% three variables and one more term, such as ab, that is not like any
+% of them, each with a negative coefficient, and the term 0.5.
+\qn{24} Write an expression that has $5$ terms, $3$ variables and a
+constant of~$0.5$, where every coefficient is negative.
+\answerline{5.5cm}
 
 \end{document}
