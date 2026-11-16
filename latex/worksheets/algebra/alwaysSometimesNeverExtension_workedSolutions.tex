@@ -1,0 +1,170 @@
+\documentclass[14pt,a4paper]{extarticle}
+\usepackage[a4paper,top=15mm,bottom=15mm,left=16mm,right=16mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tgadventor}
+\renewcommand*{\familydefault}{\sfdefault}
+\usepackage[italic]{mathastext}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows.meta}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\AtBeginDocument{\raggedright}
+
+\newtcolorbox{sol}[1]{colback=blue!2,colframe=blue!35,boxrule=0.6pt,
+  colbacktitle=blue!8,coltitle=blue!50!black,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  title={\bfseries #1},
+  toptitle=2pt,bottomtitle=2pt,
+  before upper=\raggedright}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Always, Sometimes or Never?}\\[2pt]
+  {\large Worked Solutions}
+\end{center}
+
+\vspace{4pt}
+
+\begin{sol}{Q1. \(x^2\) is bigger than \(x\).}
+Complete the table:
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{|c|c|c|}
+\hline
+x & x^2 & \text{Is } x^2 > x?\\
+\hline
+3 & 9 & \text{Yes}\\
+\hline
+0.5 & 0.25 & \text{No}\\
+\hline
+-2 & 4 & \text{Yes}\\
+\hline
+\end{array}
+\]
+
+When \(x=3\), \(x^2=9\), which is bigger than \(3\). So the statement is
+\textbf{true} when \(x=3\).
+
+When \(x=0.5\), \(x^2=0.25\), which is smaller than \(0.5\). So \(x=0.5\)
+is a \textbf{counterexample}: the statement is \textbf{false} when
+\(x=0.5\).
+
+The statement is true for some values of \(x\) and false for others, so it
+is \textbf{sometimes true}.
+\end{sol}
+
+\begin{sol}{Q2. \(10-x\) is smaller than \(10\).}
+One possible choice of values is \(x=4\), \(x=0\) and \(x=-2\):
+\[
+\renewcommand{\arraystretch}{1.2}
+\begin{array}{|c|c|c|}
+\hline
+x & 10-x & \text{Is } 10-x < 10?\\
+\hline
+4 & 6 & \text{Yes}\\
+\hline
+0 & 10 & \text{No}\\
+\hline
+-2 & 12 & \text{No}\\
+\hline
+\end{array}
+\]
+
+When \(x=4\), \(10-x=6\), so the statement is true.
+
+When \(x=-2\), \(10-x=12\), so \(x=-2\) is a \textbf{counterexample}.
+
+The statement is \textbf{sometimes true}: it is true for positive values
+of \(x\), but false for \(x=0\) and for negative values of \(x\).
+\end{sol}
+
+\begin{sol}{Q3. Counterexamples to false statements}
+\textbf{(a)} \textit{Every expression has a constant.}\\[2pt]
+The expression \(4x+y\) has no constant term. So the statement is false.
+
+\vspace{4pt}
+\textbf{(b)} \textit{Every expression with \(3\) terms has \(3\) variables.}\\[2pt]
+The expression \(2a+3b+1\) has \(3\) terms, but only \(2\) variables,
+namely \(a\) and \(b\). So the statement is false.
+
+\vspace{4pt}
+\textbf{(c)} \textit{The term \(-3x\) always has a negative value.}\\[2pt]
+When \(x=-2\), the term \(-3x\) has the value
+\[
+-3(-2)=6,
+\]
+which is not negative. So the statement is false.
+
+\vspace{4pt}
+\textbf{(d)} \textit{Every term has a coefficient bigger than \(1\).}\\[2pt]
+The term \(x\) has coefficient \(1\), which is not bigger than \(1\).
+So the statement is false. Another example is \(0.5a\), whose coefficient
+is \(0.5\).
+\end{sol}
+
+\begin{sol}{Q4. Always, sometimes or never}
+\textbf{(a)} \(x+x=2x\): \textbf{always true}.\\[2pt]
+Reason: \(x+x\) means two lots of \(x\), which is \(2x\), for every value
+of \(x\). For example, when \(x=3\), \(3+3=6=2\times 3\).
+
+\vspace{6pt}
+\textbf{(b)} \(5-x\) and \(x-5\) have the same value: \textbf{sometimes true}.\\[2pt]
+True when \(x=5\), because \(5-5=0\) and \(5-5=0\).
+False when \(x=0\), because \(5-0=5\) but \(0-5=-5\).
+
+\vspace{6pt}
+\textbf{(c)} \(x^2\) is negative: \textbf{never true}.\\[2pt]
+Reason: \(x^2\) is a square, so \(x^2\ge 0\) for every real number \(x\).
+For example, \(0^2=0\), which is not negative. No value of \(x\) makes
+\(x^2\) negative.
+
+\vspace{6pt}
+\textbf{(d)} \(\dfrac{x}{2}\) is smaller than \(x\): \textbf{sometimes true}.\\[2pt]
+True when \(x=4\), because \(\dfrac{4}{2}=2\), and \(2<4\).
+False when \(x=-4\), because \(\dfrac{-4}{2}=-2\), and \(-2\) is not
+smaller than \(-4\).
+\end{sol}
+
+\begin{sol}{Q5. Sam's ten examples}
+Sam is wrong because testing ten values only shows that the statement is
+true for those ten values. It does not show that the statement is true for
+every value of \(x\). A single counterexample is enough to show that a
+statement is not always true.
+
+A counterexample is \(x=0\), because
+\[
+3x=3\times 0=0
+\qquad\text{and}\qquad
+x+1=0+1=1.
+\]
+Since \(0\) is not bigger than \(1\), the statement is false when \(x=0\).
+So Sam's statement is not always true; it is sometimes true.
+\end{sol}
+
+\begin{sol}{Q6. A statement that is sometimes true}
+One possible answer is:
+\[
+x+2>5.
+\]
+This is sometimes true.
+
+It is true when \(x=4\), because
+\[
+4+2=6>5.
+\]
+A counterexample is \(x=1\), because
+\[
+1+2=3,
+\]
+and \(3\) is not bigger than \(5\). So the statement is sometimes true.
+\end{sol}
+
+\end{document}
