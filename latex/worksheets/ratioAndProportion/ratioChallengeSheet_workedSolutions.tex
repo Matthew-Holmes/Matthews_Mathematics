@@ -1,0 +1,862 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=18mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{xcolor}
+
+\setlist[enumerate,1]{label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=1.2em, topsep=4pt}
+\setlist[enumerate,2]{label=(\alph*), leftmargin=*, itemsep=0.35em, topsep=2pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Worked Solutions: Ratio and the Shape of A4 Paper}
+\end{center}
+\vspace{-4pt}
+\noindent\textit{Lengths are in the same units unless otherwise stated.}
+
+\begin{enumerate}[label=\textbf{Q\arabic*.}, leftmargin=*, itemsep=1.2em]
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Write each ratio as short : long and divide both parts by the short side.
+\[
+\text{A3: }297:420
+  \quad\longrightarrow\quad
+  1:\frac{420}{297}
+  =1:1.414141\ldots\approx 1:1.414.
+\]
+\[
+\text{A4: }210:297
+  \quad\longrightarrow\quad
+  1:\frac{297}{210}
+  =1:1.414285\ldots\approx 1:1.414.
+\]
+\[
+\text{A5: }148:210
+  \quad\longrightarrow\quad
+  1:\frac{210}{148}
+  =1:1.418918\ldots\approx 1:1.419.
+\]
+
+\item All three ratios are approximately \(1:1.41\), i.e. \(1:\sqrt2\). So the A3, A4 and A5 sheets are (very nearly) similar. The small differences are caused by rounding the paper sizes to whole millimetres.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item For a whole sheet \(1:n\), folding halves the long side, so the half sheet has sides \(1\) and \(n/2\). Writing the half sheet as short : long gives:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Whole sheet & Half-sheet sides & Half-sheet ratio & Same shape?\\
+\hline
+\(1:1.5\) & \(0.75:1\) & \(1:\dfrac{1}{0.75}=1:1.333\ldots\) & No\\
+\hline
+\(1:2\) & \(1:1\) & \(1:1\) & No\\
+\hline
+\(1:1.2\) & \(0.6:1\) & \(1:\dfrac{1}{0.6}=1:1.667\ldots\) & No\\
+\hline
+\(1:1.4\) & \(0.7:1\) & \(1:\dfrac{1}{0.7}=1:1.429\ldots\) & No\\
+\hline
+\end{tabular}
+\end{center}
+
+\item Let the whole sheet be \(1:n\). The half sheet has sides \(1\) and \(n/2\), so its short : long ratio is
+\[
+\frac n2:1=1:\frac{2}{n}.
+\]
+For the half sheet to have the same shape as the whole sheet, we need
+\[
+n=\frac{2}{n}
+\quad\Longrightarrow\quad
+n^2=2
+\quad\Longrightarrow\quad
+n=\sqrt2\approx 1.414.
+\]
+This lies between \(1:1.4\) and \(1:1.5\). Indeed, for \(1:1.4\) the half sheet is \(1:1.429>1.4\), while for \(1:1.5\) the half sheet is \(1:1.333<1.5\).
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Multiplying or dividing both parts by the same number gives equivalent ratios:
+\[
+2:3\xrightarrow{\times 5}10:15,
+\qquad
+2:3\xrightarrow{\div 2}1:1.5,
+\qquad
+2:3\xrightarrow{\times 0.2}0.4:0.6.
+\]
+
+\item For \(2:3\), the second part divided by the first part is
+\[
+\frac32=1.5.
+\]
+Also
+\[
+\frac{15}{10}=1.5,
+\qquad
+\frac{1.5}{1}=1.5,
+\qquad
+\frac{0.6}{0.4}=1.5.
+\]
+The result is always \(1.5\).
+
+\item If \(a:b\) is multiplied by \(k\), the new ratio is \(ka:kb\). Then
+\[
+\frac{kb}{ka}=\frac{b}{a},
+\]
+because the factor \(k\) cancels. Dividing both parts by a number is the same as multiplying by its reciprocal, so the same argument applies.
+
+\item
+\[
+y:6\xrightarrow{\div y}1:\frac6y.
+\]
+Also
+\[
+\frac y4:1\xrightarrow{\times 4}y:4\xrightarrow{\div y}1:\frac4y.
+\]
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+The whole sheet is \(1:x\). Folding halves the long side \(x\), so the half sheet has sides \(1\) and \(x/2\). Its short : long ratio is
+\[
+\frac x2:1=1:\frac{2}{x}.
+\]
+The whole and half sheets are similar, so these ratios are equivalent:
+\[
+1:x=1:\frac2x.
+\]
+Hence
+\[
+x=\frac2x
+\quad\Longrightarrow\quad
+x^2=2
+\quad\Longrightarrow\quad
+x=\sqrt2
+\]
+since \(x>0\). Thus A-series paper has ratio
+\[
+1:\sqrt2\approx 1:1.414.
+\]
+This agrees with Q1 and Q2.
+
+% ------------------------------------------------------------
+\item
+Whole Letter sheet:
+\[
+8.5:11\xrightarrow{\div 8.5}1:\frac{11}{8.5}
+=1:1.294117\ldots\approx 1:1.294.
+\]
+A half sheet has sides \(5.5\) inches and \(8.5\) inches:
+\[
+5.5:8.5\xrightarrow{\div 5.5}1:\frac{8.5}{5.5}
+=1:1.545454\ldots\approx 1:1.545.
+\]
+Since \(1.294\neq 1.545\), the half sheet of Letter paper is not similar to the whole sheet.
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item Let the short side of A0 be \(x\) metres. The long side is \(\sqrt2\,x\), so the area is
+\[
+x\cdot \sqrt2\,x=\sqrt2\,x^2.
+\]
+Since A0 has area \(1\text{ m}^2\),
+\[
+\sqrt2\,x^2=1.
+\]
+Thus
+\[
+x^2=\frac1{\sqrt2},
+\qquad
+x=\frac1{\sqrt[4]{2}}\approx 0.8409\text{ m}.
+\]
+So the short side is about \(841\text{ mm}\). The long side is
+\[
+\sqrt2\,x=\sqrt[4]{2}\approx 1.1892\text{ m},
+\]
+about \(1189\text{ mm}\).
+
+\item Halving the long side each time and rounding down to whole millimetres gives:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline
+\textbf{Size} & A0 & A1 & A2 & A3 & A4 & A5 & A6\\
+\hline
+Short side (mm) & 841 & 594 & 420 & 297 & 210 & 148 & 105\\
+\hline
+Long side (mm) & 1189 & 841 & 594 & 420 & 297 & 210 & 148\\
+\hline
+\end{tabular}
+\end{center}
+
+\item Each step from one A size to the next halves the area. From A0 to A4 there are four halvings, so
+\[
+2^4=16
+\]
+sheets of A4 make one sheet of A0. Therefore
+\[
+\text{area of A4}=\frac{1}{16}\text{ m}^2
+=\frac{10000}{16}\text{ cm}^2
+=625\text{ cm}^2.
+\]
+Using the rounded dimensions,
+\[
+21.0\times 29.7=623.7\text{ cm}^2,
+\]
+which is about \(625\text{ cm}^2\).
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item A4 to A3 multiplies every length by
+\[
+\frac{420}{297}=\sqrt2\approx 1.414=141.4\%.
+\]
+So the \(141\%\) button turns A4 into A3.
+
+\item A3 to A4 multiplies every length by
+\[
+\frac1{\sqrt2}\approx 0.7071=70.71\%.
+\]
+So the \(71\%\) button turns A3 into A4.
+
+\item A4 to A2 is two sizes up, so lengths are multiplied by
+\[
+(\sqrt2)^2=2.
+\]
+Therefore \(200\%\) turns A4 into A2.
+
+\item A4 to A1 is three sizes up, so lengths are multiplied by
+\[
+(\sqrt2)^3=2\sqrt2\approx 2.828.
+\]
+Therefore about \(283\%\) turns A4 into A1.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+Let the short side of the A4 sheet be \(1\), so the long side is \(\sqrt2\). The fold line in the diagram is the diagonal of a square of side \(1\): its horizontal and vertical components are both \(1\). By Pythagoras, its length is
+\[
+\sqrt{1^2+1^2}=\sqrt2.
+\]
+But \(\sqrt2\) is exactly the length of the long side of the sheet. So the fold line is as long as the long side. This is the special property of A-series paper, so the fold checks that the paper is A-series without measuring it.
+
+% ------------------------------------------------------------
+\item
+The whole card has short : long ratio
+\[
+1:x.
+\]
+Cutting it into three equal strips across the long side gives a strip with sides \(x/3\) and \(1\). Written short : long, this is
+\[
+\frac x3:1=1:\frac3x.
+\]
+The strip is similar to the whole card, so
+\[
+1:x=1:\frac3x.
+\]
+Thus
+\[
+x=\frac3x
+\quad\Longrightarrow\quad
+x^2=3
+\quad\Longrightarrow\quad
+x=\sqrt3.
+\]
+The card has ratio
+\[
+1:\sqrt3\approx 1:1.732.
+\]
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item For five strips, the same method gives
+\[
+\text{whole card }=1:x,
+\qquad
+\text{one strip }=\frac x5:1=1:\frac5x.
+\]
+Since the strip is similar to the whole card,
+\[
+x=\frac5x
+\quad\Longrightarrow\quad
+x^2=5
+\quad\Longrightarrow\quad
+x=\sqrt5.
+\]
+So the card is
+\[
+1:\sqrt5\approx 1:2.236.
+\]
+
+\item For \(n\) equal strips, the whole card is \(1:x\) and one strip is
+\[
+\frac xn:1=1:\frac nx.
+\]
+Similarity gives
+\[
+x=\frac nx
+\quad\Longrightarrow\quad
+x^2=n
+\quad\Longrightarrow\quad
+x=\sqrt n.
+\]
+So the ratio is
+\[
+1:\sqrt n.
+\]
+
+\item The ratio can be written with whole numbers exactly when \(\sqrt n\) is an integer, i.e. when \(n\) is a perfect square:
+\[
+n=1,4,9,16,\ldots
+\]
+For example, when \(n=4\), the card is \(1:2\). Cutting a \(1\times2\) rectangle into four strips gives strips of size \(\frac12\times1\), and
+\[
+\frac12:1=1:2,
+\]
+so each strip is similar to the whole card.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The whole rectangle is \(1:x\). Cutting off the largest square, of side \(1\), leaves a rectangle with sides \(x-1\) and \(1\). Since the leftover is short : long,
+\[
+(x-1):1\xrightarrow{\div (x-1)}1:\frac1{x-1}.
+\]
+
+\item The leftover rectangle is similar to the whole rectangle, so
+\[
+1:x=1:\frac1{x-1}.
+\]
+Hence
+\[
+x=\frac1{x-1}.
+\]
+Multiplying by \(x-1\),
+\[
+x(x-1)=1,
+\]
+so
+\[
+x^2-x-1=0.
+\]
+
+\item Using
+\[
+x^2-x-1=\left(x-\frac12\right)^2-\frac54,
+\]
+we have
+\[
+\left(x-\frac12\right)^2-\frac54=0.
+\]
+Thus
+\[
+\left(x-\frac12\right)^2=\frac54.
+\]
+Since \(x>1\), we take the positive square root:
+\[
+x-\frac12=\frac{\sqrt5}{2}.
+\]
+Therefore
+\[
+x=\frac12+\frac{\sqrt5}{2}=\frac{1+\sqrt5}{2}\approx 1.618.
+\]
+The golden rectangle has ratio
+\[
+1:\frac{1+\sqrt5}{2}\approx 1:1.618.
+\]
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item A sheet of A4 is \(1:\sqrt2\). Cutting off the largest square, of side \(1\), leaves a rectangle with sides \(\sqrt2-1\) and \(1\). Thus the leftover has ratio
+\[
+(\sqrt2-1):1.
+\]
+
+\item Multiply both parts by \(\sqrt2+1\):
+\[
+(\sqrt2-1)(\sqrt2+1)=2-1=1.
+\]
+Therefore
+\[
+(\sqrt2-1):1
+=
+1:(\sqrt2+1).
+\]
+
+\item Start with a rectangle
+\[
+1:(1+\sqrt2).
+\]
+Cutting off two squares of side \(1\) leaves a rectangle whose long side is
+\[
+(1+\sqrt2)-2=\sqrt2-1,
+\]
+and whose short side is \(1\). So the leftover ratio is
+\[
+(\sqrt2-1):1.
+\]
+By part (b), this is equal to
+\[
+1:(1+\sqrt2),
+\]
+which is the same as the whole rectangle. Therefore the leftover rectangle is similar to the whole rectangle.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The whole right-angled isosceles triangle has legs \(1,1\) and hypotenuse \(\sqrt2\). Each of the two smaller pieces has hypotenuse \(1\). Therefore
+\[
+\text{piece}:\text{whole}=1:\sqrt2.
+\]
+
+\item Each of the three pieces has one third of the area of the whole triangle. The area scale factor from piece to whole is \(3\), so the length scale factor is \(\sqrt3\). Thus
+\[
+\text{piece}:\text{whole}=1:\sqrt3.
+\]
+
+\item The whole \(L\)-shape is made of \(12\) unit squares. Each of the four similar \(L\)-shapes is made of \(3\) unit squares. Hence each piece has \(\frac14\) of the area of the whole, so the length scale factor from piece to whole is
+\[
+\sqrt4=2.
+\]
+Thus
+\[
+\text{piece}:\text{whole}=1:2.
+\]
+
+\item If a shape is cut into \(n\) equal pieces, each similar to the whole, then each piece has area \(\frac1n\) of the whole area. If every length of the piece is multiplied by \(k\) to get the whole shape, then area is multiplied by \(k^2\). Hence
+\[
+k^2=n
+\quad\Longrightarrow\quad
+k=\sqrt n.
+\]
+So
+\[
+\text{piece}:\text{whole}=1:\sqrt n.
+\]
+For A4, cutting a sheet in half gives two A5 sheets. Each is similar to the original A4 sheet, and \(n=2\), so the ratio is
+\[
+1:\sqrt2.
+\]
+This gives another explanation of why A4 has ratio \(1:\sqrt2\).
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The whole block has edges \(1,y,z\). Halving the longest edge \(z\) gives edges
+\[
+1,\ y,\ \frac z2.
+\]
+Written shortest : middle : longest, this is
+\[
+\frac z2:1:y.
+\]
+Multiplying by \(2\),
+\[
+z:2:2y.
+\]
+Dividing by \(z\),
+\[
+1:\frac2z:\frac{2y}{z}.
+\]
+
+\item Since the half blocks are similar to the whole block,
+\[
+1:y:z=1:\frac2z:\frac{2y}{z}.
+\]
+Comparing corresponding parts,
+\[
+y=\frac2z,
+\qquad
+z=\frac{2y}{z}.
+\]
+From \(y=\frac2z\), we get \(z=\frac2y\). From \(z=\frac{2y}{z}\), we get
+\[
+z^2=2y.
+\]
+Substitute \(z=\frac2y\):
+\[
+\left(\frac2y\right)^2=2y
+\quad\Longrightarrow\quad
+\frac4{y^2}=2y
+\quad\Longrightarrow\quad
+4=2y^3
+\quad\Longrightarrow\quad
+y^3=2.
+\]
+
+\item Since \(y^3=2\),
+\[
+y=\sqrt[3]{2}\approx 1.260.
+\]
+Then
+\[
+z=\frac2y=\frac2{\sqrt[3]{2}}=\sqrt[3]{4}\approx 1.587.
+\]
+So the ratio is
+\[
+1:\sqrt[3]{2}:\sqrt[3]{4}
+\approx 1:1.260:1.587.
+\]
+
+\item Let the shortest edge be \(a\). Then the edges are
+\[
+a,\quad a\sqrt[3]{2},\quad a\sqrt[3]{4}.
+\]
+The volume is
+\[
+a\cdot a\sqrt[3]{2}\cdot a\sqrt[3]{4}
+=a^3\sqrt[3]{8}
+=2a^3.
+\]
+Since the volume is \(1000\text{ cm}^3\),
+\[
+2a^3=1000
+\quad\Longrightarrow\quad
+a^3=500
+\quad\Longrightarrow\quad
+a=\sqrt[3]{500}\approx 7.94\text{ cm}.
+\]
+The middle edge is
+\[
+a\sqrt[3]{2}
+=\sqrt[3]{500\cdot 2}
+=\sqrt[3]{1000}
+=10\text{ cm}.
+\]
+The longest edge is
+\[
+a\sqrt[3]{4}
+=\sqrt[3]{500\cdot4}
+=\sqrt[3]{2000}
+\approx 12.60\text{ cm}.
+\]
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The whole four-dimensional box has edges
+\[
+1:a:b:c.
+\]
+Halving the longest edge \(c\) gives edges
+\[
+1,\ a,\ b,\ \frac c2.
+\]
+Written in order,
+\[
+\frac c2:1:a:b.
+\]
+Multiplying by \(2\),
+\[
+c:2:2a:2b.
+\]
+Dividing by \(c\),
+\[
+1:\frac2c:\frac{2a}{c}:\frac{2b}{c}.
+\]
+
+\item Since the half box is similar to the whole box,
+\[
+1:a:b:c
+=
+1:\frac2c:\frac{2a}{c}:\frac{2b}{c}.
+\]
+Comparing corresponding parts gives
+\[
+a=\frac2c,
+\qquad
+b=\frac{2a}{c},
+\qquad
+c=\frac{2b}{c}.
+\]
+From \(a=\frac2c\), we have \(c=\frac2a\). Then
+\[
+b=\frac{2a}{c}
+=\frac{2a}{2/a}
+=a^2.
+\]
+Also
+\[
+c=\frac{2b}{c}
+\quad\Longrightarrow\quad
+c^2=2b=2a^2.
+\]
+But \(c=\frac2a\), so
+\[
+\left(\frac2a\right)^2=2a^2
+\quad\Longrightarrow\quad
+\frac4{a^2}=2a^2
+\quad\Longrightarrow\quad
+4=2a^4
+\quad\Longrightarrow\quad
+a^4=2.
+\]
+Since \(c=\frac2a\) and \(a^4=2\), we get
+\[
+c=\frac{2}{a}=\frac{a^4}{a}=a^3.
+\]
+Thus
+\[
+b=a^2,
+\qquad
+c=a^3,
+\qquad
+a^4=2.
+\]
+
+\item We have
+\[
+a=2^{1/4}\approx 1.189,
+\qquad
+b=a^2=\sqrt2\approx 1.414,
+\qquad
+c=a^3=2^{3/4}\approx 1.682.
+\]
+Thus
+\[
+1:a:b:c
+\approx 1:1.189:1.414:1.682.
+\]
+The number \(a=2^{1/4}\approx 1.189\) appeared in Q6: the long side of A0 is \(2^{1/4}\) metres, i.e. \(1189\text{ mm}\). Also \(b=\sqrt2\approx 1.414\) is the A-series ratio found earlier.
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item For a \(d\)-dimensional box, let the edges be
+\[
+1:r:r^2:\cdots:r^{d-1}.
+\]
+Cutting into \(n\) equal slices across the longest edge makes each piece similar to the whole. The piece has largest edge \(r^{d-2}\), while the whole has largest edge \(r^{d-1}\), so the length scale factor from whole to piece is
+\[
+\frac{r^{d-2}}{r^{d-1}}=\frac1r.
+\]
+The volume scale factor is therefore
+\[
+\left(\frac1r\right)^d=\frac1{r^d}.
+\]
+But each piece has \(\frac1n\) of the whole volume, so
+\[
+\frac1{r^d}=\frac1n
+\quad\Longrightarrow\quad
+r^d=n
+\quad\Longrightarrow\quad
+r=n^{1/d}.
+\]
+Hence the table is:
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ & Rectangle (2D) & Box (3D) & 4D box & \(d\) dimensions\\
+\hline
+2 slices & \(\sqrt2\) & \(\sqrt[3]{2}\) & \(2^{1/4}\) & \(2^{1/d}\)\\
+\hline
+3 slices & \(\sqrt3\) & \(\sqrt[3]{3}\) & \(3^{1/4}\) & \(3^{1/d}\)\\
+\hline
+\(n\) slices & \(\sqrt n\) & \(\sqrt[3]{n}\) & \(n^{1/4}\) & \(n^{1/d}\)\\
+\hline
+\end{tabular}
+\end{center}
+
+\item For \(2\) slices, \(r=2^{1/d}\). The longest edge divided by the shortest edge is
+\[
+r^{d-1}=2^{(d-1)/d}=2^{1-1/d}.
+\]
+Thus:
+\[
+\begin{array}{c|c}
+\text{Dimension} & \text{longest}\div\text{shortest}\\
+\hline
+2\text{D} & 2^{1/2}=\sqrt2\approx 1.414\\
+3\text{D} & 2^{2/3}=\sqrt[3]{4}\approx 1.587\\
+4\text{D} & 2^{3/4}\approx 1.682\\
+10\text{D} & 2^{9/10}\approx 1.866
+\end{array}
+\]
+
+\item As the number of dimensions \(d\) increases,
+\[
+2^{1-1/d}\to 2.
+\]
+So the longest edge divided by the shortest edge gets closer and closer to \(2\). It is always less than \(2\) because
+\[
+1-\frac1d<1
+\quad\Longrightarrow\quad
+2^{1-1/d}<2.
+\]
+Equivalently, since \(r=2^{1/d}>1\),
+\[
+r^{d-1}=\frac{r^d}{r}=\frac2r<2,
+\]
+and as \(d\to\infty\), \(r\to1\), so \(\frac2r\to2\).
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The areas of A1, A2, \ldots, A6 are
+\[
+\frac12,\ \frac14,\ \frac18,\ \frac1{16},\ \frac1{32},\ \frac1{64}
+\]
+square metres. Their total is
+\[
+\frac12+\frac14+\frac18+\frac1{16}+\frac1{32}+\frac1{64}
+=
+\frac{32+16+8+4+2+1}{64}
+=
+\frac{63}{64}\text{ m}^2.
+\]
+
+\item Continuing forever, the total area of one sheet of each size from A1 onwards is the infinite geometric series
+\[
+\frac12+\frac14+\frac18+\cdots
+=
+\frac{\frac12}{1-\frac12}
+=1\text{ m}^2.
+\]
+So the total area approaches the area of the original A0 sheet. The piece left over at each stage gets smaller and smaller, with area tending to \(0\).
+
+\item
+\[
+\left(\frac1{\sqrt2}\right)^{10}
+=
+\left(2^{-1/2}\right)^{10}
+=
+2^{-5}
+=
+\frac1{32}.
+\]
+So A10 has lengths \(\frac1{32}\) of A0. Using the A0 dimensions \(841\text{ mm}\) and \(1189\text{ mm}\),
+\[
+\frac{841}{32}\approx 26.3,
+\qquad
+\frac{1189}{32}\approx 37.2.
+\]
+Thus A10 is about
+\[
+26\text{ mm}\times 37\text{ mm}.
+\]
+\end{enumerate}
+
+% ------------------------------------------------------------
+\item
+\begin{enumerate}[label=(\alph*)]
+\item The rectangle is \(1:x\). Cutting off \(k\) squares of side \(1\) leaves a rectangle with sides \(x-k\) and \(1\). Thus the leftover ratio is
+\[
+(x-k):1.
+\]
+Writing this in the form \(1:\cdots\),
+\[
+(x-k):1\xrightarrow{\div (x-k)}1:\frac1{x-k}.
+\]
+Since the leftover is similar to the whole rectangle,
+\[
+1:x=1:\frac1{x-k}.
+\]
+Hence
+\[
+x=\frac1{x-k}.
+\]
+Multiplying by \(x-k\),
+\[
+x(x-k)=1,
+\]
+so
+\[
+x^2-kx-1=0.
+\]
+
+\item For \(k=3\),
+\[
+x^2-3x-1=\left(x-\frac32\right)^2-\frac{13}{4}.
+\]
+Setting this equal to \(0\),
+\[
+\left(x-\frac32\right)^2=\frac{13}{4}.
+\]
+Taking the positive root,
+\[
+x-\frac32=\frac{\sqrt{13}}2,
+\]
+so
+\[
+x=\frac{3+\sqrt{13}}2\approx 3.303.
+\]
+The ratio is
+\[
+1:\frac{3+\sqrt{13}}2\approx 1:3.303.
+\]
+
+\item Starting from
+\[
+\left(x-\frac k2\right)^2-\frac{k^2+4}{4}=0,
+\]
+we get
+\[
+\left(x-\frac k2\right)^2=\frac{k^2+4}{4}.
+\]
+Thus
+\[
+x-\frac k2=\pm\frac{\sqrt{k^2+4}}2.
+\]
+Since \(x>0\), we take the positive root:
+\[
+x=\frac{k+\sqrt{k^2+4}}2.
+\]
+Check:
+\[
+k=1:\quad x=\frac{1+\sqrt5}{2},
+\]
+which is the golden ratio from Q11, and
+\[
+k=2:\quad x=\frac{2+\sqrt8}{2}=1+\sqrt2,
+\]
+which is the silver ratio from Q12.
+
+\item One possible rule is: cut a square off one end of a \(1:x\) rectangle, then split the remaining rectangle into two equal rectangles, and require each of these two smaller rectangles to be similar to the whole rectangle.
+
+After removing the \(1\times1\) square, the remaining rectangle has sides \(1\) and \(x-1\). Splitting it into two equal rectangles gives pieces with sides \(1\) and \(\frac{x-1}{2}\). Thus each piece has ratio
+\[
+\frac{x-1}{2}:1=1:\frac{2}{x-1}.
+\]
+For this to be similar to the whole \(1:x\),
+\[
+x=\frac{2}{x-1}.
+\]
+So
+\[
+x(x-1)=2
+\quad\Longrightarrow\quad
+x^2-x-2=0
+\quad\Longrightarrow\quad
+(x-2)(x+1)=0.
+\]
+Since \(x>0\), we get \(x=2\). The ratio is
+\[
+1:2.
+\]
+Indeed, a \(1\times2\) rectangle can be cut into a \(1\times1\) square and two \(\frac12\times1\) rectangles, each of which has ratio \(1:2\), the same as the whole rectangle.
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
