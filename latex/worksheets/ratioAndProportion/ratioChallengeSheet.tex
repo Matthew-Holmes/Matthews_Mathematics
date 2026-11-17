@@ -15,7 +15,9 @@
 % Challenge: ratio and the shape of A4 paper.
 %
 % A four-page challenge sheet on ratio for confident pupils who know
-% Pythagoras' theorem, surds and the quadratic formula. It is built on
+% Pythagoras' theorem and surds. The quadratic equations are solved by
+% rearranging a completed-square form that the sheet gives as a fact, so
+% the quadratic formula is not needed. It is built on
 % one idea: when a shape is cut into pieces that are similar to the
 % whole shape, the rule for cutting it fixes the ratio of its lengths.
 % Similar rectangles have equivalent ratios short : long, so the method
@@ -48,7 +50,8 @@
 % 1 : 2^(1/4) : 2^(1/2) : 2^(3/4) (Q15). Q16 collects the pattern and
 % asks what happens as the number of dimensions grows. Q17 is the
 % A-series spiral and the sum 1/2 + 1/4 + 1/8 + ... = 1. Q18 is the
-% family x^2 - kx - 1 = 0 and an open task.
+% family x^2 - kx - 1 = 0, solved from its completed-square form, and an
+% open task.
 %
 % There is little working space, so pupils work on paper. The answers
 % are in a comment beside each question.
@@ -518,8 +521,10 @@ The card is $1:{}$\gap.
 
 % Answers: (a) left over (x - 1) : 1; divide by (x - 1): 1 : 1/(x - 1).
 % (b) Same shape, so x = 1/(x - 1). Times (x - 1): x^2 - x = 1, so
-% x^2 - x - 1 = 0. (c) x = (1 + sqrt(5))/2 = 1.618 (the other root is
-% negative). The golden rectangle is 1 : (1 + sqrt(5))/2, about 1 : 1.618.
+% x^2 - x - 1 = 0. (c) (x - 1/2)^2 - 5/4 = 0. Add 5/4:
+% (x - 1/2)^2 = 5/4. Square root (x is positive, so take the positive
+% root): x - 1/2 = sqrt(5)/2. Add 1/2: x = (1 + sqrt(5))/2 = 1.618.
+% The golden rectangle is 1 : (1 + sqrt(5))/2, about 1 : 1.618.
 \item
 \begin{minipage}[t]{0.74\linewidth}
 A rectangle is $1:x$. Cutting off the largest possible square leaves a
@@ -535,8 +540,9 @@ rectangle}.
         \bothsides{\eqgap \& : \& 1\\ 1 \& : \& \eqgap\\}{\div(x-1)}
         \end{minipage}
   \item Show that $x^2-x-1=0$.
-  \item Solve the equation to find the ratio of the golden rectangle, exactly
-        and to 3 decimal places.
+  \item Use the fact $x^2-x-1=\left(x-\frac{1}{2}\right)^2-\frac{5}{4}$ to
+        solve the equation by rearranging. Give the ratio of the golden
+        rectangle exactly and to 3 decimal places.
 \end{enumerate}
 \end{minipage}\hfill
 \begin{minipage}[t]{0.22\linewidth}
@@ -610,7 +616,8 @@ The largest possible square is cut off a sheet of A4, $1:\sqrt{2}$.
 % Q9. (c) In the 4 by 4 grid, the four L-shapes are the squares
 % {(0,0),(1,0),(0,1)}, {(1,1),(2,1),(1,2)}, {(2,0),(3,0),(3,1)} and
 % {(0,2),(0,3),(1,3)}, counting from the bottom left; 1 : 2.
-% (d) Each piece has area 1/n of the whole shape, so the area scale
+% (d) Hint: the area is multiplied by k^2.
+% Each piece has area 1/n of the whole shape, so the area scale
 % factor is 1/n and the length scale factor is 1/sqrt(n), giving
 % 1 : sqrt(n). For A4, n = 2 gives 1 : sqrt(2) without solving an
 % equation.
@@ -664,9 +671,11 @@ whole shape. Find the ratio of lengths, piece : whole.
 \begin{enumerate}
   \setcounter{enumii}{3}
   \item A shape is cut into $n$ equal pieces like this. Explain why the ratio
-        of lengths, piece : whole, is $1:\sqrt{n}$. (If every length is
-        multiplied by $k$, the area is multiplied by $k^2$.) Use this to
-        explain why A4 is $1:\sqrt{2}$ in a different way.
+        of lengths, piece : whole, is $1:\sqrt{n}$. Use this to explain why A4
+        is $1:\sqrt{2}$ in a different way.
+
+        Fill in the hint first: if every length is multiplied by $k$, then the
+        area is \ansline[3.5cm].
 \end{enumerate}
 
 \end{enumerate}
@@ -732,8 +741,8 @@ block.
 \begin{enumerate}
   \setcounter{enumii}{2}
   \item Find the ratio $1:y:z$ exactly and to 3 decimal places.
-  \item The largest block has a volume of $1$ litre ($1000\text{ cm}^3$).
-        Find its edges, and show that one is exactly $10$\,cm.
+  \item A block has a volume of $1$ litre ($1000\text{ cm}^3$). Find its
+        edges, and show that one is $10$\,cm.
 \end{enumerate}
 
 % Answers: (a) half box c/2 : 1 : a : b = 1 : 2/c : 2a/c : 2b/c.
@@ -769,8 +778,8 @@ then in the ratio $1:r:r^2:\ldots$
         already on this sheet.
 
         \vspace{1pt}
-        {\renewcommand{\arraystretch}{1.4}
-        \begin{tabular}{|l|*{4}{C{2.3cm}|}}
+        {\small\renewcommand{\arraystretch}{1.3}
+        \begin{tabular}{|l|*{4}{C{2.75cm}|}}
         \hline
         & \textbf{Rectangle (2D)} & \textbf{Box (3D)} & \textbf{4D box}
           & \textbf{$d$ dimensions}\\ \hline
@@ -806,8 +815,8 @@ A6, with one more sheet of A6 left over.
 \vspace{2pt}
 \centering
 \begin{tikzpicture}[font=\small, baseline=(current bounding box.north)]
-  \pgfmathsetmacro{\H}{2.95}
-  \pgfmathsetmacro{\W}{2.95*sqrt(2)}
+  \pgfmathsetmacro{\H}{2.7}
+  \pgfmathsetmacro{\W}{2.7*sqrt(2)}
   \draw[thick] (0,0) rectangle (\W,\H);
   \draw (\W/2,0) -- (\W/2,\H);
   \draw (\W/2,\H/2) -- (\W,\H/2);
@@ -827,14 +836,21 @@ A6, with one more sheet of A6 left over.
 
 % Answers: (a) Cutting k squares off a 1 : x rectangle leaves
 % (x - k) : 1 = 1 : 1/(x - k), so x = 1/(x - k), x^2 - kx = 1 and
-% x^2 - kx - 1 = 0. (b) k = 3: x = (3 + sqrt(13))/2 = 3.303, so
-% 1 : 3.303. (c) Open.
-\item
+% x^2 - kx - 1 = 0. (b) (x - 3/2)^2 - 13/4 = 0, so (x - 3/2)^2 = 13/4,
+% x - 3/2 = sqrt(13)/2 and x = (3 + sqrt(13))/2 = 3.303: 1 : 3.303.
+% (c) (x - k/2)^2 = (k^2 + 4)/4, x - k/2 = sqrt(k^2 + 4)/2, so
+% x = (k + sqrt(k^2 + 4))/2. k = 1 gives (1 + sqrt(5))/2 and k = 2 gives
+% (2 + sqrt(8))/2 = 1 + sqrt(2). (d) Open.
+\item A rectangle is $1:x$. Cutting off $k$ squares leaves a similar
+rectangle. (Q11 is $k=1$ and Q12 is $k=2$.)
 \begin{enumerate}
-  \item A rectangle is $1:x$. Cutting off $k$ squares leaves a rectangle
-        similar to the whole rectangle. Show that $x^2-kx-1=0$. (Q11 is $k=1$
-        and Q12 is $k=2$.)
-  \item Find the ratio of the rectangle when $k=3$.
+  \item Show that $x^2-kx-1=0$.
+  \item Use the fact
+        $x^2-kx-1=\left(x-\frac{k}{2}\right)^2-\frac{k^2+4}{4}$ to solve
+        $x^2-3x-1=0$ by rearranging. Give the ratio when $k=3$, exactly and to
+        3 decimal places.
+  \item Rearrange $\left(x-\frac{k}{2}\right)^2-\frac{k^2+4}{4}=0$ to find
+        $x$ in terms of $k$. Check it with Q11 and Q12.
   \item Invent your own rule for cutting a rectangle, a triangle or a box into
         pieces, so that one or more of the pieces is similar to the whole
         shape. Find the ratio that your rule leads to.
