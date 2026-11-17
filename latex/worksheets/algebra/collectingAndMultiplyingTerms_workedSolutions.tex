@@ -1,0 +1,557 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[a4paper,top=12mm,bottom=12mm,left=14mm,right=14mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tgadventor}
+\renewcommand*{\familydefault}{\sfdefault}
+\usepackage[italic]{mathastext}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{arrows.meta}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlength{\columnsep}{8mm}
+\setlength{\multicolsep}{4pt}
+\AtBeginDocument{\raggedright}
+
+\newtcolorbox{methodbox}{colback=orange!3,colframe=orange!35,boxrule=0.6pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,before upper=\raggedright}
+\newtcolorbox{exbox}{colback=blue!2,colframe=blue!30,boxrule=0.6pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,before upper=\raggedright}
+
+\newcommand{\topic}[1]{\vspace{2pt}{\Large\bfseries #1}\par\vspace{4pt}}
+\newcommand{\method}[1]{\begin{methodbox}\textbf{Method.} #1\end{methodbox}}
+\newcommand{\worked}[1]{\begin{exbox}\textbf{Worked example.} #1\end{exbox}}
+\newcommand{\solitem}[1]{\par\noindent #1\par\vspace{2pt}}
+\newenvironment{solutions}{\begin{multicols}{2}\raggedright}{\end{multicols}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Worked Solutions}\\[2pt]
+  {\Large Collecting and Multiplying Terms}
+\end{center}
+
+\vspace{4pt}
+These solutions follow the order of the worksheet. In lists of drill questions, the
+working is given in a compact form; the final simplified expression is the last
+expression shown.
+
+\topic{1. Adding terms}
+
+\method{To add like terms, add their coefficients and keep the variable.
+For example, \(3a+2a=(3+2)a=5a\).}
+
+\worked{\(3a+2a=a+a+a+a+a=5a\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(4b+3b=(4+3)b=7b\).}
+\solitem{\(2x+5x=(2+5)x=7x\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(5a+2a=7a\)}
+\solitem{\(3b+4b=7b\)}
+\solitem{\(6x+3x=9x\)}
+\solitem{\(2y+8y=10y\)}
+\solitem{\(4m+4m=8m\)}
+\solitem{\(7p+5p=12p\)}
+\solitem{\(a+4a=5a\)}
+\solitem{\(9t+t=10t\)}
+\solitem{\(c+c=2c\)}
+\solitem{\(10n+6n=16n\)}
+\solitem{\(2a+3a+4a=(2+3+4)a=9a\)}
+\solitem{\(5k+k+6k=12k\)}
+\solitem{\(x+x+x+x=4x\)}
+\solitem{\(12y+15y=27y\)}
+\solitem{\(3d+2d+d+4d=10d\)}
+\solitem{\(20z+13z+7z=40z\)}
+\end{solutions}
+
+\newpage
+\topic{2. Subtracting terms}
+
+\method{Subtract coefficients in the same way as ordinary numbers, keeping the
+variable. Work from left to right when there are several terms.}
+
+\worked{\(8a+3a-5a=11a-5a=6a\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(6b+4b-3b=10b-3b=7b\).}
+\solitem{\(9x-2x+5x=7x+5x=12x\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(7a-3a=4a\)}
+\solitem{\(9b-4b=5b\)}
+\solitem{\(10x-6x=4x\)}
+\solitem{\(8y-y=7y\)}
+\solitem{\(12m-5m=7m\)}
+\solitem{\(14q-8q=6q\)}
+\solitem{\(11h-h=10h\)}
+\solitem{\(5p-4p=p\)}
+\solitem{\(6t-6t=0\)}
+\solitem{\(20n-9n=11n\)}
+\solitem{\(25w-17w=8w\)}
+\solitem{\(4a+6a-3a=10a-3a=7a\)}
+\solitem{\(5k+k-2k=6k-2k=4k\)}
+\solitem{\(9a+a-4a=10a-4a=6a\)}
+\solitem{\(8b+2b-7b=10b-7b=3b\)}
+\solitem{\(9p-2p+4p=7p+4p=11p\)}
+\solitem{\(6r-4r+5r=2r+5r=7r\)}
+\solitem{\(12t-5t-2t=7t-2t=5t\)}
+\solitem{\(10g-3g-3g=7g-3g=4g\)}
+\solitem{\(x+7x-3x=8x-3x=5x\)}
+\solitem{\(10c-4c-6c=6c-6c=0\)}
+\solitem{\(8y-3y+2y-4y=5y+2y-4y=7y-4y=3y\)}
+\solitem{\(7m+m-5m+2m=8m-5m+2m=3m+2m=5m\)}
+\solitem{\(15d-7d+d-8d=8d+d-8d=9d-8d=d\)}
+\end{solutions}
+
+\newpage
+\topic{3. Collecting like terms}
+
+\method{Like terms have exactly the same variables. Collect each set of like
+terms separately; unlike terms cannot be combined.}
+
+\worked{\(5a+3b+2a+4b=(5a+2a)+(3b+4b)=7a+7b\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(4x+2y+3x+5y=(4x+3x)+(2y+5y)=7x+7y\).}
+\solitem{\(2m+6n+m+3n=(2m+m)+(6n+3n)=3m+9n\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(3a+2b+4a=7a+2b\)}
+\solitem{\(5x+2y+3y=5x+5y\)}
+\solitem{\(4p+3p+2q=7p+2q\)}
+\solitem{\(2x+3x+4y=5x+4y\)}
+\solitem{\(2a+3b+4a+b=6a+4b\)}
+\solitem{\(6p+q+2p+5q=8p+6q\)}
+\solitem{\(3m+4n+3m+4n=6m+8n\)}
+\solitem{\(4a+5+3a=7a+5\)}
+\solitem{\(x+4+3x+2=4x+6\)}
+\solitem{\(6+3t+t=4t+6\)}
+\solitem{\(7+2m+5+m=3m+12\)}
+\solitem{\(4m+n+2+m=5m+n+2\)}
+\solitem{\(5y+1+y+8=6y+9\)}
+\solitem{\(3a+2b+6\) cannot be simplified.}
+\solitem{\(a+b+a+b+a=3a+2b\)}
+\solitem{\(4c+3d+c+2d+5c=(4c+c+5c)+(3d+2d)=10c+5d\)}
+\solitem{\(2x+3y+4z+x+y=3x+4y+4z\)}
+\solitem{\(3ab+4a+2ab=5ab+4a\)}
+\solitem{\(6xy+2x+xy+5x=7xy+7x\)}
+\solitem{\(2k+9+3h+4+k+5h=(3h+5h)+(2k+k)+(9+4)=8h+3k+13\)}
+\end{solutions}
+
+\newpage
+\topic{4. Collecting like terms with subtraction}
+
+\method{The sign in front of a term belongs to that term. Keep each sign
+when collecting like terms.}
+
+\worked{\(7a-2b-3a+6b=(7a-3a)+(-2b+6b)=4a+4b\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(8x-3y-2x+7y=(8x-2x)+(-3y+7y)=6x+4y\).}
+\solitem{\(5m+9n-m-4n=(5m-m)+(9n-4n)=4m+5n\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(6a+2b-4a=2a+2b\)}
+\solitem{\(5x+7y-3y=5x+4y\)}
+\solitem{\(8m-2m+3n=6m+3n\)}
+\solitem{\(9a-4a+2b=5a+2b\)}
+\solitem{\(9p+4q-2p-q=7p+3q\)}
+\solitem{\(6x+5y-x-2y=5x+3y\)}
+\solitem{\(8m-2n+3n=8m+n\)}
+\solitem{\(4a-3b-a+5b=3a+2b\)}
+\solitem{\(8p-3q-5p+7q=3p+4q\)}
+\solitem{\(10x+7-6x-3=4x+4\)}
+\solitem{\(-2y+5x+6y=5x+4y\)}
+\solitem{\(12+5k-4-2k=3k+8\)}
+\solitem{\(11k-3-4k+5=7k+2\)}
+\solitem{\(7c-5d-2c+9d=5c+4d\)}
+\solitem{\(3c+5d-2c+4d-c=(3c-2c-c)+9d=9d\)}
+\solitem{\(-3+4x+8-x=3x+5\)}
+\solitem{\(6ab+2a-4ab+3a=2ab+5a\)}
+\solitem{\(5xy-2y+3xy+7y=8xy+5y\)}
+\solitem{\(9m-4n+2-3m+6n-1=6m+2n+1\)}
+\solitem{\(7x-4y+2z-3x+6y-z=4x+2y+z\)}
+\end{solutions}
+
+\newpage
+\topic{5. Negative coefficients}
+
+\method{If the number being subtracted is larger than the number we start with,
+the coefficient is negative. For example, \(3-7=-4\).}
+
+\worked{\(3a-5b-7a+2b=(3a-7a)+(-5b+2b)=-4a-3b\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(4m-3n-9m+n=(4m-9m)+(-3n+n)=-5m-2n\).}
+\solitem{\(p+2q-6p-8q=(p-6p)+(2q-8q)=-5p-6q\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(2a-5a=-3a\)}
+\solitem{\(4x-9x=-5x\)}
+\solitem{\(3c-8c=-5c\)}
+\solitem{\(y-6y=-5y\)}
+\solitem{\(-3b+b=-2b\)}
+\solitem{\(-2m-4m=-6m\)}
+\solitem{\(-4y-y=-5y\)}
+\solitem{\(-7p+3p=-4p\)}
+\solitem{\(-k-k=-2k\)}
+\solitem{\(-6n+2n-3n=-4n-3n=-7n\)}
+\solitem{\(5-2n-9=-2n-4\)}
+\solitem{\(3a+2b-7a=-4a+2b\)}
+\solitem{\(2a-3b-5a+b=-3a-2b\)}
+\solitem{\(5x-3y-8x+y=-3x-2y\)}
+\solitem{\(-4p+6q+p-9q=-3p-3q\)}
+\solitem{\(2-5k-7+3k=-2k-5\)}
+\solitem{\(-a-b-2a+4b=-3a+3b\)}
+\solitem{\(4c-3-6c-2=-2c-5\)}
+\solitem{\(3xy-5x-7xy+2x=-4xy-3x\)}
+\solitem{\(8-2c-11-4c+6c=(-2c-4c+6c)+(8-11)=-3\)}
+\end{solutions}
+
+\newpage
+\topic{6. Multiplying terms}
+
+\method{Multiply the numbers together and the variables together. Write the
+number first, then the variables in alphabetical order.}
+
+\worked{\(3a\times 4b=3\times 4\times a\times b=12ab\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(2x\times 5y=2\times 5\times x\times y=10xy\).}
+\solitem{\(4n\times 3m=4\times 3\times n\times m=12mn\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(4\times a=4a\)}
+\solitem{\(a\times b=ab\)}
+\solitem{\(3\times 2b=6b\)}
+\solitem{\(5\times 4c=20c\)}
+\solitem{\(y\times x=xy\)}
+\solitem{\(5x\times 2=10x\)}
+\solitem{\(b\times 7=7b\)}
+\solitem{\(2a\times b=2ab\)}
+\solitem{\(3x\times y=3xy\)}
+\solitem{\(p\times 6q=6pq\)}
+\solitem{\(3p\times 4q=12pq\)}
+\solitem{\(6x\times 5y=30xy\)}
+\solitem{\(4a\times 4b=16ab\)}
+\solitem{\(2b\times 9a=18ab\)}
+\solitem{\(3n\times 8m=24mn\)}
+\solitem{\(7m\times 7n=49mn\)}
+\solitem{\(5t\times 4s=20st\)}
+\solitem{\(10x\times 3y=30xy\)}
+\solitem{\(4\times 2a\times b=8ab\)}
+\solitem{\(2a\times 3b\times c=6abc\)}
+\solitem{\(a\times 2b\times 3c=6abc\)}
+\solitem{\(4x\times 3yz=12xyz\)}
+\solitem{\(2xy\times 5z=10xyz\)}
+\solitem{\(3c\times 2b\times 5a=30abc\)}
+\end{solutions}
+
+\newpage
+\topic{7. Multiplying with negative numbers}
+
+\method{Use the sign rules: same signs give a positive answer, different signs
+give a negative answer. Then multiply the variables as usual.}
+
+\worked{\(-2x\times -4y=(-2\times -4)\times x\times y=8xy\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(-3a\times 5b=(-3\times 5)ab=-15ab\).}
+\solitem{\(6m\times -2n=(6\times -2)mn=-12mn\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(-2\times 3a=-6a\)}
+\solitem{\(-5\times 2y=-10y\)}
+\solitem{\(4\times -5b=-20b\)}
+\solitem{\(-3\times -2x=6x\)}
+\solitem{\(-6\times -3c=18c\)}
+\solitem{\(-8\times -k=8k\)}
+\solitem{\(-a\times b=-ab\)}
+\solitem{\(a\times -b=-ab\)}
+\solitem{\(-x\times -y=xy\)}
+\solitem{\(5p\times -2q=-10pq\)}
+\solitem{\(-4a\times 3b=-12ab\)}
+\solitem{\(-3m\times 4n=-12mn\)}
+\solitem{\(-6m\times -n=6mn\)}
+\solitem{\(-7x\times -3y=21xy\)}
+\solitem{\(-2x\times -9y=18xy\)}
+\solitem{\(2c\times -9d=-18cd\)}
+\solitem{\(8p\times -q=-8pq\)}
+\solitem{\(-5b\times -4a=20ab\)}
+\solitem{\(-10a\times -10b=100ab\)}
+\solitem{\(-2a\times 3b\times c=-6abc\)}
+\solitem{\(3x\times -2y\times 4z=-24xyz\)}
+\solitem{\(2x\times -3y\times -z=6xyz\)}
+\solitem{\(-4p\times -q\times 5r=20pqr\)}
+\solitem{\(-2a\times -3b\times -c=-6abc\)}
+\end{solutions}
+
+\newpage
+\topic{8. Squares and cubes}
+
+\method{Repeated multiplication of the same variable is written with an index:
+\(a\times a=a^2\) and \(a\times a\times a=a^3\). Multiply coefficients as usual.}
+
+\worked{\(3a\times 2a=3\times 2\times a\times a=6a^2\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(5x\times 4x=5\times 4\times x\times x=20x^2\).}
+\solitem{\(2y\times 3y\times y=2\times 3\times y\times y\times y=6y^3\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(b\times b=b^2\)}
+\solitem{\(y\times y=y^2\)}
+\solitem{\(x\times x\times x=x^3\)}
+\solitem{\(m\times m\times m\times m=m^4\)}
+\solitem{\(3\times a\times a=3a^2\)}
+\solitem{\(5\times c\times c=5c^2\)}
+\solitem{\(2p\times p=2p^2\)}
+\solitem{\(3q\times q=3q^2\)}
+\solitem{\(a\times 6a=6a^2\)}
+\solitem{\(4y\times 3y=12y^2\)}
+\solitem{\(7a\times 2a=14a^2\)}
+\solitem{\(5k\times 5k=25k^2\)}
+\solitem{\(9h\times 9h=81h^2\)}
+\solitem{\(6t\times t\times t=6t^3\)}
+\solitem{\(2n\times 3n\times 4n=24n^3\)}
+\solitem{\(-p\times p=-p^2\)}
+\solitem{\(-3x\times 4x=-12x^2\)}
+\solitem{\(-5x\times -x=5x^2\)}
+\solitem{\(-2y\times -5y=10y^2\)}
+\solitem{\(3d\times 2d\times d\times d=6d^4\)}
+\solitem{\(-4c\times -c\times 2c=8c^3\)}
+\solitem{\(a\times a\times b=a^2b\)}
+\solitem{\(x\times y\times y=xy^2\)}
+\solitem{\(p\times p\times q\times q=p^2q^2\)}
+\end{solutions}
+
+\newpage
+\topic{9. Multiplying powers}
+
+\method{When multiplying powers of the same variable, add the indices:
+\(a^m\times a^n=a^{m+n}\). A variable with no index has index \(1\).}
+
+\worked{\(2a^3\times 4a^2=2\times 4\times a^3\times a^2=8a^{5}\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(3x^4\times 5x^2=3\times 5\times x^{4+2}=15x^6\).}
+\solitem{\(6y^5\times 2y=6\times 2\times y^{5+1}=12y^6\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(a^2\times a^3=a^5\)}
+\solitem{\(x^4\times x^5=x^9\)}
+\solitem{\(p^2\times p^2=p^4\)}
+\solitem{\(n^3\times n^3=n^6\)}
+\solitem{\(z^7\times z^2=z^9\)}
+\solitem{\(b^3\times b=b^4\)}
+\solitem{\(m\times m^6=m^7\)}
+\solitem{\(q\times q^4=q^5\)}
+\solitem{\(y^{10}\times y^3=y^{13}\)}
+\solitem{\(2a^2\times 3a^4=6a^6\)}
+\solitem{\(5x^3\times 2x^3=10x^6\)}
+\solitem{\(4b^2\times 5b^2=20b^4\)}
+\solitem{\(6x^2\times 3x^3=18x^5\)}
+\solitem{\(4y\times 3y^2=12y^3\)}
+\solitem{\(2m^5\times m=2m^6\)}
+\solitem{\(k^2\times 7k^5=7k^7\)}
+\solitem{\(c^2\times c^3\times c=c^{2+3+1}=c^6\)}
+\solitem{\(h^4\times h\times h^2=h^{4+1+2}=h^7\)}
+\solitem{\(-2a^5\times 3a^2=-6a^7\)}
+\solitem{\(6n^4\times -n^4=-6n^8\)}
+\solitem{\(-y^2\times -y^3=y^5\)}
+\solitem{\(-4t^3\times -5t^6=20t^9\)}
+\solitem{\(3d^2\times 2d\times d^4=6d^{2+1+4}=6d^7\)}
+\solitem{\(-2x^3\times -3x^2\times -x=(-2\times -3\times -1)x^{3+2+1}=-6x^6\)}
+\end{solutions}
+
+\newpage
+\topic{10. Multiplying terms with more than one variable}
+
+\method{Multiply the coefficients, then add the indices of each variable
+separately. Do not add indices of different variables.}
+
+\worked{\(3a^2b\times 2ab^3=3\times 2\times a^2\times a\times b\times b^3=6a^3b^4\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(4x^3y\times 2xy^2=4\times 2\times x^{3+1}\times y^{1+2}=8x^4y^3\).}
+\solitem{\(5m^2n^3\times 3mn^4=5\times 3\times m^{2+1}\times n^{3+4}=15m^3n^7\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(a^2b\times a=a^3b\)}
+\solitem{\(x\times xy=x^2y\)}
+\solitem{\(y\times xy=xy^2\)}
+\solitem{\(ab\times ab=a^2b^2\)}
+\solitem{\(2a\times 3ab=6a^2b\)}
+\solitem{\(4m\times 2mn=8m^2n\)}
+\solitem{\(3m^2\times 4n=12m^2n\)}
+\solitem{\(p^2q\times pq=p^3q^2\)}
+\solitem{\(x^2y\times xy^3=x^3y^4\)}
+\solitem{\(pq^2\times p^2q=p^3q^3\)}
+\solitem{\(2ab\times 3bc=6ab^2c\)}
+\solitem{\(2a^2b\times 3ab=6a^3b^2\)}
+\solitem{\(4m^2n\times 2mn^2=8m^3n^3\)}
+\solitem{\(-3pq\times 2q=-6pq^2\)}
+\solitem{\(5x^2y^3\times x^4y=5x^6y^4\)}
+\solitem{\(4x^2y\times -3xy=-12x^3y^2\)}
+\solitem{\(-3a^3b^2\times 2ab=-6a^4b^3\)}
+\solitem{\(5xy^2\times -2x^3y=-10x^4y^3\)}
+\solitem{\(3p^2q\times 2pq\times q^2=6p^3q^4\)}
+\solitem{\(-2a^2b^3\times -5a^4b=10a^6b^4\)}
+\end{solutions}
+
+\newpage
+\topic{11. Collecting like terms with powers}
+
+\method{Like terms must have exactly the same variables with the same indices.
+For example, \(a^2\) and \(a\) are not like terms.}
+
+\worked{\(5a^2+3a-2a^2+4a=(5a^2-2a^2)+(3a+4a)=3a^2+7a\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(4x^2+6x+x^2-2x=(4x^2+x^2)+(6x-2x)=5x^2+4x\).}
+\solitem{\(7y^2-5y-y^2+y=(7y^2-y^2)+(-5y+y)=6y^2-4y\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(3a^2+4a^2=7a^2\)}
+\solitem{\(6x^3-2x^3=4x^3\)}
+\solitem{\(9b^2-b^2=8b^2\)}
+\solitem{\(y^2+y^2=2y^2\)}
+\solitem{\(4c^2-c^2+2c=3c^2+2c\)}
+\solitem{\(5b^2+2b+b^2=6b^2+2b\)}
+\solitem{\(4y^2+3y+2y=4y^2+5y\)}
+\solitem{\(p^2+p+p^2+p=2p^2+2p\)}
+\solitem{\(2a^2-5a^2=-3a^2\)}
+\solitem{\(7a^2-3a-2a^2+5a=5a^2+2a\)}
+\solitem{\(x^2+3x-4x^2-5x=-3x^2-2x\)}
+\solitem{\(3m^3+2m^2+m^3-m^2=4m^3+m^2\)}
+\solitem{\(a^2+a+1\) cannot be simplified.}
+\solitem{\(4ab+3a^2-ab+a^2=4a^2+3ab\)}
+\solitem{\(5k^2-3k+2-2k^2+k-7=3k^2-2k-5\)}
+\solitem{\(2x^2y+3xy^2+5x^2y=7x^2y+3xy^2\)}
+\solitem{\(6c^3-c^2+4c-2c^3+3c^2=4c^3+2c^2+4c\)}
+\solitem{\(a^2b-4ab^2+3a^2b+ab^2=4a^2b-3ab^2\)}
+\end{solutions}
+
+\newpage
+\topic{12. Multiplying and collecting like terms}
+
+\method{Multiply first, then collect like terms. Write products with the number
+first and the variables in alphabetical order.}
+
+\worked{\(2a\times 3a+4a^2=6a^2+4a^2=10a^2\).}
+
+\textbf{Gap-fill solutions.}
+\solitem{\(3x\times 2y+5xy=6xy+5xy=11xy\).}
+\solitem{\(4m\times m-m^2=4m^2-m^2=3m^2\).}
+
+\textbf{Exercise solutions.}
+\begin{solutions}
+\solitem{\(2a\times 4b+3ab=8ab+3ab=11ab\)}
+\solitem{\(5x\times x+2x^2=5x^2+2x^2=7x^2\)}
+\solitem{\(3p\times 2q-pq=6pq-pq=5pq\)}
+\solitem{\(a^2\times a+4a^3=a^3+4a^3=5a^3\)}
+\solitem{\(6y^2-2y\times y=6y^2-2y^2=4y^2\)}
+\solitem{\(7mn+2m\times 3n=7mn+6mn=13mn\)}
+\solitem{\(2a\times 3b+4a\times b=6ab+4ab=10ab\)}
+\solitem{\(3x\times 2x-x\times 5x=6x^2-5x^2=x^2\)}
+\solitem{\(2m^2\times 3m+m^3=6m^3+m^3=7m^3\)}
+\solitem{\(4a\times 2a+3a=8a^2+3a\)}
+\solitem{\(5x\times 2y-3y\times 4x=10xy-12xy=-2xy\)}
+\solitem{\(ab\times ab+3a^2b^2=a^2b^2+3a^2b^2=4a^2b^2\)}
+\solitem{\(-3k\times 2k+k^2+4k=-6k^2+k^2+4k=-5k^2+4k\)}
+\solitem{\(2a\times 3a^2+4a\times a\times a=6a^3+4a^3=10a^3\)}
+\solitem{\(3p^2\times 2p^3-4p\times p^4=6p^5-4p^5=2p^5\)}
+\solitem{\(2x\times 3y+4x\times 5x-xy=6xy+20x^2-xy=20x^2+5xy\)}
+\end{solutions}
+
+\newpage
+\topic{13. Problem solving}
+
+\textbf{Missing-term solutions.}
+\begin{solutions}
+\solitem{\(3a\times 4b=12ab\), so the missing term is \(4b\).}
+\solitem{\(5y+3y=8y\), so the missing term is \(3y\).}
+\solitem{\(5x^3\times 2x^2=10x^5\), so the missing term is \(5x^3\).}
+\solitem{\(4p+3q-2p=2p+3q\), so the missing term is \(3q\).}
+\solitem{\(-2x\times -3y=6xy\), so the missing term is \(-2x\).}
+\solitem{\(5a^2+(-3a^2)=2a^2\), so the missing term is \(-3a^2\).}
+\solitem{\(2m^3\times 4m^4n=8m^7n\), so the missing term is \(4m^4n\).}
+\solitem{\(2c+5d+4c+(-6c)=5d\), so the missing term is \(-6c\).}
+\end{solutions}
+
+\vspace{8pt}
+
+\solitem{\textbf{Sam's mistake.} \(2a\) and \(3b\) are not like terms, so
+\(2a+3b\) cannot be simplified to a single term. Also \(5ab\) means
+\(5\times a\times b\), which is a product, not a sum. For example, when
+\(a=2\) and \(b=1\), \(2a+3b=4+3=7\), but \(5ab=10\).}
+
+\vspace{6pt}
+
+\solitem{\textbf{Priya's statement.} Priya is not right. \(a^2\) and \(a^3\)
+are not like terms, so \(a^2+a^3\) cannot be simplified to \(a^5\).
+The multiplication \(a^2\times a^3\) equals \(a^5\). For example, when
+\(a=2\), \(a^2+a^3=4+8=12\), but \(a^5=32\).}
+
+\vspace{6pt}
+
+\solitem{\textbf{Tom's mistake.} Tom multiplied the coefficients but did not
+multiply the variables:
+\[
+  3a\times 4a=3\times 4\times a\times a=12a^2.
+\]
+The correct answer is \(12a^2\), not \(12a\).}
+
+\vspace{6pt}
+
+\solitem{\textbf{Rectangle.} The length is \(5x\) and the width is \(2y\).}
+\solitem{(a) Perimeter: \(5x+2y+5x+2y=10x+4y\).}
+\solitem{(b) Area: \(5x\times 2y=10xy\).}
+
+\vspace{6pt}
+
+\solitem{\textbf{Three possible pairs of side lengths for area \(12a^2\).}
+For example:
+\[
+  3a \text{ and } 4a,\qquad 2a \text{ and } 6a,\qquad a \text{ and } 12a.
+\]
+Each pair multiplies to \(12a^2\).}
+
+\vspace{6pt}
+
+\solitem{\textbf{An expression with four terms that simplifies to \(5x-2y\).}
+For example:
+\[
+  7x+y-2x-3y=(7x-2x)+(y-3y)=5x-2y.
+\]}
+
+\vspace{6pt}
+
+\solitem{\textbf{Three multiplications that simplify to \(6a^2b\).}
+For example:
+\[
+  2a\times 3ab=6a^2b,\qquad
+  6a\times ab=6a^2b,\qquad
+  3a^2\times 2b=6a^2b.
+\]}
+
+\end{document}
